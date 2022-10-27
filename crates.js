@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["bitflags","bytemuck","cfg_if","cosmic_text","fontdb","libc","log","memmap2","rustybuzz","smallvec","swash","sys_locale","ttf_parser","unicode_bidi","unicode_bidi_mirroring","unicode_ccc","unicode_general_category","unicode_linebreak","unicode_script","unicode_segmentation","yazi","zeno"];

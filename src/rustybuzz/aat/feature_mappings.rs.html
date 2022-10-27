@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.5.3/src/aat/feature_mappings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>feature_mappings.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">ttf_parser::Tag</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::aat::FeatureType</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::aat::feature_selector</span>::<span class="kw-2">*</span>;
+
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FeatureMapping</span> {
+    <span class="kw">pub</span> <span class="ident">ot_feature_tag</span>: <span class="ident">Tag</span>,
+    <span class="kw">pub</span> <span class="ident">aat_feature_type</span>: <span class="ident">FeatureType</span>,
+    <span class="kw">pub</span> <span class="ident">selector_to_enable</span>: <span class="ident">u8</span>,
+    <span class="kw">pub</span> <span class="ident">selector_to_disable</span>: <span class="ident">u8</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">FeatureMapping</span> {
+    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(
+        <span class="ident">ot_feature_tag</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">4</span>],
+        <span class="ident">aat_feature_type</span>: <span class="ident">FeatureType</span>,
+        <span class="ident">selector_to_enable</span>: <span class="ident">u8</span>,
+        <span class="ident">selector_to_disable</span>: <span class="ident">u8</span>,
+    ) -&gt; <span class="self">Self</span> {
+        <span class="ident">FeatureMapping</span> {
+            <span class="ident">ot_feature_tag</span>: <span class="ident">Tag::from_bytes</span>(<span class="ident">ot_feature_tag</span>),
+            <span class="ident">aat_feature_type</span>,
+            <span class="ident">selector_to_enable</span>,
+            <span class="ident">selector_to_disable</span>,
+        }
+    }
+}
+
+<span class="comment">// Table data courtesy of Apple.</span>
+<span class="comment">// Converted from mnemonics to integers when moving to this file.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FEATURE_MAPPINGS</span>: <span class="kw-2">&amp;</span>[<span class="ident">FeatureMapping</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;afrc&quot;</span>, <span class="ident">FeatureType::Fractions</span>, <span class="ident">VERTICAL_FRACTIONS</span>, <span class="ident">NO_FRACTIONS</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;c2pc&quot;</span>, <span class="ident">FeatureType::UpperCase</span>, <span class="ident">UPPER_CASE_PETITE_CAPS</span>, <span class="ident">DEFAULT_UPPER_CASE</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;c2sc&quot;</span>, <span class="ident">FeatureType::UpperCase</span>, <span class="ident">UPPER_CASE_SMALL_CAPS</span>, <span class="ident">DEFAULT_UPPER_CASE</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;calt&quot;</span>, <span class="ident">FeatureType::ContextualAlternatives</span>, <span class="ident">CONTEXTUAL_ALTERNATES_ON</span>, <span class="ident">CONTEXTUAL_ALTERNATES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;case&quot;</span>, <span class="ident">FeatureType::CaseSensitiveLayout</span>, <span class="ident">CASE_SENSITIVE_LAYOUT_ON</span>, <span class="ident">CASE_SENSITIVE_LAYOUT_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;clig&quot;</span>, <span class="ident">FeatureType::Ligatures</span>, <span class="ident">CONTEXTUAL_LIGATURES_ON</span>, <span class="ident">CONTEXTUAL_LIGATURES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;cpsp&quot;</span>, <span class="ident">FeatureType::CaseSensitiveLayout</span>, <span class="ident">CASE_SENSITIVE_SPACING_ON</span>, <span class="ident">CASE_SENSITIVE_SPACING_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;cswh&quot;</span>, <span class="ident">FeatureType::ContextualAlternatives</span>, <span class="ident">CONTEXTUAL_SWASH_ALTERNATES_ON</span>, <span class="ident">CONTEXTUAL_SWASH_ALTERNATES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;dlig&quot;</span>, <span class="ident">FeatureType::Ligatures</span>, <span class="ident">RARE_LIGATURES_ON</span>, <span class="ident">RARE_LIGATURES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;expt&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">EXPERT_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;frac&quot;</span>, <span class="ident">FeatureType::Fractions</span>, <span class="ident">DIAGONAL_FRACTIONS</span>, <span class="ident">NO_FRACTIONS</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;fwid&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">MONOSPACED_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;halt&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">ALT_HALF_WIDTH_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hist&quot;</span>, <span class="ident">FeatureType::Ligatures</span>, <span class="ident">HISTORICAL_LIGATURES_ON</span>, <span class="ident">HISTORICAL_LIGATURES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hkna&quot;</span>, <span class="ident">FeatureType::AlternateKana</span>, <span class="ident">ALTERNATE_HORIZ_KANA_ON</span>, <span class="ident">ALTERNATE_HORIZ_KANA_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hlig&quot;</span>, <span class="ident">FeatureType::Ligatures</span>, <span class="ident">HISTORICAL_LIGATURES_ON</span>, <span class="ident">HISTORICAL_LIGATURES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hngl&quot;</span>, <span class="ident">FeatureType::Transliteration</span>, <span class="ident">HANJA_TO_HANGUL</span>, <span class="ident">NO_TRANSLITERATION</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hojo&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">HOJO_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;hwid&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">HALF_WIDTH_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ital&quot;</span>, <span class="ident">FeatureType::ItalicCjkRoman</span>, <span class="ident">CJK_ITALIC_ROMAN_ON</span>, <span class="ident">CJK_ITALIC_ROMAN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;jp04&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">JIS2004_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;jp78&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">JIS1978_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;jp83&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">JIS1983_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;jp90&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">JIS1990_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;liga&quot;</span>, <span class="ident">FeatureType::Ligatures</span>, <span class="ident">COMMON_LIGATURES_ON</span>, <span class="ident">COMMON_LIGATURES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;lnum&quot;</span>, <span class="ident">FeatureType::NumberCase</span>, <span class="ident">UPPER_CASE_NUMBERS</span>, <span class="number">2</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;mgrk&quot;</span>, <span class="ident">FeatureType::MathematicalExtras</span>, <span class="ident">MATHEMATICAL_GREEK_ON</span>, <span class="ident">MATHEMATICAL_GREEK_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;nlck&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">NLCCHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;onum&quot;</span>, <span class="ident">FeatureType::NumberCase</span>, <span class="ident">LOWER_CASE_NUMBERS</span>, <span class="number">2</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ordn&quot;</span>, <span class="ident">FeatureType::VerticalPosition</span>, <span class="ident">ORDINALS</span>, <span class="ident">NORMAL_POSITION</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;palt&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">ALT_PROPORTIONAL_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;pcap&quot;</span>, <span class="ident">FeatureType::LowerCase</span>, <span class="ident">LOWER_CASE_PETITE_CAPS</span>, <span class="ident">DEFAULT_LOWER_CASE</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;pkna&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">PROPORTIONAL_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;pnum&quot;</span>, <span class="ident">FeatureType::NumberSpacing</span>, <span class="ident">PROPORTIONAL_NUMBERS</span>, <span class="number">4</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;pwid&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">PROPORTIONAL_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;qwid&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">QUARTER_WIDTH_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ruby&quot;</span>, <span class="ident">FeatureType::RubyKana</span>, <span class="ident">RUBY_KANA_ON</span>, <span class="ident">RUBY_KANA_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;sinf&quot;</span>, <span class="ident">FeatureType::VerticalPosition</span>, <span class="ident">SCIENTIFIC_INFERIORS</span>, <span class="ident">NORMAL_POSITION</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;smcp&quot;</span>, <span class="ident">FeatureType::LowerCase</span>, <span class="ident">LOWER_CASE_SMALL_CAPS</span>, <span class="ident">DEFAULT_LOWER_CASE</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;smpl&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">SIMPLIFIED_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss01&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_ONE_ON</span>, <span class="ident">STYLISTIC_ALT_ONE_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss02&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_TWO_ON</span>, <span class="ident">STYLISTIC_ALT_TWO_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss03&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_THREE_ON</span>, <span class="ident">STYLISTIC_ALT_THREE_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss04&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_FOUR_ON</span>, <span class="ident">STYLISTIC_ALT_FOUR_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss05&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_FIVE_ON</span>, <span class="ident">STYLISTIC_ALT_FIVE_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss06&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_SIX_ON</span>, <span class="ident">STYLISTIC_ALT_SIX_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss07&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_SEVEN_ON</span>, <span class="ident">STYLISTIC_ALT_SEVEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss08&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_EIGHT_ON</span>, <span class="ident">STYLISTIC_ALT_EIGHT_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss09&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_NINE_ON</span>, <span class="ident">STYLISTIC_ALT_NINE_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss10&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_TEN_ON</span>, <span class="ident">STYLISTIC_ALT_TEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss11&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_ELEVEN_ON</span>, <span class="ident">STYLISTIC_ALT_ELEVEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss12&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_TWELVE_ON</span>, <span class="ident">STYLISTIC_ALT_TWELVE_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss13&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_THIRTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_THIRTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss14&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_FOURTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_FOURTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss15&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_FIFTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_FIFTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss16&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_SIXTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_SIXTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss17&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_SEVENTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_SEVENTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss18&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_EIGHTEEN_ON</span>, <span class="ident">STYLISTIC_ALT_EIGHTEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss19&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_NINETEEN_ON</span>, <span class="ident">STYLISTIC_ALT_NINETEEN_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;ss20&quot;</span>, <span class="ident">FeatureType::StylisticAlternatives</span>, <span class="ident">STYLISTIC_ALT_TWENTY_ON</span>, <span class="ident">STYLISTIC_ALT_TWENTY_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;subs&quot;</span>, <span class="ident">FeatureType::VerticalPosition</span>, <span class="ident">INFERIORS</span>, <span class="ident">NORMAL_POSITION</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;sups&quot;</span>, <span class="ident">FeatureType::VerticalPosition</span>, <span class="ident">SUPERIORS</span>, <span class="ident">NORMAL_POSITION</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;swsh&quot;</span>, <span class="ident">FeatureType::ContextualAlternatives</span>, <span class="ident">SWASH_ALTERNATES_ON</span>, <span class="ident">SWASH_ALTERNATES_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;titl&quot;</span>, <span class="ident">FeatureType::StyleOptions</span>, <span class="ident">TITLING_CAPS</span>, <span class="ident">NO_STYLE_OPTIONS</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;tnam&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">TRADITIONAL_NAMES_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;tnum&quot;</span>, <span class="ident">FeatureType::NumberSpacing</span>, <span class="ident">MONOSPACED_NUMBERS</span>, <span class="number">4</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;trad&quot;</span>, <span class="ident">FeatureType::CharacterShape</span>, <span class="ident">TRADITIONAL_CHARACTERS</span>, <span class="number">16</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;twid&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">THIRD_WIDTH_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;unic&quot;</span>, <span class="ident">FeatureType::LetterCase</span>, <span class="number">14</span>, <span class="number">15</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;valt&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">ALT_PROPORTIONAL_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;vert&quot;</span>, <span class="ident">FeatureType::VerticalSubstitution</span>, <span class="ident">SUBSTITUTE_VERTICAL_FORMS_ON</span>, <span class="ident">SUBSTITUTE_VERTICAL_FORMS_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;vhal&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">ALT_HALF_WIDTH_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;vkna&quot;</span>, <span class="ident">FeatureType::AlternateKana</span>, <span class="ident">ALTERNATE_VERT_KANA_ON</span>, <span class="ident">ALTERNATE_VERT_KANA_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;vpal&quot;</span>, <span class="ident">FeatureType::TextSpacing</span>, <span class="ident">ALT_PROPORTIONAL_TEXT</span>, <span class="number">7</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;vrt2&quot;</span>, <span class="ident">FeatureType::VerticalSubstitution</span>, <span class="ident">SUBSTITUTE_VERTICAL_FORMS_ON</span>, <span class="ident">SUBSTITUTE_VERTICAL_FORMS_OFF</span>),
+    <span class="ident">FeatureMapping::new</span>(<span class="string">b&quot;zero&quot;</span>, <span class="ident">FeatureType::TypographicExtras</span>, <span class="ident">SLASHED_ZERO_ON</span>, <span class="ident">SLASHED_ZERO_OFF</span>),
+];
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

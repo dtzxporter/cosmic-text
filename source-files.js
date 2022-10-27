@@ -1,0 +1,25 @@
+var sourcesIndex = JSON.parse('{\
+"bitflags":["",[],["lib.rs"]],\
+"bytemuck":["",[],["allocation.rs","anybitpattern.rs","checked.rs","contiguous.rs","internal.rs","lib.rs","no_uninit.rs","offset_of.rs","pod.rs","pod_in_option.rs","transparent.rs","zeroable.rs","zeroable_in_option.rs"]],\
+"cfg_if":["",[],["lib.rs"]],\
+"cosmic_text":["",[["font",[["fallback",[],["mod.rs","unix.rs"]]],["font.rs","matches.rs","mod.rs","system.rs"]]],["attrs.rs","buffer.rs","cache.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
+"fontdb":["",[],["lib.rs"]],\
+"libc":["",[["unix",[["linux_like",[["linux",[["arch",[["generic",[],["mod.rs"]]],["mod.rs"]],["gnu",[["b64",[["x86_64",[],["align.rs","mod.rs","not_x32.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["align.rs","mod.rs","non_exhaustive.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["fixed_width_ints.rs","lib.rs","macros.rs"]],\
+"log":["",[],["lib.rs","macros.rs"]],\
+"memmap2":["",[],["advice.rs","lib.rs","unix.rs"]],\
+"rustybuzz":["",[["aat",[],["extended_kerning.rs","feature_mappings.rs","feature_selector.rs","map.rs","metamorphosis.rs","mod.rs","tracking.rs"]],["complex",[],["arabic.rs","arabic_table.rs","hangul.rs","hebrew.rs","indic.rs","indic_machine.rs","indic_table.rs","khmer.rs","khmer_machine.rs","mod.rs","myanmar.rs","myanmar_machine.rs","thai.rs","universal.rs","universal_machine.rs","universal_table.rs","vowel_constraints.rs"]],["ot",[],["apply.rs","contextual.rs","feature.rs","kerning.rs","layout.rs","map.rs","matching.rs","mod.rs","position.rs","substitute.rs"]]],["buffer.rs","common.rs","face.rs","fallback.rs","glyph_set.rs","lib.rs","normalize.rs","plan.rs","shape.rs","tag.rs","tag_table.rs","text_parser.rs","unicode.rs","unicode_norm.rs"]],\
+"smallvec":["",[],["lib.rs"]],\
+"swash":["",[["feature",[],["aat.rs","at.rs","mod.rs","util.rs"]],["internal",[],["aat.rs","at.rs","cmap.rs","fixed.rs","glyf.rs","head.rs","mod.rs","parse.rs","var.rs","vorg.rs","xmtx.rs"]],["scale",[["bitmap",[],["mod.rs","png.rs"]],["cff",[],["cff.rs","hint.rs","mod.rs"]],["glyf",[],["cache.rs","hint.rs","mod.rs","proxy.rs","scale.rs","var.rs"]]],["color.rs","image.rs","mod.rs","outline.rs","proxy.rs"]],["shape",[],["aat.rs","at.rs","buffer.rs","cache.rs","cluster.rs","engine.rs","feature.rs","mod.rs","partition.rs"]],["text",[["cluster",[],["char.rs","cluster.rs","complex.rs","info.rs","mod.rs","myanmar.rs","parse.rs","simple.rs","token.rs"]]],["analyze.rs","compose.rs","lang.rs","lang_data.rs","mod.rs","unicode.rs","unicode_data.rs"]]],["attributes.rs","cache.rs","charmap.rs","font.rs","lib.rs","macros.rs","metrics.rs","palette.rs","setting.rs","strike.rs","string.rs","tag.rs","variation.rs"]],\
+"sys_locale":["",[],["lib.rs","unix.rs"]],\
+"ttf_parser":["",[["ggg",[],["chained_context.rs","context.rs","feature_variations.rs","layout_table.rs","lookup.rs","mod.rs"]],["tables",[["cff",[],["argstack.rs","cff1.rs","cff2.rs","charset.rs","charstring.rs","dict.rs","encoding.rs","index.rs","mod.rs","std_names.rs"]],["cmap",[],["format0.rs","format10.rs","format12.rs","format13.rs","format14.rs","format2.rs","format4.rs","format6.rs","mod.rs"]]],["ankr.rs","avar.rs","cbdt.rs","cblc.rs","feat.rs","fvar.rs","gdef.rs","glyf.rs","gpos.rs","gsub.rs","gvar.rs","head.rs","hhea.rs","hmtx.rs","hvar.rs","kern.rs","kerx.rs","loca.rs","math.rs","maxp.rs","mod.rs","morx.rs","mvar.rs","name.rs","os2.rs","post.rs","sbix.rs","svg.rs","trak.rs","vhea.rs","vorg.rs"]]],["aat.rs","lib.rs","parser.rs","var_store.rs"]],\
+"unicode_bidi":["",[["char_data",[],["mod.rs","tables.rs"]]],["data_source.rs","deprecated.rs","explicit.rs","format_chars.rs","implicit.rs","level.rs","lib.rs","prepare.rs"]],\
+"unicode_bidi_mirroring":["",[],["lib.rs"]],\
+"unicode_ccc":["",[],["lib.rs"]],\
+"unicode_general_category":["",[],["category.rs","lib.rs","tables.rs"]],\
+"unicode_linebreak":["",[],["lib.rs","shared.rs"]],\
+"unicode_script":["",[],["lib.rs","tables.rs"]],\
+"unicode_segmentation":["",[],["grapheme.rs","lib.rs","sentence.rs","tables.rs","word.rs"]],\
+"yazi":["",[],["decode.rs","encode.rs","lib.rs"]],\
+"zeno":["",[],["command.rs","geometry.rs","hit_test.rs","lib.rs","mask.rs","path_builder.rs","path_data.rs","raster.rs","scratch.rs","segment.rs","stroke.rs","style.rs","svg_parser.rs","traversal.rs"]]\
+}');
+createSourceSidebar();

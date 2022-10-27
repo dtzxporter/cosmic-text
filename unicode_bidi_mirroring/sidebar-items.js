@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["UNICODE_VERSION","The Unicode version."]],"fn":[["get_mirrored","Returns a bidi mirrored character."],["is_mirroring","Checks that character is bidi mirrored."]]};
