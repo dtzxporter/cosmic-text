@@ -153,6 +153,21 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AttrsList</span>, <span class="ident">FontSystem</span>, <span class="ident">LayoutLine</span>, <span class="ident">ShapeLine</span>};
 
 <span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out</span>
@@ -161,8 +176,8 @@
     <span class="ident">text</span>: <span class="ident">String</span>,
     <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
     <span class="ident">wrap_simple</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">shape_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">layout_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">shape_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span>,
+    <span class="ident">layout_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">TextBufferLine</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -276,6 +291,11 @@
         <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     }
 
+    <span class="doccomment">/// Reset only layout information</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset_layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+    }
+
     <span class="doccomment">/// Check if shaping and layout information is cleared</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_reset</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">is_none</span>()
@@ -288,6 +308,11 @@
             <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         }
         <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>()
+    }
+
+    <span class="doccomment">/// Get line shaping cache</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span> {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">shape_opt</span>
     }
 
     <span class="doccomment">/// Layout line, will cache results</span>
@@ -306,6 +331,11 @@
             <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>);
         }
         <span class="self">self</span>.<span class="ident">layout_opt</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>()
+    }
+
+    <span class="doccomment">/// Get line layout cache</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">layout_opt</span>
     }
 }
 </code></pre></div>
