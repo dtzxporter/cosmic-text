@@ -501,6 +501,10 @@
 <span id="501">501</span>
 <span id="502">502</span>
 <span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -654,6 +658,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Create a new [Buffer] with the provided [FontSystem] and [Metrics]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
         <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
         <span class="ident">metrics</span>: <span class="ident">Metrics</span>,
@@ -825,11 +830,13 @@
         )
     }
 
+    <span class="doccomment">/// Shape the provided line index and return the result</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">line_shape</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">line_i</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lines</span>.<span class="ident">get_mut</span>(<span class="ident">line_i</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">line</span>.<span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">font_system</span>))
     }
 
+    <span class="doccomment">/// Lay out the provided line index and return the result</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">line_layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">line_i</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">LayoutLine</span>]<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lines</span>.<span class="ident">get_mut</span>(<span class="ident">line_i</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">line</span>.<span class="ident">layout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">font_system</span>, <span class="self">self</span>.<span class="ident">metrics</span>.<span class="ident">font_size</span>, <span class="self">self</span>.<span class="ident">width</span>))
@@ -873,6 +880,7 @@
         <span class="self">self</span>.<span class="ident">scroll</span>
     }
 
+    <span class="doccomment">/// Set the current scroll location</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_scroll</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scroll</span>: <span class="ident">i32</span>) {
         <span class="kw">if</span> <span class="ident">scroll</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">scroll</span> {
             <span class="self">self</span>.<span class="ident">scroll</span> <span class="op">=</span> <span class="ident">scroll</span>;
