@@ -667,11 +667,6 @@
 <span id="667">667</span>
 <span id="668">668</span>
 <span id="669">669</span>
-<span id="670">670</span>
-<span id="671">671</span>
-<span id="672">672</span>
-<span id="673">673</span>
-<span id="674">674</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="kw">use</span> <span class="ident">unicode_script</span>::{<span class="ident">Script</span>, <span class="ident">UnicodeScript</span>};
@@ -1154,10 +1149,10 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">font_size</span>: <span class="ident">i32</span>,
         <span class="ident">line_width</span>: <span class="ident">i32</span>,
-        <span class="ident">layout_lines</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">layout_i</span>: <span class="ident">usize</span>,
         <span class="ident">wrap_simple</span>: <span class="ident">bool</span>,
-    ) {
+    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">layout_lines</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">1</span>);
+
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">push_line</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
@@ -1267,13 +1262,11 @@
                     <span class="kw">if</span> <span class="ident">word_wrap</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">wrap_simple</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">glyphs</span>.<span class="ident">is_empty</span>() {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
                         <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                        <span class="ident">layout_lines</span>.<span class="ident">insert</span>(
-                            <span class="ident">layout_i</span>,
+                        <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                             <span class="ident">LayoutLine</span> {
                                 <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
                             },
                         );
-                        <span class="ident">layout_i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
 
                         <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
                         <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
@@ -1293,13 +1286,11 @@
                         <span class="kw">if</span> <span class="ident">glyph_wrap</span> {
                             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
                             <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                            <span class="ident">layout_lines</span>.<span class="ident">insert</span>(
-                                <span class="ident">layout_i</span>,
+                            <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                                 <span class="ident">LayoutLine</span> {
                                     <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
                                 },
                             );
-                            <span class="ident">layout_i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
 
                             <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
                             <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
@@ -1322,13 +1313,11 @@
                 <span class="kw">if</span> <span class="ident">wrap</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
                     <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                    <span class="ident">layout_lines</span>.<span class="ident">insert</span>(
-                        <span class="ident">layout_i</span>,
+                    <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                         <span class="ident">LayoutLine</span> {
                             <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
                         },
                     );
-                    <span class="ident">layout_i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
 
                     <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
                     <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
@@ -1337,13 +1326,14 @@
         }
 
         <span class="kw">if</span> <span class="ident">push_line</span> {
-            <span class="ident">layout_lines</span>.<span class="ident">insert</span>(
-                <span class="ident">layout_i</span>,
+            <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                 <span class="ident">LayoutLine</span> {
                     <span class="ident">glyphs</span>,
                 },
             );
         }
+
+        <span class="ident">layout_lines</span>
     }
 }
 </code></pre></div>
