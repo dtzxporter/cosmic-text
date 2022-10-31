@@ -79,6 +79,9 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="doccomment">//! # COSMIC Text</span>
@@ -89,11 +92,11 @@
 <span class="doccomment">//! swash. The other features are developed internal to this library.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! It is recommended that you start by creating a [FontSystem], after which you can create a</span>
-<span class="doccomment">//! [TextBuffer], provide it with some text, and then inspect the layout it produces. At this</span>
+<span class="doccomment">//! [Buffer], provide it with some text, and then inspect the layout it produces. At this</span>
 <span class="doccomment">//! point, you can use the `SwashCache` to rasterize glyphs into either images or pixels.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
-<span class="doccomment">//! use cosmic_text::{Attrs, Color, FontSystem, SwashCache, TextBuffer, TextMetrics};</span>
+<span class="doccomment">//! use cosmic_text::{Attrs, Color, FontSystem, SwashCache, Buffer, Metrics};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // A FontSystem provides access to detected system fonts, create one per application</span>
 <span class="doccomment">//! let font_system = FontSystem::new();</span>
@@ -102,25 +105,25 @@
 <span class="doccomment">//! let mut swash_cache = SwashCache::new(&amp;font_system);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Text metrics indicate the font size and line height of a buffer</span>
-<span class="doccomment">//! let metrics = TextMetrics::new(14, 20);</span>
+<span class="doccomment">//! let metrics = Metrics::new(14, 20);</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! // A TextBuffer provides shaping and layout for a UTF-8 string, create one per text widget</span>
-<span class="doccomment">//! let mut text_buffer = TextBuffer::new(&amp;font_system, metrics);</span>
+<span class="doccomment">//! // A Buffer provides shaping and layout for a UTF-8 string, create one per text widget</span>
+<span class="doccomment">//! let mut buffer = Buffer::new(&amp;font_system, metrics);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Set a size for the text buffer, in pixels</span>
-<span class="doccomment">//! text_buffer.set_size(80, 25);</span>
+<span class="doccomment">//! buffer.set_size(80, 25);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Attributes indicate what font to choose</span>
 <span class="doccomment">//! let attrs = Attrs::new();</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Add some text!</span>
-<span class="doccomment">//! text_buffer.set_text(&quot;Hello, Rust! 🦀\n&quot;, attrs);</span>
+<span class="doccomment">//! buffer.set_text(&quot;Hello, Rust! 🦀\n&quot;, attrs);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Perform shaping as desired</span>
-<span class="doccomment">//! text_buffer.shape_until_scroll();</span>
+<span class="doccomment">//! buffer.shape_until_scroll();</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Inspect the output runs</span>
-<span class="doccomment">//! for run in text_buffer.layout_runs() {</span>
+<span class="doccomment">//! for run in buffer.layout_runs() {</span>
 <span class="doccomment">//!     for glyph in run.glyphs.iter() {</span>
 <span class="doccomment">//!         println!(&quot;{:#?}&quot;, glyph);</span>
 <span class="doccomment">//!     }</span>
@@ -130,7 +133,7 @@
 <span class="doccomment">//! let text_color = Color::rgb(0xFF, 0xFF, 0xFF);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Draw the buffer (for perfomance, instead use SwashCache directly)</span>
-<span class="doccomment">//! text_buffer.draw(&amp;mut swash_cache, text_color, |x, y, w, h, color| {</span>
+<span class="doccomment">//! buffer.draw(&amp;mut swash_cache, text_color, |x, y, w, h, color| {</span>
 <span class="doccomment">//!     // Fill in your code here for drawing rectangles</span>
 <span class="doccomment">//! });</span>
 <span class="doccomment">//! ```</span>
@@ -146,6 +149,9 @@
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::cache</span>::<span class="kw-2">*</span>;
 <span class="kw">mod</span> <span class="ident">cache</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::editor</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">editor</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::font</span>::<span class="kw-2">*</span>;
 <span class="kw">mod</span> <span class="ident">font</span>;

@@ -2,7 +2,7 @@ var sourcesIndex = JSON.parse('{\
 "bitflags":["",[],["lib.rs"]],\
 "bytemuck":["",[],["allocation.rs","anybitpattern.rs","checked.rs","contiguous.rs","internal.rs","lib.rs","no_uninit.rs","offset_of.rs","pod.rs","pod_in_option.rs","transparent.rs","zeroable.rs","zeroable_in_option.rs"]],\
 "cfg_if":["",[],["lib.rs"]],\
-"cosmic_text":["",[["font",[["fallback",[],["mod.rs","unix.rs"]]],["font.rs","matches.rs","mod.rs","system.rs"]]],["attrs.rs","buffer.rs","buffer_line.rs","cache.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
+"cosmic_text":["",[["font",[["fallback",[],["mod.rs","unix.rs"]]],["font.rs","matches.rs","mod.rs","system.rs"]]],["attrs.rs","buffer.rs","buffer_line.rs","cache.rs","editor.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
 "fontdb":["",[],["lib.rs"]],\
 "libc":["",[["unix",[["linux_like",[["linux",[["arch",[["generic",[],["mod.rs"]]],["mod.rs"]],["gnu",[["b64",[["x86_64",[],["align.rs","mod.rs","not_x32.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["align.rs","mod.rs","non_exhaustive.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["fixed_width_ints.rs","lib.rs","macros.rs"]],\
 "log":["",[],["lib.rs","macros.rs"]],\
