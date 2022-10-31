@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/bytemuck-1.12.1/src/allocation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>allocation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../bytemuck/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/bytemuck-1.12.2/src/allocation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>allocation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../bytemuck/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -410,6 +410,295 @@
 <span id="410">410</span>
 <span id="411">411</span>
 <span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extern_crate_alloc&quot;</span>)]</span>
 
 <span class="doccomment">//! Stuff to boost things in the `alloc` crate.</span>
@@ -425,6 +714,8 @@
 <span class="kw">use</span> <span class="ident">alloc</span>::{
   <span class="ident">alloc</span>::{<span class="ident">alloc_zeroed</span>, <span class="ident">Layout</span>},
   <span class="ident">boxed::Box</span>,
+  <span class="ident">rc::Rc</span>,
+  <span class="ident">sync::Arc</span>,
   <span class="ident">vec</span>,
   <span class="ident">vec::Vec</span>,
 };
@@ -727,6 +1018,205 @@
   <span class="ident">dst</span>
 }
 
+<span class="doccomment">/// As [`try_cast_rc`](try_cast_rc), but unwraps for you.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_rc</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>, <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span><span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
+  <span class="ident">try_cast_rc</span>(<span class="ident">input</span>).<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="ident">_v</span>)<span class="op">|</span> <span class="ident">e</span>).<span class="ident">unwrap</span>()
+}
+
+<span class="doccomment">/// Attempts to cast the content type of a [`Rc`](alloc::rc::Rc).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// On failure you get back an error along with the starting `Rc`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The bounds on this function are the same as [`cast_mut`], because a user</span>
+<span class="doccomment">/// could call `Rc::get_unchecked_mut` on the output, which could be observable</span>
+<span class="doccomment">/// in the input.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Failure</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * The start and end content type of the `Rc` must have the exact same</span>
+<span class="doccomment">///   alignment.</span>
+<span class="doccomment">/// * The start and end size of the `Rc` must have the exact same size.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_rc</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>, <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span><span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>, (<span class="ident">PodCastError</span>, <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+  <span class="kw">if</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::AlignmentMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::SizeMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> {
+    <span class="comment">// Safety: Rc::from_raw requires size and alignment match, which is met.</span>
+    <span class="kw">let</span> <span class="ident">ptr</span>: <span class="kw-2">*const</span> <span class="ident">B</span> <span class="op">=</span> <span class="ident">Rc::into_raw</span>(<span class="ident">input</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">B</span>;
+    <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Rc::from_raw</span>(<span class="ident">ptr</span>) })
+  }
+}
+
+<span class="doccomment">/// As [`try_cast_arc`](try_cast_arc), but unwraps for you.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_arc</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>, <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span><span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
+  <span class="ident">try_cast_arc</span>(<span class="ident">input</span>).<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="ident">_v</span>)<span class="op">|</span> <span class="ident">e</span>).<span class="ident">unwrap</span>()
+}
+
+<span class="doccomment">/// Attempts to cast the content type of a [`Arc`](alloc::sync::Arc).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// On failure you get back an error along with the starting `Arc`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The bounds on this function are the same as [`cast_mut`], because a user</span>
+<span class="doccomment">/// could call `Rc::get_unchecked_mut` on the output, which could be observable</span>
+<span class="doccomment">/// in the input.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Failure</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * The start and end content type of the `Arc` must have the exact same</span>
+<span class="doccomment">///   alignment.</span>
+<span class="doccomment">/// * The start and end size of the `Arc` must have the exact same size.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_arc</span><span class="op">&lt;</span>
+  <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+  <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+<span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>, (<span class="ident">PodCastError</span>, <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+  <span class="kw">if</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::AlignmentMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::SizeMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> {
+    <span class="comment">// Safety: Arc::from_raw requires size and alignment match, which is met.</span>
+    <span class="kw">let</span> <span class="ident">ptr</span>: <span class="kw-2">*const</span> <span class="ident">B</span> <span class="op">=</span> <span class="ident">Arc::into_raw</span>(<span class="ident">input</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">B</span>;
+    <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Arc::from_raw</span>(<span class="ident">ptr</span>) })
+  }
+}
+
+<span class="doccomment">/// As [`try_cast_slice_rc`](try_cast_slice_rc), but unwraps for you.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_slice_rc</span><span class="op">&lt;</span>
+  <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+  <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+<span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Rc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>,
+) -&gt; <span class="ident">Rc</span><span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span> {
+  <span class="ident">try_cast_slice_rc</span>(<span class="ident">input</span>).<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="ident">_v</span>)<span class="op">|</span> <span class="ident">e</span>).<span class="ident">unwrap</span>()
+}
+
+<span class="doccomment">/// Attempts to cast the content type of a `Rc&lt;[T]&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// On failure you get back an error along with the starting `Rc&lt;[T]&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The bounds on this function are the same as [`cast_mut`], because a user</span>
+<span class="doccomment">/// could call `Rc::get_unchecked_mut` on the output, which could be observable</span>
+<span class="doccomment">/// in the input.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Failure</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * The start and end content type of the `Rc&lt;[T]&gt;` must have the exact same</span>
+<span class="doccomment">///   alignment.</span>
+<span class="doccomment">/// * The start and end content size in bytes of the `Rc&lt;[T]&gt;` must be the exact</span>
+<span class="doccomment">///   same.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_slice_rc</span><span class="op">&lt;</span>
+  <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+  <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+<span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Rc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Rc</span><span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span>, (<span class="ident">PodCastError</span>, <span class="ident">Rc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>)<span class="op">&gt;</span> {
+  <span class="kw">if</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::AlignmentMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">%</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+      <span class="comment">// If the size in bytes of the underlying buffer does not match an exact</span>
+      <span class="comment">// multiple of the size of B, we cannot cast between them.</span>
+      <span class="prelude-val">Err</span>((<span class="ident">PodCastError::SizeMismatch</span>, <span class="ident">input</span>))
+    } <span class="kw">else</span> {
+      <span class="comment">// Because the size is an exact multiple, we can now change the length</span>
+      <span class="comment">// of the slice and recreate the Rc</span>
+      <span class="comment">// NOTE: This is a valid operation because according to the docs of</span>
+      <span class="comment">// std::rc::Rc::from_raw(), the type U that was in the original Rc&lt;U&gt;</span>
+      <span class="comment">// acquired from Rc::into_raw() must have the same size alignment and</span>
+      <span class="comment">// size of the type T in the new Rc&lt;T&gt;. So as long as both the size</span>
+      <span class="comment">// and alignment stay the same, the Rc will remain a valid Rc.</span>
+      <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>();
+      <span class="kw">let</span> <span class="ident">rc_ptr</span>: <span class="kw-2">*const</span> <span class="ident">A</span> <span class="op">=</span> <span class="ident">Rc::into_raw</span>(<span class="ident">input</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">A</span>;
+      <span class="comment">// Must use ptr::slice_from_raw_parts, because we cannot make an</span>
+      <span class="comment">// intermediate const reference, because it has mutable provenance,</span>
+      <span class="comment">// nor an intermediate mutable reference, because it could be aliased.</span>
+      <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">core::ptr::slice_from_raw_parts</span>(<span class="ident">rc_ptr</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">B</span>, <span class="ident">length</span>);
+      <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Rc</span>::<span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">ptr</span>) })
+    }
+  } <span class="kw">else</span> {
+    <span class="kw">let</span> <span class="ident">rc_ptr</span>: <span class="kw-2">*const</span> [<span class="ident">A</span>] <span class="op">=</span> <span class="ident">Rc::into_raw</span>(<span class="ident">input</span>);
+    <span class="kw">let</span> <span class="ident">ptr</span>: <span class="kw-2">*const</span> [<span class="ident">B</span>] <span class="op">=</span> <span class="ident">rc_ptr</span> <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">B</span>];
+    <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Rc</span>::<span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">ptr</span>) })
+  }
+}
+
+<span class="doccomment">/// As [`try_cast_slice_arc`](try_cast_slice_arc), but unwraps for you.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_slice_arc</span><span class="op">&lt;</span>
+  <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+  <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+<span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>,
+) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span> {
+  <span class="ident">try_cast_slice_arc</span>(<span class="ident">input</span>).<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="ident">_v</span>)<span class="op">|</span> <span class="ident">e</span>).<span class="ident">unwrap</span>()
+}
+
+<span class="doccomment">/// Attempts to cast the content type of a `Arc&lt;[T]&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// On failure you get back an error along with the starting `Arc&lt;[T]&gt;`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The bounds on this function are the same as [`cast_mut`], because a user</span>
+<span class="doccomment">/// could call `Rc::get_unchecked_mut` on the output, which could be observable</span>
+<span class="doccomment">/// in the input.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ## Failure</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * The start and end content type of the `Arc&lt;[T]&gt;` must have the exact same</span>
+<span class="doccomment">///   alignment.</span>
+<span class="doccomment">/// * The start and end content size in bytes of the `Arc&lt;[T]&gt;` must be the</span>
+<span class="doccomment">///   exact same.</span>
+<span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_slice_arc</span><span class="op">&lt;</span>
+  <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+  <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
+<span class="op">&gt;</span>(
+  <span class="ident">input</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>,
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span>, (<span class="ident">PodCastError</span>, <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">A</span>]<span class="op">&gt;</span>)<span class="op">&gt;</span> {
+  <span class="kw">if</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="prelude-val">Err</span>((<span class="ident">PodCastError::AlignmentMismatch</span>, <span class="ident">input</span>))
+  } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() {
+    <span class="kw">if</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">%</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+      <span class="comment">// If the size in bytes of the underlying buffer does not match an exact</span>
+      <span class="comment">// multiple of the size of B, we cannot cast between them.</span>
+      <span class="prelude-val">Err</span>((<span class="ident">PodCastError::SizeMismatch</span>, <span class="ident">input</span>))
+    } <span class="kw">else</span> {
+      <span class="comment">// Because the size is an exact multiple, we can now change the length</span>
+      <span class="comment">// of the slice and recreate the Arc</span>
+      <span class="comment">// NOTE: This is a valid operation because according to the docs of</span>
+      <span class="comment">// std::sync::Arc::from_raw(), the type U that was in the original Arc&lt;U&gt;</span>
+      <span class="comment">// acquired from Arc::into_raw() must have the same size alignment and</span>
+      <span class="comment">// size of the type T in the new Arc&lt;T&gt;. So as long as both the size</span>
+      <span class="comment">// and alignment stay the same, the Arc will remain a valid Arc.</span>
+      <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>();
+      <span class="kw">let</span> <span class="ident">arc_ptr</span>: <span class="kw-2">*const</span> <span class="ident">A</span> <span class="op">=</span> <span class="ident">Arc::into_raw</span>(<span class="ident">input</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">A</span>;
+      <span class="comment">// Must use ptr::slice_from_raw_parts, because we cannot make an</span>
+      <span class="comment">// intermediate const reference, because it has mutable provenance,</span>
+      <span class="comment">// nor an intermediate mutable reference, because it could be aliased.</span>
+      <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">core::ptr::slice_from_raw_parts</span>(<span class="ident">arc_ptr</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">B</span>, <span class="ident">length</span>);
+      <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Arc</span>::<span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">ptr</span>) })
+    }
+  } <span class="kw">else</span> {
+    <span class="kw">let</span> <span class="ident">arc_ptr</span>: <span class="kw-2">*const</span> [<span class="ident">A</span>] <span class="op">=</span> <span class="ident">Arc::into_raw</span>(<span class="ident">input</span>);
+    <span class="kw">let</span> <span class="ident">ptr</span>: <span class="kw-2">*const</span> [<span class="ident">B</span>] <span class="op">=</span> <span class="ident">arc_ptr</span> <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">B</span>];
+    <span class="prelude-val">Ok</span>(<span class="kw">unsafe</span> { <span class="ident">Arc</span>::<span class="op">&lt;</span>[<span class="ident">B</span>]<span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">ptr</span>) })
+  }
+}
+
 <span class="doccomment">/// An extension trait for `TransparentWrapper` and alloc types.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TransparentWrapperAlloc</span><span class="op">&lt;</span><span class="ident">Inner</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>:
   <span class="ident">TransparentWrapper</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>
@@ -776,6 +1266,50 @@
     }
   }
 
+  <span class="doccomment">/// Convert an [`Rc`](alloc::rc::Rc) to the inner type into an `Rc` to the</span>
+  <span class="doccomment">/// wrapper type.</span>
+  <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="kw">fn</span> <span class="ident">wrap_rc</span>(<span class="ident">s</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>) -&gt; <span class="ident">Rc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
+
+    <span class="kw">unsafe</span> {
+      <span class="comment">// A pointer cast doesn&#39;t work here because rustc can&#39;t tell that</span>
+      <span class="comment">// the vtables match (because of the `?Sized` restriction relaxation).</span>
+      <span class="comment">// A `transmute` doesn&#39;t work because the layout of Rc is unspecified.</span>
+      <span class="comment">//</span>
+      <span class="comment">// SAFETY:</span>
+      <span class="comment">// * The unsafe contract requires that pointers to Inner and Self have</span>
+      <span class="comment">//   identical representations, and that the size and alignment of Inner</span>
+      <span class="comment">//   and Self are the same, which meets the safety requirements of</span>
+      <span class="comment">//   Rc::from_raw</span>
+      <span class="kw">let</span> <span class="ident">inner_ptr</span>: <span class="kw-2">*const</span> <span class="ident">Inner</span> <span class="op">=</span> <span class="ident">Rc::into_raw</span>(<span class="ident">s</span>);
+      <span class="kw">let</span> <span class="ident">wrapper_ptr</span>: <span class="kw-2">*const</span> <span class="self">Self</span> <span class="op">=</span> <span class="macro">transmute!</span>(<span class="ident">inner_ptr</span>);
+      <span class="ident">Rc::from_raw</span>(<span class="ident">wrapper_ptr</span>)
+    }
+  }
+
+  <span class="doccomment">/// Convert an [`Arc`](alloc::sync::Arc) to the inner type into an `Arc` to</span>
+  <span class="doccomment">/// the wrapper type.</span>
+  <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="kw">fn</span> <span class="ident">wrap_arc</span>(<span class="ident">s</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
+
+    <span class="kw">unsafe</span> {
+      <span class="comment">// A pointer cast doesn&#39;t work here because rustc can&#39;t tell that</span>
+      <span class="comment">// the vtables match (because of the `?Sized` restriction relaxation).</span>
+      <span class="comment">// A `transmute` doesn&#39;t work because the layout of Arc is unspecified.</span>
+      <span class="comment">//</span>
+      <span class="comment">// SAFETY:</span>
+      <span class="comment">// * The unsafe contract requires that pointers to Inner and Self have</span>
+      <span class="comment">//   identical representations, and that the size and alignment of Inner</span>
+      <span class="comment">//   and Self are the same, which meets the safety requirements of</span>
+      <span class="comment">//   Arc::from_raw</span>
+      <span class="kw">let</span> <span class="ident">inner_ptr</span>: <span class="kw-2">*const</span> <span class="ident">Inner</span> <span class="op">=</span> <span class="ident">Arc::into_raw</span>(<span class="ident">s</span>);
+      <span class="kw">let</span> <span class="ident">wrapper_ptr</span>: <span class="kw-2">*const</span> <span class="self">Self</span> <span class="op">=</span> <span class="macro">transmute!</span>(<span class="ident">inner_ptr</span>);
+      <span class="ident">Arc::from_raw</span>(<span class="ident">wrapper_ptr</span>)
+    }
+  }
+
   <span class="doccomment">/// Convert a vec of the wrapper type into a vec of the inner type.</span>
   <span class="kw">fn</span> <span class="ident">peel_vec</span>(<span class="ident">s</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>
   <span class="kw">where</span>
@@ -818,6 +1352,50 @@
       <span class="kw">let</span> <span class="ident">wrapper_ptr</span>: <span class="kw-2">*mut</span> <span class="self">Self</span> <span class="op">=</span> <span class="ident">Box::into_raw</span>(<span class="ident">s</span>);
       <span class="kw">let</span> <span class="ident">inner_ptr</span>: <span class="kw-2">*mut</span> <span class="ident">Inner</span> <span class="op">=</span> <span class="macro">transmute!</span>(<span class="ident">wrapper_ptr</span>);
       <span class="ident">Box::from_raw</span>(<span class="ident">inner_ptr</span>)
+    }
+  }
+
+  <span class="doccomment">/// Convert an [`Rc`](alloc::rc::Rc) to the wrapper type into an `Rc` to the</span>
+  <span class="doccomment">/// inner type.</span>
+  <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="kw">fn</span> <span class="ident">peel_rc</span>(<span class="ident">s</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> {
+    <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
+
+    <span class="kw">unsafe</span> {
+      <span class="comment">// A pointer cast doesn&#39;t work here because rustc can&#39;t tell that</span>
+      <span class="comment">// the vtables match (because of the `?Sized` restriction relaxation).</span>
+      <span class="comment">// A `transmute` doesn&#39;t work because the layout of Rc is unspecified.</span>
+      <span class="comment">//</span>
+      <span class="comment">// SAFETY:</span>
+      <span class="comment">// * The unsafe contract requires that pointers to Inner and Self have</span>
+      <span class="comment">//   identical representations, and that the size and alignment of Inner</span>
+      <span class="comment">//   and Self are the same, which meets the safety requirements of</span>
+      <span class="comment">//   Rc::from_raw</span>
+      <span class="kw">let</span> <span class="ident">wrapper_ptr</span>: <span class="kw-2">*const</span> <span class="self">Self</span> <span class="op">=</span> <span class="ident">Rc::into_raw</span>(<span class="ident">s</span>);
+      <span class="kw">let</span> <span class="ident">inner_ptr</span>: <span class="kw-2">*const</span> <span class="ident">Inner</span> <span class="op">=</span> <span class="macro">transmute!</span>(<span class="ident">wrapper_ptr</span>);
+      <span class="ident">Rc::from_raw</span>(<span class="ident">inner_ptr</span>)
+    }
+  }
+
+  <span class="doccomment">/// Convert an [`Arc`](alloc::sync::Arc) to the wrapper type into an `Arc` to</span>
+  <span class="doccomment">/// the inner type.</span>
+  <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="kw">fn</span> <span class="ident">peel_arc</span>(<span class="ident">s</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> {
+    <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
+
+    <span class="kw">unsafe</span> {
+      <span class="comment">// A pointer cast doesn&#39;t work here because rustc can&#39;t tell that</span>
+      <span class="comment">// the vtables match (because of the `?Sized` restriction relaxation).</span>
+      <span class="comment">// A `transmute` doesn&#39;t work because the layout of Arc is unspecified.</span>
+      <span class="comment">//</span>
+      <span class="comment">// SAFETY:</span>
+      <span class="comment">// * The unsafe contract requires that pointers to Inner and Self have</span>
+      <span class="comment">//   identical representations, and that the size and alignment of Inner</span>
+      <span class="comment">//   and Self are the same, which meets the safety requirements of</span>
+      <span class="comment">//   Arc::from_raw</span>
+      <span class="kw">let</span> <span class="ident">wrapper_ptr</span>: <span class="kw-2">*const</span> <span class="self">Self</span> <span class="op">=</span> <span class="ident">Arc::into_raw</span>(<span class="ident">s</span>);
+      <span class="kw">let</span> <span class="ident">inner_ptr</span>: <span class="kw-2">*const</span> <span class="ident">Inner</span> <span class="op">=</span> <span class="macro">transmute!</span>(<span class="ident">wrapper_ptr</span>);
+      <span class="ident">Arc::from_raw</span>(<span class="ident">inner_ptr</span>)
     }
   }
 }

@@ -253,6 +253,31 @@
 <span id="253">253</span>
 <span id="254">254</span>
 <span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="kw">use</span> <span class="ident">std::ops::Range</span>;
@@ -460,11 +485,36 @@
             <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">reworked</span>);
         }
 
-        <span class="comment">//Finally lets add the new span. it should fit now.</span>
-        <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">push</span>((<span class="ident">range</span>, <span class="ident">attrs</span>));
+        <span class="comment">// Combine span if possible</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">combined</span> <span class="op">=</span> <span class="bool-val">false</span>;
+        <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">iter_mut</span>() {
+            <span class="kw">if</span> <span class="ident">span</span>.<span class="number">1</span> <span class="op">!</span><span class="op">=</span> <span class="ident">attrs</span> {
+                <span class="comment">// Ignore not matching attrs</span>
+                <span class="kw">continue</span>;
+            }
+
+            <span class="kw">if</span> <span class="ident">span</span>.<span class="number">0</span>.<span class="ident">end</span> <span class="op">==</span> <span class="ident">range</span>.<span class="ident">start</span> {
+                <span class="comment">// Extend span with range at end</span>
+                <span class="ident">span</span>.<span class="number">0</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">end</span>;
+                <span class="ident">combined</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                <span class="kw">break</span>;
+            }
+
+            <span class="kw">if</span> <span class="ident">span</span>.<span class="number">0</span>.<span class="ident">start</span> <span class="op">==</span> <span class="ident">range</span>.<span class="ident">end</span> {
+                <span class="comment">// Extend span with range at start</span>
+                <span class="ident">span</span>.<span class="number">0</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">start</span>;
+                <span class="ident">combined</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                <span class="kw">break</span>;
+            }
+        }
+
+        <span class="kw">if</span> <span class="op">!</span> <span class="ident">combined</span> {
+            <span class="comment">//Finally lets add the new span. it should fit now.</span>
+            <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">push</span>((<span class="ident">range</span>, <span class="ident">attrs</span>));
+        }
 
         <span class="comment">//sort by start to speed up further additions</span>
-        <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">0</span>.<span class="ident">start</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">0</span>.<span class="ident">start</span>).<span class="ident">unwrap</span>())
+        <span class="self">self</span>.<span class="ident">spans</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">0</span>.<span class="ident">start</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="number">0</span>.<span class="ident">start</span>).<span class="ident">unwrap</span>());
     }
 
     <span class="doccomment">/// Get the highest priority attribute span for a range</span>
