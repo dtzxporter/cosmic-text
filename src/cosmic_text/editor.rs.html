@@ -569,28 +569,6 @@
 <span id="569">569</span>
 <span id="570">570</span>
 <span id="571">571</span>
-<span id="572">572</span>
-<span id="573">573</span>
-<span id="574">574</span>
-<span id="575">575</span>
-<span id="576">576</span>
-<span id="577">577</span>
-<span id="578">578</span>
-<span id="579">579</span>
-<span id="580">580</span>
-<span id="581">581</span>
-<span id="582">582</span>
-<span id="583">583</span>
-<span id="584">584</span>
-<span id="585">585</span>
-<span id="586">586</span>
-<span id="587">587</span>
-<span id="588">588</span>
-<span id="589">589</span>
-<span id="590">590</span>
-<span id="591">591</span>
-<span id="592">592</span>
-<span id="593">593</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="kw">use</span> <span class="ident">std::cmp</span>;
@@ -845,11 +823,6 @@
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
 
-                    <span class="macro">println!</span>(<span class="string">&quot;Before&quot;</span>);
-                    <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">attrs_list</span>().<span class="ident">spans</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">span</span>);
-                    }
-
                     <span class="comment">// Collect text after insertion as a line</span>
                     <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
 
@@ -861,11 +834,6 @@
 
                     <span class="comment">// Append the text after insertion</span>
                     <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">after</span>);
-
-                    <span class="macro">println!</span>(<span class="string">&quot;After&quot;</span>);
-                    <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">attrs_list</span>().<span class="ident">spans</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">span</span>);
-                    }
 
                     <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="ident">character</span>.<span class="ident">len_utf8</span>();
                 }
@@ -882,11 +850,6 @@
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&gt;</span> <span class="number">0</span> {
                     <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
 
-                    <span class="macro">println!</span>(<span class="string">&quot;Before&quot;</span>);
-                    <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">attrs_list</span>().<span class="ident">spans</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">span</span>);
-                    }
-
                     <span class="comment">// Get text line after cursor</span>
                     <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
 
@@ -900,8 +863,6 @@
                         }
                     }
 
-                    <span class="macro">println!</span>(<span class="string">&quot;Move cursor {} to {}&quot;</span>, <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>, <span class="ident">prev_index</span>);
-
                     <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">prev_index</span>;
 
                     <span class="comment">// Remove character</span>
@@ -909,11 +870,6 @@
 
                     <span class="comment">// Add text after cursor</span>
                     <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">after</span>);
-
-                    <span class="macro">println!</span>(<span class="string">&quot;After&quot;</span>);
-                    <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">attrs_list</span>().<span class="ident">spans</span>() {
-                        <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">span</span>);
-                    }
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="number">0</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>;
                     <span class="kw">let</span> <span class="ident">old_line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">remove</span>(<span class="ident">line_index</span>);
