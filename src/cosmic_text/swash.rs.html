@@ -142,7 +142,7 @@
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">swash::scale::image</span>::{<span class="ident">Content</span> <span class="kw">as</span> <span class="ident">SwashContent</span>, <span class="ident">Image</span> <span class="kw">as</span> <span class="ident">SwashImage</span>};
 
-<span class="kw">fn</span> <span class="ident">swash_image</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScaleContext</span>, <span class="ident">cache_key</span>: <span class="ident">CacheKey</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">swash_image</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>, <span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScaleContext</span>, <span class="ident">cache_key</span>: <span class="ident">CacheKey</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">font_system</span>.<span class="ident">get_font</span>(<span class="ident">cache_key</span>.<span class="ident">font_id</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
         <span class="prelude-val">None</span> =&gt; {
@@ -182,14 +182,14 @@
 
 <span class="doccomment">/// Cache for rasterizing with the swash scaler</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SwashCache</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+    <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
     <span class="ident">context</span>: <span class="ident">ScaleContext</span>,
     <span class="kw">pub</span> <span class="ident">image_cache</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">CacheKey</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">SwashCache</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create a new swash cache</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">font_system</span>: <span class="ident">font_system</span>,
             <span class="ident">context</span>: <span class="ident">ScaleContext::new</span>(),
