@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/bytemuck-1.12.2/src/allocation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>allocation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../bytemuck/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/bytemuck-1.12.3/src/allocation.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>allocation.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../bytemuck/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../bytemuck/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -699,6 +699,13 @@
 <span id="699">699</span>
 <span id="700">700</span>
 <span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extern_crate_alloc&quot;</span>)]</span>
 
 <span class="doccomment">//! Stuff to boost things in the `alloc` crate.</span>
@@ -711,11 +718,12 @@
 <span class="doccomment">//! [&quot;extern_crate_alloc&quot;]}`</span>
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">alloc::sync::Arc</span>;
 <span class="kw">use</span> <span class="ident">alloc</span>::{
   <span class="ident">alloc</span>::{<span class="ident">alloc_zeroed</span>, <span class="ident">Layout</span>},
   <span class="ident">boxed::Box</span>,
   <span class="ident">rc::Rc</span>,
-  <span class="ident">sync::Arc</span>,
   <span class="ident">vec</span>,
   <span class="ident">vec::Vec</span>,
 };
@@ -1056,6 +1064,7 @@
 
 <span class="doccomment">/// As [`try_cast_arc`](try_cast_arc), but unwraps for you.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_arc</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>, <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span><span class="op">&gt;</span>(
   <span class="ident">input</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>,
 ) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
@@ -1076,6 +1085,7 @@
 <span class="doccomment">///   alignment.</span>
 <span class="doccomment">/// * The start and end size of the `Arc` must have the exact same size.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_arc</span><span class="op">&lt;</span>
   <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
   <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
@@ -1157,6 +1167,7 @@
 
 <span class="doccomment">/// As [`try_cast_slice_arc`](try_cast_slice_arc), but unwraps for you.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_slice_arc</span><span class="op">&lt;</span>
   <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
   <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
@@ -1181,6 +1192,7 @@
 <span class="doccomment">/// * The start and end content size in bytes of the `Arc&lt;[T]&gt;` must be the</span>
 <span class="doccomment">///   exact same.</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_cast_slice_arc</span><span class="op">&lt;</span>
   <span class="ident">A</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
   <span class="ident">B</span>: <span class="ident">NoUninit</span> <span class="op">+</span> <span class="ident">AnyBitPattern</span>,
@@ -1291,6 +1303,7 @@
   <span class="doccomment">/// Convert an [`Arc`](alloc::sync::Arc) to the inner type into an `Arc` to</span>
   <span class="doccomment">/// the wrapper type.</span>
   <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
   <span class="kw">fn</span> <span class="ident">wrap_arc</span>(<span class="ident">s</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
     <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
 
@@ -1380,6 +1393,7 @@
   <span class="doccomment">/// Convert an [`Arc`](alloc::sync::Arc) to the wrapper type into an `Arc` to</span>
   <span class="doccomment">/// the inner type.</span>
   <span class="attribute">#[<span class="ident">inline</span>]</span>
+  <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_has_atomic</span> <span class="op">=</span> <span class="string">&quot;ptr&quot;</span>)]</span>
   <span class="kw">fn</span> <span class="ident">peel_arc</span>(<span class="ident">s</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span> {
     <span class="macro">assert!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">Inner</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="self">Self</span><span class="op">&gt;</span>());
 
