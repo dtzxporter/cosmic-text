@@ -131,9 +131,15 @@
 <span id="131">131</span>
 <span id="132">132</span>
 <span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
+<span class="kw">use</span> <span class="ident">alloc::collections::BTreeMap</span> <span class="kw">as</span> <span class="ident">Map</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">std::collections::HashMap</span> <span class="kw">as</span> <span class="ident">Map</span>;
 <span class="kw">use</span> <span class="ident">swash::scale</span>::{<span class="ident">ScaleContext</span>, <span class="ident">image::Content</span>};
 <span class="kw">use</span> <span class="ident">swash::scale</span>::{<span class="ident">Render</span>, <span class="ident">Source</span>, <span class="ident">StrikeWith</span>};
 <span class="kw">use</span> <span class="ident">swash::zeno</span>::{<span class="ident">Format</span>, <span class="ident">Vector</span>};
@@ -184,7 +190,7 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SwashCache</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
     <span class="ident">context</span>: <span class="ident">ScaleContext</span>,
-    <span class="kw">pub</span> <span class="ident">image_cache</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">CacheKey</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">image_cache</span>: <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">CacheKey</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">SwashCache</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -193,7 +199,7 @@
         <span class="self">Self</span> {
             <span class="ident">font_system</span>: <span class="ident">font_system</span>,
             <span class="ident">context</span>: <span class="ident">ScaleContext::new</span>(),
-            <span class="ident">image_cache</span>: <span class="ident">HashMap::new</span>()
+            <span class="ident">image_cache</span>: <span class="ident">Map::new</span>()
         }
     }
 

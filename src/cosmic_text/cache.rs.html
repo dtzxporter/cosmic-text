@@ -148,7 +148,7 @@
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="doccomment">/// Key for building a glyph cache</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Ord</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CacheKey</span> {
     <span class="doccomment">/// Font ID</span>
     <span class="kw">pub</span> <span class="ident">font_id</span>: <span class="ident">fontdb::ID</span>,
@@ -186,7 +186,7 @@
 }
 
 <span class="doccomment">/// Binning of subpixel position for cache optimization</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Ord</span>, <span class="ident">PartialEq</span>, <span class="ident">PartialOrd</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SubpixelBin</span> {
     <span class="ident">Zero</span>,
     <span class="ident">One</span>,
@@ -196,8 +196,8 @@
 
 <span class="kw">impl</span> <span class="ident">SubpixelBin</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">pos</span>: <span class="ident">f32</span>) -&gt; (<span class="ident">i32</span>, <span class="self">Self</span>) {
-        <span class="kw">let</span> <span class="ident">trunc</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">trunc</span>() <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">fract</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">fract</span>();
+        <span class="kw">let</span> (<span class="ident">fract</span>, <span class="ident">truncf</span>) <span class="op">=</span> <span class="ident">libm::modff</span>(<span class="ident">pos</span>);
+        <span class="kw">let</span> <span class="ident">trunc</span> <span class="op">=</span> <span class="ident">truncf</span> <span class="kw">as</span> <span class="ident">i32</span>;
         <span class="kw">if</span> <span class="ident">pos</span>.<span class="ident">is_sign_negative</span>() {
             <span class="kw">if</span> <span class="ident">fract</span> <span class="op">&gt;</span> <span class="op">-</span><span class="number">0.125</span> {
                 (<span class="ident">trunc</span>, <span class="ident"><span class="self">Self</span>::Zero</span>)

@@ -691,12 +691,22 @@
 <span id="691">691</span>
 <span id="692">692</span>
 <span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
-<span class="kw">use</span> <span class="ident">std::cmp</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
+<span class="kw">use</span> <span class="ident">alloc::string::ToString</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">core::cmp</span>;
 <span class="kw">use</span> <span class="ident">unicode_segmentation::UnicodeSegmentation</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AttrsList</span>, <span class="ident">Buffer</span>, <span class="ident">BufferLine</span>, <span class="ident">Color</span>, <span class="ident">Cursor</span>, <span class="ident">LayoutCursor</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AttrsList</span>, <span class="ident">Buffer</span>, <span class="ident">BufferLine</span>, <span class="ident">Cursor</span>, <span class="ident">LayoutCursor</span>};
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Color</span>;
 
 <span class="doccomment">/// An action to perform on an [Editor]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>

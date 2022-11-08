@@ -667,8 +667,14 @@
 <span id="667">667</span>
 <span id="668">668</span>
 <span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
+<span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+<span class="kw">use</span> <span class="ident">core::mem</span>;
 <span class="kw">use</span> <span class="ident">unicode_script</span>::{<span class="ident">Script</span>, <span class="ident">UnicodeScript</span>};
 <span class="kw">use</span> <span class="ident">unicode_segmentation::UnicodeSegmentation</span>;
 
@@ -1261,7 +1267,7 @@
                     };
                     <span class="kw">if</span> <span class="ident">word_wrap</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">wrap_simple</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">glyphs</span>.<span class="ident">is_empty</span>() {
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                        <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
+                        <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
                         <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                             <span class="ident">LayoutLine</span> {
                                 <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
@@ -1285,7 +1291,7 @@
 
                         <span class="kw">if</span> <span class="ident">glyph_wrap</span> {
                             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                            <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
+                            <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
                             <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                                 <span class="ident">LayoutLine</span> {
                                     <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
@@ -1312,7 +1318,7 @@
 
                 <span class="kw">if</span> <span class="ident">wrap</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                    <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
+                    <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
                     <span class="ident">layout_lines</span>.<span class="ident">push</span>(
                         <span class="ident">LayoutLine</span> {
                             <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
