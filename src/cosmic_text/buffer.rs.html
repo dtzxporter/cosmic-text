@@ -519,9 +519,6 @@
 <span id="519">519</span>
 <span id="520">520</span>
 <span id="521">521</span>
-<span id="522">522</span>
-<span id="523">523</span>
-<span id="524">524</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
@@ -669,8 +666,9 @@
 
 <span class="doccomment">/// A buffer of text that is shaped and laid out</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
-    <span class="doccomment">/// Lines (or paragraphs) of text in the buffer</span>
+    <span class="doccomment">/// The [FontSystem] used by this [Buffer]</span>
+    <span class="kw">pub</span> <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
+    <span class="doccomment">/// [BufferLine]s (or paragraphs) of text in the buffer</span>
     <span class="kw">pub</span> <span class="ident">lines</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BufferLine</span><span class="op">&gt;</span>,
     <span class="ident">metrics</span>: <span class="ident">Metrics</span>,
     <span class="ident">width</span>: <span class="ident">i32</span>,
@@ -889,14 +887,10 @@
 
     <span class="doccomment">/// Set the current buffer dimensions</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) {
-        <span class="kw">if</span> <span class="ident">width</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> {
+        <span class="kw">if</span> <span class="ident">width</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> <span class="op">|</span><span class="op">|</span> <span class="ident">height</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span> {
             <span class="self">self</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">width</span>;
-            <span class="self">self</span>.<span class="ident">relayout</span>();
-            <span class="self">self</span>.<span class="ident">shape_until_scroll</span>();
-        }
-
-        <span class="kw">if</span> <span class="ident">height</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span> {
             <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">height</span>;
+            <span class="self">self</span>.<span class="ident">relayout</span>();
             <span class="self">self</span>.<span class="ident">shape_until_scroll</span>();
         }
     }
