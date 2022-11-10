@@ -519,6 +519,21 @@
 <span id="519">519</span>
 <span id="520">520</span>
 <span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
@@ -945,15 +960,30 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_cursor_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">runs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">layout_runs</span>().<span class="ident">peekable</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">first_run</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">run</span>) <span class="op">=</span> <span class="ident">runs</span>.<span class="ident">next</span>() {
             <span class="kw">let</span> <span class="ident">line_y</span> <span class="op">=</span> <span class="ident">run</span>.<span class="ident">line_y</span>;
 
-            <span class="kw">if</span> <span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span> <span class="op">+</span> <span class="ident">line_height</span>
+            <span class="kw">if</span> <span class="ident">first_run</span> <span class="op">&amp;&amp;</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span> {
+                <span class="ident">first_run</span> <span class="op">=</span> <span class="bool-val">false</span>;
+                <span class="kw">let</span> <span class="ident">new_cursor</span> <span class="op">=</span> <span class="ident">Cursor::new</span>(<span class="ident">run</span>.<span class="ident">line_i</span>, <span class="number">0</span>);
+                <span class="ident">new_cursor_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">new_cursor</span>);
+            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span>
+                    <span class="op">&amp;&amp;</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span> <span class="op">+</span> <span class="ident">line_height</span>
             {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_cursor_glyph</span> <span class="op">=</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>();
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_cursor_char</span> <span class="op">=</span> <span class="number">0</span>;
+
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">first_glyph</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                
                 <span class="lifetime">&#39;hit</span>: <span class="kw">for</span> (<span class="ident">glyph_i</span>, <span class="ident">glyph</span>) <span class="kw">in</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
+                    <span class="kw">if</span> <span class="ident">first_glyph</span> {  
+                        <span class="ident">first_glyph</span> <span class="op">=</span> <span class="bool-val">false</span>;
+                        <span class="kw">if</span> (<span class="ident">run</span>.<span class="ident">rtl</span> <span class="op">&amp;&amp;</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">glyph</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">|</span><span class="op">|</span> (<span class="op">!</span><span class="ident">run</span>.<span class="ident">rtl</span> <span class="op">&amp;&amp;</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">0</span>) {
+                            <span class="ident">new_cursor_glyph</span> <span class="op">=</span> <span class="number">0</span>;
+                            <span class="ident">new_cursor_char</span> <span class="op">=</span> <span class="number">0</span>;
+                        }
+                    } 
                     <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>
                     <span class="op">&amp;&amp;</span> <span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="ident">glyph</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">glyph</span>.<span class="ident">w</span>) <span class="kw">as</span> <span class="ident">i32</span>
                     {
