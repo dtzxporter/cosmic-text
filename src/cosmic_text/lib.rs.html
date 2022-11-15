@@ -91,6 +91,36 @@
 <span id="91">91</span>
 <span id="92">92</span>
 <span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
 
 <span class="doccomment">//! # COSMIC Text</span>
@@ -100,8 +130,8 @@
 <span class="doccomment">//! rustybuzz, font discovery utilizes fontdb, and the rasterization is optional and utilizes</span>
 <span class="doccomment">//! swash. The other features are developed internal to this library.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! It is recommended that you start by creating a [FontSystem], after which you can create a</span>
-<span class="doccomment">//! [Buffer], provide it with some text, and then inspect the layout it produces. At this</span>
+<span class="doccomment">//! It is recommended that you start by creating a [`FontSystem`], after which you can create a</span>
+<span class="doccomment">//! [`Buffer`], provide it with some text, and then inspect the layout it produces. At this</span>
 <span class="doccomment">//! point, you can use the `SwashCache` to rasterize glyphs into either images or pixels.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
@@ -147,6 +177,41 @@
 <span class="doccomment">//! });</span>
 <span class="doccomment">//! ```</span>
 
+<span class="comment">// Not interested in these lints</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::new_without_default</span>)]</span>
+
+<span class="comment">// TODO: address ocurrances and then deny</span>
+<span class="comment">//</span>
+<span class="comment">// Indexing a slice can cause panics and that is something we always want to avoid</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::indexing_slicing</span>)]</span>
+<span class="comment">// Overflows can produce unpredictable results and are only checked in debug builds</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::integer_arithmetic</span>)]</span>
+
+<span class="comment">// Soundness issues</span>
+<span class="comment">//</span>
+<span class="comment">// Dereferencing unalinged pointers may be undefined behavior</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">clippy::cast_ptr_alignment</span>)]</span>
+<span class="comment">// Avoid panicking in without information about the panic. Use expect</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">clippy::unwrap_used</span>)]</span>
+<span class="comment">// This is usually a serious issue - a missing import of a define where it is interpreted</span>
+<span class="comment">// as a catch-all variable in a match, for example</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">unreachable_patterns</span>)]</span>
+<span class="comment">// Ensure that all must_use results are used</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">unused_must_use</span>)]</span>
+
+<span class="comment">// Style issues</span>
+<span class="comment">//</span>
+<span class="comment">// Documentation not ideal</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::doc_markdown</span>)]</span>
+<span class="comment">// Document possible errors</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::missing_errors_doc</span>)]</span>
+<span class="comment">// Document possible panics</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::missing_panics_doc</span>)]</span>
+<span class="comment">// Ensure semicolons are present</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::semicolon_if_nothing_returned</span>)]</span>
+<span class="comment">// Ensure numbers are readable</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::unreadable_literal</span>)]</span>
+
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
@@ -163,8 +228,8 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::cache</span>::<span class="kw-2">*</span>;
 <span class="kw">mod</span> <span class="ident">cache</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::editor</span>::<span class="kw-2">*</span>;
-<span class="kw">mod</span> <span class="ident">editor</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::edit</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">edit</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::font</span>::<span class="kw-2">*</span>;
 <span class="kw">mod</span> <span class="ident">font</span>;
@@ -179,10 +244,5 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::swash</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">swash</span>;
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;syntect&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::syntect</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;syntect&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">syntect</span>;
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

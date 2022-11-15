@@ -191,8 +191,8 @@
 
 <span class="kw">impl</span> <span class="ident">BufferLine</span> {
     <span class="doccomment">/// Create a new line with the given text and attributes list</span>
-    <span class="doccomment">/// Cached shaping and layout can be done using the [Self::shape] and</span>
-    <span class="doccomment">/// [Self::layout] functions</span>
+    <span class="doccomment">/// Cached shaping and layout can be done using the [`Self::shape`] and</span>
+    <span class="doccomment">/// [`Self::layout`] functions</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">text</span>: <span class="ident">T</span>, <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">text</span>: <span class="ident">text</span>.<span class="ident">into</span>(),
@@ -213,7 +213,7 @@
     <span class="doccomment">/// Will reset shape and layout if it differs from current text and attributes list.</span>
     <span class="doccomment">/// Returns true if the line was reset</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_text</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="ident">T</span>, <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">as_ref</span>() <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span> <span class="op">|</span><span class="op">|</span> <span class="ident">attrs_list</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span> {
+        <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">as_ref</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">text</span> <span class="op">|</span><span class="op">|</span> <span class="ident">attrs_list</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span> {
             <span class="self">self</span>.<span class="ident">text</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">into</span>();
             <span class="self">self</span>.<span class="ident">attrs_list</span> <span class="op">=</span> <span class="ident">attrs_list</span>;
             <span class="self">self</span>.<span class="ident">reset</span>();
@@ -316,7 +316,7 @@
             <span class="self">self</span>.<span class="ident">shape_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ShapeLine::new</span>(<span class="ident">font_system</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attrs_list</span>));
             <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
         }
-        <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">as_ref</span>().<span class="ident">expect</span>(<span class="string">&quot;shape not found&quot;</span>)
     }
 
     <span class="doccomment">/// Get line shaping cache</span>
@@ -336,7 +336,7 @@
             );
             <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>);
         }
-        <span class="self">self</span>.<span class="ident">layout_opt</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>()
+        <span class="self">self</span>.<span class="ident">layout_opt</span>.<span class="ident">as_ref</span>().<span class="ident">expect</span>(<span class="string">&quot;layout not found&quot;</span>)
     }
 
     <span class="doccomment">/// Get line layout cache</span>

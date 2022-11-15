@@ -148,7 +148,7 @@
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">swash::scale::image</span>::{<span class="ident">Content</span> <span class="kw">as</span> <span class="ident">SwashContent</span>, <span class="ident">Image</span> <span class="kw">as</span> <span class="ident">SwashImage</span>};
 
-<span class="kw">fn</span> <span class="ident">swash_image</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>, <span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScaleContext</span>, <span class="ident">cache_key</span>: <span class="ident">CacheKey</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">swash_image</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="ident">FontSystem</span>, <span class="ident">context</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScaleContext</span>, <span class="ident">cache_key</span>: <span class="ident">CacheKey</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SwashImage</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">font_system</span>.<span class="ident">get_font</span>(<span class="ident">cache_key</span>.<span class="ident">font_id</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
         <span class="prelude-val">None</span> =&gt; {
@@ -197,7 +197,7 @@
     <span class="doccomment">/// Create a new swash cache</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
-            <span class="ident">font_system</span>: <span class="ident">font_system</span>,
+            <span class="ident">font_system</span>,
             <span class="ident">context</span>: <span class="ident">ScaleContext::new</span>(),
             <span class="ident">image_cache</span>: <span class="ident">Map::new</span>()
         }
@@ -237,7 +237,7 @@
                                 <span class="ident">y</span> <span class="op">+</span> <span class="ident">off_y</span>,
                                 <span class="ident">Color</span>(
                                     ((<span class="ident">image</span>.<span class="ident">data</span>[<span class="ident">i</span>] <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">24</span>) <span class="op">|</span>
-                                    <span class="ident">base</span>.<span class="number">0</span> <span class="op">&amp;</span> <span class="number">0xFFFFFF</span>
+                                    <span class="ident">base</span>.<span class="number">0</span> <span class="op">&amp;</span> <span class="number">0xFF_FF_FF</span>
                                 )
                             );
                             <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
