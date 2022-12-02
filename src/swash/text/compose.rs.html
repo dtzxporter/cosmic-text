@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/compose.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>compose.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/compose.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>compose.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -185,192 +185,192 @@
 <span id="185">185</span>
 <span id="186">186</span>
 <span id="187">187</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::unicode_data</span>::{
-    <span class="ident">compose_index</span>, <span class="ident">decompose_compat_index</span>, <span class="ident">decompose_index</span>, <span class="ident">COMPOSE0</span>, <span class="ident">COMPOSE1</span>, <span class="ident">COMPOSE1_COUNT</span>,
-    <span class="ident">DECOMPOSE</span>, <span class="ident">DECOMPOSE_COMPAT</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::unicode_data::{
+    compose_index, decompose_compat_index, decompose_index, COMPOSE0, COMPOSE1, COMPOSE1_COUNT,
+    DECOMPOSE, DECOMPOSE_COMPAT,
 };
-<span class="kw">use</span> <span class="ident">core::char::from_u32_unchecked</span>;
+<span class="kw">use </span>core::char::from_u32_unchecked;
 
-<span class="doccomment">/// Decomposition of a character.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Decompose</span> {
-    <span class="ident">inner</span>: <span class="ident">DecomposeInner</span>,
-    <span class="ident">len</span>: <span class="ident">u8</span>,
-    <span class="ident">cur</span>: <span class="ident">u8</span>,
+<span class="doccomment">/// Decomposition of a character.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Decompose {
+    inner: DecomposeInner,
+    len: u8,
+    cur: u8,
 }
 
-<span class="kw">impl</span> <span class="ident">Decompose</span> {
-    <span class="doccomment">/// Returns the sequence of characters that represent the</span>
-    <span class="doccomment">/// decomposition.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">char</span>] {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span> {
-            <span class="ident">DecomposeInner::Slice</span>(<span class="ident">chars</span>) =&gt; <span class="ident">chars</span>,
-            <span class="ident">DecomposeInner::Array</span>(<span class="kw-2">ref</span> <span class="ident">chars</span>, <span class="ident">len</span>) =&gt; <span class="kw-2">&amp;</span><span class="ident">chars</span>[..<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>],
+<span class="kw">impl </span>Decompose {
+    <span class="doccomment">/// Returns the sequence of characters that represent the
+    /// decomposition.
+    </span><span class="kw">pub fn </span>chars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[char] {
+        <span class="kw">match </span><span class="self">self</span>.inner {
+            DecomposeInner::Slice(chars) =&gt; chars,
+            DecomposeInner::Array(<span class="kw-2">ref </span>chars, len) =&gt; <span class="kw-2">&amp;</span>chars[..len <span class="kw">as </span>usize],
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Decompose</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">char</span>;
+<span class="kw">impl </span>Iterator <span class="kw">for </span>Decompose {
+    <span class="kw">type </span>Item = char;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">item</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">chars</span>()[<span class="self">self</span>.<span class="ident">cur</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">item</span>)
+        <span class="kw">let </span>item = <span class="self">self</span>.chars()[<span class="self">self</span>.cur <span class="kw">as </span>usize];
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="prelude-val">Some</span>(item)
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">enum</span> <span class="ident">DecomposeInner</span> {
-    <span class="ident">Slice</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">char</span>]),
-    <span class="ident">Array</span>([<span class="ident">char</span>; <span class="number">3</span>], <span class="ident">u32</span>),
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">enum </span>DecomposeInner {
+    Slice(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[char]),
+    Array([char; <span class="number">3</span>], u32),
 }
 
-<span class="kw">impl</span> <span class="ident">DecomposeInner</span> {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Slice</span>(<span class="ident">s</span>) =&gt; <span class="ident">s</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident"><span class="self">Self</span>::Array</span>(<span class="kw">_</span>, <span class="ident">len</span>) =&gt; <span class="kw-2">*</span><span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>,
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DecomposeInner</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Decompose</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">inner</span>: <span class="ident">DecomposeInner</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">inner</span>,
-            <span class="ident">len</span>: <span class="ident">inner</span>.<span class="ident">len</span>(),
-            <span class="ident">cur</span>: <span class="number">0</span>,
+<span class="kw">impl </span>DecomposeInner {
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Slice(s) =&gt; s.len() <span class="kw">as </span>u8,
+            <span class="self">Self</span>::Array(<span class="kw">_</span>, len) =&gt; <span class="kw-2">*</span>len <span class="kw">as </span>u8,
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compose_pair</span>(<span class="ident">a</span>: <span class="ident">char</span>, <span class="ident">b</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">compose_hangul</span>(<span class="ident">a</span>, <span class="ident">b</span>) {
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>);
-    }
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">pair_index</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="ident">COMPOSE0</span>[..])<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">pair_index</span>(<span class="ident">b</span> <span class="kw">as</span> <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="ident">COMPOSE1</span>[..])<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">compose_index</span>(<span class="ident">l</span> <span class="op">*</span> <span class="ident">COMPOSE1_COUNT</span> <span class="op">+</span> <span class="ident">r</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="kw">if</span> <span class="ident">c</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">core::char::from_u32_unchecked</span>(<span class="ident">c</span>) });
-    }
-    <span class="prelude-val">None</span>
-}
-
-<span class="kw">fn</span> <span class="ident">pair_index</span>(<span class="ident">c</span>: <span class="ident">u32</span>, <span class="ident">table</span>: <span class="kw-2">&amp;</span>[(<span class="ident">u32</span>, <span class="ident">u16</span>, <span class="ident">u16</span>)]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">for</span> <span class="ident">entry</span> <span class="kw">in</span> <span class="ident">table</span> {
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">start</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c</span> <span class="op">&lt;</span> <span class="ident">start</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">entry</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">entry</span>.<span class="number">2</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> (<span class="ident">c</span> <span class="op">-</span> <span class="ident">start</span>));
-        }
-    }
-    <span class="prelude-val">None</span>
-}
-
-<span class="kw">const</span> <span class="ident">LBASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1100</span>;
-<span class="kw">const</span> <span class="ident">VBASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1161</span>;
-<span class="kw">const</span> <span class="ident">TBASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x11A7</span>;
-<span class="kw">const</span> <span class="ident">LCOUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">19</span>;
-<span class="kw">const</span> <span class="ident">VCOUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">21</span>;
-<span class="kw">const</span> <span class="ident">TCOUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">28</span>;
-<span class="kw">const</span> <span class="ident">SBASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0xAC00</span>;
-<span class="kw">const</span> <span class="ident">NCOUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">VCOUNT</span> <span class="op">*</span> <span class="ident">TCOUNT</span>;
-<span class="kw">const</span> <span class="ident">SCOUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">LCOUNT</span> <span class="op">*</span> <span class="ident">NCOUNT</span>;
-
-<span class="kw">fn</span> <span class="ident">is_hangul</span>(<span class="ident">c</span>: <span class="ident">char</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    (<span class="ident">SBASE</span>..(<span class="ident">SBASE</span> <span class="op">+</span> <span class="ident">SCOUNT</span>)).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>)
-}
-
-<span class="kw">fn</span> <span class="ident">compose_hangul</span>(<span class="ident">a</span>: <span class="ident">char</span>, <span class="ident">b</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="kw">if</span> <span class="op">!</span>(<span class="ident">VBASE</span>..(<span class="ident">TBASE</span> <span class="op">+</span> <span class="ident">TCOUNT</span>)).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>) {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
-    }
-    <span class="kw">if</span> <span class="op">!</span>(<span class="ident">LBASE</span>..(<span class="ident">LBASE</span> <span class="op">+</span> <span class="ident">LCOUNT</span>)).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span>(<span class="ident">SBASE</span>..(<span class="ident">SBASE</span> <span class="op">+</span> <span class="ident">SCOUNT</span>)).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>) {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
-    }
-    <span class="kw">if</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">SBASE</span> {
-        <span class="kw">if</span> (<span class="ident">a</span> <span class="op">-</span> <span class="ident">SBASE</span>) <span class="op">%</span> <span class="ident">TCOUNT</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">from_u32_unchecked</span>(<span class="ident">a</span> <span class="op">+</span> (<span class="ident">b</span> <span class="op">-</span> <span class="ident">TBASE</span>)) })
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">li</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">-</span> <span class="ident">LBASE</span>;
-        <span class="kw">let</span> <span class="ident">vi</span> <span class="op">=</span> <span class="ident">b</span> <span class="op">-</span> <span class="ident">VBASE</span>;
-        <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">from_u32_unchecked</span>(<span class="ident">SBASE</span> <span class="op">+</span> <span class="ident">li</span> <span class="op">*</span> <span class="ident">NCOUNT</span> <span class="op">+</span> <span class="ident">vi</span> <span class="op">*</span> <span class="ident">TCOUNT</span>) })
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">decompose_hangul</span>(<span class="ident">c</span>: <span class="ident">char</span>) -&gt; <span class="ident">DecomposeInner</span> {
-    <span class="kw">let</span> <span class="ident">si</span> <span class="op">=</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">-</span> <span class="ident">SBASE</span>;
-    <span class="kw">let</span> <span class="ident">li</span> <span class="op">=</span> <span class="ident">si</span> <span class="op">/</span> <span class="ident">NCOUNT</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">chars</span> <span class="op">=</span> [<span class="string">&#39; &#39;</span>; <span class="number">3</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">len</span> <span class="op">=</span> <span class="number">2</span>;
-    <span class="kw">unsafe</span> {
-        <span class="ident">chars</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">from_u32_unchecked</span>(<span class="ident">LBASE</span> <span class="op">+</span> <span class="ident">li</span>);
-        <span class="kw">let</span> <span class="ident">vi</span> <span class="op">=</span> (<span class="ident">si</span> <span class="op">%</span> <span class="ident">NCOUNT</span>) <span class="op">/</span> <span class="ident">TCOUNT</span>;
-        <span class="ident">chars</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">from_u32_unchecked</span>(<span class="ident">VBASE</span> <span class="op">+</span> <span class="ident">vi</span>);
-        <span class="kw">let</span> <span class="ident">ti</span> <span class="op">=</span> <span class="ident">si</span> <span class="op">%</span> <span class="ident">TCOUNT</span>;
-        <span class="kw">if</span> <span class="ident">ti</span> <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="ident">chars</span>[<span class="number">2</span>] <span class="op">=</span> <span class="ident">from_u32_unchecked</span>(<span class="ident">TBASE</span> <span class="op">+</span> <span class="ident">ti</span>);
-            <span class="ident">len</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        }
-    }
-    <span class="ident">DecomposeInner::Array</span>(<span class="ident">chars</span>, <span class="ident">len</span>)
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompose</span>(<span class="ident">c</span>: <span class="ident">char</span>) -&gt; <span class="ident">Decompose</span> {
-    <span class="kw">if</span> <span class="ident">c</span> <span class="op">&lt;</span><span class="op">=</span> <span class="string">&#39;\x7F&#39;</span> {
-        <span class="ident">DecomposeInner::Array</span>([<span class="ident">c</span>, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).<span class="ident">into</span>()
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_hangul</span>(<span class="ident">c</span>) {
-        <span class="ident">decompose_hangul</span>(<span class="ident">c</span>).<span class="ident">into</span>()
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">decompose_index</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>);
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">DecomposeInner::Array</span>([<span class="ident">c</span>, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).<span class="ident">into</span>()
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DECOMPOSE</span>[<span class="ident">index</span>..];
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="number">1</span> <span class="op">+</span> <span class="ident">buf</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">DecomposeInner::Slice</span>(<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>[<span class="number">1</span>..<span class="ident">end</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">u32</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">char</span>]) })
-                .<span class="ident">into</span>()
+<span class="kw">impl </span>From&lt;DecomposeInner&gt; <span class="kw">for </span>Decompose {
+    <span class="kw">fn </span>from(inner: DecomposeInner) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            inner,
+            len: inner.len(),
+            cur: <span class="number">0</span>,
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompose_compat</span>(<span class="ident">c</span>: <span class="ident">char</span>) -&gt; <span class="ident">Decompose</span> {
-    <span class="kw">if</span> <span class="ident">c</span> <span class="op">&lt;</span><span class="op">=</span> <span class="string">&#39;\x7F&#39;</span> {
-        <span class="ident">DecomposeInner::Array</span>([<span class="ident">c</span>, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).<span class="ident">into</span>()
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_hangul</span>(<span class="ident">c</span>) {
-        <span class="ident">decompose_hangul</span>(<span class="ident">c</span>).<span class="ident">into</span>()
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">decompose_compat_index</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>);
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">DecomposeInner::Array</span>([<span class="ident">c</span>, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).<span class="ident">into</span>()
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">decompose_index</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span>);
-            <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DECOMPOSE</span>[<span class="ident">index</span>..];
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="number">1</span> <span class="op">+</span> <span class="ident">buf</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">DecomposeInner::Slice</span>(<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>[<span class="number">1</span>..<span class="ident">end</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">u32</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">char</span>]) })
-                .<span class="ident">into</span>()
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DECOMPOSE_COMPAT</span>[<span class="ident">index</span>..];
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="number">1</span> <span class="op">+</span> <span class="ident">buf</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">DecomposeInner::Slice</span>(<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>[<span class="number">1</span>..<span class="ident">end</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">u32</span>] <span class="kw">as</span> <span class="kw-2">*const</span> [<span class="ident">char</span>]) })
-                .<span class="ident">into</span>()
+<span class="kw">pub fn </span>compose_pair(a: char, b: char) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = compose_hangul(a, b) {
+        <span class="kw">return </span><span class="prelude-val">Some</span>(c);
+    }
+    <span class="kw">let </span>l = pair_index(a <span class="kw">as </span>u32, <span class="kw-2">&amp;</span>COMPOSE0[..])<span class="question-mark">?</span>;
+    <span class="kw">let </span>r = pair_index(b <span class="kw">as </span>u32, <span class="kw-2">&amp;</span>COMPOSE1[..])<span class="question-mark">?</span>;
+    <span class="kw">let </span>c = compose_index(l * COMPOSE1_COUNT + r) <span class="kw">as </span>u32;
+    <span class="kw">if </span>c != <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="kw">unsafe </span>{ core::char::from_u32_unchecked(c) });
+    }
+    <span class="prelude-val">None
+</span>}
+
+<span class="kw">fn </span>pair_index(c: u32, table: <span class="kw-2">&amp;</span>[(u32, u16, u16)]) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+    <span class="kw">let </span>c = c <span class="kw">as </span>usize;
+    <span class="kw">for </span>entry <span class="kw">in </span>table {
+        <span class="kw">let </span>start = entry.<span class="number">0 </span><span class="kw">as </span>usize;
+        <span class="kw">if </span>start == <span class="number">0 </span>|| c &lt; start {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
+        }
+        <span class="kw">let </span>end = start + entry.<span class="number">1 </span><span class="kw">as </span>usize;
+        <span class="kw">if </span>c <span class="kw">as </span>usize &lt;= end {
+            <span class="kw">return </span><span class="prelude-val">Some</span>(entry.<span class="number">2 </span><span class="kw">as </span>usize + (c - start));
+        }
+    }
+    <span class="prelude-val">None
+</span>}
+
+<span class="kw">const </span>LBASE: u32 = <span class="number">0x1100</span>;
+<span class="kw">const </span>VBASE: u32 = <span class="number">0x1161</span>;
+<span class="kw">const </span>TBASE: u32 = <span class="number">0x11A7</span>;
+<span class="kw">const </span>LCOUNT: u32 = <span class="number">19</span>;
+<span class="kw">const </span>VCOUNT: u32 = <span class="number">21</span>;
+<span class="kw">const </span>TCOUNT: u32 = <span class="number">28</span>;
+<span class="kw">const </span>SBASE: u32 = <span class="number">0xAC00</span>;
+<span class="kw">const </span>NCOUNT: u32 = VCOUNT * TCOUNT;
+<span class="kw">const </span>SCOUNT: u32 = LCOUNT * NCOUNT;
+
+<span class="kw">fn </span>is_hangul(c: char) -&gt; bool {
+    <span class="kw">let </span>c = c <span class="kw">as </span>u32;
+    (SBASE..(SBASE + SCOUNT)).contains(<span class="kw-2">&amp;</span>c)
+}
+
+<span class="kw">fn </span>compose_hangul(a: char, b: char) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+    <span class="kw">let </span>a = a <span class="kw">as </span>u32;
+    <span class="kw">let </span>b = b <span class="kw">as </span>u32;
+    <span class="kw">if </span>!(VBASE..(TBASE + TCOUNT)).contains(<span class="kw-2">&amp;</span>b) {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
+    }
+    <span class="kw">if </span>!(LBASE..(LBASE + LCOUNT)).contains(<span class="kw-2">&amp;</span>a) &amp;&amp; !(SBASE..(SBASE + SCOUNT)).contains(<span class="kw-2">&amp;</span>a) {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
+    }
+    <span class="kw">if </span>a &gt;= SBASE {
+        <span class="kw">if </span>(a - SBASE) % TCOUNT == <span class="number">0 </span>{
+            <span class="prelude-val">Some</span>(<span class="kw">unsafe </span>{ from_u32_unchecked(a + (b - TBASE)) })
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
+    } <span class="kw">else </span>{
+        <span class="kw">let </span>li = a - LBASE;
+        <span class="kw">let </span>vi = b - VBASE;
+        <span class="prelude-val">Some</span>(<span class="kw">unsafe </span>{ from_u32_unchecked(SBASE + li * NCOUNT + vi * TCOUNT) })
+    }
+}
+
+<span class="kw">fn </span>decompose_hangul(c: char) -&gt; DecomposeInner {
+    <span class="kw">let </span>si = c <span class="kw">as </span>u32 - SBASE;
+    <span class="kw">let </span>li = si / NCOUNT;
+    <span class="kw">let </span><span class="kw-2">mut </span>chars = [<span class="string">&#39; &#39;</span>; <span class="number">3</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>len = <span class="number">2</span>;
+    <span class="kw">unsafe </span>{
+        chars[<span class="number">0</span>] = from_u32_unchecked(LBASE + li);
+        <span class="kw">let </span>vi = (si % NCOUNT) / TCOUNT;
+        chars[<span class="number">1</span>] = from_u32_unchecked(VBASE + vi);
+        <span class="kw">let </span>ti = si % TCOUNT;
+        <span class="kw">if </span>ti &gt; <span class="number">0 </span>{
+            chars[<span class="number">2</span>] = from_u32_unchecked(TBASE + ti);
+            len += <span class="number">1</span>;
+        }
+    }
+    DecomposeInner::Array(chars, len)
+}
+
+<span class="kw">pub fn </span>decompose(c: char) -&gt; Decompose {
+    <span class="kw">if </span>c &lt;= <span class="string">&#39;\x7F&#39; </span>{
+        DecomposeInner::Array([c, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).into()
+    } <span class="kw">else if </span>is_hangul(c) {
+        decompose_hangul(c).into()
+    } <span class="kw">else </span>{
+        <span class="kw">let </span>index = decompose_index(c <span class="kw">as </span>usize);
+        <span class="kw">if </span>index == <span class="number">0 </span>{
+            DecomposeInner::Array([c, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).into()
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>buf = <span class="kw-2">&amp;</span>DECOMPOSE[index..];
+            <span class="kw">let </span>end = <span class="number">1 </span>+ buf[<span class="number">0</span>] <span class="kw">as </span>usize;
+            DecomposeInner::Slice(<span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(<span class="kw-2">&amp;</span>buf[<span class="number">1</span>..end] <span class="kw">as </span><span class="kw-2">*const </span>[u32] <span class="kw">as </span><span class="kw-2">*const </span>[char]) })
+                .into()
+        }
+    }
+}
+
+<span class="kw">pub fn </span>decompose_compat(c: char) -&gt; Decompose {
+    <span class="kw">if </span>c &lt;= <span class="string">&#39;\x7F&#39; </span>{
+        DecomposeInner::Array([c, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).into()
+    } <span class="kw">else if </span>is_hangul(c) {
+        decompose_hangul(c).into()
+    } <span class="kw">else </span>{
+        <span class="kw">let </span>index = decompose_compat_index(c <span class="kw">as </span>usize);
+        <span class="kw">if </span>index == <span class="number">0 </span>{
+            DecomposeInner::Array([c, <span class="string">&#39; &#39;</span>, <span class="string">&#39; &#39;</span>], <span class="number">1</span>).into()
+        } <span class="kw">else if </span>index == <span class="number">1 </span>{
+            <span class="kw">let </span>index = decompose_index(c <span class="kw">as </span>usize);
+            <span class="kw">let </span>buf = <span class="kw-2">&amp;</span>DECOMPOSE[index..];
+            <span class="kw">let </span>end = <span class="number">1 </span>+ buf[<span class="number">0</span>] <span class="kw">as </span>usize;
+            DecomposeInner::Slice(<span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(<span class="kw-2">&amp;</span>buf[<span class="number">1</span>..end] <span class="kw">as </span><span class="kw-2">*const </span>[u32] <span class="kw">as </span><span class="kw-2">*const </span>[char]) })
+                .into()
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>buf = <span class="kw-2">&amp;</span>DECOMPOSE_COMPAT[index..];
+            <span class="kw">let </span>end = <span class="number">1 </span>+ buf[<span class="number">0</span>] <span class="kw">as </span>usize;
+            DecomposeInner::Slice(<span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(<span class="kw-2">&amp;</span>buf[<span class="number">1</span>..end] <span class="kw">as </span><span class="kw-2">*const </span>[u32] <span class="kw">as </span><span class="kw-2">*const </span>[char]) })
+                .into()
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

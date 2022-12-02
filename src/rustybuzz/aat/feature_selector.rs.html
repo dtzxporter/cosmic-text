@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/feature_selector.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>feature_selector.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/feature_selector.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>feature_selector.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -151,158 +151,158 @@
 <span id="151">151</span>
 <span id="152">152</span>
 <span id="153">153</span>
-</pre><pre class="rust"><code><span class="comment">// FeatureType::Ligatures</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">COMMON_LIGATURES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">COMMON_LIGATURES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RARE_LIGATURES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RARE_LIGATURES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_LIGATURES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">18</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_LIGATURES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">19</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HISTORICAL_LIGATURES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">20</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HISTORICAL_LIGATURES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">21</span>;
+</pre><pre class="rust"><code><span class="comment">// FeatureType::Ligatures
+</span><span class="kw">pub const </span>COMMON_LIGATURES_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>COMMON_LIGATURES_OFF: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>RARE_LIGATURES_ON: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>RARE_LIGATURES_OFF: u8 = <span class="number">5</span>;
+<span class="kw">pub const </span>CONTEXTUAL_LIGATURES_ON: u8 = <span class="number">18</span>;
+<span class="kw">pub const </span>CONTEXTUAL_LIGATURES_OFF: u8 = <span class="number">19</span>;
+<span class="kw">pub const </span>HISTORICAL_LIGATURES_ON: u8 = <span class="number">20</span>;
+<span class="kw">pub const </span>HISTORICAL_LIGATURES_OFF: u8 = <span class="number">21</span>;
 
-<span class="comment">// FeatureType::LetterCase</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SMALL_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>; <span class="comment">// deprecated</span>
+<span class="comment">// FeatureType::LetterCase
+</span><span class="kw">pub const </span>SMALL_CAPS: u8 = <span class="number">3</span>; <span class="comment">// deprecated
 
-<span class="comment">// FeatureType::VerticalSubstitution</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SUBSTITUTE_VERTICAL_FORMS_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SUBSTITUTE_VERTICAL_FORMS_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
+// FeatureType::VerticalSubstitution
+</span><span class="kw">pub const </span>SUBSTITUTE_VERTICAL_FORMS_ON: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>SUBSTITUTE_VERTICAL_FORMS_OFF: u8 = <span class="number">1</span>;
 
-<span class="comment">// FeatureType::NumberSpacing</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MONOSPACED_NUMBERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROPORTIONAL_NUMBERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="comment">// FeatureType::NumberSpacing
+</span><span class="kw">pub const </span>MONOSPACED_NUMBERS: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>PROPORTIONAL_NUMBERS: u8 = <span class="number">1</span>;
 
-<span class="comment">// FeatureType::VerticalPosition</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NORMAL_POSITION</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SUPERIORS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INFERIORS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ORDINALS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SCIENTIFIC_INFERIORS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
+<span class="comment">// FeatureType::VerticalPosition
+</span><span class="kw">pub const </span>NORMAL_POSITION: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>SUPERIORS: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>INFERIORS: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>ORDINALS: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>SCIENTIFIC_INFERIORS: u8 = <span class="number">4</span>;
 
-<span class="comment">// FeatureType::Fractions</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NO_FRACTIONS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VERTICAL_FRACTIONS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DIAGONAL_FRACTIONS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
+<span class="comment">// FeatureType::Fractions
+</span><span class="kw">pub const </span>NO_FRACTIONS: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>VERTICAL_FRACTIONS: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>DIAGONAL_FRACTIONS: u8 = <span class="number">2</span>;
 
-<span class="comment">// FeatureType::TypographicExtras</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SLASHED_ZERO_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SLASHED_ZERO_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
+<span class="comment">// FeatureType::TypographicExtras
+</span><span class="kw">pub const </span>SLASHED_ZERO_ON: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>SLASHED_ZERO_OFF: u8 = <span class="number">5</span>;
 
-<span class="comment">// FeatureType::MathematicalExtras</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MATHEMATICAL_GREEK_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">10</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MATHEMATICAL_GREEK_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">11</span>;
+<span class="comment">// FeatureType::MathematicalExtras
+</span><span class="kw">pub const </span>MATHEMATICAL_GREEK_ON: u8 = <span class="number">10</span>;
+<span class="kw">pub const </span>MATHEMATICAL_GREEK_OFF: u8 = <span class="number">11</span>;
 
-<span class="comment">// FeatureType::StyleOptions</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NO_STYLE_OPTIONS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TITLING_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
+<span class="comment">// FeatureType::StyleOptions
+</span><span class="kw">pub const </span>NO_STYLE_OPTIONS: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>TITLING_CAPS: u8 = <span class="number">4</span>;
 
-<span class="comment">// FeatureType::CharacterShape</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TRADITIONAL_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SIMPLIFIED_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">JIS1978_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">JIS1983_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">JIS1990_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EXPERT_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">10</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">JIS2004_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">11</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HOJO_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">12</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NLCCHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">13</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TRADITIONAL_NAMES_CHARACTERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">14</span>;
+<span class="comment">// FeatureType::CharacterShape
+</span><span class="kw">pub const </span>TRADITIONAL_CHARACTERS: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>SIMPLIFIED_CHARACTERS: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>JIS1978_CHARACTERS: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>JIS1983_CHARACTERS: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>JIS1990_CHARACTERS: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>EXPERT_CHARACTERS: u8 = <span class="number">10</span>;
+<span class="kw">pub const </span>JIS2004_CHARACTERS: u8 = <span class="number">11</span>;
+<span class="kw">pub const </span>HOJO_CHARACTERS: u8 = <span class="number">12</span>;
+<span class="kw">pub const </span>NLCCHARACTERS: u8 = <span class="number">13</span>;
+<span class="kw">pub const </span>TRADITIONAL_NAMES_CHARACTERS: u8 = <span class="number">14</span>;
 
-<span class="comment">// FeatureType::NumberCase</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LOWER_CASE_NUMBERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UPPER_CASE_NUMBERS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="comment">// FeatureType::NumberCase
+</span><span class="kw">pub const </span>LOWER_CASE_NUMBERS: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>UPPER_CASE_NUMBERS: u8 = <span class="number">1</span>;
 
-<span class="comment">// FeatureType::TextSpacing</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PROPORTIONAL_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MONOSPACED_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HALF_WIDTH_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">THIRD_WIDTH_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QUARTER_WIDTH_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALT_PROPORTIONAL_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALT_HALF_WIDTH_TEXT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">6</span>;
+<span class="comment">// FeatureType::TextSpacing
+</span><span class="kw">pub const </span>PROPORTIONAL_TEXT: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>MONOSPACED_TEXT: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>HALF_WIDTH_TEXT: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>THIRD_WIDTH_TEXT: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>QUARTER_WIDTH_TEXT: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>ALT_PROPORTIONAL_TEXT: u8 = <span class="number">5</span>;
+<span class="kw">pub const </span>ALT_HALF_WIDTH_TEXT: u8 = <span class="number">6</span>;
 
-<span class="comment">// FeatureType::Transliteration</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NO_TRANSLITERATION</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HANJA_TO_HANGUL</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
+<span class="comment">// FeatureType::Transliteration
+</span><span class="kw">pub const </span>NO_TRANSLITERATION: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>HANJA_TO_HANGUL: u8 = <span class="number">1</span>;
 
-<span class="comment">// FeatureType::RubyKana</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RUBY_KANA_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RUBY_KANA_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="comment">// FeatureType::RubyKana
+</span><span class="kw">pub const </span>RUBY_KANA_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>RUBY_KANA_OFF: u8 = <span class="number">3</span>;
 
-<span class="comment">// FeatureType::ItalicCjkRoman</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CJK_ITALIC_ROMAN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CJK_ITALIC_ROMAN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="comment">// FeatureType::ItalicCjkRoman
+</span><span class="kw">pub const </span>CJK_ITALIC_ROMAN_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>CJK_ITALIC_ROMAN_OFF: u8 = <span class="number">3</span>;
 
-<span class="comment">// FeatureType::CaseSensitiveLayout</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CASE_SENSITIVE_LAYOUT_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CASE_SENSITIVE_LAYOUT_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CASE_SENSITIVE_SPACING_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CASE_SENSITIVE_SPACING_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="comment">// FeatureType::CaseSensitiveLayout
+</span><span class="kw">pub const </span>CASE_SENSITIVE_LAYOUT_ON: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>CASE_SENSITIVE_LAYOUT_OFF: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>CASE_SENSITIVE_SPACING_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>CASE_SENSITIVE_SPACING_OFF: u8 = <span class="number">3</span>;
 
-<span class="comment">// FeatureType::AlternateKana</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALTERNATE_HORIZ_KANA_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALTERNATE_HORIZ_KANA_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALTERNATE_VERT_KANA_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALTERNATE_VERT_KANA_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="comment">// FeatureType::AlternateKana
+</span><span class="kw">pub const </span>ALTERNATE_HORIZ_KANA_ON: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>ALTERNATE_HORIZ_KANA_OFF: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>ALTERNATE_VERT_KANA_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>ALTERNATE_VERT_KANA_OFF: u8 = <span class="number">3</span>;
 
-<span class="comment">// FeatureType::StylisticAlternatives</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_ONE_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_ONE_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWO_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWO_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_THREE_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">6</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_THREE_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">7</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FOUR_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">8</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FOUR_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">9</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FIVE_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">10</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FIVE_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">11</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SIX_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">12</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SIX_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">13</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SEVEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">14</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SEVEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">15</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_EIGHT_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">16</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_EIGHT_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">17</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_NINE_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">18</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_NINE_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">19</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">20</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">21</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_ELEVEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">22</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_ELEVEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">23</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWELVE_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">24</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWELVE_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">25</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_THIRTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">26</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_THIRTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">27</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FOURTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">28</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FOURTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">29</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FIFTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">30</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_FIFTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">31</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SIXTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">32</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SIXTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">33</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SEVENTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">34</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_SEVENTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">35</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_EIGHTEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">36</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_EIGHTEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">37</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_NINETEEN_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">38</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_NINETEEN_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">39</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWENTY_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">40</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STYLISTIC_ALT_TWENTY_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">41</span>;
+<span class="comment">// FeatureType::StylisticAlternatives
+</span><span class="kw">pub const </span>STYLISTIC_ALT_ONE_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_ONE_OFF: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWO_ON: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWO_OFF: u8 = <span class="number">5</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_THREE_ON: u8 = <span class="number">6</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_THREE_OFF: u8 = <span class="number">7</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FOUR_ON: u8 = <span class="number">8</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FOUR_OFF: u8 = <span class="number">9</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FIVE_ON: u8 = <span class="number">10</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FIVE_OFF: u8 = <span class="number">11</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SIX_ON: u8 = <span class="number">12</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SIX_OFF: u8 = <span class="number">13</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SEVEN_ON: u8 = <span class="number">14</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SEVEN_OFF: u8 = <span class="number">15</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_EIGHT_ON: u8 = <span class="number">16</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_EIGHT_OFF: u8 = <span class="number">17</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_NINE_ON: u8 = <span class="number">18</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_NINE_OFF: u8 = <span class="number">19</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TEN_ON: u8 = <span class="number">20</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TEN_OFF: u8 = <span class="number">21</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_ELEVEN_ON: u8 = <span class="number">22</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_ELEVEN_OFF: u8 = <span class="number">23</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWELVE_ON: u8 = <span class="number">24</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWELVE_OFF: u8 = <span class="number">25</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_THIRTEEN_ON: u8 = <span class="number">26</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_THIRTEEN_OFF: u8 = <span class="number">27</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FOURTEEN_ON: u8 = <span class="number">28</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FOURTEEN_OFF: u8 = <span class="number">29</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FIFTEEN_ON: u8 = <span class="number">30</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_FIFTEEN_OFF: u8 = <span class="number">31</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SIXTEEN_ON: u8 = <span class="number">32</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SIXTEEN_OFF: u8 = <span class="number">33</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SEVENTEEN_ON: u8 = <span class="number">34</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_SEVENTEEN_OFF: u8 = <span class="number">35</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_EIGHTEEN_ON: u8 = <span class="number">36</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_EIGHTEEN_OFF: u8 = <span class="number">37</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_NINETEEN_ON: u8 = <span class="number">38</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_NINETEEN_OFF: u8 = <span class="number">39</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWENTY_ON: u8 = <span class="number">40</span>;
+<span class="kw">pub const </span>STYLISTIC_ALT_TWENTY_OFF: u8 = <span class="number">41</span>;
 
-<span class="comment">// FeatureType::ContextualAlternatives</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_ALTERNATES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_ALTERNATES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SWASH_ALTERNATES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SWASH_ALTERNATES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_SWASH_ALTERNATES_ON</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXTUAL_SWASH_ALTERNATES_OFF</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
+<span class="comment">// FeatureType::ContextualAlternatives
+</span><span class="kw">pub const </span>CONTEXTUAL_ALTERNATES_ON: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>CONTEXTUAL_ALTERNATES_OFF: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>SWASH_ALTERNATES_ON: u8 = <span class="number">2</span>;
+<span class="kw">pub const </span>SWASH_ALTERNATES_OFF: u8 = <span class="number">3</span>;
+<span class="kw">pub const </span>CONTEXTUAL_SWASH_ALTERNATES_ON: u8 = <span class="number">4</span>;
+<span class="kw">pub const </span>CONTEXTUAL_SWASH_ALTERNATES_OFF: u8 = <span class="number">5</span>;
 
-<span class="comment">// FeatureType::LowerCase</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEFAULT_LOWER_CASE</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LOWER_CASE_SMALL_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LOWER_CASE_PETITE_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
+<span class="comment">// FeatureType::LowerCase
+</span><span class="kw">pub const </span>DEFAULT_LOWER_CASE: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>LOWER_CASE_SMALL_CAPS: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>LOWER_CASE_PETITE_CAPS: u8 = <span class="number">2</span>;
 
-<span class="comment">// FeatureType::UpperCase</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEFAULT_UPPER_CASE</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UPPER_CASE_SMALL_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UPPER_CASE_PETITE_CAPS</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
+<span class="comment">// FeatureType::UpperCase
+</span><span class="kw">pub const </span>DEFAULT_UPPER_CASE: u8 = <span class="number">0</span>;
+<span class="kw">pub const </span>UPPER_CASE_SMALL_CAPS: u8 = <span class="number">1</span>;
+<span class="kw">pub const </span>UPPER_CASE_PETITE_CAPS: u8 = <span class="number">2</span>;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

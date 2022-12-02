@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -333,340 +333,340 @@
 <span id="333">333</span>
 <span id="334">334</span>
 <span id="335">335</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::{
-    <span class="ident">fixed</span>::{<span class="ident">mul</span>, <span class="ident">Fixed</span>},
-    <span class="ident">glyf</span>::<span class="kw-2">*</span>,
-    <span class="ident">var::Fvar</span>,
-    <span class="ident">Array</span>, <span class="ident">RawFont</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::internal::{
+    fixed::{mul, Fixed},
+    glyf::<span class="kw-2">*</span>,
+    var::Fvar,
+    Array, RawFont,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">FontRef</span>, <span class="ident">GlyphId</span>};
+<span class="kw">use crate</span>::{FontRef, GlyphId};
 
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">var</span>, <span class="ident">Point</span>};
+<span class="kw">use super</span>::{var, Point};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GlyfProxy</span> {
-    <span class="kw">pub</span> <span class="ident">glyf</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">loca</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">cvt</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="kw">pub</span> <span class="ident">fpgm</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="kw">pub</span> <span class="ident">prep</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="kw">pub</span> <span class="ident">cvar</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">gvar</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">max_storage</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">max_stack</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">max_fdefs</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">max_idefs</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">max_twilight</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">axis_count</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">loca_fmt</span>: <span class="ident">u8</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>GlyfProxy {
+    <span class="kw">pub </span>glyf: u32,
+    <span class="kw">pub </span>loca: u32,
+    <span class="kw">pub </span>cvt: (u32, u32),
+    <span class="kw">pub </span>fpgm: (u32, u32),
+    <span class="kw">pub </span>prep: (u32, u32),
+    <span class="kw">pub </span>cvar: u32,
+    <span class="kw">pub </span>gvar: u32,
+    <span class="kw">pub </span>max_storage: u16,
+    <span class="kw">pub </span>max_stack: u16,
+    <span class="kw">pub </span>max_fdefs: u16,
+    <span class="kw">pub </span>max_idefs: u16,
+    <span class="kw">pub </span>max_twilight: u16,
+    <span class="kw">pub </span>axis_count: u16,
+    <span class="kw">pub </span>loca_fmt: u8,
 }
 
-<span class="kw">impl</span> <span class="ident">GlyfProxy</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">maxp</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">maxp</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">head</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">loca_fmt</span> <span class="op">=</span> <span class="ident">head</span>.<span class="ident">index_to_location_format</span>() <span class="kw">as</span> <span class="ident">u8</span>;
-        <span class="kw">let</span> <span class="ident">glyf</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">GLYF</span>);
-        <span class="kw">let</span> <span class="ident">loca</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">LOCA</span>);
-        <span class="kw">if</span> <span class="ident">glyf</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">loca</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">loca_fmt</span> <span class="op">&gt;</span> <span class="number">1</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">impl </span>GlyfProxy {
+    <span class="kw">pub fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>maxp = font.maxp()<span class="question-mark">?</span>;
+        <span class="kw">let </span>head = font.head()<span class="question-mark">?</span>;
+        <span class="kw">let </span>loca_fmt = head.index_to_location_format() <span class="kw">as </span>u8;
+        <span class="kw">let </span>glyf = font.table_offset(GLYF);
+        <span class="kw">let </span>loca = font.table_offset(LOCA);
+        <span class="kw">if </span>glyf == <span class="number">0 </span>|| loca == <span class="number">0 </span>|| loca_fmt &gt; <span class="number">1 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">cvt</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_range</span>(<span class="ident">CVT_</span>).<span class="ident">unwrap_or</span>((<span class="number">0</span>, <span class="number">0</span>));
-        <span class="kw">let</span> <span class="ident">fpgm</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_range</span>(<span class="ident">FPGM</span>).<span class="ident">unwrap_or</span>((<span class="number">0</span>, <span class="number">0</span>));
-        <span class="kw">let</span> <span class="ident">prep</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_range</span>(<span class="ident">PREP</span>).<span class="ident">unwrap_or</span>((<span class="number">0</span>, <span class="number">0</span>));
-        <span class="kw">let</span> <span class="ident">cvar</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">CVAR</span>);
-        <span class="kw">let</span> <span class="ident">gvar</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">GVAR</span>);
-        <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="ident">Fvar::from_font</span>(<span class="ident">font</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">axis_count</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> {
-            <span class="ident">glyf</span>,
-            <span class="ident">loca</span>,
-            <span class="ident">loca_fmt</span>,
-            <span class="ident">cvt</span>,
-            <span class="ident">fpgm</span>,
-            <span class="ident">prep</span>,
-            <span class="ident">cvar</span>,
-            <span class="ident">gvar</span>,
-            <span class="ident">max_storage</span>: <span class="ident">maxp</span>.<span class="ident">max_storage</span>(),
-            <span class="ident">max_stack</span>: <span class="ident">maxp</span>.<span class="ident">max_stack_depth</span>(),
-            <span class="ident">max_fdefs</span>: <span class="ident">maxp</span>.<span class="ident">max_function_definitions</span>(),
-            <span class="ident">max_idefs</span>: <span class="ident">maxp</span>.<span class="ident">max_instruction_definitions</span>(),
-            <span class="comment">// Four phantom points.</span>
-            <span class="ident">max_twilight</span>: <span class="ident">maxp</span>.<span class="ident">max_twilight_points</span>() <span class="op">+</span> <span class="number">4</span>,
-            <span class="ident">axis_count</span>,
+        <span class="kw">let </span>cvt = font.table_range(CVT_).unwrap_or((<span class="number">0</span>, <span class="number">0</span>));
+        <span class="kw">let </span>fpgm = font.table_range(FPGM).unwrap_or((<span class="number">0</span>, <span class="number">0</span>));
+        <span class="kw">let </span>prep = font.table_range(PREP).unwrap_or((<span class="number">0</span>, <span class="number">0</span>));
+        <span class="kw">let </span>cvar = font.table_offset(CVAR);
+        <span class="kw">let </span>gvar = font.table_offset(GVAR);
+        <span class="kw">let </span>axis_count = Fvar::from_font(font).map(|f| f.axis_count()).unwrap_or(<span class="number">0</span>);
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{
+            glyf,
+            loca,
+            loca_fmt,
+            cvt,
+            fpgm,
+            prep,
+            cvar,
+            gvar,
+            max_storage: maxp.max_storage(),
+            max_stack: maxp.max_stack_depth(),
+            max_fdefs: maxp.max_function_definitions(),
+            max_idefs: maxp.max_instruction_definitions(),
+            <span class="comment">// Four phantom points.
+            </span>max_twilight: maxp.max_twilight_points() + <span class="number">4</span>,
+            axis_count,
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fpgm</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>] {
-        <span class="ident">data</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">fpgm</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>..<span class="self">self</span>.<span class="ident">fpgm</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>)
-            .<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[])
+    <span class="kw">pub fn </span>fpgm&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
+        data.get(<span class="self">self</span>.fpgm.<span class="number">0 </span><span class="kw">as </span>usize..<span class="self">self</span>.fpgm.<span class="number">1 </span><span class="kw">as </span>usize)
+            .unwrap_or(<span class="kw-2">&amp;</span>[])
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prep</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>] {
-        <span class="ident">data</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">prep</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>..<span class="self">self</span>.<span class="ident">prep</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>)
-            .<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[])
+    <span class="kw">pub fn </span>prep&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
+        data.get(<span class="self">self</span>.prep.<span class="number">0 </span><span class="kw">as </span>usize..<span class="self">self</span>.prep.<span class="number">1 </span><span class="kw">as </span>usize)
+            .unwrap_or(<span class="kw-2">&amp;</span>[])
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">glyph_data</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
-        <span class="ident">get</span>(<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">loca_fmt</span>, <span class="self">self</span>.<span class="ident">loca</span>, <span class="self">self</span>.<span class="ident">glyf</span>, <span class="ident">glyph_id</span>)
+    <span class="kw">pub fn </span>glyph_data&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], glyph_id: GlyphId) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; {
+        get(data, <span class="self">self</span>.loca_fmt, <span class="self">self</span>.loca, <span class="self">self</span>.glyf, glyph_id)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cvt</span>(
+    <span class="kw">pub fn </span>cvt(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">scale</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">values</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cvt</span>.<span class="number">0</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+        data: <span class="kw-2">&amp;</span>[u8],
+        scale: <span class="prelude-ty">Option</span>&lt;i32&gt;,
+        coords: <span class="kw-2">&amp;</span>[i16],
+        values: <span class="kw-2">&amp;mut </span>Vec&lt;i32&gt;,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cvt.<span class="number">0 </span>== <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Some</span>(());
         }
-        <span class="kw">let</span> <span class="ident">cvt</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">cvt</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>..<span class="self">self</span>.<span class="ident">cvt</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">Array</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">cvt</span>);
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">entries</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">values</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">len</span> {
-            <span class="ident">values</span>.<span class="ident">resize</span>(<span class="ident">len</span>, <span class="number">0</span>);
+        <span class="kw">let </span>cvt = data.get(<span class="self">self</span>.cvt.<span class="number">0 </span><span class="kw">as </span>usize..<span class="self">self</span>.cvt.<span class="number">1 </span><span class="kw">as </span>usize)<span class="question-mark">?</span>;
+        <span class="kw">let </span>entries = Array::&lt;i16&gt;::new(cvt);
+        <span class="kw">let </span>len = entries.len();
+        <span class="kw">if </span>values.len() &lt; len {
+            values.resize(len, <span class="number">0</span>);
         }
-        <span class="kw">for</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">entries</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">values</span>.<span class="ident">iter_mut</span>()) {
-            <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span> <span class="ident">a</span> <span class="kw">as</span> <span class="ident">i32</span>
+        <span class="kw">for </span>(a, b) <span class="kw">in </span>entries.iter().zip(values.iter_mut()) {
+            <span class="kw-2">*</span>b = a <span class="kw">as </span>i32
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">coords</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">cvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tuples</span>) <span class="op">=</span> <span class="ident">var::cvar_tuples</span>(<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">cvar</span>, <span class="ident">coords</span>, <span class="self">self</span>.<span class="ident">axis_count</span>) {
-                <span class="kw">for</span> <span class="ident">deltas</span> <span class="kw">in</span> <span class="ident">tuples</span> {
-                    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">delta</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">deltas</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>) <span class="op">=</span> <span class="ident">values</span>.<span class="ident">get_mut</span>(<span class="ident">index</span>) {
-                            <span class="kw-2">*</span><span class="ident">value</span> <span class="op">+</span><span class="op">=</span> <span class="ident">delta</span>.<span class="ident">to_i32</span>();
+        <span class="kw">if </span>!coords.is_empty() &amp;&amp; <span class="self">self</span>.cvar != <span class="number">0 </span>{
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(tuples) = var::cvar_tuples(data, <span class="self">self</span>.cvar, coords, <span class="self">self</span>.axis_count) {
+                <span class="kw">for </span>deltas <span class="kw">in </span>tuples {
+                    <span class="kw">for </span>(index, delta, <span class="kw">_</span>) <span class="kw">in </span>deltas {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(value) = values.get_mut(index) {
+                            <span class="kw-2">*</span>value += delta.to_i32();
                         }
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scale</span>) <span class="op">=</span> <span class="ident">scale</span> {
-            <span class="kw">for</span> <span class="ident">v</span> <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">iter_mut</span>() {
-                <span class="kw-2">*</span><span class="ident">v</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="kw-2">*</span><span class="ident">v</span>, <span class="ident">scale</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(scale) = scale {
+            <span class="kw">for </span>v <span class="kw">in </span>values.iter_mut() {
+                <span class="kw-2">*</span>v = mul(<span class="kw-2">*</span>v, scale);
             }
         }
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deltas</span>(
+    <span class="kw">pub fn </span>deltas(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-        <span class="ident">points</span>: <span class="kw-2">&amp;</span>[<span class="ident">Point</span>],
-        <span class="ident">tags</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>],
-        <span class="ident">contours</span>: <span class="kw-2">&amp;</span>[<span class="ident">u16</span>],
-        <span class="ident">accum</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-        <span class="ident">deltas</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="kw">const</span> <span class="ident">HAS_DELTA_TAG</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tuples</span>) <span class="op">=</span> <span class="ident">var::gvar_tuples</span>(<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">gvar</span>, <span class="ident">coords</span>, <span class="ident">glyph_id</span>) {
-            <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">points</span>.<span class="ident">len</span>();
-            <span class="kw">if</span> <span class="ident">len</span> <span class="op">&gt;</span> <span class="ident">tags</span>.<span class="ident">len</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">len</span> <span class="op">&gt;</span> <span class="ident">deltas</span>.<span class="ident">len</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">len</span> <span class="op">&gt;</span> <span class="ident">accum</span>.<span class="ident">len</span>() {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        data: <span class="kw-2">&amp;</span>[u8],
+        coords: <span class="kw-2">&amp;</span>[i16],
+        glyph_id: u16,
+        points: <span class="kw-2">&amp;</span>[Point],
+        tags: <span class="kw-2">&amp;mut </span>[u8],
+        contours: <span class="kw-2">&amp;</span>[u16],
+        accum: <span class="kw-2">&amp;mut </span>[Point],
+        deltas: <span class="kw-2">&amp;mut </span>[Point],
+    ) -&gt; bool {
+        <span class="kw">const </span>HAS_DELTA_TAG: u8 = <span class="number">4</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(tuples) = var::gvar_tuples(data, <span class="self">self</span>.gvar, coords, glyph_id) {
+            <span class="kw">let </span>len = points.len();
+            <span class="kw">if </span>len &gt; tags.len() || len &gt; deltas.len() || len &gt; accum.len() {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="kw">let</span> <span class="ident">tags</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">tags</span>[..<span class="ident">len</span>];
-            <span class="kw">let</span> <span class="ident">accum</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">accum</span>[..<span class="ident">len</span>];
-            <span class="kw">let</span> <span class="ident">deltas</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">deltas</span>[..<span class="ident">len</span>];
-            <span class="kw">for</span> (<span class="ident">d</span>, <span class="ident">t</span>) <span class="kw">in</span> <span class="ident">deltas</span>.<span class="ident">iter_mut</span>().<span class="ident">zip</span>(<span class="ident">tags</span>.<span class="ident">iter_mut</span>()) {
-                <span class="kw-2">*</span><span class="ident">d</span> <span class="op">=</span> <span class="ident">Point::default</span>();
-                <span class="kw-2">*</span><span class="ident">t</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident">HAS_DELTA_TAG</span>;
+            <span class="kw">let </span>tags = <span class="kw-2">&amp;mut </span>tags[..len];
+            <span class="kw">let </span>accum = <span class="kw-2">&amp;mut </span>accum[..len];
+            <span class="kw">let </span>deltas = <span class="kw-2">&amp;mut </span>deltas[..len];
+            <span class="kw">for </span>(d, t) <span class="kw">in </span>deltas.iter_mut().zip(tags.iter_mut()) {
+                <span class="kw-2">*</span>d = Point::default();
+                <span class="kw-2">*</span>t &amp;= !HAS_DELTA_TAG;
             }
-            <span class="kw">for</span> <span class="ident">tuple_deltas</span> <span class="kw">in</span> <span class="ident">tuples</span> {
-                <span class="kw">if</span> <span class="ident">tuple_deltas</span>.<span class="ident">full_coverage</span>() {
-                    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">in</span> <span class="ident">tuple_deltas</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">point</span>) <span class="op">=</span> <span class="ident">deltas</span>.<span class="ident">get_mut</span>(<span class="ident">index</span>) {
-                            <span class="ident">point</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>.<span class="number">0</span>;
-                            <span class="ident">point</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y</span>.<span class="number">0</span>;
+            <span class="kw">for </span>tuple_deltas <span class="kw">in </span>tuples {
+                <span class="kw">if </span>tuple_deltas.full_coverage() {
+                    <span class="kw">for </span>(index, x, y) <span class="kw">in </span>tuple_deltas {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(point) = deltas.get_mut(index) {
+                            point.x += x.<span class="number">0</span>;
+                            point.y += y.<span class="number">0</span>;
                         }
                     }
-                } <span class="kw">else</span> {
-                    <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">accum</span>.<span class="ident">iter_mut</span>() {
-                        <span class="kw-2">*</span><span class="ident">p</span> <span class="op">=</span> <span class="ident">Point::default</span>();
+                } <span class="kw">else </span>{
+                    <span class="kw">for </span>p <span class="kw">in </span>accum.iter_mut() {
+                        <span class="kw-2">*</span>p = Point::default();
                     }
-                    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">in</span> <span class="ident">tuple_deltas</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tag</span>) <span class="op">=</span> <span class="ident">tags</span>.<span class="ident">get_mut</span>(<span class="ident">index</span>) {
-                            <span class="kw-2">*</span><span class="ident">tag</span> <span class="op">|</span><span class="op">=</span> <span class="ident">HAS_DELTA_TAG</span>;
+                    <span class="kw">for </span>(index, x, y) <span class="kw">in </span>tuple_deltas {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(tag) = tags.get_mut(index) {
+                            <span class="kw-2">*</span>tag |= HAS_DELTA_TAG;
                         }
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">point</span>) <span class="op">=</span> <span class="ident">accum</span>.<span class="ident">get_mut</span>(<span class="ident">index</span>) {
-                            <span class="ident">point</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>.<span class="number">0</span>;
-                            <span class="ident">point</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y</span>.<span class="number">0</span>;
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(point) = accum.get_mut(index) {
+                            point.x += x.<span class="number">0</span>;
+                            point.y += y.<span class="number">0</span>;
                         }
                     }
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">next_start</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> <span class="ident">end</span> <span class="kw">in</span> <span class="ident">contours</span>.<span class="ident">iter</span>() {
-                        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">next_start</span>;
-                        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">end</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="ident">next_start</span> <span class="op">=</span> <span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>;
-                        <span class="kw">if</span> <span class="ident">start</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">len</span> <span class="op">|</span><span class="op">|</span> <span class="ident">end</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">len</span> {
+                    <span class="kw">let </span><span class="kw-2">mut </span>next_start = <span class="number">0</span>;
+                    <span class="kw">for </span>end <span class="kw">in </span>contours.iter() {
+                        <span class="kw">let </span>start = next_start;
+                        <span class="kw">let </span>end = <span class="kw-2">*</span>end <span class="kw">as </span>usize;
+                        next_start = end + <span class="number">1</span>;
+                        <span class="kw">if </span>start &gt;= len || end &gt;= len {
                             <span class="kw">continue</span>;
                         }
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">start</span>;
-                        <span class="kw">while</span> <span class="ident">idx</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> <span class="op">&amp;&amp;</span> <span class="ident">tags</span>[<span class="ident">idx</span>] <span class="op">&amp;</span> <span class="ident">HAS_DELTA_TAG</span> <span class="op">==</span> <span class="number">0</span> {
-                            <span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="kw">let </span><span class="kw-2">mut </span>idx = start;
+                        <span class="kw">while </span>idx &lt;= end &amp;&amp; tags[idx] &amp; HAS_DELTA_TAG == <span class="number">0 </span>{
+                            idx += <span class="number">1</span>;
                         }
-                        <span class="kw">if</span> <span class="ident">idx</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
-                            <span class="kw">let</span> <span class="ident">first_delta</span> <span class="op">=</span> <span class="ident">idx</span>;
-                            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cur_delta</span> <span class="op">=</span> <span class="ident">idx</span>;
-                            <span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="kw">while</span> <span class="ident">idx</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
-                                <span class="kw">if</span> <span class="ident">tags</span>[<span class="ident">idx</span>] <span class="op">&amp;</span> <span class="ident">HAS_DELTA_TAG</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                    <span class="ident">interpolate</span>(
-                                        <span class="ident">cur_delta</span> <span class="op">+</span> <span class="number">1</span>,
-                                        <span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>,
-                                        <span class="ident">cur_delta</span>,
-                                        <span class="ident">idx</span>,
-                                        <span class="ident">points</span>,
-                                        <span class="ident">accum</span>,
+                        <span class="kw">if </span>idx &lt;= end {
+                            <span class="kw">let </span>first_delta = idx;
+                            <span class="kw">let </span><span class="kw-2">mut </span>cur_delta = idx;
+                            idx += <span class="number">1</span>;
+                            <span class="kw">while </span>idx &lt;= end {
+                                <span class="kw">if </span>tags[idx] &amp; HAS_DELTA_TAG != <span class="number">0 </span>{
+                                    interpolate(
+                                        cur_delta + <span class="number">1</span>,
+                                        idx - <span class="number">1</span>,
+                                        cur_delta,
+                                        idx,
+                                        points,
+                                        accum,
                                     );
-                                    <span class="ident">cur_delta</span> <span class="op">=</span> <span class="ident">idx</span>;
+                                    cur_delta = idx;
                                 }
-                                <span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                                idx += <span class="number">1</span>;
                             }
-                            <span class="kw">if</span> <span class="ident">cur_delta</span> <span class="op">==</span> <span class="ident">first_delta</span> {
-                                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">accum</span>[<span class="ident">cur_delta</span>];
-                                <span class="kw">for</span> <span class="ident">a</span> <span class="kw">in</span> <span class="ident">accum</span>[<span class="ident">start</span>..<span class="op">=</span><span class="ident">end</span>].<span class="ident">iter_mut</span>() {
-                                    <span class="kw-2">*</span><span class="ident">a</span> <span class="op">=</span> <span class="ident">d</span>;
+                            <span class="kw">if </span>cur_delta == first_delta {
+                                <span class="kw">let </span>d = accum[cur_delta];
+                                <span class="kw">for </span>a <span class="kw">in </span>accum[start..=end].iter_mut() {
+                                    <span class="kw-2">*</span>a = d;
                                 }
-                            } <span class="kw">else</span> {
-                                <span class="ident">interpolate</span>(
-                                    <span class="ident">cur_delta</span> <span class="op">+</span> <span class="number">1</span>,
-                                    <span class="ident">end</span>,
-                                    <span class="ident">cur_delta</span>,
-                                    <span class="ident">first_delta</span>,
-                                    <span class="ident">points</span>,
-                                    <span class="ident">accum</span>,
+                            } <span class="kw">else </span>{
+                                interpolate(
+                                    cur_delta + <span class="number">1</span>,
+                                    end,
+                                    cur_delta,
+                                    first_delta,
+                                    points,
+                                    accum,
                                 );
-                                <span class="kw">if</span> <span class="ident">first_delta</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                                    <span class="ident">interpolate</span>(
-                                        <span class="ident">start</span>,
-                                        <span class="ident">first_delta</span> <span class="op">-</span> <span class="number">1</span>,
-                                        <span class="ident">cur_delta</span>,
-                                        <span class="ident">first_delta</span>,
-                                        <span class="ident">points</span>,
-                                        <span class="ident">accum</span>,
+                                <span class="kw">if </span>first_delta &gt; <span class="number">0 </span>{
+                                    interpolate(
+                                        start,
+                                        first_delta - <span class="number">1</span>,
+                                        cur_delta,
+                                        first_delta,
+                                        points,
+                                        accum,
                                     );
                                 }
                             }
                         }
                     }
-                    <span class="kw">for</span> ((<span class="ident">d</span>, <span class="ident">t</span>), <span class="ident">a</span>) <span class="kw">in</span> <span class="ident">deltas</span>.<span class="ident">iter_mut</span>().<span class="ident">zip</span>(<span class="ident">tags</span>.<span class="ident">iter_mut</span>()).<span class="ident">zip</span>(<span class="ident">accum</span>.<span class="ident">iter</span>()) {
-                        <span class="kw-2">*</span><span class="ident">t</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident">HAS_DELTA_TAG</span>;
-                        <span class="ident">d</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>.<span class="ident">x</span>;
-                        <span class="ident">d</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>.<span class="ident">y</span>;
+                    <span class="kw">for </span>((d, t), a) <span class="kw">in </span>deltas.iter_mut().zip(tags.iter_mut()).zip(accum.iter()) {
+                        <span class="kw-2">*</span>t &amp;= !HAS_DELTA_TAG;
+                        d.x += a.x;
+                        d.y += a.y;
                     }
                 }
             }
-            <span class="kw">for</span> <span class="ident">d</span> <span class="kw">in</span> <span class="ident">deltas</span>.<span class="ident">iter_mut</span>() {
-                <span class="ident">d</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">d</span>.<span class="ident">x</span>).<span class="ident">round</span>().<span class="ident">to_i32</span>();
-                <span class="ident">d</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">d</span>.<span class="ident">y</span>).<span class="ident">round</span>().<span class="ident">to_i32</span>();
+            <span class="kw">for </span>d <span class="kw">in </span>deltas.iter_mut() {
+                d.x = Fixed(d.x).round().to_i32();
+                d.y = Fixed(d.y).round().to_i32();
             }
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">composite_deltas</span>(
+    <span class="kw">pub fn </span>composite_deltas(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-        <span class="ident">deltas</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">tuples</span>) <span class="op">=</span> <span class="ident">var::gvar_tuples</span>(<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">gvar</span>, <span class="ident">coords</span>, <span class="ident">glyph_id</span>) {
-            <span class="kw">for</span> <span class="ident">delta</span> <span class="kw">in</span> <span class="ident">deltas</span>.<span class="ident">iter_mut</span>() {
-                <span class="kw-2">*</span><span class="ident">delta</span> <span class="op">=</span> <span class="ident">Point::default</span>();
+        data: <span class="kw-2">&amp;</span>[u8],
+        coords: <span class="kw-2">&amp;</span>[i16],
+        glyph_id: u16,
+        deltas: <span class="kw-2">&amp;mut </span>[Point],
+    ) -&gt; bool {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(tuples) = var::gvar_tuples(data, <span class="self">self</span>.gvar, coords, glyph_id) {
+            <span class="kw">for </span>delta <span class="kw">in </span>deltas.iter_mut() {
+                <span class="kw-2">*</span>delta = Point::default();
             }
-            <span class="kw">for</span> <span class="ident">tuple_deltas</span> <span class="kw">in</span> <span class="ident">tuples</span> {
-                <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">in</span> <span class="ident">tuple_deltas</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">point</span>) <span class="op">=</span> <span class="ident">deltas</span>.<span class="ident">get_mut</span>(<span class="ident">index</span>) {
-                        <span class="ident">point</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>.<span class="ident">round</span>().<span class="ident">to_i32</span>();
-                        <span class="ident">point</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y</span>.<span class="ident">round</span>().<span class="ident">to_i32</span>();
+            <span class="kw">for </span>tuple_deltas <span class="kw">in </span>tuples {
+                <span class="kw">for </span>(index, x, y) <span class="kw">in </span>tuple_deltas {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(point) = deltas.get_mut(index) {
+                        point.x += x.round().to_i32();
+                        point.y += y.round().to_i32();
                     }
                 }
             }
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 }
 
-<span class="kw">fn</span> <span class="ident">interpolate</span>(
-    <span class="ident">p1</span>: <span class="ident">usize</span>,
-    <span class="ident">p2</span>: <span class="ident">usize</span>,
-    <span class="ident">ref1</span>: <span class="ident">usize</span>,
-    <span class="ident">ref2</span>: <span class="ident">usize</span>,
-    <span class="ident">points</span>: <span class="kw-2">&amp;</span>[<span class="ident">Point</span>],
-    <span class="ident">deltas</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
+<span class="kw">fn </span>interpolate(
+    p1: usize,
+    p2: usize,
+    ref1: usize,
+    ref2: usize,
+    points: <span class="kw-2">&amp;</span>[Point],
+    deltas: <span class="kw-2">&amp;mut </span>[Point],
 ) {
-    <span class="kw">if</span> <span class="ident">p1</span> <span class="op">&gt;</span> <span class="ident">p2</span> {
+    <span class="kw">if </span>p1 &gt; p2 {
         <span class="kw">return</span>;
     }
-    <span class="kw">let</span> (<span class="ident">ref1</span>, <span class="ident">ref2</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">points</span>[<span class="ident">ref1</span>].<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">points</span>[<span class="ident">ref2</span>].<span class="ident">x</span> {
-        (<span class="ident">ref2</span>, <span class="ident">ref1</span>)
-    } <span class="kw">else</span> {
-        (<span class="ident">ref1</span>, <span class="ident">ref2</span>)
+    <span class="kw">let </span>(ref1, ref2) = <span class="kw">if </span>points[ref1].x &gt; points[ref2].x {
+        (ref2, ref1)
+    } <span class="kw">else </span>{
+        (ref1, ref2)
     };
-    <span class="kw">let</span> <span class="ident">in1</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">ref1</span>].<span class="ident">x</span>);
-    <span class="kw">let</span> <span class="ident">in2</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">ref2</span>].<span class="ident">x</span>);
-    <span class="kw">let</span> <span class="ident">out1</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">deltas</span>[<span class="ident">ref1</span>].<span class="ident">x</span>);
-    <span class="kw">let</span> <span class="ident">out2</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">deltas</span>[<span class="ident">ref2</span>].<span class="ident">x</span>);
-    <span class="kw">if</span> <span class="ident">in1</span> <span class="op">==</span> <span class="ident">in2</span> {
-        <span class="kw">if</span> <span class="ident">out1</span> <span class="op">==</span> <span class="ident">out2</span> {
-            <span class="kw">for</span> <span class="ident">delta</span> <span class="kw">in</span> <span class="ident">deltas</span>[<span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span>].<span class="ident">iter_mut</span>() {
-                <span class="ident">delta</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">out1</span>.<span class="number">0</span>;
+    <span class="kw">let </span>in1 = Fixed::from_i32(points[ref1].x);
+    <span class="kw">let </span>in2 = Fixed::from_i32(points[ref2].x);
+    <span class="kw">let </span>out1 = Fixed(deltas[ref1].x);
+    <span class="kw">let </span>out2 = Fixed(deltas[ref2].x);
+    <span class="kw">if </span>in1 == in2 {
+        <span class="kw">if </span>out1 == out2 {
+            <span class="kw">for </span>delta <span class="kw">in </span>deltas[p1..=p2].iter_mut() {
+                delta.x = out1.<span class="number">0</span>;
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">delta</span> <span class="kw">in</span> <span class="ident">deltas</span>[<span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span>].<span class="ident">iter_mut</span>() {
-                <span class="ident">delta</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>delta <span class="kw">in </span>deltas[p1..=p2].iter_mut() {
+                delta.x = <span class="number">0</span>;
             }
         }
-    } <span class="kw">else</span> {
-        <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span> {
-            <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">p</span>].<span class="ident">x</span>);
-            <span class="kw">if</span> <span class="ident">t</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">in1</span> {
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">out1</span>.<span class="number">0</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">t</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">in2</span> {
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">out2</span>.<span class="number">0</span>;
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> (<span class="ident">t</span> <span class="op">-</span> <span class="ident">in1</span>) <span class="op">/</span> (<span class="ident">in2</span> <span class="op">-</span> <span class="ident">in1</span>);
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">x</span> <span class="op">=</span> ((<span class="ident">Fixed::ONE</span> <span class="op">-</span> <span class="ident">f</span>) <span class="op">*</span> <span class="ident">out1</span> <span class="op">+</span> <span class="ident">f</span> <span class="op">*</span> <span class="ident">out2</span>).<span class="number">0</span>;
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>p <span class="kw">in </span>p1..=p2 {
+            <span class="kw">let </span>t = Fixed::from_i32(points[p].x);
+            <span class="kw">if </span>t &lt;= in1 {
+                deltas[p].x = out1.<span class="number">0</span>;
+            } <span class="kw">else if </span>t &gt;= in2 {
+                deltas[p].x = out2.<span class="number">0</span>;
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>f = (t - in1) / (in2 - in1);
+                deltas[p].x = ((Fixed::ONE - f) * out1 + f * out2).<span class="number">0</span>;
             }
         }
     }
-    <span class="comment">// Repeat for y</span>
-    <span class="kw">let</span> (<span class="ident">ref1</span>, <span class="ident">ref2</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">points</span>[<span class="ident">ref1</span>].<span class="ident">y</span> <span class="op">&gt;</span> <span class="ident">points</span>[<span class="ident">ref2</span>].<span class="ident">y</span> {
-        (<span class="ident">ref2</span>, <span class="ident">ref1</span>)
-    } <span class="kw">else</span> {
-        (<span class="ident">ref1</span>, <span class="ident">ref2</span>)
+    <span class="comment">// Repeat for y
+    </span><span class="kw">let </span>(ref1, ref2) = <span class="kw">if </span>points[ref1].y &gt; points[ref2].y {
+        (ref2, ref1)
+    } <span class="kw">else </span>{
+        (ref1, ref2)
     };
-    <span class="kw">let</span> <span class="ident">in1</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">ref1</span>].<span class="ident">y</span>);
-    <span class="kw">let</span> <span class="ident">in2</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">ref2</span>].<span class="ident">y</span>);
-    <span class="kw">let</span> <span class="ident">out1</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">deltas</span>[<span class="ident">ref1</span>].<span class="ident">y</span>);
-    <span class="kw">let</span> <span class="ident">out2</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">deltas</span>[<span class="ident">ref2</span>].<span class="ident">y</span>);
-    <span class="kw">if</span> <span class="ident">in1</span> <span class="op">==</span> <span class="ident">in2</span> {
-        <span class="kw">if</span> <span class="ident">out1</span> <span class="op">==</span> <span class="ident">out2</span> {
-            <span class="kw">for</span> <span class="ident">delta</span> <span class="kw">in</span> <span class="ident">deltas</span>[<span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span>].<span class="ident">iter_mut</span>() {
-                <span class="ident">delta</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">out1</span>.<span class="number">0</span>;
+    <span class="kw">let </span>in1 = Fixed::from_i32(points[ref1].y);
+    <span class="kw">let </span>in2 = Fixed::from_i32(points[ref2].y);
+    <span class="kw">let </span>out1 = Fixed(deltas[ref1].y);
+    <span class="kw">let </span>out2 = Fixed(deltas[ref2].y);
+    <span class="kw">if </span>in1 == in2 {
+        <span class="kw">if </span>out1 == out2 {
+            <span class="kw">for </span>delta <span class="kw">in </span>deltas[p1..=p2].iter_mut() {
+                delta.y = out1.<span class="number">0</span>;
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">delta</span> <span class="kw">in</span> <span class="ident">deltas</span>[<span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span>].<span class="ident">iter_mut</span>() {
-                <span class="ident">delta</span>.<span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>delta <span class="kw">in </span>deltas[p1..=p2].iter_mut() {
+                delta.y = <span class="number">0</span>;
             }
         }
-    } <span class="kw">else</span> {
-        <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">p1</span>..<span class="op">=</span><span class="ident">p2</span> {
-            <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">points</span>[<span class="ident">p</span>].<span class="ident">y</span>);
-            <span class="kw">if</span> <span class="ident">t</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">in1</span> {
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">out1</span>.<span class="number">0</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">t</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">in2</span> {
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">out2</span>.<span class="number">0</span>;
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> (<span class="ident">t</span> <span class="op">-</span> <span class="ident">in1</span>) <span class="op">/</span> (<span class="ident">in2</span> <span class="op">-</span> <span class="ident">in1</span>);
-                <span class="ident">deltas</span>[<span class="ident">p</span>].<span class="ident">y</span> <span class="op">=</span> ((<span class="ident">Fixed::ONE</span> <span class="op">-</span> <span class="ident">f</span>) <span class="op">*</span> <span class="ident">out1</span> <span class="op">+</span> <span class="ident">f</span> <span class="op">*</span> <span class="ident">out2</span>).<span class="number">0</span>;
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>p <span class="kw">in </span>p1..=p2 {
+            <span class="kw">let </span>t = Fixed::from_i32(points[p].y);
+            <span class="kw">if </span>t &lt;= in1 {
+                deltas[p].y = out1.<span class="number">0</span>;
+            } <span class="kw">else if </span>t &gt;= in2 {
+                deltas[p].y = out2.<span class="number">0</span>;
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>f = (t - in1) / (in2 - in1);
+                deltas[p].y = ((Fixed::ONE - f) * out1 + f * out2).<span class="number">0</span>;
             }
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

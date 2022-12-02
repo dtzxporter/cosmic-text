@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/info_structures.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>info_structures.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ouroboros_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/info_structures.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>info_structures.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ouroboros_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -302,212 +302,212 @@
 <span id="302">302</span>
 <span id="303">303</span>
 <span id="304">304</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::utils</span>::{<span class="ident">make_generic_arguments</span>, <span class="ident">make_generic_consumers</span>, <span class="ident">replace_this_with_lifetime</span>};
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">TokenStream</span>};
-<span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">format_ident</span>, <span class="ident">quote</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::{
-    <span class="ident">punctuated::Punctuated</span>, <span class="ident">token::Comma</span>, <span class="ident">Attribute</span>, <span class="ident">ConstParam</span>, <span class="ident">Error</span>, <span class="ident">GenericParam</span>, <span class="ident">Generics</span>,
-    <span class="ident">LifetimeDef</span>, <span class="ident">Type</span>, <span class="ident">TypeParam</span>, <span class="ident">Visibility</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::utils::{make_generic_arguments, make_generic_consumers, replace_this_with_lifetime};
+<span class="kw">use </span>proc_macro2::{Ident, TokenStream};
+<span class="kw">use </span>quote::{format_ident, quote, ToTokens};
+<span class="kw">use </span>syn::{
+    punctuated::Punctuated, token::Comma, Attribute, ConstParam, Error, GenericParam, Generics,
+    LifetimeDef, Type, TypeParam, Visibility,
 };
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Options</span> {
-    <span class="kw">pub</span> <span class="ident">do_no_doc</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">do_pub_extras</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Clone, Copy)]
+</span><span class="kw">pub struct </span>Options {
+    <span class="kw">pub </span>do_no_doc: bool,
+    <span class="kw">pub </span>do_pub_extras: bool,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">FieldType</span> {
-    <span class="doccomment">/// Not borrowed by other parts of the struct.</span>
-    <span class="ident">Tail</span>,
-    <span class="doccomment">/// Immutably borrowed by at least one other field.</span>
-    <span class="ident">Borrowed</span>,
-    <span class="doccomment">/// Mutably borrowed by one other field.</span>
-    <span class="ident">BorrowedMut</span>,
+<span class="attribute">#[derive(Clone, Copy, PartialEq)]
+</span><span class="kw">pub enum </span>FieldType {
+    <span class="doccomment">/// Not borrowed by other parts of the struct.
+    </span>Tail,
+    <span class="doccomment">/// Immutably borrowed by at least one other field.
+    </span>Borrowed,
+    <span class="doccomment">/// Mutably borrowed by one other field.
+    </span>BorrowedMut,
 }
 
-<span class="kw">impl</span> <span class="ident">FieldType</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_tail</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span> <span class="op">==</span> <span class="ident"><span class="self">Self</span>::Tail</span>
+<span class="kw">impl </span>FieldType {
+    <span class="kw">pub fn </span>is_tail(<span class="self">self</span>) -&gt; bool {
+        <span class="self">self </span>== <span class="self">Self</span>::Tail
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BorrowRequest</span> {
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">mutable</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>BorrowRequest {
+    <span class="kw">pub </span>index: usize,
+    <span class="kw">pub </span>mutable: bool,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Derive</span> {
-    <span class="ident">Debug</span>,
-    <span class="ident">PartialEq</span>,
-    <span class="ident">Eq</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub enum </span>Derive {
+    Debug,
+    PartialEq,
+    Eq,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">BuilderType</span> {
-    <span class="ident">Sync</span>,
-    <span class="ident">Async</span>,
-    <span class="ident">AsyncSend</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub enum </span>BuilderType {
+    Sync,
+    Async,
+    AsyncSend,
 }
 
-<span class="kw">impl</span> <span class="ident">BuilderType</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_async</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">BuilderType::Sync</span> =&gt; <span class="bool-val">false</span>,
-            <span class="kw">_</span> =&gt; <span class="bool-val">true</span>,
+<span class="kw">impl </span>BuilderType {
+    <span class="kw">pub fn </span>is_async(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">match </span><span class="self">self </span>{
+            BuilderType::Sync =&gt; <span class="bool-val">false</span>,
+            <span class="kw">_ </span>=&gt; <span class="bool-val">true</span>,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StructInfo</span> {
-    <span class="kw">pub</span> <span class="ident">derives</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Derive</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">ident</span>: <span class="ident">Ident</span>,
-    <span class="kw">pub</span> <span class="ident">generics</span>: <span class="ident">Generics</span>,
-    <span class="kw">pub</span> <span class="ident">vis</span>: <span class="ident">Visibility</span>,
-    <span class="kw">pub</span> <span class="ident">fields</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StructFieldInfo</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">first_lifetime</span>: <span class="ident">Ident</span>,
-    <span class="kw">pub</span> <span class="ident">attributes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>StructInfo {
+    <span class="kw">pub </span>derives: Vec&lt;Derive&gt;,
+    <span class="kw">pub </span>ident: Ident,
+    <span class="kw">pub </span>generics: Generics,
+    <span class="kw">pub </span>vis: Visibility,
+    <span class="kw">pub </span>fields: Vec&lt;StructFieldInfo&gt;,
+    <span class="kw">pub </span>first_lifetime: Ident,
+    <span class="kw">pub </span>attributes: Vec&lt;Attribute&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">StructInfo</span> {
-    <span class="comment">// The lifetime to use in place of &#39;this for internal implementations,</span>
-    <span class="comment">// should never be exposed to the user.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fake_lifetime</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Ident</span> {
-        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">first_lifetime</span>.<span class="ident">clone</span>();
+<span class="kw">impl </span>StructInfo {
+    <span class="comment">// The lifetime to use in place of &#39;this for internal implementations,
+    // should never be exposed to the user.
+    </span><span class="kw">pub fn </span>fake_lifetime(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Ident {
+        <span class="kw">return </span><span class="self">self</span>.first_lifetime.clone();
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generic_params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">GenericParam</span>, <span class="ident">Comma</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">generics</span>.<span class="ident">params</span>
+    <span class="kw">pub fn </span>generic_params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Punctuated&lt;GenericParam, Comma&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.generics.params
     }
 
-    <span class="doccomment">/// Same as generic_params but with &#39;this and &#39;outer_borrow prepended.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">borrowed_generic_params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">generic_params</span>().<span class="ident">is_empty</span>() {
-            <span class="macro">quote!</span> { <span class="op">&lt;</span><span class="lifetime">&#39;outer_borrow</span>, <span class="lifetime">&#39;this</span><span class="op">&gt;</span> }
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_generic_params</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generic_params</span>().<span class="ident">clone</span>();
-            <span class="ident">new_generic_params</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="macro">syn::parse_quote!</span> { <span class="lifetime">&#39;this</span> });
-            <span class="ident">new_generic_params</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="macro">syn::parse_quote!</span> { <span class="lifetime">&#39;outer_borrow</span> });
-            <span class="macro">quote!</span> { <span class="op">&lt;</span>#<span class="ident">new_generic_params</span><span class="op">&gt;</span> }
+    <span class="doccomment">/// Same as generic_params but with &#39;this and &#39;outer_borrow prepended.
+    </span><span class="kw">pub fn </span>borrowed_generic_params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">if </span><span class="self">self</span>.generic_params().is_empty() {
+            <span class="macro">quote! </span>{ &lt;<span class="lifetime">&#39;outer_borrow</span>, <span class="lifetime">&#39;this</span>&gt; }
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>new_generic_params = <span class="self">self</span>.generic_params().clone();
+            new_generic_params.insert(<span class="number">0</span>, <span class="macro">syn::parse_quote! </span>{ <span class="lifetime">&#39;this </span>});
+            new_generic_params.insert(<span class="number">0</span>, <span class="macro">syn::parse_quote! </span>{ <span class="lifetime">&#39;outer_borrow </span>});
+            <span class="macro">quote! </span>{ &lt;#new_generic_params&gt; }
         }
     }
 
-    <span class="doccomment">/// Same as generic_params but without bounds and with &#39;_ prepended twice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">borrowed_generic_params_inferred</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">use</span> <span class="ident">GenericParam</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="ident">params</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generic_params</span>().<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">p</span> {
-            <span class="ident">Type</span>(<span class="ident">TypeParam</span> { <span class="ident">ident</span>, .. }) <span class="op">|</span> <span class="ident">Const</span>(<span class="ident">ConstParam</span> { <span class="ident">ident</span>, .. }) =&gt; {
-                <span class="ident">ident</span>.<span class="ident">to_token_stream</span>()
+    <span class="doccomment">/// Same as generic_params but without bounds and with &#39;_ prepended twice.
+    </span><span class="kw">pub fn </span>borrowed_generic_params_inferred(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">use </span>GenericParam::<span class="kw-2">*</span>;
+        <span class="kw">let </span>params = <span class="self">self</span>.generic_params().iter().map(|p| <span class="kw">match </span>p {
+            Type(TypeParam { ident, .. }) | Const(ConstParam { ident, .. }) =&gt; {
+                ident.to_token_stream()
             }
-            <span class="ident">Lifetime</span>(<span class="ident">LifetimeDef</span> { <span class="ident">lifetime</span>, .. }) =&gt; <span class="ident">lifetime</span>.<span class="ident">to_token_stream</span>(),
+            Lifetime(LifetimeDef { lifetime, .. }) =&gt; lifetime.to_token_stream(),
         });
-        <span class="macro">quote!</span> { <span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;_</span>, #(#<span class="ident">params</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> }
+        <span class="macro">quote! </span>{ &lt;<span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;_</span>, #(#params,)<span class="kw-2">*</span>&gt; }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generic_arguments</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
-        <span class="ident">make_generic_arguments</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">generics</span>)
+    <span class="kw">pub fn </span>generic_arguments(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;TokenStream&gt; {
+        make_generic_arguments(<span class="kw-2">&amp;</span><span class="self">self</span>.generics)
     }
 
-    <span class="doccomment">/// Same as generic_arguments but with &#39;outer_borrow and &#39;this prepended.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">borrowed_generic_arguments</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">generic_arguments</span>();
-        <span class="ident">args</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="macro">quote!</span> { <span class="lifetime">&#39;this</span> });
-        <span class="ident">args</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="macro">quote!</span> { <span class="lifetime">&#39;outer_borrow</span> });
-        <span class="ident">args</span>
+    <span class="doccomment">/// Same as generic_arguments but with &#39;outer_borrow and &#39;this prepended.
+    </span><span class="kw">pub fn </span>borrowed_generic_arguments(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;TokenStream&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>args = <span class="self">self</span>.generic_arguments();
+        args.insert(<span class="number">0</span>, <span class="macro">quote! </span>{ <span class="lifetime">&#39;this </span>});
+        args.insert(<span class="number">0</span>, <span class="macro">quote! </span>{ <span class="lifetime">&#39;outer_borrow </span>});
+        args
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generic_consumers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">TokenStream</span>, <span class="ident">Ident</span>)<span class="op">&gt;</span> {
-        <span class="ident">make_generic_consumers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">generics</span>)
+    <span class="kw">pub fn </span>generic_consumers(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (TokenStream, Ident)&gt; {
+        make_generic_consumers(<span class="kw-2">&amp;</span><span class="self">self</span>.generics)
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StructFieldInfo</span> {
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">Ident</span>,
-    <span class="kw">pub</span> <span class="ident">typ</span>: <span class="ident">Type</span>,
-    <span class="kw">pub</span> <span class="ident">field_type</span>: <span class="ident">FieldType</span>,
-    <span class="kw">pub</span> <span class="ident">vis</span>: <span class="ident">Visibility</span>,
-    <span class="kw">pub</span> <span class="ident">borrows</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BorrowRequest</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// If this is true and borrows is empty, the struct will borrow from self in the future but</span>
-    <span class="doccomment">/// does not require a builder to be initialized. It should not be able to be removed from the</span>
-    <span class="doccomment">/// struct with into_heads.</span>
-    <span class="kw">pub</span> <span class="ident">self_referencing</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// If it is None, the user has not specified whether or not the field is covariant. If this is</span>
-    <span class="doccomment">/// Some(false), we should avoid making borrow_* or borrow_*_mut functions as they will not</span>
-    <span class="doccomment">/// be able to compile.</span>
-    <span class="kw">pub</span> <span class="ident">covariant</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>StructFieldInfo {
+    <span class="kw">pub </span>name: Ident,
+    <span class="kw">pub </span>typ: Type,
+    <span class="kw">pub </span>field_type: FieldType,
+    <span class="kw">pub </span>vis: Visibility,
+    <span class="kw">pub </span>borrows: Vec&lt;BorrowRequest&gt;,
+    <span class="doccomment">/// If this is true and borrows is empty, the struct will borrow from self in the future but
+    /// does not require a builder to be initialized. It should not be able to be removed from the
+    /// struct with into_heads.
+    </span><span class="kw">pub </span>self_referencing: bool,
+    <span class="doccomment">/// If it is None, the user has not specified whether or not the field is covariant. If this is
+    /// Some(false), we should avoid making borrow_* or borrow_*_mut functions as they will not
+    /// be able to compile.
+    </span><span class="kw">pub </span>covariant: <span class="prelude-ty">Option</span>&lt;bool&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ArgType</span> {
-    <span class="doccomment">/// Used when the initial value of a field can be passed directly into the constructor.</span>
-    <span class="ident">Plain</span>(<span class="ident">TokenStream</span>),
-    <span class="doccomment">/// Used when a field requires self references and thus requires something that implements</span>
-    <span class="doccomment">/// a builder function trait instead of a simple plain type.</span>
-    <span class="ident">TraitBound</span>(<span class="ident">TokenStream</span>),
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub enum </span>ArgType {
+    <span class="doccomment">/// Used when the initial value of a field can be passed directly into the constructor.
+    </span>Plain(TokenStream),
+    <span class="doccomment">/// Used when a field requires self references and thus requires something that implements
+    /// a builder function trait instead of a simple plain type.
+    </span>TraitBound(TokenStream),
 }
 
-<span class="kw">impl</span> <span class="ident">StructFieldInfo</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">builder_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Ident</span> {
-        <span class="macro">format_ident!</span>(<span class="string">&quot;{}_builder&quot;</span>, <span class="self">self</span>.<span class="ident">name</span>)
+<span class="kw">impl </span>StructFieldInfo {
+    <span class="kw">pub fn </span>builder_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Ident {
+        <span class="macro">format_ident!</span>(<span class="string">&quot;{}_builder&quot;</span>, <span class="self">self</span>.name)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">illegal_ref_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Ident</span> {
-        <span class="macro">format_ident!</span>(<span class="string">&quot;{}_illegal_static_reference&quot;</span>, <span class="self">self</span>.<span class="ident">name</span>)
+    <span class="kw">pub fn </span>illegal_ref_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Ident {
+        <span class="macro">format_ident!</span>(<span class="string">&quot;{}_illegal_static_reference&quot;</span>, <span class="self">self</span>.name)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_borrowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">field_type</span> <span class="op">!</span><span class="op">=</span> <span class="ident">FieldType::Tail</span>
+    <span class="kw">pub fn </span>is_borrowed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.field_type != FieldType::Tail
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_mutably_borrowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::BorrowedMut</span>
+    <span class="kw">pub fn </span>is_mutably_borrowed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.field_type == FieldType::BorrowedMut
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">boxed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
-        <span class="macro">quote!</span> { <span class="ident">::ouroboros::macro_help::aliasable_boxed</span>(#<span class="ident">name</span>) }
+    <span class="kw">pub fn </span>boxed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">let </span>name = <span class="kw-2">&amp;</span><span class="self">self</span>.name;
+        <span class="macro">quote! </span>{ ::ouroboros::macro_help::aliasable_boxed(#name) }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stored_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">typ</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_borrowed</span>() {
-            <span class="macro">quote!</span> { <span class="ident">::ouroboros::macro_help::AliasableBox</span><span class="op">&lt;</span>#<span class="ident">t</span><span class="op">&gt;</span> }
-        } <span class="kw">else</span> {
-            <span class="macro">quote!</span> { #<span class="ident">t</span> }
+    <span class="kw">pub fn </span>stored_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">let </span>t = <span class="kw-2">&amp;</span><span class="self">self</span>.typ;
+        <span class="kw">if </span><span class="self">self</span>.is_borrowed() {
+            <span class="macro">quote! </span>{ ::ouroboros::macro_help::AliasableBox&lt;#t&gt; }
+        } <span class="kw">else </span>{
+            <span class="macro">quote! </span>{ #t }
         }
     }
 
-    <span class="doccomment">/// Returns code which takes a variable with the same name and type as this field and turns it</span>
-    <span class="doccomment">/// into a static reference to its dereffed contents.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_illegal_static_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">let</span> <span class="ident">field_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
-        <span class="kw">let</span> <span class="ident">ref_name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">illegal_ref_name</span>();
-        <span class="macro">quote!</span> {
-            <span class="kw">let</span> #<span class="ident">ref_name</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-                <span class="ident">::ouroboros::macro_help::change_lifetime</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span>#<span class="ident">field_name</span>)
+    <span class="doccomment">/// Returns code which takes a variable with the same name and type as this field and turns it
+    /// into a static reference to its dereffed contents.
+    </span><span class="kw">pub fn </span>make_illegal_static_reference(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">let </span>field_name = <span class="kw-2">&amp;</span><span class="self">self</span>.name;
+        <span class="kw">let </span>ref_name = <span class="self">self</span>.illegal_ref_name();
+        <span class="macro">quote! </span>{
+            <span class="kw">let </span>#ref_name = <span class="kw">unsafe </span>{
+                ::ouroboros::macro_help::change_lifetime(<span class="kw-2">&amp;*</span>#field_name)
             };
         }
     }
 
-    <span class="doccomment">/// Like make_illegal_static_reference, but provides a mutable reference instead.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_illegal_static_mut_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TokenStream</span> {
-        <span class="kw">let</span> <span class="ident">field_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
-        <span class="kw">let</span> <span class="ident">ref_name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">illegal_ref_name</span>();
-        <span class="macro">quote!</span> {
-            <span class="kw">let</span> #<span class="ident">ref_name</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-                <span class="ident">::ouroboros::macro_help::change_lifetime_mut</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span>#<span class="ident">field_name</span>)
+    <span class="doccomment">/// Like make_illegal_static_reference, but provides a mutable reference instead.
+    </span><span class="kw">pub fn </span>make_illegal_static_mut_reference(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TokenStream {
+        <span class="kw">let </span>field_name = <span class="kw-2">&amp;</span><span class="self">self</span>.name;
+        <span class="kw">let </span>ref_name = <span class="self">self</span>.illegal_ref_name();
+        <span class="macro">quote! </span>{
+            <span class="kw">let </span>#ref_name = <span class="kw">unsafe </span>{
+                ::ouroboros::macro_help::change_lifetime_mut(<span class="kw-2">&amp;mut *</span>#field_name)
             };
         }
     }
 
-    <span class="doccomment">/// Generates an error requesting that the user explicitly specify whether or not the</span>
-    <span class="doccomment">/// field&#39;s type is covariant.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">covariance_error</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">error</span> <span class="op">=</span> <span class="macro">concat!</span>(
+    <span class="doccomment">/// Generates an error requesting that the user explicitly specify whether or not the
+    /// field&#39;s type is covariant.
+    </span><span class="kw">pub fn </span>covariance_error(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">let </span>error = <span class="macro">concat!</span>(
             <span class="string">&quot;Ouroboros cannot automatically determine if this type is covariant.\n\n&quot;</span>,
             <span class="string">&quot;If it is covariant, it should be legal to convert any instance of that type to an &quot;</span>,
             <span class="string">&quot;instance of that type where all usages of &#39;this are replaced with a smaller &quot;</span>,
@@ -516,95 +516,95 @@
             <span class="string">&quot;Fn(&amp;&#39;a i32).\n\n&quot;</span>,
             <span class="string">&quot;To resolve this error, add #[covariant] or #[not_covariant] to the field.\n&quot;</span>,
         );
-        <span class="macro">proc_macro_error::emit_error!</span>(<span class="self">self</span>.<span class="ident">typ</span>, <span class="ident">error</span>);
+        <span class="macro">proc_macro_error::emit_error!</span>(<span class="self">self</span>.typ, error);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_constructor_arg_type_impl</span>(
+    <span class="kw">pub fn </span>make_constructor_arg_type_impl(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">StructInfo</span>,
-        <span class="ident">make_builder_return_type</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>() -&gt; <span class="ident">TokenStream</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ArgType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">typ</span>;
-        <span class="kw">let</span> <span class="ident">fake_lifetime</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">fake_lifetime</span>();
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">borrows</span>.<span class="ident">is_empty</span>() {
-            <span class="comment">// Even if self_referencing is true, as long as borrows is empty, we don&#39;t need to use a</span>
-            <span class="comment">// builder to construct it.</span>
-            <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span>
-                <span class="ident">replace_this_with_lifetime</span>(<span class="ident">field_type</span>.<span class="ident">into_token_stream</span>(), <span class="ident">fake_lifetime</span>.<span class="ident">clone</span>());
-            <span class="prelude-val">Ok</span>(<span class="ident">ArgType::Plain</span>(<span class="macro">quote!</span> { #<span class="ident">field_type</span> }))
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">field_builder_params</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">for</span> <span class="ident">borrow</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">borrows</span> {
-                <span class="kw">if</span> <span class="ident">borrow</span>.<span class="ident">mutable</span> {
-                    <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">fields</span>[<span class="ident">borrow</span>.<span class="ident">index</span>];
-                    <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">typ</span>;
-                    <span class="ident">field_builder_params</span>.<span class="ident">push</span>(<span class="macro">quote!</span> {
-                        <span class="kw-2">&amp;</span><span class="lifetime">&#39;this</span> <span class="kw-2">mut</span> #<span class="ident">field_type</span>
+        info: <span class="kw-2">&amp;</span>StructInfo,
+        make_builder_return_type: <span class="kw">impl </span>FnOnce() -&gt; TokenStream,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;ArgType, Error&gt; {
+        <span class="kw">let </span>field_type = <span class="kw-2">&amp;</span><span class="self">self</span>.typ;
+        <span class="kw">let </span>fake_lifetime = info.fake_lifetime();
+        <span class="kw">if </span><span class="self">self</span>.borrows.is_empty() {
+            <span class="comment">// Even if self_referencing is true, as long as borrows is empty, we don&#39;t need to use a
+            // builder to construct it.
+            </span><span class="kw">let </span>field_type =
+                replace_this_with_lifetime(field_type.into_token_stream(), fake_lifetime.clone());
+            <span class="prelude-val">Ok</span>(ArgType::Plain(<span class="macro">quote! </span>{ #field_type }))
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>field_builder_params = Vec::new();
+            <span class="kw">for </span>borrow <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.borrows {
+                <span class="kw">if </span>borrow.mutable {
+                    <span class="kw">let </span>field = <span class="kw-2">&amp;</span>info.fields[borrow.index];
+                    <span class="kw">let </span>field_type = <span class="kw-2">&amp;</span>field.typ;
+                    field_builder_params.push(<span class="macro">quote! </span>{
+                        <span class="kw-2">&amp;</span><span class="lifetime">&#39;this </span><span class="kw-2">mut </span>#field_type
                     });
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">fields</span>[<span class="ident">borrow</span>.<span class="ident">index</span>];
-                    <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">typ</span>;
-                    <span class="ident">field_builder_params</span>.<span class="ident">push</span>(<span class="macro">quote!</span> {
-                        <span class="kw-2">&amp;</span><span class="lifetime">&#39;this</span> #<span class="ident">field_type</span>
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>field = <span class="kw-2">&amp;</span>info.fields[borrow.index];
+                    <span class="kw">let </span>field_type = <span class="kw-2">&amp;</span>field.typ;
+                    field_builder_params.push(<span class="macro">quote! </span>{
+                        <span class="kw-2">&amp;</span><span class="lifetime">&#39;this </span>#field_type
                     });
                 }
             }
-            <span class="kw">let</span> <span class="ident">return_type</span> <span class="op">=</span> <span class="ident">make_builder_return_type</span>();
-            <span class="kw">let</span> <span class="ident">bound</span> <span class="op">=</span> <span class="macro">quote!</span> { <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;this</span><span class="op">&gt;</span> <span class="ident">::core::ops::FnOnce</span>(#(#<span class="ident">field_builder_params</span>),<span class="kw-2">*</span>) -&gt; #<span class="ident">return_type</span> };
-            <span class="prelude-val">Ok</span>(<span class="ident">ArgType::TraitBound</span>(<span class="ident">bound</span>))
+            <span class="kw">let </span>return_type = make_builder_return_type();
+            <span class="kw">let </span>bound = <span class="macro">quote! </span>{ <span class="kw">for</span>&lt;<span class="lifetime">&#39;this</span>&gt; ::core::ops::FnOnce(#(#field_builder_params),<span class="kw-2">*</span>) -&gt; #return_type };
+            <span class="prelude-val">Ok</span>(ArgType::TraitBound(bound))
         }
     }
 
-    <span class="doccomment">/// Returns a trait bound if `for_field` refers to any other fields, and a plain type if not. This</span>
-    <span class="doccomment">/// is the type used in the constructor to initialize the value of `for_field`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_constructor_arg_type</span>(
+    <span class="doccomment">/// Returns a trait bound if `for_field` refers to any other fields, and a plain type if not. This
+    /// is the type used in the constructor to initialize the value of `for_field`.
+    </span><span class="kw">pub fn </span>make_constructor_arg_type(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">StructInfo</span>,
-        <span class="ident">builder_type</span>: <span class="ident">BuilderType</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ArgType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">typ</span>;
-        <span class="kw">let</span> <span class="ident">return_ty_constructor</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-            <span class="ident">BuilderType::AsyncSend</span> =&gt; {
-                <span class="macro">quote!</span> {
-                    <span class="ident">::core::pin::Pin</span><span class="op">&lt;</span><span class="ident">::ouroboros::macro_help::alloc::boxed::Box</span><span class="op">&lt;</span>
-                        <span class="kw">dyn</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">=</span>#<span class="ident">field_type</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">::core::marker::Send</span> <span class="op">+</span> <span class="lifetime">&#39;this</span><span class="op">&gt;</span><span class="op">&gt;</span>
+        info: <span class="kw-2">&amp;</span>StructInfo,
+        builder_type: BuilderType,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;ArgType, Error&gt; {
+        <span class="kw">let </span>field_type = <span class="kw-2">&amp;</span><span class="self">self</span>.typ;
+        <span class="kw">let </span>return_ty_constructor = || <span class="kw">match </span>builder_type {
+            BuilderType::AsyncSend =&gt; {
+                <span class="macro">quote! </span>{
+                    ::core::pin::Pin&lt;::ouroboros::macro_help::alloc::boxed::Box&lt;
+                        <span class="kw">dyn </span>::core::future::Future&lt;Output=#field_type&gt; + ::core::marker::Send + <span class="lifetime">&#39;this</span>&gt;&gt;
                 }
             }
-            <span class="ident">BuilderType::Async</span> =&gt; {
-                <span class="macro">quote!</span> { <span class="ident">::core::pin::Pin</span><span class="op">&lt;</span><span class="ident">::ouroboros::macro_help::alloc::boxed::Box</span><span class="op">&lt;</span>
-                <span class="kw">dyn</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">=</span>#<span class="ident">field_type</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;this</span><span class="op">&gt;</span><span class="op">&gt;</span> }
+            BuilderType::Async =&gt; {
+                <span class="macro">quote! </span>{ ::core::pin::Pin&lt;::ouroboros::macro_help::alloc::boxed::Box&lt;
+                <span class="kw">dyn </span>::core::future::Future&lt;Output=#field_type&gt; + <span class="lifetime">&#39;this</span>&gt;&gt; }
             }
-            <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> { #<span class="ident">field_type</span> },
+            BuilderType::Sync =&gt; <span class="macro">quote! </span>{ #field_type },
         };
-        <span class="self">self</span>.<span class="ident">make_constructor_arg_type_impl</span>(<span class="ident">info</span>, <span class="ident">return_ty_constructor</span>)
+        <span class="self">self</span>.make_constructor_arg_type_impl(info, return_ty_constructor)
     }
 
-    <span class="doccomment">/// Like make_constructor_arg_type, but used for the try_new constructor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">make_try_constructor_arg_type</span>(
+    <span class="doccomment">/// Like make_constructor_arg_type, but used for the try_new constructor.
+    </span><span class="kw">pub fn </span>make_try_constructor_arg_type(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">StructInfo</span>,
-        <span class="ident">builder_type</span>: <span class="ident">BuilderType</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ArgType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">field_type</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">typ</span>;
-        <span class="kw">let</span> <span class="ident">return_ty_constructor</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-            <span class="ident">BuilderType::AsyncSend</span> =&gt; {
-                <span class="macro">quote!</span> {
-                    <span class="ident">::core::pin::Pin</span><span class="op">&lt;</span><span class="ident">::ouroboros::macro_help::alloc::boxed::Box</span><span class="op">&lt;</span>
-                        <span class="kw">dyn</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">=</span><span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">field_type</span>, <span class="ident">Error_</span><span class="op">&gt;</span><span class="op">&gt;</span>
-                            <span class="op">+</span> <span class="ident">::core::marker::Send</span> <span class="op">+</span> <span class="lifetime">&#39;this</span><span class="op">&gt;</span><span class="op">&gt;</span>
+        info: <span class="kw-2">&amp;</span>StructInfo,
+        builder_type: BuilderType,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;ArgType, Error&gt; {
+        <span class="kw">let </span>field_type = <span class="kw-2">&amp;</span><span class="self">self</span>.typ;
+        <span class="kw">let </span>return_ty_constructor = || <span class="kw">match </span>builder_type {
+            BuilderType::AsyncSend =&gt; {
+                <span class="macro">quote! </span>{
+                    ::core::pin::Pin&lt;::ouroboros::macro_help::alloc::boxed::Box&lt;
+                        <span class="kw">dyn </span>::core::future::Future&lt;Output=::core::result::Result&lt;#field_type, Error_&gt;&gt;
+                            + ::core::marker::Send + <span class="lifetime">&#39;this</span>&gt;&gt;
                 }
             }
-            <span class="ident">BuilderType::Async</span> =&gt; {
-                <span class="macro">quote!</span> {
-                    <span class="ident">::core::pin::Pin</span><span class="op">&lt;</span><span class="ident">::ouroboros::macro_help::alloc::boxed::Box</span><span class="op">&lt;</span>
-                        <span class="kw">dyn</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span><span class="ident">Output</span><span class="op">=</span><span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">field_type</span>, <span class="ident">Error_</span><span class="op">&gt;</span><span class="op">&gt;</span>
-                            <span class="op">+</span> <span class="lifetime">&#39;this</span><span class="op">&gt;</span><span class="op">&gt;</span>
+            BuilderType::Async =&gt; {
+                <span class="macro">quote! </span>{
+                    ::core::pin::Pin&lt;::ouroboros::macro_help::alloc::boxed::Box&lt;
+                        <span class="kw">dyn </span>::core::future::Future&lt;Output=::core::result::Result&lt;#field_type, Error_&gt;&gt;
+                            + <span class="lifetime">&#39;this</span>&gt;&gt;
                 }
             }
-            <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> { <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">field_type</span>, <span class="ident">Error_</span><span class="op">&gt;</span> },
+            BuilderType::Sync =&gt; <span class="macro">quote! </span>{ ::core::result::Result&lt;#field_type, Error_&gt; },
         };
-        <span class="self">self</span>.<span class="ident">make_constructor_arg_type_impl</span>(<span class="ident">info</span>, <span class="ident">return_ty_constructor</span>)
+        <span class="self">self</span>.make_constructor_arg_type_impl(info, return_ty_constructor)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

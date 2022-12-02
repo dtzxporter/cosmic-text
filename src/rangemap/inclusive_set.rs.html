@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rangemap-1.1.0/src/inclusive_set.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>inclusive_set.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rangemap/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rangemap-1.1.0/src/inclusive_set.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>inclusive_set.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rangemap/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -459,466 +459,466 @@
 <span id="459">459</span>
 <span id="460">460</span>
 <span id="461">461</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>};
-<span class="kw">use</span> <span class="ident">core::iter::FromIterator</span>;
-<span class="kw">use</span> <span class="ident">core::ops::RangeInclusive</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>core::cmp::Ordering;
+<span class="kw">use </span>core::fmt::{<span class="self">self</span>, Debug};
+<span class="kw">use </span>core::iter::FromIterator;
+<span class="kw">use </span>core::ops::RangeInclusive;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{
-    <span class="ident">de</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">SeqAccess</span>, <span class="ident">Visitor</span>},
-    <span class="ident">ser</span>::{<span class="ident">Serialize</span>, <span class="ident">Serializer</span>},
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">use </span>core::marker::PhantomData;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">use </span>serde::{
+    de::{Deserialize, Deserializer, SeqAccess, Visitor},
+    ser::{Serialize, Serializer},
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std_ext</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RangeInclusiveMap</span>;
+<span class="kw">use </span><span class="kw">crate</span>::std_ext::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::RangeInclusiveMap;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="doccomment">/// A set whose items are stored as ranges bounded</span>
-<span class="doccomment">/// inclusively below and above `(start..=end)`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// See [`RangeInclusiveMap`]&#39;s documentation for more details.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`RangeInclusiveMap`]: struct.RangeInclusiveMap.html</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">StepFnsT</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">rm</span>: <span class="ident">RangeInclusiveMap</span><span class="op">&lt;</span><span class="ident">T</span>, (), <span class="ident">StepFnsT</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="doccomment">/// A set whose items are stored as ranges bounded
+/// inclusively below and above `(start..=end)`.
+///
+/// See [`RangeInclusiveMap`]&#39;s documentation for more details.
+///
+/// [`RangeInclusiveMap`]: struct.RangeInclusiveMap.html
+</span><span class="kw">pub struct </span>RangeInclusiveSet&lt;T, StepFnsT = T&gt; {
+    rm: RangeInclusiveMap&lt;T, (), StepFnsT&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
+<span class="kw">impl</span>&lt;T&gt; Default <span class="kw">for </span>RangeInclusiveSet&lt;T, T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite,
 {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialEq</span>,
+<span class="kw">impl</span>&lt;T&gt; PartialEq <span class="kw">for </span>RangeInclusiveSet&lt;T, T&gt;
+<span class="kw">where
+    </span>T: PartialEq,
 {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">rm</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">rm</span>
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>RangeInclusiveSet&lt;T, T&gt;) -&gt; bool {
+        <span class="self">self</span>.rm == other.rm
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Eq</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Eq</span> {}
+<span class="kw">impl</span>&lt;T&gt; Eq <span class="kw">for </span>RangeInclusiveSet&lt;T, T&gt; <span class="kw">where </span>T: Eq {}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PartialOrd</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialOrd</span>,
+<span class="kw">impl</span>&lt;T&gt; PartialOrd <span class="kw">for </span>RangeInclusiveSet&lt;T, T&gt;
+<span class="kw">where
+    </span>T: PartialOrd,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ordering</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">rm</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>RangeInclusiveSet&lt;T, T&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
+        <span class="self">self</span>.rm.partial_cmp(<span class="kw-2">&amp;</span>other.rm)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Ord</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span>,
+<span class="kw">impl</span>&lt;T&gt; Ord <span class="kw">for </span>RangeInclusiveSet&lt;T, T&gt;
+<span class="kw">where
+    </span>T: Ord,
 {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">Ordering</span> {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">rm</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>RangeInclusiveSet&lt;T, T&gt;) -&gt; Ordering {
+        <span class="self">self</span>.rm.cmp(<span class="kw-2">&amp;</span>other.rm)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
+<span class="kw">impl</span>&lt;T&gt; RangeInclusiveSet&lt;T, T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite,
 {
-    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;const_fn&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new_with_step_fns</span>()
+    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`.
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;const_fn&quot;</span>)]
+    </span><span class="kw">pub const fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new_with_step_fns()
     }
 
-    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;const_fn&quot;</span>))]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new_with_step_fns</span>()
+    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`.
+    </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;const_fn&quot;</span>))]
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new_with_step_fns()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">StepFnsT</span>: <span class="ident">StepFns</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;T, StepFnsT&gt; RangeInclusiveSet&lt;T, StepFnsT&gt;
+<span class="kw">where
+    </span>T: Ord + Clone,
+    StepFnsT: StepFns&lt;T&gt;,
 {
-    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`, specifying successor and</span>
-    <span class="doccomment">/// predecessor functions defined separately from `T` itself.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This is useful as a workaround for Rust&#39;s &quot;orphan rules&quot;,</span>
-    <span class="doccomment">/// which prevent you from implementing `StepLite` for `T` if `T`</span>
-    <span class="doccomment">/// is a foreign type.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// **NOTE:** This will likely be deprecated and then eventually</span>
-    <span class="doccomment">/// removed once the standard library&#39;s [Step](core::iter::Step)</span>
-    <span class="doccomment">/// trait is stabilised, as most crates will then likely implement [Step](core::iter::Step)</span>
-    <span class="doccomment">/// for their types where appropriate.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// See [this issue](https://github.com/rust-lang/rust/issues/42168)</span>
-    <span class="doccomment">/// for details about that stabilization process.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_step_fns</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">rm</span>: <span class="ident">RangeInclusiveMap::new_with_step_fns</span>(),
+    <span class="doccomment">/// Makes a new empty `RangeInclusiveSet`, specifying successor and
+    /// predecessor functions defined separately from `T` itself.
+    ///
+    /// This is useful as a workaround for Rust&#39;s &quot;orphan rules&quot;,
+    /// which prevent you from implementing `StepLite` for `T` if `T`
+    /// is a foreign type.
+    ///
+    /// **NOTE:** This will likely be deprecated and then eventually
+    /// removed once the standard library&#39;s [Step](core::iter::Step)
+    /// trait is stabilised, as most crates will then likely implement [Step](core::iter::Step)
+    /// for their types where appropriate.
+    ///
+    /// See [this issue](https://github.com/rust-lang/rust/issues/42168)
+    /// for details about that stabilization process.
+    </span><span class="kw">pub fn </span>new_with_step_fns() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            rm: RangeInclusiveMap::new_with_step_fns(),
         }
     }
 
-    <span class="doccomment">/// Returns a reference to the range covering the given key, if any.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">get_key_value</span>(<span class="ident">value</span>).<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">range</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">range</span>)
+    <span class="doccomment">/// Returns a reference to the range covering the given key, if any.
+    </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>T) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>RangeInclusive&lt;T&gt;&gt; {
+        <span class="self">self</span>.rm.get_key_value(value).map(|(range, <span class="kw">_</span>)| range)
     }
 
-    <span class="doccomment">/// Returns `true` if any range in the set covers the specified value.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">contains_key</span>(<span class="ident">value</span>)
+    <span class="doccomment">/// Returns `true` if any range in the set covers the specified value.
+    </span><span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, value: <span class="kw-2">&amp;</span>T) -&gt; bool {
+        <span class="self">self</span>.rm.contains_key(value)
     }
 
-    <span class="doccomment">/// Gets an ordered iterator over all ranges,</span>
-    <span class="doccomment">/// ordered by range.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">Iter</span> {
-            <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">iter</span>(),
+    <span class="doccomment">/// Gets an ordered iterator over all ranges,
+    /// ordered by range.
+    </span><span class="kw">pub fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Iter&lt;<span class="lifetime">&#39;_</span>, T&gt; {
+        Iter {
+            inner: <span class="self">self</span>.rm.iter(),
         }
     }
 
-    <span class="doccomment">/// Insert a range into the set.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the inserted range either overlaps or is immediately adjacent</span>
-    <span class="doccomment">/// any existing range, then the ranges will be coalesced into</span>
-    <span class="doccomment">/// a single contiguous range.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if range `start &gt; end`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">insert</span>(<span class="ident">range</span>, ());
+    <span class="doccomment">/// Insert a range into the set.
+    ///
+    /// If the inserted range either overlaps or is immediately adjacent
+    /// any existing range, then the ranges will be coalesced into
+    /// a single contiguous range.
+    ///
+    /// # Panics
+    ///
+    /// Panics if range `start &gt; end`.
+    </span><span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: RangeInclusive&lt;T&gt;) {
+        <span class="self">self</span>.rm.insert(range, ());
     }
 
-    <span class="doccomment">/// Removes a range from the set, if all or any of it was present.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the range to be removed _partially_ overlaps any ranges</span>
-    <span class="doccomment">/// in the set, then those ranges will be contracted to no</span>
-    <span class="doccomment">/// longer cover the removed range.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Panics</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Panics if range `start &gt; end`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">range</span>: <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">remove</span>(<span class="ident">range</span>);
+    <span class="doccomment">/// Removes a range from the set, if all or any of it was present.
+    ///
+    /// If the range to be removed _partially_ overlaps any ranges
+    /// in the set, then those ranges will be contracted to no
+    /// longer cover the removed range.
+    ///
+    /// # Panics
+    ///
+    /// Panics if range `start &gt; end`.
+    </span><span class="kw">pub fn </span>remove(<span class="kw-2">&amp;mut </span><span class="self">self</span>, range: RangeInclusive&lt;T&gt;) {
+        <span class="self">self</span>.rm.remove(range);
     }
 
-    <span class="doccomment">/// Gets an iterator over all the maximally-sized ranges</span>
-    <span class="doccomment">/// contained in `outer_range` that are not covered by</span>
-    <span class="doccomment">/// any range stored in the set.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The iterator element type is `RangeInclusive&lt;T&gt;`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">outer_range</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">Gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span> {
-        <span class="ident">Gaps</span> {
-            <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">gaps</span>(<span class="ident">outer_range</span>),
-        }
-    }
-}
-
-<span class="doccomment">/// An iterator over the ranges of a `RangeInclusiveSet`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This `struct` is created by the [`iter`] method on [`RangeInclusiveSet`]. See its</span>
-<span class="doccomment">/// documentation for more.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`iter`]: RangeInclusiveSet::iter</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident"><span class="kw">super</span>::inclusive_map::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">range</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">range</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">size_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">usize</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">size_hint</span>()
-    }
-}
-
-<span class="doccomment">/// An owning iterator over the ranges of a `RangeInclusiveSet`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This `struct` is created by the [`into_iter`] method on [`RangeInclusiveSet`]</span>
-<span class="doccomment">/// (provided by the `IntoIterator` trait). See its documentation for more.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`into_iter`]: IntoIterator::into_iter</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident"><span class="kw">super</span>::inclusive_map::IntoIter</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span>,
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">IntoIterator</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::IntoIter</span> {
-        <span class="ident">IntoIter</span> {
-            <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">into_iter</span>(),
+    <span class="doccomment">/// Gets an iterator over all the maximally-sized ranges
+    /// contained in `outer_range` that are not covered by
+    /// any range stored in the set.
+    ///
+    /// The iterator element type is `RangeInclusive&lt;T&gt;`.
+    </span><span class="kw">pub fn </span>gaps&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, outer_range: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RangeInclusive&lt;T&gt;) -&gt; Gaps&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt; {
+        Gaps {
+            inner: <span class="self">self</span>.rm.gaps(outer_range),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">IntoIter</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">range</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">range</span>)
+<span class="doccomment">/// An iterator over the ranges of a `RangeInclusiveSet`.
+///
+/// This `struct` is created by the [`iter`] method on [`RangeInclusiveSet`]. See its
+/// documentation for more.
+///
+/// [`iter`]: RangeInclusiveSet::iter
+</span><span class="kw">pub struct </span>Iter&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    inner: <span class="kw">super</span>::inclusive_map::Iter&lt;<span class="lifetime">&#39;a</span>, T, ()&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Iterator <span class="kw">for </span>Iter&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    <span class="kw">type </span>Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RangeInclusive&lt;T&gt;;
+
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RangeInclusive&lt;T&gt;&gt; {
+        <span class="self">self</span>.inner.next().map(|(range, <span class="kw">_</span>)| range)
     }
-    <span class="kw">fn</span> <span class="ident">size_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">usize</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">size_hint</span>()
+
+    <span class="kw">fn </span>size_hint(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        <span class="self">self</span>.inner.size_hint()
     }
 }
 
-<span class="comment">// We can&#39;t just derive this automatically, because that would</span>
-<span class="comment">// expose irrelevant (and private) implementation details.</span>
-<span class="comment">// Instead implement it in the same way that the underlying BTreeSet does.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Debug</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
-{
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">f</span>.<span class="ident">debug_set</span>().<span class="ident">entries</span>(<span class="self">self</span>.<span class="ident">iter</span>()).<span class="ident">finish</span>()
+<span class="doccomment">/// An owning iterator over the ranges of a `RangeInclusiveSet`.
+///
+/// This `struct` is created by the [`into_iter`] method on [`RangeInclusiveSet`]
+/// (provided by the `IntoIterator` trait). See its documentation for more.
+///
+/// [`into_iter`]: IntoIterator::into_iter
+</span><span class="kw">pub struct </span>IntoIter&lt;T&gt; {
+    inner: <span class="kw">super</span>::inclusive_map::IntoIter&lt;T, ()&gt;,
+}
+
+<span class="kw">impl</span>&lt;T&gt; IntoIterator <span class="kw">for </span>RangeInclusiveSet&lt;T&gt; {
+    <span class="kw">type </span>Item = RangeInclusive&lt;T&gt;;
+    <span class="kw">type </span>IntoIter = IntoIter&lt;T&gt;;
+    <span class="kw">fn </span>into_iter(<span class="self">self</span>) -&gt; <span class="self">Self</span>::IntoIter {
+        IntoIter {
+            inner: <span class="self">self</span>.rm.into_iter(),
+        }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
-{
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_set</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="ident">range_set</span>.<span class="ident">extend</span>(<span class="ident">iter</span>);
-        <span class="ident">range_set</span>
+<span class="kw">impl</span>&lt;T&gt; Iterator <span class="kw">for </span>IntoIter&lt;T&gt; {
+    <span class="kw">type </span>Item = RangeInclusive&lt;T&gt;;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;RangeInclusive&lt;T&gt;&gt; {
+        <span class="self">self</span>.inner.next().map(|(range, <span class="kw">_</span>)| range)
+    }
+    <span class="kw">fn </span>size_hint(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        <span class="self">self</span>.inner.size_hint()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Extend</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
+<span class="comment">// We can&#39;t just derive this automatically, because that would
+// expose irrelevant (and private) implementation details.
+// Instead implement it in the same way that the underlying BTreeSet does.
+</span><span class="kw">impl</span>&lt;T: Debug&gt; Debug <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite,
 {
-    <span class="kw">fn</span> <span class="ident">extend</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">iter</span>: <span class="ident">I</span>) {
-        <span class="ident">iter</span>.<span class="ident">into_iter</span>().<span class="ident">for_each</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">range</span><span class="op">|</span> {
-            <span class="self">self</span>.<span class="ident">insert</span>(<span class="ident">range</span>);
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+        f.debug_set().entries(<span class="self">self</span>.iter()).finish()
+    }
+}
+
+<span class="kw">impl</span>&lt;T&gt; FromIterator&lt;RangeInclusive&lt;T&gt;&gt; <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite,
+{
+    <span class="kw">fn </span>from_iter&lt;I: IntoIterator&lt;Item = RangeInclusive&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set = RangeInclusiveSet::new();
+        range_set.extend(iter);
+        range_set
+    }
+}
+
+<span class="kw">impl</span>&lt;T&gt; Extend&lt;RangeInclusive&lt;T&gt;&gt; <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite,
+{
+    <span class="kw">fn </span>extend&lt;I: IntoIterator&lt;Item = RangeInclusive&lt;T&gt;&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, iter: I) {
+        iter.into_iter().for_each(<span class="kw">move </span>|range| {
+            <span class="self">self</span>.insert(range);
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Serialize</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span> <span class="op">+</span> <span class="ident">Serialize</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T&gt; Serialize <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite + Serialize,
 {
-    <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serializer</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S::Ok</span>, <span class="ident">S::Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">S</span>: <span class="ident">Serializer</span>,
+    <span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt;
+    <span class="kw">where
+        </span>S: Serializer,
     {
-        <span class="kw">use</span> <span class="ident">serde::ser::SerializeSeq</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">seq</span> <span class="op">=</span> <span class="ident">serializer</span>.<span class="ident">serialize_seq</span>(<span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">rm</span>.<span class="ident">btm</span>.<span class="ident">len</span>()))<span class="question-mark">?</span>;
-        <span class="kw">for</span> <span class="ident">range</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">iter</span>() {
-            <span class="ident">seq</span>.<span class="ident">serialize_element</span>(<span class="kw-2">&amp;</span>(<span class="kw-2">&amp;</span><span class="ident">range</span>.<span class="ident">start</span>(), <span class="kw-2">&amp;</span><span class="ident">range</span>.<span class="ident">end</span>()))<span class="question-mark">?</span>;
+        <span class="kw">use </span>serde::ser::SerializeSeq;
+        <span class="kw">let </span><span class="kw-2">mut </span>seq = serializer.serialize_seq(<span class="prelude-val">Some</span>(<span class="self">self</span>.rm.btm.len()))<span class="question-mark">?</span>;
+        <span class="kw">for </span>range <span class="kw">in </span><span class="self">self</span>.iter() {
+            seq.serialize_element(<span class="kw-2">&amp;</span>(<span class="kw-2">&amp;</span>range.start(), <span class="kw-2">&amp;</span>range.end()))<span class="question-mark">?</span>;
         }
-        <span class="ident">seq</span>.<span class="ident">end</span>()
+        seq.end()
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span> <span class="op">+</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, T&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite + Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">deserialize</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">D::Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt;
+    <span class="kw">where
+        </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
     {
-        <span class="ident">deserializer</span>.<span class="ident">deserialize_seq</span>(<span class="ident">RangeInclusiveSetVisitor::new</span>())
+        deserializer.deserialize_seq(RangeInclusiveSetVisitor::new())
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">struct</span> <span class="ident">RangeInclusiveSetVisitor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw">fn</span>() -&gt; <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">struct </span>RangeInclusiveSetVisitor&lt;T&gt; {
+    marker: PhantomData&lt;<span class="kw">fn</span>() -&gt; RangeInclusiveSet&lt;T&gt;&gt;,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RangeInclusiveSetVisitor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">RangeInclusiveSetVisitor</span> {
-            <span class="ident">marker</span>: <span class="ident">PhantomData</span>,
-        }
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSetVisitor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span> <span class="op">+</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
-{
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">expecting</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">formatter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">formatter</span>.<span class="ident">write_str</span>(<span class="string">&quot;RangeInclusiveSet&quot;</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">visit_seq</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">access</span>: <span class="ident">A</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident">A::Error</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">A</span>: <span class="ident">SeqAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_inclusive_set</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">start</span>, <span class="ident">end</span>)) <span class="op">=</span> <span class="ident">access</span>.<span class="ident">next_element</span>()<span class="question-mark">?</span> {
-            <span class="ident">range_inclusive_set</span>.<span class="ident">insert</span>(<span class="ident">start</span>..<span class="op">=</span><span class="ident">end</span>);
-        }
-        <span class="prelude-val">Ok</span>(<span class="ident">range_inclusive_set</span>)
-    }
-}
-
-<span class="doccomment">/// An iterator over all ranges not covered by a `RangeInclusiveSet`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This `struct` is created by the [`gaps`] method on [`RangeInclusiveSet`]. See its</span>
-<span class="doccomment">/// documentation for more.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`gaps`]: RangeInclusiveSet::gaps</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident"><span class="kw">crate</span>::inclusive_map::Gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, (), <span class="ident">StepFnsT</span><span class="op">&gt;</span>,
-}
-
-<span class="comment">// `Gaps` is always fused. (See definition of `next` below.)</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span> <span class="ident">core::iter::FusedIterator</span> <span class="kw">for</span> <span class="ident">Gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">StepFnsT</span>: <span class="ident">StepFns</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-{
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">StepFnsT</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">StepFnsT</span>: <span class="ident">StepFns</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-{
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">next</span>()
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">alloc</span>::{<span class="ident">format</span>, <span class="ident">vec</span>, <span class="ident">vec::Vec</span>};
-
-    <span class="kw">trait</span> <span class="ident">RangeInclusiveSetExt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">fn</span> <span class="ident">to_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-    }
-
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RangeInclusiveSetExt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">Ord</span> <span class="op">+</span> <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">StepLite</span>,
-    {
-        <span class="kw">fn</span> <span class="ident">to_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-            <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">collect</span>()
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T&gt; RangeInclusiveSetVisitor&lt;T&gt; {
+    <span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+        RangeInclusiveSetVisitor {
+            marker: PhantomData,
         }
     }
+}
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">empty_set_is_empty</span>() {
-        <span class="kw">let</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">range_set</span>.<span class="ident">to_vec</span>(), <span class="macro">vec!</span>[]);
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, T&gt; Visitor&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>RangeInclusiveSetVisitor&lt;T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone + StepLite + Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;,
+{
+    <span class="kw">type </span>Value = RangeInclusiveSet&lt;T&gt;;
+
+    <span class="kw">fn </span>expecting(<span class="kw-2">&amp;</span><span class="self">self</span>, formatter: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        formatter.write_str(<span class="string">&quot;RangeInclusiveSet&quot;</span>)
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">insert_into_empty_map</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">0</span>..<span class="op">=</span><span class="number">50</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">range_set</span>.<span class="ident">to_vec</span>(), <span class="macro">vec!</span>[<span class="number">0</span>..<span class="op">=</span><span class="number">50</span>]);
+    <span class="kw">fn </span>visit_seq&lt;A&gt;(<span class="self">self</span>, <span class="kw-2">mut </span>access: A) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Value, A::Error&gt;
+    <span class="kw">where
+        </span>A: SeqAccess&lt;<span class="lifetime">&#39;de</span>&gt;,
+    {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_inclusive_set = RangeInclusiveSet::new();
+        <span class="kw">while let </span><span class="prelude-val">Some</span>((start, end)) = access.next_element()<span class="question-mark">? </span>{
+            range_inclusive_set.insert(start..=end);
+        }
+        <span class="prelude-val">Ok</span>(range_inclusive_set)
+    }
+}
+
+<span class="doccomment">/// An iterator over all ranges not covered by a `RangeInclusiveSet`.
+///
+/// This `struct` is created by the [`gaps`] method on [`RangeInclusiveSet`]. See its
+/// documentation for more.
+///
+/// [`gaps`]: RangeInclusiveSet::gaps
+</span><span class="kw">pub struct </span>Gaps&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt; {
+    inner: <span class="kw">crate</span>::inclusive_map::Gaps&lt;<span class="lifetime">&#39;a</span>, T, (), StepFnsT&gt;,
+}
+
+<span class="comment">// `Gaps` is always fused. (See definition of `next` below.)
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt; core::iter::FusedIterator <span class="kw">for </span>Gaps&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt;
+<span class="kw">where
+    </span>T: Ord + Clone,
+    StepFnsT: StepFns&lt;T&gt;,
+{
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt; Iterator <span class="kw">for </span>Gaps&lt;<span class="lifetime">&#39;a</span>, T, StepFnsT&gt;
+<span class="kw">where
+    </span>T: Ord + Clone,
+    StepFnsT: StepFns&lt;T&gt;,
+{
+    <span class="kw">type </span>Item = RangeInclusive&lt;T&gt;;
+
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="self">self</span>.inner.next()
+    }
+}
+
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use </span>alloc::{format, vec, vec::Vec};
+
+    <span class="kw">trait </span>RangeInclusiveSetExt&lt;T&gt; {
+        <span class="kw">fn </span>to_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;RangeInclusive&lt;T&gt;&gt;;
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">remove_partially_overlapping</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">0</span>..<span class="op">=</span><span class="number">50</span>);
-        <span class="ident">range_set</span>.<span class="ident">remove</span>(<span class="number">25</span>..<span class="op">=</span><span class="number">75</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">range_set</span>.<span class="ident">to_vec</span>(), <span class="macro">vec!</span>[<span class="number">0</span>..<span class="op">=</span><span class="number">24</span>]);
+    <span class="kw">impl</span>&lt;T&gt; RangeInclusiveSetExt&lt;T&gt; <span class="kw">for </span>RangeInclusiveSet&lt;T&gt;
+    <span class="kw">where
+        </span>T: Ord + Clone + StepLite,
+    {
+        <span class="kw">fn </span>to_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;RangeInclusive&lt;T&gt;&gt; {
+            <span class="self">self</span>.iter().cloned().collect()
+        }
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">gaps_between_items_floating_inside_outer_range</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="comment">// 0 1 2 3 4 5 6 7 8 9</span>
-        <span class="comment">// ◌ ◌ ◌ ◌ ◌ ●-● ◌ ◌ ◌</span>
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">5</span>..<span class="op">=</span><span class="number">6</span>);
-        <span class="comment">// 0 1 2 3 4 5 6 7 8 9</span>
-        <span class="comment">// ◌ ◌ ●-● ◌ ◌ ◌ ◌ ◌ ◌</span>
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">2</span>..<span class="op">=</span><span class="number">3</span>);
-        <span class="comment">// 0 1 2 3 4 5 6 7 8 9</span>
-        <span class="comment">// ◌ ◆-------------◆ ◌</span>
-        <span class="kw">let</span> <span class="ident">outer_range</span> <span class="op">=</span> <span class="number">1</span>..<span class="op">=</span><span class="number">8</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gaps</span> <span class="op">=</span> <span class="ident">range_set</span>.<span class="ident">gaps</span>(<span class="kw-2">&amp;</span><span class="ident">outer_range</span>);
-        <span class="comment">// Should yield gaps at start, between items,</span>
-        <span class="comment">// and at end.</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="number">1</span>..<span class="op">=</span><span class="number">1</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="number">4</span>..<span class="op">=</span><span class="number">4</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">Some</span>(<span class="number">7</span>..<span class="op">=</span><span class="number">8</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
-        <span class="comment">// Gaps iterator should be fused.</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">gaps</span>.<span class="ident">next</span>(), <span class="prelude-val">None</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>empty_set_is_empty() {
+        <span class="kw">let </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+        <span class="macro">assert_eq!</span>(range_set.to_vec(), <span class="macro">vec!</span>[]);
     }
 
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// impl Debug</span>
-    <span class="doccomment">///</span>
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">set_debug_repr_looks_right</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-
-        <span class="comment">// Empty</span>
-        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">set</span>), <span class="string">&quot;{}&quot;</span>);
-
-        <span class="comment">// One entry</span>
-        <span class="ident">set</span>.<span class="ident">insert</span>(<span class="number">2</span>..<span class="op">=</span><span class="number">5</span>);
-        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">set</span>), <span class="string">&quot;{2..=5}&quot;</span>);
-
-        <span class="comment">// Many entries</span>
-        <span class="ident">set</span>.<span class="ident">insert</span>(<span class="number">7</span>..<span class="op">=</span><span class="number">8</span>);
-        <span class="ident">set</span>.<span class="ident">insert</span>(<span class="number">10</span>..<span class="op">=</span><span class="number">11</span>);
-        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">set</span>), <span class="string">&quot;{2..=5, 7..=8, 10..=11}&quot;</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>insert_into_empty_map() {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+        range_set.insert(<span class="number">0</span>..=<span class="number">50</span>);
+        <span class="macro">assert_eq!</span>(range_set.to_vec(), <span class="macro">vec!</span>[<span class="number">0</span>..=<span class="number">50</span>]);
     }
 
-    <span class="comment">// impl Serialize</span>
-
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">serialization</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">RangeInclusiveSet::new</span>();
-        <span class="comment">// 0 1 2 3 4 5 6 7 8 9</span>
-        <span class="comment">// ◌ ◆---◆ ◌ ◌ ◌ ◌ ◌ ◌</span>
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">1</span>..<span class="op">=</span><span class="number">3</span>);
-        <span class="comment">// 0 1 2 3 4 5 6 7 8 9</span>
-        <span class="comment">// ◌ ◌ ◌ ◌ ◌ ◆---◆ ◌ ◌</span>
-        <span class="ident">range_set</span>.<span class="ident">insert</span>(<span class="number">5</span>..<span class="op">=</span><span class="number">7</span>);
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">serde_json::to_string</span>(<span class="kw-2">&amp;</span><span class="ident">range_set</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to serialize&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">output</span>, <span class="string">&quot;[[1,3],[5,7]]&quot;</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>remove_partially_overlapping() {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+        range_set.insert(<span class="number">0</span>..=<span class="number">50</span>);
+        range_set.remove(<span class="number">25</span>..=<span class="number">75</span>);
+        <span class="macro">assert_eq!</span>(range_set.to_vec(), <span class="macro">vec!</span>[<span class="number">0</span>..=<span class="number">24</span>]);
     }
 
-    <span class="comment">// impl Deserialize</span>
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>gaps_between_items_floating_inside_outer_range() {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◌ ◌ ◌ ◌ ●-● ◌ ◌ ◌
+        </span>range_set.insert(<span class="number">5</span>..=<span class="number">6</span>);
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◌ ●-● ◌ ◌ ◌ ◌ ◌ ◌
+        </span>range_set.insert(<span class="number">2</span>..=<span class="number">3</span>);
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◆-------------◆ ◌
+        </span><span class="kw">let </span>outer_range = <span class="number">1</span>..=<span class="number">8</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>gaps = range_set.gaps(<span class="kw-2">&amp;</span>outer_range);
+        <span class="comment">// Should yield gaps at start, between items,
+        // and at end.
+        </span><span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">Some</span>(<span class="number">1</span>..=<span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">Some</span>(<span class="number">4</span>..=<span class="number">4</span>));
+        <span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">Some</span>(<span class="number">7</span>..=<span class="number">8</span>));
+        <span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">None</span>);
+        <span class="comment">// Gaps iterator should be fused.
+        </span><span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">None</span>);
+    }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde1&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">deserialization</span>() {
-        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="string">&quot;[[1,3],[5,7]]&quot;</span>;
-        <span class="kw">let</span> <span class="ident">range_set</span>: <span class="ident">RangeInclusiveSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">serde_json::from_str</span>(<span class="ident">input</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to deserialize&quot;</span>);
-        <span class="kw">let</span> <span class="ident">reserialized</span> <span class="op">=</span> <span class="ident">serde_json::to_string</span>(<span class="kw-2">&amp;</span><span class="ident">range_set</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to re-serialize&quot;</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">reserialized</span>, <span class="ident">input</span>);
+    <span class="doccomment">///
+    /// impl Debug
+    ///
+
+    </span><span class="attribute">#[test]
+    </span><span class="kw">fn </span>set_debug_repr_looks_right() {
+        <span class="kw">let </span><span class="kw-2">mut </span>set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+
+        <span class="comment">// Empty
+        </span><span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, set), <span class="string">&quot;{}&quot;</span>);
+
+        <span class="comment">// One entry
+        </span>set.insert(<span class="number">2</span>..=<span class="number">5</span>);
+        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, set), <span class="string">&quot;{2..=5}&quot;</span>);
+
+        <span class="comment">// Many entries
+        </span>set.insert(<span class="number">7</span>..=<span class="number">8</span>);
+        set.insert(<span class="number">10</span>..=<span class="number">11</span>);
+        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, set), <span class="string">&quot;{2..=5, 7..=8, 10..=11}&quot;</span>);
+    }
+
+    <span class="comment">// impl Serialize
+
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+    #[test]
+    </span><span class="kw">fn </span>serialization() {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◆---◆ ◌ ◌ ◌ ◌ ◌ ◌
+        </span>range_set.insert(<span class="number">1</span>..=<span class="number">3</span>);
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◌ ◌ ◌ ◌ ◆---◆ ◌ ◌
+        </span>range_set.insert(<span class="number">5</span>..=<span class="number">7</span>);
+        <span class="kw">let </span>output = serde_json::to_string(<span class="kw-2">&amp;</span>range_set).expect(<span class="string">&quot;Failed to serialize&quot;</span>);
+        <span class="macro">assert_eq!</span>(output, <span class="string">&quot;[[1,3],[5,7]]&quot;</span>);
+    }
+
+    <span class="comment">// impl Deserialize
+
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;serde1&quot;</span>)]
+    #[test]
+    </span><span class="kw">fn </span>deserialization() {
+        <span class="kw">let </span>input = <span class="string">&quot;[[1,3],[5,7]]&quot;</span>;
+        <span class="kw">let </span>range_set: RangeInclusiveSet&lt;u32&gt; =
+            serde_json::from_str(input).expect(<span class="string">&quot;Failed to deserialize&quot;</span>);
+        <span class="kw">let </span>reserialized = serde_json::to_string(<span class="kw-2">&amp;</span>range_set).expect(<span class="string">&quot;Failed to re-serialize&quot;</span>);
+        <span class="macro">assert_eq!</span>(reserialized, input);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rangemap" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rangemap" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

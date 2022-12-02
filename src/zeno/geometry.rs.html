@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/geometry.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>geometry.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/geometry.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>geometry.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -596,603 +596,603 @@
 <span id="596">596</span>
 <span id="597">597</span>
 <span id="598">598</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Geometric primitives.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Geometric primitives.
 
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Sub</span>};
+</span><span class="kw">use </span>core::borrow::Borrow;
+<span class="kw">use </span>core::ops::{Add, Div, Mul, Sub};
 
-<span class="doccomment">/// Represents an angle in degrees or radians.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Angle</span>(<span class="ident">f32</span>);
+<span class="doccomment">/// Represents an angle in degrees or radians.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Default, Debug)]
+</span><span class="kw">pub struct </span>Angle(f32);
 
-<span class="kw">impl</span> <span class="ident">Angle</span> {
-    <span class="doccomment">/// Angle of zero degrees.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZERO</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span>(<span class="number">0.</span>);
+<span class="kw">impl </span>Angle {
+    <span class="doccomment">/// Angle of zero degrees.
+    </span><span class="kw">pub const </span>ZERO: <span class="self">Self </span>= <span class="self">Self</span>(<span class="number">0.</span>);
 
-    <span class="doccomment">/// Creates a new angle from degrees.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_degrees</span>(<span class="ident">degrees</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">degrees</span> <span class="op">*</span> <span class="ident">core::f32::consts::PI</span> <span class="op">/</span> <span class="number">180.</span>)
+    <span class="doccomment">/// Creates a new angle from degrees.
+    </span><span class="kw">pub fn </span>from_degrees(degrees: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(degrees * core::f32::consts::PI / <span class="number">180.</span>)
     }
 
-    <span class="doccomment">/// Creates a new angle from radians.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_radians</span>(<span class="ident">radians</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">radians</span>)
+    <span class="doccomment">/// Creates a new angle from radians.
+    </span><span class="kw">pub fn </span>from_radians(radians: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(radians)
     }
 
-    <span class="doccomment">/// Creates a new angle from gradians.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_gradians</span>(<span class="ident">gradians</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_degrees</span>(<span class="ident">gradians</span> <span class="op">/</span> <span class="number">400.</span> <span class="op">*</span> <span class="number">360.</span>)
+    <span class="doccomment">/// Creates a new angle from gradians.
+    </span><span class="kw">pub fn </span>from_gradians(gradians: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_degrees(gradians / <span class="number">400. </span>* <span class="number">360.</span>)
     }    
 
-    <span class="doccomment">/// Creates a new angle from turns.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_turns</span>(<span class="ident">turns</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_degrees</span>(<span class="ident">turns</span> <span class="op">*</span> <span class="number">360.</span>)
+    <span class="doccomment">/// Creates a new angle from turns.
+    </span><span class="kw">pub fn </span>from_turns(turns: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_degrees(turns * <span class="number">360.</span>)
     }    
 
-    <span class="doccomment">/// Returns the angle in radians.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_radians</span>(<span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="number">0</span>
-    }
+    <span class="doccomment">/// Returns the angle in radians.
+    </span><span class="kw">pub fn </span>to_radians(<span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.<span class="number">0
+    </span>}
 
-    <span class="doccomment">/// Returns the angle in degrees.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_degrees</span>(<span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">*</span> <span class="number">180.</span> <span class="op">/</span> <span class="ident">core::f32::consts::PI</span>
+    <span class="doccomment">/// Returns the angle in degrees.
+    </span><span class="kw">pub fn </span>to_degrees(<span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.<span class="number">0 </span>* <span class="number">180. </span>/ core::f32::consts::PI
     }
 }
 
-<span class="doccomment">/// Two dimensional vector.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Vector</span> {
-    <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Two dimensional vector.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Default, Debug)]
+</span><span class="kw">pub struct </span>Vector {
+    <span class="kw">pub </span>x: f32,
+    <span class="kw">pub </span>y: f32,
 }
 
-<span class="kw">impl</span> <span class="ident">Vector</span> {
-    <span class="doccomment">/// Vector with both components set to zero.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZERO</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span> { <span class="ident">x</span>: <span class="number">0.</span>, <span class="ident">y</span>: <span class="number">0.</span> };
+<span class="kw">impl </span>Vector {
+    <span class="doccomment">/// Vector with both components set to zero.
+    </span><span class="kw">pub const </span>ZERO: <span class="self">Self </span>= <span class="self">Self </span>{ x: <span class="number">0.</span>, y: <span class="number">0. </span>};
 
-    <span class="doccomment">/// Creates a new vector with the specified coordinates.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">x</span>, <span class="ident">y</span> }
+    <span class="doccomment">/// Creates a new vector with the specified coordinates.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub const fn </span>new(x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ x, y }
     }
 
-    <span class="doccomment">/// Returns the length of the vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length</span>(<span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        (<span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">y</span>).<span class="ident">sqrt</span>()
+    <span class="doccomment">/// Returns the length of the vector.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>length(<span class="self">self</span>) -&gt; f32 {
+        (<span class="self">self</span>.x * <span class="self">self</span>.x + <span class="self">self</span>.y * <span class="self">self</span>.y).sqrt()
     }
 
-    <span class="doccomment">/// Returns the squared length of the vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length_squared</span>(<span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns the squared length of the vector.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>length_squared(<span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.x * <span class="self">self</span>.x + <span class="self">self</span>.y * <span class="self">self</span>.y
     }
 
-    <span class="doccomment">/// Returns the distance between two points.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">distance_to</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident">f32</span> {
-        (<span class="self">self</span> <span class="op">-</span> <span class="ident">other</span>).<span class="ident">length</span>()
+    <span class="doccomment">/// Returns the distance between two points.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>distance_to(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; f32 {
+        (<span class="self">self </span>- other).length()
     }
 
-    <span class="doccomment">/// Computes the dot product of two vectors.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dot</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Computes the dot product of two vectors.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>dot(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; f32 {
+        <span class="self">self</span>.x * other.x + <span class="self">self</span>.y * other.y
     }
 
-    <span class="doccomment">/// Computes the cross product of two vectors.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cross</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">x</span>
+    <span class="doccomment">/// Computes the cross product of two vectors.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>cross(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; f32 {
+        <span class="self">self</span>.x * other.y - <span class="self">self</span>.y * other.x
     }
 
-    <span class="doccomment">/// Returns a normalized copy of the vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">length</span>();
-        <span class="kw">if</span> <span class="ident">length</span> <span class="op">==</span> <span class="number">0.</span> {
-            <span class="kw">return</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="number">0.</span>, <span class="number">0.</span>);
+    <span class="doccomment">/// Returns a normalized copy of the vector.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>normalize(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>length = <span class="self">self</span>.length();
+        <span class="kw">if </span>length == <span class="number">0. </span>{
+            <span class="kw">return </span><span class="self">Self</span>::new(<span class="number">0.</span>, <span class="number">0.</span>);
         }
-        <span class="kw">let</span> <span class="ident">inverse</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">/</span> <span class="ident">length</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">inverse</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">inverse</span>)
+        <span class="kw">let </span>inverse = <span class="number">1. </span>/ length;
+        <span class="self">Self</span>::new(<span class="self">self</span>.x * inverse, <span class="self">self</span>.y * inverse)
     }
 
-    <span class="doccomment">/// Returns a new vector containing the smallest integer values greater than</span>
-    <span class="doccomment">/// or equal to each component.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ceil</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span>.<span class="ident">ceil</span>(), <span class="self">self</span>.<span class="ident">y</span>.<span class="ident">ceil</span>())
+    <span class="doccomment">/// Returns a new vector containing the smallest integer values greater than
+    /// or equal to each component.
+    </span><span class="kw">pub fn </span>ceil(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x.ceil(), <span class="self">self</span>.y.ceil())
     }
 
-    <span class="doccomment">/// Returns a new vector containing the largest integer values less than</span>
-    <span class="doccomment">/// or equal to each component.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">floor</span>(<span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span>.<span class="ident">floor</span>(), <span class="self">self</span>.<span class="ident">y</span>.<span class="ident">floor</span>())
+    <span class="doccomment">/// Returns a new vector containing the largest integer values less than
+    /// or equal to each component.
+    </span><span class="kw">pub fn </span>floor(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x.floor(), <span class="self">self</span>.y.floor())
     }
 
-    <span class="doccomment">/// Returns the angle to the specified vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">angle_to</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident">Angle</span> {
-        <span class="ident">Angle::from_radians</span>(<span class="self">self</span>.<span class="ident">cross</span>(<span class="ident">other</span>).<span class="ident">atan2</span>(<span class="self">self</span>.<span class="ident">dot</span>(<span class="ident">other</span>)))
+    <span class="doccomment">/// Returns the angle to the specified vector.
+    </span><span class="kw">pub fn </span>angle_to(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; Angle {
+        Angle::from_radians(<span class="self">self</span>.cross(other).atan2(<span class="self">self</span>.dot(other)))
     }
 
-    <span class="doccomment">/// Returns true if this vector is approximately equal to other using a</span>
-    <span class="doccomment">/// standard single precision epsilon value.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nearly_eq</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Vector</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">nearly_eq_by</span>(<span class="ident">other</span>, <span class="ident">f32::EPSILON</span>)
+    <span class="doccomment">/// Returns true if this vector is approximately equal to other using a
+    /// standard single precision epsilon value.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>nearly_eq(<span class="self">self</span>, other: Vector) -&gt; bool {
+        <span class="self">self</span>.nearly_eq_by(other, f32::EPSILON)
     }
 
-    <span class="doccomment">/// Returns true if this vector is approximately equal to other using</span>
-    <span class="doccomment">/// the specified epsilon value.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nearly_eq_by</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Vector</span>, <span class="ident">epsilon</span>: <span class="ident">f32</span>) -&gt; <span class="ident">bool</span> {
-        (<span class="self">self</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">epsilon</span> <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">other</span>.<span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">epsilon</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Add</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">rhs</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">rhs</span>.<span class="ident">y</span>)
+    <span class="doccomment">/// Returns true if this vector is approximately equal to other using
+    /// the specified epsilon value.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>nearly_eq_by(<span class="self">self</span>, other: Vector, epsilon: f32) -&gt; bool {
+        (<span class="self">self</span>.x - other.x).abs() &lt; epsilon &amp;&amp; (<span class="self">self</span>.y - other.y).abs() &lt; epsilon
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Sub</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">rhs</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">rhs</span>.<span class="ident">y</span>)
+<span class="kw">impl </span>Add <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>add(<span class="self">self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x + rhs.x, <span class="self">self</span>.y + rhs.y)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">rhs</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">rhs</span>.<span class="ident">y</span>)
+<span class="kw">impl </span>Sub <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>sub(<span class="self">self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x - rhs.x, <span class="self">self</span>.y - rhs.y)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">rhs</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">rhs</span>)
+<span class="kw">impl </span>Mul <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x * rhs.x, <span class="self">self</span>.y * rhs.y)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Div</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">/</span> <span class="ident">rhs</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">/</span> <span class="ident">rhs</span>.<span class="ident">y</span>)
+<span class="kw">impl </span>Mul&lt;f32&gt; <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>mul(<span class="self">self</span>, rhs: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x * rhs, <span class="self">self</span>.y * rhs)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">/</span> <span class="ident">rhs</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">s</span>, <span class="self">self</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">s</span>)
+<span class="kw">impl </span>Div <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, rhs: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.x / rhs.x, <span class="self">self</span>.y / rhs.y)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">f32</span>; <span class="number">2</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: [<span class="ident">f32</span>; <span class="number">2</span>]) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>[<span class="number">0</span>], <span class="ident">v</span>[<span class="number">1</span>])
+<span class="kw">impl </span>Div&lt;f32&gt; <span class="kw">for </span>Vector {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>div(<span class="self">self</span>, rhs: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>s = <span class="number">1. </span>/ rhs;
+        <span class="self">Self</span>::new(<span class="self">self</span>.x * s, <span class="self">self</span>.y * s)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">i32</span>; <span class="number">2</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: [<span class="ident">i32</span>; <span class="number">2</span>]) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">f32</span>, <span class="ident">v</span>[<span class="number">1</span>] <span class="kw">as</span> <span class="ident">f32</span>)
+<span class="kw">impl </span>From&lt;[f32; <span class="number">2</span>]&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: [f32; <span class="number">2</span>]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v[<span class="number">0</span>], v[<span class="number">1</span>])
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">f32</span>, <span class="ident">f32</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: (<span class="ident">f32</span>, <span class="ident">f32</span>)) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>.<span class="number">0</span>, <span class="ident">v</span>.<span class="number">1</span>)
+<span class="kw">impl </span>From&lt;[i32; <span class="number">2</span>]&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: [i32; <span class="number">2</span>]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v[<span class="number">0</span>] <span class="kw">as </span>f32, v[<span class="number">1</span>] <span class="kw">as </span>f32)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">i32</span>, <span class="ident">i32</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: (<span class="ident">i32</span>, <span class="ident">i32</span>)) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">f32</span>, <span class="ident">v</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">f32</span>)
+<span class="kw">impl </span>From&lt;(f32, f32)&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: (f32, f32)) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v.<span class="number">0</span>, v.<span class="number">1</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">f32</span>, <span class="ident">i32</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: (<span class="ident">f32</span>, <span class="ident">i32</span>)) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>.<span class="number">0</span>, <span class="ident">v</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">f32</span>)
+<span class="kw">impl </span>From&lt;(i32, i32)&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: (i32, i32)) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v.<span class="number">0 </span><span class="kw">as </span>f32, v.<span class="number">1 </span><span class="kw">as </span>f32)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">i32</span>, <span class="ident">f32</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: (<span class="ident">i32</span>, <span class="ident">f32</span>)) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">v</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">f32</span>, <span class="ident">v</span>.<span class="number">1</span>)
+<span class="kw">impl </span>From&lt;(f32, i32)&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: (f32, i32)) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v.<span class="number">0</span>, v.<span class="number">1 </span><span class="kw">as </span>f32)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">x</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">x</span>, <span class="ident">x</span>)
+<span class="kw">impl </span>From&lt;(i32, f32)&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(v: (i32, f32)) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(v.<span class="number">0 </span><span class="kw">as </span>f32, v.<span class="number">1</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vector</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">x</span>: <span class="ident">i32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">x</span>, <span class="ident">x</span>)
+<span class="kw">impl </span>From&lt;f32&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(x: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(x, x)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">f32</span>; <span class="number">2</span>] {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">Vector</span>) -&gt; <span class="self">Self</span> {
-        [<span class="ident">v</span>.<span class="ident">x</span>, <span class="ident">v</span>.<span class="ident">y</span>]
+<span class="kw">impl </span>From&lt;i32&gt; <span class="kw">for </span>Vector {
+    <span class="kw">fn </span>from(x: i32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>x = x <span class="kw">as </span>f32;
+        <span class="self">Self</span>::new(x, x)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> <span class="kw">for</span> (<span class="ident">f32</span>, <span class="ident">f32</span>) {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">Vector</span>) -&gt; <span class="self">Self</span> {
-        (<span class="ident">v</span>.<span class="ident">x</span>, <span class="ident">v</span>.<span class="ident">y</span>)
+<span class="kw">impl </span>From&lt;Vector&gt; <span class="kw">for </span>[f32; <span class="number">2</span>] {
+    <span class="kw">fn </span>from(v: Vector) -&gt; <span class="self">Self </span>{
+        [v.x, v.y]
     }
 }
 
-<span class="doccomment">/// Alias for vector to distinguish intended use.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Point</span> <span class="op">=</span> <span class="ident">Vector</span>;
-
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">normal</span>(<span class="ident">start</span>: <span class="ident">Vector</span>, <span class="ident">end</span>: <span class="ident">Vector</span>) -&gt; <span class="ident">Vector</span> {
-    <span class="ident">Vector::new</span>(<span class="ident">end</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">start</span>.<span class="ident">y</span>, <span class="op">-</span>(<span class="ident">end</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">start</span>.<span class="ident">x</span>)).<span class="ident">normalize</span>()
+<span class="kw">impl </span>From&lt;Vector&gt; <span class="kw">for </span>(f32, f32) {
+    <span class="kw">fn </span>from(v: Vector) -&gt; <span class="self">Self </span>{
+        (v.x, v.y)
+    }
 }
 
-<span class="doccomment">/// Two dimensional transformation matrix.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Transform</span> {
-    <span class="kw">pub</span> <span class="ident">xx</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">xy</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">yx</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">yy</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Alias for vector to distinguish intended use.
+</span><span class="kw">pub type </span>Point = Vector;
+
+<span class="attribute">#[inline(always)]
+</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>normal(start: Vector, end: Vector) -&gt; Vector {
+    Vector::new(end.y - start.y, -(end.x - start.x)).normalize()
 }
 
-<span class="kw">impl</span> <span class="ident">Transform</span> {
-    <span class="doccomment">/// Identity matrix.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IDENTITY</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span> {
-        <span class="ident">xx</span>: <span class="number">1.</span>,
-        <span class="ident">xy</span>: <span class="number">0.</span>,
-        <span class="ident">yy</span>: <span class="number">1.</span>,
-        <span class="ident">yx</span>: <span class="number">0.</span>,
-        <span class="ident">x</span>: <span class="number">0.</span>,
-        <span class="ident">y</span>: <span class="number">0.</span>,
+<span class="doccomment">/// Two dimensional transformation matrix.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>Transform {
+    <span class="kw">pub </span>xx: f32,
+    <span class="kw">pub </span>xy: f32,
+    <span class="kw">pub </span>yx: f32,
+    <span class="kw">pub </span>yy: f32,
+    <span class="kw">pub </span>x: f32,
+    <span class="kw">pub </span>y: f32,
+}
+
+<span class="kw">impl </span>Transform {
+    <span class="doccomment">/// Identity matrix.
+    </span><span class="kw">pub const </span>IDENTITY: <span class="self">Self </span>= <span class="self">Self </span>{
+        xx: <span class="number">1.</span>,
+        xy: <span class="number">0.</span>,
+        yy: <span class="number">1.</span>,
+        yx: <span class="number">0.</span>,
+        x: <span class="number">0.</span>,
+        y: <span class="number">0.</span>,
     };
 
-    <span class="doccomment">/// Creates a new transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">xx</span>: <span class="ident">f32</span>, <span class="ident">xy</span>: <span class="ident">f32</span>, <span class="ident">yx</span>: <span class="ident">f32</span>, <span class="ident">yy</span>: <span class="ident">f32</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">xx</span>,
-            <span class="ident">xy</span>,
-            <span class="ident">yx</span>,
-            <span class="ident">yy</span>,
-            <span class="ident">x</span>,
-            <span class="ident">y</span>,
+    <span class="doccomment">/// Creates a new transform.
+    </span><span class="kw">pub fn </span>new(xx: f32, xy: f32, yx: f32, yy: f32, x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            xx,
+            xy,
+            yx,
+            yy,
+            x,
+            y,
         }
     }
 
-    <span class="doccomment">/// Creates a translation transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translation</span>(<span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="ident">x</span>, <span class="ident">y</span>)
+    <span class="doccomment">/// Creates a translation transform.
+    </span><span class="kw">pub fn </span>translation(x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, x, y)
     }
 
-    <span class="doccomment">/// Creates a rotation transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotation</span>(<span class="ident">angle</span>: <span class="ident">Angle</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="number">0</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span> {
-            <span class="ident">xx</span>: <span class="ident">cos</span>,
-            <span class="ident">xy</span>: <span class="ident">sin</span>,
-            <span class="ident">yx</span>: <span class="op">-</span><span class="ident">sin</span>,
-            <span class="ident">yy</span>: <span class="ident">cos</span>,
-            <span class="ident">x</span>: <span class="number">0.</span>,
-            <span class="ident">y</span>: <span class="number">0.</span>,
+    <span class="doccomment">/// Creates a rotation transform.
+    </span><span class="kw">pub fn </span>rotation(angle: Angle) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(sin, cos) = angle.<span class="number">0</span>.sin_cos();
+        <span class="self">Self </span>{
+            xx: cos,
+            xy: sin,
+            yx: -sin,
+            yy: cos,
+            x: <span class="number">0.</span>,
+            y: <span class="number">0.</span>,
         }
     }
 
-    <span class="doccomment">/// Creates a rotation transform around a point.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rotation_about</span>(<span class="ident">point</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">angle</span>: <span class="ident">Angle</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">point</span>.<span class="ident">into</span>();
-        <span class="ident"><span class="self">Self</span>::translation</span>(<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span>)
-            .<span class="ident">then_rotate</span>(<span class="ident">angle</span>)
-            .<span class="ident">then_translate</span>(<span class="op">-</span><span class="ident">p</span>.<span class="ident">x</span>, <span class="op">-</span><span class="ident">p</span>.<span class="ident">y</span>)
+    <span class="doccomment">/// Creates a rotation transform around a point.
+    </span><span class="kw">pub fn </span>rotation_about(point: <span class="kw">impl </span>Into&lt;Point&gt;, angle: Angle) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>p = point.into();
+        <span class="self">Self</span>::translation(p.x, p.y)
+            .then_rotate(angle)
+            .then_translate(-p.x, -p.y)
     }
 
-    <span class="doccomment">/// Creates a scale transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">x</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="ident">y</span>, <span class="number">0.</span>, <span class="number">0.</span>)
+    <span class="doccomment">/// Creates a scale transform.
+    </span><span class="kw">pub fn </span>scale(x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(x, <span class="number">0.</span>, <span class="number">0.</span>, y, <span class="number">0.</span>, <span class="number">0.</span>)
     }
 
-    <span class="doccomment">/// Creates a skew transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">skew</span>(<span class="ident">x</span>: <span class="ident">Angle</span>, <span class="ident">y</span>: <span class="ident">Angle</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">xx</span>: <span class="number">1.</span>,
-            <span class="ident">xy</span>: <span class="ident">y</span>.<span class="number">0</span>.<span class="ident">tan</span>(),
-            <span class="ident">yx</span>: <span class="ident">x</span>.<span class="number">0</span>.<span class="ident">tan</span>(),
-            <span class="ident">yy</span>: <span class="number">1.</span>,
-            <span class="ident">x</span>: <span class="number">0.</span>,
-            <span class="ident">y</span>: <span class="number">0.</span>,
+    <span class="doccomment">/// Creates a skew transform.
+    </span><span class="kw">pub fn </span>skew(x: Angle, y: Angle) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            xx: <span class="number">1.</span>,
+            xy: y.<span class="number">0</span>.tan(),
+            yx: x.<span class="number">0</span>.tan(),
+            yy: <span class="number">1.</span>,
+            x: <span class="number">0.</span>,
+            y: <span class="number">0.</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">combine</span>(<span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">Transform</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">Transform</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">xx</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">xx</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">yx</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xy</span>;
-        <span class="kw">let</span> <span class="ident">yx</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">xx</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">yx</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yy</span>;
-        <span class="kw">let</span> <span class="ident">xy</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">xy</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">yy</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xy</span>;
-        <span class="kw">let</span> <span class="ident">yy</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">xy</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">yy</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yy</span>;
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">xy</span> <span class="op">+</span> <span class="ident">b</span>.<span class="ident">x</span>;
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yx</span> <span class="op">+</span> <span class="ident">a</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">b</span>.<span class="ident">yy</span> <span class="op">+</span> <span class="ident">b</span>.<span class="ident">y</span>;
-        <span class="self">Self</span> {
-            <span class="ident">xx</span>,
-            <span class="ident">yx</span>,
-            <span class="ident">xy</span>,
-            <span class="ident">yy</span>,
-            <span class="ident">x</span>,
-            <span class="ident">y</span>,
+    <span class="kw">fn </span>combine(a: <span class="kw-2">&amp;</span>Transform, b: <span class="kw-2">&amp;</span>Transform) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>xx = a.xx * b.xx + a.yx * b.xy;
+        <span class="kw">let </span>yx = a.xx * b.yx + a.yx * b.yy;
+        <span class="kw">let </span>xy = a.xy * b.xx + a.yy * b.xy;
+        <span class="kw">let </span>yy = a.xy * b.yx + a.yy * b.yy;
+        <span class="kw">let </span>x = a.x * b.xx + a.y * b.xy + b.x;
+        <span class="kw">let </span>y = a.x * b.yx + a.y * b.yy + b.y;
+        <span class="self">Self </span>{
+            xx,
+            yx,
+            xy,
+            yy,
+            x,
+            y,
         }
     }
 
-    <span class="doccomment">/// Returns a new transform that represents the application of this transform</span>
-    <span class="doccomment">/// followed by other.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Transform</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="self">self</span>, <span class="ident">other</span>)
+    <span class="doccomment">/// Returns a new transform that represents the application of this transform
+    /// followed by other.
+    </span><span class="kw">pub fn </span>then(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Transform) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="self">self</span>, other)
     }
 
-    <span class="doccomment">/// Returns a new transform that represents a translation followed by this</span>
-    <span class="doccomment">/// transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::translation</span>(<span class="ident">x</span>, <span class="ident">y</span>), <span class="self">self</span>)
+    <span class="doccomment">/// Returns a new transform that represents a translation followed by this
+    /// transform.
+    </span><span class="kw">pub fn </span>pre_translate(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="kw-2">&amp;</span><span class="self">Self</span>::translation(x, y), <span class="self">self</span>)
     }
 
-    <span class="doccomment">/// Returns a new transform that represents this transform followed by a</span>
-    <span class="doccomment">/// translation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_translate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="ident">t</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>;
-        <span class="ident">t</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y</span>;
-        <span class="ident">t</span>
+    <span class="doccomment">/// Returns a new transform that represents this transform followed by a
+    /// translation.
+    </span><span class="kw">pub fn </span>then_translate(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>t = <span class="kw-2">*</span><span class="self">self</span>;
+        t.x += x;
+        t.y += y;
+        t
     }
 
-    <span class="doccomment">/// Returns a new transform that represents a rotation followed by this</span>
-    <span class="doccomment">/// transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_rotate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">angle</span>: <span class="ident">Angle</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::rotation</span>(<span class="ident">angle</span>), <span class="self">self</span>)
+    <span class="doccomment">/// Returns a new transform that represents a rotation followed by this
+    /// transform.
+    </span><span class="kw">pub fn </span>pre_rotate(<span class="kw-2">&amp;</span><span class="self">self</span>, angle: Angle) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="kw-2">&amp;</span><span class="self">Self</span>::rotation(angle), <span class="self">self</span>)
     }
 
-    <span class="doccomment">/// Returns a new transform that represents this transform followed by a</span>
-    <span class="doccomment">/// rotation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_rotate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">angle</span>: <span class="ident">Angle</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::rotation</span>(<span class="ident">angle</span>))
+    <span class="doccomment">/// Returns a new transform that represents this transform followed by a
+    /// rotation.
+    </span><span class="kw">pub fn </span>then_rotate(<span class="kw-2">&amp;</span><span class="self">self</span>, angle: Angle) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">Self</span>::rotation(angle))
     }
 
-    <span class="doccomment">/// Returns a new transform that represents a scale followed by this</span>
-    <span class="doccomment">/// transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pre_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::scale</span>(<span class="ident">x</span>, <span class="ident">y</span>), <span class="self">self</span>)
+    <span class="doccomment">/// Returns a new transform that represents a scale followed by this
+    /// transform.
+    </span><span class="kw">pub fn </span>pre_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="kw-2">&amp;</span><span class="self">Self</span>::scale(x, y), <span class="self">self</span>)
     }
 
-    <span class="doccomment">/// Returns a new transform that represents this transform followed by a</span>
-    <span class="doccomment">/// scale.    </span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">then_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::combine</span>(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::scale</span>(<span class="ident">x</span>, <span class="ident">y</span>))
+    <span class="doccomment">/// Returns a new transform that represents this transform followed by a
+    /// scale.    
+    </span><span class="kw">pub fn </span>then_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f32, y: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::combine(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">Self</span>::scale(x, y))
     }
 
-    <span class="doccomment">/// Returns the determinant of the transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">determinant</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">xx</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">yy</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">yx</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">xy</span>
+    <span class="doccomment">/// Returns the determinant of the transform.
+    </span><span class="kw">pub fn </span>determinant(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.xx * <span class="self">self</span>.yy - <span class="self">self</span>.yx * <span class="self">self</span>.xy
     }
 
-    <span class="doccomment">/// Returns the inverse of the transform, if any.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">invert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">det</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">determinant</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">det</span>.<span class="ident">is_finite</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">det</span> <span class="op">==</span> <span class="number">0.</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the inverse of the transform, if any.
+    </span><span class="kw">pub fn </span>invert(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Transform&gt; {
+        <span class="kw">let </span>det = <span class="self">self</span>.determinant();
+        <span class="kw">if </span>!det.is_finite() || det == <span class="number">0. </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">/</span> <span class="ident">det</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xx</span>;
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xy</span>;
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">yx</span>;
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">yy</span>;
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x</span>;
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">Transform</span> {
-            <span class="ident">xx</span>: <span class="ident">d</span> <span class="op">*</span> <span class="ident">s</span>,
-            <span class="ident">xy</span>: <span class="op">-</span><span class="ident">b</span> <span class="op">*</span> <span class="ident">s</span>,
-            <span class="ident">yx</span>: <span class="op">-</span><span class="ident">c</span> <span class="op">*</span> <span class="ident">s</span>,
-            <span class="ident">yy</span>: <span class="ident">a</span> <span class="op">*</span> <span class="ident">s</span>,
-            <span class="ident">x</span>: (<span class="ident">b</span> <span class="op">*</span> <span class="ident">y</span> <span class="op">-</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">x</span>) <span class="op">*</span> <span class="ident">s</span>,
-            <span class="ident">y</span>: (<span class="ident">c</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">y</span>) <span class="op">*</span> <span class="ident">s</span>,
+        <span class="kw">let </span>s = <span class="number">1. </span>/ det;
+        <span class="kw">let </span>a = <span class="self">self</span>.xx;
+        <span class="kw">let </span>b = <span class="self">self</span>.xy;
+        <span class="kw">let </span>c = <span class="self">self</span>.yx;
+        <span class="kw">let </span>d = <span class="self">self</span>.yy;
+        <span class="kw">let </span>x = <span class="self">self</span>.x;
+        <span class="kw">let </span>y = <span class="self">self</span>.y;
+        <span class="prelude-val">Some</span>(Transform {
+            xx: d * s,
+            xy: -b * s,
+            yx: -c * s,
+            yy: a * s,
+            x: (b * y - d * x) * s,
+            y: (c * x - a * y) * s,
         })
     }
 
-    <span class="doccomment">/// Returns the result of applying this transform to a point.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="ident">Point</span>) -&gt; <span class="ident">Point</span> {
-        <span class="ident">Vector</span> {
-            <span class="ident">x</span>: (<span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">xx</span> <span class="op">+</span> <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">yx</span>) <span class="op">+</span> <span class="self">self</span>.<span class="ident">x</span>,
-            <span class="ident">y</span>: (<span class="ident">point</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">xy</span> <span class="op">+</span> <span class="ident">point</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">yy</span>) <span class="op">+</span> <span class="self">self</span>.<span class="ident">y</span>,
+    <span class="doccomment">/// Returns the result of applying this transform to a point.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>transform_point(<span class="kw-2">&amp;</span><span class="self">self</span>, point: Point) -&gt; Point {
+        Vector {
+            x: (point.x * <span class="self">self</span>.xx + point.y * <span class="self">self</span>.yx) + <span class="self">self</span>.x,
+            y: (point.x * <span class="self">self</span>.xy + point.y * <span class="self">self</span>.yy) + <span class="self">self</span>.y,
         }
     }
 
-    <span class="doccomment">/// Returns the result of applying this transform to a vector.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">vector</span>: <span class="ident">Vector</span>) -&gt; <span class="ident">Vector</span> {
-        <span class="ident">Vector</span> {
-            <span class="ident">x</span>: (<span class="ident">vector</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">xx</span> <span class="op">+</span> <span class="ident">vector</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">yx</span>),
-            <span class="ident">y</span>: (<span class="ident">vector</span>.<span class="ident">x</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">xy</span> <span class="op">+</span> <span class="ident">vector</span>.<span class="ident">y</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">yy</span>),
+    <span class="doccomment">/// Returns the result of applying this transform to a vector.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>transform_vector(<span class="kw-2">&amp;</span><span class="self">self</span>, vector: Vector) -&gt; Vector {
+        Vector {
+            x: (vector.x * <span class="self">self</span>.xx + vector.y * <span class="self">self</span>.yx),
+            y: (vector.x * <span class="self">self</span>.xy + vector.y * <span class="self">self</span>.yy),
         }
     }
 }
 
-<span class="doccomment">/// The origin of the coordinate system for rendering.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Origin</span> {
-    <span class="doccomment">/// Origin (0, 0) at the top left of the image.</span>
-    <span class="ident">TopLeft</span>,
-    <span class="doccomment">/// Origin (0, 0) at the bottom left of the image.</span>
-    <span class="ident">BottomLeft</span>,
+<span class="doccomment">/// The origin of the coordinate system for rendering.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>Origin {
+    <span class="doccomment">/// Origin (0, 0) at the top left of the image.
+    </span>TopLeft,
+    <span class="doccomment">/// Origin (0, 0) at the bottom left of the image.
+    </span>BottomLeft,
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Origin</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::TopLeft</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>Origin {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::TopLeft
     }
 }
 
-<span class="doccomment">/// Describes the offset and dimensions of a rendered mask.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Placement</span> {
-    <span class="doccomment">/// Horizontal offset with respect to the origin specified when computing</span>
-    <span class="doccomment">/// the placement.</span>
-    <span class="kw">pub</span> <span class="ident">left</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// Vertical offset with respect to the origin specified when computing</span>
-    <span class="doccomment">/// the placement.</span>
-    <span class="kw">pub</span> <span class="ident">top</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// Width in pixels.</span>
-    <span class="kw">pub</span> <span class="ident">width</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// Height in pixels.</span>
-    <span class="kw">pub</span> <span class="ident">height</span>: <span class="ident">u32</span>,
+<span class="doccomment">/// Describes the offset and dimensions of a rendered mask.
+</span><span class="attribute">#[derive(Copy, Clone, Debug, Default)]
+</span><span class="kw">pub struct </span>Placement {
+    <span class="doccomment">/// Horizontal offset with respect to the origin specified when computing
+    /// the placement.
+    </span><span class="kw">pub </span>left: i32,
+    <span class="doccomment">/// Vertical offset with respect to the origin specified when computing
+    /// the placement.
+    </span><span class="kw">pub </span>top: i32,
+    <span class="doccomment">/// Width in pixels.
+    </span><span class="kw">pub </span>width: u32,
+    <span class="doccomment">/// Height in pixels.
+    </span><span class="kw">pub </span>height: u32,
 }
 
-<span class="kw">impl</span> <span class="ident">Placement</span> {
-    <span class="doccomment">/// Given an origin, offset and bounding box, computes the resulting offset</span>
-    <span class="doccomment">/// and placement for a tightly bounded mask.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compute</span>(
-        <span class="ident">origin</span>: <span class="ident">Origin</span>,
-        <span class="ident">offset</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>,
-        <span class="ident">bounds</span>: <span class="kw-2">&amp;</span><span class="ident">Bounds</span>,
-    ) -&gt; (<span class="ident">Vector</span>, <span class="ident">Placement</span>) {
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bounds</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">bounds</span>;
-        <span class="ident">bounds</span>.<span class="ident">min</span> <span class="op">=</span> (<span class="ident">bounds</span>.<span class="ident">min</span> <span class="op">+</span> <span class="ident">offset</span>).<span class="ident">floor</span>();
-        <span class="ident">bounds</span>.<span class="ident">max</span> <span class="op">=</span> (<span class="ident">bounds</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">offset</span>).<span class="ident">ceil</span>();
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="op">-</span><span class="ident">bounds</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1.</span>, <span class="op">-</span><span class="ident">bounds</span>.<span class="ident">min</span>.<span class="ident">y</span>);
-        <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">bounds</span>.<span class="ident">width</span>() <span class="kw">as</span> <span class="ident">u32</span> <span class="op">+</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">bounds</span>.<span class="ident">height</span>() <span class="kw">as</span> <span class="ident">u32</span>;
-        <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="op">-</span><span class="ident">offset</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">top</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">origin</span> <span class="op">==</span> <span class="ident">Origin::BottomLeft</span> {
-            (<span class="op">-</span><span class="ident">offset</span>.<span class="ident">y</span>).<span class="ident">floor</span>() <span class="op">+</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">f32</span>
-        } <span class="kw">else</span> {
-            <span class="op">-</span><span class="ident">offset</span>.<span class="ident">y</span>
-        } <span class="kw">as</span> <span class="ident">i32</span>;
+<span class="kw">impl </span>Placement {
+    <span class="doccomment">/// Given an origin, offset and bounding box, computes the resulting offset
+    /// and placement for a tightly bounded mask.
+    </span><span class="kw">pub fn </span>compute(
+        origin: Origin,
+        offset: <span class="kw">impl </span>Into&lt;Vector&gt;,
+        bounds: <span class="kw-2">&amp;</span>Bounds,
+    ) -&gt; (Vector, Placement) {
+        <span class="kw">let </span>offset = offset.into();
+        <span class="kw">let </span><span class="kw-2">mut </span>bounds = <span class="kw-2">*</span>bounds;
+        bounds.min = (bounds.min + offset).floor();
+        bounds.max = (bounds.max + offset).ceil();
+        <span class="kw">let </span>offset = Vector::new(-bounds.min.x + <span class="number">1.</span>, -bounds.min.y);
+        <span class="kw">let </span>width = bounds.width() <span class="kw">as </span>u32 + <span class="number">2</span>;
+        <span class="kw">let </span>height = bounds.height() <span class="kw">as </span>u32;
+        <span class="kw">let </span>left = -offset.x <span class="kw">as </span>i32;
+        <span class="kw">let </span>top = <span class="kw">if </span>origin == Origin::BottomLeft {
+            (-offset.y).floor() + height <span class="kw">as </span>f32
+        } <span class="kw">else </span>{
+            -offset.y
+        } <span class="kw">as </span>i32;
         (
-            <span class="ident">offset</span>,
-            <span class="ident">Placement</span> {
-                <span class="ident">left</span>,
-                <span class="ident">top</span>,
-                <span class="ident">width</span>,
-                <span class="ident">height</span>,
+            offset,
+            Placement {
+                left,
+                top,
+                width,
+                height,
             },
         )
     }
 }
 
-<span class="doccomment">/// Axis-aligned bounding box.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Bounds</span> {
-    <span class="kw">pub</span> <span class="ident">min</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">max</span>: <span class="ident">Point</span>,
+<span class="doccomment">/// Axis-aligned bounding box.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>Bounds {
+    <span class="kw">pub </span>min: Point,
+    <span class="kw">pub </span>max: Point,
 }
 
-<span class="kw">impl</span> <span class="ident">Bounds</span> {
-    <span class="doccomment">/// Creates a new bounding box from minimum and maximum points.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min</span>: <span class="ident">Point</span>, <span class="ident">max</span>: <span class="ident">Point</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">min</span>, <span class="ident">max</span> }
+<span class="kw">impl </span>Bounds {
+    <span class="doccomment">/// Creates a new bounding box from minimum and maximum points.
+    </span><span class="kw">pub fn </span>new(min: Point, max: Point) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ min, max }
     }
 
-    <span class="doccomment">/// Creates a new bounding box from a sequence of points.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_points</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">points</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
-        <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Creates a new bounding box from a sequence of points.
+    </span><span class="kw">pub fn </span>from_points&lt;I&gt;(points: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator,
+        I::Item: Borrow&lt;Point&gt;,
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">BoundsBuilder::new</span>();
-        <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">points</span> {
-            <span class="ident">b</span>.<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">p</span>.<span class="ident">borrow</span>());
+        <span class="kw">let </span><span class="kw-2">mut </span>b = BoundsBuilder::new();
+        <span class="kw">for </span>p <span class="kw">in </span>points {
+            b.add(<span class="kw-2">*</span>p.borrow());
         }
-        <span class="ident">b</span>.<span class="ident">build</span>()
+        b.build()
     }
 
-    <span class="doccomment">/// Returns true if the bounding box is empty.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns true if the bounding box is empty.
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.min.x &gt;= <span class="self">self</span>.max.x || <span class="self">self</span>.min.y &gt;= <span class="self">self</span>.max.y
     }
 
-    <span class="doccomment">/// Returns the width of the bounding box.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span>
+    <span class="doccomment">/// Returns the width of the bounding box.
+    </span><span class="kw">pub fn </span>width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.max.x - <span class="self">self</span>.min.x
     }
 
-    <span class="doccomment">/// Returns the height of the bounding box.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns the height of the bounding box.
+    </span><span class="kw">pub fn </span>height(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.max.y - <span class="self">self</span>.min.y
     }
 
-    <span class="doccomment">/// Returns true if the box contains the specified point.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">point</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">point</span>.<span class="ident">into</span>();
-        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">y</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span>
+    <span class="doccomment">/// Returns true if the box contains the specified point.
+    </span><span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, point: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; bool {
+        <span class="kw">let </span>p = point.into();
+        p.x &gt; <span class="self">self</span>.min.x &amp;&amp; p.x &lt; <span class="self">self</span>.max.x &amp;&amp; p.y &gt; <span class="self">self</span>.min.y &amp;&amp; p.y &lt; <span class="self">self</span>.max.y
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">BoundsBuilder</span> {
-    <span class="kw">pub</span> <span class="ident">count</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">start</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">current</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">min</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">max</span>: <span class="ident">Point</span>,
+<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>BoundsBuilder {
+    <span class="kw">pub </span>count: usize,
+    <span class="kw">pub </span>start: Point,
+    <span class="kw">pub </span>current: Point,
+    <span class="kw">pub </span>min: Point,
+    <span class="kw">pub </span>max: Point,
 }
 
-<span class="kw">impl</span> <span class="ident">BoundsBuilder</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">count</span>: <span class="number">0</span>,
-            <span class="ident">start</span>: <span class="ident">Point::ZERO</span>,
-            <span class="ident">current</span>: <span class="ident">Point::ZERO</span>,
-            <span class="ident">min</span>: <span class="ident">Point::new</span>(<span class="ident">f32::MAX</span>, <span class="ident">f32::MAX</span>),
-            <span class="ident">max</span>: <span class="ident">Point::new</span>(<span class="ident">f32::MIN</span>, <span class="ident">f32::MIN</span>),
+<span class="kw">impl </span>BoundsBuilder {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            count: <span class="number">0</span>,
+            start: Point::ZERO,
+            current: Point::ZERO,
+            min: Point::new(f32::MAX, f32::MAX),
+            max: Point::new(f32::MIN, f32::MIN),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">p</span>: <span class="ident">Point</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">x</span>;
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">y</span>;
-        <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> {
-            <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>;
+    <span class="kw">pub fn </span>add(<span class="kw-2">&amp;mut </span><span class="self">self</span>, p: Point) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>x = p.x;
+        <span class="kw">let </span>y = p.y;
+        <span class="kw">if </span>x &lt; <span class="self">self</span>.min.x {
+            <span class="self">self</span>.min.x = x;
         }
-        <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> {
-            <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>;
+        <span class="kw">if </span>x &gt; <span class="self">self</span>.max.x {
+            <span class="self">self</span>.max.x = x;
         }
-        <span class="kw">if</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> {
-            <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>;
+        <span class="kw">if </span>y &lt; <span class="self">self</span>.min.y {
+            <span class="self">self</span>.min.y = y;
         }
-        <span class="kw">if</span> <span class="ident">y</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> {
-            <span class="self">self</span>.<span class="ident">max</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>;
+        <span class="kw">if </span>y &gt; <span class="self">self</span>.max.y {
+            <span class="self">self</span>.max.y = y;
         }
-        <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>
-    }
+        <span class="self">self</span>.count += <span class="number">1</span>;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Bounds</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">count</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">Bounds</span> {
-                <span class="ident">min</span>: <span class="self">self</span>.<span class="ident">min</span>,
-                <span class="ident">max</span>: <span class="self">self</span>.<span class="ident">max</span>,
+    <span class="kw">pub fn </span>build(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Bounds {
+        <span class="kw">if </span><span class="self">self</span>.count != <span class="number">0 </span>{
+            Bounds {
+                min: <span class="self">self</span>.min,
+                max: <span class="self">self</span>.max,
             }
-        } <span class="kw">else</span> {
-            <span class="ident">Bounds::default</span>()
+        } <span class="kw">else </span>{
+            Bounds::default()
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/var.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>var.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/var.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>var.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -609,616 +609,616 @@
 <span id="609">609</span>
 <span id="610">610</span>
 <span id="611">611</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::{<span class="ident">fixed::Fixed</span>, <span class="ident">Array</span>, <span class="ident">Bytes</span>};
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::internal::{fixed::Fixed, Array, Bytes};
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cvar_tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">cvar</span>: <span class="ident">u32</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="ident">axis_count</span>: <span class="ident">u16</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">cvar</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">pub fn </span>cvar_tuples&lt;<span class="lifetime">&#39;a</span>&gt;(
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    cvar: u32,
+    coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    axis_count: u16,
+) -&gt; <span class="prelude-ty">Option</span>&lt;Tuples&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">if </span>cvar == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">data</span>, <span class="ident">cvar</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-    <span class="prelude-val">Some</span>(<span class="ident">TupleStore::from_cvar</span>(<span class="ident">b</span>, <span class="ident">axis_count</span>).<span class="ident">tuples</span>(<span class="ident">coords</span>))
+    <span class="kw">let </span>b = Bytes::with_offset(data, cvar <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+    <span class="prelude-val">Some</span>(TupleStore::from_cvar(b, axis_count).tuples(coords))
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gvar_tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">gvar</span>: <span class="ident">u32</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">gvar</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">pub fn </span>gvar_tuples&lt;<span class="lifetime">&#39;a</span>&gt;(
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    gvar: u32,
+    coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    glyph_id: u16,
+) -&gt; <span class="prelude-ty">Option</span>&lt;Tuples&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">if </span>gvar == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">data</span>, <span class="ident">gvar</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-    <span class="ident">TupleStore::from_gvar</span>(<span class="ident">b</span>, <span class="ident">glyph_id</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">store</span><span class="op">|</span> <span class="ident">store</span>.<span class="ident">tuples</span>(<span class="ident">coords</span>))
+    <span class="kw">let </span>b = Bytes::with_offset(data, gvar <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+    TupleStore::from_gvar(b, glyph_id).map(|store| store.tuples(coords))
 }
 
-<span class="doccomment">/// Tuple variation store.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TupleStore</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">shared_coords</span>: <span class="ident">SharedCoords</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">tuple_count</span>: <span class="ident">usize</span>,
-    <span class="ident">shared_point_numbers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">data_offset</span>: <span class="ident">usize</span>,
-    <span class="ident">is_cvar</span>: <span class="ident">bool</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Tuple variation store.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>TupleStore&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    shared_coords: SharedCoords&lt;<span class="lifetime">&#39;a</span>&gt;,
+    tuple_count: usize,
+    shared_point_numbers: <span class="prelude-ty">Option</span>&lt;PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+    data_offset: usize,
+    is_cvar: bool,
+    offset: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">TupleStore</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from_cvar</span>(<span class="ident">b</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">axis_count</span>: <span class="ident">u16</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tuple_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">6</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">shared_point_numbers</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">tuple_count</span> <span class="op">&amp;</span> <span class="number">0x8000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">nums</span>) <span class="op">=</span> <span class="ident">PointNumbers::new</span>(<span class="ident">b</span>, <span class="ident">data_offset</span>) {
-                <span class="ident">data_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">nums</span>.<span class="ident">data_size</span>();
-                <span class="prelude-val">Some</span>(<span class="ident">nums</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">tuple_count</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="prelude-val">None</span>
-            }
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        };
-        <span class="ident">tuple_count</span> <span class="op">=</span> <span class="ident">tuple_count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0xFFF</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="ident">b</span>,
-            <span class="ident">SharedCoords</span> {
-                <span class="ident">data</span>: <span class="ident">b</span>,
-                <span class="ident">offset</span>: <span class="number">0</span>,
-                <span class="ident">count</span>: <span class="number">0</span>,
-                <span class="ident">axis_count</span>: <span class="ident">axis_count</span> <span class="kw">as</span> <span class="ident">usize</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; TupleStore&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>from_cvar(b: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;, axis_count: u16) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>tuple_count = b.read_or_default::&lt;u16&gt;(<span class="number">4</span>) <span class="kw">as </span>usize;
+        <span class="kw">let </span><span class="kw-2">mut </span>data_offset = b.read_or_default::&lt;u16&gt;(<span class="number">6</span>) <span class="kw">as </span>usize;
+        <span class="kw">let </span>shared_point_numbers = <span class="kw">if </span>tuple_count &amp; <span class="number">0x8000 </span>!= <span class="number">0 </span>{
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(nums) = PointNumbers::new(b, data_offset) {
+                data_offset += nums.data_size();
+                <span class="prelude-val">Some</span>(nums)
+            } <span class="kw">else </span>{
+                tuple_count = <span class="number">0</span>;
+                <span class="prelude-val">None
+            </span>}
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>};
+        tuple_count = tuple_count <span class="kw">as </span>usize &amp; <span class="number">0xFFF</span>;
+        <span class="self">Self</span>::new(
+            b,
+            SharedCoords {
+                data: b,
+                offset: <span class="number">0</span>,
+                count: <span class="number">0</span>,
+                axis_count: axis_count <span class="kw">as </span>usize,
             },
-            <span class="ident">tuple_count</span>,
-            <span class="ident">shared_point_numbers</span>,
-            <span class="ident">data_offset</span>,
+            tuple_count,
+            shared_point_numbers,
+            data_offset,
             <span class="bool-val">true</span>,
             <span class="number">8</span>,
         )
     }
 
-    <span class="kw">fn</span> <span class="ident">from_gvar</span>(<span class="ident">b</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">shared_coord_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">6</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offset_to_coord</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">glyph_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">12</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">glyph_count</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>from_gvar(b: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;, glyph_id: u16) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>axis_count = b.read::&lt;u16&gt;(<span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>shared_coord_count = b.read::&lt;u16&gt;(<span class="number">6</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>offset_to_coord = b.read::&lt;u32&gt;(<span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>glyph_count = b.read::&lt;u16&gt;(<span class="number">12</span>)<span class="question-mark">?</span>;
+        <span class="kw">if </span>glyph_id &gt;= glyph_count {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">14</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">offset_to_data</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">16</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offsets_base</span> <span class="op">=</span> <span class="number">20usize</span>;
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">glyph_id</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="number">1</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offsets_base</span> <span class="op">+</span> <span class="ident">idx</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>
-                ..<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offsets_base</span> <span class="op">+</span> (<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>
-        } <span class="kw">else</span> {
-            <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offsets_base</span> <span class="op">+</span> <span class="ident">idx</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>
-                ..<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offsets_base</span> <span class="op">+</span> (<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>
-        };
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">b</span>.<span class="ident">check_range</span>(<span class="ident">range</span>.<span class="ident">start</span>, <span class="ident">len</span>) {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>flags = b.read::&lt;u16&gt;(<span class="number">14</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>offset_to_data = b.read::&lt;u32&gt;(<span class="number">16</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>offsets_base = <span class="number">20usize</span>;
+        <span class="kw">let </span>idx = glyph_id <span class="kw">as </span>usize;
+        <span class="kw">let </span><span class="kw-2">mut </span>range = <span class="kw">if </span>flags &amp; <span class="number">1 </span>!= <span class="number">0 </span>{
+            b.read::&lt;u32&gt;(offsets_base + idx * <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize
+                ..b.read::&lt;u32&gt;(offsets_base + (idx + <span class="number">1</span>) * <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize
+        } <span class="kw">else </span>{
+            b.read::&lt;u16&gt;(offsets_base + idx * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize * <span class="number">2
+                </span>..b.read::&lt;u16&gt;(offsets_base + (idx + <span class="number">1</span>) * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize * <span class="number">2
+        </span>};
+        <span class="kw">let </span>len = range.len();
+        <span class="kw">if </span>len == <span class="number">0 </span>|| !b.check_range(range.start, len) {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="ident">range</span>.<span class="ident">start</span> <span class="op">+</span><span class="op">=</span> <span class="ident">offset_to_data</span>;
-        <span class="ident">range</span>.<span class="ident">end</span> <span class="op">+</span><span class="op">=</span> <span class="ident">offset_to_data</span>;
-        <span class="kw">let</span> <span class="ident">shared_coords</span> <span class="op">=</span> <span class="ident">SharedCoords</span> {
-            <span class="ident">data</span>: <span class="ident">b</span>,
-            <span class="ident">offset</span>: <span class="ident">offset_to_coord</span>,
-            <span class="ident">count</span>: <span class="ident">shared_coord_count</span>,
-            <span class="ident">axis_count</span>,
+        range.start += offset_to_data;
+        range.end += offset_to_data;
+        <span class="kw">let </span>shared_coords = SharedCoords {
+            data: b,
+            offset: offset_to_coord,
+            count: shared_coord_count,
+            axis_count,
         };
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">b</span>.<span class="ident">data</span>().<span class="ident">get</span>(<span class="ident">range</span>)<span class="question-mark">?</span>);
-        <span class="kw">let</span> <span class="ident">tuple_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">0</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">shared_point_numbers</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">tuple_count</span> <span class="op">&amp;</span> <span class="number">0x8000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">nums</span> <span class="op">=</span> <span class="ident">PointNumbers::new</span>(<span class="ident">b</span>, <span class="ident">data_offset</span>)<span class="question-mark">?</span>;
-            <span class="ident">data_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">nums</span>.<span class="ident">data_size</span>();
-            <span class="prelude-val">Some</span>(<span class="ident">nums</span>)
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        };
-        <span class="kw">let</span> <span class="ident">tuple_count</span> <span class="op">=</span> <span class="ident">tuple_count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0xFFF</span>;
-        <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="ident">b</span>,
-            <span class="ident">shared_coords</span>,
-            <span class="ident">tuple_count</span>,
-            <span class="ident">shared_point_numbers</span>,
-            <span class="ident">data_offset</span>,
+        <span class="kw">let </span>b = Bytes::new(b.data().get(range)<span class="question-mark">?</span>);
+        <span class="kw">let </span>tuple_count = b.read::&lt;u16&gt;(<span class="number">0</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>data_offset = b.read::&lt;u16&gt;(<span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>shared_point_numbers = <span class="kw">if </span>tuple_count &amp; <span class="number">0x8000 </span>!= <span class="number">0 </span>{
+            <span class="kw">let </span>nums = PointNumbers::new(b, data_offset)<span class="question-mark">?</span>;
+            data_offset += nums.data_size();
+            <span class="prelude-val">Some</span>(nums)
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>};
+        <span class="kw">let </span>tuple_count = tuple_count <span class="kw">as </span>usize &amp; <span class="number">0xFFF</span>;
+        <span class="prelude-val">Some</span>(<span class="self">Self</span>::new(
+            b,
+            shared_coords,
+            tuple_count,
+            shared_point_numbers,
+            data_offset,
             <span class="bool-val">false</span>,
             <span class="number">4</span>,
         ))
     }
 
-    <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-        <span class="ident">shared_coords</span>: <span class="ident">SharedCoords</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-        <span class="ident">tuple_count</span>: <span class="ident">usize</span>,
-        <span class="ident">shared_point_numbers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">data_offset</span>: <span class="ident">usize</span>,
-        <span class="ident">is_cvar</span>: <span class="ident">bool</span>,
-        <span class="ident">offset</span>: <span class="ident">usize</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">shared_coords</span>,
-            <span class="ident">tuple_count</span>,
-            <span class="ident">shared_point_numbers</span>,
-            <span class="ident">data_offset</span>,
-            <span class="ident">is_cvar</span>,
-            <span class="ident">offset</span>,
+    <span class="kw">fn </span>new(
+        data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+        shared_coords: SharedCoords&lt;<span class="lifetime">&#39;a</span>&gt;,
+        tuple_count: usize,
+        shared_point_numbers: <span class="prelude-ty">Option</span>&lt;PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+        data_offset: usize,
+        is_cvar: bool,
+        offset: usize,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            data,
+            shared_coords,
+            tuple_count,
+            shared_point_numbers,
+            data_offset,
+            is_cvar,
+            offset,
         }
     }
 
-    <span class="doccomment">/// Returns an iterator over the tuples in this store for the specified</span>
-    <span class="doccomment">/// normalized variation coordinates.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tuples</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>]) -&gt; <span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">Tuples</span> {
-            <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
-            <span class="ident">shared_coords</span>: <span class="self">self</span>.<span class="ident">shared_coords</span>,
-            <span class="ident">tuple_count</span>: <span class="self">self</span>.<span class="ident">tuple_count</span>,
-            <span class="ident">shared_point_numbers</span>: <span class="self">self</span>.<span class="ident">shared_point_numbers</span>,
-            <span class="ident">data_offset</span>: <span class="self">self</span>.<span class="ident">data_offset</span>,
-            <span class="ident">is_cvar</span>: <span class="self">self</span>.<span class="ident">is_cvar</span>,
-            <span class="ident">offset</span>: <span class="self">self</span>.<span class="ident">offset</span>,
-            <span class="ident">coords</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
+    <span class="doccomment">/// Returns an iterator over the tuples in this store for the specified
+    /// normalized variation coordinates.
+    </span><span class="kw">pub fn </span>tuples(<span class="kw-2">&amp;</span><span class="self">self</span>, coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16]) -&gt; Tuples&lt;<span class="lifetime">&#39;a</span>&gt; {
+        Tuples {
+            data: <span class="self">self</span>.data,
+            shared_coords: <span class="self">self</span>.shared_coords,
+            tuple_count: <span class="self">self</span>.tuple_count,
+            shared_point_numbers: <span class="self">self</span>.shared_point_numbers,
+            data_offset: <span class="self">self</span>.data_offset,
+            is_cvar: <span class="self">self</span>.is_cvar,
+            offset: <span class="self">self</span>.offset,
+            coords,
+            cur: <span class="number">0</span>,
         }
     }
 }
 
-<span class="doccomment">/// Iterator over the tuples in a tuple variation store.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">shared_coords</span>: <span class="ident">SharedCoords</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">tuple_count</span>: <span class="ident">usize</span>,
-    <span class="ident">shared_point_numbers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">data_offset</span>: <span class="ident">usize</span>,
-    <span class="ident">is_cvar</span>: <span class="ident">bool</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="ident">cur</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Iterator over the tuples in a tuple variation store.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Tuples&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    shared_coords: SharedCoords&lt;<span class="lifetime">&#39;a</span>&gt;,
+    tuple_count: usize,
+    shared_point_numbers: <span class="prelude-ty">Option</span>&lt;PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+    data_offset: usize,
+    is_cvar: bool,
+    offset: usize,
+    coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    cur: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">next_tuple</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tuple</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">shared_coords</span>.<span class="ident">axis_count</span>;
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
-        <span class="kw">let</span> <span class="ident">peak</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">&amp;</span> <span class="number">0x8000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">embedded</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_array</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>, <span class="ident">axis_count</span>)<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">axis_count</span>;
-            <span class="ident">embedded</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">shared_coords</span>.<span class="ident">get</span>(<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0xFFF</span>)<span class="question-mark">?</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Tuples&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>next_tuple(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Tuple&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>size = d.read::&lt;u16&gt;(<span class="self">self</span>.offset)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>index = d.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">2</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>axis_count = <span class="self">self</span>.shared_coords.axis_count;
+        <span class="self">self</span>.offset += <span class="number">4</span>;
+        <span class="kw">let </span>peak = <span class="kw">if </span>index &amp; <span class="number">0x8000 </span>!= <span class="number">0 </span>{
+            <span class="kw">let </span>embedded = d.read_array::&lt;i16&gt;(<span class="self">self</span>.offset, axis_count)<span class="question-mark">?</span>;
+            <span class="self">self</span>.offset += <span class="number">2 </span>* axis_count;
+            embedded
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.shared_coords.get(index <span class="kw">as </span>usize &amp; <span class="number">0xFFF</span>)<span class="question-mark">?
+        </span>};
+        <span class="kw">let </span>intermediate = <span class="kw">if </span>index &amp; <span class="number">0x4000 </span>!= <span class="number">0 </span>{
+            <span class="kw">let </span>intermidate = d.read_array::&lt;i16&gt;(<span class="self">self</span>.offset, axis_count)<span class="question-mark">?</span>;
+            <span class="self">self</span>.offset += <span class="number">2 </span>* axis_count;
+            <span class="kw">let </span>end = d.read_array::&lt;i16&gt;(<span class="self">self</span>.offset, axis_count)<span class="question-mark">?</span>;
+            <span class="self">self</span>.offset += <span class="number">2 </span>* axis_count;
+            (intermidate, end)
+        } <span class="kw">else </span>{
+            (Array::new(<span class="kw-2">&amp;</span>[]), Array::new(<span class="kw-2">&amp;</span>[]))
         };
-        <span class="kw">let</span> <span class="ident">intermediate</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">&amp;</span> <span class="number">0x4000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">intermidate</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_array</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>, <span class="ident">axis_count</span>)<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">axis_count</span>;
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_array</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>, <span class="ident">axis_count</span>)<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">axis_count</span>;
-            (<span class="ident">intermidate</span>, <span class="ident">end</span>)
-        } <span class="kw">else</span> {
-            (<span class="ident">Array::new</span>(<span class="kw-2">&amp;</span>[]), <span class="ident">Array::new</span>(<span class="kw-2">&amp;</span>[]))
-        };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data_offset</span>;
-        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">size</span>;
-        <span class="kw">let</span> <span class="ident">point_numbers</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">&amp;</span> <span class="number">0x2000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">nums</span> <span class="op">=</span> <span class="ident">PointNumbers::new</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">data_offset</span>)<span class="question-mark">?</span>;
-            <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">nums</span>.<span class="ident">data_size</span>;
-            <span class="ident">nums</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">shared_point_numbers</span><span class="question-mark">?</span>
-        };
-        <span class="self">self</span>.<span class="ident">data_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">size</span>;
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">Tuple</span> {
-            <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
-            <span class="ident">point_numbers</span>,
-            <span class="ident">peak</span>,
-            <span class="ident">intermediate</span>,
-            <span class="ident">offset</span>,
-            <span class="ident">end</span>,
-            <span class="ident">is_cvar</span>: <span class="self">self</span>.<span class="ident">is_cvar</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="self">self</span>.data_offset;
+        <span class="kw">let </span>end = offset + size;
+        <span class="kw">let </span>point_numbers = <span class="kw">if </span>index &amp; <span class="number">0x2000 </span>!= <span class="number">0 </span>{
+            <span class="kw">let </span>nums = PointNumbers::new(<span class="self">self</span>.data, <span class="self">self</span>.data_offset)<span class="question-mark">?</span>;
+            offset += nums.data_size;
+            nums
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.shared_point_numbers<span class="question-mark">?
+        </span>};
+        <span class="self">self</span>.data_offset += size;
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="prelude-val">Some</span>(Tuple {
+            data: <span class="self">self</span>.data,
+            point_numbers,
+            peak,
+            intermediate,
+            offset,
+            end,
+            is_cvar: <span class="self">self</span>.is_cvar,
         })
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Tuples</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Deltas</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>Tuples&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = Deltas&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">loop</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">tuple_count</span> {
-                <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">loop </span>{
+            <span class="kw">if </span><span class="self">self</span>.cur &gt; <span class="self">self</span>.tuple_count {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
             }
-            <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">tuple</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_tuple</span>()<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">tuple</span>.<span class="ident">compute_scalar</span>(<span class="self">self</span>.<span class="ident">coords</span>);
-            <span class="kw">if</span> <span class="ident">scalar</span> <span class="op">==</span> <span class="ident">Fixed::ZERO</span> {
+            <span class="self">self</span>.cur += <span class="number">1</span>;
+            <span class="kw">let </span>tuple = <span class="self">self</span>.next_tuple()<span class="question-mark">?</span>;
+            <span class="kw">let </span>scalar = tuple.compute_scalar(<span class="self">self</span>.coords);
+            <span class="kw">if </span>scalar == Fixed::ZERO {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">deltas</span> <span class="op">=</span> <span class="ident">tuple</span>.<span class="ident">deltas</span>(<span class="ident">scalar</span>);
-            <span class="kw">if</span> <span class="ident">deltas</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">let </span>deltas = tuple.deltas(scalar);
+            <span class="kw">if </span>deltas.len == <span class="number">0 </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">deltas</span>);
+            <span class="kw">return </span><span class="prelude-val">Some</span>(deltas);
         }
     }
 }
 
-<span class="doccomment">/// Represents a single region of applicability within a font variation space.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Tuple</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">point_numbers</span>: <span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">peak</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">i16</span><span class="op">&gt;</span>,
-    <span class="ident">intermediate</span>: (<span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">i16</span><span class="op">&gt;</span>, <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">i16</span><span class="op">&gt;</span>),
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">end</span>: <span class="ident">usize</span>,
-    <span class="ident">is_cvar</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// Represents a single region of applicability within a font variation space.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>Tuple&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    point_numbers: PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt;,
+    peak: Array&lt;<span class="lifetime">&#39;a</span>, i16&gt;,
+    intermediate: (Array&lt;<span class="lifetime">&#39;a</span>, i16&gt;, Array&lt;<span class="lifetime">&#39;a</span>, i16&gt;),
+    offset: usize,
+    end: usize,
+    is_cvar: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Tuple</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns a scaling factor based on the specified variation coordinates</span>
-    <span class="doccomment">/// for the deltas associated with this region.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::needless_range_loop</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">compute_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>]) -&gt; <span class="ident">Fixed</span> {
-        <span class="kw">const</span> <span class="ident">ZERO</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::ZERO</span>;
-        <span class="kw">const</span> <span class="ident">ONE</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::ONE</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">ONE</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">coords</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">len</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">peak</span>.<span class="ident">len</span>() {
-            <span class="kw">return</span> <span class="ident">ZERO</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Tuple&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Returns a scaling factor based on the specified variation coordinates
+    /// for the deltas associated with this region.
+    </span><span class="attribute">#[allow(clippy::needless_range_loop)]
+    </span><span class="kw">fn </span>compute_scalar(<span class="kw-2">&amp;</span><span class="self">self</span>, coords: <span class="kw-2">&amp;</span>[i16]) -&gt; Fixed {
+        <span class="kw">const </span>ZERO: Fixed = Fixed::ZERO;
+        <span class="kw">const </span>ONE: Fixed = Fixed::ONE;
+        <span class="kw">let </span><span class="kw-2">mut </span>scalar = ONE;
+        <span class="kw">let </span>len = coords.len();
+        <span class="kw">if </span>len != <span class="self">self</span>.peak.len() {
+            <span class="kw">return </span>ZERO;
         }
-        <span class="kw">let</span> <span class="ident">inter_start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">intermediate</span>.<span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">inter_end</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">intermediate</span>.<span class="number">1</span>;
-        <span class="kw">let</span> <span class="ident">has_intermediate</span> <span class="op">=</span> <span class="ident">inter_start</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">peak</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="self">self</span>.<span class="ident">peak</span>.<span class="ident">get_or</span>(<span class="ident">i</span>, <span class="number">0</span>));
-            <span class="kw">let</span> <span class="ident">coord</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">coords</span>[<span class="ident">i</span>]);
-            <span class="kw">if</span> <span class="ident">peak</span> <span class="op">==</span> <span class="ident">ZERO</span> <span class="op">|</span><span class="op">|</span> <span class="ident">peak</span> <span class="op">==</span> <span class="ident">coord</span> {
+        <span class="kw">let </span>inter_start = <span class="self">self</span>.intermediate.<span class="number">0</span>;
+        <span class="kw">let </span>inter_end = <span class="self">self</span>.intermediate.<span class="number">1</span>;
+        <span class="kw">let </span>has_intermediate = inter_start.len() != <span class="number">0</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+            <span class="kw">let </span>peak = Fixed::from_f2dot14(<span class="self">self</span>.peak.get_or(i, <span class="number">0</span>));
+            <span class="kw">let </span>coord = Fixed::from_f2dot14(coords[i]);
+            <span class="kw">if </span>peak == ZERO || peak == coord {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="ident">coord</span> <span class="op">==</span> <span class="ident">ZERO</span> {
-                <span class="kw">return</span> <span class="ident">ZERO</span>;
+            <span class="kw">if </span>coord == ZERO {
+                <span class="kw">return </span>ZERO;
             }
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">has_intermediate</span> {
-                <span class="kw">if</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="ident">peak</span>.<span class="ident">min</span>(<span class="ident">ZERO</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">coord</span> <span class="op">&gt;</span> <span class="ident">peak</span>.<span class="ident">max</span>(<span class="ident">ZERO</span>) {
-                    <span class="kw">return</span> <span class="ident">ZERO</span>;
+            <span class="kw">if </span>!has_intermediate {
+                <span class="kw">if </span>coord &lt; peak.min(ZERO) || coord &gt; peak.max(ZERO) {
+                    <span class="kw">return </span>ZERO;
                 }
-                <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> <span class="ident">coord</span> <span class="op">/</span> <span class="ident">peak</span>;
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">inter_start</span>.<span class="ident">get_or</span>(<span class="ident">i</span>, <span class="number">0</span>));
-                <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">inter_end</span>.<span class="ident">get_or</span>(<span class="ident">i</span>, <span class="number">0</span>));
-                <span class="kw">if</span> <span class="ident">coord</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">start</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coord</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">end</span> {
-                    <span class="kw">return</span> <span class="ident">ZERO</span>;
+                scalar = scalar * coord / peak;
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>start = Fixed::from_f2dot14(inter_start.get_or(i, <span class="number">0</span>));
+                <span class="kw">let </span>end = Fixed::from_f2dot14(inter_end.get_or(i, <span class="number">0</span>));
+                <span class="kw">if </span>coord &lt;= start || coord &gt;= end {
+                    <span class="kw">return </span>ZERO;
                 }
-                <span class="kw">if</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="ident">peak</span> {
-                    <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> (<span class="ident">coord</span> <span class="op">-</span> <span class="ident">start</span>) <span class="op">/</span> (<span class="ident">peak</span> <span class="op">-</span> <span class="ident">start</span>);
-                } <span class="kw">else</span> {
-                    <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">coord</span>) <span class="op">/</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">peak</span>);
+                <span class="kw">if </span>coord &lt; peak {
+                    scalar = scalar * (coord - start) / (peak - start);
+                } <span class="kw">else </span>{
+                    scalar = scalar * (end - coord) / (end - peak);
                 }
             }
         }
-        <span class="ident">scalar</span>
+        scalar
     }
 
-    <span class="doccomment">/// Returns an iterator over the deltas for this region.</span>
-    <span class="kw">fn</span> <span class="ident">deltas</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scalar</span>: <span class="ident">Fixed</span>) -&gt; <span class="ident">Deltas</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">deltas</span>) <span class="op">=</span> <span class="ident">Deltas::new</span>(<span class="self">self</span>, <span class="ident">scalar</span>) {
-            <span class="ident">deltas</span>
-        } <span class="kw">else</span> {
-            <span class="ident">Deltas</span> {
-                <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
-                <span class="ident">pts</span>: <span class="self">self</span>.<span class="ident">point_numbers</span>.<span class="ident">iter</span>(),
-                <span class="ident">len</span>: <span class="number">0</span>,
-                <span class="ident">cur</span>: <span class="number">0</span>,
-                <span class="ident">xs</span>: <span class="number">0</span>,
-                <span class="ident">ys</span>: <span class="number">0</span>,
-                <span class="ident">xrun</span>: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
-                <span class="ident">yrun</span>: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
-                <span class="ident">scalar</span>,
+    <span class="doccomment">/// Returns an iterator over the deltas for this region.
+    </span><span class="kw">fn </span>deltas(<span class="kw-2">&amp;</span><span class="self">self</span>, scalar: Fixed) -&gt; Deltas&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(deltas) = Deltas::new(<span class="self">self</span>, scalar) {
+            deltas
+        } <span class="kw">else </span>{
+            Deltas {
+                data: <span class="self">self</span>.data,
+                pts: <span class="self">self</span>.point_numbers.iter(),
+                len: <span class="number">0</span>,
+                cur: <span class="number">0</span>,
+                xs: <span class="number">0</span>,
+                ys: <span class="number">0</span>,
+                xrun: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
+                yrun: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
+                scalar,
             }
         }
     }
 }
 
-<span class="doccomment">/// Iterator over the delta values of a particular region.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Deltas</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">pts</span>: <span class="ident">PointNumbersIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">cur</span>: <span class="ident">usize</span>,
-    <span class="ident">xs</span>: <span class="ident">usize</span>,
-    <span class="ident">ys</span>: <span class="ident">usize</span>,
-    <span class="ident">xrun</span>: (<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">bool</span>, <span class="ident">bool</span>),
-    <span class="ident">yrun</span>: (<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">bool</span>, <span class="ident">bool</span>),
-    <span class="ident">scalar</span>: <span class="ident">Fixed</span>,
+<span class="doccomment">/// Iterator over the delta values of a particular region.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Deltas&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    pts: PointNumbersIter&lt;<span class="lifetime">&#39;a</span>&gt;,
+    len: usize,
+    cur: usize,
+    xs: usize,
+    ys: usize,
+    xrun: (u8, u8, bool, bool),
+    yrun: (u8, u8, bool, bool),
+    scalar: Fixed,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Deltas</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">parent</span>: <span class="kw-2">&amp;</span><span class="ident">Tuple</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">scalar</span>: <span class="ident">Fixed</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">parent</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">parent</span>.<span class="ident">point_numbers</span>.<span class="ident">all</span> {
-            <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::count_deltas</span>(<span class="ident">d</span>, <span class="ident">parent</span>.<span class="ident">offset</span>, <span class="ident">parent</span>.<span class="ident">end</span>)<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">parent</span>.<span class="ident">is_cvar</span> {
-                <span class="ident">len</span>
-            } <span class="kw">else</span> {
-                <span class="ident">len</span> <span class="op">/</span> <span class="number">2</span>
-            }
-        } <span class="kw">else</span> {
-            <span class="ident">parent</span>.<span class="ident">point_numbers</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Deltas&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>new(parent: <span class="kw-2">&amp;</span>Tuple&lt;<span class="lifetime">&#39;a</span>&gt;, scalar: Fixed) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span>parent.data;
+        <span class="kw">let </span>len = <span class="kw">if </span>parent.point_numbers.all {
+            <span class="kw">let </span>len = <span class="self">Self</span>::count_deltas(d, parent.offset, parent.end)<span class="question-mark">?</span>;
+            <span class="kw">if </span>parent.is_cvar {
+                len
+            } <span class="kw">else </span>{
+                len / <span class="number">2
+            </span>}
+        } <span class="kw">else </span>{
+            parent.point_numbers.len <span class="kw">as </span>usize
         };
-        <span class="kw">let</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">parent</span>.<span class="ident">offset</span>;
-        <span class="kw">let</span> <span class="ident">ys</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">parent</span>.<span class="ident">is_cvar</span> {
-            <span class="ident"><span class="self">Self</span>::compute_ys_offset</span>(<span class="ident">d</span>, <span class="ident">parent</span>.<span class="ident">offset</span>, <span class="ident">parent</span>.<span class="ident">end</span>, <span class="ident">len</span>)<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="number">0</span>
-        };
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> {
-            <span class="ident">data</span>: <span class="ident">parent</span>.<span class="ident">data</span>,
-            <span class="ident">pts</span>: <span class="ident">parent</span>.<span class="ident">point_numbers</span>.<span class="ident">iter</span>(),
-            <span class="ident">len</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
-            <span class="ident">xs</span>,
-            <span class="ident">ys</span>,
-            <span class="ident">xrun</span>: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
-            <span class="ident">yrun</span>: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
-            <span class="ident">scalar</span>,
+        <span class="kw">let </span>xs = parent.offset;
+        <span class="kw">let </span>ys = <span class="kw">if </span>!parent.is_cvar {
+            <span class="self">Self</span>::compute_ys_offset(d, parent.offset, parent.end, len)<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{
+            data: parent.data,
+            pts: parent.point_numbers.iter(),
+            len,
+            cur: <span class="number">0</span>,
+            xs,
+            ys,
+            xrun: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
+            yrun: (<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>),
+            scalar,
         })
     }
 
-    <span class="doccomment">/// Returns true if this iterator provides deltas for all points.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">full_coverage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">pts</span>.<span class="ident">parent</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span>
-    }
+    <span class="doccomment">/// Returns true if this iterator provides deltas for all points.
+    </span><span class="kw">pub fn </span>full_coverage(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.pts.parent.len == <span class="number">0
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">count_deltas</span>(<span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="ident">Bytes</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">end</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offs</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">offs</span> <span class="op">&lt;</span> <span class="ident">end</span> {
-            <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span>;
-            <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">control</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0x3F</span>) <span class="op">+</span> <span class="number">1</span>;
-            <span class="ident">n</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
-            <span class="kw">if</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="kw">let</span> <span class="ident">words</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x40</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">if</span> <span class="ident">words</span> {
-                    <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">usize</span>;
+    <span class="kw">fn </span>count_deltas(d: <span class="kw-2">&amp;</span>Bytes, offset: usize, end: usize) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>offs = offset;
+        <span class="kw">let </span><span class="kw-2">mut </span>n = <span class="number">0</span>;
+        <span class="kw">while </span>offs &lt; end {
+            <span class="kw">let </span>control = d.read::&lt;u8&gt;(offs)<span class="question-mark">?</span>;
+            offs += <span class="number">1</span>;
+            <span class="kw">let </span>count = (control <span class="kw">as </span>usize &amp; <span class="number">0x3F</span>) + <span class="number">1</span>;
+            n += count;
+            <span class="kw">if </span>control &amp; <span class="number">0x80 </span>== <span class="number">0 </span>{
+                <span class="kw">let </span>words = control &amp; <span class="number">0x40 </span>!= <span class="number">0</span>;
+                <span class="kw">if </span>words {
+                    offs += count <span class="kw">as </span>usize * <span class="number">2</span>;
+                } <span class="kw">else </span>{
+                    offs += count <span class="kw">as </span>usize;
                 }
             }
         }
-        <span class="prelude-val">Some</span>(<span class="ident">n</span>)
+        <span class="prelude-val">Some</span>(n)
     }
 
-    <span class="kw">fn</span> <span class="ident">compute_ys_offset</span>(<span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="ident">Bytes</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">end</span>: <span class="ident">usize</span>, <span class="ident">x_count</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offs</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">offs</span> <span class="op">&lt;</span> <span class="ident">end</span> {
-            <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span>;
-            <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">control</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0x3F</span>) <span class="op">+</span> <span class="number">1</span>;
-            <span class="ident">n</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
-            <span class="kw">if</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="kw">let</span> <span class="ident">words</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x40</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">if</span> <span class="ident">words</span> {
-                    <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">offs</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">usize</span>;
+    <span class="kw">fn </span>compute_ys_offset(d: <span class="kw-2">&amp;</span>Bytes, offset: usize, end: usize, x_count: usize) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>offs = offset;
+        <span class="kw">let </span><span class="kw-2">mut </span>n = <span class="number">0</span>;
+        <span class="kw">while </span>offs &lt; end {
+            <span class="kw">let </span>control = d.read::&lt;u8&gt;(offs)<span class="question-mark">?</span>;
+            offs += <span class="number">1</span>;
+            <span class="kw">let </span>count = (control <span class="kw">as </span>usize &amp; <span class="number">0x3F</span>) + <span class="number">1</span>;
+            n += count;
+            <span class="kw">if </span>control &amp; <span class="number">0x80 </span>== <span class="number">0 </span>{
+                <span class="kw">let </span>words = control &amp; <span class="number">0x40 </span>!= <span class="number">0</span>;
+                <span class="kw">if </span>words {
+                    offs += count <span class="kw">as </span>usize * <span class="number">2</span>;
+                } <span class="kw">else </span>{
+                    offs += count <span class="kw">as </span>usize;
                 }
             }
-            <span class="kw">if</span> <span class="ident">n</span> <span class="op">==</span> <span class="ident">x_count</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">offs</span>);
+            <span class="kw">if </span>n == x_count {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(offs);
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">next_item</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">Fixed</span>, <span class="ident">Fixed</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">point_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pts</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">xs</span>)<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">xs</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">0</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">1</span> <span class="op">=</span> (<span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x3F</span>) <span class="op">+</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">2</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">3</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x40</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">fn </span>next_item(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(usize, Fixed, Fixed)&gt; {
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>point_index = <span class="self">self</span>.pts.next()<span class="question-mark">?</span>;
+        <span class="kw">if </span><span class="self">self</span>.xrun.<span class="number">0 </span>&gt;= <span class="self">self</span>.xrun.<span class="number">1 </span>{
+            <span class="kw">let </span>control = d.read::&lt;u8&gt;(<span class="self">self</span>.xs)<span class="question-mark">?</span>;
+            <span class="self">self</span>.xs += <span class="number">1</span>;
+            <span class="self">self</span>.xrun.<span class="number">0 </span>= <span class="number">0</span>;
+            <span class="self">self</span>.xrun.<span class="number">1 </span>= (control &amp; <span class="number">0x3F</span>) + <span class="number">1</span>;
+            <span class="self">self</span>.xrun.<span class="number">2 </span>= control &amp; <span class="number">0x80 </span>!= <span class="number">0</span>;
+            <span class="self">self</span>.xrun.<span class="number">3 </span>= control &amp; <span class="number">0x40 </span>!= <span class="number">0</span>;
         }
-        <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">0</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">2</span> {
-            <span class="number">0</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">xrun</span>.<span class="number">3</span> {
-            <span class="kw">let</span> <span class="ident">offs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xs</span>;
-            <span class="self">self</span>.<span class="ident">xs</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-            <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">offs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xs</span>;
-            <span class="self">self</span>.<span class="ident">xs</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i16</span>
+        <span class="self">self</span>.xrun.<span class="number">0 </span>+= <span class="number">1</span>;
+        <span class="kw">let </span>x = <span class="kw">if </span><span class="self">self</span>.xrun.<span class="number">2 </span>{
+            <span class="number">0
+        </span>} <span class="kw">else if </span><span class="self">self</span>.xrun.<span class="number">3 </span>{
+            <span class="kw">let </span>offs = <span class="self">self</span>.xs;
+            <span class="self">self</span>.xs += <span class="number">2</span>;
+            d.read::&lt;i16&gt;(offs)<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="kw">let </span>offs = <span class="self">self</span>.xs;
+            <span class="self">self</span>.xs += <span class="number">1</span>;
+            d.read::&lt;i8&gt;(offs)<span class="question-mark">? </span><span class="kw">as </span>i16
         };
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">ys</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">1</span> {
-                <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">ys</span>)<span class="question-mark">?</span>;
-                <span class="self">self</span>.<span class="ident">ys</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">0</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">1</span> <span class="op">=</span> (<span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x3F</span>) <span class="op">+</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">2</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-                <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">3</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x40</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>y = <span class="kw">if </span><span class="self">self</span>.ys != <span class="number">0 </span>{
+            <span class="kw">if </span><span class="self">self</span>.yrun.<span class="number">0 </span>&gt;= <span class="self">self</span>.yrun.<span class="number">1 </span>{
+                <span class="kw">let </span>control = d.read::&lt;u8&gt;(<span class="self">self</span>.ys)<span class="question-mark">?</span>;
+                <span class="self">self</span>.ys += <span class="number">1</span>;
+                <span class="self">self</span>.yrun.<span class="number">0 </span>= <span class="number">0</span>;
+                <span class="self">self</span>.yrun.<span class="number">1 </span>= (control &amp; <span class="number">0x3F</span>) + <span class="number">1</span>;
+                <span class="self">self</span>.yrun.<span class="number">2 </span>= control &amp; <span class="number">0x80 </span>!= <span class="number">0</span>;
+                <span class="self">self</span>.yrun.<span class="number">3 </span>= control &amp; <span class="number">0x40 </span>!= <span class="number">0</span>;
             }
-            <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">0</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">2</span> {
-                <span class="number">0</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">yrun</span>.<span class="number">3</span> {
-                <span class="kw">let</span> <span class="ident">offs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ys</span>;
-                <span class="self">self</span>.<span class="ident">ys</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-                <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span>
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">offs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ys</span>;
-                <span class="self">self</span>.<span class="ident">ys</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offs</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i16</span>
+            <span class="self">self</span>.yrun.<span class="number">0 </span>+= <span class="number">1</span>;
+            <span class="kw">if </span><span class="self">self</span>.yrun.<span class="number">2 </span>{
+                <span class="number">0
+            </span>} <span class="kw">else if </span><span class="self">self</span>.yrun.<span class="number">3 </span>{
+                <span class="kw">let </span>offs = <span class="self">self</span>.ys;
+                <span class="self">self</span>.ys += <span class="number">2</span>;
+                d.read::&lt;i16&gt;(offs)<span class="question-mark">?
+            </span>} <span class="kw">else </span>{
+                <span class="kw">let </span>offs = <span class="self">self</span>.ys;
+                <span class="self">self</span>.ys += <span class="number">1</span>;
+                d.read::&lt;i8&gt;(offs)<span class="question-mark">? </span><span class="kw">as </span>i16
             }
-        } <span class="kw">else</span> {
-            <span class="number">0</span>
-        };
-        <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scalar</span> <span class="op">*</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>);
-        <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scalar</span> <span class="op">*</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">y</span> <span class="kw">as</span> <span class="ident">i32</span>);
-        <span class="prelude-val">Some</span>((<span class="ident">point_index</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">dx</span>, <span class="ident">dy</span>))
+        } <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
+        <span class="kw">let </span>dx = <span class="self">self</span>.scalar * Fixed::from_i32(x <span class="kw">as </span>i32);
+        <span class="kw">let </span>dy = <span class="self">self</span>.scalar * Fixed::from_i32(y <span class="kw">as </span>i32);
+        <span class="prelude-val">Some</span>((point_index <span class="kw">as </span>usize, dx, dy))
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Deltas</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">usize</span>, <span class="ident">Fixed</span>, <span class="ident">Fixed</span>);
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>Deltas&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = (usize, Fixed, Fixed);
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">next_item</span>()
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="self">self</span>.next_item()
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">len</span>: <span class="ident">u16</span>,
-    <span class="ident">all</span>: <span class="ident">bool</span>,
-    <span class="ident">data_size</span>: <span class="ident">usize</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    offset: usize,
+    len: u16,
+    all: bool,
+    data_size: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">if</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x7F</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="self">Self</span> {
-                <span class="ident">data</span>,
-                <span class="ident">offset</span>,
-                <span class="ident">len</span>: <span class="number">0</span>,
-                <span class="ident">all</span>: <span class="bool-val">true</span>,
-                <span class="ident">data_size</span>: <span class="number">1</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>new(data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>base = offset;
+        <span class="kw">let </span><span class="kw-2">mut </span>offset = offset;
+        <span class="kw">let </span>control = data.read::&lt;u8&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        offset += <span class="number">1</span>;
+        <span class="kw">if </span>control &amp; <span class="number">0x7F </span>== <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="self">Self </span>{
+                data,
+                offset,
+                len: <span class="number">0</span>,
+                all: <span class="bool-val">true</span>,
+                data_size: <span class="number">1</span>,
             });
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_size</span> <span class="op">=</span> <span class="number">1usize</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">data_size</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            (<span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x7F</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span> <span class="op">|</span> <span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">-</span> <span class="number">1</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>
-        } <span class="kw">else</span> {
-            <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x7F</span>
-        };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">points_read</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">points_read</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">data_size</span>)<span class="question-mark">?</span>;
-            <span class="ident">data_size</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">words</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">control</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&amp;</span> <span class="number">0x7F</span>) <span class="op">+</span> <span class="number">1</span>;
-            <span class="kw">if</span> <span class="ident">words</span> {
-                <span class="ident">data_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span> <span class="op">*</span> <span class="number">2</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">data_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>data_size = <span class="number">1usize</span>;
+        <span class="kw">let </span>len = <span class="kw">if </span>control &amp; <span class="number">0x80 </span>!= <span class="number">0 </span>{
+            data_size += <span class="number">1</span>;
+            offset += <span class="number">1</span>;
+            (control &amp; <span class="number">0x7F</span>) &lt;&lt; <span class="number">8 </span>| data.read::&lt;u8&gt;(offset - <span class="number">1</span>)<span class="question-mark">? </span><span class="kw">as </span>usize
+        } <span class="kw">else </span>{
+            control &amp; <span class="number">0x7F
+        </span>};
+        <span class="kw">let </span><span class="kw-2">mut </span>points_read = <span class="number">0</span>;
+        <span class="kw">while </span>points_read &lt; len {
+            <span class="kw">let </span>control = data.read::&lt;u8&gt;(base + data_size)<span class="question-mark">?</span>;
+            data_size += <span class="number">1</span>;
+            <span class="kw">let </span>words = control &amp; <span class="number">0x80 </span>!= <span class="number">0</span>;
+            <span class="kw">let </span>count = (control <span class="kw">as </span>usize &amp; <span class="number">0x7F</span>) + <span class="number">1</span>;
+            <span class="kw">if </span>words {
+                data_size += count * <span class="number">2</span>;
+            } <span class="kw">else </span>{
+                data_size += count;
             }
-            <span class="ident">points_read</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
+            points_read += count;
         }
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">offset</span>,
-            <span class="ident">len</span>: <span class="ident">len</span> <span class="kw">as</span> <span class="ident">u16</span>,
-            <span class="ident">all</span>: <span class="bool-val">false</span>,
-            <span class="ident">data_size</span>,
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{
+            data,
+            offset,
+            len: len <span class="kw">as </span>u16,
+            all: <span class="bool-val">false</span>,
+            data_size,
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">data_size</span>
+    <span class="kw">pub fn </span>data_size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.data_size
     }
 
-    <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PointNumbersIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">PointNumbersIter</span> {
-            <span class="ident">parent</span>: <span class="kw-2">*</span><span class="self">self</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
-            <span class="ident">offset</span>: <span class="self">self</span>.<span class="ident">offset</span>,
-            <span class="ident">num</span>: <span class="number">0</span>,
-            <span class="ident">run_len</span>: <span class="number">0</span>,
-            <span class="ident">run_cur</span>: <span class="number">0</span>,
-            <span class="ident">run_words</span>: <span class="bool-val">false</span>,
+    <span class="kw">fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PointNumbersIter&lt;<span class="lifetime">&#39;a</span>&gt; {
+        PointNumbersIter {
+            parent: <span class="kw-2">*</span><span class="self">self</span>,
+            cur: <span class="number">0</span>,
+            offset: <span class="self">self</span>.offset,
+            num: <span class="number">0</span>,
+            run_len: <span class="number">0</span>,
+            run_cur: <span class="number">0</span>,
+            run_words: <span class="bool-val">false</span>,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">PointNumbersIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">parent</span>: <span class="ident">PointNumbers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">cur</span>: <span class="ident">u16</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">num</span>: <span class="ident">u16</span>,
-    <span class="ident">run_len</span>: <span class="ident">u16</span>,
-    <span class="ident">run_cur</span>: <span class="ident">u16</span>,
-    <span class="ident">run_words</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>PointNumbersIter&lt;<span class="lifetime">&#39;a</span>&gt; {
+    parent: PointNumbers&lt;<span class="lifetime">&#39;a</span>&gt;,
+    cur: u16,
+    offset: usize,
+    num: u16,
+    run_len: u16,
+    run_cur: u16,
+    run_words: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">PointNumbersIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">u16</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>PointNumbersIter&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = u16;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">parent</span>.<span class="ident">all</span> {
-            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num</span>;
-            <span class="self">self</span>.<span class="ident">num</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">value</span>);
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.parent.all {
+            <span class="kw">let </span>value = <span class="self">self</span>.num;
+            <span class="self">self</span>.num += <span class="number">1</span>;
+            <span class="kw">return </span><span class="prelude-val">Some</span>(value);
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">parent</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.parent.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">parent</span>.<span class="ident">data</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">run_cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">run_len</span> {
-            <span class="kw">let</span> <span class="ident">control</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u16</span>;
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">run_len</span> <span class="op">=</span> (<span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x7F</span>) <span class="op">+</span> <span class="number">1</span>;
-            <span class="self">self</span>.<span class="ident">run_words</span> <span class="op">=</span> <span class="ident">control</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="self">self</span>.<span class="ident">run_cur</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.parent.data;
+        <span class="kw">if </span><span class="self">self</span>.run_cur &gt;= <span class="self">self</span>.run_len {
+            <span class="kw">let </span>control = d.read::&lt;u8&gt;(<span class="self">self</span>.offset)<span class="question-mark">? </span><span class="kw">as </span>u16;
+            <span class="self">self</span>.offset += <span class="number">1</span>;
+            <span class="self">self</span>.run_len = (control &amp; <span class="number">0x7F</span>) + <span class="number">1</span>;
+            <span class="self">self</span>.run_words = control &amp; <span class="number">0x80 </span>!= <span class="number">0</span>;
+            <span class="self">self</span>.run_cur = <span class="number">0</span>;
         }
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">offset</span>;
-        <span class="self">self</span>.<span class="ident">num</span> <span class="op">+</span><span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">run_words</span> {
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-            <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u16</span>
+        <span class="kw">let </span>offset = <span class="self">self</span>.offset;
+        <span class="self">self</span>.num += <span class="kw">if </span><span class="self">self</span>.run_words {
+            <span class="self">self</span>.offset += <span class="number">2</span>;
+            d.read::&lt;u16&gt;(offset)<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="self">self</span>.offset += <span class="number">1</span>;
+            d.read::&lt;u8&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>u16
         };
-        <span class="self">self</span>.<span class="ident">run_cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">num</span>)
+        <span class="self">self</span>.run_cur += <span class="number">1</span>;
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.num)
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SharedCoords</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">count</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">axis_count</span>: <span class="ident">usize</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>SharedCoords&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    <span class="kw">pub </span>offset: usize,
+    <span class="kw">pub </span>count: usize,
+    <span class="kw">pub </span>axis_count: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">SharedCoords</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">i16</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">data</span>
-            .<span class="ident">read_array</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> (<span class="self">self</span>.<span class="ident">axis_count</span> <span class="op">*</span> <span class="ident">index</span> <span class="op">*</span> <span class="number">2</span>), <span class="self">self</span>.<span class="ident">axis_count</span>)
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; SharedCoords&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;Array&lt;<span class="lifetime">&#39;a</span>, i16&gt;&gt; {
+        <span class="self">self</span>.data
+            .read_array(<span class="self">self</span>.offset + (<span class="self">self</span>.axis_count * index * <span class="number">2</span>), <span class="self">self</span>.axis_count)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

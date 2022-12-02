@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/metrics.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metrics.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/metrics.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metrics.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -505,508 +505,508 @@
 <span id="505">505</span>
 </pre><pre class="rust"><code><span class="doccomment">/*!
 Font and glyph metrics.
-*/</span>
+*/
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">FontRef</span>, <span class="ident">GlyphId</span>, <span class="ident">NormalizedCoord</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::internal::<span class="kw-2">*</span>;
+<span class="kw">use super</span>::{FontRef, GlyphId, NormalizedCoord};
 
-<span class="doccomment">/// Proxy for rematerializing metrics.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MetricsProxy</span> {
-    <span class="ident">units_per_em</span>: <span class="ident">u16</span>,
-    <span class="ident">glyph_count</span>: <span class="ident">u16</span>,
-    <span class="ident">is_monospace</span>: <span class="ident">bool</span>,
-    <span class="ident">has_vertical_metrics</span>: <span class="ident">bool</span>,
-    <span class="ident">ascent</span>: <span class="ident">i16</span>,
-    <span class="ident">descent</span>: <span class="ident">i16</span>,
-    <span class="ident">leading</span>: <span class="ident">i16</span>,
-    <span class="ident">vertical_ascent</span>: <span class="ident">i16</span>,
-    <span class="ident">vertical_descent</span>: <span class="ident">i16</span>,
-    <span class="ident">vertical_leading</span>: <span class="ident">i16</span>,
-    <span class="ident">cap_height</span>: <span class="ident">i16</span>,
-    <span class="ident">x_height</span>: <span class="ident">i16</span>,
-    <span class="ident">average_width</span>: <span class="ident">u16</span>,
-    <span class="ident">max_width</span>: <span class="ident">u16</span>,
-    <span class="ident">underline_offset</span>: <span class="ident">i16</span>,
-    <span class="ident">strikeout_offset</span>: <span class="ident">i16</span>,
-    <span class="ident">stroke_size</span>: <span class="ident">i16</span>,
-    <span class="ident">mvar</span>: <span class="ident">u32</span>,
-    <span class="ident">hmtx</span>: <span class="ident">u32</span>,
-    <span class="ident">hvar</span>: <span class="ident">u32</span>,
-    <span class="ident">hmtx_count</span>: <span class="ident">u16</span>,
-    <span class="ident">has_vvar</span>: <span class="ident">bool</span>,
-    <span class="ident">vertical</span>: <span class="ident">Vertical</span>,
+<span class="doccomment">/// Proxy for rematerializing metrics.
+</span><span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">pub struct </span>MetricsProxy {
+    units_per_em: u16,
+    glyph_count: u16,
+    is_monospace: bool,
+    has_vertical_metrics: bool,
+    ascent: i16,
+    descent: i16,
+    leading: i16,
+    vertical_ascent: i16,
+    vertical_descent: i16,
+    vertical_leading: i16,
+    cap_height: i16,
+    x_height: i16,
+    average_width: u16,
+    max_width: u16,
+    underline_offset: i16,
+    strikeout_offset: i16,
+    stroke_size: i16,
+    mvar: u32,
+    hmtx: u32,
+    hvar: u32,
+    hmtx_count: u16,
+    has_vvar: bool,
+    vertical: Vertical,
 }
 
-<span class="kw">impl</span> <span class="ident">MetricsProxy</span> {
-    <span class="doccomment">/// Creates a metrics proxy for the specified font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="self">Self</span> {
-            <span class="ident">units_per_em</span>: <span class="number">1</span>,
-            ..<span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>MetricsProxy {
+    <span class="doccomment">/// Creates a metrics proxy for the specified font.
+    </span><span class="kw">pub fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>metadata = <span class="self">Self </span>{
+            units_per_em: <span class="number">1</span>,
+            ..<span class="self">Self</span>::default()
         };
-        <span class="ident">metadata</span>.<span class="ident">fill</span>(<span class="ident">font</span>);
-        <span class="ident">metadata</span>
+        metadata.fill(font);
+        metadata
     }
 
-    <span class="doccomment">/// Materializes font metrics for the specified font and</span>
-    <span class="doccomment">/// normalized variation coordinates. This proxy must have been created</span>
-    <span class="doccomment">/// from the same font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">materialize_metrics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">NormalizedCoord</span>]) -&gt; <span class="ident">Metrics</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">Metrics</span> {
-            <span class="ident">units_per_em</span>: <span class="self">self</span>.<span class="ident">units_per_em</span>,
-            <span class="ident">glyph_count</span>: <span class="self">self</span>.<span class="ident">glyph_count</span>,
-            <span class="ident">is_monospace</span>: <span class="self">self</span>.<span class="ident">is_monospace</span>,
-            <span class="ident">has_vertical_metrics</span>: <span class="self">self</span>.<span class="ident">has_vertical_metrics</span>,
-            <span class="ident">ascent</span>: <span class="self">self</span>.<span class="ident">ascent</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">descent</span>: <span class="self">self</span>.<span class="ident">descent</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">leading</span>: <span class="self">self</span>.<span class="ident">leading</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">vertical_ascent</span>: <span class="self">self</span>.<span class="ident">vertical_ascent</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">vertical_descent</span>: <span class="self">self</span>.<span class="ident">vertical_descent</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">vertical_leading</span>: <span class="self">self</span>.<span class="ident">vertical_leading</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">cap_height</span>: <span class="self">self</span>.<span class="ident">cap_height</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">x_height</span>: <span class="self">self</span>.<span class="ident">x_height</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">average_width</span>: <span class="self">self</span>.<span class="ident">average_width</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">max_width</span>: <span class="self">self</span>.<span class="ident">max_width</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">underline_offset</span>: <span class="self">self</span>.<span class="ident">underline_offset</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">strikeout_offset</span>: <span class="self">self</span>.<span class="ident">strikeout_offset</span> <span class="kw">as</span> <span class="ident">f32</span>,
-            <span class="ident">stroke_size</span>: <span class="self">self</span>.<span class="ident">stroke_size</span> <span class="kw">as</span> <span class="ident">f32</span>,
+    <span class="doccomment">/// Materializes font metrics for the specified font and
+    /// normalized variation coordinates. This proxy must have been created
+    /// from the same font.
+    </span><span class="kw">pub fn </span>materialize_metrics(<span class="kw-2">&amp;</span><span class="self">self</span>, font: <span class="kw-2">&amp;</span>FontRef, coords: <span class="kw-2">&amp;</span>[NormalizedCoord]) -&gt; Metrics {
+        <span class="kw">let </span>data = font.data;
+        <span class="kw">let </span><span class="kw-2">mut </span>m = Metrics {
+            units_per_em: <span class="self">self</span>.units_per_em,
+            glyph_count: <span class="self">self</span>.glyph_count,
+            is_monospace: <span class="self">self</span>.is_monospace,
+            has_vertical_metrics: <span class="self">self</span>.has_vertical_metrics,
+            ascent: <span class="self">self</span>.ascent <span class="kw">as </span>f32,
+            descent: <span class="self">self</span>.descent <span class="kw">as </span>f32,
+            leading: <span class="self">self</span>.leading <span class="kw">as </span>f32,
+            vertical_ascent: <span class="self">self</span>.vertical_ascent <span class="kw">as </span>f32,
+            vertical_descent: <span class="self">self</span>.vertical_descent <span class="kw">as </span>f32,
+            vertical_leading: <span class="self">self</span>.vertical_leading <span class="kw">as </span>f32,
+            cap_height: <span class="self">self</span>.cap_height <span class="kw">as </span>f32,
+            x_height: <span class="self">self</span>.x_height <span class="kw">as </span>f32,
+            average_width: <span class="self">self</span>.average_width <span class="kw">as </span>f32,
+            max_width: <span class="self">self</span>.max_width <span class="kw">as </span>f32,
+            underline_offset: <span class="self">self</span>.underline_offset <span class="kw">as </span>f32,
+            strikeout_offset: <span class="self">self</span>.strikeout_offset <span class="kw">as </span>f32,
+            stroke_size: <span class="self">self</span>.stroke_size <span class="kw">as </span>f32,
         };
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">mvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">coords</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="ident">var::Mvar::new</span>(<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">mvar</span>, <span class="ident">coords</span>) {
-                <span class="kw">use</span> <span class="ident">var::mvar_tags</span>::<span class="kw-2">*</span>;
-                <span class="ident">m</span>.<span class="ident">ascent</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">HASC</span>);
-                <span class="ident">m</span>.<span class="ident">descent</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">HDSC</span>);
-                <span class="ident">m</span>.<span class="ident">leading</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">HLGP</span>);
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_vertical_metrics</span> {
-                    <span class="ident">m</span>.<span class="ident">vertical_ascent</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">VASC</span>);
-                    <span class="ident">m</span>.<span class="ident">vertical_descent</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">VDSC</span>);
-                    <span class="ident">m</span>.<span class="ident">vertical_leading</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">VLGP</span>);
+        <span class="kw">if </span><span class="self">self</span>.mvar != <span class="number">0 </span>&amp;&amp; !coords.is_empty() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = var::Mvar::new(data, <span class="self">self</span>.mvar, coords) {
+                <span class="kw">use </span>var::mvar_tags::<span class="kw-2">*</span>;
+                m.ascent += v.delta(HASC);
+                m.descent += v.delta(HDSC);
+                m.leading += v.delta(HLGP);
+                <span class="kw">if </span><span class="self">self</span>.has_vertical_metrics {
+                    m.vertical_ascent += v.delta(VASC);
+                    m.vertical_descent += v.delta(VDSC);
+                    m.vertical_leading += v.delta(VLGP);
                 }
-                <span class="ident">m</span>.<span class="ident">cap_height</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">CPHT</span>);
-                <span class="ident">m</span>.<span class="ident">x_height</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">XHGT</span>);
-                <span class="ident">m</span>.<span class="ident">underline_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">UNDO</span>);
-                <span class="ident">m</span>.<span class="ident">strikeout_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">STRO</span>);
-                <span class="ident">m</span>.<span class="ident">stroke_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">UNDS</span>);
+                m.cap_height += v.delta(CPHT);
+                m.x_height += v.delta(XHGT);
+                m.underline_offset += v.delta(UNDO);
+                m.strikeout_offset += v.delta(STRO);
+                m.stroke_size += v.delta(UNDS);
             }
         }
-        <span class="ident">m</span>
+        m
     }
 
-    <span class="doccomment">/// Materializes glyph metrics for the specified font and</span>
-    <span class="doccomment">/// normalized variation coordinates. This proxy must have been created</span>
-    <span class="doccomment">/// from the same font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">materialize_glyph_metrics</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// Materializes glyph metrics for the specified font and
+    /// normalized variation coordinates. This proxy must have been created
+    /// from the same font.
+    </span><span class="kw">pub fn </span>materialize_glyph_metrics&lt;<span class="lifetime">&#39;a</span>&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">NormalizedCoord</span>],
-    ) -&gt; <span class="ident">GlyphMetrics</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vertical</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vertical</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">coords</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Vertical::Synthesized</span> {
-                <span class="ident">mvar</span>,
-                <span class="ident">advance</span>,
-                <span class="ident">origin</span>,
-            } <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">vertical</span>
+        font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;,
+        coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[NormalizedCoord],
+    ) -&gt; GlyphMetrics&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw">let </span>data = font.data;
+        <span class="kw">let </span><span class="kw-2">mut </span>vertical = <span class="self">self</span>.vertical;
+        <span class="kw">if </span>!coords.is_empty() {
+            <span class="kw">if let </span>Vertical::Synthesized {
+                mvar,
+                advance,
+                origin,
+            } = <span class="kw-2">&amp;mut </span>vertical
             {
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">mvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="ident">var::Mvar::new</span>(<span class="ident">data</span>, <span class="kw-2">*</span><span class="ident">mvar</span>, <span class="ident">coords</span>) {
-                        <span class="kw">use</span> <span class="ident">var::mvar_tags</span>::<span class="kw-2">*</span>;
-                        <span class="kw">let</span> <span class="ident">ascent_delta</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">HASC</span>);
-                        <span class="kw">let</span> <span class="ident">descent_delta</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">delta</span>(<span class="ident">HDSC</span>);
-                        <span class="kw-2">*</span><span class="ident">advance</span> <span class="op">+</span><span class="op">=</span> <span class="ident">ascent_delta</span> <span class="op">+</span> <span class="ident">descent_delta</span>;
-                        <span class="kw-2">*</span><span class="ident">origin</span> <span class="op">+</span><span class="op">=</span> <span class="ident">ascent_delta</span>;
+                <span class="kw">if </span><span class="kw-2">*</span>mvar != <span class="number">0 </span>{
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = var::Mvar::new(data, <span class="kw-2">*</span>mvar, coords) {
+                        <span class="kw">use </span>var::mvar_tags::<span class="kw-2">*</span>;
+                        <span class="kw">let </span>ascent_delta = v.delta(HASC);
+                        <span class="kw">let </span>descent_delta = v.delta(HDSC);
+                        <span class="kw-2">*</span>advance += ascent_delta + descent_delta;
+                        <span class="kw-2">*</span>origin += ascent_delta;
                     }
                 }
             }
         }
-        <span class="ident">GlyphMetrics</span> {
-            <span class="ident">data</span>,
-            <span class="ident">coords</span>,
-            <span class="ident">units_per_em</span>: <span class="self">self</span>.<span class="ident">units_per_em</span>,
-            <span class="ident">glyph_count</span>: <span class="self">self</span>.<span class="ident">glyph_count</span>,
-            <span class="ident">hmtx</span>: <span class="self">self</span>.<span class="ident">hmtx</span>,
-            <span class="ident">hvar</span>: <span class="self">self</span>.<span class="ident">hvar</span>,
-            <span class="ident">hmtx_count</span>: <span class="self">self</span>.<span class="ident">hmtx_count</span>,
-            <span class="ident">has_vvar</span>: <span class="self">self</span>.<span class="ident">has_vvar</span>,
-            <span class="ident">vertical</span>,
-            <span class="ident">scale</span>: <span class="number">1.</span>,
+        GlyphMetrics {
+            data,
+            coords,
+            units_per_em: <span class="self">self</span>.units_per_em,
+            glyph_count: <span class="self">self</span>.glyph_count,
+            hmtx: <span class="self">self</span>.hmtx,
+            hvar: <span class="self">self</span>.hvar,
+            hmtx_count: <span class="self">self</span>.hmtx_count,
+            has_vvar: <span class="self">self</span>.has_vvar,
+            vertical,
+            scale: <span class="number">1.</span>,
         }
     }
 
-    <span class="doccomment">/// Returns the number of font design units per em unit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">units_per_em</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">units_per_em</span>
+    <span class="doccomment">/// Returns the number of font design units per em unit.
+    </span><span class="kw">pub fn </span>units_per_em(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.units_per_em
     }
 
-    <span class="doccomment">/// Returns the number of glyphs in the font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">glyph_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">glyph_count</span>
+    <span class="doccomment">/// Returns the number of glyphs in the font.
+    </span><span class="kw">pub fn </span>glyph_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.glyph_count
     }
 
-    <span class="kw">fn</span> <span class="ident">fill</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">head</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">units_per_em</span> <span class="op">=</span> <span class="ident">head</span>.<span class="ident">units_per_em</span>();
-        <span class="self">self</span>.<span class="ident">glyph_count</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">maxp</span>()<span class="question-mark">?</span>.<span class="ident">glyph_count</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">have_line_metrics</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="ident">os2</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">os2</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">os2</span>) <span class="op">=</span> <span class="ident">os2</span> {
-            <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">selection_flags</span>();
-            <span class="self">self</span>.<span class="ident">average_width</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">average_char_width</span>() <span class="kw">as</span> <span class="ident">u16</span>;
-            <span class="self">self</span>.<span class="ident">strikeout_offset</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">strikeout_position</span>();
-            <span class="self">self</span>.<span class="ident">stroke_size</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">strikeout_size</span>();
-            <span class="self">self</span>.<span class="ident">x_height</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">x_height</span>();
-            <span class="self">self</span>.<span class="ident">cap_height</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">cap_height</span>();
-            <span class="kw">if</span> <span class="ident">flags</span>.<span class="ident">use_typographic_metrics</span>() {
-                <span class="self">self</span>.<span class="ident">ascent</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">typographic_ascender</span>();
-                <span class="self">self</span>.<span class="ident">descent</span> <span class="op">=</span> <span class="op">-</span><span class="ident">os2</span>.<span class="ident">typographic_descender</span>();
-                <span class="self">self</span>.<span class="ident">leading</span> <span class="op">=</span> <span class="ident">os2</span>.<span class="ident">typographic_line_gap</span>();
-                <span class="ident">have_line_metrics</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ascent</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">fn </span>fill(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font: <span class="kw-2">&amp;</span>FontRef) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>head = font.head()<span class="question-mark">?</span>;
+        <span class="self">self</span>.units_per_em = head.units_per_em();
+        <span class="self">self</span>.glyph_count = font.maxp()<span class="question-mark">?</span>.glyph_count();
+        <span class="kw">let </span><span class="kw-2">mut </span>have_line_metrics = <span class="bool-val">false</span>;
+        <span class="kw">let </span>os2 = font.os2();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(os2) = os2 {
+            <span class="kw">let </span>flags = os2.selection_flags();
+            <span class="self">self</span>.average_width = os2.average_char_width() <span class="kw">as </span>u16;
+            <span class="self">self</span>.strikeout_offset = os2.strikeout_position();
+            <span class="self">self</span>.stroke_size = os2.strikeout_size();
+            <span class="self">self</span>.x_height = os2.x_height();
+            <span class="self">self</span>.cap_height = os2.cap_height();
+            <span class="kw">if </span>flags.use_typographic_metrics() {
+                <span class="self">self</span>.ascent = os2.typographic_ascender();
+                <span class="self">self</span>.descent = -os2.typographic_descender();
+                <span class="self">self</span>.leading = os2.typographic_line_gap();
+                have_line_metrics = <span class="self">self</span>.ascent != <span class="number">0</span>;
             }
         }
-        <span class="kw">let</span> <span class="ident">hhea</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">hhea</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hhea</span>) <span class="op">=</span> <span class="ident">hhea</span> {
-            <span class="self">self</span>.<span class="ident">max_width</span> <span class="op">=</span> <span class="ident">hhea</span>.<span class="ident">max_advance</span>();
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">have_line_metrics</span> {
-                <span class="self">self</span>.<span class="ident">ascent</span> <span class="op">=</span> <span class="ident">hhea</span>.<span class="ident">ascender</span>();
-                <span class="self">self</span>.<span class="ident">descent</span> <span class="op">=</span> <span class="op">-</span><span class="ident">hhea</span>.<span class="ident">descender</span>();
-                <span class="self">self</span>.<span class="ident">leading</span> <span class="op">=</span> <span class="ident">hhea</span>.<span class="ident">line_gap</span>();
+        <span class="kw">let </span>hhea = font.hhea();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(hhea) = hhea {
+            <span class="self">self</span>.max_width = hhea.max_advance();
+            <span class="kw">if </span>!have_line_metrics {
+                <span class="self">self</span>.ascent = hhea.ascender();
+                <span class="self">self</span>.descent = -hhea.descender();
+                <span class="self">self</span>.leading = hhea.line_gap();
             }
         }
-        <span class="kw">let</span> <span class="ident">vhea</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">vhea</span>();
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">vhea</span>) <span class="op">=</span> <span class="ident">vhea</span> {
-            <span class="self">self</span>.<span class="ident">has_vertical_metrics</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="self">self</span>.<span class="ident">vertical_ascent</span> <span class="op">=</span> <span class="ident">vhea</span>.<span class="ident">ascender</span>();
-            <span class="self">self</span>.<span class="ident">vertical_descent</span> <span class="op">=</span> <span class="op">-</span><span class="ident">vhea</span>.<span class="ident">descender</span>();
-            <span class="self">self</span>.<span class="ident">vertical_leading</span> <span class="op">=</span> <span class="ident">vhea</span>.<span class="ident">line_gap</span>();
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">vertical_ascent</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">units_per_em</span> <span class="op">/</span> <span class="number">2</span>) <span class="kw">as</span> <span class="ident">i16</span>;
-            <span class="self">self</span>.<span class="ident">vertical_descent</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vertical_ascent</span>;
+        <span class="kw">let </span>vhea = font.vhea();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(vhea) = vhea {
+            <span class="self">self</span>.has_vertical_metrics = <span class="bool-val">true</span>;
+            <span class="self">self</span>.vertical_ascent = vhea.ascender();
+            <span class="self">self</span>.vertical_descent = -vhea.descender();
+            <span class="self">self</span>.vertical_leading = vhea.line_gap();
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.vertical_ascent = (<span class="self">self</span>.units_per_em / <span class="number">2</span>) <span class="kw">as </span>i16;
+            <span class="self">self</span>.vertical_descent = <span class="self">self</span>.vertical_ascent;
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">post</span>) <span class="op">=</span> <span class="ident">font</span>.<span class="ident">post</span>() {
-            <span class="self">self</span>.<span class="ident">underline_offset</span> <span class="op">=</span> <span class="ident">post</span>.<span class="ident">underline_position</span>();
-            <span class="self">self</span>.<span class="ident">stroke_size</span> <span class="op">=</span> <span class="ident">post</span>.<span class="ident">underline_size</span>();
-            <span class="self">self</span>.<span class="ident">is_monospace</span> <span class="op">=</span> <span class="ident">post</span>.<span class="ident">is_fixed_pitch</span>();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(post) = font.post() {
+            <span class="self">self</span>.underline_offset = post.underline_position();
+            <span class="self">self</span>.stroke_size = post.underline_size();
+            <span class="self">self</span>.is_monospace = post.is_fixed_pitch();
         }
-        <span class="self">self</span>.<span class="ident">mvar</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">var::MVAR</span>);
-        <span class="self">self</span>.<span class="ident">hmtx_count</span> <span class="op">=</span> <span class="ident">hhea</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">num_long_metrics</span>()).<span class="ident">unwrap_or</span>(<span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">hmtx</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">xmtx::HMTX</span>);
-        <span class="self">self</span>.<span class="ident">hvar</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">var::HVAR</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vmtx</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">if</span> <span class="ident">vhea</span>.<span class="ident">is_some</span>() {
-            <span class="ident">vmtx</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">xmtx::VMTX</span>);
+        <span class="self">self</span>.mvar = font.table_offset(var::MVAR);
+        <span class="self">self</span>.hmtx_count = hhea.map(|t| t.num_long_metrics()).unwrap_or(<span class="number">1</span>);
+        <span class="self">self</span>.hmtx = font.table_offset(xmtx::HMTX);
+        <span class="self">self</span>.hvar = font.table_offset(var::HVAR);
+        <span class="kw">let </span><span class="kw-2">mut </span>vmtx = <span class="number">0</span>;
+        <span class="kw">if </span>vhea.is_some() {
+            vmtx = font.table_offset(xmtx::VMTX);
         }
-        <span class="kw">if</span> <span class="ident">vmtx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">long_count</span> <span class="op">=</span> <span class="ident">vhea</span>.<span class="ident">unwrap</span>().<span class="ident">num_long_metrics</span>();
-            <span class="kw">let</span> <span class="ident">vvar</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">var::VVAR</span>);
-            <span class="self">self</span>.<span class="ident">has_vvar</span> <span class="op">=</span> <span class="ident">vvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">vorg</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">vorg::VORG</span>);
-            <span class="kw">if</span> <span class="ident">vorg</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">vertical</span> <span class="op">=</span> <span class="ident">Vertical::VmtxVorg</span> {
-                    <span class="ident">long_count</span>,
-                    <span class="ident">vmtx</span>,
-                    <span class="ident">vvar</span>,
-                    <span class="ident">vorg</span>,
+        <span class="kw">if </span>vmtx != <span class="number">0 </span>{
+            <span class="kw">let </span>long_count = vhea.unwrap().num_long_metrics();
+            <span class="kw">let </span>vvar = font.table_offset(var::VVAR);
+            <span class="self">self</span>.has_vvar = vvar != <span class="number">0</span>;
+            <span class="kw">let </span>vorg = font.table_offset(vorg::VORG);
+            <span class="kw">if </span>vorg != <span class="number">0 </span>{
+                <span class="self">self</span>.vertical = Vertical::VmtxVorg {
+                    long_count,
+                    vmtx,
+                    vvar,
+                    vorg,
                 };
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">glyf</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">glyf::GLYF</span>);
-                <span class="kw">let</span> <span class="ident">loca</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">glyf::LOCA</span>);
-                <span class="kw">let</span> <span class="ident">loca_fmt</span> <span class="op">=</span> <span class="ident">font</span>
-                    .<span class="ident">head</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">index_to_location_format</span>() <span class="kw">as</span> <span class="ident">u8</span>)
-                    .<span class="ident">unwrap_or</span>(<span class="number">0xFF</span>);
-                <span class="kw">if</span> <span class="ident">glyf</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">loca</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">loca_fmt</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFF</span> {
-                    <span class="self">self</span>.<span class="ident">vertical</span> <span class="op">=</span> <span class="ident">Vertical::VmtxGlyf</span> {
-                        <span class="ident">loca_fmt</span>,
-                        <span class="ident">long_count</span>,
-                        <span class="ident">vmtx</span>,
-                        <span class="ident">vvar</span>,
-                        <span class="ident">glyf</span>,
-                        <span class="ident">loca</span>,
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>glyf = font.table_offset(glyf::GLYF);
+                <span class="kw">let </span>loca = font.table_offset(glyf::LOCA);
+                <span class="kw">let </span>loca_fmt = font
+                    .head()
+                    .map(|t| t.index_to_location_format() <span class="kw">as </span>u8)
+                    .unwrap_or(<span class="number">0xFF</span>);
+                <span class="kw">if </span>glyf != <span class="number">0 </span>&amp;&amp; loca != <span class="number">0 </span>&amp;&amp; loca_fmt != <span class="number">0xFF </span>{
+                    <span class="self">self</span>.vertical = Vertical::VmtxGlyf {
+                        loca_fmt,
+                        long_count,
+                        vmtx,
+                        vvar,
+                        glyf,
+                        loca,
                     }
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">vertical</span> <span class="op">=</span> <span class="ident">Vertical::Synthesized</span> {
-                <span class="ident">mvar</span>: <span class="self">self</span>.<span class="ident">mvar</span>,
-                <span class="ident">advance</span>: <span class="self">self</span>.<span class="ident">ascent</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">descent</span> <span class="kw">as</span> <span class="ident">f32</span>,
-                <span class="ident">origin</span>: <span class="self">self</span>.<span class="ident">ascent</span> <span class="kw">as</span> <span class="ident">f32</span>,
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.vertical = Vertical::Synthesized {
+                mvar: <span class="self">self</span>.mvar,
+                advance: <span class="self">self</span>.ascent <span class="kw">as </span>f32 + <span class="self">self</span>.descent <span class="kw">as </span>f32,
+                origin: <span class="self">self</span>.ascent <span class="kw">as </span>f32,
             };
         }
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="doccomment">/// Global font metrics.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Metrics</span> {
-    <span class="doccomment">/// Number of font design units per em unit.</span>
-    <span class="kw">pub</span> <span class="ident">units_per_em</span>: <span class="ident">u16</span>,
-    <span class="doccomment">/// Number of glyphs in the font.</span>
-    <span class="kw">pub</span> <span class="ident">glyph_count</span>: <span class="ident">u16</span>,
-    <span class="doccomment">/// True if the font is monospace.</span>
-    <span class="kw">pub</span> <span class="ident">is_monospace</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// True if the font provides canonical vertical metrics.</span>
-    <span class="kw">pub</span> <span class="ident">has_vertical_metrics</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// Distance from the baseline to the top of the alignment box.</span>
-    <span class="kw">pub</span> <span class="ident">ascent</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Distance from the baseline to the bottom of the alignment box.</span>
-    <span class="kw">pub</span> <span class="ident">descent</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Recommended additional spacing between lines.</span>
-    <span class="kw">pub</span> <span class="ident">leading</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Distance from the vertical center baseline to the right edge of</span>
-    <span class="doccomment">/// the design space.</span>
-    <span class="kw">pub</span> <span class="ident">vertical_ascent</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Distance from the vertical center baseline to the left edge of</span>
-    <span class="doccomment">/// the design space.</span>
-    <span class="kw">pub</span> <span class="ident">vertical_descent</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Recommended additional spacing between columns.</span>
-    <span class="kw">pub</span> <span class="ident">vertical_leading</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Distance from the baseline to the top of a typical English capital.</span>
-    <span class="kw">pub</span> <span class="ident">cap_height</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Distance from the baseline to the top of the lowercase &quot;x&quot; or</span>
-    <span class="doccomment">/// similar character.</span>
-    <span class="kw">pub</span> <span class="ident">x_height</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Average width of all non-zero characters in the font.</span>
-    <span class="kw">pub</span> <span class="ident">average_width</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Maximum advance width of all characters in the font.</span>
-    <span class="kw">pub</span> <span class="ident">max_width</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Recommended distance from the baseline to the top of an underline</span>
-    <span class="doccomment">/// stroke.</span>
-    <span class="kw">pub</span> <span class="ident">underline_offset</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Recommended distance from the baseline to the top of a strikeout</span>
-    <span class="doccomment">/// stroke.</span>
-    <span class="kw">pub</span> <span class="ident">strikeout_offset</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// Recommended thickness of an underline or strikeout stroke.</span>
-    <span class="kw">pub</span> <span class="ident">stroke_size</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Global font metrics.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>Metrics {
+    <span class="doccomment">/// Number of font design units per em unit.
+    </span><span class="kw">pub </span>units_per_em: u16,
+    <span class="doccomment">/// Number of glyphs in the font.
+    </span><span class="kw">pub </span>glyph_count: u16,
+    <span class="doccomment">/// True if the font is monospace.
+    </span><span class="kw">pub </span>is_monospace: bool,
+    <span class="doccomment">/// True if the font provides canonical vertical metrics.
+    </span><span class="kw">pub </span>has_vertical_metrics: bool,
+    <span class="doccomment">/// Distance from the baseline to the top of the alignment box.
+    </span><span class="kw">pub </span>ascent: f32,
+    <span class="doccomment">/// Distance from the baseline to the bottom of the alignment box.
+    </span><span class="kw">pub </span>descent: f32,
+    <span class="doccomment">/// Recommended additional spacing between lines.
+    </span><span class="kw">pub </span>leading: f32,
+    <span class="doccomment">/// Distance from the vertical center baseline to the right edge of
+    /// the design space.
+    </span><span class="kw">pub </span>vertical_ascent: f32,
+    <span class="doccomment">/// Distance from the vertical center baseline to the left edge of
+    /// the design space.
+    </span><span class="kw">pub </span>vertical_descent: f32,
+    <span class="doccomment">/// Recommended additional spacing between columns.
+    </span><span class="kw">pub </span>vertical_leading: f32,
+    <span class="doccomment">/// Distance from the baseline to the top of a typical English capital.
+    </span><span class="kw">pub </span>cap_height: f32,
+    <span class="doccomment">/// Distance from the baseline to the top of the lowercase &quot;x&quot; or
+    /// similar character.
+    </span><span class="kw">pub </span>x_height: f32,
+    <span class="doccomment">/// Average width of all non-zero characters in the font.
+    </span><span class="kw">pub </span>average_width: f32,
+    <span class="doccomment">/// Maximum advance width of all characters in the font.
+    </span><span class="kw">pub </span>max_width: f32,
+    <span class="doccomment">/// Recommended distance from the baseline to the top of an underline
+    /// stroke.
+    </span><span class="kw">pub </span>underline_offset: f32,
+    <span class="doccomment">/// Recommended distance from the baseline to the top of a strikeout
+    /// stroke.
+    </span><span class="kw">pub </span>strikeout_offset: f32,
+    <span class="doccomment">/// Recommended thickness of an underline or strikeout stroke.
+    </span><span class="kw">pub </span>stroke_size: f32,
 }
 
-<span class="kw">impl</span> <span class="ident">Metrics</span> {
-    <span class="doccomment">/// Creates a new set of metrics from the specified font and</span>
-    <span class="doccomment">/// normalized variation coordinates.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="ident">MetricsProxy::from_font</span>(<span class="ident">font</span>);
-        <span class="ident">meta</span>.<span class="ident">materialize_metrics</span>(<span class="ident">font</span>, <span class="ident">coords</span>)
+<span class="kw">impl </span>Metrics {
+    <span class="doccomment">/// Creates a new set of metrics from the specified font and
+    /// normalized variation coordinates.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef, coords: <span class="kw-2">&amp;</span>[i16]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>meta = MetricsProxy::from_font(font);
+        meta.materialize_metrics(font, coords)
     }
 
-    <span class="doccomment">/// Creates a new set of metrics scaled for the specified pixels</span>
-    <span class="doccomment">/// per em unit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ppem</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">linear_scale</span>(<span class="kw">if</span> <span class="self">self</span>.<span class="ident">units_per_em</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">ppem</span> <span class="op">/</span> <span class="self">self</span>.<span class="ident">units_per_em</span> <span class="kw">as</span> <span class="ident">f32</span>
-        } <span class="kw">else</span> {
-            <span class="number">1.</span>
-        })
+    <span class="doccomment">/// Creates a new set of metrics scaled for the specified pixels
+    /// per em unit.
+    </span><span class="kw">pub fn </span>scale(<span class="kw-2">&amp;</span><span class="self">self</span>, ppem: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.linear_scale(<span class="kw">if </span><span class="self">self</span>.units_per_em != <span class="number">0 </span>{
+            ppem / <span class="self">self</span>.units_per_em <span class="kw">as </span>f32
+        } <span class="kw">else </span>{
+            <span class="number">1.
+        </span>})
     }
 
-    <span class="doccomment">/// Creates a new set of metrics scaled by the specified factor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linear_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="ident">m</span>.<span class="ident">ascent</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">descent</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">leading</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">vertical_ascent</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">vertical_descent</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">vertical_leading</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">cap_height</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">x_height</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">average_width</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">max_width</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">underline_offset</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">strikeout_offset</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>.<span class="ident">stroke_size</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">m</span>
+    <span class="doccomment">/// Creates a new set of metrics scaled by the specified factor.
+    </span><span class="kw">pub fn </span>linear_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, s: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="kw-2">*</span><span class="self">self</span>;
+        m.ascent <span class="kw-2">*</span>= s;
+        m.descent <span class="kw-2">*</span>= s;
+        m.leading <span class="kw-2">*</span>= s;
+        m.vertical_ascent <span class="kw-2">*</span>= s;
+        m.vertical_descent <span class="kw-2">*</span>= s;
+        m.vertical_leading <span class="kw-2">*</span>= s;
+        m.cap_height <span class="kw-2">*</span>= s;
+        m.x_height <span class="kw-2">*</span>= s;
+        m.average_width <span class="kw-2">*</span>= s;
+        m.max_width <span class="kw-2">*</span>= s;
+        m.underline_offset <span class="kw-2">*</span>= s;
+        m.strikeout_offset <span class="kw-2">*</span>= s;
+        m.stroke_size <span class="kw-2">*</span>= s;
+        m
     }
 }
 
-<span class="doccomment">/// Glyph advances, side bearings and vertical origins.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GlyphMetrics</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="ident">units_per_em</span>: <span class="ident">u16</span>,
-    <span class="ident">glyph_count</span>: <span class="ident">u16</span>,
-    <span class="ident">hmtx</span>: <span class="ident">u32</span>,
-    <span class="ident">hvar</span>: <span class="ident">u32</span>,
-    <span class="ident">hmtx_count</span>: <span class="ident">u16</span>,
-    <span class="ident">has_vvar</span>: <span class="ident">bool</span>,
-    <span class="ident">vertical</span>: <span class="ident">Vertical</span>,
-    <span class="ident">scale</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Glyph advances, side bearings and vertical origins.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>GlyphMetrics&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    units_per_em: u16,
+    glyph_count: u16,
+    hmtx: u32,
+    hvar: u32,
+    hmtx_count: u16,
+    has_vvar: bool,
+    vertical: Vertical,
+    scale: f32,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">GlyphMetrics</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a new set of glyph metrics from the specified font and</span>
-    <span class="doccomment">/// normalized variation coordinates.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">NormalizedCoord</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">proxy</span> <span class="op">=</span> <span class="ident">MetricsProxy::from_font</span>(<span class="ident">font</span>);
-        <span class="ident">proxy</span>.<span class="ident">materialize_glyph_metrics</span>(<span class="ident">font</span>, <span class="ident">coords</span>)
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; GlyphMetrics&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Creates a new set of glyph metrics from the specified font and
+    /// normalized variation coordinates.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;, coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[NormalizedCoord]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>proxy = MetricsProxy::from_font(font);
+        proxy.materialize_glyph_metrics(font, coords)
     }
 
-    <span class="doccomment">/// Returns the number of font design units per em unit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">units_per_em</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">units_per_em</span>
+    <span class="doccomment">/// Returns the number of font design units per em unit.
+    </span><span class="kw">pub fn </span>units_per_em(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.units_per_em
     }
 
-    <span class="doccomment">/// Returns the number of glyphs in the font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">glyph_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">glyph_count</span>
+    <span class="doccomment">/// Returns the number of glyphs in the font.
+    </span><span class="kw">pub fn </span>glyph_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.glyph_count
     }
 
-    <span class="doccomment">/// Returns true if the font provides canonical vertical glyph metrics.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_vertical_metrics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="op">!</span><span class="macro">matches!</span>(<span class="self">self</span>.<span class="ident">vertical</span>, <span class="ident">Vertical::Synthesized</span> { .. })
+    <span class="doccomment">/// Returns true if the font provides canonical vertical glyph metrics.
+    </span><span class="kw">pub fn </span>has_vertical_metrics(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !<span class="macro">matches!</span>(<span class="self">self</span>.vertical, Vertical::Synthesized { .. })
     }
 
-    <span class="doccomment">/// Returns true if variations are supported.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_variations</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">hvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">has_vvar</span>
+    <span class="doccomment">/// Returns true if variations are supported.
+    </span><span class="kw">pub fn </span>has_variations(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.hvar != <span class="number">0 </span>|| <span class="self">self</span>.has_vvar
     }
 
-    <span class="doccomment">/// Creates a new set of metrics scaled for the specified pixels</span>
-    <span class="doccomment">/// per em unit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ppem</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">linear_scale</span>(<span class="kw">if</span> <span class="self">self</span>.<span class="ident">units_per_em</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">ppem</span> <span class="op">/</span> <span class="self">self</span>.<span class="ident">units_per_em</span>() <span class="kw">as</span> <span class="ident">f32</span>
-        } <span class="kw">else</span> {
-            <span class="number">1.</span>
-        })
+    <span class="doccomment">/// Creates a new set of metrics scaled for the specified pixels
+    /// per em unit.
+    </span><span class="kw">pub fn </span>scale(<span class="kw-2">&amp;</span><span class="self">self</span>, ppem: f32) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.linear_scale(<span class="kw">if </span><span class="self">self</span>.units_per_em() != <span class="number">0 </span>{
+            ppem / <span class="self">self</span>.units_per_em() <span class="kw">as </span>f32
+        } <span class="kw">else </span>{
+            <span class="number">1.
+        </span>})
     }
 
-    <span class="doccomment">/// Creates a new set of metrics scaled by the specified factor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linear_scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">copy</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="ident">copy</span>.<span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span>;
-        <span class="ident">copy</span>
+    <span class="doccomment">/// Creates a new set of metrics scaled by the specified factor.
+    </span><span class="kw">pub fn </span>linear_scale(<span class="kw-2">&amp;</span><span class="self">self</span>, scale: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>copy = <span class="kw-2">*</span><span class="self">self</span>;
+        copy.scale = scale;
+        copy
     }
 
-    <span class="doccomment">/// Returns the horizontal advance for the specified glyph.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">advance_width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">xmtx::advance</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">hmtx</span>, <span class="self">self</span>.<span class="ident">hmtx_count</span>, <span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">var::advance_delta</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">hvar</span>, <span class="ident">glyph_id</span>, <span class="self">self</span>.<span class="ident">coords</span>);
+    <span class="doccomment">/// Returns the horizontal advance for the specified glyph.
+    </span><span class="kw">pub fn </span>advance_width(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; f32 {
+        <span class="kw">let </span><span class="kw-2">mut </span>v = xmtx::advance(<span class="self">self</span>.data, <span class="self">self</span>.hmtx, <span class="self">self</span>.hmtx_count, glyph_id) <span class="kw">as </span>f32;
+        <span class="kw">if </span><span class="self">self</span>.hvar != <span class="number">0 </span>{
+            v += var::advance_delta(<span class="self">self</span>.data, <span class="self">self</span>.hvar, glyph_id, <span class="self">self</span>.coords);
         }
-        <span class="ident">v</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">scale</span>
+        v * <span class="self">self</span>.scale
     }
 
-    <span class="doccomment">/// Returns the left side bearing for the specified glyph.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lsb</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">xmtx::sb</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">hmtx</span>, <span class="self">self</span>.<span class="ident">hmtx_count</span>, <span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">var::sb_delta</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">hvar</span>, <span class="ident">glyph_id</span>, <span class="self">self</span>.<span class="ident">coords</span>)
+    <span class="doccomment">/// Returns the left side bearing for the specified glyph.
+    </span><span class="kw">pub fn </span>lsb(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; f32 {
+        <span class="kw">let </span><span class="kw-2">mut </span>v = xmtx::sb(<span class="self">self</span>.data, <span class="self">self</span>.hmtx, <span class="self">self</span>.hmtx_count, glyph_id) <span class="kw">as </span>f32;
+        <span class="kw">if </span><span class="self">self</span>.hvar != <span class="number">0 </span>{
+            v += var::sb_delta(<span class="self">self</span>.data, <span class="self">self</span>.hvar, glyph_id, <span class="self">self</span>.coords)
         }
-        <span class="ident">v</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">scale</span>
+        v * <span class="self">self</span>.scale
     }
 
-    <span class="doccomment">/// Returns the vertical advance for the specified glyph.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">advance_height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">scale</span>
-            <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vertical</span> {
-                <span class="ident">Vertical::VmtxGlyf</span> {
-                    <span class="ident">vmtx</span>,
-                    <span class="ident">vvar</span>,
-                    <span class="ident">long_count</span>,
+    <span class="doccomment">/// Returns the vertical advance for the specified glyph.
+    </span><span class="kw">pub fn </span>advance_height(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; f32 {
+        <span class="self">self</span>.scale
+            * <span class="kw">match </span><span class="self">self</span>.vertical {
+                Vertical::VmtxGlyf {
+                    vmtx,
+                    vvar,
+                    long_count,
                     ..
                 }
-                <span class="op">|</span> <span class="ident">Vertical::VmtxVorg</span> {
-                    <span class="ident">vmtx</span>,
-                    <span class="ident">vvar</span>,
-                    <span class="ident">long_count</span>,
+                | Vertical::VmtxVorg {
+                    vmtx,
+                    vvar,
+                    long_count,
                     ..
                 } =&gt; {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">xmtx::advance</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">vmtx</span>, <span class="ident">long_count</span>, <span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">f32</span>;
-                    <span class="kw">if</span> <span class="ident">vvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">var::advance_delta</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">vvar</span>, <span class="ident">glyph_id</span>, <span class="self">self</span>.<span class="ident">coords</span>);
+                    <span class="kw">let </span><span class="kw-2">mut </span>v = xmtx::advance(<span class="self">self</span>.data, vmtx, long_count, glyph_id) <span class="kw">as </span>f32;
+                    <span class="kw">if </span>vvar != <span class="number">0 </span>{
+                        v += var::advance_delta(<span class="self">self</span>.data, vvar, glyph_id, <span class="self">self</span>.coords);
                     }
-                    <span class="ident">v</span>
+                    v
                 }
-                <span class="ident">Vertical::Synthesized</span> { <span class="ident">advance</span>, .. } =&gt; <span class="ident">advance</span>,
+                Vertical::Synthesized { advance, .. } =&gt; advance,
             }
     }
 
-    <span class="doccomment">/// Returns the top side bearing for the specified glyph.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tsb</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">scale</span>
-            <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vertical</span> {
-                <span class="ident">Vertical::VmtxGlyf</span> {
-                    <span class="ident">vmtx</span>,
-                    <span class="ident">vvar</span>,
-                    <span class="ident">long_count</span>,
+    <span class="doccomment">/// Returns the top side bearing for the specified glyph.
+    </span><span class="kw">pub fn </span>tsb(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; f32 {
+        <span class="self">self</span>.scale
+            * <span class="kw">match </span><span class="self">self</span>.vertical {
+                Vertical::VmtxGlyf {
+                    vmtx,
+                    vvar,
+                    long_count,
                     ..
                 }
-                <span class="op">|</span> <span class="ident">Vertical::VmtxVorg</span> {
-                    <span class="ident">vmtx</span>,
-                    <span class="ident">vvar</span>,
-                    <span class="ident">long_count</span>,
+                | Vertical::VmtxVorg {
+                    vmtx,
+                    vvar,
+                    long_count,
                     ..
                 } =&gt; {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">xmtx::sb</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">vmtx</span>, <span class="ident">long_count</span>, <span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">f32</span>;
-                    <span class="kw">if</span> <span class="ident">vvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">var::sb_delta</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">vvar</span>, <span class="ident">glyph_id</span>, <span class="self">self</span>.<span class="ident">coords</span>);
+                    <span class="kw">let </span><span class="kw-2">mut </span>v = xmtx::sb(<span class="self">self</span>.data, vmtx, long_count, glyph_id) <span class="kw">as </span>f32;
+                    <span class="kw">if </span>vvar != <span class="number">0 </span>{
+                        v += var::sb_delta(<span class="self">self</span>.data, vvar, glyph_id, <span class="self">self</span>.coords);
                     }
-                    <span class="ident">v</span>
+                    v
                 }
-                <span class="ident">Vertical::Synthesized</span> { .. } =&gt; <span class="number">0.</span>,
+                Vertical::Synthesized { .. } =&gt; <span class="number">0.</span>,
             }
     }
 
-    <span class="doccomment">/// Returns the vertical origin for the specified glyph id.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vertical_origin</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">scale</span>
-            <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">vertical</span> {
-                <span class="ident">Vertical::VmtxGlyf</span> {
-                    <span class="ident">loca_fmt</span>,
-                    <span class="ident">loca</span>,
-                    <span class="ident">glyf</span>,
+    <span class="doccomment">/// Returns the vertical origin for the specified glyph id.
+    </span><span class="kw">pub fn </span>vertical_origin(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; f32 {
+        <span class="self">self</span>.scale
+            * <span class="kw">match </span><span class="self">self</span>.vertical {
+                Vertical::VmtxGlyf {
+                    loca_fmt,
+                    loca,
+                    glyf,
                     ..
                 } =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max_y</span>) <span class="op">=</span> <span class="ident">glyf::ymax</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">loca_fmt</span>, <span class="ident">loca</span>, <span class="ident">glyf</span>, <span class="ident">glyph_id</span>) {
-                        <span class="ident">max_y</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">tsb</span>(<span class="ident">glyph_id</span>)
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">units_per_em</span> <span class="kw">as</span> <span class="ident">f32</span>
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(max_y) = glyf::ymax(<span class="self">self</span>.data, loca_fmt, loca, glyf, glyph_id) {
+                        max_y <span class="kw">as </span>f32 + <span class="self">self</span>.tsb(glyph_id)
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.units_per_em <span class="kw">as </span>f32
                     }
                 }
-                <span class="ident">Vertical::VmtxVorg</span> { <span class="ident">vorg</span>, .. } =&gt; <span class="ident">vorg::origin</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">vorg</span>, <span class="ident">glyph_id</span>)
-                    .<span class="ident">unwrap_or</span>(<span class="self">self</span>.<span class="ident">units_per_em</span> <span class="kw">as</span> <span class="ident">i16</span>)
-                    <span class="kw">as</span> <span class="ident">f32</span>,
-                <span class="ident">Vertical::Synthesized</span> { <span class="ident">origin</span>, .. } =&gt; <span class="ident">origin</span>,
+                Vertical::VmtxVorg { vorg, .. } =&gt; vorg::origin(<span class="self">self</span>.data, vorg, glyph_id)
+                    .unwrap_or(<span class="self">self</span>.units_per_em <span class="kw">as </span>i16)
+                    <span class="kw">as </span>f32,
+                Vertical::Synthesized { origin, .. } =&gt; origin,
             }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u8</span>)]</span>
-<span class="kw">enum</span> <span class="ident">Vertical</span> {
-    <span class="ident">VmtxGlyf</span> {
-        <span class="ident">loca_fmt</span>: <span class="ident">u8</span>,
-        <span class="ident">long_count</span>: <span class="ident">u16</span>,
-        <span class="ident">vmtx</span>: <span class="ident">u32</span>,
-        <span class="ident">vvar</span>: <span class="ident">u32</span>,
-        <span class="ident">glyf</span>: <span class="ident">u32</span>,
-        <span class="ident">loca</span>: <span class="ident">u32</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+#[repr(u8)]
+</span><span class="kw">enum </span>Vertical {
+    VmtxGlyf {
+        loca_fmt: u8,
+        long_count: u16,
+        vmtx: u32,
+        vvar: u32,
+        glyf: u32,
+        loca: u32,
     },
-    <span class="ident">VmtxVorg</span> {
-        <span class="ident">long_count</span>: <span class="ident">u16</span>,
-        <span class="ident">vmtx</span>: <span class="ident">u32</span>,
-        <span class="ident">vvar</span>: <span class="ident">u32</span>,
-        <span class="ident">vorg</span>: <span class="ident">u32</span>,
+    VmtxVorg {
+        long_count: u16,
+        vmtx: u32,
+        vvar: u32,
+        vorg: u32,
     },
-    <span class="ident">Synthesized</span> {
-        <span class="ident">mvar</span>: <span class="ident">u32</span>,
-        <span class="ident">advance</span>: <span class="ident">f32</span>,
-        <span class="ident">origin</span>: <span class="ident">f32</span>,
+    Synthesized {
+        mvar: u32,
+        advance: f32,
+        origin: f32,
     },
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Vertical</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Synthesized</span> {
-            <span class="ident">mvar</span>: <span class="number">0</span>,
-            <span class="ident">advance</span>: <span class="number">0.</span>,
-            <span class="ident">origin</span>: <span class="number">0.</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>Vertical {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Synthesized {
+            mvar: <span class="number">0</span>,
+            advance: <span class="number">0.</span>,
+            origin: <span class="number">0.</span>,
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

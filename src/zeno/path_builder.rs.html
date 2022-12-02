@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/path_builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path_builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/path_builder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path_builder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -596,603 +596,603 @@
 <span id="596">596</span>
 <span id="597">597</span>
 <span id="598">598</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Path builder.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Path builder.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::command::Command</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::{<span class="ident">Angle</span>, <span class="ident">BoundsBuilder</span>, <span class="ident">Point</span>, <span class="ident">Transform</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::command::Command;
+<span class="kw">use </span><span class="kw">super</span>::geometry::{Angle, BoundsBuilder, Point, Transform};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::lib::Vec</span>;
+<span class="kw">use </span><span class="kw">crate</span>::lib::Vec;
 
-<span class="doccomment">/// Describes the size of an arc.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ArcSize</span> {
-    <span class="doccomment">/// An arc of &lt;= 180 degrees will be drawn.</span>
-    <span class="ident">Small</span>,
-    <span class="doccomment">/// An arc of &gt;= 180 degrees will be drawn.</span>
-    <span class="ident">Large</span>,
+<span class="doccomment">/// Describes the size of an arc.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq)]
+</span><span class="kw">pub enum </span>ArcSize {
+    <span class="doccomment">/// An arc of &lt;= 180 degrees will be drawn.
+    </span>Small,
+    <span class="doccomment">/// An arc of &gt;= 180 degrees will be drawn.
+    </span>Large,
 }
 
-<span class="doccomment">/// Describes the sweep direction for an arc.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ArcSweep</span> {
-    <span class="doccomment">/// The arc is drawn in a positive angle direction.</span>
-    <span class="ident">Positive</span>,
-    <span class="doccomment">/// The arc is drawn in a negative angle direction.</span>
-    <span class="ident">Negative</span>,
+<span class="doccomment">/// Describes the sweep direction for an arc.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq)]
+</span><span class="kw">pub enum </span>ArcSweep {
+    <span class="doccomment">/// The arc is drawn in a positive angle direction.
+    </span>Positive,
+    <span class="doccomment">/// The arc is drawn in a negative angle direction.
+    </span>Negative,
 }
 
-<span class="doccomment">/// Trait for types that accept path commands.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PathBuilder</span>: <span class="ident">Sized</span> {
-    <span class="doccomment">/// Returns the current point of the path.</span>
-    <span class="kw">fn</span> <span class="ident">current_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point</span>;
+<span class="doccomment">/// Trait for types that accept path commands.
+</span><span class="kw">pub trait </span>PathBuilder: Sized {
+    <span class="doccomment">/// Returns the current point of the path.
+    </span><span class="kw">fn </span>current_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point;
 
-    <span class="doccomment">/// Moves to the specified point, beginning a new subpath.</span>
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="doccomment">/// Moves to the specified point, beginning a new subpath.
+    </span><span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 
-    <span class="doccomment">/// Moves to the specified point, relative to the current point,</span>
-    <span class="doccomment">/// beginning a new subpath.</span>
-    <span class="kw">fn</span> <span class="ident">rel_move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">move_to</span>(<span class="ident">to</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_point</span>())
+    <span class="doccomment">/// Moves to the specified point, relative to the current point,
+    /// beginning a new subpath.
+    </span><span class="kw">fn </span>rel_move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.move_to(to.into() + <span class="self">self</span>.current_point())
     }
 
-    <span class="doccomment">/// Adds a line to the specified point. This will begin a new subpath</span>
-    <span class="doccomment">/// if the path is empty or the previous subpath was closed.</span>
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="doccomment">/// Adds a line to the specified point. This will begin a new subpath
+    /// if the path is empty or the previous subpath was closed.
+    </span><span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 
-    <span class="doccomment">/// Adds a line to the specified point, relative to the current point. This</span>
-    <span class="doccomment">/// will begin a new subpath if the path is empty or the previous subpath</span>
-    <span class="doccomment">/// was closed.</span>
-    <span class="kw">fn</span> <span class="ident">rel_line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">line_to</span>(<span class="ident">to</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_point</span>())
+    <span class="doccomment">/// Adds a line to the specified point, relative to the current point. This
+    /// will begin a new subpath if the path is empty or the previous subpath
+    /// was closed.
+    </span><span class="kw">fn </span>rel_line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.line_to(to.into() + <span class="self">self</span>.current_point())
     }
 
-    <span class="doccomment">/// Adds a cubic bezier curve from the current point through the specified</span>
-    <span class="doccomment">/// control points to the final point. This will begin a new subpath if the</span>
-    <span class="doccomment">/// path is empty or the previous subpath was closed.</span>
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="doccomment">/// Adds a cubic bezier curve from the current point through the specified
+    /// control points to the final point. This will begin a new subpath if the
+    /// path is empty or the previous subpath was closed.
+    </span><span class="kw">fn </span>curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 
-    <span class="doccomment">/// Adds a cubic bezier curve from the current point through the specified</span>
-    <span class="doccomment">/// control points to the final point. All points are considered relative to the</span>
-    <span class="doccomment">/// current point. This will begin a new subpath if the path is empty or the</span>
-    <span class="doccomment">/// previous subpath was closed.</span>
-    <span class="kw">fn</span> <span class="ident">rel_curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">current_point</span>();
-        <span class="self">self</span>.<span class="ident">curve_to</span>(<span class="ident">control1</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="ident">r</span>, <span class="ident">control2</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="ident">r</span>, <span class="ident">to</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="ident">r</span>)
+    <span class="doccomment">/// Adds a cubic bezier curve from the current point through the specified
+    /// control points to the final point. All points are considered relative to the
+    /// current point. This will begin a new subpath if the path is empty or the
+    /// previous subpath was closed.
+    </span><span class="kw">fn </span>rel_curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>r = <span class="self">self</span>.current_point();
+        <span class="self">self</span>.curve_to(control1.into() + r, control2.into() + r, to.into() + r)
     }
 
-    <span class="doccomment">/// Adds a quadratic bezier curve from the current point through the specified</span>
-    <span class="doccomment">/// control point to the final point. This will begin a new subpath if the</span>
-    <span class="doccomment">/// path is empty or the previous subpath was closed.   </span>
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="doccomment">/// Adds a quadratic bezier curve from the current point through the specified
+    /// control point to the final point. This will begin a new subpath if the
+    /// path is empty or the previous subpath was closed.   
+    </span><span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control1: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 
-    <span class="doccomment">/// Adds a quadratic bezier curve from the current point through the specified</span>
-    <span class="doccomment">/// control point to the final point. All points are considered relative to the</span>
-    <span class="doccomment">/// current point. This will begin a new subpath if the path is empty or the</span>
-    <span class="doccomment">/// previous subpath was closed.    </span>
-    <span class="kw">fn</span> <span class="ident">rel_quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">current_point</span>();
-        <span class="self">self</span>.<span class="ident">quad_to</span>(<span class="ident">control</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="ident">r</span>, <span class="ident">to</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="ident">r</span>)
+    <span class="doccomment">/// Adds a quadratic bezier curve from the current point through the specified
+    /// control point to the final point. All points are considered relative to the
+    /// current point. This will begin a new subpath if the path is empty or the
+    /// previous subpath was closed.    
+    </span><span class="kw">fn </span>rel_quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>r = <span class="self">self</span>.current_point();
+        <span class="self">self</span>.quad_to(control.into() + r, to.into() + r)
     }
 
-    <span class="doccomment">/// Adds an arc with the specified x- and y-radius, rotation angle, arc size,</span>
-    <span class="doccomment">/// and arc sweep from the current point to the specified end point. The center</span>
-    <span class="doccomment">/// point of the arc will be computed from the parameters. This will begin a</span>
-    <span class="doccomment">/// new subpath if the path is empty or the previous subpath was closed.</span>
-    <span class="kw">fn</span> <span class="ident">arc_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">rx</span>: <span class="ident">f32</span>,
-        <span class="ident">ry</span>: <span class="ident">f32</span>,
-        <span class="ident">angle</span>: <span class="ident">Angle</span>,
-        <span class="ident">size</span>: <span class="ident">ArcSize</span>,
-        <span class="ident">sweep</span>: <span class="ident">ArcSweep</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">current_point</span>();
-        <span class="ident">arc</span>(
+    <span class="doccomment">/// Adds an arc with the specified x- and y-radius, rotation angle, arc size,
+    /// and arc sweep from the current point to the specified end point. The center
+    /// point of the arc will be computed from the parameters. This will begin a
+    /// new subpath if the path is empty or the previous subpath was closed.
+    </span><span class="kw">fn </span>arc_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        rx: f32,
+        ry: f32,
+        angle: Angle,
+        size: ArcSize,
+        sweep: ArcSweep,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>from = <span class="self">self</span>.current_point();
+        arc(
             <span class="self">self</span>,
-            <span class="ident">from</span>,
-            <span class="ident">rx</span>,
-            <span class="ident">ry</span>,
-            <span class="ident">angle</span>.<span class="ident">to_radians</span>(),
-            <span class="ident">size</span>,
-            <span class="ident">sweep</span>,
-            <span class="ident">to</span>.<span class="ident">into</span>(),
+            from,
+            rx,
+            ry,
+            angle.to_radians(),
+            size,
+            sweep,
+            to.into(),
         );
-        <span class="self">self</span>
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Adds an arc with the specified x- and y-radius, rotation angle, arc size,
+    /// and arc sweep from the current point to the specified end point. The end
+    /// point is considered relative to the current point. The center point of the
+    /// arc will be computed from the parameters. This will begin a new subpath if
+    /// the path is empty or the previous subpath was closed.
+    </span><span class="kw">fn </span>rel_arc_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        rx: f32,
+        ry: f32,
+        angle: Angle,
+        size: ArcSize,
+        sweep: ArcSweep,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.arc_to(rx, ry, angle, size, sweep, to.into() + <span class="self">self</span>.current_point())
     }
 
-    <span class="doccomment">/// Adds an arc with the specified x- and y-radius, rotation angle, arc size,</span>
-    <span class="doccomment">/// and arc sweep from the current point to the specified end point. The end</span>
-    <span class="doccomment">/// point is considered relative to the current point. The center point of the</span>
-    <span class="doccomment">/// arc will be computed from the parameters. This will begin a new subpath if</span>
-    <span class="doccomment">/// the path is empty or the previous subpath was closed.</span>
-    <span class="kw">fn</span> <span class="ident">rel_arc_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">rx</span>: <span class="ident">f32</span>,
-        <span class="ident">ry</span>: <span class="ident">f32</span>,
-        <span class="ident">angle</span>: <span class="ident">Angle</span>,
-        <span class="ident">size</span>: <span class="ident">ArcSize</span>,
-        <span class="ident">sweep</span>: <span class="ident">ArcSweep</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">arc_to</span>(<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">angle</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_point</span>())
+    <span class="doccomment">/// Closes the current subpath.
+    </span><span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+
+    <span class="doccomment">/// Adds a rectangle with the specified position and size to the path. This
+    /// will create a new closed subpath.
+    </span><span class="kw">fn </span>add_rect(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xy: <span class="kw">impl </span>Into&lt;Point&gt;, w: f32, h: f32) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>p = xy.into();
+        <span class="kw">let </span>(l, t, r, b) = (p.x, p.y, p.x + w, p.y + h);
+        <span class="self">self</span>.move_to(p);
+        <span class="self">self</span>.line_to((r, t));
+        <span class="self">self</span>.line_to((r, b));
+        <span class="self">self</span>.line_to((l, b));
+        <span class="self">self</span>.close()
     }
 
-    <span class="doccomment">/// Closes the current subpath.</span>
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-
-    <span class="doccomment">/// Adds a rectangle with the specified position and size to the path. This</span>
-    <span class="doccomment">/// will create a new closed subpath.</span>
-    <span class="kw">fn</span> <span class="ident">add_rect</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">xy</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">w</span>: <span class="ident">f32</span>, <span class="ident">h</span>: <span class="ident">f32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">xy</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> (<span class="ident">l</span>, <span class="ident">t</span>, <span class="ident">r</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span>, <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">w</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">h</span>);
-        <span class="self">self</span>.<span class="ident">move_to</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">r</span>, <span class="ident">t</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">r</span>, <span class="ident">b</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">l</span>, <span class="ident">b</span>));
-        <span class="self">self</span>.<span class="ident">close</span>()
+    <span class="doccomment">/// Adds a rounded rectangle with the specified position, size and radii to
+    /// the path. This will create a new closed subpath.
+    </span><span class="kw">fn </span>add_round_rect(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        xy: <span class="kw">impl </span>Into&lt;Point&gt;,
+        w: f32,
+        h: f32,
+        rx: f32,
+        ry: f32,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>p = xy.into();
+        <span class="kw">let </span>size = ArcSize::Small;
+        <span class="kw">let </span>sweep = ArcSweep::Positive;
+        <span class="kw">let </span>a = Angle::from_radians(<span class="number">0.</span>);
+        <span class="kw">let </span>hw = w * <span class="number">0.5</span>;
+        <span class="kw">let </span>rx = rx.max(<span class="number">0.</span>).min(hw);
+        <span class="kw">let </span>hh = h * <span class="number">0.5</span>;
+        <span class="kw">let </span>ry = ry.max(<span class="number">0.</span>).min(hh);
+        <span class="self">self</span>.move_to((p.x + rx, p.y));
+        <span class="self">self</span>.line_to((p.x + w - rx, p.y));
+        <span class="self">self</span>.arc_to(rx, ry, a, size, sweep, (p.x + w, p.y + ry));
+        <span class="self">self</span>.line_to((p.x + w, p.y + h - ry));
+        <span class="self">self</span>.arc_to(rx, ry, a, size, sweep, (p.x + w - rx, p.y + h));
+        <span class="self">self</span>.line_to((p.x + rx, p.y + h));
+        <span class="self">self</span>.arc_to(rx, ry, a, size, sweep, (p.x, p.y + h - ry));
+        <span class="self">self</span>.line_to((p.x, p.y + ry));
+        <span class="self">self</span>.arc_to(rx, ry, a, size, sweep, (p.x + rx, p.y));
+        <span class="self">self</span>.close()
     }
 
-    <span class="doccomment">/// Adds a rounded rectangle with the specified position, size and radii to</span>
-    <span class="doccomment">/// the path. This will create a new closed subpath.</span>
-    <span class="kw">fn</span> <span class="ident">add_round_rect</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">xy</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">w</span>: <span class="ident">f32</span>,
-        <span class="ident">h</span>: <span class="ident">f32</span>,
-        <span class="ident">rx</span>: <span class="ident">f32</span>,
-        <span class="ident">ry</span>: <span class="ident">f32</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">xy</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ArcSize::Small</span>;
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="ident">ArcSweep::Positive</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Angle::from_radians</span>(<span class="number">0.</span>);
-        <span class="kw">let</span> <span class="ident">hw</span> <span class="op">=</span> <span class="ident">w</span> <span class="op">*</span> <span class="number">0.5</span>;
-        <span class="kw">let</span> <span class="ident">rx</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">max</span>(<span class="number">0.</span>).<span class="ident">min</span>(<span class="ident">hw</span>);
-        <span class="kw">let</span> <span class="ident">hh</span> <span class="op">=</span> <span class="ident">h</span> <span class="op">*</span> <span class="number">0.5</span>;
-        <span class="kw">let</span> <span class="ident">ry</span> <span class="op">=</span> <span class="ident">ry</span>.<span class="ident">max</span>(<span class="number">0.</span>).<span class="ident">min</span>(<span class="ident">hh</span>);
-        <span class="self">self</span>.<span class="ident">move_to</span>((<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">p</span>.<span class="ident">y</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">w</span> <span class="op">-</span> <span class="ident">rx</span>, <span class="ident">p</span>.<span class="ident">y</span>));
-        <span class="self">self</span>.<span class="ident">arc_to</span>(<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, (<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">w</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">w</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">h</span> <span class="op">-</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">arc_to</span>(<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, (<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">w</span> <span class="op">-</span> <span class="ident">rx</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">h</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">h</span>));
-        <span class="self">self</span>.<span class="ident">arc_to</span>(<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, (<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">h</span> <span class="op">-</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">line_to</span>((<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">arc_to</span>(<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, (<span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">p</span>.<span class="ident">y</span>));
-        <span class="self">self</span>.<span class="ident">close</span>()
+    <span class="doccomment">/// Adds an ellipse with the specified center and radii to the path. This
+    /// will create a new closed subpath.
+    </span><span class="kw">fn </span>add_ellipse(<span class="kw-2">&amp;mut </span><span class="self">self</span>, center: <span class="kw">impl </span>Into&lt;Point&gt;, rx: f32, ry: f32) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>center = center.into();
+        <span class="kw">let </span>cx = center.x;
+        <span class="kw">let </span>cy = center.y;
+        <span class="kw">let </span>a = <span class="number">0.551915024494</span>;
+        <span class="kw">let </span>arx = a * rx;
+        <span class="kw">let </span>ary = a * ry;
+        <span class="self">self</span>.move_to((cx + rx, cy));
+        <span class="self">self</span>.curve_to((cx + rx, cy + ary), (cx + arx, cy + ry), (cx, cy + ry));
+        <span class="self">self</span>.curve_to((cx - arx, cy + ry), (cx - rx, cy + ary), (cx - rx, cy));
+        <span class="self">self</span>.curve_to((cx - rx, cy - ary), (cx - arx, cy - ry), (cx, cy - ry));
+        <span class="self">self</span>.curve_to((cx + arx, cy - ry), (cx + rx, cy - ary), (cx + rx, cy));
+        <span class="self">self</span>.close()
     }
 
-    <span class="doccomment">/// Adds an ellipse with the specified center and radii to the path. This</span>
-    <span class="doccomment">/// will create a new closed subpath.</span>
-    <span class="kw">fn</span> <span class="ident">add_ellipse</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">center</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">rx</span>: <span class="ident">f32</span>, <span class="ident">ry</span>: <span class="ident">f32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">center</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">cx</span> <span class="op">=</span> <span class="ident">center</span>.<span class="ident">x</span>;
-        <span class="kw">let</span> <span class="ident">cy</span> <span class="op">=</span> <span class="ident">center</span>.<span class="ident">y</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="number">0.551915024494</span>;
-        <span class="kw">let</span> <span class="ident">arx</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">rx</span>;
-        <span class="kw">let</span> <span class="ident">ary</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">ry</span>;
-        <span class="self">self</span>.<span class="ident">move_to</span>((<span class="ident">cx</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">cy</span>));
-        <span class="self">self</span>.<span class="ident">curve_to</span>((<span class="ident">cx</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">cy</span> <span class="op">+</span> <span class="ident">ary</span>), (<span class="ident">cx</span> <span class="op">+</span> <span class="ident">arx</span>, <span class="ident">cy</span> <span class="op">+</span> <span class="ident">ry</span>), (<span class="ident">cx</span>, <span class="ident">cy</span> <span class="op">+</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">curve_to</span>((<span class="ident">cx</span> <span class="op">-</span> <span class="ident">arx</span>, <span class="ident">cy</span> <span class="op">+</span> <span class="ident">ry</span>), (<span class="ident">cx</span> <span class="op">-</span> <span class="ident">rx</span>, <span class="ident">cy</span> <span class="op">+</span> <span class="ident">ary</span>), (<span class="ident">cx</span> <span class="op">-</span> <span class="ident">rx</span>, <span class="ident">cy</span>));
-        <span class="self">self</span>.<span class="ident">curve_to</span>((<span class="ident">cx</span> <span class="op">-</span> <span class="ident">rx</span>, <span class="ident">cy</span> <span class="op">-</span> <span class="ident">ary</span>), (<span class="ident">cx</span> <span class="op">-</span> <span class="ident">arx</span>, <span class="ident">cy</span> <span class="op">-</span> <span class="ident">ry</span>), (<span class="ident">cx</span>, <span class="ident">cy</span> <span class="op">-</span> <span class="ident">ry</span>));
-        <span class="self">self</span>.<span class="ident">curve_to</span>((<span class="ident">cx</span> <span class="op">+</span> <span class="ident">arx</span>, <span class="ident">cy</span> <span class="op">-</span> <span class="ident">ry</span>), (<span class="ident">cx</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">cy</span> <span class="op">-</span> <span class="ident">ary</span>), (<span class="ident">cx</span> <span class="op">+</span> <span class="ident">rx</span>, <span class="ident">cy</span>));
-        <span class="self">self</span>.<span class="ident">close</span>()
-    }
-
-    <span class="doccomment">/// Adds a circle with the specified center and radius to the path. This</span>
-    <span class="doccomment">/// will create a new closed subpath.</span>
-    <span class="kw">fn</span> <span class="ident">add_circle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">center</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">r</span>: <span class="ident">f32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add_ellipse</span>(<span class="ident">center</span>, <span class="ident">r</span>, <span class="ident">r</span>)
+    <span class="doccomment">/// Adds a circle with the specified center and radius to the path. This
+    /// will create a new closed subpath.
+    </span><span class="kw">fn </span>add_circle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, center: <span class="kw">impl </span>Into&lt;Point&gt;, r: f32) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.add_ellipse(center, r, r)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">PathBuilder</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">current_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last</span>() {
-            <span class="prelude-val">None</span> =&gt; <span class="ident">Point::ZERO</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">cmd</span>) =&gt; <span class="kw">match</span> <span class="ident">cmd</span> {
-                <span class="ident">Command::MoveTo</span>(<span class="ident">p</span>)
-                <span class="op">|</span> <span class="ident">Command::LineTo</span>(<span class="ident">p</span>)
-                <span class="op">|</span> <span class="ident">Command::QuadTo</span>(<span class="kw">_</span>, <span class="ident">p</span>)
-                <span class="op">|</span> <span class="ident">Command::CurveTo</span>(<span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">p</span>) =&gt; <span class="kw-2">*</span><span class="ident">p</span>,
-                <span class="ident">Command::Close</span> =&gt; {
-                    <span class="kw">for</span> <span class="ident">cmd</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">rev</span>().<span class="ident">skip</span>(<span class="number">1</span>) {
-                        <span class="kw">match</span> <span class="ident">cmd</span> {
-                            <span class="ident">Command::MoveTo</span>(<span class="ident">p</span>) =&gt; <span class="kw">return</span> <span class="kw-2">*</span><span class="ident">p</span>,
-                            <span class="kw">_</span> =&gt; {}
+<span class="kw">impl </span>PathBuilder <span class="kw">for </span>Vec&lt;Command&gt; {
+    <span class="kw">fn </span>current_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point {
+        <span class="kw">match </span><span class="self">self</span>.last() {
+            <span class="prelude-val">None </span>=&gt; Point::ZERO,
+            <span class="prelude-val">Some</span>(cmd) =&gt; <span class="kw">match </span>cmd {
+                Command::MoveTo(p)
+                | Command::LineTo(p)
+                | Command::QuadTo(<span class="kw">_</span>, p)
+                | Command::CurveTo(<span class="kw">_</span>, <span class="kw">_</span>, p) =&gt; <span class="kw-2">*</span>p,
+                Command::Close =&gt; {
+                    <span class="kw">for </span>cmd <span class="kw">in </span><span class="self">self</span>.iter().rev().skip(<span class="number">1</span>) {
+                        <span class="kw">match </span>cmd {
+                            Command::MoveTo(p) =&gt; <span class="kw">return </span><span class="kw-2">*</span>p,
+                            <span class="kw">_ </span>=&gt; {}
                         }
                     }
-                    <span class="kw">return</span> <span class="ident">Point::ZERO</span>;
+                    <span class="kw">return </span>Point::ZERO;
                 }
             },
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">Command::MoveTo</span>(<span class="ident">to</span>.<span class="ident">into</span>()));
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.push(Command::MoveTo(to.into()));
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">Command::LineTo</span>(<span class="ident">to</span>.<span class="ident">into</span>()));
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.push(Command::LineTo(to.into()));
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">Command::QuadTo</span>(<span class="ident">control</span>.<span class="ident">into</span>(), <span class="ident">to</span>.<span class="ident">into</span>()));
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.push(Command::QuadTo(control.into(), to.into()));
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">Command::CurveTo</span>(
-            <span class="ident">control1</span>.<span class="ident">into</span>(),
-            <span class="ident">control2</span>.<span class="ident">into</span>(),
-            <span class="ident">to</span>.<span class="ident">into</span>(),
+    <span class="kw">fn </span>curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.push(Command::CurveTo(
+            control1.into(),
+            control2.into(),
+            to.into(),
         ));
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">Command::Close</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.push(Command::Close);
+        <span class="self">self
+    </span>}
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TransformSink</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">S</span>,
-    <span class="kw">pub</span> <span class="ident">transform</span>: <span class="ident">Transform</span>,
+<span class="kw">pub struct </span>TransformSink&lt;<span class="lifetime">&#39;a</span>, S&gt; {
+    <span class="kw">pub </span>sink: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>S,
+    <span class="kw">pub </span>transform: Transform,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>: <span class="ident">PathBuilder</span><span class="op">&gt;</span> <span class="ident">PathBuilder</span> <span class="kw">for</span> <span class="ident">TransformSink</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">current_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">current_point</span>()
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, S: PathBuilder&gt; PathBuilder <span class="kw">for </span>TransformSink&lt;<span class="lifetime">&#39;a</span>, S&gt; {
+    <span class="kw">fn </span>current_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point {
+        <span class="self">self</span>.sink.current_point()
     }
 
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">move_to</span>(<span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">to</span>.<span class="ident">into</span>()));
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.sink.move_to(<span class="self">self</span>.transform.transform_point(to.into()));
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">line_to</span>(<span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">to</span>.<span class="ident">into</span>()));
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.sink.line_to(<span class="self">self</span>.transform.transform_point(to.into()));
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">quad_to</span>(
-            <span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">control</span>.<span class="ident">into</span>()),
-            <span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">to</span>.<span class="ident">into</span>()),
+    <span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.sink.quad_to(
+            <span class="self">self</span>.transform.transform_point(control.into()),
+            <span class="self">self</span>.transform.transform_point(to.into()),
         );
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">curve_to</span>(
-            <span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">control1</span>.<span class="ident">into</span>()),
-            <span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">control2</span>.<span class="ident">into</span>()),
-            <span class="self">self</span>.<span class="ident">transform</span>.<span class="ident">transform_point</span>(<span class="ident">to</span>.<span class="ident">into</span>()),
+    <span class="kw">fn </span>curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.sink.curve_to(
+            <span class="self">self</span>.transform.transform_point(control1.into()),
+            <span class="self">self</span>.transform.transform_point(control2.into()),
+            <span class="self">self</span>.transform.transform_point(to.into()),
         );
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">close</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.sink.close();
+        <span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span> <span class="ident">PathBuilder</span> <span class="kw">for</span> <span class="ident">BoundsBuilder</span> {
-    <span class="kw">fn</span> <span class="ident">current_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point</span> {
-        <span class="self">self</span>.<span class="ident">current</span>
+<span class="kw">impl </span>PathBuilder <span class="kw">for </span>BoundsBuilder {
+    <span class="kw">fn </span>current_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point {
+        <span class="self">self</span>.current
     }
 
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>p = to.into();
+        <span class="self">self</span>.add(p);
+        <span class="self">self</span>.current = p;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>p = to.into();
+        <span class="self">self</span>.add(p);
+        <span class="self">self</span>.current = p;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">control</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.add(control.into());
+        <span class="kw">let </span>p = to.into();
+        <span class="self">self</span>.add(p);
+        <span class="self">self</span>.current = p;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">control1</span>.<span class="ident">into</span>());
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">control2</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.add(control1.into());
+        <span class="self">self</span>.add(control2.into());
+        <span class="kw">let </span>p = to.into();
+        <span class="self">self</span>.add(p);
+        <span class="self">self</span>.current = p;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self
+    </span>}
 }
 
-<span class="doccomment">/// An iterator that generates cubic bezier curves for an arc.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Arc</span> {
-    <span class="ident">count</span>: <span class="ident">usize</span>,
-    <span class="ident">center</span>: (<span class="ident">f32</span>, <span class="ident">f32</span>),
-    <span class="ident">radii</span>: (<span class="ident">f32</span>, <span class="ident">f32</span>),
-    <span class="ident">cosphi</span>: <span class="ident">f32</span>,
-    <span class="ident">sinphi</span>: <span class="ident">f32</span>,
-    <span class="ident">ang1</span>: <span class="ident">f32</span>,
-    <span class="ident">ang2</span>: <span class="ident">f32</span>,
-    <span class="ident">a</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// An iterator that generates cubic bezier curves for an arc.
+</span><span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">pub struct </span>Arc {
+    count: usize,
+    center: (f32, f32),
+    radii: (f32, f32),
+    cosphi: f32,
+    sinphi: f32,
+    ang1: f32,
+    ang2: f32,
+    a: f32,
 }
 
-<span class="kw">impl</span> <span class="ident">Arc</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">from</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span>[<span class="ident">f32</span>; <span class="number">2</span>]<span class="op">&gt;</span>,
-        <span class="ident">rx</span>: <span class="ident">f32</span>,
-        <span class="ident">ry</span>: <span class="ident">f32</span>,
-        <span class="ident">angle</span>: <span class="ident">f32</span>,
-        <span class="ident">size</span>: <span class="ident">ArcSize</span>,
-        <span class="ident">sweep</span>: <span class="ident">ArcSweep</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span>[<span class="ident">f32</span>; <span class="number">2</span>]<span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="ident">from</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> (<span class="ident">px</span>, <span class="ident">py</span>) <span class="op">=</span> (<span class="ident">from</span>[<span class="number">0</span>], <span class="ident">from</span>[<span class="number">1</span>]);
-        <span class="kw">const</span> <span class="ident">TAU</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="number">3.141579</span> <span class="op">*</span> <span class="number">2.</span>;
-        <span class="kw">let</span> (<span class="ident">sinphi</span>, <span class="ident">cosphi</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> <span class="ident">pxp</span> <span class="op">=</span> <span class="ident">cosphi</span> <span class="op">*</span> (<span class="ident">px</span> <span class="op">-</span> <span class="ident">to</span>[<span class="number">0</span>]) <span class="op">/</span> <span class="number">2.</span> <span class="op">+</span> <span class="ident">sinphi</span> <span class="op">*</span> (<span class="ident">py</span> <span class="op">-</span> <span class="ident">to</span>[<span class="number">1</span>]) <span class="op">/</span> <span class="number">2.</span>;
-        <span class="kw">let</span> <span class="ident">pyp</span> <span class="op">=</span> <span class="op">-</span><span class="ident">sinphi</span> <span class="op">*</span> (<span class="ident">px</span> <span class="op">-</span> <span class="ident">to</span>[<span class="number">0</span>]) <span class="op">/</span> <span class="number">2.</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> (<span class="ident">py</span> <span class="op">-</span> <span class="ident">to</span>[<span class="number">1</span>]) <span class="op">/</span> <span class="number">2.</span>;
-        <span class="kw">if</span> <span class="ident">pxp</span> <span class="op">==</span> <span class="number">0.</span> <span class="op">&amp;&amp;</span> <span class="ident">pyp</span> <span class="op">==</span> <span class="number">0.</span> {
-            <span class="kw">return</span> <span class="ident"><span class="self">Self</span>::default</span>();
+<span class="kw">impl </span>Arc {
+    <span class="kw">pub fn </span>new(
+        from: <span class="kw">impl </span>Into&lt;[f32; <span class="number">2</span>]&gt;,
+        rx: f32,
+        ry: f32,
+        angle: f32,
+        size: ArcSize,
+        sweep: ArcSweep,
+        to: <span class="kw">impl </span>Into&lt;[f32; <span class="number">2</span>]&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>from = from.into();
+        <span class="kw">let </span>to = to.into();
+        <span class="kw">let </span>(px, py) = (from[<span class="number">0</span>], from[<span class="number">1</span>]);
+        <span class="kw">const </span>TAU: f32 = <span class="number">3.141579 </span>* <span class="number">2.</span>;
+        <span class="kw">let </span>(sinphi, cosphi) = angle.sin_cos();
+        <span class="kw">let </span>pxp = cosphi * (px - to[<span class="number">0</span>]) / <span class="number">2. </span>+ sinphi * (py - to[<span class="number">1</span>]) / <span class="number">2.</span>;
+        <span class="kw">let </span>pyp = -sinphi * (px - to[<span class="number">0</span>]) / <span class="number">2. </span>+ cosphi * (py - to[<span class="number">1</span>]) / <span class="number">2.</span>;
+        <span class="kw">if </span>pxp == <span class="number">0. </span>&amp;&amp; pyp == <span class="number">0. </span>{
+            <span class="kw">return </span><span class="self">Self</span>::default();
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rx</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">abs</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ry</span> <span class="op">=</span> <span class="ident">ry</span>.<span class="ident">abs</span>();
-        <span class="kw">let</span> <span class="ident">lambda</span> <span class="op">=</span> <span class="ident">pxp</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">rx</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> <span class="ident">pyp</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">ry</span>.<span class="ident">powi</span>(<span class="number">2</span>);
-        <span class="kw">if</span> <span class="ident">lambda</span> <span class="op">&gt;</span> <span class="number">1.</span> {
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">lambda</span>.<span class="ident">sqrt</span>();
-            <span class="ident">rx</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-            <span class="ident">ry</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>rx = rx.abs();
+        <span class="kw">let </span><span class="kw-2">mut </span>ry = ry.abs();
+        <span class="kw">let </span>lambda = pxp.powi(<span class="number">2</span>) / rx.powi(<span class="number">2</span>) + pyp.powi(<span class="number">2</span>) / ry.powi(<span class="number">2</span>);
+        <span class="kw">if </span>lambda &gt; <span class="number">1. </span>{
+            <span class="kw">let </span>s = lambda.sqrt();
+            rx <span class="kw-2">*</span>= s;
+            ry <span class="kw-2">*</span>= s;
         }
-        <span class="kw">let</span> <span class="ident">large_arc</span> <span class="op">=</span> <span class="ident">size</span> <span class="op">==</span> <span class="ident">ArcSize::Large</span>;
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="ident">sweep</span> <span class="op">==</span> <span class="ident">ArcSweep::Positive</span>;
-        <span class="kw">let</span> (<span class="ident">cx</span>, <span class="ident">cy</span>, <span class="ident">ang1</span>, <span class="kw-2">mut</span> <span class="ident">ang2</span>) <span class="op">=</span> {
-            <span class="kw">fn</span> <span class="ident">vec_angle</span>(<span class="ident">ux</span>: <span class="ident">f32</span>, <span class="ident">uy</span>: <span class="ident">f32</span>, <span class="ident">vx</span>: <span class="ident">f32</span>, <span class="ident">vy</span>: <span class="ident">f32</span>) -&gt; <span class="ident">f32</span> {
-                <span class="kw">let</span> <span class="ident">sign</span> <span class="op">=</span> <span class="kw">if</span> (<span class="ident">ux</span> <span class="op">*</span> <span class="ident">vy</span> <span class="op">-</span> <span class="ident">uy</span> <span class="op">*</span> <span class="ident">vx</span>) <span class="op">&lt;</span> <span class="number">0.</span> { <span class="op">-</span><span class="number">1.</span> } <span class="kw">else</span> { <span class="number">1.</span> };
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">ux</span> <span class="op">*</span> <span class="ident">vx</span> <span class="op">+</span> <span class="ident">uy</span> <span class="op">*</span> <span class="ident">vy</span>;
-                <span class="kw">if</span> <span class="ident">dot</span> <span class="op">&gt;</span> <span class="number">1.</span> {
-                    <span class="ident">dot</span> <span class="op">=</span> <span class="number">1.</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">dot</span> <span class="op">&lt;</span> <span class="op">-</span><span class="number">1.</span> {
-                    <span class="ident">dot</span> <span class="op">=</span> <span class="op">-</span><span class="number">1.</span>
-                }
-                <span class="ident">sign</span> <span class="op">*</span> <span class="ident">dot</span>.<span class="ident">acos</span>()
+        <span class="kw">let </span>large_arc = size == ArcSize::Large;
+        <span class="kw">let </span>sweep = sweep == ArcSweep::Positive;
+        <span class="kw">let </span>(cx, cy, ang1, <span class="kw-2">mut </span>ang2) = {
+            <span class="kw">fn </span>vec_angle(ux: f32, uy: f32, vx: f32, vy: f32) -&gt; f32 {
+                <span class="kw">let </span>sign = <span class="kw">if </span>(ux * vy - uy * vx) &lt; <span class="number">0. </span>{ -<span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">1. </span>};
+                <span class="kw">let </span><span class="kw-2">mut </span>dot = ux * vx + uy * vy;
+                <span class="kw">if </span>dot &gt; <span class="number">1. </span>{
+                    dot = <span class="number">1.
+                </span>} <span class="kw">else if </span>dot &lt; -<span class="number">1. </span>{
+                    dot = -<span class="number">1.
+                </span>}
+                sign * dot.acos()
             }
-            <span class="kw">let</span> <span class="ident">rxsq</span> <span class="op">=</span> <span class="ident">rx</span> <span class="op">*</span> <span class="ident">rx</span>;
-            <span class="kw">let</span> <span class="ident">rysq</span> <span class="op">=</span> <span class="ident">ry</span> <span class="op">*</span> <span class="ident">ry</span>;
-            <span class="kw">let</span> <span class="ident">pxpsq</span> <span class="op">=</span> <span class="ident">pxp</span> <span class="op">*</span> <span class="ident">pxp</span>;
-            <span class="kw">let</span> <span class="ident">pypsq</span> <span class="op">=</span> <span class="ident">pyp</span> <span class="op">*</span> <span class="ident">pyp</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">radicant</span> <span class="op">=</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">rysq</span>) <span class="op">-</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">pypsq</span>) <span class="op">-</span> (<span class="ident">rysq</span> <span class="op">*</span> <span class="ident">pxpsq</span>);
-            <span class="kw">if</span> <span class="ident">radicant</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                <span class="ident">radicant</span> <span class="op">=</span> <span class="number">0.</span>;
+            <span class="kw">let </span>rxsq = rx * rx;
+            <span class="kw">let </span>rysq = ry * ry;
+            <span class="kw">let </span>pxpsq = pxp * pxp;
+            <span class="kw">let </span>pypsq = pyp * pyp;
+            <span class="kw">let </span><span class="kw-2">mut </span>radicant = (rxsq * rysq) - (rxsq * pypsq) - (rysq * pxpsq);
+            <span class="kw">if </span>radicant &lt; <span class="number">0. </span>{
+                radicant = <span class="number">0.</span>;
             }
-            <span class="ident">radicant</span> <span class="op">/</span><span class="op">=</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">pypsq</span>) <span class="op">+</span> (<span class="ident">rysq</span> <span class="op">*</span> <span class="ident">pxpsq</span>);
-            <span class="ident">radicant</span> <span class="op">=</span> <span class="ident">radicant</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="kw">if</span> <span class="ident">large_arc</span> <span class="op">==</span> <span class="ident">sweep</span> { <span class="op">-</span><span class="number">1.</span> } <span class="kw">else</span> { <span class="number">1.</span> };
-            <span class="kw">let</span> <span class="ident">cxp</span> <span class="op">=</span> <span class="ident">radicant</span> <span class="op">*</span> <span class="ident">rx</span> <span class="op">/</span> <span class="ident">ry</span> <span class="op">*</span> <span class="ident">pyp</span>;
-            <span class="kw">let</span> <span class="ident">cyp</span> <span class="op">=</span> <span class="ident">radicant</span> <span class="op">*</span> <span class="op">-</span><span class="ident">ry</span> <span class="op">/</span> <span class="ident">rx</span> <span class="op">*</span> <span class="ident">pxp</span>;
-            <span class="kw">let</span> <span class="ident">cx</span> <span class="op">=</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">cxp</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">cyp</span> <span class="op">+</span> (<span class="ident">px</span> <span class="op">+</span> <span class="ident">to</span>[<span class="number">0</span>]) <span class="op">/</span> <span class="number">2.</span>;
-            <span class="kw">let</span> <span class="ident">cy</span> <span class="op">=</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">cxp</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">cyp</span> <span class="op">+</span> (<span class="ident">py</span> <span class="op">+</span> <span class="ident">to</span>[<span class="number">1</span>]) <span class="op">/</span> <span class="number">2.</span>;
-            <span class="kw">let</span> <span class="ident">vx1</span> <span class="op">=</span> (<span class="ident">pxp</span> <span class="op">-</span> <span class="ident">cxp</span>) <span class="op">/</span> <span class="ident">rx</span>;
-            <span class="kw">let</span> <span class="ident">vy1</span> <span class="op">=</span> (<span class="ident">pyp</span> <span class="op">-</span> <span class="ident">cyp</span>) <span class="op">/</span> <span class="ident">ry</span>;
-            <span class="kw">let</span> <span class="ident">vx2</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">pxp</span> <span class="op">-</span> <span class="ident">cxp</span>) <span class="op">/</span> <span class="ident">rx</span>;
-            <span class="kw">let</span> <span class="ident">vy2</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">pyp</span> <span class="op">-</span> <span class="ident">cyp</span>) <span class="op">/</span> <span class="ident">ry</span>;
-            <span class="kw">let</span> <span class="ident">ang1</span> <span class="op">=</span> <span class="ident">vec_angle</span>(<span class="number">1.</span>, <span class="number">0.</span>, <span class="ident">vx1</span>, <span class="ident">vy1</span>);
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ang2</span> <span class="op">=</span> <span class="ident">vec_angle</span>(<span class="ident">vx1</span>, <span class="ident">vy1</span>, <span class="ident">vx2</span>, <span class="ident">vy2</span>);
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">sweep</span> <span class="op">&amp;&amp;</span> <span class="ident">ang2</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                <span class="ident">ang2</span> <span class="op">-</span><span class="op">=</span> <span class="ident">TAU</span>;
+            radicant /= (rxsq * pypsq) + (rysq * pxpsq);
+            radicant = radicant.sqrt() * <span class="kw">if </span>large_arc == sweep { -<span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">1. </span>};
+            <span class="kw">let </span>cxp = radicant * rx / ry * pyp;
+            <span class="kw">let </span>cyp = radicant * -ry / rx * pxp;
+            <span class="kw">let </span>cx = cosphi * cxp - sinphi * cyp + (px + to[<span class="number">0</span>]) / <span class="number">2.</span>;
+            <span class="kw">let </span>cy = sinphi * cxp + cosphi * cyp + (py + to[<span class="number">1</span>]) / <span class="number">2.</span>;
+            <span class="kw">let </span>vx1 = (pxp - cxp) / rx;
+            <span class="kw">let </span>vy1 = (pyp - cyp) / ry;
+            <span class="kw">let </span>vx2 = (-pxp - cxp) / rx;
+            <span class="kw">let </span>vy2 = (-pyp - cyp) / ry;
+            <span class="kw">let </span>ang1 = vec_angle(<span class="number">1.</span>, <span class="number">0.</span>, vx1, vy1);
+            <span class="kw">let </span><span class="kw-2">mut </span>ang2 = vec_angle(vx1, vy1, vx2, vy2);
+            <span class="kw">if </span>!sweep &amp;&amp; ang2 &gt; <span class="number">0. </span>{
+                ang2 -= TAU;
             }
-            <span class="kw">if</span> <span class="ident">sweep</span> <span class="op">&amp;&amp;</span> <span class="ident">ang2</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                <span class="ident">ang2</span> <span class="op">+</span><span class="op">=</span> <span class="ident">TAU</span>;
+            <span class="kw">if </span>sweep &amp;&amp; ang2 &lt; <span class="number">0. </span>{
+                ang2 += TAU;
             }
-            (<span class="ident">cx</span>, <span class="ident">cy</span>, <span class="ident">ang1</span>, <span class="ident">ang2</span>)
+            (cx, cy, ang1, ang2)
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ratio</span> <span class="op">=</span> <span class="ident">ang2</span>.<span class="ident">abs</span>() <span class="op">/</span> (<span class="ident">TAU</span> <span class="op">/</span> <span class="number">4.</span>);
-        <span class="kw">if</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">ratio</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="number">0.0000001</span> {
-            <span class="ident">ratio</span> <span class="op">=</span> <span class="number">1.</span>
-        }
-        <span class="kw">let</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">ratio</span>.<span class="ident">ceil</span>().<span class="ident">max</span>(<span class="number">1.</span>);
-        <span class="ident">ang2</span> <span class="op">/</span><span class="op">=</span> <span class="ident">segments</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ang2</span> <span class="op">==</span> <span class="number">1.5707963267948966</span> {
-            <span class="number">0.551915024494</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ang2</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.5707963267948966</span> {
-            <span class="op">-</span><span class="number">0.551915024494</span>
-        } <span class="kw">else</span> {
-            <span class="number">4.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">ang2</span> <span class="op">/</span> <span class="number">4.</span>).<span class="ident">tan</span>()
+        <span class="kw">let </span><span class="kw-2">mut </span>ratio = ang2.abs() / (TAU / <span class="number">4.</span>);
+        <span class="kw">if </span>(<span class="number">1. </span>- ratio).abs() &lt; <span class="number">0.0000001 </span>{
+            ratio = <span class="number">1.
+        </span>}
+        <span class="kw">let </span>segments = ratio.ceil().max(<span class="number">1.</span>);
+        ang2 /= segments;
+        <span class="kw">let </span>a = <span class="kw">if </span>ang2 == <span class="number">1.5707963267948966 </span>{
+            <span class="number">0.551915024494
+        </span>} <span class="kw">else if </span>ang2 == -<span class="number">1.5707963267948966 </span>{
+            -<span class="number">0.551915024494
+        </span>} <span class="kw">else </span>{
+            <span class="number">4. </span>/ <span class="number">3. </span>* (ang2 / <span class="number">4.</span>).tan()
         };
-        <span class="self">Self</span> {
-            <span class="ident">count</span>: <span class="ident">segments</span> <span class="kw">as</span> <span class="ident">usize</span>,
-            <span class="ident">center</span>: (<span class="ident">cx</span>, <span class="ident">cy</span>),
-            <span class="ident">radii</span>: (<span class="ident">rx</span>, <span class="ident">ry</span>),
-            <span class="ident">sinphi</span>,
-            <span class="ident">cosphi</span>,
-            <span class="ident">ang1</span>,
-            <span class="ident">ang2</span>,
-            <span class="ident">a</span>,
+        <span class="self">Self </span>{
+            count: segments <span class="kw">as </span>usize,
+            center: (cx, cy),
+            radii: (rx, ry),
+            sinphi,
+            cosphi,
+            ang1,
+            ang2,
+            a,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Arc</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span>;
+<span class="kw">impl </span>Iterator <span class="kw">for </span>Arc {
+    <span class="kw">type </span>Item = Command;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">count</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.count == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="self">self</span>.<span class="ident">count</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">let</span> (<span class="ident">y1</span>, <span class="ident">x1</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">ang1</span>.<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> (<span class="ident">y2</span>, <span class="ident">x2</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">ang1</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">ang2</span>).<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>;
-        <span class="kw">let</span> (<span class="ident">cx</span>, <span class="ident">cy</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">center</span>;
-        <span class="kw">let</span> (<span class="ident">rx</span>, <span class="ident">ry</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">radii</span>;
-        <span class="kw">let</span> <span class="ident">sinphi</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sinphi</span>;
-        <span class="kw">let</span> <span class="ident">cosphi</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cosphi</span>;
-        <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">Point::new</span>((<span class="ident">x1</span> <span class="op">-</span> <span class="ident">y1</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">rx</span>, (<span class="ident">y1</span> <span class="op">+</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">y</span>),
+        <span class="self">self</span>.count -= <span class="number">1</span>;
+        <span class="kw">let </span>(y1, x1) = <span class="self">self</span>.ang1.sin_cos();
+        <span class="kw">let </span>(y2, x2) = (<span class="self">self</span>.ang1 + <span class="self">self</span>.ang2).sin_cos();
+        <span class="kw">let </span>a = <span class="self">self</span>.a;
+        <span class="kw">let </span>(cx, cy) = <span class="self">self</span>.center;
+        <span class="kw">let </span>(rx, ry) = <span class="self">self</span>.radii;
+        <span class="kw">let </span>sinphi = <span class="self">self</span>.sinphi;
+        <span class="kw">let </span>cosphi = <span class="self">self</span>.cosphi;
+        <span class="kw">let </span>c1 = Point::new((x1 - y1 * a) * rx, (y1 + x1 * a) * ry);
+        <span class="kw">let </span>c1 = Point::new(
+            cx + (cosphi * c1.x - sinphi * c1.y),
+            cy + (sinphi * c1.x + cosphi * c1.y),
         );
-        <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">Point::new</span>((<span class="ident">x2</span> <span class="op">+</span> <span class="ident">y2</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">rx</span>, (<span class="ident">y2</span> <span class="op">-</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">y</span>),
+        <span class="kw">let </span>c2 = Point::new((x2 + y2 * a) * rx, (y2 - x2 * a) * ry);
+        <span class="kw">let </span>c2 = Point::new(
+            cx + (cosphi * c2.x - sinphi * c2.y),
+            cy + (sinphi * c2.x + cosphi * c2.y),
         );
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Point::new</span>(<span class="ident">x2</span> <span class="op">*</span> <span class="ident">rx</span>, <span class="ident">y2</span> <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">y</span>),
+        <span class="kw">let </span>p = Point::new(x2 * rx, y2 * ry);
+        <span class="kw">let </span>p = Point::new(
+            cx + (cosphi * p.x - sinphi * p.y),
+            cy + (sinphi * p.x + cosphi * p.y),
         );
-        <span class="self">self</span>.<span class="ident">ang1</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ang2</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">Command::CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">p</span>))
+        <span class="self">self</span>.ang1 += <span class="self">self</span>.ang2;
+        <span class="prelude-val">Some</span>(Command::CurveTo(c1, c2, p))
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arc</span>(
-    <span class="ident">sink</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">PathBuilder</span>,
-    <span class="ident">from</span>: <span class="ident">Point</span>,
-    <span class="ident">rx</span>: <span class="ident">f32</span>,
-    <span class="ident">ry</span>: <span class="ident">f32</span>,
-    <span class="ident">angle</span>: <span class="ident">f32</span>,
-    <span class="ident">size</span>: <span class="ident">ArcSize</span>,
-    <span class="ident">sweep</span>: <span class="ident">ArcSweep</span>,
-    <span class="ident">to</span>: <span class="ident">Point</span>,
+<span class="kw">pub fn </span>arc(
+    sink: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>PathBuilder,
+    from: Point,
+    rx: f32,
+    ry: f32,
+    angle: f32,
+    size: ArcSize,
+    sweep: ArcSweep,
+    to: Point,
 ) {
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">from</span>;
-    <span class="kw">let</span> (<span class="ident">px</span>, <span class="ident">py</span>) <span class="op">=</span> (<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span>);
-    <span class="kw">const</span> <span class="ident">TAU</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">core::f32::consts::PI</span> <span class="op">*</span> <span class="number">2.</span>;
-    <span class="kw">let</span> (<span class="ident">sinphi</span>, <span class="ident">cosphi</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-    <span class="kw">let</span> <span class="ident">pxp</span> <span class="op">=</span> <span class="ident">cosphi</span> <span class="op">*</span> (<span class="ident">px</span> <span class="op">-</span> <span class="ident">to</span>.<span class="ident">x</span>) <span class="op">/</span> <span class="number">2.</span> <span class="op">+</span> <span class="ident">sinphi</span> <span class="op">*</span> (<span class="ident">py</span> <span class="op">-</span> <span class="ident">to</span>.<span class="ident">y</span>) <span class="op">/</span> <span class="number">2.</span>;
-    <span class="kw">let</span> <span class="ident">pyp</span> <span class="op">=</span> <span class="op">-</span><span class="ident">sinphi</span> <span class="op">*</span> (<span class="ident">px</span> <span class="op">-</span> <span class="ident">to</span>.<span class="ident">x</span>) <span class="op">/</span> <span class="number">2.</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> (<span class="ident">py</span> <span class="op">-</span> <span class="ident">to</span>.<span class="ident">y</span>) <span class="op">/</span> <span class="number">2.</span>;
-    <span class="kw">if</span> <span class="ident">pxp</span> <span class="op">==</span> <span class="number">0.</span> <span class="op">&amp;&amp;</span> <span class="ident">pyp</span> <span class="op">==</span> <span class="number">0.</span> {
+    <span class="kw">let </span>p = from;
+    <span class="kw">let </span>(px, py) = (p.x, p.y);
+    <span class="kw">const </span>TAU: f32 = core::f32::consts::PI * <span class="number">2.</span>;
+    <span class="kw">let </span>(sinphi, cosphi) = angle.sin_cos();
+    <span class="kw">let </span>pxp = cosphi * (px - to.x) / <span class="number">2. </span>+ sinphi * (py - to.y) / <span class="number">2.</span>;
+    <span class="kw">let </span>pyp = -sinphi * (px - to.x) / <span class="number">2. </span>+ cosphi * (py - to.y) / <span class="number">2.</span>;
+    <span class="kw">if </span>pxp == <span class="number">0. </span>&amp;&amp; pyp == <span class="number">0. </span>{
         <span class="kw">return</span>;
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rx</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">abs</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ry</span> <span class="op">=</span> <span class="ident">ry</span>.<span class="ident">abs</span>();
-    <span class="kw">let</span> <span class="ident">lambda</span> <span class="op">=</span> <span class="ident">pxp</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">rx</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> <span class="ident">pyp</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">ry</span>.<span class="ident">powi</span>(<span class="number">2</span>);
-    <span class="kw">if</span> <span class="ident">lambda</span> <span class="op">&gt;</span> <span class="number">1.</span> {
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">lambda</span>.<span class="ident">sqrt</span>();
-        <span class="ident">rx</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
-        <span class="ident">ry</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">s</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>rx = rx.abs();
+    <span class="kw">let </span><span class="kw-2">mut </span>ry = ry.abs();
+    <span class="kw">let </span>lambda = pxp.powi(<span class="number">2</span>) / rx.powi(<span class="number">2</span>) + pyp.powi(<span class="number">2</span>) / ry.powi(<span class="number">2</span>);
+    <span class="kw">if </span>lambda &gt; <span class="number">1. </span>{
+        <span class="kw">let </span>s = lambda.sqrt();
+        rx <span class="kw-2">*</span>= s;
+        ry <span class="kw-2">*</span>= s;
     }
-    <span class="kw">let</span> <span class="ident">large_arc</span> <span class="op">=</span> <span class="ident">size</span> <span class="op">==</span> <span class="ident">ArcSize::Large</span>;
-    <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="ident">sweep</span> <span class="op">==</span> <span class="ident">ArcSweep::Positive</span>;
-    <span class="kw">let</span> (<span class="ident">cx</span>, <span class="ident">cy</span>, <span class="kw-2">mut</span> <span class="ident">ang1</span>, <span class="kw-2">mut</span> <span class="ident">ang2</span>) <span class="op">=</span> {
-        <span class="kw">fn</span> <span class="ident">vec_angle</span>(<span class="ident">ux</span>: <span class="ident">f32</span>, <span class="ident">uy</span>: <span class="ident">f32</span>, <span class="ident">vx</span>: <span class="ident">f32</span>, <span class="ident">vy</span>: <span class="ident">f32</span>) -&gt; <span class="ident">f32</span> {
-            <span class="kw">let</span> <span class="ident">sign</span> <span class="op">=</span> <span class="kw">if</span> (<span class="ident">ux</span> <span class="op">*</span> <span class="ident">vy</span> <span class="op">-</span> <span class="ident">uy</span> <span class="op">*</span> <span class="ident">vx</span>) <span class="op">&lt;</span> <span class="number">0.</span> { <span class="op">-</span><span class="number">1.</span> } <span class="kw">else</span> { <span class="number">1.</span> };
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">ux</span> <span class="op">*</span> <span class="ident">vx</span> <span class="op">+</span> <span class="ident">uy</span> <span class="op">*</span> <span class="ident">vy</span>;
-            <span class="kw">if</span> <span class="ident">dot</span> <span class="op">&gt;</span> <span class="number">1.</span> {
-                <span class="ident">dot</span> <span class="op">=</span> <span class="number">1.</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">dot</span> <span class="op">&lt;</span> <span class="op">-</span><span class="number">1.</span> {
-                <span class="ident">dot</span> <span class="op">=</span> <span class="op">-</span><span class="number">1.</span>
-            }
-            <span class="ident">sign</span> <span class="op">*</span> <span class="ident">dot</span>.<span class="ident">acos</span>()
+    <span class="kw">let </span>large_arc = size == ArcSize::Large;
+    <span class="kw">let </span>sweep = sweep == ArcSweep::Positive;
+    <span class="kw">let </span>(cx, cy, <span class="kw-2">mut </span>ang1, <span class="kw-2">mut </span>ang2) = {
+        <span class="kw">fn </span>vec_angle(ux: f32, uy: f32, vx: f32, vy: f32) -&gt; f32 {
+            <span class="kw">let </span>sign = <span class="kw">if </span>(ux * vy - uy * vx) &lt; <span class="number">0. </span>{ -<span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">1. </span>};
+            <span class="kw">let </span><span class="kw-2">mut </span>dot = ux * vx + uy * vy;
+            <span class="kw">if </span>dot &gt; <span class="number">1. </span>{
+                dot = <span class="number">1.
+            </span>} <span class="kw">else if </span>dot &lt; -<span class="number">1. </span>{
+                dot = -<span class="number">1.
+            </span>}
+            sign * dot.acos()
         }
-        <span class="kw">let</span> <span class="ident">rxsq</span> <span class="op">=</span> <span class="ident">rx</span> <span class="op">*</span> <span class="ident">rx</span>;
-        <span class="kw">let</span> <span class="ident">rysq</span> <span class="op">=</span> <span class="ident">ry</span> <span class="op">*</span> <span class="ident">ry</span>;
-        <span class="kw">let</span> <span class="ident">pxpsq</span> <span class="op">=</span> <span class="ident">pxp</span> <span class="op">*</span> <span class="ident">pxp</span>;
-        <span class="kw">let</span> <span class="ident">pypsq</span> <span class="op">=</span> <span class="ident">pyp</span> <span class="op">*</span> <span class="ident">pyp</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">radicant</span> <span class="op">=</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">rysq</span>) <span class="op">-</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">pypsq</span>) <span class="op">-</span> (<span class="ident">rysq</span> <span class="op">*</span> <span class="ident">pxpsq</span>);
-        <span class="kw">if</span> <span class="ident">radicant</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-            <span class="ident">radicant</span> <span class="op">=</span> <span class="number">0.</span>;
+        <span class="kw">let </span>rxsq = rx * rx;
+        <span class="kw">let </span>rysq = ry * ry;
+        <span class="kw">let </span>pxpsq = pxp * pxp;
+        <span class="kw">let </span>pypsq = pyp * pyp;
+        <span class="kw">let </span><span class="kw-2">mut </span>radicant = (rxsq * rysq) - (rxsq * pypsq) - (rysq * pxpsq);
+        <span class="kw">if </span>radicant &lt; <span class="number">0. </span>{
+            radicant = <span class="number">0.</span>;
         }
-        <span class="ident">radicant</span> <span class="op">/</span><span class="op">=</span> (<span class="ident">rxsq</span> <span class="op">*</span> <span class="ident">pypsq</span>) <span class="op">+</span> (<span class="ident">rysq</span> <span class="op">*</span> <span class="ident">pxpsq</span>);
-        <span class="ident">radicant</span> <span class="op">=</span> <span class="ident">radicant</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="kw">if</span> <span class="ident">large_arc</span> <span class="op">==</span> <span class="ident">sweep</span> { <span class="op">-</span><span class="number">1.</span> } <span class="kw">else</span> { <span class="number">1.</span> };
-        <span class="kw">let</span> <span class="ident">cxp</span> <span class="op">=</span> <span class="ident">radicant</span> <span class="op">*</span> <span class="ident">rx</span> <span class="op">/</span> <span class="ident">ry</span> <span class="op">*</span> <span class="ident">pyp</span>;
-        <span class="kw">let</span> <span class="ident">cyp</span> <span class="op">=</span> <span class="ident">radicant</span> <span class="op">*</span> <span class="op">-</span><span class="ident">ry</span> <span class="op">/</span> <span class="ident">rx</span> <span class="op">*</span> <span class="ident">pxp</span>;
-        <span class="kw">let</span> <span class="ident">cx</span> <span class="op">=</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">cxp</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">cyp</span> <span class="op">+</span> (<span class="ident">px</span> <span class="op">+</span> <span class="ident">to</span>.<span class="ident">x</span>) <span class="op">/</span> <span class="number">2.</span>;
-        <span class="kw">let</span> <span class="ident">cy</span> <span class="op">=</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">cxp</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">cyp</span> <span class="op">+</span> (<span class="ident">py</span> <span class="op">+</span> <span class="ident">to</span>.<span class="ident">y</span>) <span class="op">/</span> <span class="number">2.</span>;
-        <span class="kw">let</span> <span class="ident">vx1</span> <span class="op">=</span> (<span class="ident">pxp</span> <span class="op">-</span> <span class="ident">cxp</span>) <span class="op">/</span> <span class="ident">rx</span>;
-        <span class="kw">let</span> <span class="ident">vy1</span> <span class="op">=</span> (<span class="ident">pyp</span> <span class="op">-</span> <span class="ident">cyp</span>) <span class="op">/</span> <span class="ident">ry</span>;
-        <span class="kw">let</span> <span class="ident">vx2</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">pxp</span> <span class="op">-</span> <span class="ident">cxp</span>) <span class="op">/</span> <span class="ident">rx</span>;
-        <span class="kw">let</span> <span class="ident">vy2</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">pyp</span> <span class="op">-</span> <span class="ident">cyp</span>) <span class="op">/</span> <span class="ident">ry</span>;
-        <span class="kw">let</span> <span class="ident">ang1</span> <span class="op">=</span> <span class="ident">vec_angle</span>(<span class="number">1.</span>, <span class="number">0.</span>, <span class="ident">vx1</span>, <span class="ident">vy1</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ang2</span> <span class="op">=</span> <span class="ident">vec_angle</span>(<span class="ident">vx1</span>, <span class="ident">vy1</span>, <span class="ident">vx2</span>, <span class="ident">vy2</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">sweep</span> <span class="op">&amp;&amp;</span> <span class="ident">ang2</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-            <span class="ident">ang2</span> <span class="op">-</span><span class="op">=</span> <span class="ident">TAU</span>;
+        radicant /= (rxsq * pypsq) + (rysq * pxpsq);
+        radicant = radicant.sqrt() * <span class="kw">if </span>large_arc == sweep { -<span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">1. </span>};
+        <span class="kw">let </span>cxp = radicant * rx / ry * pyp;
+        <span class="kw">let </span>cyp = radicant * -ry / rx * pxp;
+        <span class="kw">let </span>cx = cosphi * cxp - sinphi * cyp + (px + to.x) / <span class="number">2.</span>;
+        <span class="kw">let </span>cy = sinphi * cxp + cosphi * cyp + (py + to.y) / <span class="number">2.</span>;
+        <span class="kw">let </span>vx1 = (pxp - cxp) / rx;
+        <span class="kw">let </span>vy1 = (pyp - cyp) / ry;
+        <span class="kw">let </span>vx2 = (-pxp - cxp) / rx;
+        <span class="kw">let </span>vy2 = (-pyp - cyp) / ry;
+        <span class="kw">let </span>ang1 = vec_angle(<span class="number">1.</span>, <span class="number">0.</span>, vx1, vy1);
+        <span class="kw">let </span><span class="kw-2">mut </span>ang2 = vec_angle(vx1, vy1, vx2, vy2);
+        <span class="kw">if </span>!sweep &amp;&amp; ang2 &gt; <span class="number">0. </span>{
+            ang2 -= TAU;
         }
-        <span class="kw">if</span> <span class="ident">sweep</span> <span class="op">&amp;&amp;</span> <span class="ident">ang2</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-            <span class="ident">ang2</span> <span class="op">+</span><span class="op">=</span> <span class="ident">TAU</span>;
+        <span class="kw">if </span>sweep &amp;&amp; ang2 &lt; <span class="number">0. </span>{
+            ang2 += TAU;
         }
-        (<span class="ident">cx</span>, <span class="ident">cy</span>, <span class="ident">ang1</span>, <span class="ident">ang2</span>)
+        (cx, cy, ang1, ang2)
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ratio</span> <span class="op">=</span> <span class="ident">ang2</span>.<span class="ident">abs</span>() <span class="op">/</span> (<span class="ident">TAU</span> <span class="op">/</span> <span class="number">4.</span>);
-    <span class="kw">if</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">ratio</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="number">0.0000001</span> {
-        <span class="ident">ratio</span> <span class="op">=</span> <span class="number">1.</span>
-    }
-    <span class="kw">let</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">ratio</span>.<span class="ident">ceil</span>().<span class="ident">max</span>(<span class="number">1.</span>);
-    <span class="ident">ang2</span> <span class="op">/</span><span class="op">=</span> <span class="ident">segments</span>;
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ang2</span> <span class="op">==</span> <span class="number">1.5707963267948966</span> {
-        <span class="number">0.551915024494</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ang2</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.5707963267948966</span> {
-        <span class="op">-</span><span class="number">0.551915024494</span>
-    } <span class="kw">else</span> {
-        <span class="number">4.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">ang2</span> <span class="op">/</span> <span class="number">4.</span>).<span class="ident">tan</span>()
+    <span class="kw">let </span><span class="kw-2">mut </span>ratio = ang2.abs() / (TAU / <span class="number">4.</span>);
+    <span class="kw">if </span>(<span class="number">1. </span>- ratio).abs() &lt; <span class="number">0.0000001 </span>{
+        ratio = <span class="number">1.
+    </span>}
+    <span class="kw">let </span>segments = ratio.ceil().max(<span class="number">1.</span>);
+    ang2 /= segments;
+    <span class="kw">let </span>a = <span class="kw">if </span>ang2 == <span class="number">1.5707963267948966 </span>{
+        <span class="number">0.551915024494
+    </span>} <span class="kw">else if </span>ang2 == -<span class="number">1.5707963267948966 </span>{
+        -<span class="number">0.551915024494
+    </span>} <span class="kw">else </span>{
+        <span class="number">4. </span>/ <span class="number">3. </span>* (ang2 / <span class="number">4.</span>).tan()
     };
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">segments</span> <span class="kw">as</span> <span class="ident">usize</span> {
-        <span class="kw">let</span> (<span class="ident">y1</span>, <span class="ident">x1</span>) <span class="op">=</span> <span class="ident">ang1</span>.<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> (<span class="ident">y2</span>, <span class="ident">x2</span>) <span class="op">=</span> (<span class="ident">ang1</span> <span class="op">+</span> <span class="ident">ang2</span>).<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">Point::new</span>((<span class="ident">x1</span> <span class="op">-</span> <span class="ident">y1</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">rx</span>, (<span class="ident">y1</span> <span class="op">+</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c1</span>.<span class="ident">y</span>),
+    <span class="kw">for _ in </span><span class="number">0</span>..segments <span class="kw">as </span>usize {
+        <span class="kw">let </span>(y1, x1) = ang1.sin_cos();
+        <span class="kw">let </span>(y2, x2) = (ang1 + ang2).sin_cos();
+        <span class="kw">let </span>c1 = Point::new((x1 - y1 * a) * rx, (y1 + x1 * a) * ry);
+        <span class="kw">let </span>c1 = Point::new(
+            cx + (cosphi * c1.x - sinphi * c1.y),
+            cy + (sinphi * c1.x + cosphi * c1.y),
         );
-        <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">Point::new</span>((<span class="ident">x2</span> <span class="op">+</span> <span class="ident">y2</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">rx</span>, (<span class="ident">y2</span> <span class="op">-</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">c2</span>.<span class="ident">y</span>),
+        <span class="kw">let </span>c2 = Point::new((x2 + y2 * a) * rx, (y2 - x2 * a) * ry);
+        <span class="kw">let </span>c2 = Point::new(
+            cx + (cosphi * c2.x - sinphi * c2.y),
+            cy + (sinphi * c2.x + cosphi * c2.y),
         );
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Point::new</span>(<span class="ident">x2</span> <span class="op">*</span> <span class="ident">rx</span>, <span class="ident">y2</span> <span class="op">*</span> <span class="ident">ry</span>);
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Point::new</span>(
-            <span class="ident">cx</span> <span class="op">+</span> (<span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">y</span>),
-            <span class="ident">cy</span> <span class="op">+</span> (<span class="ident">sinphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cosphi</span> <span class="op">*</span> <span class="ident">p</span>.<span class="ident">y</span>),
+        <span class="kw">let </span>p = Point::new(x2 * rx, y2 * ry);
+        <span class="kw">let </span>p = Point::new(
+            cx + (cosphi * p.x - sinphi * p.y),
+            cy + (sinphi * p.x + cosphi * p.y),
         );
-        <span class="ident">sink</span>.<span class="ident">curve_to</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">p</span>);
-        <span class="ident">ang1</span> <span class="op">+</span><span class="op">=</span> <span class="ident">ang2</span>;
+        sink.curve_to(c1, c2, p);
+        ang1 += ang2;
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

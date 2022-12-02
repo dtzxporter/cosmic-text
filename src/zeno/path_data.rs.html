@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/path_data.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path_data.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/path_data.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path_data.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -226,233 +226,233 @@
 <span id="226">226</span>
 <span id="227">227</span>
 <span id="228">228</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Path data.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Path data.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::command</span>::{<span class="ident">Command</span>, <span class="ident">PointsCommands</span>, <span class="ident">Verb</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::{<span class="ident">Point</span>, <span class="ident">Transform</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_builder::PathBuilder</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::segment::segments</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::svg_parser::SvgCommands</span>;
+</span><span class="kw">use </span><span class="kw">super</span>::command::{Command, PointsCommands, Verb};
+<span class="kw">use </span><span class="kw">super</span>::geometry::{Point, Transform};
+<span class="kw">use </span><span class="kw">super</span>::path_builder::PathBuilder;
+<span class="kw">use </span><span class="kw">super</span>::segment::segments;
+<span class="kw">use </span><span class="kw">super</span>::svg_parser::SvgCommands;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::stroke::stroke_into</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">super</span>::stroke::stroke_into;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::style</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">super</span>::style::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::{<span class="ident">Bounds</span>, <span class="ident">BoundsBuilder</span>};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">super</span>::geometry::{Bounds, BoundsBuilder};
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_builder::TransformSink</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">super</span>::path_builder::TransformSink;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::lib::Vec</span>;
+<span class="kw">use </span><span class="kw">crate</span>::lib::Vec;
 
-<span class="doccomment">/// Trait for types that represent path data.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A primary design goal for this crate is to be agnostic with regard to</span>
-<span class="doccomment">/// storage of path data. This trait provides the abstraction to make that</span>
-<span class="doccomment">/// possible.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// All path data is consumed internally as an iterator over path</span>
-<span class="doccomment">/// [commands](enum.Command.html) and as such, this trait is similar to</span>
-<span class="doccomment">/// the IntoIterator trait, but restricted to iterators of commands and</span>
-<span class="doccomment">/// without consuming itself.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Implementations of this trait are provided for SVG path data (in the form</span>
-<span class="doccomment">/// of strings), slices/vectors of commands, and the common point and</span>
-<span class="doccomment">/// verb list structure (as the tuple `(&amp;[Point], &amp;[Verb])`).</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// As such, these paths are all equivalent:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use zeno::{Command, PathData, Point, Verb};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// // SVG path data</span>
-<span class="doccomment">/// let path1 = &quot;M1,2 L3,4&quot;;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// // Slice of commands</span>
-<span class="doccomment">/// let path2 = &amp;[</span>
-<span class="doccomment">///     Command::MoveTo(Point::new(1.0, 2.0)),</span>
-<span class="doccomment">///     Command::LineTo(Point::new(3.0, 4.0)),</span>
-<span class="doccomment">/// ][..];</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// // Tuple of slices to points and verbs</span>
-<span class="doccomment">/// let path3 = (</span>
-<span class="doccomment">///     &amp;[Point::new(1.0, 2.0), Point::new(3.0, 4.0)][..],</span>
-<span class="doccomment">///     &amp;[Verb::MoveTo, Verb::LineTo][..],</span>
-<span class="doccomment">/// );</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert!(path1.commands().eq(path2.commands()));</span>
-<span class="doccomment">/// assert!(path2.commands().eq(path3.commands()));</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Implementing PathData is similar to implementing IntoIterator:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use zeno::{Command, PathData};</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// pub struct MyPath {</span>
-<span class="doccomment">///     data: Vec&lt;Command&gt;</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// impl&lt;&#39;a&gt; PathData for &amp;&#39;a MyPath {</span>
-<span class="doccomment">///     // Copied here because PathData expects Commands by value</span>
-<span class="doccomment">///     type Commands = std::iter::Copied&lt;std::slice::Iter&lt;&#39;a, Command&gt;&gt;;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     fn commands(&amp;self) -&gt; Self::Commands {</span>
-<span class="doccomment">///         self.data.iter().copied()</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The provided copy_into() method evaluates the command iterator and</span>
-<span class="doccomment">/// submits the commands to a sink. You should also implement this if you</span>
-<span class="doccomment">/// have a more direct method of dispatching to a sink as rasterizer</span>
-<span class="doccomment">/// performance can be sensitive to latencies here.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PathData</span> {
-    <span class="doccomment">/// Command iterator.</span>
-    <span class="kw">type</span> <span class="ident">Commands</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>;
+<span class="doccomment">/// Trait for types that represent path data.
+///
+/// A primary design goal for this crate is to be agnostic with regard to
+/// storage of path data. This trait provides the abstraction to make that
+/// possible.
+///
+/// All path data is consumed internally as an iterator over path
+/// [commands](enum.Command.html) and as such, this trait is similar to
+/// the IntoIterator trait, but restricted to iterators of commands and
+/// without consuming itself.
+///
+/// Implementations of this trait are provided for SVG path data (in the form
+/// of strings), slices/vectors of commands, and the common point and
+/// verb list structure (as the tuple `(&amp;[Point], &amp;[Verb])`).
+///
+/// As such, these paths are all equivalent:
+///
+/// ```rust
+/// use zeno::{Command, PathData, Point, Verb};
+///
+/// // SVG path data
+/// let path1 = &quot;M1,2 L3,4&quot;;
+///
+/// // Slice of commands
+/// let path2 = &amp;[
+///     Command::MoveTo(Point::new(1.0, 2.0)),
+///     Command::LineTo(Point::new(3.0, 4.0)),
+/// ][..];
+///
+/// // Tuple of slices to points and verbs
+/// let path3 = (
+///     &amp;[Point::new(1.0, 2.0), Point::new(3.0, 4.0)][..],
+///     &amp;[Verb::MoveTo, Verb::LineTo][..],
+/// );
+///
+/// assert!(path1.commands().eq(path2.commands()));
+/// assert!(path2.commands().eq(path3.commands()));
+/// ```
+///
+/// Implementing PathData is similar to implementing IntoIterator:
+///
+/// ```rust
+/// use zeno::{Command, PathData};
+///
+/// pub struct MyPath {
+///     data: Vec&lt;Command&gt;
+/// }
+///
+/// impl&lt;&#39;a&gt; PathData for &amp;&#39;a MyPath {
+///     // Copied here because PathData expects Commands by value
+///     type Commands = std::iter::Copied&lt;std::slice::Iter&lt;&#39;a, Command&gt;&gt;;
+///
+///     fn commands(&amp;self) -&gt; Self::Commands {
+///         self.data.iter().copied()
+///     }
+/// }
+/// ```
+///
+/// The provided copy_into() method evaluates the command iterator and
+/// submits the commands to a sink. You should also implement this if you
+/// have a more direct method of dispatching to a sink as rasterizer
+/// performance can be sensitive to latencies here.
+</span><span class="kw">pub trait </span>PathData {
+    <span class="doccomment">/// Command iterator.
+    </span><span class="kw">type </span>Commands: Iterator&lt;Item = Command&gt; + Clone;
 
-    <span class="doccomment">/// Returns an iterator over the commands described by the path data.</span>
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span>;
+    <span class="doccomment">/// Returns an iterator over the commands described by the path data.
+    </span><span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands;
 
-    <span class="doccomment">/// Copies the path data into the specified sink.</span>
-    <span class="kw">fn</span> <span class="ident">copy_to</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">PathBuilder</span>) {
-        <span class="kw">for</span> <span class="ident">cmd</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">commands</span>() {
-            <span class="kw">use</span> <span class="ident">Command</span>::<span class="kw-2">*</span>;
-            <span class="kw">match</span> <span class="ident">cmd</span> {
-                <span class="ident">MoveTo</span>(<span class="ident">p</span>) =&gt; <span class="ident">sink</span>.<span class="ident">move_to</span>(<span class="ident">p</span>),
-                <span class="ident">LineTo</span>(<span class="ident">p</span>) =&gt; <span class="ident">sink</span>.<span class="ident">line_to</span>(<span class="ident">p</span>),
-                <span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">p</span>) =&gt; <span class="ident">sink</span>.<span class="ident">quad_to</span>(<span class="ident">c</span>, <span class="ident">p</span>),
-                <span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">p</span>) =&gt; <span class="ident">sink</span>.<span class="ident">curve_to</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">p</span>),
-                <span class="ident">Close</span> =&gt; <span class="ident">sink</span>.<span class="ident">close</span>(),
+    <span class="doccomment">/// Copies the path data into the specified sink.
+    </span><span class="kw">fn </span>copy_to(<span class="kw-2">&amp;</span><span class="self">self</span>, sink: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>PathBuilder) {
+        <span class="kw">for </span>cmd <span class="kw">in </span><span class="self">self</span>.commands() {
+            <span class="kw">use </span>Command::<span class="kw-2">*</span>;
+            <span class="kw">match </span>cmd {
+                MoveTo(p) =&gt; sink.move_to(p),
+                LineTo(p) =&gt; sink.line_to(p),
+                QuadTo(c, p) =&gt; sink.quad_to(c, p),
+                CurveTo(c1, c2, p) =&gt; sink.curve_to(c1, c2, p),
+                Close =&gt; sink.close(),
             };
         }
     }
 }
 
-<span class="doccomment">/// Computes the total length of the path.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length</span>(<span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span>, <span class="ident">transform</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span>) -&gt; <span class="ident">f32</span> {
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">commands</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">length</span> <span class="op">=</span> <span class="number">0.</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">transform</span>) <span class="op">=</span> <span class="ident">transform</span> {
-        <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">segments</span>(<span class="ident">data</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">cmd</span><span class="op">|</span> <span class="ident">cmd</span>.<span class="ident">transform</span>(<span class="kw-2">&amp;</span><span class="ident">transform</span>)), <span class="bool-val">false</span>) {
-            <span class="ident">length</span> <span class="op">+</span><span class="op">=</span> <span class="ident">s</span>.<span class="ident">length</span>();
+<span class="doccomment">/// Computes the total length of the path.
+</span><span class="kw">pub fn </span>length(data: <span class="kw">impl </span>PathData, transform: <span class="prelude-ty">Option</span>&lt;Transform&gt;) -&gt; f32 {
+    <span class="kw">let </span>data = data.commands();
+    <span class="kw">let </span><span class="kw-2">mut </span>length = <span class="number">0.</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(transform) = transform {
+        <span class="kw">for </span>s <span class="kw">in </span>segments(data.map(|cmd| cmd.transform(<span class="kw-2">&amp;</span>transform)), <span class="bool-val">false</span>) {
+            length += s.length();
         }
-    } <span class="kw">else</span> {
-        <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">segments</span>(<span class="ident">data</span>, <span class="bool-val">false</span>) {
-            <span class="ident">length</span> <span class="op">+</span><span class="op">=</span> <span class="ident">s</span>.<span class="ident">length</span>();
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>s <span class="kw">in </span>segments(data, <span class="bool-val">false</span>) {
+            length += s.length();
         }
     }
-    <span class="ident">length</span>
+    length
 }
 
-<span class="doccomment">/// Computes the bounding box of the path.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bounds</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-    <span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span>,
-    <span class="ident">style</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Style</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">transform</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span>,
-) -&gt; <span class="ident">Bounds</span> {
-    <span class="kw">let</span> <span class="ident">style</span> <span class="op">=</span> <span class="ident">style</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bounds</span> <span class="op">=</span> <span class="ident">BoundsBuilder::new</span>();
-    <span class="ident">apply</span>(<span class="ident">data</span>, <span class="ident">style</span>, <span class="ident">transform</span>, <span class="kw-2">&amp;mut</span> <span class="ident">bounds</span>);
-    <span class="ident">bounds</span>.<span class="ident">build</span>()
+<span class="doccomment">/// Computes the bounding box of the path.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">pub fn </span>bounds&lt;<span class="lifetime">&#39;a</span>&gt;(
+    data: <span class="kw">impl </span>PathData,
+    style: <span class="kw">impl </span>Into&lt;Style&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+    transform: <span class="prelude-ty">Option</span>&lt;Transform&gt;,
+) -&gt; Bounds {
+    <span class="kw">let </span>style = style.into();
+    <span class="kw">let </span><span class="kw-2">mut </span>bounds = BoundsBuilder::new();
+    apply(data, style, transform, <span class="kw-2">&amp;mut </span>bounds);
+    bounds.build()
 }
 
-<span class="doccomment">/// Applies the style and transform to the path and emits the result to the</span>
-<span class="doccomment">/// specified sink.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;eval&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-    <span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span>,
-    <span class="ident">style</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Style</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">transform</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span>,
-    <span class="ident">sink</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">PathBuilder</span>,
-) -&gt; <span class="ident">Fill</span> {
-    <span class="kw">let</span> <span class="ident">style</span> <span class="op">=</span> <span class="ident">style</span>.<span class="ident">into</span>();
-    <span class="kw">match</span> <span class="ident">style</span> {
-        <span class="ident">Style::Fill</span>(<span class="ident">fill</span>) =&gt; {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">transform</span>) <span class="op">=</span> <span class="ident">transform</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">transform_sink</span> <span class="op">=</span> <span class="ident">TransformSink</span> { <span class="ident">sink</span>, <span class="ident">transform</span> };
-                <span class="ident">data</span>.<span class="ident">copy_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">transform_sink</span>);
-                <span class="ident">fill</span>
-            } <span class="kw">else</span> {
-                <span class="ident">data</span>.<span class="ident">copy_to</span>(<span class="ident">sink</span>);
-                <span class="ident">fill</span>
+<span class="doccomment">/// Applies the style and transform to the path and emits the result to the
+/// specified sink.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;eval&quot;</span>)]
+</span><span class="kw">pub fn </span>apply&lt;<span class="lifetime">&#39;a</span>&gt;(
+    data: <span class="kw">impl </span>PathData,
+    style: <span class="kw">impl </span>Into&lt;Style&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+    transform: <span class="prelude-ty">Option</span>&lt;Transform&gt;,
+    sink: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>PathBuilder,
+) -&gt; Fill {
+    <span class="kw">let </span>style = style.into();
+    <span class="kw">match </span>style {
+        Style::Fill(fill) =&gt; {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(transform) = transform {
+                <span class="kw">let </span><span class="kw-2">mut </span>transform_sink = TransformSink { sink, transform };
+                data.copy_to(<span class="kw-2">&amp;mut </span>transform_sink);
+                fill
+            } <span class="kw">else </span>{
+                data.copy_to(sink);
+                fill
             }
         }
-        <span class="ident">Style::Stroke</span>(<span class="ident">stroke</span>) =&gt; {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">transform</span>) <span class="op">=</span> <span class="ident">transform</span> {
-                <span class="kw">if</span> <span class="ident">stroke</span>.<span class="ident">scale</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">transform_sink</span> <span class="op">=</span> <span class="ident">TransformSink</span> { <span class="ident">sink</span>, <span class="ident">transform</span> };
-                    <span class="ident">stroke_into</span>(<span class="ident">data</span>.<span class="ident">commands</span>(), <span class="kw-2">&amp;</span><span class="ident">stroke</span>, <span class="kw-2">&amp;mut</span> <span class="ident">transform_sink</span>);
-                } <span class="kw">else</span> {
-                    <span class="ident">stroke_into</span>(
-                        <span class="ident">data</span>.<span class="ident">commands</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">cmd</span><span class="op">|</span> <span class="ident">cmd</span>.<span class="ident">transform</span>(<span class="kw-2">&amp;</span><span class="ident">transform</span>)),
-                        <span class="kw-2">&amp;</span><span class="ident">stroke</span>,
-                        <span class="ident">sink</span>,
+        Style::Stroke(stroke) =&gt; {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(transform) = transform {
+                <span class="kw">if </span>stroke.scale {
+                    <span class="kw">let </span><span class="kw-2">mut </span>transform_sink = TransformSink { sink, transform };
+                    stroke_into(data.commands(), <span class="kw-2">&amp;</span>stroke, <span class="kw-2">&amp;mut </span>transform_sink);
+                } <span class="kw">else </span>{
+                    stroke_into(
+                        data.commands().map(|cmd| cmd.transform(<span class="kw-2">&amp;</span>transform)),
+                        <span class="kw-2">&amp;</span>stroke,
+                        sink,
                     );
                 }
-            } <span class="kw">else</span> {
-                <span class="ident">stroke_into</span>(<span class="ident">data</span>.<span class="ident">commands</span>(), <span class="kw-2">&amp;</span><span class="ident">stroke</span>, <span class="ident">sink</span>);
+            } <span class="kw">else </span>{
+                stroke_into(data.commands(), <span class="kw-2">&amp;</span>stroke, sink);
             }
-            <span class="ident">Fill::NonZero</span>
+            Fill::NonZero
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PathData</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;_</span> <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PathData</span>,
+<span class="kw">impl</span>&lt;T&gt; PathData <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;_ </span>T
+<span class="kw">where
+    </span>T: PathData,
 {
-    <span class="kw">type</span> <span class="ident">Commands</span> <span class="op">=</span> <span class="ident">T::Commands</span>;
+    <span class="kw">type </span>Commands = T::Commands;
 
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span> {
-        <span class="ident">T::commands</span>(<span class="kw-2">*</span><span class="self">self</span>)
+    <span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands {
+        T::commands(<span class="kw-2">*</span><span class="self">self</span>)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">copy_to</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">PathBuilder</span>) {
-        <span class="ident">T::copy_to</span>(<span class="kw-2">*</span><span class="self">self</span>, <span class="ident">sink</span>)
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">PathData</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span> {
-    <span class="kw">type</span> <span class="ident">Commands</span> <span class="op">=</span> <span class="ident">SvgCommands</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span> {
-        <span class="ident">SvgCommands::new</span>(<span class="self">self</span>)
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>copy_to(<span class="kw-2">&amp;</span><span class="self">self</span>, sink: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>PathBuilder) {
+        T::copy_to(<span class="kw-2">*</span><span class="self">self</span>, sink)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">PathData</span> <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Point</span>], <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Verb</span>]) {
-    <span class="kw">type</span> <span class="ident">Commands</span> <span class="op">=</span> <span class="ident">PointsCommands</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PathData <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str {
+    <span class="kw">type </span>Commands = SvgCommands&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span> {
-        <span class="ident">PointsCommands::new</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="self">self</span>.<span class="number">1</span>)
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">copy_to</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">PathBuilder</span>) {
-        <span class="self">self</span>.<span class="ident">commands</span>().<span class="ident">copy_to</span>(<span class="ident">sink</span>);
+    <span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands {
+        SvgCommands::new(<span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">PathData</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Command</span>] {
-    <span class="kw">type</span> <span class="ident">Commands</span> <span class="op">=</span> <span class="ident">core::iter::Copied</span><span class="op">&lt;</span><span class="ident">core::slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Command</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PathData <span class="kw">for </span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point], <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Verb]) {
+    <span class="kw">type </span>Commands = PointsCommands&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">copied</span>()
+    <span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands {
+        PointsCommands::new(<span class="self">self</span>.<span class="number">0</span>, <span class="self">self</span>.<span class="number">1</span>)
+    }
+
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>copy_to(<span class="kw-2">&amp;</span><span class="self">self</span>, sink: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>PathBuilder) {
+        <span class="self">self</span>.commands().copy_to(sink);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">PathData</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Commands</span> <span class="op">=</span> <span class="ident">core::iter::Copied</span><span class="op">&lt;</span><span class="ident">core::slice::Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Command</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PathData <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Command] {
+    <span class="kw">type </span>Commands = core::iter::Copied&lt;core::slice::Iter&lt;<span class="lifetime">&#39;a</span>, Command&gt;&gt;;
 
-    <span class="kw">fn</span> <span class="ident">commands</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Commands</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">copied</span>()
+    <span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands {
+        <span class="self">self</span>.iter().copied()
+    }
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PathData <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Vec&lt;Command&gt; {
+    <span class="kw">type </span>Commands = core::iter::Copied&lt;core::slice::Iter&lt;<span class="lifetime">&#39;a</span>, Command&gt;&gt;;
+
+    <span class="kw">fn </span>commands(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Commands {
+        <span class="self">self</span>.iter().copied()
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

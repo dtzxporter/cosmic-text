@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ttf-parser-0.17.1/src/tables/cff/encoding.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encoding.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../ttf_parser/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../ttf_parser/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../ttf_parser/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ttf-parser-0.17.1/src/tables/cff/encoding.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encoding.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../ttf_parser/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../ttf_parser/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../ttf_parser/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -171,14 +171,14 @@
 <span id="171">171</span>
 <span id="172">172</span>
 <span id="173">173</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::charset::Charset</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::StringId</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::parser</span>::{<span class="ident">FromData</span>, <span class="ident">LazyArray16</span>, <span class="ident">Stream</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::GlyphId</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::charset::Charset;
+<span class="kw">use </span><span class="kw">super</span>::StringId;
+<span class="kw">use </span><span class="kw">crate</span>::parser::{FromData, LazyArray16, Stream};
+<span class="kw">use </span><span class="kw">crate</span>::GlyphId;
 
-<span class="doccomment">/// The Standard Encoding as defined in the Adobe Technical Note #5176 Appendix B.</span>
-<span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STANDARD_ENCODING</span>: [<span class="ident">u8</span>; <span class="number">256</span>] <span class="op">=</span> [
+<span class="doccomment">/// The Standard Encoding as defined in the Adobe Technical Note #5176 Appendix B.
+</span><span class="attribute">#[rustfmt::skip]
+</span><span class="kw">pub const </span>STANDARD_ENCODING: [u8; <span class="number">256</span>] = [
       <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,
       <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,
       <span class="number">1</span>,   <span class="number">2</span>,   <span class="number">3</span>,   <span class="number">4</span>,   <span class="number">5</span>,   <span class="number">6</span>,   <span class="number">7</span>,   <span class="number">8</span>,   <span class="number">9</span>,  <span class="number">10</span>,  <span class="number">11</span>,  <span class="number">12</span>,  <span class="number">13</span>,  <span class="number">14</span>,  <span class="number">15</span>,  <span class="number">16</span>,
@@ -197,152 +197,152 @@
       <span class="number">0</span>, <span class="number">144</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">145</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">146</span>, <span class="number">147</span>, <span class="number">148</span>, <span class="number">149</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,
 ];
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Format1Range</span> {
-    <span class="ident">first</span>: <span class="ident">u8</span>,
-    <span class="ident">left</span>: <span class="ident">u8</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Format1Range {
+    first: u8,
+    left: u8,
 }
 
-<span class="kw">impl</span> <span class="ident">FromData</span> <span class="kw">for</span> <span class="ident">Format1Range</span> {
-    <span class="kw">const</span> <span class="ident">SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">2</span>;
+<span class="kw">impl </span>FromData <span class="kw">for </span>Format1Range {
+    <span class="kw">const </span>SIZE: usize = <span class="number">2</span>;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Stream::new</span>(<span class="ident">data</span>);
-        <span class="prelude-val">Some</span>(<span class="ident">Format1Range</span> {
-            <span class="ident">first</span>: <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>,
-            <span class="ident">left</span>: <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>parse(data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = Stream::new(data);
+        <span class="prelude-val">Some</span>(Format1Range {
+            first: s.read::&lt;u8&gt;()<span class="question-mark">?</span>,
+            left: s.read::&lt;u8&gt;()<span class="question-mark">?</span>,
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Supplement</span> {
-    <span class="ident">code</span>: <span class="ident">u8</span>,
-    <span class="ident">name</span>: <span class="ident">StringId</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Supplement {
+    code: u8,
+    name: StringId,
 }
 
-<span class="kw">impl</span> <span class="ident">FromData</span> <span class="kw">for</span> <span class="ident">Supplement</span> {
-    <span class="kw">const</span> <span class="ident">SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="kw">impl </span>FromData <span class="kw">for </span>Supplement {
+    <span class="kw">const </span>SIZE: usize = <span class="number">3</span>;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Stream::new</span>(<span class="ident">data</span>);
-        <span class="prelude-val">Some</span>(<span class="ident">Supplement</span> {
-            <span class="ident">code</span>: <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>,
-            <span class="ident">name</span>: <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">StringId</span><span class="op">&gt;</span>()<span class="question-mark">?</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>parse(data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = Stream::new(data);
+        <span class="prelude-val">Some</span>(Supplement {
+            code: s.read::&lt;u8&gt;()<span class="question-mark">?</span>,
+            name: s.read::&lt;StringId&gt;()<span class="question-mark">?</span>,
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Encoding</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">kind</span>: <span class="ident">EncodingKind</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">supplemental</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Supplement</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone, Copy, Default, Debug)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Encoding&lt;<span class="lifetime">&#39;a</span>&gt; {
+    kind: EncodingKind&lt;<span class="lifetime">&#39;a</span>&gt;,
+    supplemental: LazyArray16&lt;<span class="lifetime">&#39;a</span>, Supplement&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">EncodingKind</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">Standard</span>,
-    <span class="ident">Expert</span>,
-    <span class="ident">Format0</span>(<span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">u8</span><span class="op">&gt;</span>),
-    <span class="ident">Format1</span>(<span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Format1Range</span><span class="op">&gt;</span>),
+<span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>EncodingKind&lt;<span class="lifetime">&#39;a</span>&gt; {
+    Standard,
+    Expert,
+    Format0(LazyArray16&lt;<span class="lifetime">&#39;a</span>, u8&gt;),
+    Format1(LazyArray16&lt;<span class="lifetime">&#39;a</span>, Format1Range&gt;),
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">EncodingKind</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Standard</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>EncodingKind&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Standard
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Encoding</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_standard</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Encoding</span> {
-            <span class="ident">kind</span>: <span class="ident">EncodingKind::Standard</span>,
-            <span class="ident">supplemental</span>: <span class="ident">LazyArray16::default</span>(),
+<span class="kw">impl </span>Encoding&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">pub fn </span>new_standard() -&gt; <span class="self">Self </span>{
+        Encoding {
+            kind: EncodingKind::Standard,
+            supplemental: LazyArray16::default(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_expert</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">Encoding</span> {
-            <span class="ident">kind</span>: <span class="ident">EncodingKind::Expert</span>,
-            <span class="ident">supplemental</span>: <span class="ident">LazyArray16::default</span>(),
+    <span class="kw">pub fn </span>new_expert() -&gt; <span class="self">Self </span>{
+        Encoding {
+            kind: EncodingKind::Expert,
+            supplemental: LazyArray16::default(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">code_to_gid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">charset</span>: <span class="kw-2">&amp;</span><span class="ident">Charset</span>, <span class="ident">code</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">GlyphId</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">supplemental</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">supplemental</span>.<span class="ident">into_iter</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">code</span> <span class="op">==</span> <span class="ident">code</span>) {
-                <span class="kw">return</span> <span class="ident">charset</span>.<span class="ident">sid_to_gid</span>(<span class="ident">s</span>.<span class="ident">name</span>);
+    <span class="kw">pub fn </span>code_to_gid(<span class="kw-2">&amp;</span><span class="self">self</span>, charset: <span class="kw-2">&amp;</span>Charset, code: u8) -&gt; <span class="prelude-ty">Option</span>&lt;GlyphId&gt; {
+        <span class="kw">if </span>!<span class="self">self</span>.supplemental.is_empty() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>s) = <span class="self">self</span>.supplemental.into_iter().find(|s| s.code == code) {
+                <span class="kw">return </span>charset.sid_to_gid(s.name);
             }
         }
 
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="ident">code</span>);
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span> {
-            <span class="comment">// Standard encodings store a StringID/SID and not GlyphID/GID.</span>
-            <span class="comment">// Therefore we have to get SID first and then convert it to GID via Charset.</span>
-            <span class="comment">// Custom encodings (FormatN) store GID directly.</span>
-            <span class="comment">//</span>
-            <span class="comment">// Indexing for predefined encodings never fails,</span>
-            <span class="comment">// because `code` is always `u8` and encodings have 256 entries.</span>
-            <span class="comment">//</span>
-            <span class="comment">// We treat `Expert` as `Standard` as well, since we allow only 8bit codepoints.</span>
-            <span class="ident">EncodingKind::Standard</span> <span class="op">|</span> <span class="ident">EncodingKind::Expert</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">sid</span> <span class="op">=</span> <span class="ident">StringId</span>(<span class="ident">u16::from</span>(<span class="ident">STANDARD_ENCODING</span>[<span class="ident">index</span>]));
-                <span class="ident">charset</span>.<span class="ident">sid_to_gid</span>(<span class="ident">sid</span>)
+        <span class="kw">let </span>index = usize::from(code);
+        <span class="kw">match </span><span class="self">self</span>.kind {
+            <span class="comment">// Standard encodings store a StringID/SID and not GlyphID/GID.
+            // Therefore we have to get SID first and then convert it to GID via Charset.
+            // Custom encodings (FormatN) store GID directly.
+            //
+            // Indexing for predefined encodings never fails,
+            // because `code` is always `u8` and encodings have 256 entries.
+            //
+            // We treat `Expert` as `Standard` as well, since we allow only 8bit codepoints.
+            </span>EncodingKind::Standard | EncodingKind::Expert =&gt; {
+                <span class="kw">let </span>sid = StringId(u16::from(STANDARD_ENCODING[index]));
+                charset.sid_to_gid(sid)
             }
-            <span class="ident">EncodingKind::Format0</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-                <span class="comment">// +1 because .notdef is implicit.</span>
-                <span class="ident">table</span>
-                    .<span class="ident">into_iter</span>()
-                    .<span class="ident">position</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span> <span class="op">==</span> <span class="ident">code</span>)
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u16</span>)
-                    .<span class="ident">map</span>(<span class="ident">GlyphId</span>)
+            EncodingKind::Format0(<span class="kw-2">ref </span>table) =&gt; {
+                <span class="comment">// +1 because .notdef is implicit.
+                </span>table
+                    .into_iter()
+                    .position(|c| c == code)
+                    .map(|i| (i + <span class="number">1</span>) <span class="kw">as </span>u16)
+                    .map(GlyphId)
             }
-            <span class="ident">EncodingKind::Format1</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-                <span class="comment">// Starts from 1 because .notdef is implicit.</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">gid</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">for</span> <span class="ident">range</span> <span class="kw">in</span> <span class="ident">table</span>.<span class="ident">into_iter</span>() {
-                    <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">first</span>.<span class="ident">saturating_add</span>(<span class="ident">range</span>.<span class="ident">left</span>);
-                    <span class="kw">if</span> (<span class="ident">range</span>.<span class="ident">first</span>..<span class="op">=</span><span class="ident">end</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">code</span>) {
-                        <span class="ident">gid</span> <span class="op">+</span><span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">code</span> <span class="op">-</span> <span class="ident">range</span>.<span class="ident">first</span>);
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">GlyphId</span>(<span class="ident">gid</span>));
-                    } <span class="kw">else</span> {
-                        <span class="ident">gid</span> <span class="op">+</span><span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">range</span>.<span class="ident">left</span>) <span class="op">+</span> <span class="number">1</span>;
+            EncodingKind::Format1(<span class="kw-2">ref </span>table) =&gt; {
+                <span class="comment">// Starts from 1 because .notdef is implicit.
+                </span><span class="kw">let </span><span class="kw-2">mut </span>gid: u16 = <span class="number">1</span>;
+                <span class="kw">for </span>range <span class="kw">in </span>table.into_iter() {
+                    <span class="kw">let </span>end = range.first.saturating_add(range.left);
+                    <span class="kw">if </span>(range.first..=end).contains(<span class="kw-2">&amp;</span>code) {
+                        gid += u16::from(code - range.first);
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(GlyphId(gid));
+                    } <span class="kw">else </span>{
+                        gid += u16::from(range.left) + <span class="number">1</span>;
                     }
                 }
 
-                <span class="prelude-val">None</span>
-            }
+                <span class="prelude-val">None
+            </span>}
         }
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">parse_encoding</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Encoding</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-    <span class="comment">// The first high-bit in format indicates that a Supplemental encoding is present.</span>
-    <span class="comment">// Check it and clear.</span>
-    <span class="kw">let</span> <span class="ident">has_supplemental</span> <span class="op">=</span> <span class="ident">format</span> <span class="op">&amp;</span> <span class="number">0x80</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">format</span> <span class="op">&amp;</span> <span class="number">0x7f</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>parse_encoding&lt;<span class="lifetime">&#39;a</span>&gt;(s: <span class="kw-2">&amp;mut </span>Stream&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Encoding&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">let </span>format = s.read::&lt;u8&gt;()<span class="question-mark">?</span>;
+    <span class="comment">// The first high-bit in format indicates that a Supplemental encoding is present.
+    // Check it and clear.
+    </span><span class="kw">let </span>has_supplemental = format &amp; <span class="number">0x80 </span>!= <span class="number">0</span>;
+    <span class="kw">let </span>format = format &amp; <span class="number">0x7f</span>;
 
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
-    <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">format</span> {
-        <span class="comment">// TODO: read_array8?</span>
-        <span class="number">0</span> =&gt; <span class="ident">s</span>.<span class="ident">read_array16</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">count</span>).<span class="ident">map</span>(<span class="ident">EncodingKind::Format0</span>)<span class="question-mark">?</span>,
-        <span class="number">1</span> =&gt; <span class="ident">s</span>
-            .<span class="ident">read_array16</span>::<span class="op">&lt;</span><span class="ident">Format1Range</span><span class="op">&gt;</span>(<span class="ident">count</span>)
-            .<span class="ident">map</span>(<span class="ident">EncodingKind::Format1</span>)<span class="question-mark">?</span>,
-        <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+    <span class="kw">let </span>count = u16::from(s.read::&lt;u8&gt;()<span class="question-mark">?</span>);
+    <span class="kw">let </span>kind = <span class="kw">match </span>format {
+        <span class="comment">// TODO: read_array8?
+        </span><span class="number">0 </span>=&gt; s.read_array16::&lt;u8&gt;(count).map(EncodingKind::Format0)<span class="question-mark">?</span>,
+        <span class="number">1 </span>=&gt; s
+            .read_array16::&lt;Format1Range&gt;(count)
+            .map(EncodingKind::Format1)<span class="question-mark">?</span>,
+        <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
     };
 
-    <span class="kw">let</span> <span class="ident">supplemental</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">has_supplemental</span> {
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
-        <span class="ident">s</span>.<span class="ident">read_array16</span>::<span class="op">&lt;</span><span class="ident">Supplement</span><span class="op">&gt;</span>(<span class="ident">count</span>)<span class="question-mark">?</span>
-    } <span class="kw">else</span> {
-        <span class="ident">LazyArray16::default</span>()
+    <span class="kw">let </span>supplemental = <span class="kw">if </span>has_supplemental {
+        <span class="kw">let </span>count = u16::from(s.read::&lt;u8&gt;()<span class="question-mark">?</span>);
+        s.read_array16::&lt;Supplement&gt;(count)<span class="question-mark">?
+    </span>} <span class="kw">else </span>{
+        LazyArray16::default()
     };
 
-    <span class="prelude-val">Some</span>(<span class="ident">Encoding</span> { <span class="ident">kind</span>, <span class="ident">supplemental</span> })
+    <span class="prelude-val">Some</span>(Encoding { kind, supplemental })
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="ttf_parser" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="ttf_parser" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

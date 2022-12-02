@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/internal/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/internal/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -518,525 +518,525 @@
 <span id="518">518</span>
 <span id="519">519</span>
 <span id="520">520</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Parsing primitives.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Parsing primitives.
 
-<span class="kw">use</span> <span class="ident">core::ops::Range</span>;
+</span><span class="kw">use </span>core::ops::Range;
 
-<span class="doccomment">/// Buffer wrapping a byte slice for safely reading big endian data.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]);
+<span class="doccomment">/// Buffer wrapping a byte slice for safely reading big endian data.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Bytes&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw">pub </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a new bytes instance for the specified buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span>(<span class="ident">data</span>)
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Bytes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Creates a new bytes instance for the specified buffer.
+    </span><span class="kw">pub fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(data)
     }
 
-    <span class="doccomment">/// Creates a new bytes instance for the specified buffer and offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_offset</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="self">Self</span>(<span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">offset</span>..)<span class="question-mark">?</span>))
+    <span class="doccomment">/// Creates a new bytes instance for the specified buffer and offset.
+    </span><span class="kw">pub fn </span>with_offset(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Some</span>(<span class="self">Self</span>(data.get(offset..)<span class="question-mark">?</span>))
     }
 
-    <span class="doccomment">/// Creates a new bytes instance with the specified range of data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_range</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">range</span>: <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="self">Self</span>(<span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">range</span>)<span class="question-mark">?</span>))
+    <span class="doccomment">/// Creates a new bytes instance with the specified range of data.
+    </span><span class="kw">pub fn </span>with_range(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], range: Range&lt;usize&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Some</span>(<span class="self">Self</span>(data.get(range)<span class="question-mark">?</span>))
     }
 
-    <span class="doccomment">/// Returns the underlying data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>] {
-        <span class="self">self</span>.<span class="number">0</span>
+    <span class="doccomment">/// Returns the underlying data.
+    </span><span class="kw">pub fn </span>data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
+        <span class="self">self</span>.<span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Returns the length of the underlying data.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.<span class="number">0</span>.len()
     }
 
-    <span class="doccomment">/// Returns the length of the underlying data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>()
+    <span class="doccomment">/// Returns true if the specified range is within the bounds of the
+    /// underlying data.
+    </span><span class="kw">pub fn </span>check_range(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize, len: usize) -&gt; bool {
+        <span class="kw">let </span>end = <span class="self">self</span>.<span class="number">0</span>.len();
+        (offset &lt; end) &amp; (end - offset &gt;= len)
     }
 
-    <span class="doccomment">/// Returns true if the specified range is within the bounds of the</span>
-    <span class="doccomment">/// underlying data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span>();
-        (<span class="ident">offset</span> <span class="op">&lt;</span> <span class="ident">end</span>) <span class="op">&amp;</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">offset</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">len</span>)
-    }
-
-    <span class="doccomment">/// Returns an error if the specified range is not within the bounds of</span>
-    <span class="doccomment">/// the underlying data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ensure_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">offset</span>, <span class="ident">len</span>) {
+    <span class="doccomment">/// Returns an error if the specified range is not within the bounds of
+    /// the underlying data.
+    </span><span class="kw">pub fn </span>ensure_range(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.check_range(offset, len) {
             <span class="prelude-val">Some</span>(())
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
+    }
+
+    <span class="doccomment">/// Reads a value of the specified type at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read&lt;T: FromBeData&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
+        T::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads a u8 value at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u8(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;u8&gt; {
+        u8::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads a u16 value at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u16(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;u16&gt; {
+        u16::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads a u24 value at the specified offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u24(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+        U24::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset).map(|x| x.<span class="number">0</span>)
+    }
+
+    <span class="doccomment">/// Reads a u32 value at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u32(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+        u32::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads an i8 value at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_i8(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;i8&gt; {
+        i8::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads an i16 value at some offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_i16(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;i16&gt; {
+        i16::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads a value of the specified type at some offset, or returns the
+    /// default value on bounds check failure.
+    </span><span class="kw">pub fn </span>read_or_default&lt;T: FromBeData + Default&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; T {
+        T::from_be_data(<span class="self">self</span>.<span class="number">0</span>, offset).unwrap_or_default()
+    }
+
+    <span class="doccomment">/// Returns a value of the specified type at some offset without bounds
+    /// checking.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub unsafe fn </span>read_unchecked&lt;T: FromBeData&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; T {
+        T::from_be_data_unchecked(<span class="self">self</span>.<span class="number">0</span>, offset)
+    }
+
+    <span class="doccomment">/// Reads an array of values of the specified type and length at some
+    /// offset.
+    </span><span class="kw">pub fn </span>read_array&lt;T: FromBeData&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;Array&lt;<span class="lifetime">&#39;a</span>, T&gt;&gt; {
+        <span class="kw">let </span>len = len * T::SIZE;
+        <span class="kw">if </span>!<span class="self">self</span>.check_range(offset, len) {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
+        <span class="prelude-val">Some</span>(Array::new(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>[offset..offset + len]))
     }
 
-    <span class="doccomment">/// Reads a value of the specified type at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">T::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads a u8 value at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="ident">u8::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads a u16 value at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u16</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
-        <span class="ident">u16::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads a u24 value at the specified offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u24</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="ident">U24::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">0</span>)
-    }
-
-    <span class="doccomment">/// Reads a u32 value at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="ident">u32::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads an i8 value at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_i8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span> {
-        <span class="ident">i8::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads an i16 value at some offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_i16</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span> {
-        <span class="ident">i16::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads a value of the specified type at some offset, or returns the</span>
-    <span class="doccomment">/// default value on bounds check failure.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_or_default</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="ident">T</span> {
-        <span class="ident">T::from_be_data</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>).<span class="ident">unwrap_or_default</span>()
-    }
-
-    <span class="doccomment">/// Returns a value of the specified type at some offset without bounds</span>
-    <span class="doccomment">/// checking.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">read_unchecked</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="ident">T</span> {
-        <span class="ident">T::from_be_data_unchecked</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
-    }
-
-    <span class="doccomment">/// Reads an array of values of the specified type and length at some</span>
-    <span class="doccomment">/// offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_array</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span> <span class="op">*</span> <span class="ident">T::SIZE</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">offset</span>, <span class="ident">len</span>) {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Reads a sequence of bytes at the specified offset and length.
+    </span><span class="kw">pub fn </span>read_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; {
+        <span class="kw">if </span>!<span class="self">self</span>.check_range(offset, len) {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="prelude-val">Some</span>(<span class="ident">Array::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>[<span class="ident">offset</span>..<span class="ident">offset</span> <span class="op">+</span> <span class="ident">len</span>]))
+        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>[offset..offset + len])
     }
 
-    <span class="doccomment">/// Reads a sequence of bytes at the specified offset and length.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">offset</span>, <span class="ident">len</span>) {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>[<span class="ident">offset</span>..<span class="ident">offset</span> <span class="op">+</span> <span class="ident">len</span>])
-    }
-
-    <span class="doccomment">/// Creates a new stream at the specified offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stream_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Stream</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">Stream::with_offset</span>(<span class="self">self</span>.<span class="number">0</span>, <span class="ident">offset</span>)
+    <span class="doccomment">/// Creates a new stream at the specified offset.
+    </span><span class="kw">pub fn </span>stream_at(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;Stream&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        Stream::with_offset(<span class="self">self</span>.<span class="number">0</span>, offset)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">core::ops::Deref</span> <span class="kw">for</span> <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">u8</span>];
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="self">self</span>.<span class="number">0</span>
-    }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; core::ops::Deref <span class="kw">for </span>Bytes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Target = [u8];
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+        <span class="self">self</span>.<span class="number">0
+    </span>}
 }
 
-<span class="doccomment">/// Stream over a byte slice for safely reading big endian data.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Stream over a byte slice for safely reading big endian data.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Stream&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    offset: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a new stream wrapping the specified bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">data</span>, <span class="ident">offset</span>: <span class="number">0</span> }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Stream&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Creates a new stream wrapping the specified bytes.
+    </span><span class="kw">pub fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ data, offset: <span class="number">0 </span>}
     }
 
-    <span class="doccomment">/// Creates a new stream with the specified data and offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_offset</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">offset</span>..)<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">data</span>, <span class="ident">offset</span>: <span class="number">0</span> })
+    <span class="doccomment">/// Creates a new stream with the specified data and offset.
+    </span><span class="kw">pub fn </span>with_offset(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>data = data.get(offset..)<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{ data, offset: <span class="number">0 </span>})
     }
 
-    <span class="doccomment">/// Creates a new stream with the specified range of data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_range</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">range</span>: <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">range</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">data</span>, <span class="ident">offset</span>: <span class="number">0</span> })
+    <span class="doccomment">/// Creates a new stream with the specified range of data.
+    </span><span class="kw">pub fn </span>with_range(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], range: Range&lt;usize&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>data = data.get(range)<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{ data, offset: <span class="number">0 </span>})
     }
 
-    <span class="doccomment">/// Returns the underlying buffer for the cursor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>] {
-        <span class="self">self</span>.<span class="ident">data</span>
+    <span class="doccomment">/// Returns the underlying buffer for the cursor.
+    </span><span class="kw">pub fn </span>data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
+        <span class="self">self</span>.data
     }
 
-    <span class="doccomment">/// Returns the length of the underlying buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>()
+    <span class="doccomment">/// Returns the length of the underlying buffer.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.data.len()
     }
 
-    <span class="doccomment">/// Returns the current offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">offset</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">offset</span>
+    <span class="doccomment">/// Returns the current offset.
+    </span><span class="kw">pub fn </span>offset(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.offset
     }
 
-    <span class="doccomment">/// Returns the number of bytes available for reading.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">offset</span>
+    <span class="doccomment">/// Returns the number of bytes available for reading.
+    </span><span class="kw">pub fn </span>remaining(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.data.len() - <span class="self">self</span>.offset
     }
 
-    <span class="doccomment">/// Sets the offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_offset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">offset</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Sets the offset.
+    </span><span class="kw">pub fn </span>set_offset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span>offset &gt; <span class="self">self</span>.data.len() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset</span>;
+        <span class="self">self</span>.offset = offset;
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="doccomment">/// Returns true if the specified number of bytes can be read.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">len</span>
+    <span class="doccomment">/// Returns true if the specified number of bytes can be read.
+    </span><span class="kw">pub fn </span>check_range(<span class="kw-2">&amp;</span><span class="self">self</span>, len: usize) -&gt; bool {
+        <span class="self">self</span>.data.len() - <span class="self">self</span>.offset &gt;= len
     }
 
-    <span class="doccomment">/// Returns an error of the specified number of bytes cannot be read.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ensure_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">len</span>) {
+    <span class="doccomment">/// Returns an error of the specified number of bytes cannot be read.
+    </span><span class="kw">pub fn </span>ensure_range(<span class="kw-2">&amp;</span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.check_range(len) {
             <span class="prelude-val">Some</span>(())
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
+    }
+
+    <span class="doccomment">/// Skips the specified number of bytes.
+    </span><span class="kw">pub fn </span>skip(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bytes: usize) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="self">self</span>.set_offset(<span class="self">self</span>.offset.checked_add(bytes)<span class="question-mark">?</span>)
+    }
+
+    <span class="doccomment">/// Reads a value of the specified type and advances the offset.
+    </span><span class="kw">pub fn </span>read&lt;T: FromBeData&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
+        <span class="kw">if </span><span class="self">self</span>.data.len() - <span class="self">self</span>.offset &lt; T::SIZE {
+            <span class="prelude-val">None
+        </span>} <span class="kw">else </span>{
+            <span class="kw">let </span>v = <span class="kw">unsafe </span>{ T::from_be_data_unchecked(<span class="self">self</span>.data, <span class="self">self</span>.offset) };
+            <span class="self">self</span>.offset += T::SIZE;
+            <span class="prelude-val">Some</span>(v)
         }
     }
 
-    <span class="doccomment">/// Skips the specified number of bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">bytes</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">set_offset</span>(<span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">checked_add</span>(<span class="ident">bytes</span>)<span class="question-mark">?</span>)
+    <span class="doccomment">/// Reads a u8 value and advances the offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u8(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u8&gt; {
+        <span class="self">self</span>.read::&lt;u8&gt;()
     }
 
-    <span class="doccomment">/// Reads a value of the specified type and advances the offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">&lt;</span> <span class="ident">T::SIZE</span> {
-            <span class="prelude-val">None</span>
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">T::from_be_data_unchecked</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">offset</span>) };
-            <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">T::SIZE</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">v</span>)
+    <span class="doccomment">/// Reads a u16 value and advances the offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u16(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u16&gt; {
+        <span class="self">self</span>.read::&lt;u16&gt;()
+    }
+
+    <span class="doccomment">/// Reads a u32 value and advances the offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_u32(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+        <span class="self">self</span>.read::&lt;u32&gt;()
+    }
+
+    <span class="doccomment">/// Reads an i8 value and advances the offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_i8(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;i8&gt; {
+        <span class="self">self</span>.read::&lt;i8&gt;()
+    }
+
+    <span class="doccomment">/// Reads an i16 value and advances the offset.
+    </span><span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>read_i16(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;i16&gt; {
+        <span class="self">self</span>.read::&lt;i16&gt;()
+    }
+
+    <span class="doccomment">/// Reads an array of values of the specified type and length and
+    /// advances the offset.
+    </span><span class="kw">pub fn </span>read_array&lt;T: FromBeData&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;Array&lt;<span class="lifetime">&#39;a</span>, T&gt;&gt; {
+        <span class="kw">let </span>len = len * T::SIZE;
+        <span class="kw">if </span>!<span class="self">self</span>.check_range(len) {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
+        <span class="kw">let </span>arr = Array::new(<span class="kw-2">&amp;</span><span class="self">self</span>.data[<span class="self">self</span>.offset..<span class="self">self</span>.offset + len]);
+        <span class="self">self</span>.offset += len;
+        <span class="prelude-val">Some</span>(arr)
     }
 
-    <span class="doccomment">/// Reads a u8 value and advances the offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()
-    }
-
-    <span class="doccomment">/// Reads a u16 value and advances the offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()
-    }
-
-    <span class="doccomment">/// Reads a u32 value and advances the offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u32</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>()
-    }
-
-    <span class="doccomment">/// Reads an i8 value and advances the offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_i8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>()
-    }
-
-    <span class="doccomment">/// Reads an i16 value and advances the offset.</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_i16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()
-    }
-
-    <span class="doccomment">/// Reads an array of values of the specified type and length and</span>
-    <span class="doccomment">/// advances the offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_array</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span> <span class="op">*</span> <span class="ident">T::SIZE</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">len</span>) {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Reads a sequence of bytes of the specified length and advances the
+    /// offset.
+    </span><span class="kw">pub fn </span>read_bytes(<span class="kw-2">&amp;mut </span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; {
+        <span class="kw">if </span>!<span class="self">self</span>.check_range(len) {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">arr</span> <span class="op">=</span> <span class="ident">Array::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[<span class="self">self</span>.<span class="ident">offset</span>..<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="ident">len</span>]);
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">len</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">arr</span>)
-    }
-
-    <span class="doccomment">/// Reads a sequence of bytes of the specified length and advances the</span>
-    <span class="doccomment">/// offset.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_bytes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">check_range</span>(<span class="ident">len</span>) {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[<span class="self">self</span>.<span class="ident">offset</span>..<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="ident">len</span>];
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">len</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">bytes</span>)
+        <span class="kw">let </span>bytes = <span class="kw-2">&amp;</span><span class="self">self</span>.data[<span class="self">self</span>.offset..<span class="self">self</span>.offset + len];
+        <span class="self">self</span>.offset += len;
+        <span class="prelude-val">Some</span>(bytes)
     }
 }
 
-<span class="doccomment">/// An array wrapping a byte buffer over a sequence of values that implement</span>
-<span class="doccomment">/// FromBeData.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">_p</span>: <span class="ident">core::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// An array wrapping a byte buffer over a sequence of values that implement
+/// FromBeData.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Array&lt;<span class="lifetime">&#39;a</span>, T: FromBeData&gt; {
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    len: usize,
+    _p: core::marker::PhantomData&lt;T&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">core::fmt::Debug</span> <span class="kw">for</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">core::fmt::Debug</span> <span class="op">+</span> <span class="ident">FromBeData</span>,
+<span class="kw">impl</span>&lt;T&gt; core::fmt::Debug <span class="kw">for </span>Array&lt;<span class="lifetime">&#39;_</span>, T&gt;
+<span class="kw">where
+    </span>T: core::fmt::Debug + FromBeData,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">core::fmt::Formatter</span>) -&gt; <span class="ident">core::fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;[&quot;</span>)<span class="question-mark">?</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>core::fmt::Formatter) -&gt; core::fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">&quot;[&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">for </span>(i, value) <span class="kw">in </span><span class="self">self</span>.iter().enumerate() {
+            <span class="kw">if </span>i &gt; <span class="number">0 </span>{
+                <span class="macro">write!</span>(f, <span class="string">&quot;, &quot;</span>)<span class="question-mark">?</span>;
             }
-            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?}&quot;</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+            <span class="macro">write!</span>(f, <span class="string">&quot;{:?}&quot;</span>, value)<span class="question-mark">?</span>;
         }
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;]&quot;</span>)
+        <span class="macro">write!</span>(f, <span class="string">&quot;]&quot;</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">len</span>: <span class="ident">data</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="ident">T::SIZE</span>,
-            <span class="ident">_p</span>: <span class="ident">core::marker::PhantomData</span> {},
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: FromBeData&gt; Array&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            data,
+            len: data.len() / T::SIZE,
+            _p: core::marker::PhantomData {},
         }
     }
 
-    <span class="doccomment">/// Returns the length of the array.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">len</span>
+    <span class="doccomment">/// Returns the length of the array.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.len
     }
 
-    <span class="doccomment">/// Returns the element at the specified index.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="prelude-val">None</span>
-        } <span class="kw">else</span> {
-            <span class="kw">unsafe</span> { <span class="prelude-val">Some</span>(<span class="ident">T::from_be_data_unchecked</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">index</span> <span class="op">*</span> <span class="ident">T::SIZE</span>)) }
+    <span class="doccomment">/// Returns the element at the specified index.
+    </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len {
+            <span class="prelude-val">None
+        </span>} <span class="kw">else </span>{
+            <span class="kw">unsafe </span>{ <span class="prelude-val">Some</span>(T::from_be_data_unchecked(<span class="self">self</span>.data, index * T::SIZE)) }
         }
     }
 
-    <span class="doccomment">/// Returns the element at the specified index, or some value if the index</span>
-    <span class="doccomment">/// is out of bounds.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_or</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">or</span>: <span class="ident">T</span>) -&gt; <span class="ident">T</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="ident">or</span>
-        } <span class="kw">else</span> {
-            <span class="kw">unsafe</span> { <span class="ident">T::from_be_data_unchecked</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">index</span> <span class="op">*</span> <span class="ident">T::SIZE</span>) }
+    <span class="doccomment">/// Returns the element at the specified index, or some value if the index
+    /// is out of bounds.
+    </span><span class="kw">pub fn </span>get_or(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, or: T) -&gt; T {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len {
+            or
+        } <span class="kw">else </span>{
+            <span class="kw">unsafe </span>{ T::from_be_data_unchecked(<span class="self">self</span>.data, index * T::SIZE) }
         }
     }
 
-    <span class="doccomment">/// Returns the element at the specified index without bounds checking.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="ident">T</span> {
-        <span class="ident">T::from_be_data_unchecked</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="ident">index</span> <span class="op">*</span> <span class="ident">T::SIZE</span>)
+    <span class="doccomment">/// Returns the element at the specified index without bounds checking.
+    </span><span class="kw">pub unsafe fn </span>get_unchecked(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; T {
+        T::from_be_data_unchecked(<span class="self">self</span>.data, index * T::SIZE)
     }
 
-    <span class="doccomment">/// Performs a binary search over the array using the specified comparator</span>
-    <span class="doccomment">/// function. Returns the index and value of the element on success, or</span>
-    <span class="doccomment">/// `None` if a match was not found.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">binary_search_by</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">T</span>)<span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">core::cmp::Ordering</span>,
+    <span class="doccomment">/// Performs a binary search over the array using the specified comparator
+    /// function. Returns the index and value of the element on success, or
+    /// `None` if a match was not found.
+    </span><span class="kw">pub fn </span>binary_search_by&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut </span>f: F) -&gt; <span class="prelude-ty">Option</span>&lt;(usize, T)&gt;
+    <span class="kw">where
+        </span>F: FnMut(<span class="kw-2">&amp;</span>T) -&gt; core::cmp::Ordering,
     {
-        <span class="comment">// Taken from Rust core library.</span>
-        <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>;
-        <span class="kw">if</span> <span class="ident">size</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="comment">// Taken from Rust core library.
+        </span><span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>size = <span class="self">self</span>.len;
+        <span class="kw">if </span>size == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="number">0usize</span>;
-        <span class="kw">while</span> <span class="ident">size</span> <span class="op">&gt;</span> <span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">half</span> <span class="op">=</span> <span class="ident">size</span> <span class="op">/</span> <span class="number">2</span>;
-            <span class="kw">let</span> <span class="ident">mid</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">half</span>;
-            <span class="comment">// SAFETY: the call is made safe by the following inconstants:</span>
-            <span class="comment">// - `mid &gt;= 0`: by definition</span>
-            <span class="comment">// - `mid &lt; size`: `mid = size / 2 + size / 4 + size / 8 ...`</span>
-            <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">get_unchecked</span>(<span class="ident">mid</span>) };
-            <span class="ident">base</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="ident">element</span>) {
-                <span class="ident">Greater</span> =&gt; <span class="ident">base</span>,
-                <span class="ident">Less</span> =&gt; <span class="ident">mid</span>,
-                <span class="ident">Equal</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">mid</span>, <span class="ident">element</span>)),
+        <span class="kw">let </span><span class="kw-2">mut </span>base = <span class="number">0usize</span>;
+        <span class="kw">while </span>size &gt; <span class="number">1 </span>{
+            <span class="kw">let </span>half = size / <span class="number">2</span>;
+            <span class="kw">let </span>mid = base + half;
+            <span class="comment">// SAFETY: the call is made safe by the following inconstants:
+            // - `mid &gt;= 0`: by definition
+            // - `mid &lt; size`: `mid = size / 2 + size / 4 + size / 8 ...`
+            </span><span class="kw">let </span>element = <span class="kw">unsafe </span>{ <span class="self">self</span>.get_unchecked(mid) };
+            base = <span class="kw">match </span>f(<span class="kw-2">&amp;</span>element) {
+                Greater =&gt; base,
+                Less =&gt; mid,
+                Equal =&gt; <span class="kw">return </span><span class="prelude-val">Some</span>((mid, element)),
             };
-            <span class="ident">size</span> <span class="op">-</span><span class="op">=</span> <span class="ident">half</span>;
+            size -= half;
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="doccomment">/// Returns an iterator over the elements of the array.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ArrayIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">ArrayIter</span> {
-            <span class="ident">inner</span>: <span class="kw-2">*</span><span class="self">self</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
-        }
-    }
-}
-
-<span class="doccomment">/// Iterator over the elements of an array.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ArrayIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">FromBeData</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">cur</span>: <span class="ident">usize</span>,
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">FromBeData</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">ArrayIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>;
-
-    <span class="kw">fn</span> <span class="ident">size_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">usize</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">len</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">cur</span>;
-        (<span class="ident">remaining</span>, <span class="prelude-val">Some</span>(<span class="ident">remaining</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">unsafe</span> { <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_unchecked</span>(<span class="self">self</span>.<span class="ident">cur</span> <span class="op">-</span> <span class="number">1</span>)) }
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">FromBeData</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">IntoIterator</span> <span class="kw">for</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">ArrayIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">T</span>;
-
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::IntoIter</span> {
-        <span class="ident">ArrayIter</span> {
-            <span class="ident">inner</span>: <span class="self">self</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
+    <span class="doccomment">/// Returns an iterator over the elements of the array.
+    </span><span class="kw">pub fn </span>iter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ArrayIter&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+        ArrayIter {
+            inner: <span class="kw-2">*</span><span class="self">self</span>,
+            cur: <span class="number">0</span>,
         }
     }
 }
 
-<span class="doccomment">/// Interface for reading big endian data from a buffer.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FromBeData</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span> {
-    <span class="kw">const</span> <span class="ident">SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>();
+<span class="doccomment">/// Iterator over the elements of an array.
+</span><span class="attribute">#[derive(Clone)]
+#[doc(hidden)]
+</span><span class="kw">pub struct </span>ArrayIter&lt;<span class="lifetime">&#39;a</span>, T: FromBeData&gt; {
+    inner: Array&lt;<span class="lifetime">&#39;a</span>, T&gt;,
+    cur: usize,
+}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">from_be_data</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buf</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> (<span class="ident">offset</span> <span class="op">&lt;</span> <span class="ident">len</span>) <span class="op">&amp;&amp;</span> ((<span class="ident">len</span> <span class="op">-</span> <span class="ident">offset</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="ident"><span class="self">Self</span>::SIZE</span>) {
-            <span class="kw">unsafe</span> { <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::from_be_data_unchecked</span>(<span class="ident">buf</span>, <span class="ident">offset</span>)) }
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: FromBeData + <span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>ArrayIter&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    <span class="kw">type </span>Item = T;
+
+    <span class="kw">fn </span>size_hint(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        <span class="kw">let </span>remaining = <span class="self">self</span>.inner.len - <span class="self">self</span>.cur;
+        (remaining, <span class="prelude-val">Some</span>(remaining))
+    }
+
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.inner.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-    }
-
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span>;
-}
-
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">USE_UNALIGNED_READS_LE</span>: <span class="ident">bool</span> <span class="op">=</span>
-    <span class="macro">cfg!</span>(<span class="ident">any</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>));
-
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">u8</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>)
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="kw">unsafe </span>{ <span class="prelude-val">Some</span>(<span class="self">self</span>.inner.get_unchecked(<span class="self">self</span>.cur - <span class="number">1</span>)) }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">i8</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">i8</span>
-    }
-}
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: FromBeData + <span class="lifetime">&#39;a</span>&gt; IntoIterator <span class="kw">for </span>Array&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    <span class="kw">type </span>IntoIter = ArrayIter&lt;<span class="lifetime">&#39;a</span>, T&gt;;
+    <span class="kw">type </span>Item = T;
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">u16</span> {
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">USE_UNALIGNED_READS_LE</span> {
-            (<span class="kw-2">*</span>(<span class="ident">buf</span>.<span class="ident">as_ptr</span>().<span class="ident">add</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u16</span>)).<span class="ident">swap_bytes</span>()
-        } <span class="kw">else</span> {
-            (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">u16</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span> <span class="op">|</span> <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u16</span>
+    <span class="kw">fn </span>into_iter(<span class="self">self</span>) -&gt; <span class="self">Self</span>::IntoIter {
+        ArrayIter {
+            inner: <span class="self">self</span>,
+            cur: <span class="number">0</span>,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">i16</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">u16::from_be_data_unchecked</span>(<span class="ident">buf</span>, <span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">i16</span>
+<span class="doccomment">/// Interface for reading big endian data from a buffer.
+</span><span class="kw">pub trait </span>FromBeData: Sized + Copy + Clone {
+    <span class="kw">const </span>SIZE: usize = core::mem::size_of::&lt;<span class="self">Self</span>&gt;();
+
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>from_be_data(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>len = buf.len();
+        <span class="kw">if </span>(offset &lt; len) &amp;&amp; ((len - offset) &gt;= <span class="self">Self</span>::SIZE) {
+            <span class="kw">unsafe </span>{ <span class="prelude-val">Some</span>(<span class="self">Self</span>::from_be_data_unchecked(buf, offset)) }
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
+    }
+
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self</span>;
+}
+
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>USE_UNALIGNED_READS_LE: bool =
+    <span class="macro">cfg!</span>(any(target_arch = <span class="string">&quot;x86&quot;</span>, target_arch = <span class="string">&quot;x86_64&quot;</span>));
+
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>u8 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw-2">*</span>buf.get_unchecked(offset)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">u32</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">USE_UNALIGNED_READS_LE</span> {
-            (<span class="kw-2">*</span>(<span class="ident">buf</span>.<span class="ident">as_ptr</span>().<span class="ident">add</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u32</span>)).<span class="ident">swap_bytes</span>()
-        } <span class="kw">else</span> {
-            (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">24</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>) <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>
-                <span class="op">|</span> <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">3</span>) <span class="kw">as</span> <span class="ident">u32</span>
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>i8 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw-2">*</span>buf.get_unchecked(offset) <span class="kw">as </span>i8
+    }
+}
+
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>u16 {
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>USE_UNALIGNED_READS_LE {
+            (<span class="kw-2">*</span>(buf.as_ptr().add(offset) <span class="kw">as </span><span class="kw-2">*const </span>u16)).swap_bytes()
+        } <span class="kw">else </span>{
+            (<span class="kw-2">*</span>buf.get_unchecked(offset) <span class="kw">as </span>u16) &lt;&lt; <span class="number">8 </span>| <span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">1</span>) <span class="kw">as </span>u16
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">i32</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">u32::from_be_data_unchecked</span>(<span class="ident">buf</span>, <span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">i32</span>
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>i16 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        u16::from_be_data_unchecked(buf, offset) <span class="kw">as </span>i16
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">u64</span> {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">USE_UNALIGNED_READS_LE</span> {
-            (<span class="kw-2">*</span>(<span class="ident">buf</span>.<span class="ident">as_ptr</span>().<span class="ident">add</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u64</span>)).<span class="ident">swap_bytes</span>()
-        } <span class="kw">else</span> {
-            (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">56</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">48</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">40</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">3</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">32</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">24</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">5</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">6</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>
-                <span class="op">|</span> <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">7</span>) <span class="kw">as</span> <span class="ident">u64</span>
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>u32 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>USE_UNALIGNED_READS_LE {
+            (<span class="kw-2">*</span>(buf.as_ptr().add(offset) <span class="kw">as </span><span class="kw-2">*const </span>u32)).swap_bytes()
+        } <span class="kw">else </span>{
+            (<span class="kw-2">*</span>buf.get_unchecked(offset) <span class="kw">as </span>u32) &lt;&lt; <span class="number">24
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">1</span>) <span class="kw">as </span>u32) &lt;&lt; <span class="number">16
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">2</span>) <span class="kw">as </span>u32) &lt;&lt; <span class="number">8
+                </span>| <span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">3</span>) <span class="kw">as </span>u32
         }
     }
 }
 
-<span class="doccomment">/// Unsigned 24-bit integer.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">U24</span>(<span class="kw">pub</span> <span class="ident">u32</span>);
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>i32 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        u32::from_be_data_unchecked(buf, offset) <span class="kw">as </span>i32
+    }
+}
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> <span class="ident">U24</span> {
-    <span class="kw">const</span> <span class="ident">SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>u64 {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>USE_UNALIGNED_READS_LE {
+            (<span class="kw-2">*</span>(buf.as_ptr().add(offset) <span class="kw">as </span><span class="kw-2">*const </span>u64)).swap_bytes()
+        } <span class="kw">else </span>{
+            (<span class="kw-2">*</span>buf.get_unchecked(offset) <span class="kw">as </span>u64) &lt;&lt; <span class="number">56
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">1</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">48
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">2</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">40
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">3</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">32
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">4</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">24
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">5</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">16
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">6</span>) <span class="kw">as </span>u64) &lt;&lt; <span class="number">8
+                </span>| <span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">7</span>) <span class="kw">as </span>u64
+        }
+    }
+}
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
+<span class="doccomment">/// Unsigned 24-bit integer.
+</span><span class="attribute">#[derive(Copy, Clone)]
+#[doc(hidden)]
+</span><span class="kw">pub struct </span>U24(<span class="kw">pub </span>u32);
+
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>U24 {
+    <span class="kw">const </span>SIZE: usize = <span class="number">3</span>;
+
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(buf: <span class="kw-2">&amp;</span>[u8], offset: usize) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>(
-            (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>
-                <span class="op">|</span> (<span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>
-                <span class="op">|</span> <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_unchecked</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>) <span class="kw">as</span> <span class="ident">u32</span>,
+            (<span class="kw-2">*</span>buf.get_unchecked(offset) <span class="kw">as </span>u32) &lt;&lt; <span class="number">16
+                </span>| (<span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">1</span>) <span class="kw">as </span>u32) &lt;&lt; <span class="number">8
+                </span>| <span class="kw-2">*</span>buf.get_unchecked(offset + <span class="number">2</span>) <span class="kw">as </span>u32,
         )
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromBeData</span> <span class="kw">for</span> () {
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_be_data_unchecked</span>(<span class="ident">_buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">_offset</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {}
+<span class="kw">impl </span>FromBeData <span class="kw">for </span>() {
+    <span class="kw">unsafe fn </span>from_be_data_unchecked(_buf: <span class="kw-2">&amp;</span>[u8], _offset: usize) -&gt; <span class="self">Self </span>{}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

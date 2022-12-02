@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/complex/hangul.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hangul.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/complex/hangul.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hangul.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -366,373 +366,373 @@
 <span id="366">366</span>
 <span id="367">367</span>
 <span id="368">368</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>alloc::boxed::Box;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Face</span>, <span class="ident">GlyphInfo</span>, <span class="ident">Mask</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer</span>::{<span class="ident">Buffer</span>, <span class="ident">BufferFlags</span>, <span class="ident">BufferClusterLevel</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ot</span>::{<span class="ident">feature</span>, <span class="ident">FeatureFlags</span>, <span class="ident">Map</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan</span>::{<span class="ident">ShapePlan</span>, <span class="ident">ShapePlanner</span>};
-<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+<span class="kw">use crate</span>::{Face, GlyphInfo, Mask};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::{Buffer, BufferFlags, BufferClusterLevel};
+<span class="kw">use </span><span class="kw">crate</span>::ot::{feature, FeatureFlags, Map};
+<span class="kw">use </span><span class="kw">crate</span>::plan::{ShapePlan, ShapePlanner};
+<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HANGUL_SHAPER</span>: <span class="ident">ComplexShaper</span> <span class="op">=</span> <span class="ident">ComplexShaper</span> {
-    <span class="ident">collect_features</span>: <span class="prelude-val">Some</span>(<span class="ident">collect_features</span>),
-    <span class="ident">override_features</span>: <span class="prelude-val">Some</span>(<span class="ident">override_features</span>),
-    <span class="ident">create_data</span>: <span class="prelude-val">Some</span>(<span class="op">|</span><span class="ident">plan</span><span class="op">|</span> <span class="ident">Box::new</span>(<span class="ident">HangulShapePlan::new</span>(<span class="kw-2">&amp;</span><span class="ident">plan</span>.<span class="ident">ot_map</span>))),
-    <span class="ident">preprocess_text</span>: <span class="prelude-val">Some</span>(<span class="ident">preprocess_text</span>),
-    <span class="ident">postprocess_glyphs</span>: <span class="prelude-val">None</span>,
-    <span class="ident">normalization_mode</span>: <span class="prelude-val">None</span>,
-    <span class="ident">decompose</span>: <span class="prelude-val">None</span>,
-    <span class="ident">compose</span>: <span class="prelude-val">None</span>,
-    <span class="ident">setup_masks</span>: <span class="prelude-val">Some</span>(<span class="ident">setup_masks</span>),
-    <span class="ident">gpos_tag</span>: <span class="prelude-val">None</span>,
-    <span class="ident">reorder_marks</span>: <span class="prelude-val">None</span>,
-    <span class="ident">zero_width_marks</span>: <span class="prelude-val">None</span>,
-    <span class="ident">fallback_position</span>: <span class="bool-val">false</span>,
+<span class="kw">pub const </span>HANGUL_SHAPER: ComplexShaper = ComplexShaper {
+    collect_features: <span class="prelude-val">Some</span>(collect_features),
+    override_features: <span class="prelude-val">Some</span>(override_features),
+    create_data: <span class="prelude-val">Some</span>(|plan| Box::new(HangulShapePlan::new(<span class="kw-2">&amp;</span>plan.ot_map))),
+    preprocess_text: <span class="prelude-val">Some</span>(preprocess_text),
+    postprocess_glyphs: <span class="prelude-val">None</span>,
+    normalization_mode: <span class="prelude-val">None</span>,
+    decompose: <span class="prelude-val">None</span>,
+    compose: <span class="prelude-val">None</span>,
+    setup_masks: <span class="prelude-val">Some</span>(setup_masks),
+    gpos_tag: <span class="prelude-val">None</span>,
+    reorder_marks: <span class="prelude-val">None</span>,
+    zero_width_marks: <span class="prelude-val">None</span>,
+    fallback_position: <span class="bool-val">false</span>,
 };
 
 
-<span class="kw">const</span> <span class="ident">L_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1100</span>;
-<span class="kw">const</span> <span class="ident">V_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1161</span>;
-<span class="kw">const</span> <span class="ident">T_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x11A7</span>;
-<span class="kw">const</span> <span class="ident">L_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">19</span>;
-<span class="kw">const</span> <span class="ident">V_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">21</span>;
-<span class="kw">const</span> <span class="ident">T_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">28</span>;
-<span class="kw">const</span> <span class="ident">N_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">V_COUNT</span> <span class="op">*</span> <span class="ident">T_COUNT</span>;
-<span class="kw">const</span> <span class="ident">S_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">L_COUNT</span> <span class="op">*</span> <span class="ident">N_COUNT</span>;
-<span class="kw">const</span> <span class="ident">S_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0xAC00</span>;
+<span class="kw">const </span>L_BASE: u32 = <span class="number">0x1100</span>;
+<span class="kw">const </span>V_BASE: u32 = <span class="number">0x1161</span>;
+<span class="kw">const </span>T_BASE: u32 = <span class="number">0x11A7</span>;
+<span class="kw">const </span>L_COUNT: u32 = <span class="number">19</span>;
+<span class="kw">const </span>V_COUNT: u32 = <span class="number">21</span>;
+<span class="kw">const </span>T_COUNT: u32 = <span class="number">28</span>;
+<span class="kw">const </span>N_COUNT: u32 = V_COUNT * T_COUNT;
+<span class="kw">const </span>S_COUNT: u32 = L_COUNT * N_COUNT;
+<span class="kw">const </span>S_BASE: u32 = <span class="number">0xAC00</span>;
 
-<span class="kw">const</span> <span class="ident">LJMO</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">const</span> <span class="ident">VJMO</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">const</span> <span class="ident">TJMO</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
+<span class="kw">const </span>LJMO: u8 = <span class="number">1</span>;
+<span class="kw">const </span>VJMO: u8 = <span class="number">2</span>;
+<span class="kw">const </span>TJMO: u8 = <span class="number">3</span>;
 
 
-<span class="kw">impl</span> <span class="ident">GlyphInfo</span> {
-    <span class="kw">fn</span> <span class="ident">hangul_shaping_feature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">let</span> <span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">4</span>] <span class="op">=</span> <span class="ident">bytemuck::cast_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">var2</span>);
-        <span class="ident">v</span>[<span class="number">2</span>]
+<span class="kw">impl </span>GlyphInfo {
+    <span class="kw">fn </span>hangul_shaping_feature(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="kw">let </span>v: <span class="kw-2">&amp;</span>[u8; <span class="number">4</span>] = bytemuck::cast_ref(<span class="kw-2">&amp;</span><span class="self">self</span>.var2);
+        v[<span class="number">2</span>]
     }
 
-    <span class="kw">fn</span> <span class="ident">set_hangul_shaping_feature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">feature</span>: <span class="ident">u8</span>) {
-        <span class="kw">let</span> <span class="ident">v</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>; <span class="number">4</span>] <span class="op">=</span> <span class="ident">bytemuck::cast_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">var2</span>);
-        <span class="ident">v</span>[<span class="number">2</span>] <span class="op">=</span> <span class="ident">feature</span>;
+    <span class="kw">fn </span>set_hangul_shaping_feature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, feature: u8) {
+        <span class="kw">let </span>v: <span class="kw-2">&amp;mut </span>[u8; <span class="number">4</span>] = bytemuck::cast_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>.var2);
+        v[<span class="number">2</span>] = feature;
     }
 }
 
 
-<span class="kw">struct</span> <span class="ident">HangulShapePlan</span> {
-    <span class="ident">mask_array</span>: [<span class="ident">Mask</span>; <span class="number">4</span>],
+<span class="kw">struct </span>HangulShapePlan {
+    mask_array: [Mask; <span class="number">4</span>],
 }
 
-<span class="kw">impl</span> <span class="ident">HangulShapePlan</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="ident">Map</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">HangulShapePlan</span> {
-            <span class="ident">mask_array</span>: [
+<span class="kw">impl </span>HangulShapePlan {
+    <span class="kw">fn </span>new(map: <span class="kw-2">&amp;</span>Map) -&gt; <span class="self">Self </span>{
+        HangulShapePlan {
+            mask_array: [
                 <span class="number">0</span>,
-                <span class="ident">map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::LEADING_JAMO_FORMS</span>),
-                <span class="ident">map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::VOWEL_JAMO_FORMS</span>),
-                <span class="ident">map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::TRAILING_JAMO_FORMS</span>),
+                map.one_mask(feature::LEADING_JAMO_FORMS),
+                map.one_mask(feature::VOWEL_JAMO_FORMS),
+                map.one_mask(feature::TRAILING_JAMO_FORMS),
             ]
         }
     }
 }
 
 
-<span class="kw">fn</span> <span class="ident">collect_features</span>(<span class="ident">planner</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapePlanner</span>) {
-    <span class="ident">planner</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::LEADING_JAMO_FORMS</span>, <span class="ident">FeatureFlags::empty</span>(), <span class="number">1</span>);
-    <span class="ident">planner</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::VOWEL_JAMO_FORMS</span>, <span class="ident">FeatureFlags::empty</span>(), <span class="number">1</span>);
-    <span class="ident">planner</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::TRAILING_JAMO_FORMS</span>, <span class="ident">FeatureFlags::empty</span>(), <span class="number">1</span>);
+<span class="kw">fn </span>collect_features(planner: <span class="kw-2">&amp;mut </span>ShapePlanner) {
+    planner.ot_map.add_feature(feature::LEADING_JAMO_FORMS, FeatureFlags::empty(), <span class="number">1</span>);
+    planner.ot_map.add_feature(feature::VOWEL_JAMO_FORMS, FeatureFlags::empty(), <span class="number">1</span>);
+    planner.ot_map.add_feature(feature::TRAILING_JAMO_FORMS, FeatureFlags::empty(), <span class="number">1</span>);
 }
 
-<span class="kw">fn</span> <span class="ident">override_features</span>(<span class="ident">planner</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapePlanner</span>) {
-    <span class="comment">// Uniscribe does not apply &#39;calt&#39; for Hangul, and certain fonts</span>
-    <span class="comment">// (Noto Sans CJK, Source Sans Han, etc) apply all of jamo lookups</span>
-    <span class="comment">// in calt, which is not desirable.</span>
-    <span class="ident">planner</span>.<span class="ident">ot_map</span>.<span class="ident">disable_feature</span>(<span class="ident">feature::CONTEXTUAL_ALTERNATES</span>);
+<span class="kw">fn </span>override_features(planner: <span class="kw-2">&amp;mut </span>ShapePlanner) {
+    <span class="comment">// Uniscribe does not apply &#39;calt&#39; for Hangul, and certain fonts
+    // (Noto Sans CJK, Source Sans Han, etc) apply all of jamo lookups
+    // in calt, which is not desirable.
+    </span>planner.ot_map.disable_feature(feature::CONTEXTUAL_ALTERNATES);
 }
 
-<span class="kw">fn</span> <span class="ident">preprocess_text</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="comment">// Hangul syllables come in two shapes: LV, and LVT.  Of those:</span>
-    <span class="comment">//</span>
-    <span class="comment">//   - LV can be precomposed, or decomposed.  Lets call those</span>
-    <span class="comment">//     &lt;LV&gt; and &lt;L,V&gt;,</span>
-    <span class="comment">//   - LVT can be fully precomposed, partically precomposed, or</span>
-    <span class="comment">//     fully decomposed.  Ie. &lt;LVT&gt;, &lt;LV,T&gt;, or &lt;L,V,T&gt;.</span>
-    <span class="comment">//</span>
-    <span class="comment">// The composition / decomposition is mechanical.  However, not</span>
-    <span class="comment">// all &lt;L,V&gt; sequences compose, and not all &lt;LV,T&gt; sequences</span>
-    <span class="comment">// compose.</span>
-    <span class="comment">//</span>
-    <span class="comment">// Here are the specifics:</span>
-    <span class="comment">//</span>
-    <span class="comment">//   - &lt;L&gt;: U+1100..115F, U+A960..A97F</span>
-    <span class="comment">//   - &lt;V&gt;: U+1160..11A7, U+D7B0..D7C7</span>
-    <span class="comment">//   - &lt;T&gt;: U+11A8..11FF, U+D7CB..D7FB</span>
-    <span class="comment">//</span>
-    <span class="comment">//   - Only the &lt;L,V&gt; sequences for some of the U+11xx ranges combine.</span>
-    <span class="comment">//   - Only &lt;LV,T&gt; sequences for some of the Ts in U+11xx range combine.</span>
-    <span class="comment">//</span>
-    <span class="comment">// Here is what we want to accomplish in this shaper:</span>
-    <span class="comment">//</span>
-    <span class="comment">//   - If the whole syllable can be precomposed, do that,</span>
-    <span class="comment">//   - Otherwise, fully decompose and apply ljmo/vjmo/tjmo features.</span>
-    <span class="comment">//   - If a valid syllable is followed by a Hangul tone mark, reorder the tone</span>
-    <span class="comment">//     mark to precede the whole syllable - unless it is a zero-width glyph, in</span>
-    <span class="comment">//     which case we leave it untouched, assuming it&#39;s designed to overstrike.</span>
-    <span class="comment">//</span>
-    <span class="comment">// That is, of the different possible syllables:</span>
-    <span class="comment">//</span>
-    <span class="comment">//   &lt;L&gt;</span>
-    <span class="comment">//   &lt;L,V&gt;</span>
-    <span class="comment">//   &lt;L,V,T&gt;</span>
-    <span class="comment">//   &lt;LV&gt;</span>
-    <span class="comment">//   &lt;LVT&gt;</span>
-    <span class="comment">//   &lt;LV, T&gt;</span>
-    <span class="comment">//</span>
-    <span class="comment">// - &lt;L&gt; needs no work.</span>
-    <span class="comment">//</span>
-    <span class="comment">// - &lt;LV&gt; and &lt;LVT&gt; can stay the way they are if the font supports them, otherwise we</span>
-    <span class="comment">//   should fully decompose them if font supports.</span>
-    <span class="comment">//</span>
-    <span class="comment">// - &lt;L,V&gt; and &lt;L,V,T&gt; we should compose if the whole thing can be composed.</span>
-    <span class="comment">//</span>
-    <span class="comment">// - &lt;LV,T&gt; we should compose if the whole thing can be composed, otherwise we should</span>
-    <span class="comment">//   decompose.</span>
+<span class="kw">fn </span>preprocess_text(<span class="kw">_</span>: <span class="kw-2">&amp;</span>ShapePlan, face: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="comment">// Hangul syllables come in two shapes: LV, and LVT.  Of those:
+    //
+    //   - LV can be precomposed, or decomposed.  Lets call those
+    //     &lt;LV&gt; and &lt;L,V&gt;,
+    //   - LVT can be fully precomposed, partically precomposed, or
+    //     fully decomposed.  Ie. &lt;LVT&gt;, &lt;LV,T&gt;, or &lt;L,V,T&gt;.
+    //
+    // The composition / decomposition is mechanical.  However, not
+    // all &lt;L,V&gt; sequences compose, and not all &lt;LV,T&gt; sequences
+    // compose.
+    //
+    // Here are the specifics:
+    //
+    //   - &lt;L&gt;: U+1100..115F, U+A960..A97F
+    //   - &lt;V&gt;: U+1160..11A7, U+D7B0..D7C7
+    //   - &lt;T&gt;: U+11A8..11FF, U+D7CB..D7FB
+    //
+    //   - Only the &lt;L,V&gt; sequences for some of the U+11xx ranges combine.
+    //   - Only &lt;LV,T&gt; sequences for some of the Ts in U+11xx range combine.
+    //
+    // Here is what we want to accomplish in this shaper:
+    //
+    //   - If the whole syllable can be precomposed, do that,
+    //   - Otherwise, fully decompose and apply ljmo/vjmo/tjmo features.
+    //   - If a valid syllable is followed by a Hangul tone mark, reorder the tone
+    //     mark to precede the whole syllable - unless it is a zero-width glyph, in
+    //     which case we leave it untouched, assuming it&#39;s designed to overstrike.
+    //
+    // That is, of the different possible syllables:
+    //
+    //   &lt;L&gt;
+    //   &lt;L,V&gt;
+    //   &lt;L,V,T&gt;
+    //   &lt;LV&gt;
+    //   &lt;LVT&gt;
+    //   &lt;LV, T&gt;
+    //
+    // - &lt;L&gt; needs no work.
+    //
+    // - &lt;LV&gt; and &lt;LVT&gt; can stay the way they are if the font supports them, otherwise we
+    //   should fully decompose them if font supports.
+    //
+    // - &lt;L,V&gt; and &lt;L,V,T&gt; we should compose if the whole thing can be composed.
+    //
+    // - &lt;LV,T&gt; we should compose if the whole thing can be composed, otherwise we should
+    //   decompose.
 
-    <span class="ident">buffer</span>.<span class="ident">clear_output</span>();
-    <span class="comment">// Extent of most recently seen syllable; valid only if start &lt; end</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">end</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">while</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-        <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">glyph_id</span>;
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_char</span>();
+    </span>buffer.clear_output();
+    <span class="comment">// Extent of most recently seen syllable; valid only if start &lt; end
+    </span><span class="kw">let </span><span class="kw-2">mut </span>start = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>end = <span class="number">0</span>;
+    buffer.idx = <span class="number">0</span>;
+    <span class="kw">while </span>buffer.idx &lt; buffer.len {
+        <span class="kw">let </span>u = buffer.cur(<span class="number">0</span>).glyph_id;
+        <span class="kw">let </span>c = buffer.cur(<span class="number">0</span>).as_char();
 
-        <span class="kw">if</span> <span class="ident">is_hangul_tone</span>(<span class="ident">u</span>) {
-            <span class="comment">// We could cache the width of the tone marks and the existence of dotted-circle,</span>
-            <span class="comment">// but the use of the Hangul tone mark characters seems to be rare enough that</span>
-            <span class="comment">// I didn&#39;t bother for now.</span>
-            <span class="kw">if</span> <span class="ident">start</span> <span class="op">&lt;</span> <span class="ident">end</span> <span class="op">&amp;&amp;</span> <span class="ident">end</span> <span class="op">==</span> <span class="ident">buffer</span>.<span class="ident">out_len</span> {
-                <span class="comment">// Tone mark follows a valid syllable; move it in front, unless it&#39;s zero width.</span>
-                <span class="ident">buffer</span>.<span class="ident">unsafe_to_break_from_outbuffer</span>(<span class="ident">start</span>, <span class="ident">buffer</span>.<span class="ident">idx</span>);
-                <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">is_zero_width_char</span>(<span class="ident">face</span>, <span class="ident">c</span>) {
-                    <span class="ident">buffer</span>.<span class="ident">merge_out_clusters</span>(<span class="ident">start</span>, <span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>);
-                    <span class="kw">let</span> <span class="ident">out_info</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_info_mut</span>();
-                    <span class="kw">let</span> <span class="ident">tone</span> <span class="op">=</span> <span class="ident">out_info</span>[<span class="ident">end</span>];
-                    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">end</span><span class="op">-</span><span class="ident">start</span>).<span class="ident">rev</span>() {
-                        <span class="ident">out_info</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">out_info</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">start</span>];
+        <span class="kw">if </span>is_hangul_tone(u) {
+            <span class="comment">// We could cache the width of the tone marks and the existence of dotted-circle,
+            // but the use of the Hangul tone mark characters seems to be rare enough that
+            // I didn&#39;t bother for now.
+            </span><span class="kw">if </span>start &lt; end &amp;&amp; end == buffer.out_len {
+                <span class="comment">// Tone mark follows a valid syllable; move it in front, unless it&#39;s zero width.
+                </span>buffer.unsafe_to_break_from_outbuffer(start, buffer.idx);
+                buffer.next_glyph();
+                <span class="kw">if </span>!is_zero_width_char(face, c) {
+                    buffer.merge_out_clusters(start, end + <span class="number">1</span>);
+                    <span class="kw">let </span>out_info = buffer.out_info_mut();
+                    <span class="kw">let </span>tone = out_info[end];
+                    <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..end-start).rev() {
+                        out_info[i + start + <span class="number">1</span>] = out_info[i + start];
                     }
-                    <span class="ident">out_info</span>[<span class="ident">start</span>] <span class="op">=</span> <span class="ident">tone</span>;
+                    out_info[start] = tone;
                 }
-            } <span class="kw">else</span> {
-                <span class="comment">// No valid syllable as base for tone mark; try to insert dotted circle.</span>
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::DO_NOT_INSERT_DOTTED_CIRCLE</span>) <span class="op">&amp;&amp;</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="number">0x25CC</span>) {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">chars</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">2</span>];
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">is_zero_width_char</span>(<span class="ident">face</span>, <span class="ident">c</span>) {
-                        <span class="ident">chars</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">u</span>;
-                        <span class="ident">chars</span>[<span class="number">1</span>] <span class="op">=</span> <span class="number">0x25CC</span>;
-                    } <span class="kw">else</span> {
-                        <span class="ident">chars</span>[<span class="number">0</span>] <span class="op">=</span> <span class="number">0x25CC</span>;
-                        <span class="ident">chars</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">u</span>;
+            } <span class="kw">else </span>{
+                <span class="comment">// No valid syllable as base for tone mark; try to insert dotted circle.
+                </span><span class="kw">if </span>!buffer.flags.contains(BufferFlags::DO_NOT_INSERT_DOTTED_CIRCLE) &amp;&amp; face.has_glyph(<span class="number">0x25CC</span>) {
+                    <span class="kw">let </span><span class="kw-2">mut </span>chars = [<span class="number">0</span>; <span class="number">2</span>];
+                    <span class="kw">if </span>!is_zero_width_char(face, c) {
+                        chars[<span class="number">0</span>] = u;
+                        chars[<span class="number">1</span>] = <span class="number">0x25CC</span>;
+                    } <span class="kw">else </span>{
+                        chars[<span class="number">0</span>] = <span class="number">0x25CC</span>;
+                        chars[<span class="number">1</span>] = u;
                     }
 
-                    <span class="ident">buffer</span>.<span class="ident">replace_glyphs</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span><span class="ident">chars</span>);
-                } <span class="kw">else</span> {
-                    <span class="comment">// No dotted circle available in the font; just leave tone mark untouched.</span>
-                    <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+                    buffer.replace_glyphs(<span class="number">1</span>, <span class="number">2</span>, <span class="kw-2">&amp;</span>chars);
+                } <span class="kw">else </span>{
+                    <span class="comment">// No dotted circle available in the font; just leave tone mark untouched.
+                    </span>buffer.next_glyph();
                 }
             }
 
-            <span class="ident">start</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
-            <span class="ident">end</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
+            start = buffer.out_len;
+            end = buffer.out_len;
             <span class="kw">continue</span>;
         }
 
-        <span class="comment">// Remember current position as a potential syllable start;</span>
-        <span class="comment">// will only be used if we set end to a later position.</span>
-        <span class="ident">start</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
+        <span class="comment">// Remember current position as a potential syllable start;
+        // will only be used if we set end to a later position.
+        </span>start = buffer.out_len;
 
-        <span class="kw">if</span> <span class="ident">is_l</span>(<span class="ident">u</span>) <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">u</span>;
-            <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">1</span>).<span class="ident">glyph_id</span>;
-            <span class="kw">if</span> <span class="ident">is_v</span>(<span class="ident">v</span>) {
-                <span class="comment">// Have &lt;L,V&gt; or &lt;L,V,T&gt;.</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tindex</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">2</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-                    <span class="ident">t</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">2</span>).<span class="ident">glyph_id</span>;
-                    <span class="kw">if</span> <span class="ident">is_t</span>(<span class="ident">t</span>) {
-                        <span class="comment">// Only used if isCombiningT (t); otherwise invalid.</span>
-                        <span class="ident">tindex</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">-</span> <span class="ident">T_BASE</span>;
-                    } <span class="kw">else</span> {
-                        <span class="comment">// The next character was not a trailing jamo.</span>
-                        <span class="ident">t</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">if </span>is_l(u) &amp;&amp; buffer.idx + <span class="number">1 </span>&lt; buffer.len {
+            <span class="kw">let </span>l = u;
+            <span class="kw">let </span>v = buffer.cur(<span class="number">1</span>).glyph_id;
+            <span class="kw">if </span>is_v(v) {
+                <span class="comment">// Have &lt;L,V&gt; or &lt;L,V,T&gt;.
+                </span><span class="kw">let </span><span class="kw-2">mut </span>t = <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>tindex = <span class="number">0</span>;
+                <span class="kw">if </span>buffer.idx + <span class="number">2 </span>&lt; buffer.len {
+                    t = buffer.cur(<span class="number">2</span>).glyph_id;
+                    <span class="kw">if </span>is_t(t) {
+                        <span class="comment">// Only used if isCombiningT (t); otherwise invalid.
+                        </span>tindex = t - T_BASE;
+                    } <span class="kw">else </span>{
+                        <span class="comment">// The next character was not a trailing jamo.
+                        </span>t = <span class="number">0</span>;
                     }
                 }
 
-                <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">t</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="number">3</span> } <span class="kw">else</span> { <span class="number">2</span> };
-                <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="ident">offset</span>);
+                <span class="kw">let </span>offset = <span class="kw">if </span>t != <span class="number">0 </span>{ <span class="number">3 </span>} <span class="kw">else </span>{ <span class="number">2 </span>};
+                buffer.unsafe_to_break(buffer.idx, buffer.idx + offset);
 
-                <span class="comment">// We&#39;ve got a syllable &lt;L,V,T?&gt;; see if it can potentially be composed.</span>
-                <span class="kw">if</span> <span class="ident">is_combining_l</span>(<span class="ident">l</span>) <span class="op">&amp;&amp;</span> <span class="ident">is_combining_v</span>(<span class="ident">v</span>) <span class="op">&amp;&amp;</span> (<span class="ident">t</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">is_combining_t</span>(<span class="ident">t</span>)) {
-                    <span class="comment">// Try to compose; if this succeeds, end is set to start+1.</span>
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">S_BASE</span> <span class="op">+</span> (<span class="ident">l</span> <span class="op">-</span> <span class="ident">L_BASE</span>) <span class="op">*</span> <span class="ident">N_COUNT</span> <span class="op">+</span> (<span class="ident">v</span> <span class="op">-</span> <span class="ident">V_BASE</span>) <span class="op">*</span> <span class="ident">T_COUNT</span> <span class="op">+</span> <span class="ident">tindex</span>;
-                    <span class="kw">if</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">s</span>) {
-                        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">t</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="number">3</span> } <span class="kw">else</span> { <span class="number">2</span> };
-                        <span class="ident">buffer</span>.<span class="ident">replace_glyphs</span>(<span class="ident">n</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="ident">s</span>]);
-                        <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>;
+                <span class="comment">// We&#39;ve got a syllable &lt;L,V,T?&gt;; see if it can potentially be composed.
+                </span><span class="kw">if </span>is_combining_l(l) &amp;&amp; is_combining_v(v) &amp;&amp; (t == <span class="number">0 </span>|| is_combining_t(t)) {
+                    <span class="comment">// Try to compose; if this succeeds, end is set to start+1.
+                    </span><span class="kw">let </span>s = S_BASE + (l - L_BASE) * N_COUNT + (v - V_BASE) * T_COUNT + tindex;
+                    <span class="kw">if </span>face.has_glyph(s) {
+                        <span class="kw">let </span>n = <span class="kw">if </span>t != <span class="number">0 </span>{ <span class="number">3 </span>} <span class="kw">else </span>{ <span class="number">2 </span>};
+                        buffer.replace_glyphs(n, <span class="number">1</span>, <span class="kw-2">&amp;</span>[s]);
+                        end = start + <span class="number">1</span>;
                         <span class="kw">continue</span>;
                     }
                 }
 
-                <span class="comment">// We didn&#39;t compose, either because it&#39;s an Old Hangul syllable without a</span>
-                <span class="comment">// precomposed character in Unicode, or because the font didn&#39;t support the</span>
-                <span class="comment">// necessary precomposed glyph.</span>
-                <span class="comment">// Set jamo features on the individual glyphs, and advance past them.</span>
-                <span class="ident">buffer</span>.<span class="ident">cur_mut</span>(<span class="number">0</span>).<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">LJMO</span>);
-                <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-                <span class="ident">buffer</span>.<span class="ident">cur_mut</span>(<span class="number">0</span>).<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">VJMO</span>);
-                <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-                <span class="kw">if</span> <span class="ident">t</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">buffer</span>.<span class="ident">cur_mut</span>(<span class="number">0</span>).<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">TJMO</span>);
-                    <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-                    <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">3</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">2</span>;
+                <span class="comment">// We didn&#39;t compose, either because it&#39;s an Old Hangul syllable without a
+                // precomposed character in Unicode, or because the font didn&#39;t support the
+                // necessary precomposed glyph.
+                // Set jamo features on the individual glyphs, and advance past them.
+                </span>buffer.cur_mut(<span class="number">0</span>).set_hangul_shaping_feature(LJMO);
+                buffer.next_glyph();
+                buffer.cur_mut(<span class="number">0</span>).set_hangul_shaping_feature(VJMO);
+                buffer.next_glyph();
+                <span class="kw">if </span>t != <span class="number">0 </span>{
+                    buffer.cur_mut(<span class="number">0</span>).set_hangul_shaping_feature(TJMO);
+                    buffer.next_glyph();
+                    end = start + <span class="number">3</span>;
+                } <span class="kw">else </span>{
+                    end = start + <span class="number">2</span>;
                 }
 
-                <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">cluster_level</span> <span class="op">==</span> <span class="ident">BufferClusterLevel::MonotoneGraphemes</span> {
-                    <span class="ident">buffer</span>.<span class="ident">merge_out_clusters</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+                <span class="kw">if </span>buffer.cluster_level == BufferClusterLevel::MonotoneGraphemes {
+                    buffer.merge_out_clusters(start, end);
                 }
 
                 <span class="kw">continue</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_combined_s</span>(<span class="ident">u</span>) {
-            <span class="comment">// Have &lt;LV&gt;, &lt;LVT&gt;, or &lt;LV,T&gt;</span>
-            <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">u</span>;
-            <span class="kw">let</span> <span class="ident">has_glyph</span> <span class="op">=</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">s</span>);
+        } <span class="kw">else if </span>is_combined_s(u) {
+            <span class="comment">// Have &lt;LV&gt;, &lt;LVT&gt;, or &lt;LV,T&gt;
+            </span><span class="kw">let </span>s = u;
+            <span class="kw">let </span>has_glyph = face.has_glyph(s);
 
-            <span class="kw">let</span> <span class="ident">lindex</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="ident">S_BASE</span>) <span class="op">/</span> <span class="ident">N_COUNT</span>;
-            <span class="kw">let</span> <span class="ident">nindex</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="ident">S_BASE</span>) <span class="op">%</span> <span class="ident">N_COUNT</span>;
-            <span class="kw">let</span> <span class="ident">vindex</span> <span class="op">=</span> <span class="ident">nindex</span> <span class="op">/</span> <span class="ident">T_COUNT</span>;
-            <span class="kw">let</span> <span class="ident">tindex</span> <span class="op">=</span> <span class="ident">nindex</span> <span class="op">%</span> <span class="ident">T_COUNT</span>;
+            <span class="kw">let </span>lindex = (s - S_BASE) / N_COUNT;
+            <span class="kw">let </span>nindex = (s - S_BASE) % N_COUNT;
+            <span class="kw">let </span>vindex = nindex / T_COUNT;
+            <span class="kw">let </span>tindex = nindex % T_COUNT;
 
-            <span class="kw">if</span> <span class="ident">tindex</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">is_combining_t</span>(<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">1</span>).<span class="ident">glyph_id</span>) {
-                <span class="comment">// &lt;LV,T&gt;, try to combine.</span>
-                <span class="kw">let</span> <span class="ident">new_tindex</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">1</span>).<span class="ident">glyph_id</span> <span class="op">-</span> <span class="ident">T_BASE</span>;
-                <span class="kw">let</span> <span class="ident">new_s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">+</span> <span class="ident">new_tindex</span>;
+            <span class="kw">if </span>tindex == <span class="number">0 </span>&amp;&amp; buffer.idx + <span class="number">1 </span>&lt; buffer.len &amp;&amp; is_combining_t(buffer.cur(<span class="number">1</span>).glyph_id) {
+                <span class="comment">// &lt;LV,T&gt;, try to combine.
+                </span><span class="kw">let </span>new_tindex = buffer.cur(<span class="number">1</span>).glyph_id - T_BASE;
+                <span class="kw">let </span>new_s = s + new_tindex;
 
-                <span class="kw">if</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">new_s</span>) {
-                    <span class="ident">buffer</span>.<span class="ident">replace_glyphs</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[<span class="ident">new_s</span>]);
-                    <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>;
+                <span class="kw">if </span>face.has_glyph(new_s) {
+                    buffer.replace_glyphs(<span class="number">2</span>, <span class="number">1</span>, <span class="kw-2">&amp;</span>[new_s]);
+                    end = start + <span class="number">1</span>;
                     <span class="kw">continue</span>;
-                } <span class="kw">else</span> {
-                    <span class="comment">// Mark unsafe between LV and T.</span>
-                    <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">2</span>);
+                } <span class="kw">else </span>{
+                    <span class="comment">// Mark unsafe between LV and T.
+                    </span>buffer.unsafe_to_break(buffer.idx, buffer.idx + <span class="number">2</span>);
                 }
             }
 
-            <span class="comment">// Otherwise, decompose if font doesn&#39;t support &lt;LV&gt; or &lt;LVT&gt;,</span>
-            <span class="comment">// or if having non-combining &lt;LV,T&gt;.  Note that we already handled</span>
-            <span class="comment">// combining &lt;LV,T&gt; above.</span>
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">has_glyph</span> <span class="op">|</span><span class="op">|</span> (<span class="ident">tindex</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">is_t</span>(<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">1</span>).<span class="ident">glyph_id</span>)) {
-                <span class="kw">let</span> <span class="ident">decomposed</span> <span class="op">=</span> [<span class="ident">L_BASE</span> <span class="op">+</span> <span class="ident">lindex</span>, <span class="ident">V_BASE</span> <span class="op">+</span> <span class="ident">vindex</span>, <span class="ident">T_BASE</span> <span class="op">+</span> <span class="ident">tindex</span>];
-                <span class="kw">if</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">decomposed</span>[<span class="number">0</span>]) <span class="op">&amp;&amp;</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">decomposed</span>[<span class="number">1</span>]) <span class="op">&amp;&amp;</span>
-                    (<span class="ident">tindex</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">decomposed</span>[<span class="number">2</span>]))
+            <span class="comment">// Otherwise, decompose if font doesn&#39;t support &lt;LV&gt; or &lt;LVT&gt;,
+            // or if having non-combining &lt;LV,T&gt;.  Note that we already handled
+            // combining &lt;LV,T&gt; above.
+            </span><span class="kw">if </span>!has_glyph || (tindex == <span class="number">0 </span>&amp;&amp; buffer.idx + <span class="number">1 </span>&lt; buffer.len &amp;&amp; is_t(buffer.cur(<span class="number">1</span>).glyph_id)) {
+                <span class="kw">let </span>decomposed = [L_BASE + lindex, V_BASE + vindex, T_BASE + tindex];
+                <span class="kw">if </span>face.has_glyph(decomposed[<span class="number">0</span>]) &amp;&amp; face.has_glyph(decomposed[<span class="number">1</span>]) &amp;&amp;
+                    (tindex == <span class="number">0 </span>|| face.has_glyph(decomposed[<span class="number">2</span>]))
                 {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s_len</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">tindex</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="number">3</span> } <span class="kw">else</span> { <span class="number">2</span> };
-                    <span class="ident">buffer</span>.<span class="ident">replace_glyphs</span>(<span class="number">1</span>, <span class="ident">s_len</span>, <span class="kw-2">&amp;</span><span class="ident">decomposed</span>);
+                    <span class="kw">let </span><span class="kw-2">mut </span>s_len = <span class="kw">if </span>tindex != <span class="number">0 </span>{ <span class="number">3 </span>} <span class="kw">else </span>{ <span class="number">2 </span>};
+                    buffer.replace_glyphs(<span class="number">1</span>, s_len, <span class="kw-2">&amp;</span>decomposed);
 
-                    <span class="comment">// If we decomposed an LV because of a non-combining T following,</span>
-                    <span class="comment">// we want to include this T in the syllable.</span>
-                    <span class="kw">if</span> <span class="ident">has_glyph</span> <span class="op">&amp;&amp;</span> <span class="ident">tindex</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-                        <span class="ident">s_len</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="comment">// If we decomposed an LV because of a non-combining T following,
+                    // we want to include this T in the syllable.
+                    </span><span class="kw">if </span>has_glyph &amp;&amp; tindex == <span class="number">0 </span>{
+                        buffer.next_glyph();
+                        s_len += <span class="number">1</span>;
                     }
 
-                    <span class="comment">// We decomposed S: apply jamo features to the individual glyphs</span>
-                    <span class="comment">// that are now in `buffer.out_info`.</span>
-                    <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">s_len</span>;
+                    <span class="comment">// We decomposed S: apply jamo features to the individual glyphs
+                    // that are now in `buffer.out_info`.
+                    </span>end = start + s_len;
 
-                    <span class="ident">buffer</span>.<span class="ident">out_info_mut</span>()[<span class="ident">start</span> <span class="op">+</span> <span class="number">0</span>].<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">LJMO</span>);
-                    <span class="ident">buffer</span>.<span class="ident">out_info_mut</span>()[<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">VJMO</span>);
-                    <span class="kw">if</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">2</span> <span class="op">&lt;</span> <span class="ident">end</span> {
-                        <span class="ident">buffer</span>.<span class="ident">out_info_mut</span>()[<span class="ident">start</span> <span class="op">+</span> <span class="number">2</span>].<span class="ident">set_hangul_shaping_feature</span>(<span class="ident">TJMO</span>);
+                    buffer.out_info_mut()[start + <span class="number">0</span>].set_hangul_shaping_feature(LJMO);
+                    buffer.out_info_mut()[start + <span class="number">1</span>].set_hangul_shaping_feature(VJMO);
+                    <span class="kw">if </span>start + <span class="number">2 </span>&lt; end {
+                        buffer.out_info_mut()[start + <span class="number">2</span>].set_hangul_shaping_feature(TJMO);
                     }
 
-                    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">cluster_level</span> <span class="op">==</span> <span class="ident">BufferClusterLevel::MonotoneGraphemes</span> {
-                        <span class="ident">buffer</span>.<span class="ident">merge_out_clusters</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+                    <span class="kw">if </span>buffer.cluster_level == BufferClusterLevel::MonotoneGraphemes {
+                        buffer.merge_out_clusters(start, end);
                     }
 
                     <span class="kw">continue</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">tindex</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&gt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">is_t</span>(<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">1</span>).<span class="ident">glyph_id</span>) {
-                    <span class="comment">// Mark unsafe between LV and T.</span>
-                    <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">2</span>);
+                } <span class="kw">else if </span>tindex == <span class="number">0 </span>&amp;&amp; buffer.idx + <span class="number">1 </span>&gt; buffer.len &amp;&amp; is_t(buffer.cur(<span class="number">1</span>).glyph_id) {
+                    <span class="comment">// Mark unsafe between LV and T.
+                    </span>buffer.unsafe_to_break(buffer.idx, buffer.idx + <span class="number">2</span>);
                 }
             }
 
-            <span class="kw">if</span> <span class="ident">has_glyph</span> {
-                <span class="comment">// We didn&#39;t decompose the S, so just advance past it.</span>
-                <span class="ident">end</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>;
-                <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+            <span class="kw">if </span>has_glyph {
+                <span class="comment">// We didn&#39;t decompose the S, so just advance past it.
+                </span>end = start + <span class="number">1</span>;
+                buffer.next_glyph();
                 <span class="kw">continue</span>;
             }
         }
 
-        <span class="comment">// Didn&#39;t find a recognizable syllable, so we leave end &lt;= start;</span>
-        <span class="comment">// this will prevent tone-mark reordering happening.</span>
-        <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+        <span class="comment">// Didn&#39;t find a recognizable syllable, so we leave end &lt;= start;
+        // this will prevent tone-mark reordering happening.
+        </span>buffer.next_glyph();
     }
 
-    <span class="ident">buffer</span>.<span class="ident">swap_buffers</span>();
+    buffer.swap_buffers();
 }
 
-<span class="kw">fn</span> <span class="ident">is_hangul_tone</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="number">0x302E</span>..<span class="op">=</span><span class="number">0x302F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_hangul_tone(u: u32) -&gt; bool {
+    (<span class="number">0x302E</span>..=<span class="number">0x302F</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_zero_width_char</span>(<span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">c</span>: <span class="ident">char</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) <span class="op">=</span> <span class="ident">face</span>.<span class="ident">glyph_index</span>(<span class="ident">c</span> <span class="kw">as</span> <span class="ident">u32</span>) {
-        <span class="ident">face</span>.<span class="ident">glyph_h_advance</span>(<span class="ident">glyph</span>) <span class="op">==</span> <span class="number">0</span>
-    } <span class="kw">else</span> {
-        <span class="bool-val">false</span>
-    }
+<span class="kw">fn </span>is_zero_width_char(face: <span class="kw-2">&amp;</span>Face, c: char) -&gt; bool {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(glyph) = face.glyph_index(c <span class="kw">as </span>u32) {
+        face.glyph_h_advance(glyph) == <span class="number">0
+    </span>} <span class="kw">else </span>{
+        <span class="bool-val">false
+    </span>}
 }
 
-<span class="kw">fn</span> <span class="ident">is_l</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="number">0x1100</span>..<span class="op">=</span><span class="number">0x115F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xA960</span>..<span class="op">=</span><span class="number">0xA97C</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_l(u: u32) -&gt; bool {
+    (<span class="number">0x1100</span>..=<span class="number">0x115F</span>).contains(<span class="kw-2">&amp;</span>u) || (<span class="number">0xA960</span>..=<span class="number">0xA97C</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_v</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="number">0x1160</span>..<span class="op">=</span><span class="number">0x11A7</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xD7B0</span>..<span class="op">=</span><span class="number">0xD7C6</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_v(u: u32) -&gt; bool {
+    (<span class="number">0x1160</span>..=<span class="number">0x11A7</span>).contains(<span class="kw-2">&amp;</span>u) || (<span class="number">0xD7B0</span>..=<span class="number">0xD7C6</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_t</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="number">0x11A8</span>..<span class="op">=</span><span class="number">0x11FF</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xD7CB</span>..<span class="op">=</span><span class="number">0xD7FB</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_t(u: u32) -&gt; bool {
+    (<span class="number">0x11A8</span>..=<span class="number">0x11FF</span>).contains(<span class="kw-2">&amp;</span>u) || (<span class="number">0xD7CB</span>..=<span class="number">0xD7FB</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_combining_l</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="ident">L_BASE</span> ..<span class="op">=</span> <span class="ident">L_BASE</span> <span class="op">+</span> <span class="ident">L_COUNT</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_combining_l(u: u32) -&gt; bool {
+    (L_BASE ..= L_BASE + L_COUNT - <span class="number">1</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_combining_v</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="ident">V_BASE</span> ..<span class="op">=</span> <span class="ident">V_BASE</span> <span class="op">+</span> <span class="ident">V_COUNT</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_combining_v(u: u32) -&gt; bool {
+    (V_BASE ..= V_BASE + V_COUNT - <span class="number">1</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_combining_t</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="ident">T_BASE</span> <span class="op">+</span> <span class="number">1</span> ..<span class="op">=</span> <span class="ident">T_BASE</span> <span class="op">+</span> <span class="ident">T_COUNT</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_combining_t(u: u32) -&gt; bool {
+    (T_BASE + <span class="number">1 </span>..= T_BASE + T_COUNT - <span class="number">1</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">is_combined_s</span>(<span class="ident">u</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
-    (<span class="ident">S_BASE</span> ..<span class="op">=</span> <span class="ident">S_BASE</span> <span class="op">+</span> <span class="ident">S_COUNT</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>)
+<span class="kw">fn </span>is_combined_s(u: u32) -&gt; bool {
+    (S_BASE ..= S_BASE + S_COUNT - <span class="number">1</span>).contains(<span class="kw-2">&amp;</span>u)
 }
 
-<span class="kw">fn</span> <span class="ident">setup_masks</span>(<span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">hangul_plan</span> <span class="op">=</span> <span class="ident">plan</span>.<span class="ident">data</span>::<span class="op">&lt;</span><span class="ident">HangulShapePlan</span><span class="op">&gt;</span>();
-    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="ident">buffer</span>.<span class="ident">info_slice_mut</span>() {
-        <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">hangul_plan</span>.<span class="ident">mask_array</span>[<span class="ident">info</span>.<span class="ident">hangul_shaping_feature</span>() <span class="kw">as</span> <span class="ident">usize</span>];
+<span class="kw">fn </span>setup_masks(plan: <span class="kw-2">&amp;</span>ShapePlan, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>hangul_plan = plan.data::&lt;HangulShapePlan&gt;();
+    <span class="kw">for </span>info <span class="kw">in </span>buffer.info_slice_mut() {
+        info.mask |= hangul_plan.mask_array[info.hangul_shaping_feature() <span class="kw">as </span>usize];
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

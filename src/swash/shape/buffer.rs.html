@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/shape/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/shape/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -706,713 +706,713 @@
 <span id="706">706</span>
 <span id="707">707</span>
 <span id="708">708</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::cluster</span>::{<span class="ident">Glyph</span>, <span class="ident">GlyphInfo</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::feature</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::text</span>::{
-    <span class="ident">cluster</span>::{<span class="ident">Char</span>, <span class="ident">CharCluster</span>, <span class="ident">ClusterInfo</span>, <span class="ident">ShapeClass</span>, <span class="ident">SourceRange</span>, <span class="ident">MAX_CLUSTER_SIZE</span>},
-    <span class="ident">JoiningType</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::cluster::{Glyph, GlyphInfo};
+<span class="kw">use </span><span class="kw">super</span>::feature::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::text::{
+    cluster::{Char, CharCluster, ClusterInfo, ShapeClass, SourceRange, MAX_CLUSTER_SIZE},
+    JoiningType,
 };
-<span class="kw">use</span> <span class="ident">core::ops::Range</span>;
+<span class="kw">use </span>core::ops::Range;
 
-<span class="comment">// Glyph flags.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SUBSTITUTED</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">1</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LIGATED</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">2</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">COMPONENT</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">4</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MARK_ATTACH</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">8</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CURSIVE_ATTACH</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">16</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IGNORABLE</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">64</span>;
+<span class="comment">// Glyph flags.
+</span><span class="kw">pub const </span>SUBSTITUTED: u16 = <span class="number">1</span>;
+<span class="kw">pub const </span>LIGATED: u16 = <span class="number">2</span>;
+<span class="kw">pub const </span>COMPONENT: u16 = <span class="number">4</span>;
+<span class="kw">pub const </span>MARK_ATTACH: u16 = <span class="number">8</span>;
+<span class="kw">pub const </span>CURSIVE_ATTACH: u16 = <span class="number">16</span>;
+<span class="kw">pub const </span>IGNORABLE: u16 = <span class="number">64</span>;
 
-<span class="doccomment">/// Per glyph shaping data.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GlyphData</span> {
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">class</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">char_class</span>: <span class="ident">ShapeClass</span>,
-    <span class="kw">pub</span> <span class="ident">mark_type</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">joining_type</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">mask</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">skip</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">component</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">cluster</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">u32</span>,
+<span class="doccomment">/// Per glyph shaping data.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>GlyphData {
+    <span class="kw">pub </span>id: u16,
+    <span class="kw">pub </span>flags: u16,
+    <span class="kw">pub </span>class: u8,
+    <span class="kw">pub </span>char_class: ShapeClass,
+    <span class="kw">pub </span>mark_type: u8,
+    <span class="kw">pub </span>joining_type: u8,
+    <span class="kw">pub </span>mask: u8,
+    <span class="kw">pub </span>skip: bool,
+    <span class="kw">pub </span>component: u8,
+    <span class="kw">pub </span>cluster: u32,
+    <span class="kw">pub </span>data: u32,
 }
 
-<span class="kw">impl</span> <span class="ident">GlyphData</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_component</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">COMPONENT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
+<span class="kw">impl </span>GlyphData {
+    <span class="kw">pub fn </span>is_component(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; COMPONENT != <span class="number">0
+    </span>}
 }
 
-<span class="doccomment">/// Per glyph shaping position data.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PositionData</span> {
-    <span class="kw">pub</span> <span class="ident">base</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">advance</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Per glyph shaping position data.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>PositionData {
+    <span class="kw">pub </span>base: u8,
+    <span class="kw">pub </span>flags: u16,
+    <span class="kw">pub </span>x: f32,
+    <span class="kw">pub </span>y: f32,
+    <span class="kw">pub </span>advance: f32,
 }
 
-<span class="kw">impl</span> <span class="ident">Glyph</span> {
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">g</span>: <span class="kw-2">&amp;</span><span class="ident">GlyphData</span>, <span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">PositionData</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">id</span>: <span class="ident">g</span>.<span class="ident">id</span>,
-            <span class="ident">info</span>: <span class="ident">GlyphInfo</span>(<span class="ident">p</span>.<span class="ident">flags</span>),
-            <span class="ident">x</span>: <span class="ident">p</span>.<span class="ident">x</span>,
-            <span class="ident">y</span>: <span class="ident">p</span>.<span class="ident">y</span>,
-            <span class="ident">advance</span>: <span class="ident">p</span>.<span class="ident">advance</span>,
-            <span class="ident">data</span>: <span class="ident">g</span>.<span class="ident">data</span>,
+<span class="kw">impl </span>Glyph {
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>new(g: <span class="kw-2">&amp;</span>GlyphData, p: <span class="kw-2">&amp;</span>PositionData) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            id: g.id,
+            info: GlyphInfo(p.flags),
+            x: p.x,
+            y: p.y,
+            advance: p.advance,
+            data: g.data,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Buffer</span> {
-    <span class="kw">pub</span> <span class="ident">glyphs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GlyphData</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">positions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PositionData</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">infos</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">ClusterInfo</span>, <span class="ident">bool</span>, <span class="ident">u32</span>)<span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">ranges</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SourceRange</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">shaped_glyphs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Glyph</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">is_rtl</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">dotted_circle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">has_cursive</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">has_marks</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">reversed</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">next_cluster</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">indices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">ids</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">skip_state</span>: <span class="ident">SkipState</span>,
-    <span class="kw">pub</span> <span class="ident">sub_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">pos_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone, Default)]
+</span><span class="kw">pub struct </span>Buffer {
+    <span class="kw">pub </span>glyphs: Vec&lt;GlyphData&gt;,
+    <span class="kw">pub </span>positions: Vec&lt;PositionData&gt;,
+    <span class="kw">pub </span>infos: Vec&lt;(ClusterInfo, bool, u32)&gt;,
+    <span class="kw">pub </span>ranges: Vec&lt;SourceRange&gt;,
+    <span class="kw">pub </span>shaped_glyphs: Vec&lt;Glyph&gt;,
+    <span class="kw">pub </span>is_rtl: bool,
+    <span class="kw">pub </span>dotted_circle: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+    <span class="kw">pub </span>has_cursive: bool,
+    <span class="kw">pub </span>has_marks: bool,
+    <span class="kw">pub </span>reversed: bool,
+    <span class="kw">pub </span>next_cluster: u32,
+    <span class="kw">pub </span>indices: Vec&lt;usize&gt;,
+    <span class="kw">pub </span>ids: Vec&lt;u16&gt;,
+    <span class="kw">pub </span>skip_state: SkipState,
+    <span class="kw">pub </span>sub_args: Vec&lt;u16&gt;,
+    <span class="kw">pub </span>pos_args: Vec&lt;u16&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SkipState</span> {
-    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">mask</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">mark_check</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">mark_class</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">mark_set</span>: <span class="ident">u32</span>,
+<span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Default)]
+</span><span class="kw">pub struct </span>SkipState {
+    <span class="kw">pub </span>flags: u8,
+    <span class="kw">pub </span>mask: u8,
+    <span class="kw">pub </span>mark_check: u8,
+    <span class="kw">pub </span>mark_class: u8,
+    <span class="kw">pub </span>mark_set: u32,
 }
 
-<span class="kw">impl</span> <span class="ident">Buffer</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>Buffer {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>()
+    <span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.glyphs.len()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;</span><span class="ident">CharCluster</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">chars</span> <span class="op">=</span> <span class="ident">cluster</span>.<span class="ident">mapped_chars</span>();
-        <span class="kw">if</span> <span class="ident">cluster</span>.<span class="ident">info</span>().<span class="ident">is_broken</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dotted_circle</span> {
-                <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">chars</span>[<span class="number">0</span>];
-                <span class="self">self</span>.<span class="ident">push_char</span>(<span class="kw-2">&amp;</span><span class="ident">Char</span> {
-                    <span class="ident">ch</span>: <span class="string">&#39;\u{25cc}&#39;</span>,
-                    <span class="ident">shape_class</span>: <span class="ident">ShapeClass::Base</span>,
-                    <span class="ident">joining_type</span>: <span class="ident">JoiningType::U</span>,
-                    <span class="ident">ignorable</span>: <span class="bool-val">false</span>,
-                    <span class="ident">contributes_to_shaping</span>: <span class="bool-val">true</span>,
-                    <span class="ident">glyph_id</span>: <span class="ident">id</span>,
-                    <span class="ident">offset</span>: <span class="ident">first</span>.<span class="ident">offset</span>,
-                    <span class="ident">data</span>: <span class="ident">first</span>.<span class="ident">data</span>,
+    <span class="kw">pub fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;</span>CharCluster) -&gt; Range&lt;usize&gt; {
+        <span class="kw">let </span>start = <span class="self">self</span>.glyphs.len();
+        <span class="kw">let </span>chars = cluster.mapped_chars();
+        <span class="kw">if </span>cluster.info().is_broken() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(id) = <span class="self">self</span>.dotted_circle {
+                <span class="kw">let </span>first = <span class="kw-2">&amp;</span>chars[<span class="number">0</span>];
+                <span class="self">self</span>.push_char(<span class="kw-2">&amp;</span>Char {
+                    ch: <span class="string">&#39;\u{25cc}&#39;</span>,
+                    shape_class: ShapeClass::Base,
+                    joining_type: JoiningType::U,
+                    ignorable: <span class="bool-val">false</span>,
+                    contributes_to_shaping: <span class="bool-val">true</span>,
+                    glyph_id: id,
+                    offset: first.offset,
+                    data: first.data,
                 });
             }
         }
-        <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="ident">chars</span> {
-            <span class="self">self</span>.<span class="ident">push_char</span>(<span class="ident">ch</span>);
+        <span class="kw">for </span>ch <span class="kw">in </span>chars {
+            <span class="self">self</span>.push_char(ch);
         }
-        <span class="self">self</span>.<span class="ident">next_cluster</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">push_cluster</span>(<span class="ident">cluster</span>);
-        <span class="ident">start</span>..<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>()
+        <span class="self">self</span>.next_cluster += <span class="number">1</span>;
+        <span class="self">self</span>.push_cluster(cluster);
+        start..<span class="self">self</span>.glyphs.len()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push_order</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;</span><span class="ident">CharCluster</span>, <span class="ident">order</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">chars</span> <span class="op">=</span> <span class="ident">cluster</span>.<span class="ident">mapped_chars</span>();
-        <span class="kw">if</span> <span class="ident">cluster</span>.<span class="ident">info</span>().<span class="ident">is_broken</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dotted_circle</span> {
-                <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">chars</span>[<span class="ident">order</span>[<span class="number">0</span>]];
-                <span class="self">self</span>.<span class="ident">push_char</span>(<span class="kw-2">&amp;</span><span class="ident">Char</span> {
-                    <span class="ident">ch</span>: <span class="string">&#39;\u{25cc}&#39;</span>,
-                    <span class="ident">shape_class</span>: <span class="ident">ShapeClass::Base</span>,
-                    <span class="ident">joining_type</span>: <span class="ident">JoiningType::U</span>,
-                    <span class="ident">ignorable</span>: <span class="bool-val">false</span>,
-                    <span class="ident">contributes_to_shaping</span>: <span class="bool-val">true</span>,
-                    <span class="ident">glyph_id</span>: <span class="ident">id</span>,
-                    <span class="ident">offset</span>: <span class="ident">first</span>.<span class="ident">offset</span>,
-                    <span class="ident">data</span>: <span class="ident">first</span>.<span class="ident">data</span>,
+    <span class="kw">pub fn </span>push_order(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;</span>CharCluster, order: <span class="kw-2">&amp;</span>[usize]) -&gt; Range&lt;usize&gt; {
+        <span class="kw">let </span>start = <span class="self">self</span>.glyphs.len();
+        <span class="kw">let </span>chars = cluster.mapped_chars();
+        <span class="kw">if </span>cluster.info().is_broken() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(id) = <span class="self">self</span>.dotted_circle {
+                <span class="kw">let </span>first = <span class="kw-2">&amp;</span>chars[order[<span class="number">0</span>]];
+                <span class="self">self</span>.push_char(<span class="kw-2">&amp;</span>Char {
+                    ch: <span class="string">&#39;\u{25cc}&#39;</span>,
+                    shape_class: ShapeClass::Base,
+                    joining_type: JoiningType::U,
+                    ignorable: <span class="bool-val">false</span>,
+                    contributes_to_shaping: <span class="bool-val">true</span>,
+                    glyph_id: id,
+                    offset: first.offset,
+                    data: first.data,
                 });
             }
         }
-        <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="ident">order</span>[..<span class="ident">chars</span>.<span class="ident">len</span>()].<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">chars</span>[<span class="kw-2">*</span><span class="ident">i</span>]) {
-            <span class="self">self</span>.<span class="ident">push_char</span>(<span class="ident">ch</span>);
+        <span class="kw">for </span>ch <span class="kw">in </span>order[..chars.len()].iter().map(|i| <span class="kw-2">&amp;</span>chars[<span class="kw-2">*</span>i]) {
+            <span class="self">self</span>.push_char(ch);
         }
-        <span class="self">self</span>.<span class="ident">next_cluster</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">push_cluster</span>(<span class="ident">cluster</span>);
-        <span class="ident">start</span>..<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>()
+        <span class="self">self</span>.next_cluster += <span class="number">1</span>;
+        <span class="self">self</span>.push_cluster(cluster);
+        start..<span class="self">self</span>.glyphs.len()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">_push_hangul</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;</span><span class="ident">CharCluster</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">chars</span> <span class="op">=</span> <span class="ident">cluster</span>.<span class="ident">mapped_chars</span>();
-        <span class="kw">if</span> <span class="ident">cluster</span>.<span class="ident">info</span>().<span class="ident">is_broken</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dotted_circle</span> {
-                <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">chars</span>[<span class="number">0</span>];
-                <span class="self">self</span>.<span class="ident">push_char</span>(<span class="kw-2">&amp;</span><span class="ident">Char</span> {
-                    <span class="ident">ch</span>: <span class="string">&#39;\u{25cc}&#39;</span>,
-                    <span class="ident">shape_class</span>: <span class="ident">ShapeClass::Base</span>,
-                    <span class="ident">joining_type</span>: <span class="ident">JoiningType::U</span>,
-                    <span class="ident">ignorable</span>: <span class="bool-val">false</span>,
-                    <span class="ident">contributes_to_shaping</span>: <span class="bool-val">true</span>,
-                    <span class="ident">glyph_id</span>: <span class="ident">id</span>,
-                    <span class="ident">offset</span>: <span class="ident">first</span>.<span class="ident">offset</span>,
-                    <span class="ident">data</span>: <span class="ident">first</span>.<span class="ident">data</span>,
+    <span class="kw">pub fn </span>_push_hangul(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;</span>CharCluster) -&gt; Range&lt;usize&gt; {
+        <span class="kw">let </span>start = <span class="self">self</span>.glyphs.len();
+        <span class="kw">let </span>chars = cluster.mapped_chars();
+        <span class="kw">if </span>cluster.info().is_broken() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(id) = <span class="self">self</span>.dotted_circle {
+                <span class="kw">let </span>first = <span class="kw-2">&amp;</span>chars[<span class="number">0</span>];
+                <span class="self">self</span>.push_char(<span class="kw-2">&amp;</span>Char {
+                    ch: <span class="string">&#39;\u{25cc}&#39;</span>,
+                    shape_class: ShapeClass::Base,
+                    joining_type: JoiningType::U,
+                    ignorable: <span class="bool-val">false</span>,
+                    contributes_to_shaping: <span class="bool-val">true</span>,
+                    glyph_id: id,
+                    offset: first.offset,
+                    data: first.data,
                 });
             }
         }
-        <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="ident">chars</span> {
-            <span class="self">self</span>.<span class="ident">_push_hangul_char</span>(<span class="ident">ch</span>);
+        <span class="kw">for </span>ch <span class="kw">in </span>chars {
+            <span class="self">self</span>._push_hangul_char(ch);
         }
-        <span class="self">self</span>.<span class="ident">next_cluster</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">push_cluster</span>(<span class="ident">cluster</span>);
-        <span class="ident">start</span>..<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>()
+        <span class="self">self</span>.next_cluster += <span class="number">1</span>;
+        <span class="self">self</span>.push_cluster(cluster);
+        start..<span class="self">self</span>.glyphs.len()
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">push_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ch</span>: <span class="kw-2">&amp;</span><span class="ident">Char</span>) {
-        <span class="kw">let</span> <span class="ident">cluster</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_cluster</span>;
-        <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">push</span>(<span class="ident">GlyphData</span> {
-            <span class="ident">id</span>: <span class="ident">ch</span>.<span class="ident">glyph_id</span>,
-            <span class="ident">flags</span>: (<span class="ident">ch</span>.<span class="ident">ignorable</span> <span class="kw">as</span> <span class="ident">u16</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">6</span>,
-            <span class="ident">class</span>: <span class="number">0</span>,
-            <span class="ident">char_class</span>: <span class="ident">ch</span>.<span class="ident">shape_class</span>,
-            <span class="ident">joining_type</span>: <span class="ident">ch</span>.<span class="ident">joining_type</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident">mark_type</span>: <span class="number">0</span>,
-            <span class="ident">mask</span>: <span class="number">0</span>,
-            <span class="ident">skip</span>: <span class="bool-val">false</span>,
-            <span class="ident">component</span>: <span class="op">!</span><span class="number">0</span>,
-            <span class="ident">cluster</span>,
-            <span class="ident">data</span>: <span class="ident">ch</span>.<span class="ident">data</span>,
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>push_char(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: <span class="kw-2">&amp;</span>Char) {
+        <span class="kw">let </span>cluster = <span class="self">self</span>.next_cluster;
+        <span class="self">self</span>.glyphs.push(GlyphData {
+            id: ch.glyph_id,
+            flags: (ch.ignorable <span class="kw">as </span>u16) &lt;&lt; <span class="number">6</span>,
+            class: <span class="number">0</span>,
+            char_class: ch.shape_class,
+            joining_type: ch.joining_type <span class="kw">as </span>u8,
+            mark_type: <span class="number">0</span>,
+            mask: <span class="number">0</span>,
+            skip: <span class="bool-val">false</span>,
+            component: !<span class="number">0</span>,
+            cluster,
+            data: ch.data,
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">_push_hangul_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ch</span>: <span class="kw-2">&amp;</span><span class="ident">Char</span>) {
-        <span class="kw">let</span> <span class="ident">cluster</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_cluster</span>;
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">ch</span>.<span class="ident">ch</span> <span class="kw">as</span> <span class="ident">u32</span>;
-        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="kw">if</span> (<span class="number">0x1100</span>..<span class="op">=</span><span class="number">0x115F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xA960</span>..<span class="op">=</span><span class="number">0xA97C</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) {
-            <span class="number">1</span>
-        } <span class="kw">else</span> <span class="kw">if</span> (<span class="number">0x1160</span>..<span class="op">=</span><span class="number">0x11A7</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xD7B0</span>..<span class="op">=</span><span class="number">0xD7C6</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) {
-            <span class="number">2</span>
-        } <span class="kw">else</span> <span class="kw">if</span> (<span class="number">0x11A8</span>..<span class="op">=</span><span class="number">0x11FF</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) <span class="op">|</span><span class="op">|</span> (<span class="number">0xD7CB</span>..<span class="op">=</span><span class="number">0xD7FB</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) {
-            <span class="number">4</span>
-        } <span class="kw">else</span> {
-            <span class="number">1</span> <span class="op">|</span> <span class="number">2</span> <span class="op">|</span> <span class="number">4</span>
-        };
-        <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">push</span>(<span class="ident">GlyphData</span> {
-            <span class="ident">id</span>: <span class="ident">ch</span>.<span class="ident">glyph_id</span>,
-            <span class="ident">flags</span>: (<span class="ident">ch</span>.<span class="ident">ignorable</span> <span class="kw">as</span> <span class="ident">u16</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">6</span>,
-            <span class="ident">class</span>: <span class="number">0</span>,
-            <span class="ident">char_class</span>: <span class="ident">ch</span>.<span class="ident">shape_class</span>,
-            <span class="ident">joining_type</span>: <span class="ident">ch</span>.<span class="ident">joining_type</span> <span class="kw">as</span> <span class="ident">u8</span>,
-            <span class="ident">mark_type</span>: <span class="number">0</span>,
-            <span class="ident">mask</span>,
-            <span class="ident">skip</span>: <span class="bool-val">false</span>,
-            <span class="ident">component</span>: <span class="op">!</span><span class="number">0</span>,
-            <span class="ident">cluster</span>,
-            <span class="ident">data</span>: <span class="ident">ch</span>.<span class="ident">data</span>,
+    <span class="kw">fn </span>_push_hangul_char(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: <span class="kw-2">&amp;</span>Char) {
+        <span class="kw">let </span>cluster = <span class="self">self</span>.next_cluster;
+        <span class="kw">let </span>c = ch.ch <span class="kw">as </span>u32;
+        <span class="kw">let </span>mask = <span class="kw">if </span>(<span class="number">0x1100</span>..=<span class="number">0x115F</span>).contains(<span class="kw-2">&amp;</span>c) || (<span class="number">0xA960</span>..=<span class="number">0xA97C</span>).contains(<span class="kw-2">&amp;</span>c) {
+            <span class="number">1
+        </span>} <span class="kw">else if </span>(<span class="number">0x1160</span>..=<span class="number">0x11A7</span>).contains(<span class="kw-2">&amp;</span>c) || (<span class="number">0xD7B0</span>..=<span class="number">0xD7C6</span>).contains(<span class="kw-2">&amp;</span>c) {
+            <span class="number">2
+        </span>} <span class="kw">else if </span>(<span class="number">0x11A8</span>..=<span class="number">0x11FF</span>).contains(<span class="kw-2">&amp;</span>c) || (<span class="number">0xD7CB</span>..=<span class="number">0xD7FB</span>).contains(<span class="kw-2">&amp;</span>c) {
+            <span class="number">4
+        </span>} <span class="kw">else </span>{
+            <span class="number">1 </span>| <span class="number">2 </span>| <span class="number">4
+        </span>};
+        <span class="self">self</span>.glyphs.push(GlyphData {
+            id: ch.glyph_id,
+            flags: (ch.ignorable <span class="kw">as </span>u16) &lt;&lt; <span class="number">6</span>,
+            class: <span class="number">0</span>,
+            char_class: ch.shape_class,
+            joining_type: ch.joining_type <span class="kw">as </span>u8,
+            mark_type: <span class="number">0</span>,
+            mask,
+            skip: <span class="bool-val">false</span>,
+            component: !<span class="number">0</span>,
+            cluster,
+            data: ch.data,
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">push_cluster</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;</span><span class="ident">CharCluster</span>) {
-        <span class="self">self</span>.<span class="ident">infos</span>
-            .<span class="ident">push</span>((<span class="ident">cluster</span>.<span class="ident">info</span>(), <span class="bool-val">false</span>, <span class="ident">cluster</span>.<span class="ident">user_data</span>()));
-        <span class="self">self</span>.<span class="ident">ranges</span>.<span class="ident">push</span>(<span class="ident">cluster</span>.<span class="ident">range</span>());
+    <span class="kw">fn </span>push_cluster(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;</span>CharCluster) {
+        <span class="self">self</span>.infos
+            .push((cluster.info(), <span class="bool-val">false</span>, cluster.user_data()));
+        <span class="self">self</span>.ranges.push(cluster.range());
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">positions</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">infos</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">ranges</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">is_rtl</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">reversed</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">has_cursive</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">has_marks</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">dotted_circle</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="self">self</span>.<span class="ident">next_cluster</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">skip_state</span> <span class="op">=</span> <span class="ident">SkipState::default</span>();
+    <span class="kw">pub fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.glyphs.clear();
+        <span class="self">self</span>.positions.clear();
+        <span class="self">self</span>.infos.clear();
+        <span class="self">self</span>.ranges.clear();
+        <span class="self">self</span>.is_rtl = <span class="bool-val">false</span>;
+        <span class="self">self</span>.reversed = <span class="bool-val">false</span>;
+        <span class="self">self</span>.has_cursive = <span class="bool-val">false</span>;
+        <span class="self">self</span>.has_marks = <span class="bool-val">false</span>;
+        <span class="self">self</span>.dotted_circle = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.next_cluster = <span class="number">0</span>;
+        <span class="self">self</span>.skip_state = SkipState::default();
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ensure_order</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">reversed</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="ident">reversed</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">reversed</span> {
-            <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">reverse</span>();
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">positions</span>.<span class="ident">is_empty</span>() {
-                <span class="self">self</span>.<span class="ident">positions</span>.<span class="ident">reverse</span>();
+    <span class="kw">pub fn </span>ensure_order(<span class="kw-2">&amp;mut </span><span class="self">self</span>, reversed: bool) {
+        <span class="kw">if </span>reversed != <span class="self">self</span>.reversed {
+            <span class="self">self</span>.glyphs.reverse();
+            <span class="kw">if </span>!<span class="self">self</span>.positions.is_empty() {
+                <span class="self">self</span>.positions.reverse();
             }
-            <span class="self">self</span>.<span class="ident">reversed</span> <span class="op">=</span> <span class="ident">reversed</span>;
+            <span class="self">self</span>.reversed = reversed;
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear_flags</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">flags</span>: <span class="ident">u16</span>, <span class="ident">range</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">range</span>) <span class="op">=</span> <span class="ident">range</span> {
-            <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">range</span>] {
-                <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident">flags</span>;
+    <span class="kw">pub fn </span>clear_flags(<span class="kw-2">&amp;mut </span><span class="self">self</span>, flags: u16, range: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt;) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(range) = range {
+            <span class="kw">for </span>g <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[range] {
+                g.flags &amp;= !flags;
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span> {
-                <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident">flags</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>g <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs {
+                g.flags &amp;= !flags;
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">setup_positions</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">was_morx</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="ident">was_morx</span> {
-            <span class="self">self</span>.<span class="ident">glyphs</span>
-                .<span class="ident">retain</span>(<span class="op">|</span><span class="ident">g</span><span class="op">|</span> <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">COMPONENT</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">g</span>.<span class="ident">id</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span>);
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="ident">g</span><span class="op">|</span> <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">COMPONENT</span> <span class="op">==</span> <span class="number">0</span>);
+    <span class="kw">pub fn </span>setup_positions(<span class="kw-2">&amp;mut </span><span class="self">self</span>, was_morx: bool) {
+        <span class="kw">if </span>was_morx {
+            <span class="self">self</span>.glyphs
+                .retain(|g| g.flags &amp; COMPONENT == <span class="number">0 </span>&amp;&amp; g.id != <span class="number">0xFFFF</span>);
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.glyphs.retain(|g| g.flags &amp; COMPONENT == <span class="number">0</span>);
         }
-        <span class="self">self</span>.<span class="ident">positions</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">positions</span>
-            .<span class="ident">resize</span>(<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>(), <span class="ident">PositionData::default</span>());
+        <span class="self">self</span>.positions.clear();
+        <span class="self">self</span>.positions
+            .resize(<span class="self">self</span>.glyphs.len(), PositionData::default());
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">substitute</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">id</span>: <span class="ident">u16</span>) {
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">index</span>];
-        <span class="comment">// if TRACE {</span>
-        <span class="comment">//     println!(&quot;!subst[{}] {} -&gt; {}&quot;, index, g.id, id);</span>
-        <span class="comment">// }</span>
-        <span class="ident">g</span>.<span class="ident">id</span> <span class="op">=</span> <span class="ident">id</span>;
-        <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">SUBSTITUTED</span>;
+    <span class="kw">pub fn </span>substitute(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, id: u16) {
+        <span class="kw">let </span>g = <span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[index];
+        <span class="comment">// if TRACE {
+        //     println!(&quot;!subst[{}] {} -&gt; {}&quot;, index, g.id, id);
+        // }
+        </span>g.id = id;
+        g.flags |= SUBSTITUTED;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">substitute_ligature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">id</span>: <span class="ident">u16</span>, <span class="ident">components</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) {
-        <span class="comment">// if TRACE {</span>
-        <span class="comment">//     print!(&quot;!subst[{}] {}&quot;, index, self.glyphs[index].id);</span>
-        <span class="comment">//     for c in components {</span>
-        <span class="comment">//         print!(&quot; {}&quot;, self.glyphs[*c].id)</span>
-        <span class="comment">//     }</span>
-        <span class="comment">//     println!(&quot; -&gt; {}&quot;, id);</span>
-        <span class="comment">// }</span>
-        <span class="kw">if</span> <span class="ident">components</span>.<span class="ident">is_empty</span>() {
+    <span class="kw">pub fn </span>substitute_ligature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, id: u16, components: <span class="kw-2">&amp;</span>[usize]) {
+        <span class="comment">// if TRACE {
+        //     print!(&quot;!subst[{}] {}&quot;, index, self.glyphs[index].id);
+        //     for c in components {
+        //         print!(&quot; {}&quot;, self.glyphs[*c].id)
+        //     }
+        //     println!(&quot; -&gt; {}&quot;, id);
+        // }
+        </span><span class="kw">if </span>components.is_empty() {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">index</span>];
-        <span class="ident">g</span>.<span class="ident">id</span> <span class="op">=</span> <span class="ident">id</span>;
-        <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">SUBSTITUTED</span> <span class="op">|</span> <span class="ident">LIGATED</span>;
-        <span class="kw">let</span> <span class="ident">cluster</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">cluster</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_index</span> <span class="op">=</span> <span class="ident">index</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">index</span>) <span class="kw">in</span> <span class="ident">components</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">index</span>];
-            <span class="self">self</span>.<span class="ident">infos</span>[<span class="ident">g</span>.<span class="ident">cluster</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="number">1</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="ident">g</span>.<span class="ident">id</span> <span class="op">=</span> <span class="number">0xFFFF</span>;
-            <span class="ident">g</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">COMPONENT</span>;
-            <span class="ident">g</span>.<span class="ident">class</span> <span class="op">=</span> <span class="number">5</span>;
-            <span class="ident">g</span>.<span class="ident">cluster</span> <span class="op">=</span> <span class="ident">cluster</span>;
-            <span class="ident">g</span>.<span class="ident">skip</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="kw">if</span> (<span class="ident">index</span> <span class="op">-</span> <span class="ident">last_index</span>) <span class="op">&gt;</span> <span class="number">1</span> {
-                <span class="kw">let</span> <span class="ident">component</span> <span class="op">=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>;
-                <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">last_index</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">index</span>] {
-                    <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">mark_type</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">g</span>.<span class="ident">class</span> <span class="op">==</span> <span class="number">3</span> {
-                        <span class="ident">g</span>.<span class="ident">component</span> <span class="op">=</span> <span class="ident">component</span>;
-                        <span class="ident">g</span>.<span class="ident">cluster</span> <span class="op">=</span> <span class="ident">cluster</span>;
+        <span class="kw">let </span>g = <span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[index];
+        g.id = id;
+        g.flags |= SUBSTITUTED | LIGATED;
+        <span class="kw">let </span>cluster = g.cluster;
+        <span class="kw">let </span><span class="kw-2">mut </span>last_index = index;
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>index) <span class="kw">in </span>components.iter().enumerate() {
+            <span class="kw">let </span>g = <span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[index];
+            <span class="self">self</span>.infos[g.cluster <span class="kw">as </span>usize].<span class="number">1 </span>= <span class="bool-val">true</span>;
+            g.id = <span class="number">0xFFFF</span>;
+            g.flags |= COMPONENT;
+            g.class = <span class="number">5</span>;
+            g.cluster = cluster;
+            g.skip = <span class="bool-val">true</span>;
+            <span class="kw">if </span>(index - last_index) &gt; <span class="number">1 </span>{
+                <span class="kw">let </span>component = i <span class="kw">as </span>u8;
+                <span class="kw">for </span>g <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[last_index + <span class="number">1</span>..index] {
+                    <span class="kw">if </span>g.mark_type != <span class="number">0 </span>|| g.class == <span class="number">3 </span>{
+                        g.component = component;
+                        g.cluster = cluster;
                     }
                 }
             }
-            <span class="ident">last_index</span> <span class="op">=</span> <span class="ident">index</span>;
+            last_index = index;
         }
-        <span class="kw">if</span> (<span class="ident">last_index</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">last_component</span> <span class="op">=</span> <span class="ident">components</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u8</span>;
-            <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">last_index</span> <span class="op">+</span> <span class="number">1</span>..] {
-                <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">mark_type</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">g</span>.<span class="ident">class</span> <span class="op">==</span> <span class="number">3</span> {
-                    <span class="ident">g</span>.<span class="ident">component</span> <span class="op">=</span> <span class="ident">last_component</span>;
-                    <span class="ident">g</span>.<span class="ident">cluster</span> <span class="op">=</span> <span class="ident">cluster</span>;
-                } <span class="kw">else</span> {
+        <span class="kw">if </span>(last_index + <span class="number">1</span>) &lt; <span class="self">self</span>.glyphs.len() {
+            <span class="kw">let </span>last_component = components.len() <span class="kw">as </span>u8;
+            <span class="kw">for </span>g <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs[last_index + <span class="number">1</span>..] {
+                <span class="kw">if </span>g.mark_type != <span class="number">0 </span>|| g.class == <span class="number">3 </span>{
+                    g.component = last_component;
+                    g.cluster = cluster;
+                } <span class="kw">else </span>{
                     <span class="kw">break</span>;
                 }
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">substitute_multiple</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">ids</span>: <span class="kw-2">&amp;</span>[<span class="ident">u16</span>]) {
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">ids</span>.<span class="ident">len</span>();
-        <span class="kw">if</span> <span class="ident">count</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">remove</span>(<span class="ident">index</span>);
+    <span class="kw">pub fn </span>substitute_multiple(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, ids: <span class="kw-2">&amp;</span>[u16]) {
+        <span class="kw">let </span>count = ids.len();
+        <span class="kw">if </span>count == <span class="number">0 </span>{
+            <span class="self">self</span>.glyphs.remove(index);
             <span class="kw">return</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">count</span> <span class="op">==</span> <span class="number">1</span> {
-            <span class="self">self</span>.<span class="ident">substitute</span>(<span class="ident">index</span>, <span class="ident">ids</span>[<span class="number">0</span>]);
+        } <span class="kw">else if </span>count == <span class="number">1 </span>{
+            <span class="self">self</span>.substitute(index, ids[<span class="number">0</span>]);
             <span class="kw">return</span>;
         }
-        <span class="comment">// if TRACE {</span>
-        <span class="comment">//     println!(&quot;!subst[{}] {} -&gt; {:?}&quot;, index, self.glyphs[index].id, ids);</span>
-        <span class="comment">// }</span>
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">glyphs</span>[<span class="ident">index</span>];
-        <span class="self">self</span>.<span class="ident">glyphs</span>
-            .<span class="ident">splice</span>(<span class="ident">index</span>..<span class="ident">index</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">SubstIter</span> { <span class="ident">ids</span>, <span class="ident">g</span>, <span class="ident">cur</span>: <span class="number">0</span> });
+        <span class="comment">// if TRACE {
+        //     println!(&quot;!subst[{}] {} -&gt; {:?}&quot;, index, self.glyphs[index].id, ids);
+        // }
+        </span><span class="kw">let </span>g = <span class="self">self</span>.glyphs[index];
+        <span class="self">self</span>.glyphs
+            .splice(index..index + <span class="number">1</span>, SubstIter { ids, g, cur: <span class="number">0 </span>});
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">multiply</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">count</span>: <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">glyphs</span>
-            .<span class="ident">get</span>(<span class="ident">index</span>)
-            .<span class="ident">copied</span>()
-            .<span class="ident">unwrap_or_else</span>(<span class="ident">GlyphData::default</span>);
-        <span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">splice</span>(<span class="ident">index</span>..<span class="ident">index</span>, (<span class="number">0</span>..<span class="ident">count</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">g</span>));
+    <span class="kw">pub fn </span>multiply(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, count: usize) {
+        <span class="kw">let </span>g = <span class="self">self
+            </span>.glyphs
+            .get(index)
+            .copied()
+            .unwrap_or_else(GlyphData::default);
+        <span class="self">self</span>.glyphs.splice(index..index, (<span class="number">0</span>..count).map(|<span class="kw">_</span>| g));
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>, <span class="ident">xadvance</span>: <span class="ident">f32</span>, <span class="ident">_yadvance</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">positions</span>[<span class="ident">index</span>];
-        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>;
-        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y</span>;
-        <span class="ident">p</span>.<span class="ident">advance</span> <span class="op">+</span><span class="op">=</span> <span class="ident">xadvance</span>;
+    <span class="kw">pub fn </span>position(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, x: f32, y: f32, xadvance: f32, _yadvance: f32) {
+        <span class="kw">let </span>p = <span class="kw-2">&amp;mut </span><span class="self">self</span>.positions[index];
+        p.x += x;
+        p.y += y;
+        p.advance += xadvance;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_cursive</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">next</span>: <span class="ident">usize</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">positions</span>[<span class="ident">index</span>];
-        <span class="self">self</span>.<span class="ident">has_cursive</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">p</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">CURSIVE_ATTACH</span>;
-        <span class="kw">if</span> <span class="bool-val">true</span> {
-            <span class="comment">//self.dir.is_horizontal() {</span>
-            <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>;
-        <span class="comment">//p.advance -= x;</span>
-        } <span class="kw">else</span> {
-            <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>;
+    <span class="kw">pub fn </span>position_cursive(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, next: usize, x: f32, y: f32) {
+        <span class="kw">let </span>p = <span class="kw-2">&amp;mut </span><span class="self">self</span>.positions[index];
+        <span class="self">self</span>.has_cursive = <span class="bool-val">true</span>;
+        p.flags = CURSIVE_ATTACH;
+        <span class="kw">if </span><span class="bool-val">true </span>{
+            <span class="comment">//self.dir.is_horizontal() {
+            </span>p.y = y;
+        <span class="comment">//p.advance -= x;
+        </span>} <span class="kw">else </span>{
+            p.x = x;
         }
-        <span class="ident">p</span>.<span class="ident">base</span> <span class="op">=</span> (<span class="ident">next</span> <span class="op">-</span> <span class="ident">index</span>) <span class="kw">as</span> <span class="ident">u8</span>;
+        p.base = (next - index) <span class="kw">as </span>u8;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_mark</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>, <span class="ident">base</span>: <span class="ident">usize</span>, <span class="ident">dx</span>: <span class="ident">f32</span>, <span class="ident">dy</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">positions</span>[<span class="ident">index</span>];
-        <span class="self">self</span>.<span class="ident">has_marks</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">p</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">MARK_ATTACH</span>;
-        <span class="ident">p</span>.<span class="ident">base</span> <span class="op">=</span> (<span class="ident">index</span> <span class="op">-</span> <span class="ident">base</span>) <span class="kw">as</span> <span class="ident">u8</span>;
-        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">dx</span>;
-        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">dy</span>;
+    <span class="kw">pub fn </span>position_mark(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize, base: usize, dx: f32, dy: f32) {
+        <span class="kw">let </span>p = <span class="kw-2">&amp;mut </span><span class="self">self</span>.positions[index];
+        <span class="self">self</span>.has_marks = <span class="bool-val">true</span>;
+        p.flags = MARK_ATTACH;
+        p.base = (index - base) <span class="kw">as </span>u8;
+        p.x = dx;
+        p.y = dy;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_join_masks</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">glyphs</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">glyphs</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">glyphs</span>.<span class="ident">len</span>();
-        <span class="comment">// Transparent joining type.</span>
-        <span class="kw">const</span> <span class="ident">JOIN_T</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">6</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">joining_type</span>;
-            <span class="kw">if</span> <span class="ident">ty</span> <span class="op">==</span> <span class="ident">JOIN_T</span> {
+    <span class="kw">pub fn </span>set_join_masks(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">let </span><span class="kw-2">mut </span>prev: <span class="prelude-ty">Option</span>&lt;usize&gt; = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>state = <span class="number">0</span>;
+        <span class="kw">let </span>glyphs = <span class="kw-2">&amp;mut </span><span class="self">self</span>.glyphs;
+        <span class="kw">let </span>len = glyphs.len();
+        <span class="comment">// Transparent joining type.
+        </span><span class="kw">const </span>JOIN_T: u8 = <span class="number">6</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+            <span class="kw">let </span>ty = glyphs[i].joining_type;
+            <span class="kw">if </span>ty == JOIN_T {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="ident">JOIN_STATES</span>[<span class="ident">state</span>][<span class="ident">ty</span> <span class="kw">as</span> <span class="ident">usize</span>];
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">j</span>) <span class="op">=</span> <span class="ident">prev</span> {
-                <span class="kw">if</span> <span class="ident">entry</span>.<span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="ident">NONE_MASK</span> {
-                    <span class="ident">glyphs</span>[<span class="ident">j</span>].<span class="ident">mask</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="number">0</span>;
+            <span class="kw">let </span>entry = JOIN_STATES[state][ty <span class="kw">as </span>usize];
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(j) = prev {
+                <span class="kw">if </span>entry.<span class="number">0 </span>!= NONE_MASK {
+                    glyphs[j].mask = entry.<span class="number">0</span>;
                 }
             }
-            <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">mask</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="number">1</span>;
-            <span class="ident">prev</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-            <span class="ident">state</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="number">2</span> <span class="kw">as</span> <span class="ident">usize</span>;
+            glyphs[i].mask = entry.<span class="number">1</span>;
+            prev = <span class="prelude-val">Some</span>(i);
+            state = entry.<span class="number">2 </span><span class="kw">as </span>usize;
         }
     }
 }
 
-<span class="kw">struct</span> <span class="ident">SubstIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">ids</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u16</span>],
-    <span class="ident">g</span>: <span class="ident">GlyphData</span>,
-    <span class="ident">cur</span>: <span class="ident">usize</span>,
+<span class="kw">struct </span>SubstIter&lt;<span class="lifetime">&#39;a</span>&gt; {
+    ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u16],
+    g: GlyphData,
+    cur: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">SubstIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">GlyphData</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>SubstIter&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = GlyphData;
 
-    <span class="kw">fn</span> <span class="ident">size_hint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">usize</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ids</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">cur</span>;
-        (<span class="ident">remaining</span>, <span class="prelude-val">Some</span>(<span class="ident">remaining</span>))
+    <span class="kw">fn </span>size_hint(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        <span class="kw">let </span>remaining = <span class="self">self</span>.ids.len() - <span class="self">self</span>.cur;
+        (remaining, <span class="prelude-val">Some</span>(remaining))
     }
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ids</span>.<span class="ident">len</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.ids.len() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">GlyphData</span> {
-            <span class="ident">id</span>: <span class="self">self</span>.<span class="ident">ids</span>[<span class="self">self</span>.<span class="ident">cur</span>],
-            <span class="ident">flags</span>: <span class="ident">SUBSTITUTED</span>,
-            ..<span class="self">self</span>.<span class="ident">g</span>
+        <span class="kw">let </span>g = GlyphData {
+            id: <span class="self">self</span>.ids[<span class="self">self</span>.cur],
+            flags: SUBSTITUTED,
+            ..<span class="self">self</span>.g
         };
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">g</span>)
+        <span class="self">self</span>.cur += <span class="number">1</span>;
+        <span class="prelude-val">Some</span>(g)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reorder_myanmar</span>(<span class="ident">chars</span>: <span class="kw-2">&amp;</span>[<span class="ident">Char</span>], <span class="ident">order</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-    <span class="kw">use</span> <span class="ident">ShapeClass</span>::<span class="kw-2">*</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ignored</span> <span class="op">=</span> [<span class="bool-val">false</span>; <span class="ident">MAX_CLUSTER_SIZE</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">kinzi</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">medial_ra</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vpre</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vblw</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">anus</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_vblw</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">chars</span>.<span class="ident">len</span>();
-    <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
+<span class="kw">pub fn </span>reorder_myanmar(chars: <span class="kw-2">&amp;</span>[Char], order: <span class="kw-2">&amp;mut </span>Vec&lt;usize&gt;) {
+    <span class="kw">use </span>ShapeClass::<span class="kw-2">*</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>ignored = [<span class="bool-val">false</span>; MAX_CLUSTER_SIZE];
+    <span class="kw">let </span><span class="kw-2">mut </span>base = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>kinzi: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>medial_ra = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>vpre: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>vblw: <span class="prelude-ty">Option</span>&lt;usize&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>anus: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>last_vblw = <span class="bool-val">false</span>;
+    <span class="kw">let </span>len = chars.len();
+    <span class="kw">if </span>len == <span class="number">0 </span>{
         <span class="kw">return</span>;
     }
-    <span class="kw">if</span> <span class="ident">order</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="ident">order</span>.<span class="ident">resize</span>(<span class="ident">chars</span>.<span class="ident">len</span>(), <span class="number">0</span>);
+    <span class="kw">if </span>order.len() &lt; len {
+        order.resize(chars.len(), <span class="number">0</span>);
     }
-    <span class="kw">if</span> <span class="ident">chars</span>[<span class="number">0</span>].<span class="ident">shape_class</span> <span class="op">==</span> <span class="ident">Kinzi</span> {
-        <span class="ident">kinzi</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="number">0</span>..<span class="number">3</span>);
-        <span class="ident">ignored</span>[<span class="number">0</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">ignored</span>[<span class="number">1</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">ignored</span>[<span class="number">2</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">i</span> <span class="op">=</span> <span class="number">3</span>;
+    <span class="kw">if </span>chars[<span class="number">0</span>].shape_class == Kinzi {
+        kinzi = <span class="prelude-val">Some</span>(<span class="number">0</span>..<span class="number">3</span>);
+        ignored[<span class="number">0</span>] = <span class="bool-val">true</span>;
+        ignored[<span class="number">1</span>] = <span class="bool-val">true</span>;
+        ignored[<span class="number">2</span>] = <span class="bool-val">true</span>;
+        i = <span class="number">3</span>;
     }
-    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">chars</span>[<span class="ident">i</span>];
-        <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">ch</span>.<span class="ident">shape_class</span>;
-        <span class="kw">if</span> <span class="ident">last_vblw</span> <span class="op">&amp;&amp;</span> <span class="ident">k</span> <span class="op">==</span> <span class="ident">Anusvara</span> {
-            <span class="ident">anus</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">anus</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">r</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">start</span>..<span class="ident">i</span> <span class="op">-</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>),
-                <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>),
+    <span class="kw">while </span>i &lt; len {
+        <span class="kw">let </span>ch = chars[i];
+        <span class="kw">let </span>k = ch.shape_class;
+        <span class="kw">if </span>last_vblw &amp;&amp; k == Anusvara {
+            anus = <span class="kw">match </span>anus {
+                <span class="prelude-val">Some</span>(r) =&gt; <span class="prelude-val">Some</span>(r.start..i - r.start + <span class="number">1</span>),
+                <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>(i..i + <span class="number">1</span>),
             };
-            <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            ignored[i] = <span class="bool-val">true</span>;
+            i += <span class="number">1</span>;
             <span class="kw">continue</span>;
         }
-        <span class="ident">last_vblw</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="ident">k</span> <span class="op">==</span> <span class="ident">VBlw</span> {
-            <span class="kw">if</span> <span class="ident">vblw</span>.<span class="ident">is_none</span>() {
-                <span class="ident">vblw</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
+        last_vblw = <span class="bool-val">false</span>;
+        <span class="kw">if </span>k == VBlw {
+            <span class="kw">if </span>vblw.is_none() {
+                vblw = <span class="prelude-val">Some</span>(i);
             }
-            <span class="ident">last_vblw</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            last_vblw = <span class="bool-val">true</span>;
         }
-        <span class="kw">if</span> <span class="ident">k</span> <span class="op">==</span> <span class="ident">Base</span> <span class="op">&amp;&amp;</span> <span class="ident">base</span>.<span class="ident">is_none</span>() {
-            <span class="ident">base</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-            <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">k</span> <span class="op">==</span> <span class="ident">MedialRa</span> {
-            <span class="ident">medial_ra</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-            <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">k</span> <span class="op">==</span> <span class="ident">VPre</span> {
-            <span class="ident">vpre</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">vpre</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">r</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">start</span>..<span class="ident">i</span> <span class="op">-</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>),
-                <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>),
+        <span class="kw">if </span>k == Base &amp;&amp; base.is_none() {
+            base = <span class="prelude-val">Some</span>(i);
+            ignored[i] = <span class="bool-val">true</span>;
+        } <span class="kw">else if </span>k == MedialRa {
+            medial_ra = <span class="prelude-val">Some</span>(i);
+            ignored[i] = <span class="bool-val">true</span>;
+        } <span class="kw">else if </span>k == VPre {
+            vpre = <span class="kw">match </span>vpre {
+                <span class="prelude-val">Some</span>(r) =&gt; <span class="prelude-val">Some</span>(r.start..i - r.start + <span class="number">1</span>),
+                <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>(i..i + <span class="number">1</span>),
             };
-            <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+            ignored[i] = <span class="bool-val">true</span>;
         }
-        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        i += <span class="number">1</span>;
     }
-    <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">vpre</span> {
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">r</span> {
-            <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">j</span>;
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        }
-    }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">j</span>) <span class="op">=</span> <span class="ident">medial_ra</span> {
-        <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">j</span>;
-        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-    }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">j</span>) <span class="op">=</span> <span class="ident">base</span> {
-        <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">j</span>;
-        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-    }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">kinzi</span> {
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">r</span> {
-            <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">j</span>;
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    i = <span class="number">0</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = vpre {
+        <span class="kw">for </span>j <span class="kw">in </span>r {
+            order[i] = j;
+            i += <span class="number">1</span>;
         }
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">while</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="kw">if</span> <span class="ident">ignored</span>[<span class="ident">j</span>] {
-            <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(j) = medial_ra {
+        order[i] = j;
+        i += <span class="number">1</span>;
+    }
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(j) = base {
+        order[i] = j;
+        i += <span class="number">1</span>;
+    }
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = kinzi {
+        <span class="kw">for </span>j <span class="kw">in </span>r {
+            order[i] = j;
+            i += <span class="number">1</span>;
+        }
+    }
+    <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
+    <span class="kw">while </span>j &lt; len {
+        <span class="kw">if </span>ignored[j] {
+            j += <span class="number">1</span>;
             <span class="kw">continue</span>;
         }
-        <span class="kw">if</span> <span class="prelude-val">Some</span>(<span class="ident">j</span>) <span class="op">==</span> <span class="ident">vblw</span> <span class="op">&amp;&amp;</span> <span class="ident">anus</span>.<span class="ident">is_some</span>() {
-            <span class="kw">for</span> <span class="ident">k</span> <span class="kw">in</span> <span class="ident">anus</span>.<span class="ident">take</span>().<span class="ident">unwrap</span>() {
-                <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">k</span>;
-                <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">if </span><span class="prelude-val">Some</span>(j) == vblw &amp;&amp; anus.is_some() {
+            <span class="kw">for </span>k <span class="kw">in </span>anus.take().unwrap() {
+                order[i] = k;
+                i += <span class="number">1</span>;
             }
         }
-        <span class="ident">order</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">j</span>;
-        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        order[i] = j;
+        i += <span class="number">1</span>;
+        j += <span class="number">1</span>;
     }
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::needless_range_loop</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reorder_complex</span>(<span class="ident">glyphs</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">GlyphData</span>], <span class="ident">buf</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GlyphData</span><span class="op">&gt;</span>, <span class="ident">order</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-    <span class="kw">use</span> <span class="ident">ShapeClass</span>::<span class="kw-2">*</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">first_base</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_base</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_halant</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reph</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pref</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vpre</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vmpre</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ignored</span> <span class="op">=</span> [<span class="bool-val">false</span>; <span class="number">64</span>];
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">glyphs</span>.<span class="ident">len</span>();
-    <span class="kw">if</span> <span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">glyphs</span>.<span class="ident">len</span>() {
-        <span class="ident">buf</span>.<span class="ident">resize</span>(<span class="ident">len</span>, <span class="ident">GlyphData::default</span>());
+<span class="attribute">#[allow(clippy::needless_range_loop)]
+</span><span class="kw">pub fn </span>reorder_complex(glyphs: <span class="kw-2">&amp;mut </span>[GlyphData], buf: <span class="kw-2">&amp;mut </span>Vec&lt;GlyphData&gt;, order: <span class="kw-2">&amp;mut </span>Vec&lt;usize&gt;) {
+    <span class="kw">use </span>ShapeClass::<span class="kw-2">*</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>first_base = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>last_base = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>last_halant = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>reph = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>pref = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>vpre: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>vmpre: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt; = <span class="prelude-val">None</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>ignored = [<span class="bool-val">false</span>; <span class="number">64</span>];
+    <span class="kw">let </span>len = glyphs.len();
+    <span class="kw">if </span>buf.len() &lt; glyphs.len() {
+        buf.resize(len, GlyphData::default());
     }
-    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[..<span class="ident">len</span>];
-    <span class="kw">if</span> <span class="ident">order</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="ident">order</span>.<span class="ident">resize</span>(<span class="ident">len</span>, <span class="number">0</span>);
+    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[..len];
+    <span class="kw">if </span>order.len() &lt; len {
+        order.resize(len, <span class="number">0</span>);
     }
-    <span class="kw">let</span> <span class="ident">order</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">order</span>[..<span class="ident">len</span>];
-    <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">g</span>) <span class="kw">in</span> <span class="ident">glyphs</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-        <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">is_component</span>() {
+    <span class="kw">let </span>order = <span class="kw-2">&amp;mut </span>order[..len];
+    <span class="kw">for </span>(i, g) <span class="kw">in </span>glyphs.iter().enumerate() {
+        <span class="kw">if </span>g.is_component() {
             <span class="kw">continue</span>;
         }
-        <span class="kw">match</span> <span class="ident">g</span>.<span class="ident">char_class</span> {
-            <span class="ident">Base</span> =&gt; {
-                <span class="kw">if</span> <span class="ident">first_base</span> <span class="op">==</span> <span class="prelude-val">None</span> {
-                    <span class="ident">first_base</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-                    <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">match </span>g.char_class {
+            Base =&gt; {
+                <span class="kw">if </span>first_base == <span class="prelude-val">None </span>{
+                    first_base = <span class="prelude-val">Some</span>(i);
+                    ignored[i] = <span class="bool-val">true</span>;
                 }
-                <span class="kw">if</span> <span class="ident">last_halant</span>.<span class="ident">is_none</span>() {
-                    <span class="ident">last_base</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-                }
-            }
-            <span class="ident">Halant</span> =&gt; {
-                <span class="ident">last_halant</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-            }
-            <span class="ident">Reph</span> =&gt; {
-                <span class="kw">if</span> <span class="ident">reph</span> <span class="op">==</span> <span class="prelude-val">None</span> {
-                    <span class="ident">reph</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-                    <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+                <span class="kw">if </span>last_halant.is_none() {
+                    last_base = <span class="prelude-val">Some</span>(i);
                 }
             }
-            <span class="ident">Pref</span> =&gt; {
-                <span class="kw">if</span> <span class="ident">pref</span> <span class="op">==</span> <span class="prelude-val">None</span> {
-                    <span class="ident">pref</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>);
-                    <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+            Halant =&gt; {
+                last_halant = <span class="prelude-val">Some</span>(i);
+            }
+            Reph =&gt; {
+                <span class="kw">if </span>reph == <span class="prelude-val">None </span>{
+                    reph = <span class="prelude-val">Some</span>(i);
+                    ignored[i] = <span class="bool-val">true</span>;
                 }
             }
-            <span class="ident">VPre</span> =&gt; {
-                <span class="ident">vpre</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">vpre</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">r</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">start</span>..<span class="ident">i</span> <span class="op">-</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>),
-                    <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>),
+            Pref =&gt; {
+                <span class="kw">if </span>pref == <span class="prelude-val">None </span>{
+                    pref = <span class="prelude-val">Some</span>(i);
+                    ignored[i] = <span class="bool-val">true</span>;
+                }
+            }
+            VPre =&gt; {
+                vpre = <span class="kw">match </span>vpre {
+                    <span class="prelude-val">Some</span>(r) =&gt; <span class="prelude-val">Some</span>(r.start..i - r.start + <span class="number">1</span>),
+                    <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>(i..i + <span class="number">1</span>),
                 };
-                <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+                ignored[i] = <span class="bool-val">true</span>;
             }
-            <span class="ident">VMPre</span> =&gt; {
-                <span class="ident">vmpre</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">vmpre</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">r</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">start</span>..<span class="ident">i</span> <span class="op">-</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>),
-                    <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>),
+            VMPre =&gt; {
+                vmpre = <span class="kw">match </span>vmpre {
+                    <span class="prelude-val">Some</span>(r) =&gt; <span class="prelude-val">Some</span>(r.start..i - r.start + <span class="number">1</span>),
+                    <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>(i..i + <span class="number">1</span>),
                 };
-                <span class="ident">ignored</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="bool-val">true</span>;
+                ignored[i] = <span class="bool-val">true</span>;
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="comment">// No explicit virama; insert vmpre, vpre, pref</span>
-    <span class="kw">if</span> <span class="ident">last_halant</span>.<span class="ident">is_none</span>() {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">vmpre</span>.<span class="ident">clone</span>() {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">r</span> {
-                <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            }
-        }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">vpre</span>.<span class="ident">clone</span>() {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">r</span> {
-                <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
+    <span class="comment">// No explicit virama; insert vmpre, vpre, pref
+    </span><span class="kw">if </span>last_halant.is_none() {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = vmpre.clone() {
+            <span class="kw">for </span>i <span class="kw">in </span>r {
+                order[j] = i;
+                j += <span class="number">1</span>;
             }
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">pref</span> {
-            <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-            <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = vpre.clone() {
+            <span class="kw">for </span>i <span class="kw">in </span>r {
+                order[j] = i;
+                j += <span class="number">1</span>;
+            }
+        }
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(i) = pref {
+            order[j] = i;
+            j += <span class="number">1</span>;
         }
     }
-    <span class="comment">// Insert the base...</span>
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">first_base</span> {
-        <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="comment">// Insert the base...
+    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(i) = first_base {
+        order[j] = i;
+        j += <span class="number">1</span>;
     }
-    <span class="kw">if</span> <span class="ident">last_base</span>.<span class="ident">is_none</span>() {
-        <span class="comment">// ... and the reph</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">reph</span> {
-            <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-            <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">if </span>last_base.is_none() {
+        <span class="comment">// ... and the reph
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(i) = reph {
+            order[j] = i;
+            j += <span class="number">1</span>;
         }
     }
-    <span class="comment">// Now the rest</span>
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">glyphs</span>.<span class="ident">len</span>();
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
-        <span class="kw">if</span> <span class="ident">ignored</span>[<span class="ident">i</span>] {
+    <span class="comment">// Now the rest
+    </span><span class="kw">let </span>len = glyphs.len();
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+        <span class="kw">if </span>ignored[i] {
             <span class="kw">continue</span>;
         }
-        <span class="comment">// println!(&quot; -&gt; i = {}, j = {}&quot;, i, j);</span>
-        <span class="comment">// println!(&quot;order: {:?}&quot;, order);</span>
-        <span class="comment">// println!(&quot;ignored: {:?}&quot;, &amp;ignored[0..order.len()]);</span>
-        <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="comment">// Insert reph after final base</span>
-        <span class="kw">if</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">==</span> <span class="ident">last_base</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">reph</span> {
-                <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="comment">// println!(&quot; -&gt; i = {}, j = {}&quot;, i, j);
+        // println!(&quot;order: {:?}&quot;, order);
+        // println!(&quot;ignored: {:?}&quot;, &amp;ignored[0..order.len()]);
+        </span>order[j] = i;
+        j += <span class="number">1</span>;
+        <span class="comment">// Insert reph after final base
+        </span><span class="kw">if </span><span class="prelude-val">Some</span>(i) == last_base {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(i) = reph {
+                order[j] = i;
+                j += <span class="number">1</span>;
             }
         }
-        <span class="comment">// Move vmpre, vpre and pref after the final virama</span>
-        <span class="kw">if</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">==</span> <span class="ident">last_halant</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">vmpre</span>.<span class="ident">clone</span>() {
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">r</span> {
-                    <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                    <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="comment">// Move vmpre, vpre and pref after the final virama
+        </span><span class="kw">if </span><span class="prelude-val">Some</span>(i) == last_halant {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = vmpre.clone() {
+                <span class="kw">for </span>i <span class="kw">in </span>r {
+                    order[j] = i;
+                    j += <span class="number">1</span>;
                 }
             }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span> <span class="ident">vpre</span>.<span class="ident">clone</span>() {
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">r</span> {
-                    <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                    <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(r) = vpre.clone() {
+                <span class="kw">for </span>i <span class="kw">in </span>r {
+                    order[j] = i;
+                    j += <span class="number">1</span>;
                 }
             }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">pref</span> {
-                <span class="ident">order</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">i</span>;
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(i) = pref {
+                order[j] = i;
+                j += <span class="number">1</span>;
             }
         }
     }
-    <span class="comment">// Reorder glyphs</span>
-    <span class="ident">buf</span>.<span class="ident">copy_from_slice</span>(<span class="ident">glyphs</span>);
-    <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="kw">in</span> <span class="ident">order</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-        <span class="ident">glyphs</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">buf</span>[<span class="kw-2">*</span><span class="ident">j</span>];
+    <span class="comment">// Reorder glyphs
+    </span>buf.copy_from_slice(glyphs);
+    <span class="kw">for </span>(i, j) <span class="kw">in </span>order.iter().enumerate() {
+        glyphs[i] = buf[<span class="kw-2">*</span>j];
     }
-    <span class="comment">// println!(&quot;order: {:?}&quot;, order);</span>
-    <span class="comment">// let new = glyphs</span>
-    <span class="comment">//     .iter()</span>
-    <span class="comment">//     .map(|g| (g.class, char_kind(g.subclass)))</span>
-    <span class="comment">//     .collect::&lt;Vec&lt;_&gt;&gt;();</span>
-    <span class="comment">// println!(&quot;new: {:?}&quot;, &amp;new[..]);</span>
-}
+    <span class="comment">// println!(&quot;order: {:?}&quot;, order);
+    // let new = glyphs
+    //     .iter()
+    //     .map(|g| (g.class, char_kind(g.subclass)))
+    //     .collect::&lt;Vec&lt;_&gt;&gt;();
+    // println!(&quot;new: {:?}&quot;, &amp;new[..]);
+</span>}
 
-<span class="comment">// Matches the Arabic joining table from Harfbuzz.</span>
-<span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-<span class="kw">const</span> <span class="ident">JOIN_STATES</span>: [[(<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">u8</span>); <span class="number">6</span>]; <span class="number">7</span>] <span class="op">=</span> [
-    <span class="comment">//   U,                            L,                       R,                        D,                    ALAPH,                 DALATH_RISH</span>
-    <span class="comment">// State 0: prev was U, not willing to join.</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 1: prev was R or ISOL_MASK/ALAPH, not willing to join.</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">FIN2_MASK</span>,<span class="number">5</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 2: prev was D/L in ISOL_MASK form, willing to join.</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">INIT_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">1</span>), (<span class="ident">INIT_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">3</span>), (<span class="ident">INIT_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">4</span>), (<span class="ident">INIT_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 3: prev was D in FINA_MASK form, willing to join. */</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">MEDI_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">1</span>), (<span class="ident">MEDI_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">3</span>), (<span class="ident">MEDI_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">4</span>), (<span class="ident">MEDI_MASK</span>,<span class="ident">FINA_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 4: prev was FINA_MASK ALAPH, not willing to join. */</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">MED2_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">MED2_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">MED2_MASK</span>,<span class="ident">FIN2_MASK</span>,<span class="number">5</span>), (<span class="ident">MED2_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 5: prev was FIN2_MASK/FIN3_MASK ALAPH, not willing to join. */</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">ISOL_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">ISOL_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">ISOL_MASK</span>,<span class="ident">FIN2_MASK</span>,<span class="number">5</span>), (<span class="ident">ISOL_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">6</span>), ],
-    <span class="comment">// State 6: prev was DALATH/RISH, not willing to join. */</span>
-    [ (<span class="ident">NONE_MASK</span>,<span class="ident">NONE_MASK</span>,<span class="number">0</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">1</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">2</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">FIN3_MASK</span>,<span class="number">5</span>), (<span class="ident">NONE_MASK</span>,<span class="ident">ISOL_MASK</span>,<span class="number">6</span>), ]
+<span class="comment">// Matches the Arabic joining table from Harfbuzz.
+</span><span class="attribute">#[rustfmt::skip]
+</span><span class="kw">const </span>JOIN_STATES: [[(u8, u8, u8); <span class="number">6</span>]; <span class="number">7</span>] = [
+    <span class="comment">//   U,                            L,                       R,                        D,                    ALAPH,                 DALATH_RISH
+    // State 0: prev was U, not willing to join.
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,ISOL_MASK,<span class="number">1</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,ISOL_MASK,<span class="number">1</span>), (NONE_MASK,ISOL_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 1: prev was R or ISOL_MASK/ALAPH, not willing to join.
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,ISOL_MASK,<span class="number">1</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,FIN2_MASK,<span class="number">5</span>), (NONE_MASK,ISOL_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 2: prev was D/L in ISOL_MASK form, willing to join.
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (INIT_MASK,FINA_MASK,<span class="number">1</span>), (INIT_MASK,FINA_MASK,<span class="number">3</span>), (INIT_MASK,FINA_MASK,<span class="number">4</span>), (INIT_MASK,FINA_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 3: prev was D in FINA_MASK form, willing to join. */
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (MEDI_MASK,FINA_MASK,<span class="number">1</span>), (MEDI_MASK,FINA_MASK,<span class="number">3</span>), (MEDI_MASK,FINA_MASK,<span class="number">4</span>), (MEDI_MASK,FINA_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 4: prev was FINA_MASK ALAPH, not willing to join. */
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (MED2_MASK,ISOL_MASK,<span class="number">1</span>), (MED2_MASK,ISOL_MASK,<span class="number">2</span>), (MED2_MASK,FIN2_MASK,<span class="number">5</span>), (MED2_MASK,ISOL_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 5: prev was FIN2_MASK/FIN3_MASK ALAPH, not willing to join. */
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (ISOL_MASK,ISOL_MASK,<span class="number">1</span>), (ISOL_MASK,ISOL_MASK,<span class="number">2</span>), (ISOL_MASK,FIN2_MASK,<span class="number">5</span>), (ISOL_MASK,ISOL_MASK,<span class="number">6</span>), ],
+    <span class="comment">// State 6: prev was DALATH/RISH, not willing to join. */
+    </span>[ (NONE_MASK,NONE_MASK,<span class="number">0</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,ISOL_MASK,<span class="number">1</span>), (NONE_MASK,ISOL_MASK,<span class="number">2</span>), (NONE_MASK,FIN3_MASK,<span class="number">5</span>), (NONE_MASK,ISOL_MASK,<span class="number">6</span>), ]
 ];
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

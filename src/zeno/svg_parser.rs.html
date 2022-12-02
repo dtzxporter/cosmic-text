@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/svg_parser.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>svg_parser.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/svg_parser.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>svg_parser.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -656,663 +656,663 @@
 <span id="656">656</span>
 <span id="657">657</span>
 <span id="658">658</span>
-</pre><pre class="rust"><code><span class="doccomment">//! SVG path data parser.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! SVG path data parser.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::command::Command</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry::Vector</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_builder</span>::{<span class="ident">Arc</span>, <span class="ident">ArcSize</span>, <span class="ident">ArcSweep</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::command::Command;
+<span class="kw">use </span><span class="kw">super</span>::geometry::Vector;
+<span class="kw">use </span><span class="kw">super</span>::path_builder::{Arc, ArcSize, ArcSweep};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">enum</span> <span class="ident">State</span> {
-    <span class="ident">Initial</span>,
-    <span class="ident">Next</span>,
-    <span class="ident">Continue</span>(<span class="ident">u8</span>),
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">enum </span>State {
+    Initial,
+    Next,
+    Continue(u8),
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SvgCommands</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">cur</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">pos</span>: <span class="ident">usize</span>,
-    <span class="ident">cmd_pos</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">error</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">done</span>: <span class="ident">bool</span>,
-    <span class="ident">start_point</span>: <span class="ident">Vector</span>,
-    <span class="ident">cur_point</span>: <span class="ident">Vector</span>,
-    <span class="ident">last_control</span>: <span class="ident">Vector</span>,
-    <span class="ident">last_cmd</span>: <span class="ident">u8</span>,
-    <span class="ident">state</span>: <span class="ident">State</span>,
-    <span class="ident">arc</span>: <span class="ident">Arc</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>SvgCommands&lt;<span class="lifetime">&#39;a</span>&gt; {
+    buf: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    cur: u8,
+    <span class="kw">pub </span>pos: usize,
+    cmd_pos: usize,
+    <span class="kw">pub </span>error: bool,
+    <span class="kw">pub </span>done: bool,
+    start_point: Vector,
+    cur_point: Vector,
+    last_control: Vector,
+    last_cmd: u8,
+    state: State,
+    arc: Arc,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">SvgCommands</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>SvgCommands&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = Command;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">parse</span>()
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="self">self</span>.parse()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">SvgCommands</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">buf</span>: <span class="ident">source</span>.<span class="ident">as_bytes</span>(),
-            <span class="ident">cur</span>: <span class="number">0</span>,
-            <span class="ident">pos</span>: <span class="number">0</span>,
-            <span class="ident">cmd_pos</span>: <span class="number">0</span>,
-            <span class="ident">error</span>: <span class="bool-val">false</span>,
-            <span class="ident">done</span>: <span class="bool-val">false</span>,
-            <span class="ident">start_point</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">cur_point</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">last_control</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">last_cmd</span>: <span class="number">0</span>,
-            <span class="ident">state</span>: <span class="ident">State::Initial</span>,
-            <span class="ident">arc</span>: <span class="ident">Arc::default</span>(),
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; SvgCommands&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new(source: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            buf: source.as_bytes(),
+            cur: <span class="number">0</span>,
+            pos: <span class="number">0</span>,
+            cmd_pos: <span class="number">0</span>,
+            error: <span class="bool-val">false</span>,
+            done: <span class="bool-val">false</span>,
+            start_point: Vector::ZERO,
+            cur_point: Vector::ZERO,
+            last_control: Vector::ZERO,
+            last_cmd: <span class="number">0</span>,
+            state: State::Initial,
+            arc: Arc::default(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">Command</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">next</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">cmd</span>);
+    <span class="kw">fn </span>parse(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Command&gt; {
+        <span class="kw">use </span>Command::<span class="kw-2">*</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>cmd = <span class="self">self</span>.cur;
+        <span class="kw">loop </span>{
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(cmd) = <span class="self">self</span>.arc.next() {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(cmd);
             }
-            <span class="self">self</span>.<span class="ident">last_cmd</span> <span class="op">=</span> <span class="ident">cmd</span>;
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">state</span> {
-                <span class="ident">State::Initial</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">advance</span>();
-                    <span class="self">self</span>.<span class="ident">skip_whitespace</span>();
-                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+            <span class="self">self</span>.last_cmd = cmd;
+            <span class="kw">match </span><span class="self">self</span>.state {
+                State::Initial =&gt; {
+                    <span class="self">self</span>.advance();
+                    <span class="self">self</span>.skip_whitespace();
+                    <span class="self">self</span>.state = State::Next;
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">State::Next</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">skip_whitespace</span>();
-                    <span class="self">self</span>.<span class="ident">cmd_pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pos</span>;
-                    <span class="ident">cmd</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>;
-                    <span class="self">self</span>.<span class="ident">advance</span>();
-                    <span class="self">self</span>.<span class="ident">skip_whitespace</span>();
-                    <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Continue</span>(<span class="ident">cmd</span>);
-                    <span class="kw">match</span> <span class="ident">cmd</span> {
-                        <span class="string">b&#39;z&#39;</span> <span class="op">|</span> <span class="string">b&#39;Z&#39;</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">start_point</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Close</span>);
+                State::Next =&gt; {
+                    <span class="self">self</span>.skip_whitespace();
+                    <span class="self">self</span>.cmd_pos = <span class="self">self</span>.pos;
+                    cmd = <span class="self">self</span>.cur;
+                    <span class="self">self</span>.advance();
+                    <span class="self">self</span>.skip_whitespace();
+                    <span class="self">self</span>.state = State::Continue(cmd);
+                    <span class="kw">match </span>cmd {
+                        <span class="string">b&#39;z&#39; </span>| <span class="string">b&#39;Z&#39; </span>=&gt; {
+                            <span class="self">self</span>.state = State::Next;
+                            <span class="self">self</span>.cur_point = <span class="self">self</span>.start_point;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Close);
                         }
-                        <span class="string">b&#39;M&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">start_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">MoveTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;M&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.start_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(MoveTo(to));
                         }
-                        <span class="string">b&#39;m&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">start_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">MoveTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;m&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.rel_point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.start_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(MoveTo(to));
                         }
-                        <span class="string">b&#39;L&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;L&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;l&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;l&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.rel_point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;H&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;H&#39; </span>=&gt; {
+                            <span class="kw">let </span>x = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>to = Vector::new(x, <span class="self">self</span>.cur_point.y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;h&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;h&#39; </span>=&gt; {
+                            <span class="kw">let </span>x = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x + x, <span class="self">self</span>.cur_point.y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;V&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span>, <span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;V&#39; </span>=&gt; {
+                            <span class="kw">let </span>y = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x, y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;v&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
+                        <span class="string">b&#39;v&#39; </span>=&gt; {
+                            <span class="kw">let </span>y = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x, <span class="self">self</span>.cur_point.y + y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
                         }
-                        <span class="string">b&#39;C&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">three_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;C&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c1, c2, to) = <span class="self">self</span>.three_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
                         }
-                        <span class="string">b&#39;c&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_three_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;c&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c1, c2, to) = <span class="self">self</span>.rel_three_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
                         }
-                        <span class="string">b&#39;S&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">two_points</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;S&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c2, to) = <span class="self">self</span>.two_points()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c1 = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
                         }
-                        <span class="string">b&#39;s&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_two_points</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;s&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c2, to) = <span class="self">self</span>.rel_two_points()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c1 = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
                         }
-                        <span class="string">b&#39;Q&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">two_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;Q&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c, to) = <span class="self">self</span>.two_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
                         }
-                        <span class="string">b&#39;q&#39;</span> =&gt; {
-                            <span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_two_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;q&#39; </span>=&gt; {
+                            <span class="kw">let </span>(c, to) = <span class="self">self</span>.rel_two_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
                         }
-                        <span class="string">b&#39;T&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;T&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
                         }
-                        <span class="string">b&#39;t&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
+                        <span class="string">b&#39;t&#39; </span>=&gt; {
+                            <span class="kw">let </span>to = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
                         }
-                        <span class="string">b&#39;A&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur_point</span>;
-                            <span class="kw">let</span> (<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc_arguments</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">from</span>, <span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>.<span class="ident">to_radians</span>(), <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>);
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
+                        <span class="string">b&#39;A&#39; </span>=&gt; {
+                            <span class="kw">let </span>from = <span class="self">self</span>.cur_point;
+                            <span class="kw">let </span>(rx, ry, a, size, sweep, to) = <span class="self">self</span>.arc_arguments(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
+                            <span class="self">self</span>.arc = Arc::new(from, rx, ry, a.to_radians(), size, sweep, to);
+                            <span class="self">self</span>.skip_comma_whitespace();
                             <span class="kw">continue</span>;
                         }
-                        <span class="string">b&#39;a&#39;</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur_point</span>;
-                            <span class="kw">let</span> (<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc_arguments</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">from</span>, <span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>.<span class="ident">to_radians</span>(), <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>);
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
+                        <span class="string">b&#39;a&#39; </span>=&gt; {
+                            <span class="kw">let </span>from = <span class="self">self</span>.cur_point;
+                            <span class="kw">let </span>(rx, ry, a, size, sweep, to) = <span class="self">self</span>.arc_arguments(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
+                            <span class="self">self</span>.arc = Arc::new(from, rx, ry, a.to_radians(), size, sweep, to);
+                            <span class="self">self</span>.skip_comma_whitespace();
                             <span class="kw">continue</span>;
                         }
-                        <span class="kw">_</span> =&gt; {
-                            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">done</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                <span class="self">self</span>.<span class="ident">error</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                                <span class="self">self</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cmd_pos</span>;
+                        <span class="kw">_ </span>=&gt; {
+                            <span class="kw">if </span>!<span class="self">self</span>.done || cmd != <span class="number">0 </span>{
+                                <span class="self">self</span>.error = <span class="bool-val">true</span>;
+                                <span class="self">self</span>.pos = <span class="self">self</span>.cmd_pos;
                             }
-                            <span class="kw">return</span> <span class="prelude-val">None</span>;
+                            <span class="kw">return </span><span class="prelude-val">None</span>;
                         }
                     }
                 }
-                <span class="ident">State::Continue</span>(<span class="ident">cmd</span>) =&gt; <span class="kw">match</span> <span class="ident">cmd</span> {
-                    <span class="string">b&#39;M&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                State::Continue(cmd) =&gt; <span class="kw">match </span>cmd {
+                    <span class="string">b&#39;M&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.point_to() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;m&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;m&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.rel_point_to() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;L&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;L&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.point_to() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;l&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;l&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.rel_point_to() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;H&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;H&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>to = Vector::new(x, <span class="self">self</span>.cur_point.y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;h&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;h&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x + x, <span class="self">self</span>.cur_point.y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;V&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">y</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span>, <span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;V&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(y) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x, y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;v&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">y</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">cur_point</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">y</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">LineTo</span>(<span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;v&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(y) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>to = Vector::new(<span class="self">self</span>.cur_point.x, <span class="self">self</span>.cur_point.y + y);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(LineTo(to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;C&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c1</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> (<span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">two_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;C&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c1) = <span class="self">self</span>.point() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>(c2, to) = <span class="self">self</span>.two_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;c&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c1</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> (<span class="ident">c2</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_two_points_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;c&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c1) = <span class="self">self</span>.rel_point() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>(c2, to) = <span class="self">self</span>.rel_two_points_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;S&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c2</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;S&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c2) = <span class="self">self</span>.point() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>to = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c1 = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;s&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c2</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>() {
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-                            <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c2</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;s&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c2) = <span class="self">self</span>.rel_point() {
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>to = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+                            <span class="kw">let </span>c1 = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c2;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(CurveTo(c1, c2, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;Q&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>() {
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;Q&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = <span class="self">self</span>.point() {
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>to = <span class="self">self</span>.point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;q&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>() {
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;q&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = <span class="self">self</span>.rel_point() {
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">let </span>to = <span class="self">self</span>.rel_point_to()<span class="question-mark">?</span>;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;T&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>() {
-                            <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;T&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.point() {
+                            <span class="kw">let </span>c = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;t&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>() {
-                            <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reflected_control</span>(<span class="ident">cmd</span>);
-                            <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_control</span> <span class="op">=</span> <span class="ident">c</span>;
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;t&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(to) = <span class="self">self</span>.rel_point() {
+                            <span class="kw">let </span>c = <span class="self">self</span>.reflected_control(cmd);
+                            <span class="self">self</span>.cur_point = to;
+                            <span class="self">self</span>.last_control = c;
+                            <span class="self">self</span>.skip_comma_whitespace();
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(QuadTo(c, to));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;A&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rx</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur_point</span>;
-                            <span class="kw">let</span> (<span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc_rest_arguments</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">from</span>, <span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>.<span class="ident">to_radians</span>(), <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>);
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;A&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(rx) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>from = <span class="self">self</span>.cur_point;
+                            <span class="kw">let </span>(ry, a, size, sweep, to) = <span class="self">self</span>.arc_rest_arguments(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
+                            <span class="self">self</span>.arc = Arc::new(from, rx, ry, a.to_radians(), size, sweep, to);
+                            <span class="self">self</span>.skip_comma_whitespace();
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="string">b&#39;a&#39;</span> =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rx</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>() {
-                            <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur_point</span>;
-                            <span class="kw">let</span> (<span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc_rest_arguments</span>(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
-                            <span class="self">self</span>.<span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">from</span>, <span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>.<span class="ident">to_radians</span>(), <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>);
-                            <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">State::Next</span>;
+                    <span class="string">b&#39;a&#39; </span>=&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(rx) = <span class="self">self</span>.coord() {
+                            <span class="kw">let </span>from = <span class="self">self</span>.cur_point;
+                            <span class="kw">let </span>(ry, a, size, sweep, to) = <span class="self">self</span>.arc_rest_arguments(<span class="bool-val">true</span>)<span class="question-mark">?</span>;
+                            <span class="self">self</span>.arc = Arc::new(from, rx, ry, a.to_radians(), size, sweep, to);
+                            <span class="self">self</span>.skip_comma_whitespace();
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.state = State::Next;
                         }
                     }
-                    <span class="kw">_</span> =&gt; {
-                        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">done</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cmd</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="self">self</span>.<span class="ident">error</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="self">self</span>.<span class="ident">pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cmd_pos</span>;
+                    <span class="kw">_ </span>=&gt; {
+                        <span class="kw">if </span>!<span class="self">self</span>.done || cmd != <span class="number">0 </span>{
+                            <span class="self">self</span>.error = <span class="bool-val">true</span>;
+                            <span class="self">self</span>.pos = <span class="self">self</span>.cmd_pos;
                         }
-                        <span class="kw">return</span> <span class="prelude-val">None</span>;
+                        <span class="kw">return </span><span class="prelude-val">None</span>;
                     }
                 },
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">reflected_control</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">cmd</span>: <span class="ident">u8</span>) -&gt; <span class="ident">Vector</span> {
-        <span class="kw">let</span> <span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur_point</span>;
-        <span class="kw">let</span> <span class="ident">old</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">last_control</span>;
-        <span class="kw">if</span> <span class="ident">cmd</span> <span class="op">==</span> <span class="string">b&#39;S&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">cmd</span> <span class="op">==</span> <span class="string">b&#39;s&#39;</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_cmd</span> {
-                <span class="string">b&#39;C&#39;</span> <span class="op">|</span> <span class="string">b&#39;c&#39;</span> <span class="op">|</span> <span class="string">b&#39;S&#39;</span> <span class="op">|</span> <span class="string">b&#39;s&#39;</span> =&gt; (<span class="number">2.</span> <span class="op">*</span> <span class="ident">cur</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">x</span>, <span class="number">2.</span> <span class="op">*</span> <span class="ident">cur</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">y</span>).<span class="ident">into</span>(),
-                <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">cur_point</span>,
+    <span class="kw">fn </span>reflected_control(<span class="kw-2">&amp;</span><span class="self">self</span>, cmd: u8) -&gt; Vector {
+        <span class="kw">let </span>cur = <span class="self">self</span>.cur_point;
+        <span class="kw">let </span>old = <span class="self">self</span>.last_control;
+        <span class="kw">if </span>cmd == <span class="string">b&#39;S&#39; </span>|| cmd == <span class="string">b&#39;s&#39; </span>{
+            <span class="kw">match </span><span class="self">self</span>.last_cmd {
+                <span class="string">b&#39;C&#39; </span>| <span class="string">b&#39;c&#39; </span>| <span class="string">b&#39;S&#39; </span>| <span class="string">b&#39;s&#39; </span>=&gt; (<span class="number">2. </span>* cur.x - old.x, <span class="number">2. </span>* cur.y - old.y).into(),
+                <span class="kw">_ </span>=&gt; <span class="self">self</span>.cur_point,
             }
-        } <span class="kw">else</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">last_cmd</span> {
-                <span class="string">b&#39;Q&#39;</span> <span class="op">|</span> <span class="string">b&#39;q&#39;</span> <span class="op">|</span> <span class="string">b&#39;T&#39;</span> <span class="op">|</span> <span class="string">b&#39;t&#39;</span> =&gt; (<span class="number">2.</span> <span class="op">*</span> <span class="ident">cur</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">x</span>, <span class="number">2.</span> <span class="op">*</span> <span class="ident">cur</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">old</span>.<span class="ident">y</span>).<span class="ident">into</span>(),
-                <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">cur_point</span>,
+        } <span class="kw">else </span>{
+            <span class="kw">match </span><span class="self">self</span>.last_cmd {
+                <span class="string">b&#39;Q&#39; </span>| <span class="string">b&#39;q&#39; </span>| <span class="string">b&#39;T&#39; </span>| <span class="string">b&#39;t&#39; </span>=&gt; (<span class="number">2. </span>* cur.x - old.x, <span class="number">2. </span>* cur.y - old.y).into(),
+                <span class="kw">_ </span>=&gt; <span class="self">self</span>.cur_point,
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">arc_arguments</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rel</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">f32</span>, <span class="ident">f32</span>, <span class="ident">f32</span>, <span class="ident">ArcSize</span>, <span class="ident">ArcSweep</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">rx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">ry</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">large_arc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">boolean</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">boolean</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">rel</span> {
-            <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>
+    <span class="kw">fn </span>arc_arguments(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rel: bool) -&gt; <span class="prelude-ty">Option</span>&lt;(f32, f32, f32, ArcSize, ArcSweep, Vector)&gt; {
+        <span class="kw">let </span>rx = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>ry = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>a = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>large_arc = <span class="self">self</span>.boolean()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>sweep = <span class="self">self</span>.boolean()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>to = <span class="kw">if </span>rel {
+            <span class="self">self</span>.rel_point_to()<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="self">self</span>.point_to()<span class="question-mark">?
+        </span>};
+        <span class="kw">let </span>size = <span class="kw">if </span>large_arc {
+            ArcSize::Large
+        } <span class="kw">else </span>{
+            ArcSize::Small
         };
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">large_arc</span> {
-            <span class="ident">ArcSize::Large</span>
-        } <span class="kw">else</span> {
-            <span class="ident">ArcSize::Small</span>
+        <span class="kw">let </span>sweep = <span class="kw">if </span>sweep {
+            ArcSweep::Positive
+        } <span class="kw">else </span>{
+            ArcSweep::Negative
         };
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">sweep</span> {
-            <span class="ident">ArcSweep::Positive</span>
-        } <span class="kw">else</span> {
-            <span class="ident">ArcSweep::Negative</span>
+        <span class="prelude-val">Some</span>((rx, ry, a, size, sweep, to))
+    }
+
+    <span class="kw">fn </span>arc_rest_arguments(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rel: bool) -&gt; <span class="prelude-ty">Option</span>&lt;(f32, f32, ArcSize, ArcSweep, Vector)&gt; {
+        <span class="kw">let </span>ry = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>a = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>large_arc = <span class="self">self</span>.boolean()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>sweep = <span class="self">self</span>.boolean()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>to = <span class="kw">if </span>rel {
+            <span class="self">self</span>.rel_point_to()<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            <span class="self">self</span>.point_to()<span class="question-mark">?
+        </span>};
+        <span class="kw">let </span>size = <span class="kw">if </span>large_arc {
+            ArcSize::Large
+        } <span class="kw">else </span>{
+            ArcSize::Small
         };
-        <span class="prelude-val">Some</span>((<span class="ident">rx</span>, <span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">arc_rest_arguments</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rel</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">f32</span>, <span class="ident">f32</span>, <span class="ident">ArcSize</span>, <span class="ident">ArcSweep</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">ry</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">large_arc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">boolean</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">boolean</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">rel</span> {
-            <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>
+        <span class="kw">let </span>sweep = <span class="kw">if </span>sweep {
+            ArcSweep::Positive
+        } <span class="kw">else </span>{
+            ArcSweep::Negative
         };
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">large_arc</span> {
-            <span class="ident">ArcSize::Large</span>
-        } <span class="kw">else</span> {
-            <span class="ident">ArcSize::Small</span>
-        };
-        <span class="kw">let</span> <span class="ident">sweep</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">sweep</span> {
-            <span class="ident">ArcSweep::Positive</span>
-        } <span class="kw">else</span> {
-            <span class="ident">ArcSweep::Negative</span>
-        };
-        <span class="prelude-val">Some</span>((<span class="ident">ry</span>, <span class="ident">a</span>, <span class="ident">size</span>, <span class="ident">sweep</span>, <span class="ident">to</span>))
+        <span class="prelude-val">Some</span>((ry, a, size, sweep, to))
     }
 
-    <span class="kw">fn</span> <span class="ident">point</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>).<span class="ident">into</span>())
+    <span class="kw">fn </span>point(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Vector&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.coord()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b).into())
     }
 
-    <span class="kw">fn</span> <span class="ident">point_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">p</span>)
+    <span class="kw">fn </span>point_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Vector&gt; {
+        <span class="kw">let </span>p = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.cur_point = p;
+        <span class="prelude-val">Some</span>(p)
     }
 
-    <span class="kw">fn</span> <span class="ident">rel_point</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">p</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">cur_point</span>)
+    <span class="kw">fn </span>rel_point(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Vector&gt; {
+        <span class="kw">let </span>p = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(p + <span class="self">self</span>.cur_point)
     }
 
-    <span class="kw">fn</span> <span class="ident">rel_point_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">cur_point</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">p</span>)
+    <span class="kw">fn </span>rel_point_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Vector&gt; {
+        <span class="kw">let </span>p = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.cur_point = p;
+        <span class="prelude-val">Some</span>(p)
     }
 
-    <span class="kw">fn</span> <span class="ident">two_points_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>))
+    <span class="kw">fn </span>two_points_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.point_to()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b))
     }
 
-    <span class="kw">fn</span> <span class="ident">two_points</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>))
+    <span class="kw">fn </span>two_points(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b))
     }
 
-    <span class="kw">fn</span> <span class="ident">rel_two_points_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>))
+    <span class="kw">fn </span>rel_two_points_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.rel_point_to()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b))
     }
     
-    <span class="kw">fn</span> <span class="ident">rel_two_points</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>))
+    <span class="kw">fn </span>rel_two_points(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b))
     }
 
-    <span class="kw">fn</span> <span class="ident">three_points_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">point_to</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>))
+    <span class="kw">fn </span>three_points_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>c = <span class="self">self</span>.point_to()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b, c))
     }
 
-    <span class="kw">fn</span> <span class="ident">rel_three_points_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point</span>()<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">skip_comma_whitespace</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rel_point_to</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>))
+    <span class="kw">fn </span>rel_three_points_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;(Vector, Vector, Vector)&gt; {
+        <span class="kw">let </span>a = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>b = <span class="self">self</span>.rel_point()<span class="question-mark">?</span>;
+        <span class="self">self</span>.skip_comma_whitespace();
+        <span class="kw">let </span>c = <span class="self">self</span>.rel_point_to()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>((a, b, c))
     }
 
-    <span class="kw">fn</span> <span class="ident">coord</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cur</span> {
-            <span class="string">b&#39;+&#39;</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">advance</span>();
-                <span class="self">self</span>.<span class="ident">number</span>()
+    <span class="kw">fn </span>coord(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;f32&gt; {
+        <span class="kw">match </span><span class="self">self</span>.cur {
+            <span class="string">b&#39;+&#39; </span>=&gt; {
+                <span class="self">self</span>.advance();
+                <span class="self">self</span>.number()
             }
-            <span class="string">b&#39;-&#39;</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">advance</span>();
-                <span class="prelude-val">Some</span>(<span class="op">-</span><span class="self">self</span>.<span class="ident">number</span>()<span class="question-mark">?</span>)
+            <span class="string">b&#39;-&#39; </span>=&gt; {
+                <span class="self">self</span>.advance();
+                <span class="prelude-val">Some</span>(-<span class="self">self</span>.number()<span class="question-mark">?</span>)
             }
-            <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">number</span>(),
+            <span class="kw">_ </span>=&gt; <span class="self">self</span>.number(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">number</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">32</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">has_decimal</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cur</span> {
-                <span class="string">b&#39;.&#39;</span> =&gt; {
-                    <span class="kw">if</span> <span class="ident">has_decimal</span> {
+    <span class="kw">fn </span>number(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;f32&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">32</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>pos = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>has_decimal = <span class="bool-val">false</span>;
+        <span class="kw">loop </span>{
+            <span class="kw">match </span><span class="self">self</span>.cur {
+                <span class="string">b&#39;.&#39; </span>=&gt; {
+                    <span class="kw">if </span>has_decimal {
                         <span class="kw">break</span>;
-                    } <span class="kw">else</span> {
-                        <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_mut</span>(<span class="ident">pos</span>)<span class="question-mark">?</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>;
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">has_decimal</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                    } <span class="kw">else </span>{
+                        <span class="kw-2">*</span>buf.get_mut(pos)<span class="question-mark">? </span>= <span class="self">self</span>.cur;
+                        pos += <span class="number">1</span>;
+                        has_decimal = <span class="bool-val">true</span>;
                     }
                 }
-                <span class="string">b&#39;0&#39;</span>..<span class="op">=</span><span class="string">b&#39;9&#39;</span> =&gt; {
-                    <span class="kw-2">*</span><span class="ident">buf</span>.<span class="ident">get_mut</span>(<span class="ident">pos</span>)<span class="question-mark">?</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>;
-                    <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="string">b&#39;0&#39;</span>..=<span class="string">b&#39;9&#39; </span>=&gt; {
+                    <span class="kw-2">*</span>buf.get_mut(pos)<span class="question-mark">? </span>= <span class="self">self</span>.cur;
+                    pos += <span class="number">1</span>;
                 }
-                <span class="kw">_</span> =&gt; <span class="kw">break</span>,
+                <span class="kw">_ </span>=&gt; <span class="kw">break</span>,
             }
-            <span class="self">self</span>.<span class="ident">advance</span>();
+            <span class="self">self</span>.advance();
         }
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">core::str::from_utf8</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>[..<span class="ident">pos</span>]).<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="ident">s</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>().<span class="ident">ok</span>()
+        <span class="kw">let </span>s = core::str::from_utf8(<span class="kw-2">&amp;</span>buf[..pos]).ok()<span class="question-mark">?</span>;
+        s.parse::&lt;f32&gt;().ok()
     }
 
-    <span class="kw">fn</span> <span class="ident">boolean</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cur</span> {
-            <span class="string">b&#39;0&#39;</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">advance</span>();
+    <span class="kw">fn </span>boolean(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">match </span><span class="self">self</span>.cur {
+            <span class="string">b&#39;0&#39; </span>=&gt; {
+                <span class="self">self</span>.advance();
                 <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
             }
-            <span class="string">b&#39;1&#39;</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">advance</span>();
+            <span class="string">b&#39;1&#39; </span>=&gt; {
+                <span class="self">self</span>.advance();
                 <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
             }
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">skip_comma_whitespace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">skip_whitespace</span>();
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">accept</span>(<span class="string">b&#39;,&#39;</span>) {
-            <span class="self">self</span>.<span class="ident">skip_whitespace</span>();
+    <span class="kw">fn </span>skip_comma_whitespace(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.skip_whitespace();
+        <span class="kw">if </span><span class="self">self</span>.accept(<span class="string">b&#39;,&#39;</span>) {
+            <span class="self">self</span>.skip_whitespace();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">skip_whitespace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">accept_by</span>(<span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">b</span> {
-            <span class="number">0x9</span> <span class="op">|</span> <span class="number">0x20</span> <span class="op">|</span> <span class="number">0xA</span> <span class="op">|</span> <span class="number">0xC</span> <span class="op">|</span> <span class="number">0xD</span> =&gt; <span class="bool-val">true</span>,
-            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+    <span class="kw">fn </span>skip_whitespace(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">while </span><span class="self">self</span>.accept_by(|b| <span class="kw">match </span>b {
+            <span class="number">0x9 </span>| <span class="number">0x20 </span>| <span class="number">0xA </span>| <span class="number">0xC </span>| <span class="number">0xD </span>=&gt; <span class="bool-val">true</span>,
+            <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         }) {}
     }
 
-    <span class="kw">fn</span> <span class="ident">accept</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">b</span>: <span class="ident">u8</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">==</span> <span class="ident">b</span> {
-            <span class="self">self</span>.<span class="ident">advance</span>();
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">fn </span>accept(<span class="kw-2">&amp;mut </span><span class="self">self</span>, b: u8) -&gt; bool {
+        <span class="kw">if </span><span class="self">self</span>.cur == b {
+            <span class="self">self</span>.advance();
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">accept_by</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">u8</span>) -&gt; <span class="ident">bool</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">f</span>(<span class="self">self</span>.<span class="ident">cur</span>) {
-            <span class="self">self</span>.<span class="ident">advance</span>();
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">fn </span>accept_by(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">impl </span>Fn(u8) -&gt; bool) -&gt; bool {
+        <span class="kw">if </span>f(<span class="self">self</span>.cur) {
+            <span class="self">self</span>.advance();
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">pos</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">buf</span>.<span class="ident">len</span>() {
-            <span class="self">self</span>.<span class="ident">done</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="self">self</span>.<span class="ident">cur</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">fn </span>advance(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.pos == <span class="self">self</span>.buf.len() {
+            <span class="self">self</span>.done = <span class="bool-val">true</span>;
+            <span class="self">self</span>.cur = <span class="number">0</span>;
             <span class="kw">return</span>;
         }
-        <span class="self">self</span>.<span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buf</span>[<span class="self">self</span>.<span class="ident">pos</span>];
-        <span class="self">self</span>.<span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="self">self</span>.cur = <span class="self">self</span>.buf[<span class="self">self</span>.pos];
+        <span class="self">self</span>.pos += <span class="number">1</span>;
     }
 }
 
-<span class="doccomment">/// Returns an error indicating the first position of invalid SVG path data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">validate_svg</span>(<span class="ident">svg</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">cmds</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">SvgCommands::new</span>(<span class="ident">svg</span>);
-    <span class="ident">cmds</span>.<span class="ident">count</span>();
-    <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">cmds</span>.<span class="ident">pos</span>;
-    <span class="kw">if</span> <span class="ident">cmds</span>.<span class="ident">error</span> <span class="op">|</span><span class="op">|</span> <span class="ident">pos</span> <span class="op">!</span><span class="op">=</span> <span class="ident">svg</span>.<span class="ident">len</span>() {
-        <span class="prelude-val">Err</span>(<span class="ident">pos</span>.<span class="ident">saturating_sub</span>(<span class="number">1</span>))
-    } <span class="kw">else</span> {
+<span class="doccomment">/// Returns an error indicating the first position of invalid SVG path data.
+</span><span class="kw">pub fn </span>validate_svg(svg: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), usize&gt; {
+    <span class="kw">let </span>cmds = <span class="kw-2">&amp;mut </span>SvgCommands::new(svg);
+    cmds.count();
+    <span class="kw">let </span>pos = cmds.pos;
+    <span class="kw">if </span>cmds.error || pos != svg.len() {
+        <span class="prelude-val">Err</span>(pos.saturating_sub(<span class="number">1</span>))
+    } <span class="kw">else </span>{
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

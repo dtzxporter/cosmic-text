@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/cache.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cache.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/cache.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cache.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -277,284 +277,284 @@
 <span id="277">277</span>
 <span id="278">278</span>
 <span id="279">279</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::hint</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::proxy::GlyfProxy</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Point</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::hint::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">super</span>::proxy::GlyfProxy;
+<span class="kw">use </span><span class="kw">super</span>::Point;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">CacheSlot</span> <span class="op">=</span> (<span class="ident">u8</span>, <span class="ident">u8</span>);
+<span class="kw">pub type </span>CacheSlot = (u8, u8);
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Cache</span> {
-    <span class="ident">fonts</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FontEntry</span><span class="op">&gt;</span>,
-    <span class="ident">sizes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SizeEntry</span><span class="op">&gt;</span>,
-    <span class="ident">stack</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-    <span class="ident">twilight</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    <span class="ident">twilight_tags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="ident">epoch</span>: <span class="ident">u64</span>,
-    <span class="ident">max_entries</span>: <span class="ident">usize</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>Cache {
+    fonts: Vec&lt;FontEntry&gt;,
+    sizes: Vec&lt;SizeEntry&gt;,
+    stack: Vec&lt;i32&gt;,
+    twilight: Vec&lt;Point&gt;,
+    twilight_tags: Vec&lt;u8&gt;,
+    epoch: u64,
+    max_entries: usize,
 }
 
-<span class="kw">impl</span> <span class="ident">Cache</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">max_entries</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">fonts</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">sizes</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">stack</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">twilight</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">twilight_tags</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">epoch</span>: <span class="number">0</span>,
-            <span class="ident">max_entries</span>,
+<span class="kw">impl </span>Cache {
+    <span class="kw">pub fn </span>new(max_entries: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            fonts: Vec::new(),
+            sizes: Vec::new(),
+            stack: Vec::new(),
+            twilight: Vec::new(),
+            twilight_tags: Vec::new(),
+            epoch: <span class="number">0</span>,
+            max_entries,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prepare</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">font_id</span>: <span class="ident">u64</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">proxy</span>: <span class="kw-2">&amp;</span><span class="ident">GlyfProxy</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">ppem</span>: <span class="ident">u16</span>,
-        <span class="ident">scale</span>: <span class="ident">i32</span>,
-        <span class="ident">mode</span>: <span class="ident">HinterMode</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CacheSlot</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">epoch</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="ident">epoch</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">epoch</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">run_fpgm</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="ident">max_twilight</span> <span class="op">=</span> <span class="ident">proxy</span>.<span class="ident">max_twilight</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="self">self</span>.<span class="ident">twilight</span>.<span class="ident">resize</span>(<span class="ident">max_twilight</span> <span class="op">*</span> <span class="number">3</span>, <span class="ident">Point::default</span>());
-        <span class="self">self</span>.<span class="ident">twilight_tags</span>.<span class="ident">resize</span>(<span class="ident">max_twilight</span>, <span class="number">0</span>);
-        <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">resize</span>(<span class="ident">proxy</span>.<span class="ident">max_stack</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="number">0</span>);
-        <span class="kw">let</span> <span class="ident">font_entry</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">find_font</span>(<span class="ident">font_id</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">font_entry</span>.<span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">max_fdefs</span> <span class="op">=</span> <span class="ident">proxy</span>.<span class="ident">max_fdefs</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="kw">let</span> <span class="ident">max_idefs</span> <span class="op">=</span> <span class="ident">proxy</span>.<span class="ident">max_idefs</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">fonts</span>[<span class="ident">font_entry</span>.<span class="number">1</span>];
-            <span class="ident">font</span>.<span class="ident">font_id</span> <span class="op">=</span> <span class="ident">font_id</span>;
-            <span class="ident">font</span>.<span class="ident">epoch</span> <span class="op">=</span> <span class="ident">epoch</span>;
-            <span class="ident">font</span>.<span class="ident">definitions</span>.<span class="ident">clear</span>();
-            <span class="ident">font</span>.<span class="ident">definitions</span>
-                .<span class="ident">resize</span>(<span class="ident">max_fdefs</span> <span class="op">+</span> <span class="ident">max_idefs</span>, <span class="ident">Function::default</span>());
-            <span class="ident">font</span>.<span class="ident">max_fdefs</span> <span class="op">=</span> <span class="ident">max_fdefs</span>;
-            <span class="ident">font</span>.<span class="ident">cvt_len</span> <span class="op">=</span> (<span class="ident">proxy</span>.<span class="ident">cvt</span>.<span class="number">1</span> <span class="op">-</span> <span class="ident">proxy</span>.<span class="ident">cvt</span>.<span class="number">0</span>) <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>;
-            <span class="ident">run_fpgm</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">fonts</span>[<span class="ident">font_entry</span>.<span class="number">1</span>].<span class="ident">epoch</span> <span class="op">=</span> <span class="ident">epoch</span>;
+    <span class="kw">pub fn </span>prepare(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_id: u64,
+        data: <span class="kw-2">&amp;</span>[u8],
+        proxy: <span class="kw-2">&amp;</span>GlyfProxy,
+        coords: <span class="kw-2">&amp;</span>[i16],
+        ppem: u16,
+        scale: i32,
+        mode: HinterMode,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;CacheSlot&gt; {
+        <span class="self">self</span>.epoch += <span class="number">1</span>;
+        <span class="kw">let </span>epoch = <span class="self">self</span>.epoch;
+        <span class="kw">let </span><span class="kw-2">mut </span>run_fpgm = <span class="bool-val">false</span>;
+        <span class="kw">let </span>max_twilight = proxy.max_twilight <span class="kw">as </span>usize;
+        <span class="self">self</span>.twilight.resize(max_twilight * <span class="number">3</span>, Point::default());
+        <span class="self">self</span>.twilight_tags.resize(max_twilight, <span class="number">0</span>);
+        <span class="self">self</span>.stack.resize(proxy.max_stack <span class="kw">as </span>usize, <span class="number">0</span>);
+        <span class="kw">let </span>font_entry = <span class="self">self</span>.find_font(font_id);
+        <span class="kw">if </span>!font_entry.<span class="number">0 </span>{
+            <span class="kw">let </span>max_fdefs = proxy.max_fdefs <span class="kw">as </span>usize;
+            <span class="kw">let </span>max_idefs = proxy.max_idefs <span class="kw">as </span>usize;
+            <span class="kw">let </span>font = <span class="kw-2">&amp;mut </span><span class="self">self</span>.fonts[font_entry.<span class="number">1</span>];
+            font.font_id = font_id;
+            font.epoch = epoch;
+            font.definitions.clear();
+            font.definitions
+                .resize(max_fdefs + max_idefs, Function::default());
+            font.max_fdefs = max_fdefs;
+            font.cvt_len = (proxy.cvt.<span class="number">1 </span>- proxy.cvt.<span class="number">0</span>) <span class="kw">as </span>usize * <span class="number">2</span>;
+            run_fpgm = <span class="bool-val">true</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.fonts[font_entry.<span class="number">1</span>].epoch = epoch;
         }
-        <span class="kw">let</span> <span class="ident">size_entry</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">find_size</span>(<span class="ident">font_id</span>, <span class="ident">coords</span>, <span class="ident">scale</span>, <span class="ident">mode</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">run_prep</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">size_entry</span>.<span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">sizes</span>[<span class="ident">size_entry</span>.<span class="number">1</span>];
-            <span class="ident">size</span>.<span class="ident">font_id</span> <span class="op">=</span> <span class="ident">font_id</span>;
-            <span class="ident">size</span>.<span class="ident">epoch</span> <span class="op">=</span> <span class="ident">epoch</span>;
-            <span class="ident">size</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">HinterState::default</span>();
-            <span class="ident">size</span>.<span class="ident">mode</span> <span class="op">=</span> <span class="ident">mode</span>;
-            <span class="ident">size</span>.<span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span>;
-            <span class="ident">size</span>.<span class="ident">coords</span>.<span class="ident">clear</span>();
-            <span class="ident">size</span>.<span class="ident">coords</span>.<span class="ident">extend_from_slice</span>(<span class="ident">coords</span>);
-            <span class="kw">let</span> <span class="ident">cvt_len</span> <span class="op">=</span> (<span class="ident">proxy</span>.<span class="ident">cvt</span>.<span class="number">1</span> <span class="op">-</span> <span class="ident">proxy</span>.<span class="ident">cvt</span>.<span class="number">0</span>) <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>;
-            <span class="ident">size</span>.<span class="ident">store</span>.<span class="ident">clear</span>();
-            <span class="ident">size</span>.<span class="ident">store</span>.<span class="ident">resize</span>(<span class="ident">cvt_len</span> <span class="op">+</span> <span class="ident">proxy</span>.<span class="ident">max_storage</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="number">0</span>);
-            <span class="ident">proxy</span>.<span class="ident">cvt</span>(<span class="ident">data</span>, <span class="prelude-val">Some</span>(<span class="ident">scale</span>), <span class="ident">coords</span>, <span class="kw-2">&amp;mut</span> <span class="ident">size</span>.<span class="ident">store</span>);
-            <span class="ident">run_prep</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">sizes</span>[<span class="ident">size_entry</span>.<span class="number">1</span>].<span class="ident">epoch</span> <span class="op">=</span> <span class="ident">epoch</span>;
+        <span class="kw">let </span>size_entry = <span class="self">self</span>.find_size(font_id, coords, scale, mode);
+        <span class="kw">let </span><span class="kw-2">mut </span>run_prep = <span class="bool-val">false</span>;
+        <span class="kw">if </span>!size_entry.<span class="number">0 </span>{
+            <span class="kw">let </span>size = <span class="kw-2">&amp;mut </span><span class="self">self</span>.sizes[size_entry.<span class="number">1</span>];
+            size.font_id = font_id;
+            size.epoch = epoch;
+            size.state = HinterState::default();
+            size.mode = mode;
+            size.scale = scale;
+            size.coords.clear();
+            size.coords.extend_from_slice(coords);
+            <span class="kw">let </span>cvt_len = (proxy.cvt.<span class="number">1 </span>- proxy.cvt.<span class="number">0</span>) <span class="kw">as </span>usize * <span class="number">2</span>;
+            size.store.clear();
+            size.store.resize(cvt_len + proxy.max_storage <span class="kw">as </span>usize, <span class="number">0</span>);
+            proxy.cvt(data, <span class="prelude-val">Some</span>(scale), coords, <span class="kw-2">&amp;mut </span>size.store);
+            run_prep = <span class="bool-val">true</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.sizes[size_entry.<span class="number">1</span>].epoch = epoch;
         }
-        <span class="kw">if</span> <span class="ident">run_fpgm</span> <span class="op">|</span> <span class="ident">run_prep</span> {
-            <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">fonts</span>[<span class="ident">font_entry</span>.<span class="number">1</span>];
-            <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">sizes</span>[<span class="ident">size_entry</span>.<span class="number">1</span>];
-            <span class="kw">let</span> (<span class="ident">cvt</span>, <span class="ident">store</span>) <span class="op">=</span> <span class="ident">size</span>.<span class="ident">store</span>.<span class="ident">split_at_mut</span>(<span class="ident">font</span>.<span class="ident">cvt_len</span>);
-            <span class="kw">let</span> (<span class="ident">fdefs</span>, <span class="ident">idefs</span>) <span class="op">=</span> <span class="ident">font</span>.<span class="ident">definitions</span>.<span class="ident">split_at_mut</span>(<span class="ident">font</span>.<span class="ident">max_fdefs</span>);
-            <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">Zone::new</span>(<span class="kw-2">&amp;mut</span> [], <span class="kw-2">&amp;mut</span> [], <span class="kw-2">&amp;mut</span> [], <span class="kw-2">&amp;mut</span> [], <span class="kw-2">&amp;</span>[]);
-            <span class="kw">let</span> <span class="ident">max_twilight</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">twilight_tags</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> (<span class="ident">unscaled</span>, <span class="ident">rest</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">twilight</span>.<span class="ident">split_at_mut</span>(<span class="ident">max_twilight</span>);
-            <span class="kw">let</span> (<span class="ident">original</span>, <span class="ident">points</span>) <span class="op">=</span> <span class="ident">rest</span>.<span class="ident">split_at_mut</span>(<span class="ident">max_twilight</span>);
-            <span class="kw">let</span> <span class="ident">twilight_contours</span> <span class="op">=</span> [<span class="ident">max_twilight</span> <span class="kw">as</span> <span class="ident">u16</span>];
-            <span class="kw">let</span> <span class="ident">twilight</span> <span class="op">=</span> <span class="ident">Zone::new</span>(
-                <span class="ident">unscaled</span>,
-                <span class="ident">original</span>,
-                <span class="ident">points</span>,
-                <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">twilight_tags</span>[..],
-                <span class="kw-2">&amp;</span><span class="ident">twilight_contours</span>,
+        <span class="kw">if </span>run_fpgm | run_prep {
+            <span class="kw">let </span>font = <span class="kw-2">&amp;mut </span><span class="self">self</span>.fonts[font_entry.<span class="number">1</span>];
+            <span class="kw">let </span>size = <span class="kw-2">&amp;mut </span><span class="self">self</span>.sizes[size_entry.<span class="number">1</span>];
+            <span class="kw">let </span>(cvt, store) = size.store.split_at_mut(font.cvt_len);
+            <span class="kw">let </span>(fdefs, idefs) = font.definitions.split_at_mut(font.max_fdefs);
+            <span class="kw">let </span>glyph = Zone::new(<span class="kw-2">&amp;mut </span>[], <span class="kw-2">&amp;mut </span>[], <span class="kw-2">&amp;mut </span>[], <span class="kw-2">&amp;mut </span>[], <span class="kw-2">&amp;</span>[]);
+            <span class="kw">let </span>max_twilight = <span class="self">self</span>.twilight_tags.len();
+            <span class="kw">let </span>(unscaled, rest) = <span class="self">self</span>.twilight.split_at_mut(max_twilight);
+            <span class="kw">let </span>(original, points) = rest.split_at_mut(max_twilight);
+            <span class="kw">let </span>twilight_contours = [max_twilight <span class="kw">as </span>u16];
+            <span class="kw">let </span>twilight = Zone::new(
+                unscaled,
+                original,
+                points,
+                <span class="kw-2">&amp;mut </span><span class="self">self</span>.twilight_tags[..],
+                <span class="kw-2">&amp;</span>twilight_contours,
             );
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hinter</span> <span class="op">=</span> <span class="ident">Hinter::new</span>(
-                <span class="ident">store</span>,
-                <span class="ident">cvt</span>,
-                <span class="ident">fdefs</span>,
-                <span class="ident">idefs</span>,
-                <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">stack</span>,
-                <span class="ident">twilight</span>,
-                <span class="ident">glyph</span>,
-                <span class="ident">coords</span>,
-                <span class="ident">proxy</span>.<span class="ident">axis_count</span>,
+            <span class="kw">let </span><span class="kw-2">mut </span>hinter = Hinter::new(
+                store,
+                cvt,
+                fdefs,
+                idefs,
+                <span class="kw-2">&amp;mut </span><span class="self">self</span>.stack,
+                twilight,
+                glyph,
+                coords,
+                proxy.axis_count,
             );
-            <span class="kw">if</span> <span class="ident">run_fpgm</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">HinterState::default</span>();
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">hinter</span>.<span class="ident">run_fpgm</span>(<span class="kw-2">&amp;mut</span> <span class="ident">state</span>, <span class="ident">proxy</span>.<span class="ident">fpgm</span>(<span class="ident">data</span>)) {
-                    <span class="kw">return</span> <span class="prelude-val">None</span>;
+            <span class="kw">if </span>run_fpgm {
+                <span class="kw">let </span><span class="kw-2">mut </span>state = HinterState::default();
+                <span class="kw">if </span>!hinter.run_fpgm(<span class="kw-2">&amp;mut </span>state, proxy.fpgm(data)) {
+                    <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
             }
-            <span class="kw">if</span> <span class="ident">run_prep</span> {
-                <span class="ident">size</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">HinterState::default</span>();
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">hinter</span>.<span class="ident">run_prep</span>(
-                    <span class="kw-2">&amp;mut</span> <span class="ident">size</span>.<span class="ident">state</span>,
-                    <span class="ident">mode</span>,
-                    <span class="ident">proxy</span>.<span class="ident">fpgm</span>(<span class="ident">data</span>),
-                    <span class="ident">proxy</span>.<span class="ident">prep</span>(<span class="ident">data</span>),
-                    <span class="ident">ppem</span>,
-                    <span class="ident">scale</span>,
+            <span class="kw">if </span>run_prep {
+                size.state = HinterState::default();
+                <span class="kw">if </span>!hinter.run_prep(
+                    <span class="kw-2">&amp;mut </span>size.state,
+                    mode,
+                    proxy.fpgm(data),
+                    proxy.prep(data),
+                    ppem,
+                    scale,
                 ) {
-                    <span class="kw">return</span> <span class="prelude-val">None</span>;
+                    <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
             }
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">sizes</span>[<span class="ident">size_entry</span>.<span class="number">1</span>].<span class="ident">state</span>.<span class="ident">hinting_enabled</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span>!<span class="self">self</span>.sizes[size_entry.<span class="number">1</span>].state.hinting_enabled() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="prelude-val">Some</span>((<span class="ident">font_entry</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">size_entry</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">u8</span>))
+        <span class="prelude-val">Some</span>((font_entry.<span class="number">1 </span><span class="kw">as </span>u8, size_entry.<span class="number">1 </span><span class="kw">as </span>u8))
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hint</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">proxy</span>: <span class="kw-2">&amp;</span><span class="ident">GlyfProxy</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">slot</span>: <span class="ident">CacheSlot</span>,
-        <span class="ident">unscaled</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-        <span class="ident">original</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-        <span class="ident">scaled</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-        <span class="ident">tags</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>],
-        <span class="ident">contours</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u16</span>],
-        <span class="ident">phantom</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Point</span>],
-        <span class="ident">point_base</span>: <span class="ident">usize</span>,
-        <span class="ident">contour_base</span>: <span class="ident">usize</span>,
-        <span class="ident">ins</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">is_composite</span>: <span class="ident">bool</span>,
+    <span class="kw">pub fn </span>hint(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        data: <span class="kw-2">&amp;</span>[u8],
+        proxy: <span class="kw-2">&amp;</span>GlyfProxy,
+        coords: <span class="kw-2">&amp;</span>[i16],
+        slot: CacheSlot,
+        unscaled: <span class="kw-2">&amp;mut </span>[Point],
+        original: <span class="kw-2">&amp;mut </span>[Point],
+        scaled: <span class="kw-2">&amp;mut </span>[Point],
+        tags: <span class="kw-2">&amp;mut </span>[u8],
+        contours: <span class="kw-2">&amp;mut </span>[u16],
+        phantom: <span class="kw-2">&amp;mut </span>[Point],
+        point_base: usize,
+        contour_base: usize,
+        ins: <span class="kw-2">&amp;</span>[u8],
+        is_composite: bool,
     ) {
-        <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">fonts</span>[<span class="ident">slot</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">sizes</span>[<span class="ident">slot</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="kw">if</span> <span class="ident">is_composite</span> <span class="op">&amp;&amp;</span> <span class="ident">point_base</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">contours</span>[<span class="ident">contour_base</span>..] {
-                <span class="kw-2">*</span><span class="ident">c</span> <span class="op">-</span><span class="op">=</span> <span class="ident">point_base</span> <span class="kw">as</span> <span class="ident">u16</span>;
+        <span class="kw">let </span>font = <span class="kw-2">&amp;mut </span><span class="self">self</span>.fonts[slot.<span class="number">0 </span><span class="kw">as </span>usize];
+        <span class="kw">let </span>size = <span class="kw-2">&amp;mut </span><span class="self">self</span>.sizes[slot.<span class="number">1 </span><span class="kw">as </span>usize];
+        <span class="kw">if </span>is_composite &amp;&amp; point_base != <span class="number">0 </span>{
+            <span class="kw">for </span>c <span class="kw">in </span><span class="kw-2">&amp;mut </span>contours[contour_base..] {
+                <span class="kw-2">*</span>c -= point_base <span class="kw">as </span>u16;
             }
         }
-        <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">Zone::new</span>(
-            <span class="ident">unscaled</span>,
-            <span class="ident">original</span>,
-            <span class="kw-2">&amp;mut</span> <span class="ident">scaled</span>[<span class="ident">point_base</span>..],
-            <span class="kw-2">&amp;mut</span> <span class="ident">tags</span>[<span class="ident">point_base</span>..],
-            <span class="kw-2">&amp;</span><span class="ident">contours</span>[<span class="ident">contour_base</span>..],
+        <span class="kw">let </span>glyph = Zone::new(
+            unscaled,
+            original,
+            <span class="kw-2">&amp;mut </span>scaled[point_base..],
+            <span class="kw-2">&amp;mut </span>tags[point_base..],
+            <span class="kw-2">&amp;</span>contours[contour_base..],
         );
-        <span class="kw">let</span> <span class="ident">twilight_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">twilight_tags</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">twilight_contours</span> <span class="op">=</span> [<span class="ident">twilight_len</span> <span class="kw">as</span> <span class="ident">u16</span>];
-        <span class="kw">let</span> (<span class="ident">twilight_original</span>, <span class="ident">rest</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">twilight</span>.<span class="ident">split_at_mut</span>(<span class="ident">twilight_len</span>);
-        <span class="kw">let</span> (<span class="ident">twilight_unscaled</span>, <span class="ident">twilight_points</span>) <span class="op">=</span> <span class="ident">rest</span>.<span class="ident">split_at_mut</span>(<span class="ident">twilight_len</span>);
-        <span class="kw">let</span> <span class="ident">twilight</span> <span class="op">=</span> <span class="ident">Zone::new</span>(
-            <span class="ident">twilight_unscaled</span>,
-            <span class="ident">twilight_original</span>,
-            <span class="ident">twilight_points</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">twilight_tags</span>[..],
-            <span class="kw-2">&amp;</span><span class="ident">twilight_contours</span>,
+        <span class="kw">let </span>twilight_len = <span class="self">self</span>.twilight_tags.len();
+        <span class="kw">let </span>twilight_contours = [twilight_len <span class="kw">as </span>u16];
+        <span class="kw">let </span>(twilight_original, rest) = <span class="self">self</span>.twilight.split_at_mut(twilight_len);
+        <span class="kw">let </span>(twilight_unscaled, twilight_points) = rest.split_at_mut(twilight_len);
+        <span class="kw">let </span>twilight = Zone::new(
+            twilight_unscaled,
+            twilight_original,
+            twilight_points,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.twilight_tags[..],
+            <span class="kw-2">&amp;</span>twilight_contours,
         );
-        <span class="kw">let</span> (<span class="ident">cvt</span>, <span class="ident">store</span>) <span class="op">=</span> <span class="ident">size</span>.<span class="ident">store</span>.<span class="ident">split_at_mut</span>(<span class="ident">font</span>.<span class="ident">cvt_len</span>);
-        <span class="kw">let</span> (<span class="ident">fdefs</span>, <span class="ident">idefs</span>) <span class="op">=</span> <span class="ident">font</span>.<span class="ident">definitions</span>.<span class="ident">split_at_mut</span>(<span class="ident">font</span>.<span class="ident">max_fdefs</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hinter</span> <span class="op">=</span> <span class="ident">Hinter::new</span>(
-            <span class="ident">store</span>,
-            <span class="ident">cvt</span>,
-            <span class="ident">fdefs</span>,
-            <span class="ident">idefs</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">stack</span>[..],
-            <span class="ident">twilight</span>,
-            <span class="ident">glyph</span>,
-            <span class="ident">coords</span>,
-            <span class="ident">proxy</span>.<span class="ident">axis_count</span>,
+        <span class="kw">let </span>(cvt, store) = size.store.split_at_mut(font.cvt_len);
+        <span class="kw">let </span>(fdefs, idefs) = font.definitions.split_at_mut(font.max_fdefs);
+        <span class="kw">let </span><span class="kw-2">mut </span>hinter = Hinter::new(
+            store,
+            cvt,
+            fdefs,
+            idefs,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.stack[..],
+            twilight,
+            glyph,
+            coords,
+            proxy.axis_count,
         );
-        <span class="ident">hinter</span>.<span class="ident">run</span>(
-            <span class="kw-2">&amp;mut</span> <span class="ident">size</span>.<span class="ident">state</span>,
-            <span class="ident">proxy</span>.<span class="ident">fpgm</span>(<span class="ident">data</span>),
-            <span class="ident">proxy</span>.<span class="ident">prep</span>(<span class="ident">data</span>),
-            <span class="ident">ins</span>,
-            <span class="ident">is_composite</span>,
+        hinter.run(
+            <span class="kw-2">&amp;mut </span>size.state,
+            proxy.fpgm(data),
+            proxy.prep(data),
+            ins,
+            is_composite,
         );
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">size</span>.<span class="ident">state</span>.<span class="ident">compat_enabled</span>() {
-            <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">p</span>) <span class="kw">in</span> (<span class="kw-2">&amp;</span><span class="ident">scaled</span>[<span class="ident">scaled</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">4</span>..]).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                <span class="ident">phantom</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="kw-2">*</span><span class="ident">p</span>;
+        <span class="kw">if </span>!size.state.compat_enabled() {
+            <span class="kw">for </span>(i, p) <span class="kw">in </span>(<span class="kw-2">&amp;</span>scaled[scaled.len() - <span class="number">4</span>..]).iter().enumerate() {
+                phantom[i] = <span class="kw-2">*</span>p;
             }
         }
-        <span class="kw">if</span> <span class="ident">is_composite</span> <span class="op">&amp;&amp;</span> <span class="ident">point_base</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">contours</span>[<span class="ident">contour_base</span>..] {
-                <span class="kw-2">*</span><span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">point_base</span> <span class="kw">as</span> <span class="ident">u16</span>;
+        <span class="kw">if </span>is_composite &amp;&amp; point_base != <span class="number">0 </span>{
+            <span class="kw">for </span>c <span class="kw">in </span><span class="kw-2">&amp;mut </span>contours[contour_base..] {
+                <span class="kw-2">*</span>c += point_base <span class="kw">as </span>u16;
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">find_font</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">font_id</span>: <span class="ident">u64</span>) -&gt; (<span class="ident">bool</span>, <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lowest_epoch</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">epoch</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lowest_index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">font</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">fonts</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">font</span>.<span class="ident">font_id</span> <span class="op">==</span> <span class="ident">font_id</span> {
-                <span class="kw">return</span> (<span class="bool-val">true</span>, <span class="ident">i</span>);
+    <span class="kw">fn </span>find_font(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_id: u64) -&gt; (bool, usize) {
+        <span class="kw">let </span><span class="kw-2">mut </span>lowest_epoch = <span class="self">self</span>.epoch;
+        <span class="kw">let </span><span class="kw-2">mut </span>lowest_index = <span class="number">0</span>;
+        <span class="kw">for </span>(i, font) <span class="kw">in </span><span class="self">self</span>.fonts.iter().enumerate() {
+            <span class="kw">if </span>font.font_id == font_id {
+                <span class="kw">return </span>(<span class="bool-val">true</span>, i);
             }
-            <span class="kw">if</span> <span class="ident">font</span>.<span class="ident">epoch</span> <span class="op">&lt;</span> <span class="ident">lowest_epoch</span> {
-                <span class="ident">lowest_epoch</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">epoch</span>;
-                <span class="ident">lowest_index</span> <span class="op">=</span> <span class="ident">i</span>;
+            <span class="kw">if </span>font.epoch &lt; lowest_epoch {
+                lowest_epoch = font.epoch;
+                lowest_index = i;
             }
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fonts</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max_entries</span> {
-            <span class="ident">lowest_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fonts</span>.<span class="ident">len</span>();
-            <span class="self">self</span>.<span class="ident">fonts</span>.<span class="ident">push</span>(<span class="ident">FontEntry::default</span>());
+        <span class="kw">if </span><span class="self">self</span>.fonts.len() &lt; <span class="self">self</span>.max_entries {
+            lowest_index = <span class="self">self</span>.fonts.len();
+            <span class="self">self</span>.fonts.push(FontEntry::default());
         }
-        (<span class="bool-val">false</span>, <span class="ident">lowest_index</span>)
+        (<span class="bool-val">false</span>, lowest_index)
     }
 
-    <span class="kw">fn</span> <span class="ident">find_size</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">font_id</span>: <span class="ident">u64</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-        <span class="ident">scale</span>: <span class="ident">i32</span>,
-        <span class="ident">mode</span>: <span class="ident">HinterMode</span>,
-    ) -&gt; (<span class="ident">bool</span>, <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lowest_epoch</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">epoch</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lowest_index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">vary</span> <span class="op">=</span> <span class="op">!</span><span class="ident">coords</span>.<span class="ident">is_empty</span>();
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">size</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">sizes</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">epoch</span> <span class="op">&lt;</span> <span class="ident">lowest_epoch</span> {
-                <span class="ident">lowest_epoch</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">epoch</span>;
-                <span class="ident">lowest_index</span> <span class="op">=</span> <span class="ident">i</span>;
+    <span class="kw">fn </span>find_size(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_id: u64,
+        coords: <span class="kw-2">&amp;</span>[i16],
+        scale: i32,
+        mode: HinterMode,
+    ) -&gt; (bool, usize) {
+        <span class="kw">let </span><span class="kw-2">mut </span>lowest_epoch = <span class="self">self</span>.epoch;
+        <span class="kw">let </span><span class="kw-2">mut </span>lowest_index = <span class="number">0</span>;
+        <span class="kw">let </span>vary = !coords.is_empty();
+        <span class="kw">for </span>(i, size) <span class="kw">in </span><span class="self">self</span>.sizes.iter().enumerate() {
+            <span class="kw">if </span>size.epoch &lt; lowest_epoch {
+                lowest_epoch = size.epoch;
+                lowest_index = i;
             }
-            <span class="kw">if</span> <span class="ident">size</span>.<span class="ident">font_id</span> <span class="op">==</span> <span class="ident">font_id</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">size</span>.<span class="ident">scale</span> <span class="op">==</span> <span class="ident">scale</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">size</span>.<span class="ident">mode</span> <span class="op">==</span> <span class="ident">mode</span>
-                <span class="op">&amp;&amp;</span> (<span class="op">!</span><span class="ident">vary</span> <span class="op">|</span><span class="op">|</span> (<span class="ident">coords</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="ident">size</span>.<span class="ident">coords</span>[..]))
+            <span class="kw">if </span>size.font_id == font_id
+                &amp;&amp; size.scale == scale
+                &amp;&amp; size.mode == mode
+                &amp;&amp; (!vary || (coords == <span class="kw-2">&amp;</span>size.coords[..]))
             {
-                <span class="kw">return</span> (<span class="bool-val">true</span>, <span class="ident">i</span>);
+                <span class="kw">return </span>(<span class="bool-val">true</span>, i);
             }
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">sizes</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">max_entries</span> {
-            <span class="ident">lowest_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sizes</span>.<span class="ident">len</span>();
-            <span class="self">self</span>.<span class="ident">sizes</span>.<span class="ident">push</span>(<span class="ident">SizeEntry::default</span>());
+        <span class="kw">if </span><span class="self">self</span>.sizes.len() &lt; <span class="self">self</span>.max_entries {
+            lowest_index = <span class="self">self</span>.sizes.len();
+            <span class="self">self</span>.sizes.push(SizeEntry::default());
         }
-        (<span class="bool-val">false</span>, <span class="ident">lowest_index</span>)
+        (<span class="bool-val">false</span>, lowest_index)
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">FontEntry</span> {
-    <span class="ident">font_id</span>: <span class="ident">u64</span>,
-    <span class="ident">definitions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Function</span><span class="op">&gt;</span>,
-    <span class="ident">max_fdefs</span>: <span class="ident">usize</span>,
-    <span class="ident">cvt_len</span>: <span class="ident">usize</span>,
-    <span class="ident">epoch</span>: <span class="ident">u64</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">struct </span>FontEntry {
+    font_id: u64,
+    definitions: Vec&lt;Function&gt;,
+    max_fdefs: usize,
+    cvt_len: usize,
+    epoch: u64,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SizeEntry</span> {
-    <span class="ident">font_id</span>: <span class="ident">u64</span>,
-    <span class="ident">state</span>: <span class="ident">HinterState</span>,
-    <span class="ident">mode</span>: <span class="ident">HinterMode</span>,
-    <span class="ident">coords</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>,
-    <span class="ident">scale</span>: <span class="ident">i32</span>,
-    <span class="ident">store</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-    <span class="ident">epoch</span>: <span class="ident">u64</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">struct </span>SizeEntry {
+    font_id: u64,
+    state: HinterState,
+    mode: HinterMode,
+    coords: Vec&lt;i16&gt;,
+    scale: i32,
+    store: Vec&lt;i32&gt;,
+    epoch: u64,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

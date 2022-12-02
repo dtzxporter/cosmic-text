@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -51,58 +51,58 @@
 <span id="51">51</span>
 <span id="52">52</span>
 <span id="53">53</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">super</span>::{
-    <span class="ident"><span class="kw">super</span>::Script</span>, <span class="ident">complex::ComplexState</span>, <span class="ident">myanmar::MyanmarState</span>, <span class="ident">simple::SimpleState</span>, <span class="ident">CharCluster</span>,
-    <span class="ident">Token</span>,
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+    <span class="kw">super</span>::Script, complex::ComplexState, myanmar::MyanmarState, simple::SimpleState, CharCluster,
+    Token,
 };
 
-<span class="doccomment">/// Parser that accepts a sequence of characters and outputs character clusters.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident">Inner</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Parser that accepts a sequence of characters and outputs character clusters.
+</span><span class="kw">pub struct </span>Parser&lt;I&gt; {
+    inner: Inner&lt;I&gt;,
 }
 
-<span class="comment">// enum Inner&lt;I&gt; {</span>
-<span class="comment">//     Simple(SimpleClusters&lt;Filter&lt;I&gt;&gt;),</span>
-<span class="comment">//     Myanmar(MyanmarClusters&lt;Filter&lt;I&gt;&gt;),</span>
-<span class="comment">//     Complex(ComplexClusters&lt;Filter&lt;I&gt;&gt;),</span>
-<span class="comment">// }</span>
+<span class="comment">// enum Inner&lt;I&gt; {
+//     Simple(SimpleClusters&lt;Filter&lt;I&gt;&gt;),
+//     Myanmar(MyanmarClusters&lt;Filter&lt;I&gt;&gt;),
+//     Complex(ComplexClusters&lt;Filter&lt;I&gt;&gt;),
+// }
 
-<span class="kw">enum</span> <span class="ident">Inner</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">Simple</span>(<span class="ident">SimpleState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>),
-    <span class="ident">Myanmar</span>(<span class="ident">MyanmarState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>),
-    <span class="ident">Complex</span>(<span class="ident">ComplexState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>),
+</span><span class="kw">enum </span>Inner&lt;I&gt; {
+    Simple(SimpleState&lt;I&gt;),
+    Myanmar(MyanmarState&lt;I&gt;),
+    Complex(ComplexState&lt;I&gt;),
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Token</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">impl</span>&lt;I&gt; Parser&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator&lt;Item = Token&gt; + Clone,
 {
-    <span class="doccomment">/// Creates a new cluster parser for the specified script and iterator</span>
-    <span class="doccomment">/// over tokens.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">script</span>: <span class="ident">Script</span>, <span class="ident">tokens</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">inner</span>: <span class="kw">if</span> <span class="ident">script</span>.<span class="ident">is_complex</span>() {
-                <span class="kw">if</span> <span class="ident">script</span> <span class="op">==</span> <span class="ident">Script::Myanmar</span> {
-                    <span class="ident">Inner::Myanmar</span>(<span class="ident">MyanmarState::new</span>(<span class="ident">tokens</span>))
-                } <span class="kw">else</span> {
-                    <span class="ident">Inner::Complex</span>(<span class="ident">ComplexState::new</span>(<span class="ident">script</span>, <span class="ident">tokens</span>))
+    <span class="doccomment">/// Creates a new cluster parser for the specified script and iterator
+    /// over tokens.
+    </span><span class="kw">pub fn </span>new(script: Script, tokens: I) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            inner: <span class="kw">if </span>script.is_complex() {
+                <span class="kw">if </span>script == Script::Myanmar {
+                    Inner::Myanmar(MyanmarState::new(tokens))
+                } <span class="kw">else </span>{
+                    Inner::Complex(ComplexState::new(script, tokens))
                 }
-            } <span class="kw">else</span> {
-                <span class="ident">Inner::Simple</span>(<span class="ident">SimpleState::new</span>(<span class="ident">tokens</span>))
+            } <span class="kw">else </span>{
+                Inner::Simple(SimpleState::new(tokens))
             },
         }
     }
 
-    <span class="doccomment">/// Parses the next cluster.</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;mut</span> <span class="ident">CharCluster</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">cluster</span>.<span class="ident">clear</span>();
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span> {
-            <span class="ident">Inner::Simple</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">c</span>) =&gt; <span class="ident">c</span>.<span class="ident">next</span>(<span class="ident">cluster</span>),
-            <span class="ident">Inner::Myanmar</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">c</span>) =&gt; <span class="ident">c</span>.<span class="ident">next</span>(<span class="ident">cluster</span>),
-            <span class="ident">Inner::Complex</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">c</span>) =&gt; <span class="ident">c</span>.<span class="ident">next</span>(<span class="ident">cluster</span>),
+    <span class="doccomment">/// Parses the next cluster.
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;mut </span>CharCluster) -&gt; bool {
+        cluster.clear();
+        <span class="kw">match </span><span class="self">self</span>.inner {
+            Inner::Simple(<span class="kw-2">ref mut </span>c) =&gt; c.next(cluster),
+            Inner::Myanmar(<span class="kw-2">ref mut </span>c) =&gt; c.next(cluster),
+            Inner::Complex(<span class="kw-2">ref mut </span>c) =&gt; c.next(cluster),
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

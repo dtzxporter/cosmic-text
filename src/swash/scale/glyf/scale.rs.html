@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/scale.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scale.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/glyf/scale.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>scale.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -565,572 +565,572 @@
 <span id="565">565</span>
 <span id="566">566</span>
 <span id="567">567</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::cache</span>::{<span class="ident">Cache</span>, <span class="ident">CacheSlot</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::{
-    <span class="ident">fixed</span>::{<span class="ident">div</span>, <span class="ident">mul</span>, <span class="ident">muldiv</span>, <span class="ident">round</span>},
-    <span class="ident">Stream</span>,
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::cache::{Cache, CacheSlot};
+<span class="kw">use </span><span class="kw">super</span>::internal::{
+    fixed::{div, mul, muldiv, round},
+    Stream,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::proxy::GlyfProxy</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::Point</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">metrics::MetricsProxy</span>, <span class="ident">CacheKey</span>, <span class="ident">FontRef</span>};
+<span class="kw">use </span><span class="kw">super</span>::proxy::GlyfProxy;
+<span class="kw">use </span><span class="kw">super</span>::Point;
+<span class="kw">use crate</span>::{metrics::MetricsProxy, CacheKey, FontRef};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Scaler</span> {
-    <span class="kw">pub</span> <span class="ident">unscaled</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">scaled</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">original</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">deltas</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">tags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">contours</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">cache</span>: <span class="ident">Cache</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>Scaler {
+    <span class="kw">pub </span>unscaled: Vec&lt;Point&gt;,
+    <span class="kw">pub </span>scaled: Vec&lt;Point&gt;,
+    <span class="kw">pub </span>original: Vec&lt;Point&gt;,
+    <span class="kw">pub </span>deltas: Vec&lt;Point&gt;,
+    <span class="kw">pub </span>tags: Vec&lt;u8&gt;,
+    <span class="kw">pub </span>contours: Vec&lt;u16&gt;,
+    <span class="kw">pub </span>cache: Cache,
 }
 
-<span class="kw">impl</span> <span class="ident">Scaler</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">max_entries</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">cache</span>: <span class="ident">Cache::new</span>(<span class="ident">max_entries</span>),
-            ..<span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>Scaler {
+    <span class="kw">pub fn </span>new(max_entries: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            cache: Cache::new(max_entries),
+            ..<span class="self">Self</span>::default()
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">deltas</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">contours</span>.<span class="ident">clear</span>();
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">state</span>.<span class="ident">metrics</span>.<span class="ident">glyph_count</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">pub fn </span>scale(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>ScalerState, glyph_id: u16) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="self">self</span>.scaled.clear();
+        <span class="self">self</span>.unscaled.clear();
+        <span class="self">self</span>.original.clear();
+        <span class="self">self</span>.deltas.clear();
+        <span class="self">self</span>.tags.clear();
+        <span class="self">self</span>.contours.clear();
+        <span class="kw">if </span>glyph_id &gt;= state.metrics.glyph_count() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="self">self</span>.<span class="ident">load</span>(<span class="ident">state</span>, <span class="ident">glyph_id</span>, <span class="number">0</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">pp0x</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">0</span>].<span class="ident">x</span>;
-        <span class="kw">if</span> <span class="ident">pp0x</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span> {
-                <span class="ident">p</span>.<span class="ident">x</span> <span class="op">-</span><span class="op">=</span> <span class="ident">pp0x</span>;
+        <span class="self">self</span>.load(state, glyph_id, <span class="number">0</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>pp0x = state.phantom[<span class="number">0</span>].x;
+        <span class="kw">if </span>pp0x != <span class="number">0 </span>{
+            <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled {
+                p.x -= pp0x;
             }
         }
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="doccomment">/// Loading</span>
-<span class="kw">impl</span> <span class="ident">Scaler</span> {
-    <span class="kw">fn</span> <span class="ident">load</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>, <span class="ident">recurse</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-        <span class="kw">if</span> <span class="ident">recurse</span> <span class="op">&gt;</span> <span class="number">32</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="doccomment">/// Loading
+</span><span class="kw">impl </span>Scaler {
+    <span class="kw">fn </span>load(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>ScalerState, glyph_id: u16, recurse: u8) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+        <span class="kw">if </span>recurse &gt; <span class="number">32 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Stream::new</span>(<span class="ident">state</span>.<span class="ident">proxy</span>.<span class="ident">glyph_data</span>(<span class="ident">state</span>.<span class="ident">data</span>, <span class="ident">glyph_id</span>)<span class="question-mark">?</span>);
-        <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+        <span class="kw">let </span><span class="kw-2">mut </span>s = Stream::new(state.proxy.glyph_data(state.data, glyph_id)<span class="question-mark">?</span>);
+        <span class="kw">if </span>s.len() == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Some</span>(());
         }
-        <span class="kw">let</span> <span class="ident">point_base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">contour_base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">contours</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">initial</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-        <span class="kw">match</span> <span class="ident">initial</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">0</span>) {
-            <span class="ident">Greater</span> =&gt; {
-                <span class="kw">const</span> <span class="ident">XSHORT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-                <span class="kw">const</span> <span class="ident">YSHORT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-                <span class="kw">const</span> <span class="ident">REPEAT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">8</span>;
-                <span class="kw">const</span> <span class="ident">XSAME</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">16</span>;
-                <span class="kw">const</span> <span class="ident">YSAME</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">32</span>;
-                <span class="kw">let</span> <span class="ident">contour_count</span> <span class="op">=</span> <span class="ident">initial</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">let</span> <span class="ident">contour_end</span> <span class="op">=</span> <span class="ident">contour_base</span> <span class="op">+</span> <span class="ident">contour_count</span>;
-                <span class="kw">let</span> <span class="ident">bounds</span> <span class="op">=</span> [<span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>];
-                <span class="self">self</span>.<span class="ident">setup</span>(<span class="ident">state</span>, <span class="ident">bounds</span>, <span class="ident">glyph_id</span>, <span class="ident">recurse</span>);
-                <span class="self">self</span>.<span class="ident">contours</span>.<span class="ident">resize</span>(<span class="ident">contour_end</span>, <span class="number">0</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_contour</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">contour_count</span> {
-                    <span class="kw">let</span> <span class="ident">contour</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-                    <span class="kw">if</span> <span class="ident">contour</span> <span class="op">&lt;</span> <span class="ident">last_contour</span> {
-                        <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>point_base = <span class="self">self</span>.scaled.len();
+        <span class="kw">let </span>contour_base = <span class="self">self</span>.contours.len();
+        <span class="kw">let </span>initial = s.read::&lt;i16&gt;()<span class="question-mark">?</span>;
+        <span class="kw">match </span>initial.cmp(<span class="kw-2">&amp;</span><span class="number">0</span>) {
+            Greater =&gt; {
+                <span class="kw">const </span>XSHORT: u8 = <span class="number">2</span>;
+                <span class="kw">const </span>YSHORT: u8 = <span class="number">4</span>;
+                <span class="kw">const </span>REPEAT: u8 = <span class="number">8</span>;
+                <span class="kw">const </span>XSAME: u8 = <span class="number">16</span>;
+                <span class="kw">const </span>YSAME: u8 = <span class="number">32</span>;
+                <span class="kw">let </span>contour_count = initial <span class="kw">as </span>usize;
+                <span class="kw">let </span>contour_end = contour_base + contour_count;
+                <span class="kw">let </span>bounds = [s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>];
+                <span class="self">self</span>.setup(state, bounds, glyph_id, recurse);
+                <span class="self">self</span>.contours.resize(contour_end, <span class="number">0</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>last_contour = <span class="number">0</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..contour_count {
+                    <span class="kw">let </span>contour = s.read::&lt;u16&gt;()<span class="question-mark">?</span>;
+                    <span class="kw">if </span>contour &lt; last_contour {
+                        <span class="kw">return </span><span class="prelude-val">None</span>;
                     }
-                    <span class="self">self</span>.<span class="ident">contours</span>[<span class="ident">contour_base</span> <span class="op">+</span> <span class="ident">i</span>] <span class="op">=</span> <span class="ident">contour</span>;
-                    <span class="ident">last_contour</span> <span class="op">=</span> <span class="ident">contour</span>;
+                    <span class="self">self</span>.contours[contour_base + i] = contour;
+                    last_contour = contour;
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">point_count</span> <span class="op">=</span> <span class="ident">last_contour</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">scaled</span>
-                    .<span class="ident">resize</span>(<span class="ident">point_base</span> <span class="op">+</span> <span class="ident">point_count</span>, <span class="ident">Point::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-                <span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">resize</span>(<span class="ident">point_base</span> <span class="op">+</span> <span class="ident">point_count</span>, <span class="number">0</span>);
-                <span class="kw">let</span> <span class="ident">ins_len</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">ins</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read_bytes</span>(<span class="ident">ins_len</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">point_end</span> <span class="op">=</span> <span class="ident">point_base</span> <span class="op">+</span> <span class="ident">point_count</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">point_base</span>;
-                <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">point_end</span> {
-                    <span class="kw">let</span> <span class="ident">tag</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-                    <span class="kw">if</span> <span class="ident">tag</span> <span class="op">&amp;</span> <span class="ident">REPEAT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">min</span>(<span class="ident">point_end</span> <span class="op">-</span> <span class="ident">i</span>);
-                        <span class="kw">for</span> <span class="ident">t</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="ident">count</span>] {
-                            <span class="kw-2">*</span><span class="ident">t</span> <span class="op">=</span> <span class="ident">tag</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>point_count = last_contour <span class="kw">as </span>usize + <span class="number">1</span>;
+                <span class="self">self</span>.scaled
+                    .resize(point_base + point_count, Point::new(<span class="number">0</span>, <span class="number">0</span>));
+                <span class="self">self</span>.tags.resize(point_base + point_count, <span class="number">0</span>);
+                <span class="kw">let </span>ins_len = s.read::&lt;u16&gt;()<span class="question-mark">?</span>;
+                <span class="kw">let </span>ins = s.read_bytes(ins_len <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+                <span class="kw">let </span>point_end = point_base + point_count;
+                <span class="kw">let </span><span class="kw-2">mut </span>i = point_base;
+                <span class="kw">while </span>i &lt; point_end {
+                    <span class="kw">let </span>tag = s.read::&lt;u8&gt;()<span class="question-mark">?</span>;
+                    <span class="kw">if </span>tag &amp; REPEAT != <span class="number">0 </span>{
+                        <span class="kw">let </span>count = (s.read::&lt;u8&gt;()<span class="question-mark">? </span><span class="kw">as </span>usize + <span class="number">1</span>).min(point_end - i);
+                        <span class="kw">for </span>t <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.tags[i..i + count] {
+                            <span class="kw-2">*</span>t = tag;
                         }
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">tag</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        i += count;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.tags[i] = tag;
+                        i += <span class="number">1</span>;
                     }
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="number">0i32</span>;
-                <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">tag</span>, <span class="ident">point</span>) <span class="kw">in</span> (<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">point_base</span>..])
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..])
+                <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="number">0i32</span>;
+                <span class="kw">for </span>(<span class="kw-2">&amp;</span>tag, point) <span class="kw">in </span>(<span class="kw-2">&amp;</span><span class="self">self</span>.tags[point_base..])
+                    .iter()
+                    .zip(<span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[point_base..])
                 {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">delta</span> <span class="op">=</span> <span class="number">0i32</span>;
-                    <span class="kw">if</span> <span class="ident">tag</span> <span class="op">&amp;</span> <span class="ident">XSHORT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">delta</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                        <span class="kw">if</span> <span class="ident">tag</span> <span class="op">&amp;</span> <span class="ident">XSAME</span> <span class="op">==</span> <span class="number">0</span> {
-                            <span class="ident">delta</span> <span class="op">=</span> <span class="op">-</span><span class="ident">delta</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>delta = <span class="number">0i32</span>;
+                    <span class="kw">if </span>tag &amp; XSHORT != <span class="number">0 </span>{
+                        delta = s.read::&lt;u8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                        <span class="kw">if </span>tag &amp; XSAME == <span class="number">0 </span>{
+                            delta = -delta;
                         }
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">tag</span> <span class="op">&amp;</span> <span class="ident">XSAME</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="ident">delta</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
+                    } <span class="kw">else if </span>tag &amp; XSAME == <span class="number">0 </span>{
+                        delta = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
                     }
-                    <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">delta</span>;
-                    <span class="ident">point</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">v</span>;
+                    v += delta;
+                    point.x = v;
                 }
-                <span class="ident">v</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">for</span> (<span class="ident">tag</span>, <span class="ident">point</span>) <span class="kw">in</span> (<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">point_base</span>..])
-                    .<span class="ident">iter_mut</span>()
-                    .<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..])
+                v = <span class="number">0</span>;
+                <span class="kw">for </span>(tag, point) <span class="kw">in </span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>.tags[point_base..])
+                    .iter_mut()
+                    .zip(<span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[point_base..])
                 {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">delta</span> <span class="op">=</span> <span class="number">0i32</span>;
-                    <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">tag</span>;
-                    <span class="kw">if</span> <span class="ident">t</span> <span class="op">&amp;</span> <span class="ident">YSHORT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">delta</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                        <span class="kw">if</span> <span class="ident">t</span> <span class="op">&amp;</span> <span class="ident">YSAME</span> <span class="op">==</span> <span class="number">0</span> {
-                            <span class="ident">delta</span> <span class="op">=</span> <span class="op">-</span><span class="ident">delta</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>delta = <span class="number">0i32</span>;
+                    <span class="kw">let </span>t = <span class="kw-2">*</span>tag;
+                    <span class="kw">if </span>t &amp; YSHORT != <span class="number">0 </span>{
+                        delta = s.read::&lt;u8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                        <span class="kw">if </span>t &amp; YSAME == <span class="number">0 </span>{
+                            delta = -delta;
                         }
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">t</span> <span class="op">&amp;</span> <span class="ident">YSAME</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="ident">delta</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
+                    } <span class="kw">else if </span>t &amp; YSAME == <span class="number">0 </span>{
+                        delta = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
                     }
-                    <span class="ident">v</span> <span class="op">+</span><span class="op">=</span> <span class="ident">delta</span>;
-                    <span class="ident">point</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">v</span>;
-                    <span class="kw-2">*</span><span class="ident">tag</span> <span class="op">&amp;=</span> <span class="number">1</span>;
+                    v += delta;
+                    point.y = v;
+                    <span class="kw-2">*</span>tag &amp;= <span class="number">1</span>;
                 }
-                <span class="self">self</span>.<span class="ident">push_phantom</span>(<span class="ident">state</span>);
-                <span class="ident">point_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
-                <span class="kw">let</span> <span class="ident">point_end</span> <span class="op">=</span> <span class="ident">point_base</span> <span class="op">+</span> <span class="ident">point_count</span>;
-                <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">vary</span> {
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">resize</span>(<span class="ident">point_count</span>, <span class="ident">Point::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-                    <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">resize</span>(<span class="ident">point_count</span>, <span class="ident">Point::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-                    <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">proxy</span>.<span class="ident">deltas</span>(
-                        <span class="ident">state</span>.<span class="ident">data</span>,
-                        <span class="ident">state</span>.<span class="ident">coords</span>,
-                        <span class="ident">glyph_id</span>,
-                        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..],
-                        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">point_base</span>..],
-                        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">contours</span>[<span class="ident">contour_base</span>..],
-                        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">unscaled</span>[..],
-                        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">original</span>[..],
+                <span class="self">self</span>.push_phantom(state);
+                point_count += <span class="number">4</span>;
+                <span class="kw">let </span>point_end = point_base + point_count;
+                <span class="kw">if </span>state.vary {
+                    <span class="self">self</span>.unscaled.clear();
+                    <span class="self">self</span>.unscaled.resize(point_count, Point::new(<span class="number">0</span>, <span class="number">0</span>));
+                    <span class="self">self</span>.original.clear();
+                    <span class="self">self</span>.original.resize(point_count, Point::new(<span class="number">0</span>, <span class="number">0</span>));
+                    <span class="kw">if </span>state.proxy.deltas(
+                        state.data,
+                        state.coords,
+                        glyph_id,
+                        <span class="kw-2">&amp;</span><span class="self">self</span>.scaled[point_base..],
+                        <span class="kw-2">&amp;mut </span><span class="self">self</span>.tags[point_base..],
+                        <span class="kw-2">&amp;</span><span class="self">self</span>.contours[contour_base..],
+                        <span class="kw-2">&amp;mut </span><span class="self">self</span>.unscaled[..],
+                        <span class="kw-2">&amp;mut </span><span class="self">self</span>.original[..],
                     ) {
-                        <span class="kw">for</span> (<span class="ident">d</span>, <span class="ident">p</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">original</span>[..<span class="ident">point_count</span>]
-                            .<span class="ident">iter</span>()
-                            .<span class="ident">zip</span>(<span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..].<span class="ident">iter_mut</span>())
+                        <span class="kw">for </span>(d, p) <span class="kw">in </span><span class="self">self</span>.original[..point_count]
+                            .iter()
+                            .zip(<span class="self">self</span>.scaled[point_base..].iter_mut())
                         {
-                            <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>.<span class="ident">x</span>;
-                            <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>.<span class="ident">y</span>;
+                            p.x += d.x;
+                            p.y += d.y;
                         }
                     }
                 }
-                <span class="kw">let</span> <span class="ident">hinted</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">hint</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ins</span>.<span class="ident">is_empty</span>();
-                <span class="kw">if</span> <span class="ident">hinted</span> {
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..]);
+                <span class="kw">let </span>hinted = state.hint &amp;&amp; !ins.is_empty();
+                <span class="kw">if </span>hinted {
+                    <span class="self">self</span>.unscaled.clear();
+                    <span class="self">self</span>.unscaled.extend_from_slice(<span class="kw-2">&amp;</span><span class="self">self</span>.scaled[point_base..]);
                 }
-                <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">have_scale</span> {
-                    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">scale</span>;
-                    <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..] {
-                        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">scale</span>);
-                        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">p</span>.<span class="ident">y</span>, <span class="ident">scale</span>);
+                <span class="kw">if </span>state.have_scale {
+                    <span class="kw">let </span>scale = state.scale;
+                    <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[point_base..] {
+                        p.x = mul(p.x, scale);
+                        p.y = mul(p.y, scale);
                     }
-                    <span class="self">self</span>.<span class="ident">save_phantom</span>(<span class="ident">state</span>, <span class="ident">point_base</span>, <span class="ident">point_count</span>);
+                    <span class="self">self</span>.save_phantom(state, point_base, point_count);
                 }
-                <span class="kw">if</span> <span class="ident">hinted</span> {
-                    <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">original</span>
-                        .<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..<span class="ident">point_end</span>]);
-                    <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_end</span> <span class="op">-</span> <span class="number">4</span>..] {
-                        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">round</span>(<span class="ident">p</span>.<span class="ident">x</span>);
-                        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">round</span>(<span class="ident">p</span>.<span class="ident">y</span>);
+                <span class="kw">if </span>hinted {
+                    <span class="self">self</span>.original.clear();
+                    <span class="self">self</span>.original
+                        .extend_from_slice(<span class="kw-2">&amp;</span><span class="self">self</span>.scaled[point_base..point_end]);
+                    <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[point_end - <span class="number">4</span>..] {
+                        p.x = round(p.x);
+                        p.y = round(p.y);
                     }
-                    <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">state</span>, <span class="ident">point_base</span>, <span class="ident">contour_base</span>, <span class="ident">ins</span>, <span class="bool-val">false</span>);
+                    <span class="self">self</span>.hint(state, point_base, contour_base, ins, <span class="bool-val">false</span>);
                 }
-                <span class="kw">if</span> <span class="ident">point_base</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">contours</span>[<span class="ident">contour_base</span>..<span class="ident">contour_end</span>] {
-                        <span class="kw-2">*</span><span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">point_base</span> <span class="kw">as</span> <span class="ident">u16</span>;
+                <span class="kw">if </span>point_base != <span class="number">0 </span>{
+                    <span class="kw">for </span>c <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.contours[contour_base..contour_end] {
+                        <span class="kw-2">*</span>c += point_base <span class="kw">as </span>u16;
                     }
                 }
-                <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">truncate</span>(<span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">4</span>);
-                <span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">truncate</span>(<span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">4</span>);
+                <span class="self">self</span>.scaled.truncate(<span class="self">self</span>.scaled.len() - <span class="number">4</span>);
+                <span class="self">self</span>.tags.truncate(<span class="self">self</span>.tags.len() - <span class="number">4</span>);
                 <span class="prelude-val">Some</span>(())
             }
-            <span class="ident">Less</span> =&gt; {
-                <span class="kw">const</span> <span class="ident">ARGS_ARE_WORDS</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x001</span>;
-                <span class="kw">const</span> <span class="ident">ARGS_ARE_XY_VALUES</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x002</span>;
-                <span class="kw">const</span> <span class="ident">ROUND_XY_TO_GRID</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x004</span>;
-                <span class="kw">const</span> <span class="ident">HAVE_SCALE</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x008</span>;
-                <span class="kw">const</span> <span class="ident">MORE_COMPONENTS</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">32</span>;
-                <span class="kw">const</span> <span class="ident">HAVE_XY_SCALE</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">64</span>;
-                <span class="kw">const</span> <span class="ident">HAVE_MATRIX</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">128</span>;
-                <span class="kw">const</span> <span class="ident">HAVE_TRANSFORM</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="ident">HAVE_SCALE</span> <span class="op">|</span> <span class="ident">HAVE_XY_SCALE</span> <span class="op">|</span> <span class="ident">HAVE_MATRIX</span>;
-                <span class="kw">const</span> <span class="ident">HAVE_INSTRUCTIONS</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">256</span>;
-                <span class="kw">const</span> <span class="ident">USE_MY_METRICS</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">512</span>;
-                <span class="kw">const</span> <span class="ident">SCALED_COMPONENT_OFFSET</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x800</span>;
-                <span class="kw">const</span> <span class="ident">UNSCALED_COMPONENT_OFFSET</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">4096</span>;
-                <span class="kw">let</span> <span class="ident">bounds</span> <span class="op">=</span> [<span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>, <span class="ident">s</span>.<span class="ident">read_i16</span>()<span class="question-mark">?</span>];
-                <span class="self">self</span>.<span class="ident">setup</span>(<span class="ident">state</span>, <span class="ident">bounds</span>, <span class="ident">glyph_id</span>, <span class="ident">recurse</span>);
-                <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">have_scale</span> {
-                    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">scale</span>;
-                    <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">state</span>.<span class="ident">phantom</span>.<span class="ident">iter_mut</span>() {
-                        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">scale</span>);
-                        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">p</span>.<span class="ident">y</span>, <span class="ident">scale</span>);
+            Less =&gt; {
+                <span class="kw">const </span>ARGS_ARE_WORDS: u16 = <span class="number">0x001</span>;
+                <span class="kw">const </span>ARGS_ARE_XY_VALUES: u16 = <span class="number">0x002</span>;
+                <span class="kw">const </span>ROUND_XY_TO_GRID: u16 = <span class="number">0x004</span>;
+                <span class="kw">const </span>HAVE_SCALE: u16 = <span class="number">0x008</span>;
+                <span class="kw">const </span>MORE_COMPONENTS: u16 = <span class="number">32</span>;
+                <span class="kw">const </span>HAVE_XY_SCALE: u16 = <span class="number">64</span>;
+                <span class="kw">const </span>HAVE_MATRIX: u16 = <span class="number">128</span>;
+                <span class="kw">const </span>HAVE_TRANSFORM: u16 = HAVE_SCALE | HAVE_XY_SCALE | HAVE_MATRIX;
+                <span class="kw">const </span>HAVE_INSTRUCTIONS: u16 = <span class="number">256</span>;
+                <span class="kw">const </span>USE_MY_METRICS: u16 = <span class="number">512</span>;
+                <span class="kw">const </span>SCALED_COMPONENT_OFFSET: u16 = <span class="number">0x800</span>;
+                <span class="kw">const </span>UNSCALED_COMPONENT_OFFSET: u16 = <span class="number">4096</span>;
+                <span class="kw">let </span>bounds = [s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>, s.read_i16()<span class="question-mark">?</span>];
+                <span class="self">self</span>.setup(state, bounds, glyph_id, recurse);
+                <span class="kw">if </span>state.have_scale {
+                    <span class="kw">let </span>scale = state.scale;
+                    <span class="kw">for </span>p <span class="kw">in </span>state.phantom.iter_mut() {
+                        p.x = mul(p.x, scale);
+                        p.y = mul(p.y, scale);
                     }
                 }
-                <span class="kw">let</span> <span class="ident">delta_base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">deltas</span>.<span class="ident">len</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">have_deltas</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                <span class="kw">let</span> <span class="ident">base_offset</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">offset</span>();
-                <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">vary</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flags</span>: <span class="ident">u16</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">0usize</span>;
-                    <span class="kw">loop</span> {
-                        <span class="ident">flags</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>()<span class="question-mark">?</span>;
-                        <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">2</span>)<span class="question-mark">?</span>;
-                        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">ARGS_ARE_WORDS</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">4</span>)<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">2</span>)<span class="question-mark">?</span>;
+                <span class="kw">let </span>delta_base = <span class="self">self</span>.deltas.len();
+                <span class="kw">let </span><span class="kw-2">mut </span>have_deltas = <span class="bool-val">false</span>;
+                <span class="kw">let </span>base_offset = s.offset();
+                <span class="kw">if </span>state.vary {
+                    <span class="kw">let </span><span class="kw-2">mut </span>flags: u16;
+                    <span class="kw">let </span><span class="kw-2">mut </span>count = <span class="number">0usize</span>;
+                    <span class="kw">loop </span>{
+                        flags = s.read()<span class="question-mark">?</span>;
+                        s.skip(<span class="number">2</span>)<span class="question-mark">?</span>;
+                        <span class="kw">if </span>flags &amp; ARGS_ARE_WORDS != <span class="number">0 </span>{
+                            s.skip(<span class="number">4</span>)<span class="question-mark">?</span>;
+                        } <span class="kw">else </span>{
+                            s.skip(<span class="number">2</span>)<span class="question-mark">?</span>;
                         }
-                        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_SCALE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">2</span>)<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_XY_SCALE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">4</span>)<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_MATRIX</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="ident">s</span>.<span class="ident">skip</span>(<span class="number">8</span>)<span class="question-mark">?</span>;
+                        <span class="kw">if </span>flags &amp; HAVE_SCALE != <span class="number">0 </span>{
+                            s.skip(<span class="number">2</span>)<span class="question-mark">?</span>;
+                        } <span class="kw">else if </span>flags &amp; HAVE_XY_SCALE != <span class="number">0 </span>{
+                            s.skip(<span class="number">4</span>)<span class="question-mark">?</span>;
+                        } <span class="kw">else if </span>flags &amp; HAVE_MATRIX != <span class="number">0 </span>{
+                            s.skip(<span class="number">8</span>)<span class="question-mark">?</span>;
                         }
-                        <span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">MORE_COMPONENTS</span> <span class="op">==</span> <span class="number">0</span> {
+                        count += <span class="number">1</span>;
+                        <span class="kw">if </span>flags &amp; MORE_COMPONENTS == <span class="number">0 </span>{
                             <span class="kw">break</span>;
                         }
                     }
-                    <span class="ident">s</span>.<span class="ident">set_offset</span>(<span class="ident">base_offset</span>)<span class="question-mark">?</span>;
-                    <span class="self">self</span>.<span class="ident">deltas</span>.<span class="ident">resize</span>(<span class="ident">delta_base</span> <span class="op">+</span> <span class="ident">count</span>, <span class="ident">Point::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-                    <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">proxy</span>.<span class="ident">composite_deltas</span>(
-                        <span class="ident">state</span>.<span class="ident">data</span>,
-                        <span class="ident">state</span>.<span class="ident">coords</span>,
-                        <span class="ident">glyph_id</span>,
-                        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">deltas</span>[<span class="ident">delta_base</span>..],
+                    s.set_offset(base_offset)<span class="question-mark">?</span>;
+                    <span class="self">self</span>.deltas.resize(delta_base + count, Point::new(<span class="number">0</span>, <span class="number">0</span>));
+                    <span class="kw">if </span>state.proxy.composite_deltas(
+                        state.data,
+                        state.coords,
+                        glyph_id,
+                        <span class="kw-2">&amp;mut </span><span class="self">self</span>.deltas[delta_base..],
                     ) {
-                        <span class="ident">have_deltas</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                        have_deltas = <span class="bool-val">true</span>;
                     }
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flags</span>: <span class="ident">u16</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">loop</span> {
-                    <span class="ident">flags</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>()<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">phantom</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">phantom</span>;
-                    <span class="kw">let</span> <span class="ident">start_point</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>();
-                    <span class="self">self</span>.<span class="ident">load</span>(<span class="ident">state</span>, <span class="ident">id</span>, <span class="ident">recurse</span> <span class="op">+</span> <span class="number">1</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">end_point</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>();
-                    <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">USE_MY_METRICS</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="ident">state</span>.<span class="ident">phantom</span> <span class="op">=</span> <span class="ident">phantom</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>flags: u16;
+                <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                <span class="kw">loop </span>{
+                    flags = s.read()<span class="question-mark">?</span>;
+                    <span class="kw">let </span>id = s.read::&lt;u16&gt;()<span class="question-mark">?</span>;
+                    <span class="kw">let </span>phantom = state.phantom;
+                    <span class="kw">let </span>start_point = <span class="self">self</span>.scaled.len();
+                    <span class="self">self</span>.load(state, id, recurse + <span class="number">1</span>)<span class="question-mark">?</span>;
+                    <span class="kw">let </span>end_point = <span class="self">self</span>.scaled.len();
+                    <span class="kw">if </span>flags &amp; USE_MY_METRICS == <span class="number">0 </span>{
+                        state.phantom = phantom;
                     }
-                    <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">i32</span>;
-                    <span class="kw">let</span> <span class="ident">y</span>: <span class="ident">i32</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">have_offset</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                    <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">ARGS_ARE_XY_VALUES</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">ARGS_ARE_WORDS</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="ident">x</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                            <span class="ident">y</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">x</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                            <span class="ident">y</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
+                    <span class="kw">let </span>x: i32;
+                    <span class="kw">let </span>y: i32;
+                    <span class="kw">let </span><span class="kw-2">mut </span>have_offset = <span class="bool-val">false</span>;
+                    <span class="kw">if </span>flags &amp; ARGS_ARE_XY_VALUES != <span class="number">0 </span>{
+                        <span class="kw">if </span>flags &amp; ARGS_ARE_WORDS != <span class="number">0 </span>{
+                            x = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                            y = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                        } <span class="kw">else </span>{
+                            x = s.read::&lt;i8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                            y = s.read::&lt;i8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
                         }
-                        <span class="ident">have_offset</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">ARGS_ARE_WORDS</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">x</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                        <span class="ident">y</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                    } <span class="kw">else</span> {
-                        <span class="ident">x</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                        <span class="ident">y</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span>;
+                        have_offset = <span class="bool-val">true</span>;
+                    } <span class="kw">else if </span>flags &amp; ARGS_ARE_WORDS != <span class="number">0 </span>{
+                        x = s.read::&lt;u16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                        y = s.read::&lt;u16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                    } <span class="kw">else </span>{
+                        x = s.read::&lt;u8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
+                        y = s.read::&lt;u8&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32;
                     }
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">xx</span> <span class="op">=</span> <span class="number">0x10000</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">xy</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">yx</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">yy</span> <span class="op">=</span> <span class="number">0x10000</span>;
-                    <span class="kw">let</span> <span class="ident">have_xform</span> <span class="op">=</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_TRANSFORM</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_SCALE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">xx</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                        <span class="ident">yy</span> <span class="op">=</span> <span class="ident">xx</span>;
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_XY_SCALE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">xx</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                        <span class="ident">yy</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_MATRIX</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="ident">xx</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                        <span class="ident">yx</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                        <span class="ident">xy</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
-                        <span class="ident">yy</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>xx = <span class="number">0x10000</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>xy = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>yx = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>yy = <span class="number">0x10000</span>;
+                    <span class="kw">let </span>have_xform = flags &amp; HAVE_TRANSFORM != <span class="number">0</span>;
+                    <span class="kw">if </span>flags &amp; HAVE_SCALE != <span class="number">0 </span>{
+                        xx = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                        yy = xx;
+                    } <span class="kw">else if </span>flags &amp; HAVE_XY_SCALE != <span class="number">0 </span>{
+                        xx = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                        yy = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                    } <span class="kw">else if </span>flags &amp; HAVE_MATRIX != <span class="number">0 </span>{
+                        xx = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                        yx = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                        xy = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
+                        yy = s.read::&lt;i16&gt;()<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>;
                     }
-                    <span class="kw">let</span> <span class="ident">xx</span> <span class="op">=</span> <span class="ident">xx</span>;
-                    <span class="kw">let</span> <span class="ident">xy</span> <span class="op">=</span> <span class="ident">xy</span>;
-                    <span class="kw">let</span> <span class="ident">yx</span> <span class="op">=</span> <span class="ident">yx</span>;
-                    <span class="kw">let</span> <span class="ident">yy</span> <span class="op">=</span> <span class="ident">yy</span>;
-                    <span class="kw">if</span> <span class="ident">have_xform</span> {
-                        <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">start_point</span>..<span class="ident">end_point</span>] {
-                            <span class="kw">let</span> (<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span> <span class="ident">transform</span>(<span class="ident">p</span>.<span class="ident">x</span>, <span class="ident">p</span>.<span class="ident">y</span>, <span class="ident">xx</span>, <span class="ident">xy</span>, <span class="ident">yx</span>, <span class="ident">yy</span>);
-                            <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>;
-                            <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>;
+                    <span class="kw">let </span>xx = xx;
+                    <span class="kw">let </span>xy = xy;
+                    <span class="kw">let </span>yx = yx;
+                    <span class="kw">let </span>yy = yy;
+                    <span class="kw">if </span>have_xform {
+                        <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[start_point..end_point] {
+                            <span class="kw">let </span>(x, y) = transform(p.x, p.y, xx, xy, yx, yy);
+                            p.x = x;
+                            p.y = y;
                         }
                     }
-                    <span class="kw">let</span> (<span class="ident">dx</span>, <span class="ident">dy</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">have_offset</span> {
-                        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">dx</span>, <span class="kw-2">mut</span> <span class="ident">dy</span>) <span class="op">=</span> (<span class="ident">x</span>, <span class="ident">y</span>);
-                        <span class="kw">if</span> <span class="ident">have_xform</span>
-                            <span class="op">&amp;&amp;</span> (<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="ident">SCALED_COMPONENT_OFFSET</span> <span class="op">|</span> <span class="ident">UNSCALED_COMPONENT_OFFSET</span>)
-                                <span class="op">==</span> <span class="ident">SCALED_COMPONENT_OFFSET</span>)
+                    <span class="kw">let </span>(dx, dy) = <span class="kw">if </span>have_offset {
+                        <span class="kw">let </span>(<span class="kw-2">mut </span>dx, <span class="kw-2">mut </span>dy) = (x, y);
+                        <span class="kw">if </span>have_xform
+                            &amp;&amp; (flags &amp; (SCALED_COMPONENT_OFFSET | UNSCALED_COMPONENT_OFFSET)
+                                == SCALED_COMPONENT_OFFSET)
                         {
-                            <span class="ident">dx</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">dx</span>, <span class="ident">hypot</span>(<span class="ident">xx</span>, <span class="ident">xy</span>));
-                            <span class="ident">dy</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">dy</span>, <span class="ident">hypot</span>(<span class="ident">yy</span>, <span class="ident">yx</span>));
+                            dx = mul(dx, hypot(xx, xy));
+                            dy = mul(dy, hypot(yy, yx));
                         }
-                        <span class="kw">if</span> <span class="ident">have_deltas</span> {
-                            <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">deltas</span>[<span class="ident">delta_base</span> <span class="op">+</span> <span class="ident">i</span>];
-                            <span class="ident">dx</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>.<span class="ident">x</span>;
-                            <span class="ident">dy</span> <span class="op">+</span><span class="op">=</span> <span class="ident">d</span>.<span class="ident">y</span>;
+                        <span class="kw">if </span>have_deltas {
+                            <span class="kw">let </span>d = <span class="self">self</span>.deltas[delta_base + i];
+                            dx += d.x;
+                            dy += d.y;
                         }
-                        <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">have_scale</span> {
-                            <span class="ident">dx</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">dx</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
-                            <span class="ident">dy</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">dy</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
-                            <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">hint</span> <span class="op">&amp;&amp;</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">ROUND_XY_TO_GRID</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                <span class="ident">dy</span> <span class="op">=</span> <span class="ident">round</span>(<span class="ident">dy</span>);
+                        <span class="kw">if </span>state.have_scale {
+                            dx = mul(dx, state.scale);
+                            dy = mul(dy, state.scale);
+                            <span class="kw">if </span>state.hint &amp;&amp; flags &amp; ROUND_XY_TO_GRID != <span class="number">0 </span>{
+                                dy = round(dy);
                             }
                         }
-                        (<span class="ident">dx</span>, <span class="ident">dy</span>)
-                    } <span class="kw">else</span> {
-                        <span class="kw">let</span> (<span class="ident">a1</span>, <span class="ident">a2</span>) <span class="op">=</span> (<span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">y</span> <span class="kw">as</span> <span class="ident">usize</span>);
-                        <span class="kw">let</span> <span class="ident">pi1</span> <span class="op">=</span> <span class="ident">point_base</span> <span class="op">+</span> <span class="ident">a1</span>;
-                        <span class="kw">let</span> <span class="ident">pi2</span> <span class="op">=</span> <span class="ident">start_point</span> <span class="op">+</span> <span class="ident">a2</span>;
-                        <span class="kw">if</span> <span class="ident">pi1</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">pi2</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>() {
-                            <span class="kw">return</span> <span class="prelude-val">None</span>;
+                        (dx, dy)
+                    } <span class="kw">else </span>{
+                        <span class="kw">let </span>(a1, a2) = (x <span class="kw">as </span>usize, y <span class="kw">as </span>usize);
+                        <span class="kw">let </span>pi1 = point_base + a1;
+                        <span class="kw">let </span>pi2 = start_point + a2;
+                        <span class="kw">if </span>pi1 &gt;= <span class="self">self</span>.scaled.len() || pi2 &gt;= <span class="self">self</span>.scaled.len() {
+                            <span class="kw">return </span><span class="prelude-val">None</span>;
                         }
-                        <span class="kw">let</span> <span class="ident">p1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">pi1</span>];
-                        <span class="kw">let</span> <span class="ident">p2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">pi2</span>];
-                        (<span class="ident">p1</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">p2</span>.<span class="ident">x</span>, <span class="ident">p1</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">p2</span>.<span class="ident">y</span>)
+                        <span class="kw">let </span>p1 = <span class="self">self</span>.scaled[pi1];
+                        <span class="kw">let </span>p2 = <span class="self">self</span>.scaled[pi2];
+                        (p1.x - p2.x, p1.y - p2.y)
                     };
-                    <span class="kw">if</span> <span class="ident">dx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">dy</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">start_point</span>..<span class="ident">end_point</span>] {
-                            <span class="ident">p</span>.<span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dx</span>;
-                            <span class="ident">p</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dy</span>;
+                    <span class="kw">if </span>dx != <span class="number">0 </span>|| dy != <span class="number">0 </span>{
+                        <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[start_point..end_point] {
+                            p.x += dx;
+                            p.y += dy;
                         }
                     }
-                    <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">MORE_COMPONENTS</span> <span class="op">==</span> <span class="number">0</span> {
+                    <span class="kw">if </span>flags &amp; MORE_COMPONENTS == <span class="number">0 </span>{
                         <span class="kw">break</span>;
                     }
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    i += <span class="number">1</span>;
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ins</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
-                <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">HAVE_INSTRUCTIONS</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">ins_len</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="ident">ins</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">read_bytes</span>(<span class="ident">ins_len</span>)<span class="question-mark">?</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>ins: <span class="kw-2">&amp;</span>[u8] = <span class="kw-2">&amp;</span>[];
+                <span class="kw">if </span>flags &amp; HAVE_INSTRUCTIONS != <span class="number">0 </span>{
+                    <span class="kw">let </span>ins_len = s.read::&lt;u16&gt;()<span class="question-mark">? </span><span class="kw">as </span>usize;
+                    ins = s.read_bytes(ins_len)<span class="question-mark">?</span>;
                 }
-                <span class="self">self</span>.<span class="ident">deltas</span>.<span class="ident">resize</span>(<span class="ident">delta_base</span>, <span class="ident">Point::new</span>(<span class="number">0</span>, <span class="number">0</span>));
-                <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">hint</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ins</span>.<span class="ident">is_empty</span>() {
-                    <span class="self">self</span>.<span class="ident">push_phantom</span>(<span class="ident">state</span>);
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">unscaled</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..]);
-                    <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">clear</span>();
-                    <span class="self">self</span>.<span class="ident">original</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span>..]);
-                    <span class="kw">let</span> <span class="ident">point_end</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>();
-                    <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_end</span> <span class="op">-</span> <span class="number">4</span>..] {
-                        <span class="ident">p</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">round</span>(<span class="ident">p</span>.<span class="ident">x</span>);
-                        <span class="ident">p</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">round</span>(<span class="ident">p</span>.<span class="ident">y</span>);
+                <span class="self">self</span>.deltas.resize(delta_base, Point::new(<span class="number">0</span>, <span class="number">0</span>));
+                <span class="kw">if </span>state.hint &amp;&amp; !ins.is_empty() {
+                    <span class="self">self</span>.push_phantom(state);
+                    <span class="self">self</span>.unscaled.clear();
+                    <span class="self">self</span>.unscaled.extend_from_slice(<span class="kw-2">&amp;</span><span class="self">self</span>.scaled[point_base..]);
+                    <span class="self">self</span>.original.clear();
+                    <span class="self">self</span>.original.extend_from_slice(<span class="kw-2">&amp;</span><span class="self">self</span>.scaled[point_base..]);
+                    <span class="kw">let </span>point_end = <span class="self">self</span>.scaled.len();
+                    <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[point_end - <span class="number">4</span>..] {
+                        p.x = round(p.x);
+                        p.y = round(p.y);
                     }
-                    <span class="kw">for</span> <span class="ident">t</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">tags</span>[<span class="ident">point_base</span>..] {
-                        <span class="kw-2">*</span><span class="ident">t</span> <span class="op">&amp;=</span> <span class="op">!</span>(<span class="number">0x08</span> <span class="op">|</span> <span class="number">0x10</span>);
+                    <span class="kw">for </span>t <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.tags[point_base..] {
+                        <span class="kw-2">*</span>t &amp;= !(<span class="number">0x08 </span>| <span class="number">0x10</span>);
                     }
-                    <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">state</span>, <span class="ident">point_base</span>, <span class="ident">contour_base</span>, <span class="ident">ins</span>, <span class="bool-val">true</span>);
-                    <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">truncate</span>(<span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">4</span>);
-                    <span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">truncate</span>(<span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">4</span>);
+                    <span class="self">self</span>.hint(state, point_base, contour_base, ins, <span class="bool-val">true</span>);
+                    <span class="self">self</span>.scaled.truncate(<span class="self">self</span>.scaled.len() - <span class="number">4</span>);
+                    <span class="self">self</span>.tags.truncate(<span class="self">self</span>.tags.len() - <span class="number">4</span>);
                 }
                 <span class="prelude-val">Some</span>(())
             }
-            <span class="ident">Equal</span> =&gt; <span class="prelude-val">Some</span>(()),
+            Equal =&gt; <span class="prelude-val">Some</span>(()),
         }
     }
 }
 
-<span class="doccomment">/// Hinting</span>
-<span class="kw">impl</span> <span class="ident">Scaler</span> {
-    <span class="kw">fn</span> <span class="ident">hint</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>,
-        <span class="ident">point_base</span>: <span class="ident">usize</span>,
-        <span class="ident">contour_base</span>: <span class="ident">usize</span>,
-        <span class="ident">ins</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">is_composite</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::hint::HinterMode</span>;
-        <span class="kw">let</span> <span class="ident">slot</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">state</span>.<span class="ident">slot</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">slot</span>) =&gt; <span class="ident">slot</span>,
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cache</span>.<span class="ident">prepare</span>(
-                    <span class="ident">state</span>.<span class="ident">id</span>,
-                    <span class="ident">state</span>.<span class="ident">data</span>,
-                    <span class="ident">state</span>.<span class="ident">proxy</span>,
-                    <span class="ident">state</span>.<span class="ident">coords</span>,
-                    <span class="ident">state</span>.<span class="ident">ppem</span>,
-                    <span class="ident">state</span>.<span class="ident">scale</span>,
-                    <span class="ident">HinterMode::Modern</span>,
+<span class="doccomment">/// Hinting
+</span><span class="kw">impl </span>Scaler {
+    <span class="kw">fn </span>hint(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        state: <span class="kw-2">&amp;mut </span>ScalerState,
+        point_base: usize,
+        contour_base: usize,
+        ins: <span class="kw-2">&amp;</span>[u8],
+        is_composite: bool,
+    ) -&gt; bool {
+        <span class="kw">use </span><span class="kw">super</span>::hint::HinterMode;
+        <span class="kw">let </span>slot = <span class="kw">match </span>state.slot {
+            <span class="prelude-val">Some</span>(slot) =&gt; slot,
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">match </span><span class="self">self</span>.cache.prepare(
+                    state.id,
+                    state.data,
+                    state.proxy,
+                    state.coords,
+                    state.ppem,
+                    state.scale,
+                    HinterMode::Modern,
                 ) {
-                    <span class="prelude-val">Some</span>(<span class="ident">slot</span>) =&gt; {
-                        <span class="ident">state</span>.<span class="ident">slot</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">slot</span>);
-                        <span class="ident">slot</span>
+                    <span class="prelude-val">Some</span>(slot) =&gt; {
+                        state.slot = <span class="prelude-val">Some</span>(slot);
+                        slot
                     }
-                    <span class="prelude-val">None</span> =&gt; {
-                        <span class="ident">state</span>.<span class="ident">hint</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">return</span> <span class="bool-val">false</span>;
+                    <span class="prelude-val">None </span>=&gt; {
+                        state.hint = <span class="bool-val">false</span>;
+                        <span class="kw">return </span><span class="bool-val">false</span>;
                     }
                 }
             }
         };
-        <span class="self">self</span>.<span class="ident">cache</span>.<span class="ident">hint</span>(
-            <span class="ident">state</span>.<span class="ident">data</span>,
-            <span class="ident">state</span>.<span class="ident">proxy</span>,
-            <span class="ident">state</span>.<span class="ident">coords</span>,
-            <span class="ident">slot</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">unscaled</span>[..],
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">original</span>[..],
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">scaled</span>[..],
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">tags</span>[..],
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">contours</span>[..],
-            <span class="kw-2">&amp;mut</span> <span class="ident">state</span>.<span class="ident">phantom</span>[..],
-            <span class="ident">point_base</span>,
-            <span class="ident">contour_base</span>,
-            <span class="ident">ins</span>,
-            <span class="ident">is_composite</span>,
+        <span class="self">self</span>.cache.hint(
+            state.data,
+            state.proxy,
+            state.coords,
+            slot,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.unscaled[..],
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.original[..],
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.scaled[..],
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.tags[..],
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.contours[..],
+            <span class="kw-2">&amp;mut </span>state.phantom[..],
+            point_base,
+            contour_base,
+            ins,
+            is_composite,
         );
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 }
 
-<span class="doccomment">/// Per-component setup.</span>
-<span class="kw">impl</span> <span class="ident">Scaler</span> {
-    <span class="kw">fn</span> <span class="ident">setup</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>, <span class="ident">bounds</span>: [<span class="ident">i16</span>; <span class="number">4</span>], <span class="ident">glyph_id</span>: <span class="ident">u16</span>, <span class="ident">depth</span>: <span class="ident">u8</span>) {
-        <span class="kw">let</span> <span class="ident">metrics</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">metrics</span>.<span class="ident">materialize_glyph_metrics</span>(
-            <span class="kw-2">&amp;</span><span class="ident">FontRef</span> {
-                <span class="ident">data</span>: <span class="ident">state</span>.<span class="ident">data</span>,
-                <span class="ident">offset</span>: <span class="number">0</span>,
-                <span class="ident">key</span>: <span class="ident">CacheKey</span>(<span class="number">0</span>),
+<span class="doccomment">/// Per-component setup.
+</span><span class="kw">impl </span>Scaler {
+    <span class="kw">fn </span>setup(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>ScalerState, bounds: [i16; <span class="number">4</span>], glyph_id: u16, depth: u8) {
+        <span class="kw">let </span>metrics = state.metrics.materialize_glyph_metrics(
+            <span class="kw-2">&amp;</span>FontRef {
+                data: state.data,
+                offset: <span class="number">0</span>,
+                key: CacheKey(<span class="number">0</span>),
             },
-            <span class="ident">state</span>.<span class="ident">coords</span>,
+            state.coords,
         );
-        <span class="kw">let</span> <span class="ident">lsb</span> <span class="op">=</span> <span class="ident">metrics</span>.<span class="ident">lsb</span>(<span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">i16</span>;
-        <span class="kw">let</span> <span class="ident">advance</span> <span class="op">=</span> <span class="ident">metrics</span>.<span class="ident">advance_width</span>(<span class="ident">glyph_id</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">vadvance</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">tsb</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">=</span> (<span class="ident">bounds</span>[<span class="number">0</span>] <span class="op">-</span> <span class="ident">lsb</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">advance</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">advance</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">/</span> <span class="number">2</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">=</span> (<span class="ident">bounds</span>[<span class="number">3</span>] <span class="op">+</span> <span class="ident">tsb</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">3</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">advance</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">/</span> <span class="number">2</span>;
-        <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">3</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">-</span> <span class="ident">vadvance</span>;
-        <span class="kw">if</span> <span class="ident">depth</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">state</span>.<span class="ident">have_scale</span> {
-            <span class="ident">state</span>.<span class="ident">xmin</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">bounds</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
-            <span class="ident">state</span>.<span class="ident">xmax</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">bounds</span>[<span class="number">2</span>] <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
-            <span class="ident">state</span>.<span class="ident">lsb</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">lsb</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
+        <span class="kw">let </span>lsb = metrics.lsb(glyph_id) <span class="kw">as </span>i16;
+        <span class="kw">let </span>advance = metrics.advance_width(glyph_id) <span class="kw">as </span>i32;
+        <span class="kw">let </span>vadvance = <span class="number">0</span>;
+        <span class="kw">let </span>tsb = <span class="number">0</span>;
+        state.phantom[<span class="number">0</span>].x = (bounds[<span class="number">0</span>] - lsb) <span class="kw">as </span>i32;
+        state.phantom[<span class="number">0</span>].y = <span class="number">0</span>;
+        state.phantom[<span class="number">1</span>].x = state.phantom[<span class="number">0</span>].x + advance <span class="kw">as </span>i32;
+        state.phantom[<span class="number">1</span>].y = <span class="number">0</span>;
+        state.phantom[<span class="number">2</span>].x = advance <span class="kw">as </span>i32 / <span class="number">2</span>;
+        state.phantom[<span class="number">2</span>].y = (bounds[<span class="number">3</span>] + tsb) <span class="kw">as </span>i32;
+        state.phantom[<span class="number">3</span>].x = advance <span class="kw">as </span>i32 / <span class="number">2</span>;
+        state.phantom[<span class="number">3</span>].y = state.phantom[<span class="number">2</span>].y - vadvance;
+        <span class="kw">if </span>depth == <span class="number">0 </span>&amp;&amp; state.have_scale {
+            state.xmin = mul(bounds[<span class="number">0</span>] <span class="kw">as </span>i32, state.scale);
+            state.xmax = mul(bounds[<span class="number">2</span>] <span class="kw">as </span>i32, state.scale);
+            state.lsb = mul(lsb <span class="kw">as </span>i32, state.scale);
         }
-        <span class="ident">state</span>.<span class="ident">advance</span> <span class="op">=</span> <span class="ident">mul</span>(<span class="ident">advance</span>, <span class="ident">state</span>.<span class="ident">scale</span>);
+        state.advance = mul(advance, state.scale);
     }
 
-    <span class="kw">fn</span> <span class="ident">push_phantom</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>) {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">4</span> {
-            <span class="self">self</span>.<span class="ident">scaled</span>.<span class="ident">push</span>(<span class="ident">state</span>.<span class="ident">phantom</span>[<span class="ident">i</span>]);
-            <span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">push</span>(<span class="number">0</span>);
+    <span class="kw">fn </span>push_phantom(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>ScalerState) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">4 </span>{
+            <span class="self">self</span>.scaled.push(state.phantom[i]);
+            <span class="self">self</span>.tags.push(<span class="number">0</span>);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">save_phantom</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ScalerState</span>, <span class="ident">point_base</span>: <span class="ident">usize</span>, <span class="ident">point_count</span>: <span class="ident">usize</span>) {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">4</span> {
-            <span class="ident">state</span>.<span class="ident">phantom</span>[<span class="number">3</span> <span class="op">-</span> <span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">scaled</span>[<span class="ident">point_base</span> <span class="op">+</span> <span class="ident">point_count</span> <span class="op">-</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
+    <span class="kw">fn </span>save_phantom(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>ScalerState, point_base: usize, point_count: usize) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">4 </span>{
+            state.phantom[<span class="number">3 </span>- i] = <span class="self">self</span>.scaled[point_base + point_count - i - <span class="number">1</span>];
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ScalerState</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">u64</span>,
-    <span class="kw">pub</span> <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="kw">pub</span> <span class="ident">proxy</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GlyfProxy</span>,
-    <span class="kw">pub</span> <span class="ident">metrics</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">MetricsProxy</span>,
-    <span class="kw">pub</span> <span class="ident">slot</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CacheSlot</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">have_scale</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">ppem</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">scale</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">hint</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">vary</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">xmin</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">xmax</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">lsb</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">advance</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">phantom</span>: [<span class="ident">Point</span>; <span class="number">4</span>],
+<span class="kw">pub struct </span>ScalerState&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    <span class="kw">pub </span>id: u64,
+    <span class="kw">pub </span>coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    <span class="kw">pub </span>proxy: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>GlyfProxy,
+    <span class="kw">pub </span>metrics: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>MetricsProxy,
+    <span class="kw">pub </span>slot: <span class="prelude-ty">Option</span>&lt;CacheSlot&gt;,
+    <span class="kw">pub </span>have_scale: bool,
+    <span class="kw">pub </span>ppem: u16,
+    <span class="kw">pub </span>scale: i32,
+    <span class="kw">pub </span>hint: bool,
+    <span class="kw">pub </span>vary: bool,
+    <span class="kw">pub </span>xmin: i32,
+    <span class="kw">pub </span>xmax: i32,
+    <span class="kw">pub </span>lsb: i32,
+    <span class="kw">pub </span>advance: i32,
+    <span class="kw">pub </span>phantom: [Point; <span class="number">4</span>],
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ScalerState</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-        <span class="ident">id</span>: <span class="ident">u64</span>,
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-        <span class="ident">proxy</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">GlyfProxy</span>,
-        <span class="ident">metrics</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">MetricsProxy</span>,
-        <span class="ident">size</span>: <span class="ident">f32</span>,
-        <span class="ident">hint</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">abs</span>();
-        <span class="kw">let</span> <span class="ident">ppem</span> <span class="op">=</span> <span class="ident">size</span> <span class="kw">as</span> <span class="ident">u16</span>;
-        <span class="kw">let</span> <span class="ident">upem</span> <span class="op">=</span> <span class="ident">metrics</span>.<span class="ident">units_per_em</span>();
-        <span class="kw">let</span> (<span class="ident">have_scale</span>, <span class="ident">scale</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">size</span> <span class="op">!</span><span class="op">=</span> <span class="number">0.</span> <span class="op">&amp;&amp;</span> <span class="ident">upem</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            (<span class="bool-val">true</span>, <span class="ident">div</span>((<span class="ident">size</span> <span class="op">*</span> <span class="number">64.</span>) <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">upem</span> <span class="kw">as</span> <span class="ident">i32</span>))
-        } <span class="kw">else</span> {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ScalerState&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub fn </span>new(
+        data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+        id: u64,
+        coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+        proxy: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>GlyfProxy,
+        metrics: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>MetricsProxy,
+        size: f32,
+        hint: bool,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>size = size.abs();
+        <span class="kw">let </span>ppem = size <span class="kw">as </span>u16;
+        <span class="kw">let </span>upem = metrics.units_per_em();
+        <span class="kw">let </span>(have_scale, scale) = <span class="kw">if </span>size != <span class="number">0. </span>&amp;&amp; upem != <span class="number">0 </span>{
+            (<span class="bool-val">true</span>, div((size * <span class="number">64.</span>) <span class="kw">as </span>i32, upem <span class="kw">as </span>i32))
+        } <span class="kw">else </span>{
             (<span class="bool-val">false</span>, <span class="number">0</span>)
         };
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">id</span>,
-            <span class="ident">coords</span>,
-            <span class="ident">proxy</span>,
-            <span class="ident">metrics</span>,
-            <span class="ident">slot</span>: <span class="prelude-val">None</span>,
-            <span class="ident">have_scale</span>,
-            <span class="ident">ppem</span>,
-            <span class="ident">scale</span>,
-            <span class="ident">hint</span>,
-            <span class="ident">vary</span>: <span class="ident">proxy</span>.<span class="ident">axis_count</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">coords</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">proxy</span>.<span class="ident">gvar</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>,
-            <span class="ident">xmin</span>: <span class="number">0</span>,
-            <span class="ident">xmax</span>: <span class="number">0</span>,
-            <span class="ident">lsb</span>: <span class="number">0</span>,
-            <span class="ident">advance</span>: <span class="number">0</span>,
-            <span class="ident">phantom</span>: <span class="ident">Default::default</span>(),
+        <span class="self">Self </span>{
+            data,
+            id,
+            coords,
+            proxy,
+            metrics,
+            slot: <span class="prelude-val">None</span>,
+            have_scale,
+            ppem,
+            scale,
+            hint,
+            vary: proxy.axis_count != <span class="number">0 </span>&amp;&amp; !coords.is_empty() &amp;&amp; proxy.gvar != <span class="number">0</span>,
+            xmin: <span class="number">0</span>,
+            xmax: <span class="number">0</span>,
+            lsb: <span class="number">0</span>,
+            advance: <span class="number">0</span>,
+            phantom: Default::default(),
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">hypot</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">i32</span>, <span class="kw-2">mut</span> <span class="ident">b</span>: <span class="ident">i32</span>) -&gt; <span class="ident">i32</span> {
-    <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">abs</span>();
-    <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">abs</span>();
-    <span class="kw">if</span> <span class="ident">a</span> <span class="op">&gt;</span> <span class="ident">b</span> {
-        <span class="ident">a</span> <span class="op">+</span> ((<span class="number">3</span> <span class="op">*</span> <span class="ident">b</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">b</span> <span class="op">+</span> ((<span class="number">3</span> <span class="op">*</span> <span class="ident">a</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>)
+<span class="kw">fn </span>hypot(<span class="kw-2">mut </span>a: i32, <span class="kw-2">mut </span>b: i32) -&gt; i32 {
+    a = a.abs();
+    b = b.abs();
+    <span class="kw">if </span>a &gt; b {
+        a + ((<span class="number">3 </span>* b) &gt;&gt; <span class="number">3</span>)
+    } <span class="kw">else </span>{
+        b + ((<span class="number">3 </span>* a) &gt;&gt; <span class="number">3</span>)
     }
 }
 
-<span class="kw">fn</span> <span class="ident">transform</span>(<span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">xx</span>: <span class="ident">i32</span>, <span class="ident">xy</span>: <span class="ident">i32</span>, <span class="ident">yx</span>: <span class="ident">i32</span>, <span class="ident">yy</span>: <span class="ident">i32</span>) -&gt; (<span class="ident">i32</span>, <span class="ident">i32</span>) {
-    <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="number">0x10000</span>;
+<span class="kw">fn </span>transform(x: i32, y: i32, xx: i32, xy: i32, yx: i32, yy: i32) -&gt; (i32, i32) {
+    <span class="kw">let </span>scale = <span class="number">0x10000</span>;
     (
-        <span class="ident">muldiv</span>(<span class="ident">x</span>, <span class="ident">xx</span>, <span class="ident">scale</span>) <span class="op">+</span> <span class="ident">muldiv</span>(<span class="ident">y</span>, <span class="ident">xy</span>, <span class="ident">scale</span>),
-        <span class="ident">muldiv</span>(<span class="ident">x</span>, <span class="ident">yx</span>, <span class="ident">scale</span>) <span class="op">+</span> <span class="ident">muldiv</span>(<span class="ident">y</span>, <span class="ident">yy</span>, <span class="ident">scale</span>),
+        muldiv(x, xx, scale) + muldiv(y, xy, scale),
+        muldiv(x, yx, scale) + muldiv(y, yy, scale),
     )
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

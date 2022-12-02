@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/map.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/map.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -150,157 +150,157 @@
 <span id="150">150</span>
 <span id="151">151</span>
 <span id="152">152</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>alloc::vec::Vec;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Face</span>, <span class="ident">Tag</span>, <span class="ident">Mask</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::feature_mappings::FEATURE_MAPPINGS</span>;
+<span class="kw">use crate</span>::{Face, Tag, Mask};
+<span class="kw">use </span><span class="kw">super</span>::feature_mappings::FEATURE_MAPPINGS;
 
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u8</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">FeatureType</span> {
-    <span class="ident">Ligatures</span> <span class="op">=</span> <span class="number">1</span>,
-    <span class="ident">LetterCase</span> <span class="op">=</span> <span class="number">3</span>,
-    <span class="ident">VerticalSubstitution</span> <span class="op">=</span> <span class="number">4</span>,
-    <span class="ident">NumberSpacing</span> <span class="op">=</span> <span class="number">6</span>,
-    <span class="ident">VerticalPosition</span> <span class="op">=</span> <span class="number">10</span>,
-    <span class="ident">Fractions</span> <span class="op">=</span> <span class="number">11</span>,
-    <span class="ident">TypographicExtras</span> <span class="op">=</span> <span class="number">14</span>,
-    <span class="ident">MathematicalExtras</span> <span class="op">=</span> <span class="number">15</span>,
-    <span class="ident">StyleOptions</span> <span class="op">=</span> <span class="number">19</span>,
-    <span class="ident">CharacterShape</span> <span class="op">=</span> <span class="number">20</span>,
-    <span class="ident">NumberCase</span> <span class="op">=</span> <span class="number">21</span>,
-    <span class="ident">TextSpacing</span> <span class="op">=</span> <span class="number">22</span>,
-    <span class="ident">Transliteration</span> <span class="op">=</span> <span class="number">23</span>,
-    <span class="ident">RubyKana</span> <span class="op">=</span> <span class="number">28</span>,
-    <span class="ident">ItalicCjkRoman</span> <span class="op">=</span> <span class="number">32</span>,
-    <span class="ident">CaseSensitiveLayout</span> <span class="op">=</span> <span class="number">33</span>,
-    <span class="ident">AlternateKana</span> <span class="op">=</span> <span class="number">34</span>,
-    <span class="ident">StylisticAlternatives</span> <span class="op">=</span> <span class="number">35</span>,
-    <span class="ident">ContextualAlternatives</span> <span class="op">=</span> <span class="number">36</span>,
-    <span class="ident">LowerCase</span> <span class="op">=</span> <span class="number">37</span>,
-    <span class="ident">UpperCase</span> <span class="op">=</span> <span class="number">38</span>,
+<span class="attribute">#[repr(u8)]
+#[derive(Clone, Copy, PartialEq)]
+</span><span class="kw">pub enum </span>FeatureType {
+    Ligatures = <span class="number">1</span>,
+    LetterCase = <span class="number">3</span>,
+    VerticalSubstitution = <span class="number">4</span>,
+    NumberSpacing = <span class="number">6</span>,
+    VerticalPosition = <span class="number">10</span>,
+    Fractions = <span class="number">11</span>,
+    TypographicExtras = <span class="number">14</span>,
+    MathematicalExtras = <span class="number">15</span>,
+    StyleOptions = <span class="number">19</span>,
+    CharacterShape = <span class="number">20</span>,
+    NumberCase = <span class="number">21</span>,
+    TextSpacing = <span class="number">22</span>,
+    Transliteration = <span class="number">23</span>,
+    RubyKana = <span class="number">28</span>,
+    ItalicCjkRoman = <span class="number">32</span>,
+    CaseSensitiveLayout = <span class="number">33</span>,
+    AlternateKana = <span class="number">34</span>,
+    StylisticAlternatives = <span class="number">35</span>,
+    ContextualAlternatives = <span class="number">36</span>,
+    LowerCase = <span class="number">37</span>,
+    UpperCase = <span class="number">38</span>,
 }
 
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Map</span> {
-    <span class="kw">pub</span> <span class="ident">chain_flags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mask</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>Map {
+    <span class="kw">pub </span>chain_flags: Vec&lt;Mask&gt;,
 }
 
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FeatureInfo</span> {
-    <span class="kw">pub</span> <span class="ident">kind</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">setting</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">is_exclusive</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>FeatureInfo {
+    <span class="kw">pub </span>kind: u16,
+    <span class="kw">pub </span>setting: u16,
+    <span class="kw">pub </span>is_exclusive: bool,
 }
 
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MapBuilder</span> {
-    <span class="kw">pub</span> <span class="ident">features</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FeatureInfo</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>MapBuilder {
+    <span class="kw">pub </span>features: Vec&lt;FeatureInfo&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">MapBuilder</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_feature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">tag</span>: <span class="ident">Tag</span>, <span class="ident">value</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">const</span> <span class="ident">FEATURE_TYPE_CHARACTER_ALTERNATIVES</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">17</span>;
+<span class="kw">impl </span>MapBuilder {
+    <span class="kw">pub fn </span>add_feature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face, tag: Tag, value: u32) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">const </span>FEATURE_TYPE_CHARACTER_ALTERNATIVES: u16 = <span class="number">17</span>;
 
-        <span class="kw">let</span> <span class="ident">feat</span> <span class="op">=</span> <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">feat</span><span class="question-mark">?</span>;
+        <span class="kw">let </span>feat = face.tables().feat<span class="question-mark">?</span>;
 
-        <span class="kw">if</span> <span class="ident">tag</span> <span class="op">==</span> <span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;aalt&quot;</span>) {
-            <span class="kw">let</span> <span class="ident">exposes_feature</span> <span class="op">=</span> <span class="ident">feat</span>.<span class="ident">names</span>.<span class="ident">find</span>(<span class="ident">FEATURE_TYPE_CHARACTER_ALTERNATIVES</span>)
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">setting_names</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span>)
-                .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>);
+        <span class="kw">if </span>tag == Tag::from_bytes(<span class="string">b&quot;aalt&quot;</span>) {
+            <span class="kw">let </span>exposes_feature = feat.names.find(FEATURE_TYPE_CHARACTER_ALTERNATIVES)
+                .map(|f| f.setting_names.len() != <span class="number">0</span>)
+                .unwrap_or(<span class="bool-val">false</span>);
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">exposes_feature</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+            <span class="kw">if </span>!exposes_feature {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(());
             }
 
-            <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">push</span>(<span class="ident">FeatureInfo</span> {
-                <span class="ident">kind</span>: <span class="ident">FEATURE_TYPE_CHARACTER_ALTERNATIVES</span>,
-                <span class="ident">setting</span>: <span class="ident">value</span> <span class="kw">as</span> <span class="ident">u16</span>,
-                <span class="ident">is_exclusive</span>: <span class="bool-val">true</span>,
+            <span class="self">self</span>.features.push(FeatureInfo {
+                kind: FEATURE_TYPE_CHARACTER_ALTERNATIVES,
+                setting: value <span class="kw">as </span>u16,
+                is_exclusive: <span class="bool-val">true</span>,
             });
         }
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">FEATURE_MAPPINGS</span>.<span class="ident">binary_search_by</span>(<span class="op">|</span><span class="ident">map</span><span class="op">|</span> <span class="ident">map</span>.<span class="ident">ot_feature_tag</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">tag</span>)).<span class="ident">ok</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">mapping</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">FEATURE_MAPPINGS</span>[<span class="ident">idx</span>];
+        <span class="kw">let </span>idx = FEATURE_MAPPINGS.binary_search_by(|map| map.ot_feature_tag.cmp(<span class="kw-2">&amp;</span>tag)).ok()<span class="question-mark">?</span>;
+        <span class="kw">let </span>mapping = <span class="kw-2">&amp;</span>FEATURE_MAPPINGS[idx];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">feature</span> <span class="op">=</span> <span class="ident">feat</span>.<span class="ident">names</span>.<span class="ident">find</span>(<span class="ident">mapping</span>.<span class="ident">aat_feature_type</span> <span class="kw">as</span> <span class="ident">u16</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>feature = feat.names.find(mapping.aat_feature_type <span class="kw">as </span>u16);
 
-        <span class="kw">match</span> <span class="ident">feature</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">feature</span>) <span class="kw">if</span> <span class="ident">feature</span>.<span class="ident">setting_names</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> =&gt; {}
-            <span class="kw">_</span> =&gt; {
-                <span class="comment">// Special case: Chain::compile_flags will fall back to the deprecated version of</span>
-                <span class="comment">// small-caps if necessary, so we need to check for that possibility.</span>
-                <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/2307</span>
-                <span class="kw">if</span>  <span class="ident">mapping</span>.<span class="ident">aat_feature_type</span> <span class="op">==</span> <span class="ident">FeatureType::LowerCase</span> <span class="op">&amp;&amp;</span>
-                    <span class="ident">mapping</span>.<span class="ident">selector_to_enable</span> <span class="op">==</span> <span class="ident"><span class="kw">super</span>::feature_selector::LOWER_CASE_SMALL_CAPS</span>
+        <span class="kw">match </span>feature {
+            <span class="prelude-val">Some</span>(feature) <span class="kw">if </span>feature.setting_names.len() != <span class="number">0 </span>=&gt; {}
+            <span class="kw">_ </span>=&gt; {
+                <span class="comment">// Special case: Chain::compile_flags will fall back to the deprecated version of
+                // small-caps if necessary, so we need to check for that possibility.
+                // https://github.com/harfbuzz/harfbuzz/issues/2307
+                </span><span class="kw">if  </span>mapping.aat_feature_type == FeatureType::LowerCase &amp;&amp;
+                    mapping.selector_to_enable == <span class="kw">super</span>::feature_selector::LOWER_CASE_SMALL_CAPS
                 {
-                    <span class="ident">feature</span> <span class="op">=</span> <span class="ident">feat</span>.<span class="ident">names</span>.<span class="ident">find</span>(<span class="ident">FeatureType::LetterCase</span> <span class="kw">as</span> <span class="ident">u16</span>);
+                    feature = feat.names.find(FeatureType::LetterCase <span class="kw">as </span>u16);
                 }
             }
         }
 
-        <span class="kw">match</span> <span class="ident">feature</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">feature</span>) <span class="kw">if</span> <span class="ident">feature</span>.<span class="ident">setting_names</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">setting</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">mapping</span>.<span class="ident">selector_to_enable</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">mapping</span>.<span class="ident">selector_to_disable</span>
-                } <span class="kw">as</span> <span class="ident">u16</span>;
+        <span class="kw">match </span>feature {
+            <span class="prelude-val">Some</span>(feature) <span class="kw">if </span>feature.setting_names.len() != <span class="number">0 </span>=&gt; {
+                <span class="kw">let </span>setting = <span class="kw">if </span>value != <span class="number">0 </span>{
+                    mapping.selector_to_enable
+                } <span class="kw">else </span>{
+                    mapping.selector_to_disable
+                } <span class="kw">as </span>u16;
 
-                <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">push</span>(<span class="ident">FeatureInfo</span> {
-                    <span class="ident">kind</span>: <span class="ident">mapping</span>.<span class="ident">aat_feature_type</span> <span class="kw">as</span> <span class="ident">u16</span>,
-                    <span class="ident">setting</span>,
-                    <span class="ident">is_exclusive</span>: <span class="ident">feature</span>.<span class="ident">exclusive</span>,
+                <span class="self">self</span>.features.push(FeatureInfo {
+                    kind: mapping.aat_feature_type <span class="kw">as </span>u16,
+                    setting,
+                    is_exclusive: feature.exclusive,
                 });
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
 
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_feature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">u16</span>, <span class="ident">setting</span>: <span class="ident">u16</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">binary_search_by</span>(<span class="op">|</span><span class="ident">probe</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">probe</span>.<span class="ident">kind</span> <span class="op">!</span><span class="op">=</span> <span class="ident">kind</span> {
-                <span class="ident">probe</span>.<span class="ident">kind</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">kind</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">probe</span>.<span class="ident">setting</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">setting</span>)
+    <span class="kw">pub fn </span>has_feature(<span class="kw-2">&amp;</span><span class="self">self</span>, kind: u16, setting: u16) -&gt; bool {
+        <span class="self">self</span>.features.binary_search_by(|probe| {
+            <span class="kw">if </span>probe.kind != kind {
+                probe.kind.cmp(<span class="kw-2">&amp;</span>kind)
+            } <span class="kw">else </span>{
+                probe.setting.cmp(<span class="kw-2">&amp;</span>setting)
             }
-        }).<span class="ident">is_ok</span>()
+        }).is_ok()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; <span class="ident">Map</span> {
-        <span class="comment">// Sort features and merge duplicates.</span>
-        <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">sort_by</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">kind</span> <span class="op">!</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">kind</span> {
-                <span class="ident">a</span>.<span class="ident">kind</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="ident">kind</span>)
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">is_exclusive</span> <span class="op">&amp;&amp;</span> (<span class="ident">a</span>.<span class="ident">setting</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>) <span class="op">!</span><span class="op">=</span> (<span class="ident">b</span>.<span class="ident">setting</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>) {
-                <span class="ident">a</span>.<span class="ident">setting</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="ident">setting</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">core::cmp::Ordering::Equal</span>
+    <span class="kw">pub fn </span>compile(<span class="kw-2">&amp;mut </span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; Map {
+        <span class="comment">// Sort features and merge duplicates.
+        </span><span class="self">self</span>.features.sort_by(|a, b| {
+            <span class="kw">if </span>a.kind != b.kind {
+                a.kind.cmp(<span class="kw-2">&amp;</span>b.kind)
+            } <span class="kw">else if </span>!a.is_exclusive &amp;&amp; (a.setting &amp; !<span class="number">1</span>) != (b.setting &amp; !<span class="number">1</span>) {
+                a.setting.cmp(<span class="kw-2">&amp;</span>b.setting)
+            } <span class="kw">else </span>{
+                core::cmp::Ordering::Equal
             }
         });
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">features</span>.<span class="ident">len</span>() {
-            <span class="comment">// Nonexclusive feature selectors come in even/odd pairs to turn a setting on/off</span>
-            <span class="comment">// respectively, so we mask out the low-order bit when checking for &quot;duplicates&quot;</span>
-            <span class="comment">// (selectors referring to the same feature setting) here.</span>
-            <span class="kw">let</span> <span class="ident">non_exclusive</span> <span class="op">=</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>[<span class="ident">i</span>].<span class="ident">is_exclusive</span> <span class="op">&amp;&amp;</span>
-                (<span class="self">self</span>.<span class="ident">features</span>[<span class="ident">i</span>].<span class="ident">setting</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>) <span class="op">!</span><span class="op">=</span> (<span class="self">self</span>.<span class="ident">features</span>[<span class="ident">j</span>].<span class="ident">setting</span> <span class="op">&amp;</span> <span class="op">!</span><span class="number">1</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.features.len() {
+            <span class="comment">// Nonexclusive feature selectors come in even/odd pairs to turn a setting on/off
+            // respectively, so we mask out the low-order bit when checking for &quot;duplicates&quot;
+            // (selectors referring to the same feature setting) here.
+            </span><span class="kw">let </span>non_exclusive = !<span class="self">self</span>.features[i].is_exclusive &amp;&amp;
+                (<span class="self">self</span>.features[i].setting &amp; !<span class="number">1</span>) != (<span class="self">self</span>.features[j].setting &amp; !<span class="number">1</span>);
 
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">i</span>].<span class="ident">kind</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">j</span>].<span class="ident">kind</span> <span class="op">|</span><span class="op">|</span> <span class="ident">non_exclusive</span> {
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">i</span>];
+            <span class="kw">if </span><span class="self">self</span>.features[i].kind != <span class="self">self</span>.features[j].kind || non_exclusive {
+                j += <span class="number">1</span>;
+                <span class="self">self</span>.features[j] = <span class="self">self</span>.features[i];
             }
         }
-        <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">truncate</span>(<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>);
+        <span class="self">self</span>.features.truncate(j + <span class="number">1</span>);
 
-        <span class="ident"><span class="kw">super</span>::metamorphosis::compile_flags</span>(<span class="ident">face</span>, <span class="self">self</span>).<span class="ident">unwrap_or_default</span>()
+        <span class="kw">super</span>::metamorphosis::compile_flags(face, <span class="self">self</span>).unwrap_or_default()
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

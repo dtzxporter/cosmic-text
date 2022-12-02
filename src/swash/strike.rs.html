@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/strike.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>strike.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/strike.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>strike.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -841,848 +841,848 @@
 <span id="841">841</span>
 <span id="842">842</span>
 <span id="843">843</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Alpha and color bitmaps.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Alpha and color bitmaps.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">FontRef</span>, <span class="ident">GlyphId</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::internal::<span class="kw-2">*</span>;
+<span class="kw">use super</span>::{FontRef, GlyphId};
 
-<span class="doccomment">/// Proxy for rematerializing strike collections.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BitmapStrikesProxy</span> {
-    <span class="ident">bitmaps</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="ident">color_bitmaps</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="ident">upem</span>: <span class="ident">u16</span>,
-    <span class="ident">is_apple</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// Proxy for rematerializing strike collections.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>BitmapStrikesProxy {
+    bitmaps: (u32, u32),
+    color_bitmaps: (u32, u32),
+    upem: u16,
+    is_apple: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">BitmapStrikesProxy</span> {
-    <span class="doccomment">/// Creates strike collection proxy from the specified font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">upem</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">head</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="ident">h</span>.<span class="ident">units_per_em</span>()).<span class="ident">unwrap_or</span>(<span class="number">1</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bitmaps</span> <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>);
-        <span class="kw">let</span> <span class="ident">eblc</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;EBLC&quot;</span>));
-        <span class="kw">if</span> <span class="ident">eblc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">ebdt</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;EBDT&quot;</span>));
-            <span class="kw">if</span> <span class="ident">ebdt</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="ident">bitmaps</span> <span class="op">=</span> (<span class="ident">eblc</span>, <span class="ident">ebdt</span>);
+<span class="kw">impl </span>BitmapStrikesProxy {
+    <span class="doccomment">/// Creates strike collection proxy from the specified font.
+    </span><span class="kw">pub fn </span>from_font&lt;<span class="lifetime">&#39;a</span>&gt;(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>upem = font.head().map(|h| h.units_per_em()).unwrap_or(<span class="number">1</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>bitmaps = (<span class="number">0</span>, <span class="number">0</span>);
+        <span class="kw">let </span>eblc = font.table_offset(raw_tag(<span class="string">b&quot;EBLC&quot;</span>));
+        <span class="kw">if </span>eblc != <span class="number">0 </span>{
+            <span class="kw">let </span>ebdt = font.table_offset(raw_tag(<span class="string">b&quot;EBDT&quot;</span>));
+            <span class="kw">if </span>ebdt != <span class="number">0 </span>{
+                bitmaps = (eblc, ebdt);
             }
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">color_bitmaps</span> <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>);
-        <span class="kw">let</span> <span class="ident">sbix</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;sbix&quot;</span>));
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">is_apple</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="ident">sbix</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">color_bitmaps</span> <span class="op">=</span> (<span class="ident">sbix</span>, <span class="ident">sbix</span>);
-            <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::string::StringId::Family</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">font</span>.<span class="ident">localized_strings</span>().<span class="ident">find_by_id</span>(<span class="ident">Family</span>, <span class="prelude-val">None</span>) {
-                <span class="ident">is_apple</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">chars</span>().<span class="ident">eq</span>(<span class="string">&quot;Apple Color Emoji&quot;</span>.<span class="ident">chars</span>());
+        <span class="kw">let </span><span class="kw-2">mut </span>color_bitmaps = (<span class="number">0</span>, <span class="number">0</span>);
+        <span class="kw">let </span>sbix = font.table_offset(raw_tag(<span class="string">b&quot;sbix&quot;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>is_apple = <span class="bool-val">false</span>;
+        <span class="kw">if </span>sbix != <span class="number">0 </span>{
+            color_bitmaps = (sbix, sbix);
+            <span class="kw">use </span><span class="kw">super</span>::string::StringId::Family;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = font.localized_strings().find_by_id(Family, <span class="prelude-val">None</span>) {
+                is_apple = name.chars().eq(<span class="string">&quot;Apple Color Emoji&quot;</span>.chars());
             }
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">cblc</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;CBLC&quot;</span>));
-            <span class="kw">if</span> <span class="ident">cblc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="kw">let</span> <span class="ident">cbdt</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;CBDT&quot;</span>));
-                <span class="kw">if</span> <span class="ident">cbdt</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">color_bitmaps</span> <span class="op">=</span> (<span class="ident">cblc</span>, <span class="ident">cbdt</span>);
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>cblc = font.table_offset(raw_tag(<span class="string">b&quot;CBLC&quot;</span>));
+            <span class="kw">if </span>cblc != <span class="number">0 </span>{
+                <span class="kw">let </span>cbdt = font.table_offset(raw_tag(<span class="string">b&quot;CBDT&quot;</span>));
+                <span class="kw">if </span>cbdt != <span class="number">0 </span>{
+                    color_bitmaps = (cblc, cbdt);
                 }
             }
         }
-        <span class="self">Self</span> {
-            <span class="ident">bitmaps</span>,
-            <span class="ident">color_bitmaps</span>,
-            <span class="ident">upem</span>,
-            <span class="ident">is_apple</span>,
+        <span class="self">Self </span>{
+            bitmaps,
+            color_bitmaps,
+            upem,
+            is_apple,
         }
     }
 
-    <span class="doccomment">/// Returns true if the font has alpha bitmap strikes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_alpha</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">bitmaps</span>.<span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+    <span class="doccomment">/// Returns true if the font has alpha bitmap strikes.
+    </span><span class="kw">pub fn </span>has_alpha(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.bitmaps.<span class="number">0 </span>!= <span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Returns true if the font has color bitmap strikes.
+    </span><span class="kw">pub fn </span>has_color(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.color_bitmaps.<span class="number">0 </span>!= <span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Materializes an alpha strike iterator for the specified font. This
+    /// proxy must have been created from the same font.
+    </span><span class="kw">pub fn </span>materialize_alpha&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; BitmapStrikes&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="self">self</span>.materialize_impl(font.data, <span class="self">self</span>.bitmaps.<span class="number">0</span>, <span class="self">self</span>.bitmaps.<span class="number">1</span>, <span class="self">self</span>.upem, <span class="bool-val">false</span>)
     }
 
-    <span class="doccomment">/// Returns true if the font has color bitmap strikes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_color</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">color_bitmaps</span>.<span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="doccomment">/// Materializes an alpha strike iterator for the specified font. This</span>
-    <span class="doccomment">/// proxy must have been created from the same font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">materialize_alpha</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">BitmapStrikes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">materialize_impl</span>(<span class="ident">font</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">bitmaps</span>.<span class="number">0</span>, <span class="self">self</span>.<span class="ident">bitmaps</span>.<span class="number">1</span>, <span class="self">self</span>.<span class="ident">upem</span>, <span class="bool-val">false</span>)
-    }
-
-    <span class="doccomment">/// Materializes a color strike iterator for the specified font. This</span>
-    <span class="doccomment">/// proxy must have been created from the same font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">materialize_color</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">BitmapStrikes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">materialize_impl</span>(
-            <span class="ident">font</span>.<span class="ident">data</span>,
-            <span class="self">self</span>.<span class="ident">color_bitmaps</span>.<span class="number">0</span>,
-            <span class="self">self</span>.<span class="ident">color_bitmaps</span>.<span class="number">1</span>,
-            <span class="self">self</span>.<span class="ident">upem</span>,
-            <span class="self">self</span>.<span class="ident">is_apple</span>,
+    <span class="doccomment">/// Materializes a color strike iterator for the specified font. This
+    /// proxy must have been created from the same font.
+    </span><span class="kw">pub fn </span>materialize_color&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; BitmapStrikes&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="self">self</span>.materialize_impl(
+            font.data,
+            <span class="self">self</span>.color_bitmaps.<span class="number">0</span>,
+            <span class="self">self</span>.color_bitmaps.<span class="number">1</span>,
+            <span class="self">self</span>.upem,
+            <span class="self">self</span>.is_apple,
         )
     }
 
-    <span class="kw">fn</span> <span class="ident">materialize_impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
+    <span class="kw">fn </span>materialize_impl&lt;<span class="lifetime">&#39;a</span>&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-        <span class="ident">loc</span>: <span class="ident">u32</span>,
-        <span class="ident">dat</span>: <span class="ident">u32</span>,
-        <span class="ident">upem</span>: <span class="ident">u16</span>,
-        <span class="ident">is_apple</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="ident">BitmapStrikes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">loc</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">BitmapStrikes::new</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[], <span class="ident">upem</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">loc</span> <span class="op">==</span> <span class="ident">dat</span> {
-            <span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">loc</span> <span class="kw">as</span> <span class="ident">usize</span>..).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]);
-            <span class="ident">BitmapStrikes::new</span>(<span class="ident">loc</span>, <span class="ident">loc</span>, <span class="ident">upem</span>, <span class="bool-val">true</span>, <span class="ident">is_apple</span>)
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">loc</span> <span class="kw">as</span> <span class="ident">usize</span>..).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]);
-            <span class="kw">let</span> <span class="ident">dat</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">dat</span> <span class="kw">as</span> <span class="ident">usize</span>..).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]);
-            <span class="ident">BitmapStrikes::new</span>(<span class="ident">loc</span>, <span class="ident">dat</span>, <span class="ident">upem</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>)
+        data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+        loc: u32,
+        dat: u32,
+        upem: u16,
+        is_apple: bool,
+    ) -&gt; BitmapStrikes&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw">if </span>loc == <span class="number">0 </span>{
+            BitmapStrikes::new(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[], upem, <span class="bool-val">false</span>, <span class="bool-val">false</span>)
+        } <span class="kw">else if </span>loc == dat {
+            <span class="kw">let </span>loc = data.get(loc <span class="kw">as </span>usize..).unwrap_or(<span class="kw-2">&amp;</span>[]);
+            BitmapStrikes::new(loc, loc, upem, <span class="bool-val">true</span>, is_apple)
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>loc = data.get(loc <span class="kw">as </span>usize..).unwrap_or(<span class="kw-2">&amp;</span>[]);
+            <span class="kw">let </span>dat = data.get(dat <span class="kw">as </span>usize..).unwrap_or(<span class="kw-2">&amp;</span>[]);
+            BitmapStrikes::new(loc, dat, upem, <span class="bool-val">false</span>, <span class="bool-val">false</span>)
         }
     }
 }
 
-<span class="doccomment">/// Iterator over a collection of bitmap strikes.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BitmapStrikes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">bitmap_data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">is_sbix</span>: <span class="ident">bool</span>,
-    <span class="ident">is_apple</span>: <span class="ident">bool</span>,
-    <span class="ident">upem</span>: <span class="ident">u16</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">pos</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Iterator over a collection of bitmap strikes.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>BitmapStrikes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    bitmap_data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    is_sbix: bool,
+    is_apple: bool,
+    upem: u16,
+    len: usize,
+    pos: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BitmapStrikes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-        <span class="ident">bitmap_data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-        <span class="ident">upem</span>: <span class="ident">u16</span>,
-        <span class="ident">is_sbix</span>: <span class="ident">bool</span>,
-        <span class="ident">is_apple</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">bitmap_data</span>,
-            <span class="ident">upem</span>,
-            <span class="ident">is_sbix</span>,
-            <span class="ident">is_apple</span>,
-            <span class="ident">len</span>: <span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">4</span>) <span class="kw">as</span> <span class="ident">usize</span>,
-            <span class="ident">pos</span>: <span class="number">0</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; BitmapStrikes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>new(
+        data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+        bitmap_data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+        upem: u16,
+        is_sbix: bool,
+        is_apple: bool,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = Bytes::new(data);
+        <span class="self">Self </span>{
+            data,
+            bitmap_data,
+            upem,
+            is_sbix,
+            is_apple,
+            len: data.read_or_default::&lt;u32&gt;(<span class="number">4</span>) <span class="kw">as </span>usize,
+            pos: <span class="number">0</span>,
         }
     }
 
-    <span class="doccomment">/// Returns the bitmap strike at the specified index.</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the bitmap strike at the specified index.
+    </span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_sbix</span> {
-            <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">8</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>
-        } <span class="kw">else</span> {
-            <span class="number">8</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">48</span>
-        };
-        <span class="prelude-val">Some</span>(<span class="ident">BitmapStrike</span> {
-            <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>,
-            <span class="ident">bitmap_data</span>: <span class="self">self</span>.<span class="ident">bitmap_data</span>,
-            <span class="ident">upem</span>: <span class="self">self</span>.<span class="ident">upem</span>,
-            <span class="ident">is_sbix</span>: <span class="self">self</span>.<span class="ident">is_sbix</span>,
-            <span class="ident">is_apple</span>: <span class="self">self</span>.<span class="ident">is_apple</span>,
-            <span class="ident">offset</span>,
+        <span class="kw">let </span>offset = <span class="kw">if </span><span class="self">self</span>.is_sbix {
+            <span class="self">self</span>.data.read::&lt;u32&gt;(<span class="number">8 </span>+ index <span class="kw">as </span>usize * <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize
+        } <span class="kw">else </span>{
+            <span class="number">8 </span>+ index <span class="kw">as </span>usize * <span class="number">48
+        </span>};
+        <span class="prelude-val">Some</span>(BitmapStrike {
+            data: <span class="self">self</span>.data,
+            bitmap_data: <span class="self">self</span>.bitmap_data,
+            upem: <span class="self">self</span>.upem,
+            is_sbix: <span class="self">self</span>.is_sbix,
+            is_apple: <span class="self">self</span>.is_apple,
+            offset,
         })
     }
 
-    <span class="doccomment">/// Searches for a strike that matches the specified size and glyph</span>
-    <span class="doccomment">/// identifier. Returns the strike of the nearest suitable size, preferring</span>
-    <span class="doccomment">/// larger strikes if no exact match is available.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ## Iteration behavior</span>
-    <span class="doccomment">/// This function searches the entire strike collection without regard</span>
-    <span class="doccomment">/// for the current state of the iterator.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_by_nearest_ppem</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ppem</span>: <span class="ident">u16</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">best_size</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">strike</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">strike</span>) =&gt; <span class="ident">strike</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+    <span class="doccomment">/// Searches for a strike that matches the specified size and glyph
+    /// identifier. Returns the strike of the nearest suitable size, preferring
+    /// larger strikes if no exact match is available.
+    ///
+    /// ## Iteration behavior
+    /// This function searches the entire strike collection without regard
+    /// for the current state of the iterator.
+    </span><span class="kw">pub fn </span>find_by_nearest_ppem(<span class="kw-2">&amp;</span><span class="self">self</span>, ppem: u16, glyph_id: GlyphId) -&gt; <span class="prelude-ty">Option</span>&lt;BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>best = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>best_size = <span class="number">0</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.len {
+            <span class="kw">let </span>strike = <span class="kw">match </span><span class="self">self</span>.get(i) {
+                <span class="prelude-val">Some</span>(strike) =&gt; strike,
+                <span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">strike</span>.<span class="ident">contains</span>(<span class="ident">glyph_id</span>) {
+            <span class="kw">if </span>!strike.contains(glyph_id) {
                 <span class="kw">continue</span>;
             }
-            <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">strike</span>);
-            <span class="kw">let</span> <span class="ident">strike_ppem</span> <span class="op">=</span> <span class="ident">strike</span>.<span class="ident">ppem</span>();
-            <span class="kw">if</span> <span class="ident">strike_ppem</span> <span class="op">&gt;</span> <span class="ident">best_size</span> {
-                <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">strike</span>);
-                <span class="ident">best_size</span> <span class="op">=</span> <span class="ident">strike_ppem</span>;
+            best = <span class="prelude-val">Some</span>(strike);
+            <span class="kw">let </span>strike_ppem = strike.ppem();
+            <span class="kw">if </span>strike_ppem &gt; best_size {
+                best = <span class="prelude-val">Some</span>(strike);
+                best_size = strike_ppem;
             }
-            <span class="kw">if</span> <span class="ident">strike_ppem</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">ppem</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">strike</span>);
+            <span class="kw">if </span>strike_ppem &gt;= ppem {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(strike);
             }
         }
-        <span class="ident">best</span>
+        best
     }
 
-    <span class="doccomment">/// Searches for a strike that exactly matches the specified size and glyph</span>
-    <span class="doccomment">/// identifier.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ## Iteration behavior</span>
-    <span class="doccomment">/// This function searches the entire strike collection without regard</span>
-    <span class="doccomment">/// for the current state of the iterator.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_by_exact_ppem</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ppem</span>: <span class="ident">u16</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">strike</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">strike</span>) =&gt; <span class="ident">strike</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+    <span class="doccomment">/// Searches for a strike that exactly matches the specified size and glyph
+    /// identifier.
+    ///
+    /// ## Iteration behavior
+    /// This function searches the entire strike collection without regard
+    /// for the current state of the iterator.
+    </span><span class="kw">pub fn </span>find_by_exact_ppem(<span class="kw-2">&amp;</span><span class="self">self</span>, ppem: u16, glyph_id: GlyphId) -&gt; <span class="prelude-ty">Option</span>&lt;BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.len {
+            <span class="kw">let </span>strike = <span class="kw">match </span><span class="self">self</span>.get(i) {
+                <span class="prelude-val">Some</span>(strike) =&gt; strike,
+                <span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">strike</span>.<span class="ident">contains</span>(<span class="ident">glyph_id</span>) {
+            <span class="kw">if </span>!strike.contains(glyph_id) {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="ident">strike</span>.<span class="ident">ppem</span>() <span class="op">==</span> <span class="ident">ppem</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">strike</span>);
+            <span class="kw">if </span>strike.ppem() == ppem {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(strike);
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="doccomment">/// Searches for a strike with the largest size that contains the specified</span>
-    <span class="doccomment">/// glyph.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ## Iteration behavior</span>
-    <span class="doccomment">/// This function searches the entire strike collection without regard</span>
-    <span class="doccomment">/// for the current state of the iterator.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_by_largest_ppem</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">largest</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">largest_ppem</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">strike</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">strike</span>) =&gt; <span class="ident">strike</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+    <span class="doccomment">/// Searches for a strike with the largest size that contains the specified
+    /// glyph.
+    ///
+    /// ## Iteration behavior
+    /// This function searches the entire strike collection without regard
+    /// for the current state of the iterator.
+    </span><span class="kw">pub fn </span>find_by_largest_ppem(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; <span class="prelude-ty">Option</span>&lt;BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>largest = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>largest_ppem = <span class="number">0</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.len {
+            <span class="kw">let </span>strike = <span class="kw">match </span><span class="self">self</span>.get(i) {
+                <span class="prelude-val">Some</span>(strike) =&gt; strike,
+                <span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">strike</span>.<span class="ident">contains</span>(<span class="ident">glyph_id</span>) {
+            <span class="kw">if </span>!strike.contains(glyph_id) {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">strike_ppem</span> <span class="op">=</span> <span class="ident">strike</span>.<span class="ident">ppem</span>();
-            <span class="kw">if</span> <span class="ident">largest</span>.<span class="ident">is_none</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">strike_ppem</span> <span class="op">&gt;</span> <span class="ident">largest_ppem</span> {
-                <span class="ident">largest</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">strike</span>);
-                <span class="ident">largest_ppem</span> <span class="op">=</span> <span class="ident">strike_ppem</span>;
+            <span class="kw">let </span>strike_ppem = strike.ppem();
+            <span class="kw">if </span>largest.is_none() || strike_ppem &gt; largest_ppem {
+                largest = <span class="prelude-val">Some</span>(strike);
+                largest_ppem = strike_ppem;
             }
         }
-        <span class="ident">largest</span>
+        largest
     }
 }
 
-<span class="macro">impl_iter!</span>(<span class="ident">BitmapStrikes</span>, <span class="ident">BitmapStrike</span>);
+<span class="macro">impl_iter!</span>(BitmapStrikes, BitmapStrike);
 
-<span class="doccomment">/// Collection of bitmaps of a specific size and format.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">bitmap_data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">upem</span>: <span class="ident">u16</span>,
-    <span class="ident">is_sbix</span>: <span class="ident">bool</span>,
-    <span class="ident">is_apple</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// Collection of bitmaps of a specific size and format.
+</span><span class="attribute">#[derive(Copy, Clone)]
+#[allow(dead_code)]
+</span><span class="kw">pub struct </span>BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    bitmap_data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    offset: usize,
+    upem: u16,
+    is_sbix: bool,
+    is_apple: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BitmapStrike</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns the device pixel density for which the strike was designed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ppi</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_sbix</span> {
-            <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)
-        } <span class="kw">else</span> {
-            <span class="number">72</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; BitmapStrike&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Returns the device pixel density for which the strike was designed.
+    </span><span class="kw">pub fn </span>ppi(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="kw">if </span><span class="self">self</span>.is_sbix {
+            <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">2</span>)
+        } <span class="kw">else </span>{
+            <span class="number">72
+        </span>}
+    }
+
+    <span class="doccomment">/// Returns the bit depth of the strike.
+    </span><span class="kw">pub fn </span>bit_depth(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="kw">if </span><span class="self">self</span>.is_sbix {
+            <span class="kw">return </span><span class="number">32</span>;
+        }
+        <span class="self">self</span>.data.read_or_default::&lt;u8&gt;(<span class="self">self</span>.offset + <span class="number">46</span>)
+    }
+
+    <span class="doccomment">/// Returns the size of the strike in pixels per em.
+    </span><span class="kw">pub fn </span>ppem(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="kw">if </span><span class="self">self</span>.is_sbix {
+            <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset)
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.data.read_or_default::&lt;u8&gt;(<span class="self">self</span>.offset + <span class="number">45</span>) <span class="kw">as </span>u16
         }
     }
 
-    <span class="doccomment">/// Returns the bit depth of the strike.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bit_depth</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_sbix</span> {
-            <span class="kw">return</span> <span class="number">32</span>;
-        }
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">46</span>)
+    <span class="doccomment">/// Returns true if the specified glyph is covered by the strike.
+    </span><span class="kw">pub fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; bool {
+        get_coverage(<span class="kw-2">&amp;</span><span class="self">self</span>.data, <span class="self">self</span>.offset, <span class="self">self</span>.is_sbix, glyph_id).unwrap_or(<span class="bool-val">false</span>)
     }
 
-    <span class="doccomment">/// Returns the size of the strike in pixels per em.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ppem</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_sbix</span> {
-            <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>)
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">45</span>) <span class="kw">as</span> <span class="ident">u16</span>
-        }
-    }
-
-    <span class="doccomment">/// Returns true if the specified glyph is covered by the strike.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">get_coverage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">offset</span>, <span class="self">self</span>.<span class="ident">is_sbix</span>, <span class="ident">glyph_id</span>).<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
-    }
-
-    <span class="doccomment">/// Returns the bitmap for the specified glyph, if available.</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph_id</span>: <span class="ident">GlyphId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Bitmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">get_location</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">offset</span>, <span class="self">self</span>.<span class="ident">is_sbix</span>, <span class="ident">glyph_id</span>)<span class="question-mark">?</span>;
-        <span class="ident">loc</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">bitmap_data</span>, <span class="self">self</span>.<span class="ident">upem</span>, <span class="self">self</span>.<span class="ident">is_apple</span>)
+    <span class="doccomment">/// Returns the bitmap for the specified glyph, if available.
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph_id: GlyphId) -&gt; <span class="prelude-ty">Option</span>&lt;Bitmap&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">let </span>loc = get_location(<span class="kw-2">&amp;</span><span class="self">self</span>.data, <span class="self">self</span>.offset, <span class="self">self</span>.is_sbix, glyph_id)<span class="question-mark">?</span>;
+        loc.get(<span class="self">self</span>.bitmap_data, <span class="self">self</span>.upem, <span class="self">self</span>.is_apple)
     }
 }
 
-<span class="doccomment">/// Format of a bitmap.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">BitmapFormat</span> {
-    <span class="doccomment">/// Alpha mask with the specified number of bits.</span>
-    <span class="ident">Alpha</span>(<span class="ident">u8</span>),
-    <span class="doccomment">/// Packed alpha mask with the specified number of bits.</span>
-    <span class="ident">Packed</span>(<span class="ident">u8</span>),
-    <span class="doccomment">/// 32-bit RGBA color.</span>
-    <span class="ident">Color</span>,
-    <span class="doccomment">/// PNG encoded.</span>
-    <span class="ident">Png</span>,
+<span class="doccomment">/// Format of a bitmap.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>BitmapFormat {
+    <span class="doccomment">/// Alpha mask with the specified number of bits.
+    </span>Alpha(u8),
+    <span class="doccomment">/// Packed alpha mask with the specified number of bits.
+    </span>Packed(u8),
+    <span class="doccomment">/// 32-bit RGBA color.
+    </span>Color,
+    <span class="doccomment">/// PNG encoded.
+    </span>Png,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">BitmapFormat</span> {
-    <span class="doccomment">/// Returns the number of channels.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">channels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Alpha</span>(..) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::Packed</span>(..) =&gt; <span class="number">1</span>,
-            <span class="kw">_</span> =&gt; <span class="number">4</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">impl </span>BitmapFormat {
+    <span class="doccomment">/// Returns the number of channels.
+    </span><span class="kw">pub fn </span>channels(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Alpha(..) | <span class="self">Self</span>::Packed(..) =&gt; <span class="number">1</span>,
+            <span class="kw">_ </span>=&gt; <span class="number">4</span>,
         }
     }
 
-    <span class="doccomment">/// Returns the buffer size for a bitmap of the specified dimensions in this</span>
-    <span class="doccomment">/// format.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">usize</span> {
-        (<span class="ident">width</span> <span class="op">*</span> <span class="ident">height</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">channels</span>()) <span class="kw">as</span> <span class="ident">usize</span>
+    <span class="doccomment">/// Returns the buffer size for a bitmap of the specified dimensions in this
+    /// format.
+    </span><span class="kw">pub fn </span>buffer_size(<span class="kw-2">&amp;</span><span class="self">self</span>, width: u32, height: u32) -&gt; usize {
+        (width * height * <span class="self">self</span>.channels()) <span class="kw">as </span>usize
     }
 }
 
-<span class="doccomment">/// Bitmap glyph.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Bitmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">format</span>: <span class="ident">BitmapFormat</span>,
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">ppem</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">width</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">height</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">left</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">top</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">advance</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
+<span class="doccomment">/// Bitmap glyph.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Bitmap&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>format: BitmapFormat,
+    <span class="kw">pub </span>id: u16,
+    <span class="kw">pub </span>ppem: u16,
+    <span class="kw">pub </span>width: u32,
+    <span class="kw">pub </span>height: u32,
+    <span class="kw">pub </span>left: i32,
+    <span class="kw">pub </span>top: i32,
+    <span class="kw">pub </span>advance: u32,
+    <span class="kw">pub </span>data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Bitmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">BitmapData</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">upem</span>: <span class="ident">u16</span>, <span class="ident">is_apple</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">is_packed</span> {
-            <span class="ident">BitmapFormat::Packed</span>(<span class="ident">data</span>.<span class="ident">bit_depth</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">is_png</span> {
-            <span class="ident">BitmapFormat::Png</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">bit_depth</span> <span class="op">==</span> <span class="number">32</span> {
-            <span class="ident">BitmapFormat::Color</span>
-        } <span class="kw">else</span> {
-            <span class="ident">BitmapFormat::Alpha</span>(<span class="ident">data</span>.<span class="ident">bit_depth</span>)
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Bitmap&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>new(data: <span class="kw-2">&amp;</span>BitmapData&lt;<span class="lifetime">&#39;a</span>&gt;, upem: u16, is_apple: bool) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>format = <span class="kw">if </span>data.is_packed {
+            BitmapFormat::Packed(data.bit_depth)
+        } <span class="kw">else if </span>data.is_png {
+            BitmapFormat::Png
+        } <span class="kw">else if </span>data.bit_depth == <span class="number">32 </span>{
+            BitmapFormat::Color
+        } <span class="kw">else </span>{
+            BitmapFormat::Alpha(data.bit_depth)
         };
-        <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">left</span>, <span class="ident">top</span>, <span class="ident">advance</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">is_png</span> {
-            <span class="kw">let</span> <span class="ident">png</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>.<span class="ident">data</span>);
-            <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">png</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">16</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">png</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">20</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> (<span class="ident">left</span>, <span class="kw-2">mut</span> <span class="ident">top</span>) <span class="op">=</span> (<span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">y</span> <span class="kw">as</span> <span class="ident">i32</span>);
-            <span class="kw">let</span> <span class="ident">advance</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">is_sbix</span> {
-                <span class="kw">if</span> <span class="ident">top</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">is_apple</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">ppem</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="ident">upem</span> <span class="kw">as</span> <span class="ident">f32</span>;
-                    <span class="ident">top</span> <span class="op">=</span> (<span class="op">-</span><span class="number">100.</span> <span class="op">*</span> <span class="ident">s</span>).<span class="ident">round</span>() <span class="kw">as</span> <span class="ident">i32</span>;
+        <span class="kw">let </span>(width, height, left, top, advance) = <span class="kw">if </span>data.is_png {
+            <span class="kw">let </span>png = Bytes::new(data.data);
+            <span class="kw">let </span>width = png.read::&lt;u32&gt;(<span class="number">16</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>height = png.read::&lt;u32&gt;(<span class="number">20</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>(left, <span class="kw-2">mut </span>top) = (data.metrics.x <span class="kw">as </span>i32, data.metrics.y <span class="kw">as </span>i32);
+            <span class="kw">let </span>advance = <span class="kw">if </span>data.is_sbix {
+                <span class="kw">if </span>top == <span class="number">0 </span>&amp;&amp; is_apple {
+                    <span class="kw">let </span>s = data.ppem <span class="kw">as </span>f32 / upem <span class="kw">as </span>f32;
+                    top = (-<span class="number">100. </span>* s).round() <span class="kw">as </span>i32;
                 }
-                <span class="ident">top</span> <span class="op">+</span><span class="op">=</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                <span class="number">0</span>
-            } <span class="kw">else</span> {
-                <span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">advance</span> <span class="kw">as</span> <span class="ident">u32</span>
+                top += height <span class="kw">as </span>i32;
+                <span class="number">0
+            </span>} <span class="kw">else </span>{
+                data.metrics.advance <span class="kw">as </span>u32
             };
-            (<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">left</span>, <span class="ident">top</span>, <span class="ident">advance</span>)
-        } <span class="kw">else</span> {
+            (width, height, left, top, advance)
+        } <span class="kw">else </span>{
             (
-                <span class="ident">data</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">u32</span>,
-                <span class="ident">data</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">u32</span>,
-                <span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                <span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">y</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                <span class="ident">data</span>.<span class="ident">metrics</span>.<span class="ident">advance</span> <span class="kw">as</span> <span class="ident">u32</span>,
+                data.width <span class="kw">as </span>u32,
+                data.height <span class="kw">as </span>u32,
+                data.metrics.x <span class="kw">as </span>i32,
+                data.metrics.y <span class="kw">as </span>i32,
+                data.metrics.advance <span class="kw">as </span>u32,
             )
         };
-        <span class="prelude-val">Some</span>(<span class="ident">Bitmap</span> {
-            <span class="ident">format</span>,
-            <span class="ident">id</span>: <span class="ident">data</span>.<span class="ident">id</span>,
-            <span class="ident">ppem</span>: <span class="ident">data</span>.<span class="ident">ppem</span>,
-            <span class="ident">width</span>,
-            <span class="ident">height</span>,
-            <span class="ident">left</span>,
-            <span class="ident">top</span>,
-            <span class="ident">advance</span>,
-            <span class="ident">data</span>: <span class="ident">data</span>.<span class="ident">data</span>,
+        <span class="prelude-val">Some</span>(Bitmap {
+            format,
+            id: data.id,
+            ppem: data.ppem,
+            width,
+            height,
+            left,
+            top,
+            advance,
+            data: data.data,
         })
     }
 
-    <span class="doccomment">/// Returns the size of an image buffer necessary for storing the decoded bitmap.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decoded_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">format</span>.<span class="ident">buffer_size</span>(<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
+    <span class="doccomment">/// Returns the size of an image buffer necessary for storing the decoded bitmap.
+    </span><span class="kw">pub fn </span>decoded_size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.format.buffer_size(<span class="self">self</span>.width, <span class="self">self</span>.height)
     }
 
-    <span class="doccomment">/// Returns the width, height and buffer size for a scaled version of the bitmap.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scaled_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">size</span>: <span class="ident">f32</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">usize</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span>;
-        <span class="kw">if</span> <span class="ident">size</span> <span class="op">!</span><span class="op">=</span> <span class="number">0.</span> {
-            <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="ident">size</span> <span class="op">/</span> <span class="self">self</span>.<span class="ident">ppem</span> <span class="kw">as</span> <span class="ident">f32</span>;
-            <span class="ident">w</span> <span class="op">=</span> (<span class="ident">w</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">scale</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-            <span class="ident">h</span> <span class="op">=</span> (<span class="ident">h</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">scale</span>) <span class="kw">as</span> <span class="ident">u32</span>;
+    <span class="doccomment">/// Returns the width, height and buffer size for a scaled version of the bitmap.
+    </span><span class="kw">pub fn </span>scaled_size(<span class="kw-2">&amp;</span><span class="self">self</span>, size: f32) -&gt; (u32, u32, usize) {
+        <span class="kw">let </span><span class="kw-2">mut </span>w = <span class="self">self</span>.width;
+        <span class="kw">let </span><span class="kw-2">mut </span>h = <span class="self">self</span>.height;
+        <span class="kw">if </span>size != <span class="number">0. </span>{
+            <span class="kw">let </span>scale = size / <span class="self">self</span>.ppem <span class="kw">as </span>f32;
+            w = (w <span class="kw">as </span>f32 * scale) <span class="kw">as </span>u32;
+            h = (h <span class="kw">as </span>f32 * scale) <span class="kw">as </span>u32;
         }
-        (<span class="ident">w</span>, <span class="ident">h</span>, <span class="self">self</span>.<span class="ident">format</span>.<span class="ident">buffer_size</span>(<span class="ident">w</span>, <span class="ident">h</span>))
+        (w, h, <span class="self">self</span>.format.buffer_size(w, h))
     }
 
-    <span class="doccomment">/// Decodes the bitmap into the specified target buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scratch</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">target</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tmp</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="ident">scratch</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scratch</span>) <span class="op">=</span> <span class="ident">scratch</span> {
-            <span class="ident">scratch</span>
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;mut</span> <span class="ident">tmp</span>
+    <span class="doccomment">/// Decodes the bitmap into the specified target buffer.
+    </span><span class="kw">pub fn </span>decode(<span class="kw-2">&amp;</span><span class="self">self</span>, scratch: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;&gt;, target: <span class="kw-2">&amp;mut </span>[u8]) -&gt; bool {
+        <span class="kw">let </span><span class="kw-2">mut </span>tmp = Vec::new();
+        <span class="kw">let </span>scratch = <span class="kw">if let </span><span class="prelude-val">Some</span>(scratch) = scratch {
+            scratch
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;mut </span>tmp
         };
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">decoded_size</span>();
-        <span class="kw">if</span> <span class="ident">target</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">size</span> {
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">let </span>size = <span class="self">self</span>.decoded_size();
+        <span class="kw">if </span>target.len() &lt; size {
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">src</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">dst</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">target</span>;
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">format</span> {
-            <span class="ident">BitmapFormat::Packed</span>(<span class="ident">bits</span>) =&gt; <span class="kw">match</span> <span class="ident">bits</span> {
-                <span class="number">1</span> =&gt; {
-                    <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span>) <span class="kw">as</span> <span class="ident">usize</span> {
-                        <span class="ident">dst</span>[<span class="ident">x</span>] <span class="op">=</span> (<span class="ident">src</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span><span class="ident">x</span> <span class="op">&amp;</span> <span class="number">7</span>) <span class="op">&amp;</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">255</span>;
+        <span class="kw">let </span>w = <span class="self">self</span>.width <span class="kw">as </span>usize;
+        <span class="kw">let </span>h = <span class="self">self</span>.height <span class="kw">as </span>usize;
+        <span class="kw">let </span>src = <span class="self">self</span>.data;
+        <span class="kw">let </span>dst = <span class="kw-2">&amp;mut *</span>target;
+        <span class="kw">match </span><span class="self">self</span>.format {
+            BitmapFormat::Packed(bits) =&gt; <span class="kw">match </span>bits {
+                <span class="number">1 </span>=&gt; {
+                    <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..(w * h) <span class="kw">as </span>usize {
+                        dst[x] = (src[x &gt;&gt; <span class="number">3</span>] &gt;&gt; (!x &amp; <span class="number">7</span>) &amp; <span class="number">1</span>) * <span class="number">255</span>;
                     }
                 }
-                <span class="number">2</span> =&gt; {
-                    <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span>) <span class="kw">as</span> <span class="ident">usize</span> {
-                        <span class="ident">dst</span>[<span class="ident">x</span>] <span class="op">=</span> (<span class="ident">src</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span>(<span class="ident">x</span> <span class="op">*</span> <span class="number">2</span>) <span class="op">&amp;</span> <span class="number">2</span>) <span class="op">&amp;</span> <span class="number">3</span>) <span class="op">*</span> <span class="number">85</span>;
+                <span class="number">2 </span>=&gt; {
+                    <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..(w * h) <span class="kw">as </span>usize {
+                        dst[x] = (src[x &gt;&gt; <span class="number">2</span>] &gt;&gt; (!(x * <span class="number">2</span>) &amp; <span class="number">2</span>) &amp; <span class="number">3</span>) * <span class="number">85</span>;
                     }
                 }
-                <span class="number">4</span> =&gt; {
-                    <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span>) <span class="kw">as</span> <span class="ident">usize</span> {
-                        <span class="ident">dst</span>[<span class="ident">x</span>] <span class="op">=</span> (<span class="ident">src</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span>(<span class="ident">x</span> <span class="op">*</span> <span class="number">4</span>) <span class="op">&amp;</span> <span class="number">4</span>) <span class="op">&amp;</span> <span class="number">15</span>) <span class="op">*</span> <span class="number">17</span>;
+                <span class="number">4 </span>=&gt; {
+                    <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..(w * h) <span class="kw">as </span>usize {
+                        dst[x] = (src[x &gt;&gt; <span class="number">1</span>] &gt;&gt; (!(x * <span class="number">4</span>) &amp; <span class="number">4</span>) &amp; <span class="number">15</span>) * <span class="number">17</span>;
                     }
                 }
-                <span class="number">8</span> <span class="op">|</span> <span class="number">32</span> =&gt; {
-                    <span class="ident">dst</span>.<span class="ident">copy_from_slice</span>(<span class="ident">src</span>);
+                <span class="number">8 </span>| <span class="number">32 </span>=&gt; {
+                    dst.copy_from_slice(src);
                 }
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="bool-val">false</span>,
+                <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="bool-val">false</span>,
             },
-            <span class="ident">BitmapFormat::Alpha</span>(<span class="ident">bits</span>) =&gt; <span class="kw">match</span> <span class="ident">bits</span> {
-                <span class="number">1</span> =&gt; {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dst_idx</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> <span class="ident">row</span> <span class="kw">in</span> <span class="ident">src</span>.<span class="ident">chunks</span>(((<span class="ident">w</span> <span class="op">*</span> <span class="ident">bits</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>) {
-                        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">w</span> <span class="kw">as</span> <span class="ident">usize</span> {
-                            <span class="ident">dst</span>[<span class="ident">dst_idx</span>] <span class="op">=</span> (<span class="ident">row</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span><span class="ident">x</span> <span class="op">&amp;</span> <span class="number">7</span>) <span class="op">&amp;</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">255</span>;
-                            <span class="ident">dst_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            BitmapFormat::Alpha(bits) =&gt; <span class="kw">match </span>bits {
+                <span class="number">1 </span>=&gt; {
+                    <span class="kw">let </span><span class="kw-2">mut </span>dst_idx = <span class="number">0</span>;
+                    <span class="kw">for </span>row <span class="kw">in </span>src.chunks(((w * bits <span class="kw">as </span>usize) + <span class="number">7</span>) / <span class="number">8</span>) {
+                        <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..w <span class="kw">as </span>usize {
+                            dst[dst_idx] = (row[x &gt;&gt; <span class="number">3</span>] &gt;&gt; (!x &amp; <span class="number">7</span>) &amp; <span class="number">1</span>) * <span class="number">255</span>;
+                            dst_idx += <span class="number">1</span>;
                         }
                     }
                 }
-                <span class="number">2</span> =&gt; {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dst_idx</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> <span class="ident">row</span> <span class="kw">in</span> <span class="ident">src</span>.<span class="ident">chunks</span>(((<span class="ident">w</span> <span class="op">*</span> <span class="ident">bits</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>) {
-                        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">w</span> <span class="kw">as</span> <span class="ident">usize</span> {
-                            <span class="ident">dst</span>[<span class="ident">dst_idx</span>] <span class="op">=</span> (<span class="ident">row</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span>(<span class="ident">x</span> <span class="op">*</span> <span class="number">2</span>) <span class="op">&amp;</span> <span class="number">2</span>) <span class="op">&amp;</span> <span class="number">3</span>) <span class="op">*</span> <span class="number">85</span>;
-                            <span class="ident">dst_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="number">2 </span>=&gt; {
+                    <span class="kw">let </span><span class="kw-2">mut </span>dst_idx = <span class="number">0</span>;
+                    <span class="kw">for </span>row <span class="kw">in </span>src.chunks(((w * bits <span class="kw">as </span>usize) + <span class="number">7</span>) / <span class="number">8</span>) {
+                        <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..w <span class="kw">as </span>usize {
+                            dst[dst_idx] = (row[x &gt;&gt; <span class="number">2</span>] &gt;&gt; (!(x * <span class="number">2</span>) &amp; <span class="number">2</span>) &amp; <span class="number">3</span>) * <span class="number">85</span>;
+                            dst_idx += <span class="number">1</span>;
                         }
                     }
                 }
-                <span class="number">4</span> =&gt; {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dst_idx</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> <span class="ident">row</span> <span class="kw">in</span> <span class="ident">src</span>.<span class="ident">chunks</span>(((<span class="ident">w</span> <span class="op">*</span> <span class="ident">bits</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>) {
-                        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">w</span> <span class="kw">as</span> <span class="ident">usize</span> {
-                            <span class="ident">dst</span>[<span class="ident">dst_idx</span>] <span class="op">=</span> (<span class="ident">row</span>[<span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>] <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="op">!</span>(<span class="ident">x</span> <span class="op">*</span> <span class="number">4</span>) <span class="op">&amp;</span> <span class="number">4</span>) <span class="op">&amp;</span> <span class="number">15</span>) <span class="op">*</span> <span class="number">17</span>;
-                            <span class="ident">dst_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="number">4 </span>=&gt; {
+                    <span class="kw">let </span><span class="kw-2">mut </span>dst_idx = <span class="number">0</span>;
+                    <span class="kw">for </span>row <span class="kw">in </span>src.chunks(((w * bits <span class="kw">as </span>usize) + <span class="number">7</span>) / <span class="number">8</span>) {
+                        <span class="kw">for </span>x <span class="kw">in </span><span class="number">0</span>..w <span class="kw">as </span>usize {
+                            dst[dst_idx] = (row[x &gt;&gt; <span class="number">1</span>] &gt;&gt; (!(x * <span class="number">4</span>) &amp; <span class="number">4</span>) &amp; <span class="number">15</span>) * <span class="number">17</span>;
+                            dst_idx += <span class="number">1</span>;
                         }
                     }
                 }
-                <span class="number">8</span> <span class="op">|</span> <span class="number">32</span> =&gt; {
-                    <span class="ident">dst</span>.<span class="ident">copy_from_slice</span>(<span class="ident">src</span>);
+                <span class="number">8 </span>| <span class="number">32 </span>=&gt; {
+                    dst.copy_from_slice(src);
                 }
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="bool-val">false</span>,
+                <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="bool-val">false</span>,
             },
 
-            <span class="ident">BitmapFormat::Color</span> =&gt; {
-                <span class="ident">dst</span>.<span class="ident">copy_from_slice</span>(<span class="ident">src</span>);
+            BitmapFormat::Color =&gt; {
+                dst.copy_from_slice(src);
             }
-            <span class="ident">BitmapFormat::Png</span> =&gt; {
-                <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::scale::decode_png</span>;
-                <span class="ident">scratch</span>.<span class="ident">clear</span>();
-                <span class="kw">if</span> <span class="ident">decode_png</span>(<span class="ident">src</span>, <span class="ident">scratch</span>, <span class="ident">target</span>).<span class="ident">is_none</span>() {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+            BitmapFormat::Png =&gt; {
+                <span class="kw">use </span><span class="kw">super</span>::scale::decode_png;
+                scratch.clear();
+                <span class="kw">if </span>decode_png(src, scratch, target).is_none() {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
         }
-        <span class="bool-val">true</span>
+        <span class="bool-val">true
+    </span>}
+}
+
+<span class="doccomment">/// The location of a bitmap in the bitmap data table.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>Location {
+    format: u8,
+    flags: u8,
+    id: u16,
+    offset: u32,
+    size: u32,
+    ppem: u16,
+    bit_depth: u8,
+    width: u8,
+    height: u8,
+    metrics: Metrics,
+    vertical_metrics: Metrics,
+}
+
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">impl </span>Location {
+    <span class="doccomment">/// Gets a bitmap from this location in the specified data source.
+    </span><span class="kw">pub fn </span>get&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], upem: u16, is_apple: bool) -&gt; <span class="prelude-ty">Option</span>&lt;Bitmap&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        Bitmap::new(<span class="kw-2">&amp;</span>get_data(data, <span class="self">self</span>)<span class="question-mark">?</span>, upem, is_apple)
     }
 }
 
-<span class="doccomment">/// The location of a bitmap in the bitmap data table.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Location</span> {
-    <span class="ident">format</span>: <span class="ident">u8</span>,
-    <span class="ident">flags</span>: <span class="ident">u8</span>,
-    <span class="ident">id</span>: <span class="ident">u16</span>,
-    <span class="ident">offset</span>: <span class="ident">u32</span>,
-    <span class="ident">size</span>: <span class="ident">u32</span>,
-    <span class="ident">ppem</span>: <span class="ident">u16</span>,
-    <span class="ident">bit_depth</span>: <span class="ident">u8</span>,
-    <span class="ident">width</span>: <span class="ident">u8</span>,
-    <span class="ident">height</span>: <span class="ident">u8</span>,
-    <span class="ident">metrics</span>: <span class="ident">Metrics</span>,
-    <span class="ident">vertical_metrics</span>: <span class="ident">Metrics</span>,
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">Location</span> {
-    <span class="doccomment">/// Gets a bitmap from this location in the specified data source.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">upem</span>: <span class="ident">u16</span>, <span class="ident">is_apple</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Bitmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">Bitmap::new</span>(<span class="kw-2">&amp;</span><span class="ident">get_data</span>(<span class="ident">data</span>, <span class="self">self</span>)<span class="question-mark">?</span>, <span class="ident">upem</span>, <span class="ident">is_apple</span>)
+<span class="kw">fn </span>get_coverage(table: <span class="kw-2">&amp;</span>[u8], strike_base: usize, is_sbix: bool, glyph_id: u16) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+    <span class="kw">if </span>is_sbix {
+        <span class="kw">return </span><span class="prelude-val">Some</span>(sbix_range(table, strike_base, glyph_id, <span class="number">0</span>).is_some());
     }
-}
-
-<span class="kw">fn</span> <span class="ident">get_coverage</span>(<span class="ident">table</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">strike_base</span>: <span class="ident">usize</span>, <span class="ident">is_sbix</span>: <span class="ident">bool</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">is_sbix</span> {
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">sbix_range</span>(<span class="ident">table</span>, <span class="ident">strike_base</span>, <span class="ident">glyph_id</span>, <span class="number">0</span>).<span class="ident">is_some</span>());
+    <span class="kw">let </span>b = Bytes::with_offset(table, strike_base)<span class="question-mark">?</span>;
+    <span class="kw">if </span>glyph_id &lt; b.read(<span class="number">40</span>)<span class="question-mark">? </span>|| glyph_id &gt; b.read(<span class="number">42</span>)<span class="question-mark">? </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">table</span>, <span class="ident">strike_base</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&lt;</span> <span class="ident">b</span>.<span class="ident">read</span>(<span class="number">40</span>)<span class="question-mark">?</span> <span class="op">|</span><span class="op">|</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span> <span class="ident">b</span>.<span class="ident">read</span>(<span class="number">42</span>)<span class="question-mark">?</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
-    }
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">array_offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">0</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">table</span>, <span class="ident">array_offset</span>)<span class="question-mark">?</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">8</span>;
-        <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&lt;</span> <span class="ident">first</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>count = b.read::&lt;u32&gt;(<span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>array_offset = b.read::&lt;u32&gt;(<span class="number">0</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>b = Bytes::with_offset(table, array_offset)<span class="question-mark">?</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..count {
+        <span class="kw">let </span>offset = i * <span class="number">8</span>;
+        <span class="kw">let </span>first = b.read::&lt;u16&gt;(offset)<span class="question-mark">?</span>;
+        <span class="kw">if </span>glyph_id &lt; first {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> {
+        <span class="kw">if </span>glyph_id &gt; b.read::&lt;u16&gt;(offset + <span class="number">2</span>)<span class="question-mark">? </span>{
             <span class="kw">continue</span>;
         }
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
+        <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
     }
-    <span class="prelude-val">None</span>
-}
+    <span class="prelude-val">None
+</span>}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">get_location</span>(
-    <span class="ident">table</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    <span class="ident">strike_base</span>: <span class="ident">usize</span>,
-    <span class="ident">is_sbix</span>: <span class="ident">bool</span>,
-    <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">table</span>);
-    <span class="kw">if</span> <span class="ident">is_sbix</span> {
-        <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="ident">sbix_range</span>(<span class="ident">table</span>, <span class="ident">strike_base</span>, <span class="ident">glyph_id</span>, <span class="number">0</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">start</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">start</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">start</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">start</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">ppem</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">strike_base</span>)<span class="question-mark">?</span>;
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Location</span> {
-            <span class="ident">ppem</span>,
-            <span class="ident">id</span>: <span class="ident">glyph_id</span>,
-            <span class="ident">bit_depth</span>: <span class="number">32</span>,
-            <span class="ident">width</span>: <span class="number">0</span>,
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">metrics</span>: <span class="ident">Metrics</span> {
-                <span class="ident">x</span>: <span class="ident">x</span> <span class="kw">as</span> <span class="ident">i8</span>,
-                <span class="ident">y</span>: <span class="ident">y</span> <span class="kw">as</span> <span class="ident">i8</span>,
-                <span class="ident">advance</span>: <span class="number">0</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">fn </span>get_location(
+    table: <span class="kw-2">&amp;</span>[u8],
+    strike_base: usize,
+    is_sbix: bool,
+    glyph_id: u16,
+) -&gt; <span class="prelude-ty">Option</span>&lt;Location&gt; {
+    <span class="kw">let </span>d = Bytes::new(table);
+    <span class="kw">if </span>is_sbix {
+        <span class="kw">let </span>(start, end) = sbix_range(table, strike_base, glyph_id, <span class="number">0</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>len = (end - start) <span class="kw">as </span>usize;
+        <span class="kw">let </span>start = start <span class="kw">as </span>usize;
+        <span class="kw">let </span>x = d.read::&lt;i16&gt;(start)<span class="question-mark">?</span>;
+        <span class="kw">let </span>y = d.read::&lt;i16&gt;(start + <span class="number">2</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>ppem = d.read::&lt;u16&gt;(strike_base)<span class="question-mark">?</span>;
+        <span class="kw">return </span><span class="prelude-val">Some</span>(Location {
+            ppem,
+            id: glyph_id,
+            bit_depth: <span class="number">32</span>,
+            width: <span class="number">0</span>,
+            height: <span class="number">0</span>,
+            metrics: Metrics {
+                x: x <span class="kw">as </span>i8,
+                y: y <span class="kw">as </span>i8,
+                advance: <span class="number">0</span>,
             },
-            <span class="ident">vertical_metrics</span>: <span class="ident">Metrics::default</span>(),
-            <span class="ident">format</span>: <span class="number">0xFF</span>,
-            <span class="ident">flags</span>: <span class="number">1</span>,
-            <span class="ident">offset</span>: <span class="ident">start</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">+</span> <span class="number">8</span>,
-            <span class="ident">size</span>: <span class="ident">len</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">-</span> <span class="number">8</span>,
+            vertical_metrics: Metrics::default(),
+            format: <span class="number">0xFF</span>,
+            flags: <span class="number">1</span>,
+            offset: start <span class="kw">as </span>u32 + <span class="number">8</span>,
+            size: len <span class="kw">as </span>u32 - <span class="number">8</span>,
         });
     }
-    <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&lt;</span> <span class="ident">d</span>.<span class="ident">read</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">40</span>)<span class="question-mark">?</span> <span class="op">|</span><span class="op">|</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span> <span class="ident">d</span>.<span class="ident">read</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">42</span>)<span class="question-mark">?</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">if </span>glyph_id &lt; d.read(strike_base + <span class="number">40</span>)<span class="question-mark">? </span>|| glyph_id &gt; d.read(strike_base + <span class="number">42</span>)<span class="question-mark">? </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">ppem</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">45</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u16</span>;
-    <span class="kw">let</span> <span class="ident">bit_depth</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">46</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">strike_base</span> <span class="op">+</span> <span class="number">47</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">array_offset</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">strike_base</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">array_offset</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">8</span>;
-        <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&lt;</span> <span class="ident">first</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>count = d.read::&lt;u32&gt;(strike_base + <span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>ppem = d.read::&lt;u8&gt;(strike_base + <span class="number">45</span>)<span class="question-mark">? </span><span class="kw">as </span>u16;
+    <span class="kw">let </span>bit_depth = d.read::&lt;u8&gt;(strike_base + <span class="number">46</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>flags = d.read::&lt;u8&gt;(strike_base + <span class="number">47</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>array_offset = d.read::&lt;u32&gt;(strike_base)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..count {
+        <span class="kw">let </span>offset = array_offset + i * <span class="number">8</span>;
+        <span class="kw">let </span>first = d.read::&lt;u16&gt;(offset)<span class="question-mark">?</span>;
+        <span class="kw">if </span>glyph_id &lt; first {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> {
+        <span class="kw">if </span>glyph_id &gt; d.read::&lt;u16&gt;(offset + <span class="number">2</span>)<span class="question-mark">? </span>{
             <span class="kw">continue</span>;
         }
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">array_offset</span> <span class="op">+</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">index_format</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">image_format</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u8</span>;
-        <span class="kw">let</span> <span class="ident">image_offset</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">loc</span> <span class="op">=</span> <span class="ident">Location</span> {
-            <span class="ident">ppem</span>,
-            <span class="ident">id</span>: <span class="ident">glyph_id</span>,
-            <span class="ident">bit_depth</span>,
-            <span class="ident">width</span>: <span class="number">0</span>,
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">metrics</span>: <span class="ident">Metrics::default</span>(),
-            <span class="ident">vertical_metrics</span>: <span class="ident">Metrics::default</span>(),
-            <span class="ident">format</span>: <span class="ident">image_format</span>,
-            <span class="ident">flags</span>,
-            <span class="ident">offset</span>: <span class="number">0</span>,
-            <span class="ident">size</span>: <span class="number">0</span>,
+        <span class="kw">let </span>offset = array_offset + d.read::&lt;u32&gt;(offset + <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>index_format = d.read::&lt;u16&gt;(offset)<span class="question-mark">?</span>;
+        <span class="kw">let </span>image_format = d.read::&lt;u16&gt;(offset + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>u8;
+        <span class="kw">let </span>image_offset = d.read::&lt;u32&gt;(offset + <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>u32;
+        <span class="kw">let </span>base = offset + <span class="number">8</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>loc = Location {
+            ppem,
+            id: glyph_id,
+            bit_depth,
+            width: <span class="number">0</span>,
+            height: <span class="number">0</span>,
+            metrics: Metrics::default(),
+            vertical_metrics: Metrics::default(),
+            format: image_format,
+            flags,
+            offset: <span class="number">0</span>,
+            size: <span class="number">0</span>,
         };
-        <span class="kw">match</span> <span class="ident">index_format</span> {
-            <span class="number">1</span> =&gt; {
-                <span class="ident">loc</span>.<span class="ident">offset</span> <span class="op">=</span>
-                    <span class="ident">image_offset</span> <span class="op">+</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> (<span class="ident">glyph_id</span> <span class="op">-</span> <span class="ident">first</span>) <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>);
+        <span class="kw">match </span>index_format {
+            <span class="number">1 </span>=&gt; {
+                loc.offset =
+                    image_offset + d.read::&lt;u32&gt;(base + (glyph_id - first) <span class="kw">as </span>usize * <span class="number">4</span>)<span class="question-mark">?</span>;
+                <span class="kw">return </span><span class="prelude-val">Some</span>(loc);
             }
-            <span class="number">2</span> =&gt; {
-                <span class="ident">loc</span>.<span class="ident">size</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span>)<span class="question-mark">?</span>;
-                <span class="ident">loc</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="ident">image_offset</span> <span class="op">+</span> <span class="ident">loc</span>.<span class="ident">size</span> <span class="op">*</span> (<span class="ident">glyph_id</span> <span class="op">-</span> <span class="ident">first</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-                <span class="kw">let</span> (<span class="ident">w</span>, <span class="ident">h</span>) <span class="op">=</span> <span class="ident">get_metrics</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">d</span>,
-                    <span class="ident">base</span> <span class="op">+</span> <span class="number">4</span>,
-                    <span class="ident">flags</span>,
+            <span class="number">2 </span>=&gt; {
+                loc.size = d.read::&lt;u32&gt;(base)<span class="question-mark">?</span>;
+                loc.offset = image_offset + loc.size * (glyph_id - first) <span class="kw">as </span>u32;
+                <span class="kw">let </span>(w, h) = get_metrics(
+                    <span class="kw-2">&amp;</span>d,
+                    base + <span class="number">4</span>,
+                    flags,
                     <span class="bool-val">true</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">loc</span>.<span class="ident">metrics</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">loc</span>.<span class="ident">vertical_metrics</span>,
+                    <span class="kw-2">&amp;mut </span>loc.metrics,
+                    <span class="kw-2">&amp;mut </span>loc.vertical_metrics,
                 )<span class="question-mark">?</span>;
-                <span class="ident">loc</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">w</span>;
-                <span class="ident">loc</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">h</span>;
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>);
+                loc.width = w;
+                loc.height = h;
+                <span class="kw">return </span><span class="prelude-val">Some</span>(loc);
             }
-            <span class="number">3</span> =&gt; {
-                <span class="ident">loc</span>.<span class="ident">offset</span> <span class="op">=</span>
-                    <span class="ident">image_offset</span> <span class="op">+</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> (<span class="ident">glyph_id</span> <span class="op">-</span> <span class="ident">first</span>) <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>);
+            <span class="number">3 </span>=&gt; {
+                loc.offset =
+                    image_offset + d.read::&lt;u16&gt;(base + (glyph_id - first) <span class="kw">as </span>usize * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>u32;
+                <span class="kw">return </span><span class="prelude-val">Some</span>(loc);
             }
-            <span class="number">4</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">while</span> <span class="ident">l</span> <span class="op">&lt;</span> <span class="ident">h</span> {
-                    <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-                    <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> (<span class="ident">l</span> <span class="op">+</span> <span class="ident">h</span>) <span class="op">/</span> <span class="number">2</span>;
-                    <span class="kw">let</span> <span class="ident">rec</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">4</span>;
-                    <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">rec</span>)<span class="question-mark">?</span>;
-                    <span class="kw">match</span> <span class="ident">glyph_id</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">id</span>) {
-                        <span class="ident">Less</span> =&gt; <span class="ident">h</span> <span class="op">=</span> <span class="ident">i</span>,
-                        <span class="ident">Greater</span> =&gt; <span class="ident">l</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="ident">i</span>,
-                        <span class="ident">Equal</span> =&gt; {
-                            <span class="kw">let</span> <span class="ident">offset1</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">rec</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-                            <span class="kw">let</span> <span class="ident">offset2</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">rec</span> <span class="op">+</span> <span class="number">6</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-                            <span class="kw">if</span> <span class="ident">offset2</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">offset1</span> {
-                                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            <span class="number">4 </span>=&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>l = <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>h = d.read::&lt;u32&gt;(base)<span class="question-mark">? </span><span class="kw">as </span>usize;
+                <span class="kw">while </span>l &lt; h {
+                    <span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+                    <span class="kw">let </span>i = (l + h) / <span class="number">2</span>;
+                    <span class="kw">let </span>rec = base + i * <span class="number">4</span>;
+                    <span class="kw">let </span>id = d.read::&lt;u16&gt;(rec)<span class="question-mark">?</span>;
+                    <span class="kw">match </span>glyph_id.cmp(<span class="kw-2">&amp;</span>id) {
+                        Less =&gt; h = i,
+                        Greater =&gt; l = i + i,
+                        Equal =&gt; {
+                            <span class="kw">let </span>offset1 = d.read::&lt;u16&gt;(rec + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>u32;
+                            <span class="kw">let </span>offset2 = d.read::&lt;u16&gt;(rec + <span class="number">6</span>)<span class="question-mark">? </span><span class="kw">as </span>u32;
+                            <span class="kw">if </span>offset2 &lt;= offset1 {
+                                <span class="kw">return </span><span class="prelude-val">None</span>;
                             }
-                            <span class="ident">loc</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="ident">image_offset</span> <span class="op">+</span> <span class="ident">offset1</span>;
-                            <span class="ident">loc</span>.<span class="ident">size</span> <span class="op">=</span> <span class="ident">offset2</span> <span class="op">-</span> <span class="ident">offset1</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">loc</span>);
+                            loc.offset = image_offset + offset1;
+                            loc.size = offset2 - offset1;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(loc);
                         }
                     }
                 }
             }
-            <span class="kw">_</span> =&gt; {
-                <span class="kw">return</span> <span class="prelude-val">None</span>;
+            <span class="kw">_ </span>=&gt; {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
             }
         }
     }
-    <span class="prelude-val">None</span>
-}
+    <span class="prelude-val">None
+</span>}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">get_data</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">table</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">loc</span>: <span class="kw-2">&amp;</span><span class="ident">Location</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BitmapData</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">depth</span> <span class="op">=</span> <span class="ident">loc</span>.<span class="ident">bit_depth</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bitmap</span> <span class="op">=</span> <span class="ident">BitmapData</span> {
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span>[],
-        <span class="ident">flags</span>: <span class="ident">loc</span>.<span class="ident">flags</span>,
-        <span class="ident">id</span>: <span class="ident">loc</span>.<span class="ident">id</span>,
-        <span class="ident">ppem</span>: <span class="ident">loc</span>.<span class="ident">ppem</span>,
-        <span class="ident">bit_depth</span>: <span class="ident">loc</span>.<span class="ident">bit_depth</span>,
-        <span class="ident">width</span>: <span class="ident">loc</span>.<span class="ident">width</span>,
-        <span class="ident">height</span>: <span class="ident">loc</span>.<span class="ident">height</span>,
-        <span class="ident">metrics</span>: <span class="ident">loc</span>.<span class="ident">metrics</span>,
-        <span class="ident">vertical_metrics</span>: <span class="ident">loc</span>.<span class="ident">vertical_metrics</span>,
-        <span class="ident">is_packed</span>: <span class="bool-val">false</span>,
-        <span class="ident">is_png</span>: <span class="bool-val">false</span>,
-        <span class="ident">is_sbix</span>: <span class="bool-val">false</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">fn </span>get_data&lt;<span class="lifetime">&#39;a</span>&gt;(table: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], loc: <span class="kw-2">&amp;</span>Location) -&gt; <span class="prelude-ty">Option</span>&lt;BitmapData&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">let </span>depth = loc.bit_depth <span class="kw">as </span>usize;
+    <span class="kw">let </span><span class="kw-2">mut </span>bitmap = BitmapData {
+        data: <span class="kw-2">&amp;</span>[],
+        flags: loc.flags,
+        id: loc.id,
+        ppem: loc.ppem,
+        bit_depth: loc.bit_depth,
+        width: loc.width,
+        height: loc.height,
+        metrics: loc.metrics,
+        vertical_metrics: loc.vertical_metrics,
+        is_packed: <span class="bool-val">false</span>,
+        is_png: <span class="bool-val">false</span>,
+        is_sbix: <span class="bool-val">false</span>,
     };
-    <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">Bytes::new</span>(<span class="ident">table</span>);
-    <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">loc</span>.<span class="ident">offset</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">loc</span>.<span class="ident">flags</span>;
-    <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">loc</span>.<span class="ident">size</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">match</span> <span class="ident">loc</span>.<span class="ident">format</span> {
-        <span class="number">0xFF</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span>, <span class="ident">size</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_png</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_sbix</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+    <span class="kw">let </span>d = <span class="kw-2">&amp;</span>Bytes::new(table);
+    <span class="kw">let </span>offset = loc.offset <span class="kw">as </span>usize;
+    <span class="kw">let </span>flags = loc.flags;
+    <span class="kw">let </span>size = loc.size <span class="kw">as </span>usize;
+    <span class="kw">match </span>loc.format {
+        <span class="number">0xFF </span>=&gt; {
+            bitmap.data = d.read_bytes(offset, size)<span class="question-mark">?</span>;
+            bitmap.is_png = <span class="bool-val">true</span>;
+            bitmap.is_sbix = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">1</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> (<span class="ident">bitmap</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">depth</span> <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>;
-            <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">5</span>, <span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">1 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>w = (bitmap.width <span class="kw">as </span>usize * depth + <span class="number">7</span>) / <span class="number">8</span>;
+            <span class="kw">let </span>h = bitmap.height <span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">5</span>, w * h)<span class="question-mark">?</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">2</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">depth</span>;
-            <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">5</span>, (<span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span> <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_packed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">2 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>w = bitmap.width <span class="kw">as </span>usize * depth;
+            <span class="kw">let </span>h = bitmap.height <span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">5</span>, (w * h + <span class="number">7</span>) / <span class="number">8</span>)<span class="question-mark">?</span>;
+            bitmap.is_packed = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">5</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span>, <span class="ident">size</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_packed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">5 </span>=&gt; {
+            bitmap.data = d.read_bytes(offset, size)<span class="question-mark">?</span>;
+            bitmap.is_packed = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">6</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> (<span class="ident">bitmap</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">depth</span> <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>;
-            <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>, <span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">6 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>w = (bitmap.width <span class="kw">as </span>usize * depth + <span class="number">7</span>) / <span class="number">8</span>;
+            <span class="kw">let </span>h = bitmap.height <span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">8</span>, w * h)<span class="question-mark">?</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">7</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">depth</span>;
-            <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">bitmap</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>, (<span class="ident">w</span> <span class="op">*</span> <span class="ident">h</span> <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">8</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_packed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">7 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>w = bitmap.width <span class="kw">as </span>usize * depth;
+            <span class="kw">let </span>h = bitmap.height <span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">8</span>, (w * h + <span class="number">7</span>) / <span class="number">8</span>)<span class="question-mark">?</span>;
+            bitmap.is_packed = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">17</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">5</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">9</span>, <span class="ident">size</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_png</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">17 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>size = d.read::&lt;u32&gt;(offset + <span class="number">5</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">9</span>, size)<span class="question-mark">?</span>;
+            bitmap.is_png = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">18</span> =&gt; {
-            <span class="ident">bitmap</span>.<span class="ident">read_metrics</span>(<span class="ident">d</span>, <span class="ident">offset</span>, <span class="ident">flags</span>, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">12</span>, <span class="ident">size</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_png</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">18 </span>=&gt; {
+            bitmap.read_metrics(d, offset, flags, <span class="bool-val">true</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>size = d.read::&lt;u32&gt;(offset + <span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">12</span>, size)<span class="question-mark">?</span>;
+            bitmap.is_png = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="number">19</span> =&gt; {
-            <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">bitmap</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>, <span class="ident">size</span>)<span class="question-mark">?</span>;
-            <span class="ident">bitmap</span>.<span class="ident">is_png</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">Some</span>(<span class="ident">bitmap</span>)
+        <span class="number">19 </span>=&gt; {
+            <span class="kw">let </span>size = d.read::&lt;u32&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>usize;
+            bitmap.data = d.read_bytes(offset + <span class="number">4</span>, size)<span class="question-mark">?</span>;
+            bitmap.is_png = <span class="bool-val">true</span>;
+            <span class="prelude-val">Some</span>(bitmap)
         }
-        <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+        <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
     }
 }
 
-<span class="kw">fn</span> <span class="ident">sbix_range</span>(<span class="ident">table</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">strike_base</span>: <span class="ident">usize</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>, <span class="ident">recurse</span>: <span class="ident">i32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>)<span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">DUPE</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;dupe&quot;</span>);
-    <span class="kw">const</span> <span class="ident">PNG</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;png &quot;</span>);
-    <span class="kw">if</span> <span class="ident">recurse</span> <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">fn </span>sbix_range(table: <span class="kw-2">&amp;</span>[u8], strike_base: usize, glyph_id: u16, recurse: i32) -&gt; <span class="prelude-ty">Option</span>&lt;(u32, u32)&gt; {
+    <span class="kw">const </span>DUPE: RawTag = raw_tag(<span class="string">b&quot;dupe&quot;</span>);
+    <span class="kw">const </span>PNG: RawTag = raw_tag(<span class="string">b&quot;png &quot;</span>);
+    <span class="kw">if </span>recurse &gt; <span class="number">1 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">table</span>);
-    <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">glyph_id</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">strike_base</span> <span class="op">+</span> <span class="number">4</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">id</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> (<span class="ident">id</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">end</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">start</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>b = Bytes::new(table);
+    <span class="kw">let </span>id = glyph_id <span class="kw">as </span>usize;
+    <span class="kw">let </span>base = strike_base + <span class="number">4</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>start = b.read::&lt;u32&gt;(base + id * <span class="number">4</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>end = b.read::&lt;u32&gt;(base + (id + <span class="number">1</span>) * <span class="number">4</span>)<span class="question-mark">?</span>;
+    <span class="kw">if </span>end &lt;= start {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="ident">start</span> <span class="op">+</span><span class="op">=</span> <span class="ident">strike_base</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="ident">end</span> <span class="op">+</span><span class="op">=</span> <span class="ident">strike_base</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="kw">let</span> <span class="ident">tag</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">start</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">tag</span> <span class="op">==</span> <span class="ident">DUPE</span> {
-        <span class="kw">let</span> <span class="ident">dupe</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">start</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">8</span>)<span class="question-mark">?</span>;
-        <span class="ident">sbix_range</span>(<span class="ident">table</span>, <span class="ident">strike_base</span>, <span class="ident">dupe</span>, <span class="ident">recurse</span> <span class="op">+</span> <span class="number">1</span>)
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">tag</span> <span class="op">==</span> <span class="ident">PNG</span> {
-        <span class="prelude-val">Some</span>((<span class="ident">start</span>, <span class="ident">end</span>))
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    }
+    start += strike_base <span class="kw">as </span>u32;
+    end += strike_base <span class="kw">as </span>u32;
+    <span class="kw">let </span>tag = b.read::&lt;u32&gt;(start <span class="kw">as </span>usize + <span class="number">4</span>)<span class="question-mark">?</span>;
+    <span class="kw">if </span>tag == DUPE {
+        <span class="kw">let </span>dupe = b.read::&lt;u16&gt;(start <span class="kw">as </span>usize + <span class="number">8</span>)<span class="question-mark">?</span>;
+        sbix_range(table, strike_base, dupe, recurse + <span class="number">1</span>)
+    } <span class="kw">else if </span>tag == PNG {
+        <span class="prelude-val">Some</span>((start, end))
+    } <span class="kw">else </span>{
+        <span class="prelude-val">None
+    </span>}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">BitmapData</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">ppem</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">bit_depth</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">width</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">height</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">metrics</span>: <span class="ident">Metrics</span>,
-    <span class="kw">pub</span> <span class="ident">vertical_metrics</span>: <span class="ident">Metrics</span>,
-    <span class="kw">pub</span> <span class="ident">is_packed</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">is_png</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">is_sbix</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>BitmapData&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    <span class="kw">pub </span>id: u16,
+    <span class="kw">pub </span>ppem: u16,
+    <span class="kw">pub </span>flags: u8,
+    <span class="kw">pub </span>bit_depth: u8,
+    <span class="kw">pub </span>width: u8,
+    <span class="kw">pub </span>height: u8,
+    <span class="kw">pub </span>metrics: Metrics,
+    <span class="kw">pub </span>vertical_metrics: Metrics,
+    <span class="kw">pub </span>is_packed: bool,
+    <span class="kw">pub </span>is_png: bool,
+    <span class="kw">pub </span>is_sbix: bool,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">BitmapData</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">read_metrics</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="ident">Bytes</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">flags</span>: <span class="ident">u8</span>, <span class="ident">big</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">w</span>, <span class="ident">h</span>) <span class="op">=</span> <span class="ident">get_metrics</span>(
-            <span class="ident">d</span>,
-            <span class="ident">offset</span>,
-            <span class="ident">flags</span>,
-            <span class="ident">big</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">metrics</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">vertical_metrics</span>,
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; BitmapData&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>read_metrics(<span class="kw-2">&amp;mut </span><span class="self">self</span>, d: <span class="kw-2">&amp;</span>Bytes, offset: usize, flags: u8, big: bool) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>(w, h) = get_metrics(
+            d,
+            offset,
+            flags,
+            big,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.metrics,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.vertical_metrics,
         )<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">w</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">h</span>;
+        <span class="self">self</span>.width = w;
+        <span class="self">self</span>.height = h;
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Metrics</span> {
-    <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">i8</span>,
-    <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">i8</span>,
-    <span class="kw">pub</span> <span class="ident">advance</span>: <span class="ident">u8</span>,
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">struct </span>Metrics {
+    <span class="kw">pub </span>x: i8,
+    <span class="kw">pub </span>y: i8,
+    <span class="kw">pub </span>advance: u8,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">get_metrics</span>(
-    <span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="ident">Bytes</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">flags</span>: <span class="ident">u8</span>,
-    <span class="ident">big</span>: <span class="ident">bool</span>,
-    <span class="ident">h</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Metrics</span>,
-    <span class="ident">v</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Metrics</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u8</span>, <span class="ident">u8</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">big</span> {
-        <span class="ident">h</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="ident">h</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">3</span>)<span class="question-mark">?</span>;
-        <span class="ident">h</span>.<span class="ident">advance</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-        <span class="ident">v</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">5</span>)<span class="question-mark">?</span>;
-        <span class="ident">v</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">6</span>)<span class="question-mark">?</span>;
-        <span class="ident">v</span>.<span class="ident">advance</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">7</span>)<span class="question-mark">?</span>;
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="number">2</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="ident">v</span> } <span class="kw">else</span> { <span class="ident">h</span> };
-        <span class="ident">m</span>.<span class="ident">x</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="ident">m</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">3</span>)<span class="question-mark">?</span>;
-        <span class="ident">m</span>.<span class="ident">advance</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;scale&quot;</span>)]
+</span><span class="kw">fn </span>get_metrics(
+    d: <span class="kw-2">&amp;</span>Bytes,
+    offset: usize,
+    flags: u8,
+    big: bool,
+    h: <span class="kw-2">&amp;mut </span>Metrics,
+    v: <span class="kw-2">&amp;mut </span>Metrics,
+) -&gt; <span class="prelude-ty">Option</span>&lt;(u8, u8)&gt; {
+    <span class="kw">let </span>width = d.read::&lt;u8&gt;(offset + <span class="number">1</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>height = d.read::&lt;u8&gt;(offset)<span class="question-mark">?</span>;
+    <span class="kw">if </span>big {
+        h.x = d.read::&lt;i8&gt;(offset + <span class="number">2</span>)<span class="question-mark">?</span>;
+        h.y = d.read::&lt;i8&gt;(offset + <span class="number">3</span>)<span class="question-mark">?</span>;
+        h.advance = d.read::&lt;u8&gt;(offset + <span class="number">4</span>)<span class="question-mark">?</span>;
+        v.x = d.read::&lt;i8&gt;(offset + <span class="number">5</span>)<span class="question-mark">?</span>;
+        v.y = d.read::&lt;i8&gt;(offset + <span class="number">6</span>)<span class="question-mark">?</span>;
+        v.advance = d.read::&lt;u8&gt;(offset + <span class="number">7</span>)<span class="question-mark">?</span>;
+    } <span class="kw">else </span>{
+        <span class="kw">let </span>m = <span class="kw">if </span>flags &amp; <span class="number">2 </span>!= <span class="number">0 </span>{ v } <span class="kw">else </span>{ h };
+        m.x = d.read::&lt;i8&gt;(offset + <span class="number">2</span>)<span class="question-mark">?</span>;
+        m.y = d.read::&lt;i8&gt;(offset + <span class="number">3</span>)<span class="question-mark">?</span>;
+        m.advance = d.read::&lt;u8&gt;(offset + <span class="number">4</span>)<span class="question-mark">?</span>;
     }
-    <span class="prelude-val">Some</span>((<span class="ident">width</span>, <span class="ident">height</span>))
+    <span class="prelude-val">Some</span>((width, height))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

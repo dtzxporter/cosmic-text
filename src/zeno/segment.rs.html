@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/segment.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>segment.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/segment.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>segment.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -632,633 +632,633 @@
 <span id="632">632</span>
 <span id="633">633</span>
 <span id="634">634</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Path segmentation.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Path segmentation.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::command::Command</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::<span class="kw-2">*</span>;
+</span><span class="kw">use </span><span class="kw">super</span>::command::Command;
+<span class="kw">use </span><span class="kw">super</span>::geometry::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
+<span class="kw">use </span>core::borrow::Borrow;
 
-<span class="doccomment">/// Represents the time parameter for a specific distance along</span>
-<span class="doccomment">/// a segment.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SegmentTime</span> {
-    <span class="kw">pub</span> <span class="ident">distance</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">time</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Represents the time parameter for a specific distance along
+/// a segment.
+</span><span class="attribute">#[derive(Copy, Clone, Debug)]
+</span><span class="kw">pub struct </span>SegmentTime {
+    <span class="kw">pub </span>distance: f32,
+    <span class="kw">pub </span>time: f32,
 }
 
-<span class="doccomment">/// Line segment.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Line</span> {
-    <span class="kw">pub</span> <span class="ident">a</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">b</span>: <span class="ident">Point</span>,
+<span class="doccomment">/// Line segment.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Debug)]
+</span><span class="kw">pub struct </span>Line {
+    <span class="kw">pub </span>a: Point,
+    <span class="kw">pub </span>b: Point,
 }
 
-<span class="kw">impl</span> <span class="ident">Line</span> {
-    <span class="doccomment">/// Creates a new line segment.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">a</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>, <span class="ident">b</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">a</span>: <span class="ident">a</span>.<span class="ident">into</span>(),
-            <span class="ident">b</span>: <span class="ident">b</span>.<span class="ident">into</span>(),
+<span class="kw">impl </span>Line {
+    <span class="doccomment">/// Creates a new line segment.
+    </span><span class="kw">pub fn </span>new(a: <span class="kw">impl </span>Into&lt;Vector&gt;, b: <span class="kw">impl </span>Into&lt;Vector&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            a: a.into(),
+            b: b.into(),
         }
     }
 
-    <span class="doccomment">/// Returns the length of the line segment.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        (<span class="self">self</span>.<span class="ident">b</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">a</span>).<span class="ident">length</span>()
+    <span class="doccomment">/// Returns the length of the line segment.
+    </span><span class="kw">pub fn </span>length(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        (<span class="self">self</span>.b - <span class="self">self</span>.a).length()
     }
 
-    <span class="doccomment">/// Returns a slice of the line segment described by the specified start and end times.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">start</span>: <span class="ident">f32</span>, <span class="ident">end</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">a</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">a</span> <span class="op">+</span> <span class="ident">dir</span> <span class="op">*</span> <span class="ident">start</span>, <span class="self">self</span>.<span class="ident">a</span> <span class="op">+</span> <span class="ident">dir</span> <span class="op">*</span> <span class="ident">end</span>)
+    <span class="doccomment">/// Returns a slice of the line segment described by the specified start and end times.
+    </span><span class="kw">pub fn </span>slice(<span class="kw-2">&amp;</span><span class="self">self</span>, start: f32, end: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>dir = <span class="self">self</span>.b - <span class="self">self</span>.a;
+        <span class="self">Self</span>::new(<span class="self">self</span>.a + dir * start, <span class="self">self</span>.a + dir * end)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">distance</span>: <span class="ident">f32</span>) -&gt; <span class="ident">SegmentTime</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">b</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">a</span>).<span class="ident">length</span>();
-        <span class="kw">if</span> <span class="ident">distance</span> <span class="op">&gt;</span> <span class="ident">len</span> {
-            <span class="kw">return</span> <span class="ident">SegmentTime</span> {
-                <span class="ident">distance</span>: <span class="ident">len</span>,
-                <span class="ident">time</span>: <span class="number">1.</span>,
+    <span class="kw">pub fn </span>time(<span class="kw-2">&amp;</span><span class="self">self</span>, distance: f32) -&gt; SegmentTime {
+        <span class="kw">let </span>len = (<span class="self">self</span>.b - <span class="self">self</span>.a).length();
+        <span class="kw">if </span>distance &gt; len {
+            <span class="kw">return </span>SegmentTime {
+                distance: len,
+                time: <span class="number">1.</span>,
             };
         }
-        <span class="ident">SegmentTime</span> {
-            <span class="ident">distance</span>,
-            <span class="ident">time</span>: <span class="ident">distance</span> <span class="op">/</span> <span class="ident">len</span>,
+        SegmentTime {
+            distance,
+            time: distance / len,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">b</span>, <span class="self">self</span>.<span class="ident">a</span>)
+    <span class="kw">pub fn </span>reverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.b, <span class="self">self</span>.a)
     }
 }
 
-<span class="doccomment">/// Cubic bezier curve.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Curve</span> {
-    <span class="kw">pub</span> <span class="ident">a</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">b</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">c</span>: <span class="ident">Point</span>,
-    <span class="kw">pub</span> <span class="ident">d</span>: <span class="ident">Point</span>,
+<span class="doccomment">/// Cubic bezier curve.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Default, Debug)]
+</span><span class="kw">pub struct </span>Curve {
+    <span class="kw">pub </span>a: Point,
+    <span class="kw">pub </span>b: Point,
+    <span class="kw">pub </span>c: Point,
+    <span class="kw">pub </span>d: Point,
 }
 
-<span class="kw">impl</span> <span class="ident">Curve</span> {
-    <span class="doccomment">/// Creates a new curve.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">a</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">b</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">c</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">d</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="ident">Curve</span> {
-            <span class="ident">a</span>: <span class="ident">a</span>.<span class="ident">into</span>(),
-            <span class="ident">b</span>: <span class="ident">b</span>.<span class="ident">into</span>(),
-            <span class="ident">c</span>: <span class="ident">c</span>.<span class="ident">into</span>(),
-            <span class="ident">d</span>: <span class="ident">d</span>.<span class="ident">into</span>(),
+<span class="kw">impl </span>Curve {
+    <span class="doccomment">/// Creates a new curve.
+    </span><span class="kw">pub fn </span>new(
+        a: <span class="kw">impl </span>Into&lt;Point&gt;,
+        b: <span class="kw">impl </span>Into&lt;Point&gt;,
+        c: <span class="kw">impl </span>Into&lt;Point&gt;,
+        d: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        Curve {
+            a: a.into(),
+            b: b.into(),
+            c: c.into(),
+            d: d.into(),
         }
     }
 
-    <span class="doccomment">/// Creates a new curve from a quadratic bezier curve.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_quadratic</span>(<span class="ident">a</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">b</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">c</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">into</span>();
-        <span class="self">Self</span> {
-            <span class="ident">a</span>,
-            <span class="ident">b</span>: <span class="ident">Point::new</span>(<span class="ident">a</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">a</span>.<span class="ident">x</span>), <span class="ident">a</span>.<span class="ident">y</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">a</span>.<span class="ident">y</span>)),
-            <span class="ident">c</span>: <span class="ident">Point::new</span>(<span class="ident">c</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">c</span>.<span class="ident">x</span>), <span class="ident">c</span>.<span class="ident">y</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">b</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">c</span>.<span class="ident">y</span>)),
-            <span class="ident">d</span>: <span class="ident">c</span>,
+    <span class="doccomment">/// Creates a new curve from a quadratic bezier curve.
+    </span><span class="kw">pub fn </span>from_quadratic(a: <span class="kw">impl </span>Into&lt;Point&gt;, b: <span class="kw">impl </span>Into&lt;Point&gt;, c: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>a = a.into();
+        <span class="kw">let </span>b = b.into();
+        <span class="kw">let </span>c = c.into();
+        <span class="self">Self </span>{
+            a,
+            b: Point::new(a.x + <span class="number">2. </span>/ <span class="number">3. </span>* (b.x - a.x), a.y + <span class="number">2. </span>/ <span class="number">3. </span>* (b.y - a.y)),
+            c: Point::new(c.x + <span class="number">2. </span>/ <span class="number">3. </span>* (b.x - c.x), c.y + <span class="number">2. </span>/ <span class="number">3. </span>* (b.y - c.y)),
+            d: c,
         }
     }
 
-    <span class="doccomment">/// Returns the length of the curve.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">len</span> <span class="op">=</span> <span class="number">0.</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>;
-        <span class="kw">let</span> <span class="ident">steps</span> <span class="op">=</span> <span class="number">64</span>;
-        <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">/</span> <span class="ident">steps</span> <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="number">0.</span>;
-        <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="op">=</span><span class="ident">steps</span> {
-            <span class="ident">t</span> <span class="op">+</span><span class="op">=</span> <span class="ident">step</span>;
-            <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">evaluate</span>(<span class="ident">t</span>);
-            <span class="ident">len</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">next</span> <span class="op">-</span> <span class="ident">prev</span>).<span class="ident">length</span>();
-            <span class="ident">prev</span> <span class="op">=</span> <span class="ident">next</span>;
+    <span class="doccomment">/// Returns the length of the curve.
+    </span><span class="kw">pub fn </span>length(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="kw">let </span><span class="kw-2">mut </span>len = <span class="number">0.</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>prev = <span class="self">self</span>.a;
+        <span class="kw">let </span>steps = <span class="number">64</span>;
+        <span class="kw">let </span>step = <span class="number">1. </span>/ steps <span class="kw">as </span>f32;
+        <span class="kw">let </span><span class="kw-2">mut </span>t = <span class="number">0.</span>;
+        <span class="kw">for _ in </span><span class="number">0</span>..=steps {
+            t += step;
+            <span class="kw">let </span>next = <span class="self">self</span>.evaluate(t);
+            len += (next - prev).length();
+            prev = next;
         }
-        <span class="ident">len</span>
+        len
     }
 
-    <span class="doccomment">/// Returns a slice of the curve described by the specified start and end times.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">start</span>: <span class="ident">f32</span>, <span class="ident">end</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">t0</span> <span class="op">=</span> <span class="ident">start</span>;
-        <span class="kw">let</span> <span class="ident">t1</span> <span class="op">=</span> <span class="ident">end</span>;
-        <span class="kw">let</span> <span class="ident">u0</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">-</span> <span class="ident">t0</span>;
-        <span class="kw">let</span> <span class="ident">u1</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">-</span> <span class="ident">t1</span>;
-        <span class="kw">let</span> <span class="ident">v0</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>;
-        <span class="kw">let</span> <span class="ident">v1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>;
-        <span class="kw">let</span> <span class="ident">v2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">c</span>;
-        <span class="kw">let</span> <span class="ident">v3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">d</span>;
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            (<span class="ident">v0</span> <span class="op">*</span> (<span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span>))
-                <span class="op">+</span> (<span class="ident">v1</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span>))
-                <span class="op">+</span> (<span class="ident">v2</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">+</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span>))
-                <span class="op">+</span> (<span class="ident">v3</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span>)),
-            (<span class="ident">v0</span> <span class="op">*</span> (<span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u1</span>))
-                <span class="op">+</span> (<span class="ident">v1</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v2</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">+</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v3</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t1</span>)),
-            (<span class="ident">v0</span> <span class="op">*</span> (<span class="ident">u0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span>))
-                <span class="op">+</span> (<span class="ident">v1</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v2</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u0</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">+</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v3</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span>)),
-            (<span class="ident">v0</span> <span class="op">*</span> (<span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span>))
-                <span class="op">+</span> (<span class="ident">v1</span> <span class="op">*</span> (<span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v2</span> <span class="op">*</span> (<span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">+</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">+</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">u1</span> <span class="op">*</span> <span class="ident">t1</span>))
-                <span class="op">+</span> (<span class="ident">v3</span> <span class="op">*</span> (<span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span> <span class="op">*</span> <span class="ident">t1</span>)),
+    <span class="doccomment">/// Returns a slice of the curve described by the specified start and end times.
+    </span><span class="kw">pub fn </span>slice(<span class="kw-2">&amp;</span><span class="self">self</span>, start: f32, end: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>t0 = start;
+        <span class="kw">let </span>t1 = end;
+        <span class="kw">let </span>u0 = <span class="number">1. </span>- t0;
+        <span class="kw">let </span>u1 = <span class="number">1. </span>- t1;
+        <span class="kw">let </span>v0 = <span class="self">self</span>.a;
+        <span class="kw">let </span>v1 = <span class="self">self</span>.b;
+        <span class="kw">let </span>v2 = <span class="self">self</span>.c;
+        <span class="kw">let </span>v3 = <span class="self">self</span>.d;
+        <span class="self">Self</span>::new(
+            (v0 * (u0 * u0 * u0))
+                + (v1 * (t0 * u0 * u0 + u0 * t0 * u0 + u0 * u0 * t0))
+                + (v2 * (t0 * t0 * u0 + u0 * t0 * t0 + t0 * u0 * t0))
+                + (v3 * (t0 * t0 * t0)),
+            (v0 * (u0 * u0 * u1))
+                + (v1 * (t0 * u0 * u1 + u0 * t0 * u1 + u0 * u0 * t1))
+                + (v2 * (t0 * t0 * u1 + u0 * t0 * t1 + t0 * u0 * t1))
+                + (v3 * (t0 * t0 * t1)),
+            (v0 * (u0 * u1 * u1))
+                + (v1 * (t0 * u1 * u1 + u0 * t1 * u1 + u0 * u1 * t1))
+                + (v2 * (t0 * t1 * u1 + u0 * t1 * t1 + t0 * u1 * t1))
+                + (v3 * (t0 * t1 * t1)),
+            (v0 * (u1 * u1 * u1))
+                + (v1 * (t1 * u1 * u1 + u1 * t1 * u1 + u1 * u1 * t1))
+                + (v2 * (t1 * t1 * u1 + u1 * t1 * t1 + t1 * u1 * t1))
+                + (v3 * (t1 * t1 * t1)),
         )
     }
 
-    <span class="doccomment">/// Returns a curve with the direction reversed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">d</span>, <span class="self">self</span>.<span class="ident">c</span>, <span class="self">self</span>.<span class="ident">b</span>, <span class="self">self</span>.<span class="ident">a</span>)
+    <span class="doccomment">/// Returns a curve with the direction reversed.
+    </span><span class="kw">pub fn </span>reverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(<span class="self">self</span>.d, <span class="self">self</span>.c, <span class="self">self</span>.b, <span class="self">self</span>.a)
     }
 
-    <span class="doccomment">/// Returns the time parameter for the specified linear distance along</span>
-    <span class="doccomment">/// the curve.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">distance</span>: <span class="ident">f32</span>, <span class="ident">tolerance</span>: <span class="ident">f32</span>) -&gt; <span class="ident">SegmentTime</span> {
-        <span class="kw">let</span> (<span class="ident">distance</span>, <span class="ident">time</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">time_impl</span>(<span class="ident">distance</span>, <span class="ident">tolerance</span>, <span class="number">1.</span>, <span class="number">0</span>);
-        <span class="ident">SegmentTime</span> { <span class="ident">distance</span>, <span class="ident">time</span> }
+    <span class="doccomment">/// Returns the time parameter for the specified linear distance along
+    /// the curve.
+    </span><span class="kw">pub fn </span>time(<span class="kw-2">&amp;</span><span class="self">self</span>, distance: f32, tolerance: f32) -&gt; SegmentTime {
+        <span class="kw">let </span>(distance, time) = <span class="self">self</span>.time_impl(distance, tolerance, <span class="number">1.</span>, <span class="number">0</span>);
+        SegmentTime { distance, time }
     }
 
-    <span class="doccomment">/// Returns true if the curve can be represented as a line within some</span>
-    <span class="doccomment">/// tolerance.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_line</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tolerance</span>: <span class="ident">f32</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">degen_ab</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">b</span>, <span class="ident">tolerance</span>);
-        <span class="kw">let</span> <span class="ident">degen_bc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">c</span>, <span class="ident">tolerance</span>);
-        <span class="kw">let</span> <span class="ident">degen_cd</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">c</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">d</span>, <span class="ident">tolerance</span>);
-        <span class="ident">degen_ab</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="ident">degen_bc</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="ident">degen_cd</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">2</span>
+    <span class="doccomment">/// Returns true if the curve can be represented as a line within some
+    /// tolerance.
+    </span><span class="kw">pub fn </span>is_line(<span class="kw-2">&amp;</span><span class="self">self</span>, tolerance: f32) -&gt; bool {
+        <span class="kw">let </span>degen_ab = <span class="self">self</span>.a.nearly_eq_by(<span class="self">self</span>.b, tolerance);
+        <span class="kw">let </span>degen_bc = <span class="self">self</span>.b.nearly_eq_by(<span class="self">self</span>.c, tolerance);
+        <span class="kw">let </span>degen_cd = <span class="self">self</span>.c.nearly_eq_by(<span class="self">self</span>.d, tolerance);
+        degen_ab <span class="kw">as </span>u8 + degen_bc <span class="kw">as </span>u8 + degen_cd <span class="kw">as </span>u8 &gt;= <span class="number">2
+    </span>}
+
+    <span class="doccomment">/// Evaluates the curve at the specified time.
+    </span><span class="kw">pub fn </span>evaluate(<span class="kw-2">&amp;</span><span class="self">self</span>, time: f32) -&gt; Point {
+        <span class="kw">let </span>t = time;
+        <span class="kw">let </span>t0 = <span class="number">1. </span>- t;
+        (<span class="self">self</span>.a * (t0 * t0 * t0))
+            + (<span class="self">self</span>.b * (<span class="number">3. </span>* t0 * t0 * t))
+            + (<span class="self">self</span>.c * (<span class="number">3. </span>* t0 * t * t))
+            + (<span class="self">self</span>.d * (t * t * t))
     }
 
-    <span class="doccomment">/// Evaluates the curve at the specified time.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">evaluate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">time</span>: <span class="ident">f32</span>) -&gt; <span class="ident">Point</span> {
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">time</span>;
-        <span class="kw">let</span> <span class="ident">t0</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">-</span> <span class="ident">t</span>;
-        (<span class="self">self</span>.<span class="ident">a</span> <span class="op">*</span> (<span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span>))
-            <span class="op">+</span> (<span class="self">self</span>.<span class="ident">b</span> <span class="op">*</span> (<span class="number">3.</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t</span>))
-            <span class="op">+</span> (<span class="self">self</span>.<span class="ident">c</span> <span class="op">*</span> (<span class="number">3.</span> <span class="op">*</span> <span class="ident">t0</span> <span class="op">*</span> <span class="ident">t</span> <span class="op">*</span> <span class="ident">t</span>))
-            <span class="op">+</span> (<span class="self">self</span>.<span class="ident">d</span> <span class="op">*</span> (<span class="ident">t</span> <span class="op">*</span> <span class="ident">t</span> <span class="op">*</span> <span class="ident">t</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_segment</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">SegmentId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Segment</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_line</span>(<span class="ident">MERGE_EPSILON</span>) {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">d</span>, <span class="ident">MERGE_EPSILON</span>) {
-                <span class="prelude-val">None</span>
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="self">self</span>.<span class="ident">a</span>, <span class="self">self</span>.<span class="ident">d</span>)))
+    <span class="kw">fn </span>to_segment(<span class="kw-2">&amp;</span><span class="self">self</span>, id: SegmentId) -&gt; <span class="prelude-ty">Option</span>&lt;Segment&gt; {
+        <span class="kw">if </span><span class="self">self</span>.is_line(MERGE_EPSILON) {
+            <span class="kw">if </span><span class="self">self</span>.a.nearly_eq_by(<span class="self">self</span>.d, MERGE_EPSILON) {
+                <span class="prelude-val">None
+            </span>} <span class="kw">else </span>{
+                <span class="prelude-val">Some</span>(Segment::Line(id, Line::new(<span class="self">self</span>.a, <span class="self">self</span>.d)))
             }
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">Segment::Curve</span>(<span class="ident">id</span>, <span class="kw-2">*</span><span class="self">self</span>))
+        } <span class="kw">else </span>{
+            <span class="prelude-val">Some</span>(Segment::Curve(id, <span class="kw-2">*</span><span class="self">self</span>))
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">split_at_max_curvature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">splits</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Curve</span>; <span class="number">4</span>]) -&gt; <span class="ident">usize</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tmp</span> <span class="op">=</span> [<span class="number">0f32</span>; <span class="number">3</span>];
-        <span class="kw">let</span> <span class="ident">count1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">max_curvature</span>(<span class="kw-2">&amp;mut</span> <span class="ident">tmp</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ts</span> <span class="op">=</span> [<span class="number">0f32</span>; <span class="number">4</span>];
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">t</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">tmp</span>[..<span class="ident">count1</span>] {
-            <span class="kw">if</span> <span class="ident">t</span> <span class="op">&gt;</span> <span class="number">0.</span> <span class="op">&amp;&amp;</span> <span class="ident">t</span> <span class="op">&lt;</span> <span class="number">1.</span> {
-                <span class="ident">ts</span>[<span class="ident">count</span>] <span class="op">=</span> <span class="ident">t</span>;
-                <span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">fn </span>split_at_max_curvature(<span class="kw-2">&amp;</span><span class="self">self</span>, splits: <span class="kw-2">&amp;mut </span>[Curve; <span class="number">4</span>]) -&gt; usize {
+        <span class="kw">let </span><span class="kw-2">mut </span>tmp = [<span class="number">0f32</span>; <span class="number">3</span>];
+        <span class="kw">let </span>count1 = <span class="self">self</span>.max_curvature(<span class="kw-2">&amp;mut </span>tmp);
+        <span class="kw">let </span><span class="kw-2">mut </span>count = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>ts = [<span class="number">0f32</span>; <span class="number">4</span>];
+        <span class="kw">for </span><span class="kw-2">&amp;</span>t <span class="kw">in </span><span class="kw-2">&amp;</span>tmp[..count1] {
+            <span class="kw">if </span>t &gt; <span class="number">0. </span>&amp;&amp; t &lt; <span class="number">1. </span>{
+                ts[count] = t;
+                count += <span class="number">1</span>;
             }
         }
-        <span class="kw">if</span> <span class="ident">count</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">splits</span>[<span class="number">0</span>] <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_t</span> <span class="op">=</span> <span class="number">0.</span>;
-            <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">t</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">ts</span>[..<span class="ident">count</span>] {
-                <span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">slice</span>(<span class="ident">last_t</span>, <span class="ident">t</span>);
-                <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">last_t</span> <span class="op">=</span> <span class="ident">t</span>;
+        <span class="kw">if </span>count == <span class="number">0 </span>{
+            splits[<span class="number">0</span>] = <span class="kw-2">*</span><span class="self">self</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>last_t = <span class="number">0.</span>;
+            <span class="kw">for </span><span class="kw-2">&amp;</span>t <span class="kw">in </span><span class="kw-2">&amp;</span>ts[..count] {
+                splits[i] = <span class="self">self</span>.slice(last_t, t);
+                i += <span class="number">1</span>;
+                last_t = t;
             }
-            <span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">slice</span>(<span class="ident">last_t</span>, <span class="number">1.</span>);
+            splits[i] = <span class="self">self</span>.slice(last_t, <span class="number">1.</span>);
         }
-        <span class="ident">count</span> <span class="op">+</span> <span class="number">1</span>
+        count + <span class="number">1
+    </span>}
+
+    <span class="kw">fn </span>split(<span class="kw-2">&amp;</span><span class="self">self</span>, t: f32) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        (<span class="self">self</span>.slice(<span class="number">0.</span>, t), <span class="self">self</span>.slice(t, <span class="number">1.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">split</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">t</span>: <span class="ident">f32</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        (<span class="self">self</span>.<span class="ident">slice</span>(<span class="number">0.</span>, <span class="ident">t</span>), <span class="self">self</span>.<span class="ident">slice</span>(<span class="ident">t</span>, <span class="number">1.</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">time_impl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">distance</span>: <span class="ident">f32</span>, <span class="ident">tolerance</span>: <span class="ident">f32</span>, <span class="ident">t</span>: <span class="ident">f32</span>, <span class="ident">level</span>: <span class="ident">u8</span>) -&gt; (<span class="ident">f32</span>, <span class="ident">f32</span>) {
-        <span class="kw">if</span> <span class="ident">level</span> <span class="op">&lt;</span> <span class="number">5</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">too_curvy</span>(<span class="ident">tolerance</span>) {
-            <span class="kw">let</span> <span class="ident">c0</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">slice</span>(<span class="number">0.</span>, <span class="number">0.5</span>);
-            <span class="kw">let</span> (<span class="ident">dist0</span>, <span class="ident">t0</span>) <span class="op">=</span> <span class="ident">c0</span>.<span class="ident">time_impl</span>(<span class="ident">distance</span>, <span class="ident">tolerance</span>, <span class="ident">t</span> <span class="op">*</span> <span class="number">0.5</span>, <span class="ident">level</span> <span class="op">+</span> <span class="number">1</span>);
-            <span class="kw">if</span> <span class="ident">dist0</span> <span class="op">&lt;</span> <span class="ident">distance</span> {
-                <span class="kw">let</span> <span class="ident">c1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">slice</span>(<span class="number">0.5</span>, <span class="number">1.</span>);
-                <span class="kw">let</span> (<span class="ident">dist1</span>, <span class="ident">t1</span>) <span class="op">=</span> <span class="ident">c1</span>.<span class="ident">time_impl</span>(<span class="ident">distance</span> <span class="op">-</span> <span class="ident">dist0</span>, <span class="ident">tolerance</span>, <span class="ident">t</span> <span class="op">*</span> <span class="number">0.5</span>, <span class="ident">level</span> <span class="op">+</span> <span class="number">1</span>);
-                (<span class="ident">dist0</span> <span class="op">+</span> <span class="ident">dist1</span>, <span class="ident">t0</span> <span class="op">+</span> <span class="ident">t1</span>)
-            } <span class="kw">else</span> {
-                (<span class="ident">dist0</span>, <span class="ident">t0</span>)
+    <span class="kw">fn </span>time_impl(<span class="kw-2">&amp;</span><span class="self">self</span>, distance: f32, tolerance: f32, t: f32, level: u8) -&gt; (f32, f32) {
+        <span class="kw">if </span>level &lt; <span class="number">5 </span>&amp;&amp; <span class="self">self</span>.too_curvy(tolerance) {
+            <span class="kw">let </span>c0 = <span class="self">self</span>.slice(<span class="number">0.</span>, <span class="number">0.5</span>);
+            <span class="kw">let </span>(dist0, t0) = c0.time_impl(distance, tolerance, t * <span class="number">0.5</span>, level + <span class="number">1</span>);
+            <span class="kw">if </span>dist0 &lt; distance {
+                <span class="kw">let </span>c1 = <span class="self">self</span>.slice(<span class="number">0.5</span>, <span class="number">1.</span>);
+                <span class="kw">let </span>(dist1, t1) = c1.time_impl(distance - dist0, tolerance, t * <span class="number">0.5</span>, level + <span class="number">1</span>);
+                (dist0 + dist1, t0 + t1)
+            } <span class="kw">else </span>{
+                (dist0, t0)
             }
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">dist</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">d</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">a</span>).<span class="ident">length</span>();
-            <span class="kw">if</span> <span class="ident">dist</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">distance</span> {
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">distance</span> <span class="op">/</span> <span class="ident">dist</span>;
-                (<span class="ident">distance</span>, <span class="ident">t</span> <span class="op">*</span> <span class="ident">s</span>)
-            } <span class="kw">else</span> {
-                (<span class="ident">dist</span>, <span class="ident">t</span>)
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>dist = (<span class="self">self</span>.d - <span class="self">self</span>.a).length();
+            <span class="kw">if </span>dist &gt;= distance {
+                <span class="kw">let </span>s = distance / dist;
+                (distance, t * s)
+            } <span class="kw">else </span>{
+                (dist, t)
             }
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">max_curvature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ts</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">f32</span>; <span class="number">3</span>]) -&gt; <span class="ident">usize</span> {
-        <span class="kw">let</span> <span class="ident">comps_x</span> <span class="op">=</span> [<span class="self">self</span>.<span class="ident">a</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">c</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">d</span>.<span class="ident">x</span>];
-        <span class="kw">let</span> <span class="ident">comps_y</span> <span class="op">=</span> [<span class="self">self</span>.<span class="ident">a</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">c</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">d</span>.<span class="ident">y</span>];
-        <span class="kw">fn</span> <span class="ident">get_coeffs</span>(<span class="ident">src</span>: [<span class="ident">f32</span>; <span class="number">4</span>]) -&gt; [<span class="ident">f32</span>; <span class="number">4</span>] {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">src</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">src</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">src</span>[<span class="number">2</span>] <span class="op">-</span> <span class="number">2.</span> <span class="op">*</span> <span class="ident">src</span>[<span class="number">1</span>] <span class="op">+</span> <span class="ident">src</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">src</span>[<span class="number">3</span>] <span class="op">+</span> <span class="number">3.</span> <span class="op">*</span> (<span class="ident">src</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">src</span>[<span class="number">2</span>]) <span class="op">-</span> <span class="ident">src</span>[<span class="number">0</span>];
-            [<span class="ident">c</span> <span class="op">*</span> <span class="ident">c</span>, <span class="number">3.</span> <span class="op">*</span> <span class="ident">b</span> <span class="op">*</span> <span class="ident">c</span>, <span class="number">2.</span> <span class="op">*</span> <span class="ident">b</span> <span class="op">*</span> <span class="ident">b</span> <span class="op">+</span> <span class="ident">c</span> <span class="op">*</span> <span class="ident">a</span>, <span class="ident">a</span> <span class="op">*</span> <span class="ident">b</span>]
-        }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coeffs</span> <span class="op">=</span> <span class="ident">get_coeffs</span>(<span class="ident">comps_x</span>);
-        <span class="kw">let</span> <span class="ident">coeffs_y</span> <span class="op">=</span> <span class="ident">get_coeffs</span>(<span class="ident">comps_y</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">4</span> {
-            <span class="ident">coeffs</span>[<span class="ident">i</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">coeffs_y</span>[<span class="ident">i</span>];
-        }
-        <span class="ident"><span class="self">Self</span>::solve</span>(<span class="ident">coeffs</span>, <span class="ident">ts</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">solve</span>(<span class="ident">coeff</span>: [<span class="ident">f32</span>; <span class="number">4</span>], <span class="ident">ts</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">f32</span>; <span class="number">3</span>]) -&gt; <span class="ident">usize</span> {
-        <span class="kw">const</span> <span class="ident">PI</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">core::f32::consts::PI</span>;
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">/</span> <span class="ident">coeff</span>[<span class="number">0</span>];
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">coeff</span>[<span class="number">1</span>] <span class="op">*</span> <span class="ident">i</span>;
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">coeff</span>[<span class="number">2</span>] <span class="op">*</span> <span class="ident">i</span>;
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coeff</span>[<span class="number">3</span>] <span class="op">*</span> <span class="ident">i</span>;
-        <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">-</span> <span class="ident">b</span> <span class="op">*</span> <span class="number">3.</span>) <span class="op">/</span> <span class="number">9.</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> (<span class="number">2.</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">-</span> <span class="number">9.</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">*</span> <span class="ident">b</span> <span class="op">+</span> <span class="number">27.</span> <span class="op">*</span> <span class="ident">c</span>) <span class="op">/</span> <span class="number">54.</span>;
-        <span class="kw">let</span> <span class="ident">q3</span> <span class="op">=</span> <span class="ident">q</span> <span class="op">*</span> <span class="ident">q</span> <span class="op">*</span> <span class="ident">q</span>;
-        <span class="kw">let</span> <span class="ident">r2_sub_q3</span> <span class="op">=</span> <span class="ident">r</span> <span class="op">*</span> <span class="ident">r</span> <span class="op">-</span> <span class="ident">q3</span>;
-        <span class="kw">let</span> <span class="ident">adiv3</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">/</span> <span class="number">3.</span>;
-        <span class="kw">if</span> <span class="ident">r2_sub_q3</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-            <span class="kw">let</span> <span class="ident">theta</span> <span class="op">=</span> <span class="ident">satf32</span>(<span class="ident">r</span> <span class="op">/</span> <span class="ident">q3</span>.<span class="ident">sqrt</span>()).<span class="ident">acos</span>();
-            <span class="kw">let</span> <span class="ident">neg2_root_q</span> <span class="op">=</span> <span class="op">-</span><span class="number">2.</span> <span class="op">*</span> <span class="ident">q</span>.<span class="ident">sqrt</span>();
-            <span class="ident">ts</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">satf32</span>(<span class="ident">neg2_root_q</span> <span class="op">*</span> (<span class="ident">theta</span> <span class="op">/</span> <span class="number">3.</span>).<span class="ident">cos</span>() <span class="op">-</span> <span class="ident">adiv3</span>);
-            <span class="ident">ts</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">satf32</span>(<span class="ident">neg2_root_q</span> <span class="op">*</span> ((<span class="ident">theta</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">*</span> <span class="ident">PI</span>) <span class="op">/</span> <span class="number">3.</span>).<span class="ident">cos</span>() <span class="op">-</span> <span class="ident">adiv3</span>);
-            <span class="ident">ts</span>[<span class="number">2</span>] <span class="op">=</span> <span class="ident">satf32</span>(<span class="ident">neg2_root_q</span> <span class="op">*</span> ((<span class="ident">theta</span> <span class="op">-</span> <span class="number">2.</span> <span class="op">*</span> <span class="ident">PI</span>) <span class="op">/</span> <span class="number">3.</span>).<span class="ident">cos</span>() <span class="op">-</span> <span class="ident">adiv3</span>);
-            <span class="ident">ts</span>.<span class="ident">sort_unstable_by</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap_or</span>(<span class="ident">core::cmp::Ordering::Less</span>));
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">3</span>;
-            <span class="kw">if</span> <span class="ident">ts</span>[<span class="number">0</span>] <span class="op">==</span> <span class="ident">ts</span>[<span class="number">1</span>] {
-                <span class="ident">ts</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">ts</span>[<span class="number">2</span>];
-                <span class="ident">count</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="kw">if</span> <span class="ident">ts</span>[<span class="number">1</span>] <span class="op">==</span> <span class="ident">ts</span>[<span class="number">2</span>] {
-                <span class="ident">count</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="ident">count</span>
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">abs</span>() <span class="op">+</span> <span class="ident">r2_sub_q3</span>.<span class="ident">sqrt</span>();
-            <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">powf</span>(<span class="number">0.3333333</span>);
-            <span class="kw">if</span> <span class="ident">r</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                <span class="ident">a</span> <span class="op">=</span> <span class="op">-</span><span class="ident">a</span>;
-            }
-            <span class="kw">if</span> <span class="ident">a</span> <span class="op">!</span><span class="op">=</span> <span class="number">0.</span> {
-                <span class="ident">a</span> <span class="op">+</span><span class="op">=</span> <span class="ident">q</span> <span class="op">/</span> <span class="ident">a</span>;
-            }
-            <span class="ident">ts</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">satf32</span>(<span class="ident">a</span> <span class="op">-</span> <span class="ident">adiv3</span>);
-            <span class="number">1</span>
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">too_curvy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tolerance</span>: <span class="ident">f32</span>) -&gt; <span class="ident">bool</span> {
-        (<span class="number">2.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">d</span>.<span class="ident">x</span> <span class="op">-</span> <span class="number">3.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">c</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">tolerance</span>
-            <span class="op">|</span><span class="op">|</span> (<span class="number">2.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">d</span>.<span class="ident">y</span> <span class="op">-</span> <span class="number">3.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">c</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">tolerance</span>
-            <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">d</span>.<span class="ident">x</span> <span class="op">-</span> <span class="number">3.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">tolerance</span>
-            <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">d</span>.<span class="ident">y</span> <span class="op">-</span> <span class="number">3.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">y</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">a</span>.<span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">tolerance</span>
+    <span class="kw">fn </span>max_curvature(<span class="kw-2">&amp;</span><span class="self">self</span>, ts: <span class="kw-2">&amp;mut </span>[f32; <span class="number">3</span>]) -&gt; usize {
+        <span class="kw">let </span>comps_x = [<span class="self">self</span>.a.x, <span class="self">self</span>.b.x, <span class="self">self</span>.c.x, <span class="self">self</span>.d.x];
+        <span class="kw">let </span>comps_y = [<span class="self">self</span>.a.y, <span class="self">self</span>.b.y, <span class="self">self</span>.c.y, <span class="self">self</span>.d.y];
+        <span class="kw">fn </span>get_coeffs(src: [f32; <span class="number">4</span>]) -&gt; [f32; <span class="number">4</span>] {
+            <span class="kw">let </span>a = src[<span class="number">1</span>] - src[<span class="number">0</span>];
+            <span class="kw">let </span>b = src[<span class="number">2</span>] - <span class="number">2. </span>* src[<span class="number">1</span>] + src[<span class="number">0</span>];
+            <span class="kw">let </span>c = src[<span class="number">3</span>] + <span class="number">3. </span>* (src[<span class="number">1</span>] - src[<span class="number">2</span>]) - src[<span class="number">0</span>];
+            [c * c, <span class="number">3. </span>* b * c, <span class="number">2. </span>* b * b + c * a, a * b]
+        }
+        <span class="kw">let </span><span class="kw-2">mut </span>coeffs = get_coeffs(comps_x);
+        <span class="kw">let </span>coeffs_y = get_coeffs(comps_y);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">4 </span>{
+            coeffs[i] += coeffs_y[i];
+        }
+        <span class="self">Self</span>::solve(coeffs, ts)
     }
 
-    <span class="kw">fn</span> <span class="ident">needs_split</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">b</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">c</span>, <span class="ident">MERGE_EPSILON</span>) {
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">fn </span>solve(coeff: [f32; <span class="number">4</span>], ts: <span class="kw-2">&amp;mut </span>[f32; <span class="number">3</span>]) -&gt; usize {
+        <span class="kw">const </span>PI: f32 = core::f32::consts::PI;
+        <span class="kw">let </span>i = <span class="number">1. </span>/ coeff[<span class="number">0</span>];
+        <span class="kw">let </span>a = coeff[<span class="number">1</span>] * i;
+        <span class="kw">let </span>b = coeff[<span class="number">2</span>] * i;
+        <span class="kw">let </span>c = coeff[<span class="number">3</span>] * i;
+        <span class="kw">let </span>q = (a * a - b * <span class="number">3.</span>) / <span class="number">9.</span>;
+        <span class="kw">let </span>r = (<span class="number">2. </span>* a * a * a - <span class="number">9. </span>* a * b + <span class="number">27. </span>* c) / <span class="number">54.</span>;
+        <span class="kw">let </span>q3 = q * q * q;
+        <span class="kw">let </span>r2_sub_q3 = r * r - q3;
+        <span class="kw">let </span>adiv3 = a / <span class="number">3.</span>;
+        <span class="kw">if </span>r2_sub_q3 &lt; <span class="number">0. </span>{
+            <span class="kw">let </span>theta = satf32(r / q3.sqrt()).acos();
+            <span class="kw">let </span>neg2_root_q = -<span class="number">2. </span>* q.sqrt();
+            ts[<span class="number">0</span>] = satf32(neg2_root_q * (theta / <span class="number">3.</span>).cos() - adiv3);
+            ts[<span class="number">1</span>] = satf32(neg2_root_q * ((theta + <span class="number">2. </span>* PI) / <span class="number">3.</span>).cos() - adiv3);
+            ts[<span class="number">2</span>] = satf32(neg2_root_q * ((theta - <span class="number">2. </span>* PI) / <span class="number">3.</span>).cos() - adiv3);
+            ts.sort_unstable_by(|x, y| x.partial_cmp(y).unwrap_or(core::cmp::Ordering::Less));
+            <span class="kw">let </span><span class="kw-2">mut </span>count = <span class="number">3</span>;
+            <span class="kw">if </span>ts[<span class="number">0</span>] == ts[<span class="number">1</span>] {
+                ts[<span class="number">1</span>] = ts[<span class="number">2</span>];
+                count -= <span class="number">1</span>;
+            }
+            <span class="kw">if </span>ts[<span class="number">1</span>] == ts[<span class="number">2</span>] {
+                count -= <span class="number">1</span>;
+            }
+            count
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>a = r.abs() + r2_sub_q3.sqrt();
+            a = a.powf(<span class="number">0.3333333</span>);
+            <span class="kw">if </span>r &gt; <span class="number">0. </span>{
+                a = -a;
+            }
+            <span class="kw">if </span>a != <span class="number">0. </span>{
+                a += q / a;
+            }
+            ts[<span class="number">0</span>] = satf32(a - adiv3);
+            <span class="number">1
+        </span>}
+    }
+
+    <span class="kw">fn </span>too_curvy(<span class="kw-2">&amp;</span><span class="self">self</span>, tolerance: f32) -&gt; bool {
+        (<span class="number">2. </span>* <span class="self">self</span>.d.x - <span class="number">3. </span>* <span class="self">self</span>.c.x + <span class="self">self</span>.a.x).abs() &gt; tolerance
+            || (<span class="number">2. </span>* <span class="self">self</span>.d.y - <span class="number">3. </span>* <span class="self">self</span>.c.y + <span class="self">self</span>.a.y).abs() &gt; tolerance
+            || (<span class="self">self</span>.d.x - <span class="number">3. </span>* <span class="self">self</span>.b.x + <span class="number">2. </span>* <span class="self">self</span>.a.x).abs() &gt; tolerance
+            || (<span class="self">self</span>.d.y - <span class="number">3. </span>* <span class="self">self</span>.b.y + <span class="number">2. </span>* <span class="self">self</span>.a.y).abs() &gt; tolerance
+    }
+
+    <span class="kw">fn </span>needs_split(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">if </span><span class="self">self</span>.b.nearly_eq_by(<span class="self">self</span>.c, MERGE_EPSILON) {
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="kw">let</span> <span class="ident">normal_ab</span> <span class="op">=</span> <span class="ident">normal</span>(<span class="self">self</span>.<span class="ident">a</span>, <span class="self">self</span>.<span class="ident">b</span>);
-        <span class="kw">let</span> <span class="ident">normal_bc</span> <span class="op">=</span> <span class="ident">normal</span>(<span class="self">self</span>.<span class="ident">b</span>, <span class="self">self</span>.<span class="ident">c</span>);
-        <span class="kw">fn</span> <span class="ident">too_curvy</span>(<span class="ident">n0</span>: <span class="ident">Vector</span>, <span class="ident">n1</span>: <span class="ident">Vector</span>) -&gt; <span class="ident">bool</span> {
-            <span class="kw">const</span> <span class="ident">FLAT_ENOUGH</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="number">1.41421356237</span> <span class="op">/</span> <span class="number">2.</span> <span class="op">+</span> <span class="number">1.</span> <span class="op">/</span> <span class="number">10.</span>;
-            <span class="ident">n0</span>.<span class="ident">dot</span>(<span class="ident">n1</span>) <span class="op">&lt;</span><span class="op">=</span> <span class="ident">FLAT_ENOUGH</span>
+        <span class="kw">let </span>normal_ab = normal(<span class="self">self</span>.a, <span class="self">self</span>.b);
+        <span class="kw">let </span>normal_bc = normal(<span class="self">self</span>.b, <span class="self">self</span>.c);
+        <span class="kw">fn </span>too_curvy(n0: Vector, n1: Vector) -&gt; bool {
+            <span class="kw">const </span>FLAT_ENOUGH: f32 = <span class="number">1.41421356237 </span>/ <span class="number">2. </span>+ <span class="number">1. </span>/ <span class="number">10.</span>;
+            n0.dot(n1) &lt;= FLAT_ENOUGH
         }
-        <span class="ident">too_curvy</span>(<span class="ident">normal_ab</span>, <span class="ident">normal_bc</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">too_curvy</span>(<span class="ident">normal_bc</span>, <span class="ident">normal</span>(<span class="self">self</span>.<span class="ident">c</span>, <span class="self">self</span>.<span class="ident">d</span>))
+        too_curvy(normal_ab, normal_bc) || too_curvy(normal_bc, normal(<span class="self">self</span>.c, <span class="self">self</span>.d))
     }
 }
 
-<span class="kw">fn</span> <span class="ident">satf32</span>(<span class="ident">x</span>: <span class="ident">f32</span>) -&gt; <span class="ident">f32</span> {
-    <span class="ident">x</span>.<span class="ident">max</span>(<span class="number">0.</span>).<span class="ident">min</span>(<span class="number">1.</span>)
+<span class="kw">fn </span>satf32(x: f32) -&gt; f32 {
+    x.max(<span class="number">0.</span>).min(<span class="number">1.</span>)
 }
 
-<span class="doccomment">/// Marker that allows regrouping of previously split segments due to simplification.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">SegmentId</span> <span class="op">=</span> <span class="ident">u8</span>;
+<span class="doccomment">/// Marker that allows regrouping of previously split segments due to simplification.
+</span><span class="kw">pub type </span>SegmentId = u8;
 
-<span class="doccomment">/// Segment of a path.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Segment</span> {
-    <span class="doccomment">/// Line segment..</span>
-    <span class="ident">Line</span>(<span class="ident">SegmentId</span>, <span class="ident">Line</span>),
-    <span class="doccomment">/// Cubic bezier segment.</span>
-    <span class="ident">Curve</span>(<span class="ident">SegmentId</span>, <span class="ident">Curve</span>),
-    <span class="doccomment">/// Marks the end of a subpath. Contains the value `true` if the subpath</span>
-    <span class="doccomment">/// is closed.</span>
-    <span class="ident">End</span>(<span class="ident">bool</span>),
+<span class="doccomment">/// Segment of a path.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Debug)]
+</span><span class="kw">pub enum </span>Segment {
+    <span class="doccomment">/// Line segment..
+    </span>Line(SegmentId, Line),
+    <span class="doccomment">/// Cubic bezier segment.
+    </span>Curve(SegmentId, Curve),
+    <span class="doccomment">/// Marks the end of a subpath. Contains the value `true` if the subpath
+    /// is closed.
+    </span>End(bool),
 }
 
-<span class="kw">impl</span> <span class="ident">Segment</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">length</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Line</span>(<span class="kw">_</span>, <span class="ident">line</span>) =&gt; <span class="ident">line</span>.<span class="ident">length</span>(),
-            <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="kw">_</span>, <span class="ident">curve</span>) =&gt; <span class="ident">curve</span>.<span class="ident">length</span>(),
-            <span class="kw">_</span> =&gt; <span class="number">0.</span>,
+<span class="kw">impl </span>Segment {
+    <span class="kw">pub fn </span>length(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Line(<span class="kw">_</span>, line) =&gt; line.length(),
+            <span class="self">Self</span>::Curve(<span class="kw">_</span>, curve) =&gt; curve.length(),
+            <span class="kw">_ </span>=&gt; <span class="number">0.</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">start</span>: <span class="ident">f32</span>, <span class="ident">end</span>: <span class="ident">f32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Line</span>(<span class="ident">id</span>, <span class="ident">line</span>) =&gt; <span class="ident"><span class="self">Self</span>::Line</span>(<span class="kw-2">*</span><span class="ident">id</span>, <span class="ident">line</span>.<span class="ident">slice</span>(<span class="ident">start</span>, <span class="ident">end</span>)),
-            <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="ident">id</span>, <span class="ident">curve</span>) =&gt; <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="kw-2">*</span><span class="ident">id</span>, <span class="ident">curve</span>.<span class="ident">slice</span>(<span class="ident">start</span>, <span class="ident">end</span>)),
-            <span class="ident"><span class="self">Self</span>::End</span>(..) =&gt; <span class="kw-2">*</span><span class="self">self</span>,
+    <span class="kw">pub fn </span>slice(<span class="kw-2">&amp;</span><span class="self">self</span>, start: f32, end: f32) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Line(id, line) =&gt; <span class="self">Self</span>::Line(<span class="kw-2">*</span>id, line.slice(start, end)),
+            <span class="self">Self</span>::Curve(id, curve) =&gt; <span class="self">Self</span>::Curve(<span class="kw-2">*</span>id, curve.slice(start, end)),
+            <span class="self">Self</span>::End(..) =&gt; <span class="kw-2">*</span><span class="self">self</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Line</span>(<span class="ident">id</span>, <span class="ident">line</span>) =&gt; <span class="ident"><span class="self">Self</span>::Line</span>(<span class="kw-2">*</span><span class="ident">id</span>, <span class="ident">line</span>.<span class="ident">reverse</span>()),
-            <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="ident">id</span>, <span class="ident">curve</span>) =&gt; <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="kw-2">*</span><span class="ident">id</span>, <span class="ident">curve</span>.<span class="ident">reverse</span>()),
-            <span class="ident"><span class="self">Self</span>::End</span>(..) =&gt; <span class="kw-2">*</span><span class="self">self</span>,
+    <span class="kw">pub fn </span>reverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Line(id, line) =&gt; <span class="self">Self</span>::Line(<span class="kw-2">*</span>id, line.reverse()),
+            <span class="self">Self</span>::Curve(id, curve) =&gt; <span class="self">Self</span>::Curve(<span class="kw-2">*</span>id, curve.reverse()),
+            <span class="self">Self</span>::End(..) =&gt; <span class="kw-2">*</span><span class="self">self</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">time</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">distance</span>: <span class="ident">f32</span>, <span class="ident">tolerance</span>: <span class="ident">f32</span>) -&gt; <span class="ident">SegmentTime</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Line</span>(<span class="kw">_</span>, <span class="ident">line</span>) =&gt; <span class="ident">line</span>.<span class="ident">time</span>(<span class="ident">distance</span>),
-            <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="kw">_</span>, <span class="ident">curve</span>) =&gt; <span class="ident">curve</span>.<span class="ident">time</span>(<span class="ident">distance</span>, <span class="ident">tolerance</span>),
-            <span class="kw">_</span> =&gt; <span class="ident">SegmentTime</span> {
-                <span class="ident">distance</span>: <span class="number">0.</span>,
-                <span class="ident">time</span>: <span class="number">0.</span>,
+    <span class="kw">pub fn </span>time(<span class="kw-2">&amp;</span><span class="self">self</span>, distance: f32, tolerance: f32) -&gt; SegmentTime {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Line(<span class="kw">_</span>, line) =&gt; line.time(distance),
+            <span class="self">Self</span>::Curve(<span class="kw">_</span>, curve) =&gt; curve.time(distance, tolerance),
+            <span class="kw">_ </span>=&gt; SegmentTime {
+                distance: <span class="number">0.</span>,
+                time: <span class="number">0.</span>,
             },
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">point_normal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">time</span>: <span class="ident">f32</span>) -&gt; (<span class="ident">Point</span>, <span class="ident">Vector</span>) {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Line</span>(<span class="kw">_</span>, <span class="ident">line</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">b</span> <span class="op">-</span> <span class="ident">line</span>.<span class="ident">a</span>;
-                <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">a</span> <span class="op">+</span> <span class="ident">dir</span> <span class="op">*</span> <span class="ident">time</span>;
-                <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">normal</span>(<span class="ident">line</span>.<span class="ident">a</span>, <span class="ident">line</span>.<span class="ident">b</span>);
-                (<span class="ident">p</span>, <span class="ident">n</span>)
+    <span class="kw">pub fn </span>point_normal(<span class="kw-2">&amp;</span><span class="self">self</span>, time: f32) -&gt; (Point, Vector) {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Line(<span class="kw">_</span>, line) =&gt; {
+                <span class="kw">let </span>dir = line.b - line.a;
+                <span class="kw">let </span>p = line.a + dir * time;
+                <span class="kw">let </span>n = normal(line.a, line.b);
+                (p, n)
             }
-            <span class="ident"><span class="self">Self</span>::Curve</span>(<span class="kw">_</span>, <span class="ident">curve</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">evaluate</span>(<span class="ident">time</span>);
-                <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">evaluate</span>(<span class="ident">time</span> <span class="op">-</span> <span class="number">0.05</span>);
-                <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">evaluate</span>(<span class="ident">time</span> <span class="op">+</span> <span class="number">0.05</span>);
-                <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">normal</span>(<span class="ident">a</span>, <span class="ident">b</span>);
-                (<span class="ident">p</span>, <span class="ident">n</span>)
+            <span class="self">Self</span>::Curve(<span class="kw">_</span>, curve) =&gt; {
+                <span class="kw">let </span>p = curve.evaluate(time);
+                <span class="kw">let </span>a = curve.evaluate(time - <span class="number">0.05</span>);
+                <span class="kw">let </span>b = curve.evaluate(time + <span class="number">0.05</span>);
+                <span class="kw">let </span>n = normal(a, b);
+                (p, n)
             }
-            <span class="ident"><span class="self">Self</span>::End</span>(..) =&gt; (<span class="ident">Point::ZERO</span>, <span class="ident">Vector::ZERO</span>),
+            <span class="self">Self</span>::End(..) =&gt; (Point::ZERO, Vector::ZERO),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Segment</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::End</span>(<span class="bool-val">false</span>)
+<span class="kw">impl </span>Default <span class="kw">for </span>Segment {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::End(<span class="bool-val">false</span>)
     }
 }
 
-<span class="comment">// This large epsilon trades fidelity for performance, visual continuity</span>
-<span class="comment">// and numeric stability.</span>
-<span class="kw">const</span> <span class="ident">MERGE_EPSILON</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="number">0.01</span>;
+<span class="comment">// This large epsilon trades fidelity for performance, visual continuity
+// and numeric stability.
+</span><span class="kw">const </span>MERGE_EPSILON: f32 = <span class="number">0.01</span>;
 
-<span class="doccomment">/// Creates a segment iterator from a command iterator, optionally producing</span>
-<span class="doccomment">/// simplified curves.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">segments</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">commands</span>: <span class="ident">I</span>, <span class="ident">simplify_curves</span>: <span class="ident">bool</span>) -&gt; <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Creates a segment iterator from a command iterator, optionally producing
+/// simplified curves.
+</span><span class="kw">pub fn </span>segments&lt;I&gt;(commands: I, simplify_curves: bool) -&gt; Segments&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator + Clone,
+    I::Item: Borrow&lt;Command&gt;,
 {
-    <span class="ident">Segments::new</span>(<span class="ident">simplify_curves</span>, <span class="ident">commands</span>)
+    Segments::new(simplify_curves, commands)
 }
 
-<span class="doccomment">/// Iterator over path segments.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">commands</span>: <span class="ident">I</span>,
-    <span class="ident">start</span>: <span class="ident">Vector</span>,
-    <span class="ident">prev</span>: <span class="ident">Vector</span>,
-    <span class="ident">close</span>: <span class="ident">bool</span>,
-    <span class="ident">split</span>: <span class="ident">bool</span>,
-    <span class="ident">splits</span>: [<span class="ident">Curve</span>; <span class="number">16</span>],
-    <span class="ident">split_count</span>: <span class="ident">usize</span>,
-    <span class="ident">split_index</span>: <span class="ident">usize</span>,
-    <span class="ident">last_was_end</span>: <span class="ident">bool</span>,
-    <span class="ident">id</span>: <span class="ident">u8</span>,
-    <span class="ident">count</span>: <span class="ident">u32</span>,
+<span class="doccomment">/// Iterator over path segments.
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>Segments&lt;I&gt; {
+    commands: I,
+    start: Vector,
+    prev: Vector,
+    close: bool,
+    split: bool,
+    splits: [Curve; <span class="number">16</span>],
+    split_count: usize,
+    split_index: usize,
+    last_was_end: bool,
+    id: u8,
+    count: u32,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;I&gt; Segments&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator + Clone,
+    I::Item: Borrow&lt;Command&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">split</span>: <span class="ident">bool</span>, <span class="ident">commands</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">commands</span>,
-            <span class="ident">start</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">prev</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">close</span>: <span class="bool-val">false</span>,
-            <span class="ident">split</span>,
-            <span class="ident">splits</span>: [<span class="ident">Curve::default</span>(); <span class="number">16</span>],
-            <span class="ident">split_count</span>: <span class="number">0</span>,
-            <span class="ident">split_index</span>: <span class="number">0</span>,
-            <span class="ident">last_was_end</span>: <span class="bool-val">true</span>,
-            <span class="ident">id</span>: <span class="number">0</span>,
-            <span class="ident">count</span>: <span class="number">0</span>,
+    <span class="kw">fn </span>new(split: bool, commands: I) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            commands,
+            start: Vector::ZERO,
+            prev: Vector::ZERO,
+            close: <span class="bool-val">false</span>,
+            split,
+            splits: [Curve::default(); <span class="number">16</span>],
+            split_count: <span class="number">0</span>,
+            split_index: <span class="number">0</span>,
+            last_was_end: <span class="bool-val">true</span>,
+            id: <span class="number">0</span>,
+            count: <span class="number">0</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">split_curve</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">SegmentId</span>, <span class="ident">c</span>: <span class="kw-2">&amp;</span><span class="ident">Curve</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Segment</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_line</span>(<span class="ident">MERGE_EPSILON</span>) {
-            <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">a</span>.<span class="ident">nearly_eq_by</span>(<span class="ident">c</span>.<span class="ident">d</span>, <span class="ident">MERGE_EPSILON</span>) {
-                <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>split_curve(<span class="kw-2">&amp;mut </span><span class="self">self</span>, id: SegmentId, c: <span class="kw-2">&amp;</span>Curve) -&gt; <span class="prelude-ty">Option</span>&lt;Segment&gt; {
+        <span class="kw">if </span>c.is_line(MERGE_EPSILON) {
+            <span class="kw">if </span>c.a.nearly_eq_by(c.d, MERGE_EPSILON) {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
             }
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="ident">c</span>.<span class="ident">a</span>, <span class="ident">c</span>.<span class="ident">d</span>)));
+            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::Line(id, Line::new(c.a, c.d)));
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">splits</span> <span class="op">=</span> [<span class="ident">Curve::default</span>(); <span class="number">4</span>];
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">split_at_max_curvature</span>(<span class="kw-2">&amp;mut</span> <span class="ident">splits</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-            <span class="kw">let</span> <span class="ident">curve</span> <span class="op">=</span> <span class="ident">splits</span>[<span class="ident">j</span>];
-            <span class="kw">if</span> <span class="ident">curve</span>.<span class="ident">needs_split</span>() {
-                <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">split</span>(<span class="number">0.5</span>);
-                <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">needs_split</span>() {
-                    <span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">d</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">split</span>(<span class="number">0.5</span>);
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">c</span>;
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">d</span>;
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">a</span>;
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>splits = [Curve::default(); <span class="number">4</span>];
+        <span class="kw">let </span>count = c.split_at_max_curvature(<span class="kw-2">&amp;mut </span>splits);
+        <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..count {
+            <span class="kw">let </span>curve = splits[j];
+            <span class="kw">if </span>curve.needs_split() {
+                <span class="kw">let </span>(a, b) = curve.split(<span class="number">0.5</span>);
+                <span class="kw">if </span>a.needs_split() {
+                    <span class="kw">let </span>(c, d) = a.split(<span class="number">0.5</span>);
+                    <span class="self">self</span>.splits[i] = c;
+                    <span class="self">self</span>.splits[i + <span class="number">1</span>] = d;
+                    i += <span class="number">2</span>;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.splits[i] = a;
+                    i += <span class="number">1</span>;
                 }
-                <span class="kw">if</span> <span class="ident">b</span>.<span class="ident">needs_split</span>() {
-                    <span class="kw">let</span> (<span class="ident">c</span>, <span class="ident">d</span>) <span class="op">=</span> <span class="ident">b</span>.<span class="ident">split</span>(<span class="number">0.5</span>);
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">c</span>;
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">d</span>;
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">b</span>;
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw">if </span>b.needs_split() {
+                    <span class="kw">let </span>(c, d) = b.split(<span class="number">0.5</span>);
+                    <span class="self">self</span>.splits[i] = c;
+                    <span class="self">self</span>.splits[i + <span class="number">1</span>] = d;
+                    i += <span class="number">2</span>;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.splits[i] = b;
+                    i += <span class="number">1</span>;
                 }
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">splits</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">curve</span>;
-                <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.splits[i] = curve;
+                i += <span class="number">1</span>;
             }
         }
-        <span class="self">self</span>.<span class="ident">split_count</span> <span class="op">=</span> <span class="ident">i</span>;
-        <span class="self">self</span>.<span class="ident">split_index</span> <span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">splits</span>[<span class="number">0</span>].<span class="ident">to_segment</span>(<span class="ident">id</span>);
+        <span class="self">self</span>.split_count = i;
+        <span class="self">self</span>.split_index = <span class="number">1</span>;
+        <span class="kw">return </span><span class="self">self</span>.splits[<span class="number">0</span>].to_segment(id);
     }
 
-    <span class="kw">fn</span> <span class="ident">inc_id</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">id</span> <span class="op">==</span> <span class="number">254</span> {
-            <span class="self">self</span>.<span class="ident">id</span> <span class="op">=</span> <span class="number">0</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">id</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">fn </span>inc_id(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.id == <span class="number">254 </span>{
+            <span class="self">self</span>.id = <span class="number">0</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.id += <span class="number">1</span>;
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;I&gt; Iterator <span class="kw">for </span>Segments&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator + Clone,
+    I::Item: Borrow&lt;Command&gt;,
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Segment</span>;
+    <span class="kw">type </span>Item = Segment;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">Command</span>::<span class="kw-2">*</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">close</span> {
-            <span class="self">self</span>.<span class="ident">close</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::End</span>(<span class="bool-val">true</span>));
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">use </span>Command::<span class="kw-2">*</span>;
+        <span class="kw">if </span><span class="self">self</span>.close {
+            <span class="self">self</span>.close = <span class="bool-val">false</span>;
+            <span class="self">self</span>.last_was_end = <span class="bool-val">true</span>;
+            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::End(<span class="bool-val">true</span>));
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">split</span> {
-            <span class="kw">loop</span> {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">split_index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">split_count</span> {
-                    <span class="kw">let</span> <span class="ident">curve</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">splits</span>[<span class="self">self</span>.<span class="ident">split_index</span>];
-                    <span class="self">self</span>.<span class="ident">split_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>) <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">to_segment</span>(<span class="self">self</span>.<span class="ident">id</span>) {
-                        <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">d</span>;
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>);
+        <span class="kw">if </span><span class="self">self</span>.split {
+            <span class="kw">loop </span>{
+                <span class="kw">if </span><span class="self">self</span>.split_index &lt; <span class="self">self</span>.split_count {
+                    <span class="kw">let </span>curve = <span class="self">self</span>.splits[<span class="self">self</span>.split_index];
+                    <span class="self">self</span>.split_index += <span class="number">1</span>;
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(segment) = curve.to_segment(<span class="self">self</span>.id) {
+                        <span class="self">self</span>.count += <span class="number">1</span>;
+                        <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                        <span class="self">self</span>.prev = curve.d;
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(segment);
                     }
                     <span class="kw">continue</span>;
                 }
-                <span class="self">self</span>.<span class="ident">inc_id</span>();
-                <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">id</span>;
-                <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prev</span>;
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">commands</span>.<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">borrow</span>() {
-                    <span class="ident">MoveTo</span>(<span class="ident">to</span>) =&gt; {
-                        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
-                        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">last_was_end</span> {
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::End</span>(<span class="bool-val">false</span>));
+                <span class="self">self</span>.inc_id();
+                <span class="kw">let </span>id = <span class="self">self</span>.id;
+                <span class="kw">let </span>from = <span class="self">self</span>.prev;
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self</span>.commands.next()<span class="question-mark">?</span>.borrow() {
+                    MoveTo(to) =&gt; {
+                        <span class="self">self</span>.start = to;
+                        <span class="self">self</span>.prev = to;
+                        <span class="self">self</span>.count = <span class="number">0</span>;
+                        <span class="kw">if </span>!<span class="self">self</span>.last_was_end {
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::End(<span class="bool-val">false</span>));
                         }
                     }
-                    <span class="ident">LineTo</span>(<span class="ident">to</span>) =&gt; {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">from</span>.<span class="ident">nearly_eq_by</span>(<span class="ident">to</span>, <span class="ident">MERGE_EPSILON</span>) {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="ident">from</span>, <span class="ident">to</span>)));
+                    LineTo(to) =&gt; {
+                        <span class="kw">if </span>!from.nearly_eq_by(to, MERGE_EPSILON) {
+                            <span class="self">self</span>.count += <span class="number">1</span>;
+                            <span class="self">self</span>.prev = to;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::Line(id, Line::new(from, to)));
                         }
                     }
-                    <span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>) =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">split_curve</span>(<span class="ident">id</span>, <span class="kw-2">&amp;</span><span class="ident">Curve::new</span>(<span class="ident">from</span>, <span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>)) {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>);
+                    CurveTo(c1, c2, to) =&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(segment) = <span class="self">self</span>.split_curve(id, <span class="kw-2">&amp;</span>Curve::new(from, c1, c2, to)) {
+                            <span class="self">self</span>.count += <span class="number">1</span>;
+                            <span class="self">self</span>.prev = to;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(segment);
                         }
                     }
-                    <span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>) =&gt; {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>) <span class="op">=</span>
-                            <span class="self">self</span>.<span class="ident">split_curve</span>(<span class="ident">id</span>, <span class="kw-2">&amp;</span><span class="ident">Curve::from_quadratic</span>(<span class="ident">from</span>, <span class="ident">c</span>, <span class="ident">to</span>))
+                    QuadTo(c, to) =&gt; {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(segment) =
+                            <span class="self">self</span>.split_curve(id, <span class="kw-2">&amp;</span>Curve::from_quadratic(from, c, to))
                         {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>);
+                            <span class="self">self</span>.count += <span class="number">1</span>;
+                            <span class="self">self</span>.prev = to;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(segment);
                         }
                     }
-                    <span class="ident">Close</span> =&gt; {
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">start</span>;
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">count</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">from</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">start</span>, <span class="ident">MERGE_EPSILON</span>) {
-                            <span class="self">self</span>.<span class="ident">close</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="ident">from</span>, <span class="self">self</span>.<span class="ident">start</span>)));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::End</span>(<span class="bool-val">true</span>));
+                    Close =&gt; {
+                        <span class="self">self</span>.prev = <span class="self">self</span>.start;
+                        <span class="kw">if </span><span class="self">self</span>.count == <span class="number">0 </span>|| !from.nearly_eq_by(<span class="self">self</span>.start, MERGE_EPSILON) {
+                            <span class="self">self</span>.close = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::Line(id, Line::new(from, <span class="self">self</span>.start)));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.count = <span class="number">0</span>;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::End(<span class="bool-val">true</span>));
                         }
                     }
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">id</span>;
-            <span class="self">self</span>.<span class="ident">inc_id</span>();
-            <span class="kw">loop</span> {
-                <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prev</span>;
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">commands</span>.<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">borrow</span>() {
-                    <span class="ident">MoveTo</span>(<span class="ident">to</span>) =&gt; {
-                        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
-                        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">last_was_end</span> {
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::End</span>(<span class="bool-val">false</span>));
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>id = <span class="self">self</span>.id;
+            <span class="self">self</span>.inc_id();
+            <span class="kw">loop </span>{
+                <span class="kw">let </span>from = <span class="self">self</span>.prev;
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self</span>.commands.next()<span class="question-mark">?</span>.borrow() {
+                    MoveTo(to) =&gt; {
+                        <span class="self">self</span>.start = to;
+                        <span class="self">self</span>.prev = to;
+                        <span class="self">self</span>.count = <span class="number">0</span>;
+                        <span class="kw">if </span>!<span class="self">self</span>.last_was_end {
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::End(<span class="bool-val">false</span>));
                         }
                     }
-                    <span class="ident">LineTo</span>(<span class="ident">to</span>) =&gt; {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">from</span>.<span class="ident">nearly_eq_by</span>(<span class="ident">to</span>, <span class="ident">MERGE_EPSILON</span>) {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="ident">from</span>, <span class="ident">to</span>)));
+                    LineTo(to) =&gt; {
+                        <span class="kw">if </span>!from.nearly_eq_by(to, MERGE_EPSILON) {
+                            <span class="self">self</span>.count += <span class="number">1</span>;
+                            <span class="self">self</span>.prev = to;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::Line(id, Line::new(from, to)));
                         }
                     }
-                    <span class="ident">CurveTo</span>(<span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>) =&gt; {
-                        <span class="kw">let</span> <span class="ident">segment</span> <span class="op">=</span> <span class="ident">Segment::Curve</span>(<span class="ident">id</span>, <span class="ident">Curve::new</span>(<span class="ident">from</span>, <span class="ident">c1</span>, <span class="ident">c2</span>, <span class="ident">to</span>));
-                        <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>);
+                    CurveTo(c1, c2, to) =&gt; {
+                        <span class="kw">let </span>segment = Segment::Curve(id, Curve::new(from, c1, c2, to));
+                        <span class="self">self</span>.count += <span class="number">1</span>;
+                        <span class="self">self</span>.prev = to;
+                        <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(segment);
                     }
-                    <span class="ident">QuadTo</span>(<span class="ident">c</span>, <span class="ident">to</span>) =&gt; {
-                        <span class="kw">let</span> <span class="ident">segment</span> <span class="op">=</span> <span class="ident">Segment::Curve</span>(<span class="ident">id</span>, <span class="ident">Curve::from_quadratic</span>(<span class="ident">from</span>, <span class="ident">c</span>, <span class="ident">to</span>));
-                        <span class="self">self</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">to</span>;
-                        <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>);
+                    QuadTo(c, to) =&gt; {
+                        <span class="kw">let </span>segment = Segment::Curve(id, Curve::from_quadratic(from, c, to));
+                        <span class="self">self</span>.count += <span class="number">1</span>;
+                        <span class="self">self</span>.prev = to;
+                        <span class="self">self</span>.last_was_end = <span class="bool-val">false</span>;
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(segment);
                     }
-                    <span class="ident">Close</span> =&gt; {
-                        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">start</span>;
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">count</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">from</span>.<span class="ident">nearly_eq_by</span>(<span class="self">self</span>.<span class="ident">start</span>, <span class="number">0.01</span>) {
-                            <span class="self">self</span>.<span class="ident">close</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::Line</span>(<span class="ident">id</span>, <span class="ident">Line::new</span>(<span class="ident">from</span>, <span class="self">self</span>.<span class="ident">start</span>)));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">count</span> <span class="op">=</span> <span class="number">0</span>;
-                            <span class="self">self</span>.<span class="ident">last_was_end</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Segment::End</span>(<span class="bool-val">true</span>));
+                    Close =&gt; {
+                        <span class="self">self</span>.prev = <span class="self">self</span>.start;
+                        <span class="kw">if </span><span class="self">self</span>.count == <span class="number">0 </span>|| !from.nearly_eq_by(<span class="self">self</span>.start, <span class="number">0.01</span>) {
+                            <span class="self">self</span>.close = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::Line(id, Line::new(from, <span class="self">self</span>.start)));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.count = <span class="number">0</span>;
+                            <span class="self">self</span>.last_was_end = <span class="bool-val">true</span>;
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(Segment::End(<span class="bool-val">true</span>));
                         }
                     }
                 }
@@ -1267,4 +1267,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

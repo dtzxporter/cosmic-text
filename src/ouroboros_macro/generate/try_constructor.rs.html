@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/generate/try_constructor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>try_constructor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../ouroboros_macro/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/generate/try_constructor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>try_constructor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../ouroboros_macro/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -299,45 +299,45 @@
 <span id="299">299</span>
 <span id="300">300</span>
 <span id="301">301</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">info_structures</span>::{<span class="ident">ArgType</span>, <span class="ident">BuilderType</span>, <span class="ident">FieldType</span>, <span class="ident">Options</span>, <span class="ident">StructInfo</span>},
-    <span class="ident">utils::to_class_case</span>,
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+    info_structures::{ArgType, BuilderType, FieldType, Options, StructInfo},
+    utils::to_class_case,
 };
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">TokenStream</span>};
-<span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">format_ident</span>, <span class="ident">quote</span>};
-<span class="kw">use</span> <span class="ident">syn::Error</span>;
+<span class="kw">use </span>proc_macro2::{Ident, TokenStream};
+<span class="kw">use </span>quote::{format_ident, quote};
+<span class="kw">use </span>syn::Error;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_try_builder_and_constructor</span>(
-    <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">StructInfo</span>,
-    <span class="ident">options</span>: <span class="ident">Options</span>,
-    <span class="ident">builder_type</span>: <span class="ident">BuilderType</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Ident</span>, <span class="ident">TokenStream</span>, <span class="ident">TokenStream</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">struct_name</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">ident</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">generic_args</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">generic_arguments</span>();
+<span class="kw">pub fn </span>create_try_builder_and_constructor(
+    info: <span class="kw-2">&amp;</span>StructInfo,
+    options: Options,
+    builder_type: BuilderType,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(Ident, TokenStream, TokenStream), Error&gt; {
+    <span class="kw">let </span>struct_name = info.ident.clone();
+    <span class="kw">let </span>generic_args = info.generic_arguments();
 
-    <span class="kw">let</span> <span class="ident">visibility</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">options</span>.<span class="ident">do_pub_extras</span> {
-        <span class="ident">info</span>.<span class="ident">vis</span>.<span class="ident">clone</span>()
-    } <span class="kw">else</span> {
-        <span class="macro">syn::parse_quote!</span> { <span class="kw">pub</span>(<span class="kw">super</span>) }
+    <span class="kw">let </span>visibility = <span class="kw">if </span>options.do_pub_extras {
+        info.vis.clone()
+    } <span class="kw">else </span>{
+        <span class="macro">syn::parse_quote! </span>{ <span class="kw">pub</span>(<span class="kw">super</span>) }
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">head_recover_code</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">fields</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">field</span>.<span class="ident">self_referencing</span> {
-            <span class="kw">let</span> <span class="ident">field_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">name</span>;
-            <span class="ident">head_recover_code</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">field_name</span> });
+    <span class="kw">let </span><span class="kw-2">mut </span>head_recover_code = Vec::new();
+    <span class="kw">for </span>field <span class="kw">in </span><span class="kw-2">&amp;</span>info.fields {
+        <span class="kw">if </span>!field.self_referencing {
+            <span class="kw">let </span>field_name = <span class="kw-2">&amp;</span>field.name;
+            head_recover_code.push(<span class="macro">quote! </span>{ #field_name });
         }
     }
-    <span class="kw">for</span> (<span class="ident">_ty</span>, <span class="ident">ident</span>) <span class="kw">in</span> <span class="ident">info</span>.<span class="ident">generic_consumers</span>() {
-        <span class="ident">head_recover_code</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">ident</span>: <span class="ident">::core::marker::PhantomData</span> });
+    <span class="kw">for </span>(_ty, ident) <span class="kw">in </span>info.generic_consumers() {
+        head_recover_code.push(<span class="macro">quote! </span>{ #ident: ::core::marker::PhantomData });
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_head_index</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>current_head_index = <span class="number">0</span>;
 
-    <span class="kw">let</span> <span class="ident">builder_struct_name</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-        <span class="ident">BuilderType::AsyncSend</span> =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}AsyncSendTryBuilder&quot;</span>, <span class="ident">info</span>.<span class="ident">ident</span>),
-        <span class="ident">BuilderType::Async</span> =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}AsyncTryBuilder&quot;</span>, <span class="ident">info</span>.<span class="ident">ident</span>),
-        <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}TryBuilder&quot;</span>, <span class="ident">info</span>.<span class="ident">ident</span>),
+    <span class="kw">let </span>builder_struct_name = <span class="kw">match </span>builder_type {
+        BuilderType::AsyncSend =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}AsyncSendTryBuilder&quot;</span>, info.ident),
+        BuilderType::Async =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}AsyncTryBuilder&quot;</span>, info.ident),
+        BuilderType::Sync =&gt; <span class="macro">format_ident!</span>(<span class="string">&quot;{}TryBuilder&quot;</span>, info.ident),
     };
-    <span class="kw">let</span> <span class="ident">documentation</span> <span class="op">=</span> <span class="macro">format!</span>(
+    <span class="kw">let </span>documentation = <span class="macro">format!</span>(
         <span class="macro">concat!</span>(
             <span class="string">&quot;(See also [`{0}::try_build()`]({0}::try_build).) Like [`new`](Self::new), but &quot;</span>,
             <span class="string">&quot;builders for [self-referencing fields](https://docs.rs/ouroboros/latest/ouroboros/attr.self_referencing.html#definitions) &quot;</span>,
@@ -345,9 +345,9 @@
             <span class="string">&quot;succeed, `Ok` is returned. The arguments are as follows:\n\n&quot;</span>,
             <span class="string">&quot;| Argument | Suggested Use |\n| --- | --- |\n&quot;</span>,
         ),
-        <span class="ident">builder_struct_name</span>.<span class="ident">to_string</span>()
+        builder_struct_name.to_string()
     );
-    <span class="kw">let</span> <span class="ident">or_recover_documentation</span> <span class="op">=</span> <span class="macro">format!</span>(
+    <span class="kw">let </span>or_recover_documentation = <span class="macro">format!</span>(
         <span class="macro">concat!</span>(
             <span class="string">&quot;(See also [`{0}::try_build_or_recover()`]({0}::try_build_or_recover).) Like &quot;</span>,
             <span class="string">&quot;[`try_new`](Self::try_new), but all &quot;</span>,
@@ -355,9 +355,9 @@
             <span class="string">&quot;are returned in the case of an error. The arguments are as follows:\n\n&quot;</span>,
             <span class="string">&quot;| Argument | Suggested Use |\n| --- | --- |\n&quot;</span>,
         ),
-        <span class="ident">builder_struct_name</span>.<span class="ident">to_string</span>()
+        builder_struct_name.to_string()
     );
-    <span class="kw">let</span> <span class="ident">builder_documentation</span> <span class="op">=</span> <span class="macro">concat!</span>(
+    <span class="kw">let </span>builder_documentation = <span class="macro">concat!</span>(
         <span class="string">&quot;A more verbose but stable way to construct self-referencing structs. It is &quot;</span>,
         <span class="string">&quot;comparable to using `StructName { field1: value1, field2: value2 }` rather than &quot;</span>,
         <span class="string">&quot;`StructName::new(value1, value2)`. This has the dual benefit of makin your code &quot;</span>,
@@ -366,239 +366,239 @@
         <span class="string">&quot;construct the actual struct. The fields of this struct should be used as follows:\n\n&quot;</span>,
         <span class="string">&quot;| Field | Suggested Use |\n| --- | --- |\n&quot;</span>,
     )
-    .<span class="ident">to_owned</span>();
-    <span class="kw">let</span> <span class="ident">build_fn_documentation</span> <span class="op">=</span> <span class="macro">format!</span>(
+    .to_owned();
+    <span class="kw">let </span>build_fn_documentation = <span class="macro">format!</span>(
         <span class="macro">concat!</span>(
             <span class="string">&quot;Calls [`{0}::try_new()`]({0}::try_new) using the provided values. This is &quot;</span>,
-            <span class="string">&quot;preferrable over calling `try_new()` directly for the reasons listed above. &quot;</span>
-        ),
-        <span class="ident">info</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>()
+            <span class="string">&quot;preferrable over calling `try_new()` directly for the reasons listed above. &quot;
+        </span>),
+        info.ident.to_string()
     );
-    <span class="kw">let</span> <span class="ident">build_or_recover_fn_documentation</span> <span class="op">=</span> <span class="macro">format!</span>(
+    <span class="kw">let </span>build_or_recover_fn_documentation = <span class="macro">format!</span>(
         <span class="macro">concat!</span>(
             <span class="string">&quot;Calls [`{0}::try_new_or_recover()`]({0}::try_new_or_recover) using the provided &quot;</span>,
             <span class="string">&quot;values. This is preferrable over calling `try_new_or_recover()` directly for the &quot;</span>,
-            <span class="string">&quot;reasons listed above. &quot;</span>
-        ),
-        <span class="ident">info</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>()
+            <span class="string">&quot;reasons listed above. &quot;
+        </span>),
+        info.ident.to_string()
     );
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">doc_table</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>.<span class="ident">to_owned</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">or_recover_code</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">params</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder_struct_generic_producers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">info</span>
-        .<span class="ident">generic_params</span>()
-        .<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">param</span><span class="op">|</span> <span class="macro">quote!</span> { #<span class="ident">param</span> })
-        .<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder_struct_generic_consumers</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">generic_arguments</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder_struct_fields</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder_struct_field_names</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>doc_table = <span class="string">&quot;&quot;</span>.to_owned();
+    <span class="kw">let </span><span class="kw-2">mut </span>or_recover_code: Vec&lt;TokenStream&gt; = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>params: Vec&lt;TokenStream&gt; = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>builder_struct_generic_producers: Vec&lt;<span class="kw">_</span>&gt; = info
+        .generic_params()
+        .iter()
+        .map(|param| <span class="macro">quote! </span>{ #param })
+        .collect();
+    <span class="kw">let </span><span class="kw-2">mut </span>builder_struct_generic_consumers = info.generic_arguments();
+    <span class="kw">let </span><span class="kw-2">mut </span>builder_struct_fields = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>builder_struct_field_names = Vec::new();
 
-    <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">fields</span> {
-        <span class="kw">let</span> <span class="ident">field_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">name</span>;
+    <span class="kw">for </span>field <span class="kw">in </span><span class="kw-2">&amp;</span>info.fields {
+        <span class="kw">let </span>field_name = <span class="kw-2">&amp;</span>field.name;
 
-        <span class="kw">let</span> <span class="ident">arg_type</span> <span class="op">=</span> <span class="ident">field</span>.<span class="ident">make_try_constructor_arg_type</span>(<span class="ident">info</span>, <span class="ident">builder_type</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ArgType::Plain</span>(<span class="ident">plain_type</span>) <span class="op">=</span> <span class="ident">arg_type</span> {
-            <span class="comment">// No fancy builder function, we can just move the value directly into the struct.</span>
-            <span class="ident">params</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">field_name</span>: #<span class="ident">plain_type</span> });
-            <span class="ident">builder_struct_fields</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">field_name</span>: #<span class="ident">plain_type</span> });
-            <span class="ident">builder_struct_field_names</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">field_name</span> });
-            <span class="ident">doc_table</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format!</span>(
+        <span class="kw">let </span>arg_type = field.make_try_constructor_arg_type(info, builder_type)<span class="question-mark">?</span>;
+        <span class="kw">if let </span>ArgType::Plain(plain_type) = arg_type {
+            <span class="comment">// No fancy builder function, we can just move the value directly into the struct.
+            </span>params.push(<span class="macro">quote! </span>{ #field_name: #plain_type });
+            builder_struct_fields.push(<span class="macro">quote! </span>{ #field_name: #plain_type });
+            builder_struct_field_names.push(<span class="macro">quote! </span>{ #field_name });
+            doc_table += <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                 <span class="string">&quot;| `{}` | Directly pass in the value this field should contain |\n&quot;</span>,
-                <span class="ident">field_name</span>.<span class="ident">to_string</span>()
+                field_name.to_string()
             );
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">field</span>.<span class="ident">self_referencing</span> {
-                <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">is_borrowed</span>() {
-                    <span class="ident">head_recover_code</span>[<span class="ident">current_head_index</span>] <span class="op">=</span> <span class="macro">quote!</span> {
-                        #<span class="ident">field_name</span>: <span class="ident">::ouroboros::macro_help::unbox</span>(#<span class="ident">field_name</span>)
+            <span class="kw">if </span>!field.self_referencing {
+                <span class="kw">if </span>field.is_borrowed() {
+                    head_recover_code[current_head_index] = <span class="macro">quote! </span>{
+                        #field_name: ::ouroboros::macro_help::unbox(#field_name)
                     };
-                } <span class="kw">else</span> {
-                    <span class="ident">head_recover_code</span>[<span class="ident">current_head_index</span>] <span class="op">=</span> <span class="macro">quote!</span> { #<span class="ident">field_name</span> };
+                } <span class="kw">else </span>{
+                    head_recover_code[current_head_index] = <span class="macro">quote! </span>{ #field_name };
                 }
-                <span class="ident">current_head_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                current_head_index += <span class="number">1</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ArgType::TraitBound</span>(<span class="ident">bound_type</span>) <span class="op">=</span> <span class="ident">arg_type</span> {
-            <span class="comment">// Trait bounds are much trickier. We need a special syntax to accept them in the</span>
-            <span class="comment">// contructor, and generic parameters need to be added to the builder struct to make</span>
-            <span class="comment">// it work.</span>
-            <span class="kw">let</span> <span class="ident">builder_name</span> <span class="op">=</span> <span class="ident">field</span>.<span class="ident">builder_name</span>();
-            <span class="ident">params</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">builder_name</span> : <span class="kw">impl</span> #<span class="ident">bound_type</span> });
-            <span class="comment">// Ok so hear me out basically without this thing here my IDE thinks the rest of the</span>
-            <span class="comment">// code is a string and it all turns green.</span>
-            {}
-            <span class="ident">doc_table</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format!</span>(
+        } <span class="kw">else if let </span>ArgType::TraitBound(bound_type) = arg_type {
+            <span class="comment">// Trait bounds are much trickier. We need a special syntax to accept them in the
+            // contructor, and generic parameters need to be added to the builder struct to make
+            // it work.
+            </span><span class="kw">let </span>builder_name = field.builder_name();
+            params.push(<span class="macro">quote! </span>{ #builder_name : <span class="kw">impl </span>#bound_type });
+            <span class="comment">// Ok so hear me out basically without this thing here my IDE thinks the rest of the
+            // code is a string and it all turns green.
+            </span>{}
+            doc_table += <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                 <span class="string">&quot;| `{}` | Use a function or closure: `(&quot;</span>,
-                <span class="ident">builder_name</span>.<span class="ident">to_string</span>()
+                builder_name.to_string()
             );
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">builder_args</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">borrow</span>) <span class="kw">in</span> <span class="ident">field</span>.<span class="ident">borrows</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                <span class="kw">let</span> <span class="ident">borrowed_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">fields</span>[<span class="ident">borrow</span>.<span class="ident">index</span>].<span class="ident">name</span>;
-                <span class="ident">builder_args</span>.<span class="ident">push</span>(<span class="macro">format_ident!</span>(<span class="string">&quot;{}_illegal_static_reference&quot;</span>, <span class="ident">borrowed_name</span>));
-                <span class="ident">doc_table</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format!</span>(
+            <span class="kw">let </span><span class="kw-2">mut </span>builder_args = Vec::new();
+            <span class="kw">for </span>(index, borrow) <span class="kw">in </span>field.borrows.iter().enumerate() {
+                <span class="kw">let </span>borrowed_name = <span class="kw-2">&amp;</span>info.fields[borrow.index].name;
+                builder_args.push(<span class="macro">format_ident!</span>(<span class="string">&quot;{}_illegal_static_reference&quot;</span>, borrowed_name));
+                doc_table += <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                     <span class="string">&quot;{}: &amp;{}_&quot;</span>,
-                    <span class="ident">borrowed_name</span>.<span class="ident">to_string</span>(),
-                    <span class="kw">if</span> <span class="ident">borrow</span>.<span class="ident">mutable</span> { <span class="string">&quot;mut &quot;</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> },
+                    borrowed_name.to_string(),
+                    <span class="kw">if </span>borrow.mutable { <span class="string">&quot;mut &quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;&quot; </span>},
                 );
-                <span class="kw">if</span> <span class="ident">index</span> <span class="op">&lt;</span> <span class="ident">field</span>.<span class="ident">borrows</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> {
-                    <span class="ident">doc_table</span> <span class="op">+</span><span class="op">=</span> <span class="string">&quot;, &quot;</span>;
+                <span class="kw">if </span>index &lt; field.borrows.len() - <span class="number">1 </span>{
+                    doc_table += <span class="string">&quot;, &quot;</span>;
                 }
             }
-            <span class="ident">doc_table</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;) -&gt; Result&lt;{}: _, Error_&gt;` | \n&quot;</span>, <span class="ident">field_name</span>.<span class="ident">to_string</span>());
-            <span class="kw">let</span> <span class="ident">builder_value</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">builder_type</span>.<span class="ident">is_async</span>() {
-                <span class="macro">quote!</span> { #<span class="ident">builder_name</span> (#(#<span class="ident">builder_args</span>),<span class="kw-2">*</span>).<span class="kw">await</span> }
-            } <span class="kw">else</span> {
-                <span class="macro">quote!</span> { #<span class="ident">builder_name</span> (#(#<span class="ident">builder_args</span>),<span class="kw-2">*</span>) }
+            doc_table += <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;) -&gt; Result&lt;{}: _, Error_&gt;` | \n&quot;</span>, field_name.to_string());
+            <span class="kw">let </span>builder_value = <span class="kw">if </span>builder_type.is_async() {
+                <span class="macro">quote! </span>{ #builder_name (#(#builder_args),<span class="kw-2">*</span>).<span class="kw">await </span>}
+            } <span class="kw">else </span>{
+                <span class="macro">quote! </span>{ #builder_name (#(#builder_args),<span class="kw-2">*</span>) }
             };
-            <span class="ident">or_recover_code</span>.<span class="ident">push</span>(<span class="macro">quote!</span> {
-                <span class="kw">let</span> #<span class="ident">field_name</span> <span class="op">=</span> <span class="kw">match</span> #<span class="ident">builder_value</span> {
-                    <span class="ident">::core::result::Result::Ok</span>(<span class="ident">value</span>) =&gt; <span class="ident">value</span>,
-                    <span class="ident">::core::result::Result::Err</span>(<span class="ident">err</span>)
-                        =&gt; <span class="kw">return</span> <span class="ident">::core::result::Result::Err</span>((<span class="ident">err</span>, <span class="ident">Heads</span> { #(#<span class="ident">head_recover_code</span>),<span class="op">*</span> })),
+            or_recover_code.push(<span class="macro">quote! </span>{
+                <span class="kw">let </span>#field_name = <span class="kw">match </span>#builder_value {
+                    ::core::result::Result::Ok(value) =&gt; value,
+                    ::core::result::Result::Err(err)
+                        =&gt; <span class="kw">return </span>::core::result::Result::Err((err, Heads { #(#head_recover_code),* })),
                 };
             });
-            <span class="kw">let</span> <span class="ident">generic_type_name</span> <span class="op">=</span>
-                <span class="macro">format_ident!</span>(<span class="string">&quot;{}Builder_&quot;</span>, <span class="ident">to_class_case</span>(<span class="ident">field_name</span>.<span class="ident">to_string</span>().<span class="ident">as_str</span>()));
+            <span class="kw">let </span>generic_type_name =
+                <span class="macro">format_ident!</span>(<span class="string">&quot;{}Builder_&quot;</span>, to_class_case(field_name.to_string().as_str()));
 
-            <span class="ident">builder_struct_generic_producers</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">generic_type_name</span>: #<span class="ident">bound_type</span> });
-            <span class="ident">builder_struct_generic_consumers</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">generic_type_name</span> });
-            <span class="ident">builder_struct_fields</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">builder_name</span>: #<span class="ident">generic_type_name</span> });
-            <span class="ident">builder_struct_field_names</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { #<span class="ident">builder_name</span> });
+            builder_struct_generic_producers.push(<span class="macro">quote! </span>{ #generic_type_name: #bound_type });
+            builder_struct_generic_consumers.push(<span class="macro">quote! </span>{ #generic_type_name });
+            builder_struct_fields.push(<span class="macro">quote! </span>{ #builder_name: #generic_type_name });
+            builder_struct_field_names.push(<span class="macro">quote! </span>{ #builder_name });
         }
-        <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">is_borrowed</span>() {
-            <span class="kw">let</span> <span class="ident">boxed</span> <span class="op">=</span> <span class="ident">field</span>.<span class="ident">boxed</span>();
-            <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::BorrowedMut</span> {
-                <span class="ident">or_recover_code</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { <span class="kw">let</span> <span class="kw-2">mut</span> #<span class="ident">field_name</span> <span class="op">=</span> #<span class="ident">boxed</span>; });
-            } <span class="kw">else</span> {
-                <span class="ident">or_recover_code</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { <span class="kw">let</span> #<span class="ident">field_name</span> <span class="op">=</span> #<span class="ident">boxed</span>; });
+        <span class="kw">if </span>field.is_borrowed() {
+            <span class="kw">let </span>boxed = field.boxed();
+            <span class="kw">if </span>field.field_type == FieldType::BorrowedMut {
+                or_recover_code.push(<span class="macro">quote! </span>{ <span class="kw">let </span><span class="kw-2">mut </span>#field_name = #boxed; });
+            } <span class="kw">else </span>{
+                or_recover_code.push(<span class="macro">quote! </span>{ <span class="kw">let </span>#field_name = #boxed; });
             }
         }
 
-        <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::Borrowed</span> {
-            <span class="ident">or_recover_code</span>.<span class="ident">push</span>(<span class="ident">field</span>.<span class="ident">make_illegal_static_reference</span>());
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::BorrowedMut</span> {
-            <span class="ident">or_recover_code</span>.<span class="ident">push</span>(<span class="ident">field</span>.<span class="ident">make_illegal_static_mut_reference</span>());
+        <span class="kw">if </span>field.field_type == FieldType::Borrowed {
+            or_recover_code.push(field.make_illegal_static_reference());
+        } <span class="kw">else if </span>field.field_type == FieldType::BorrowedMut {
+            or_recover_code.push(field.make_illegal_static_mut_reference());
         }
     }
-    <span class="kw">let</span> <span class="ident">documentation</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">options</span>.<span class="ident">do_no_doc</span> {
-        <span class="kw">let</span> <span class="ident">documentation</span> <span class="op">=</span> <span class="ident">documentation</span> <span class="op">+</span> <span class="kw-2">&amp;</span><span class="ident">doc_table</span>;
-        <span class="macro">quote!</span> {
-            <span class="attribute">#[<span class="ident">doc</span><span class="op">=</span>#<span class="ident">documentation</span>]</span>
+    <span class="kw">let </span>documentation = <span class="kw">if </span>!options.do_no_doc {
+        <span class="kw">let </span>documentation = documentation + <span class="kw-2">&amp;</span>doc_table;
+        <span class="macro">quote! </span>{
+            <span class="attribute">#[doc=#documentation]
+        </span>}
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="attribute">#[doc(hidden)] </span>}
+    };
+    <span class="kw">let </span>or_recover_documentation = <span class="kw">if </span>!options.do_no_doc {
+        <span class="kw">let </span>or_recover_documentation = or_recover_documentation + <span class="kw-2">&amp;</span>doc_table;
+        <span class="macro">quote! </span>{
+            <span class="attribute">#[doc=#or_recover_documentation]
+        </span>}
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="attribute">#[doc(hidden)] </span>}
+    };
+    <span class="kw">let </span>builder_documentation = <span class="kw">if </span>!options.do_no_doc {
+        <span class="kw">let </span>builder_documentation = builder_documentation + <span class="kw-2">&amp;</span>doc_table;
+        <span class="macro">quote! </span>{
+            <span class="attribute">#[doc=#builder_documentation]
+        </span>}
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="attribute">#[doc(hidden)] </span>}
+    };
+    <span class="kw">let </span>or_recover_ident = <span class="kw">match </span>builder_type {
+        BuilderType::AsyncSend =&gt; <span class="macro">quote! </span>{ try_new_or_recover_async_send },
+        BuilderType::Async =&gt; <span class="macro">quote! </span>{ try_new_or_recover_async },
+        BuilderType::Sync =&gt; <span class="macro">quote! </span>{ try_new_or_recover },
+    };
+    <span class="kw">let </span>or_recover_constructor_fn = <span class="kw">if </span>builder_type.is_async() {
+        <span class="macro">quote! </span>{ <span class="kw">async fn </span>#or_recover_ident }
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="kw">fn </span>#or_recover_ident }
+    };
+    <span class="kw">let </span>constructor_fn = <span class="kw">match </span>builder_type {
+        BuilderType::AsyncSend =&gt; <span class="macro">quote! </span>{ <span class="kw">async fn </span>try_new_async_send },
+        BuilderType::Async =&gt; <span class="macro">quote! </span>{ <span class="kw">async fn </span>try_new_async },
+        BuilderType::Sync =&gt; <span class="macro">quote! </span>{ <span class="kw">fn </span>try_new },
+    };
+    <span class="kw">let </span>constructor_code = <span class="kw">if </span>builder_type.is_async() {
+        <span class="macro">quote! </span>{ #struct_name::#or_recover_ident(#(#builder_struct_field_names),<span class="kw-2">*</span>).<span class="kw">await</span>.map_err(|(error, _heads)| error) }
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ #struct_name::#or_recover_ident(#(#builder_struct_field_names),<span class="kw-2">*</span>).map_err(|(error, _heads)| error) }
+    };
+    <span class="kw">let </span>field_names: Vec&lt;<span class="kw">_</span>&gt; = info.fields.iter().map(|field| field.name.clone()).collect();
+    <span class="kw">let </span>constructor_def = <span class="macro">quote! </span>{
+        #documentation
+        #visibility #constructor_fn&lt;Error_&gt;(#(#params),<span class="kw-2">*</span>) -&gt; ::core::result::Result&lt;#struct_name &lt;#(#generic_args),<span class="kw-2">*</span>&gt;, Error_&gt; {
+            #constructor_code
         }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> }
-    };
-    <span class="kw">let</span> <span class="ident">or_recover_documentation</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">options</span>.<span class="ident">do_no_doc</span> {
-        <span class="kw">let</span> <span class="ident">or_recover_documentation</span> <span class="op">=</span> <span class="ident">or_recover_documentation</span> <span class="op">+</span> <span class="kw-2">&amp;</span><span class="ident">doc_table</span>;
-        <span class="macro">quote!</span> {
-            <span class="attribute">#[<span class="ident">doc</span><span class="op">=</span>#<span class="ident">or_recover_documentation</span>]</span>
-        }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> }
-    };
-    <span class="kw">let</span> <span class="ident">builder_documentation</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">options</span>.<span class="ident">do_no_doc</span> {
-        <span class="kw">let</span> <span class="ident">builder_documentation</span> <span class="op">=</span> <span class="ident">builder_documentation</span> <span class="op">+</span> <span class="kw-2">&amp;</span><span class="ident">doc_table</span>;
-        <span class="macro">quote!</span> {
-            <span class="attribute">#[<span class="ident">doc</span><span class="op">=</span>#<span class="ident">builder_documentation</span>]</span>
-        }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> }
-    };
-    <span class="kw">let</span> <span class="ident">or_recover_ident</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-        <span class="ident">BuilderType::AsyncSend</span> =&gt; <span class="macro">quote!</span> { <span class="ident">try_new_or_recover_async_send</span> },
-        <span class="ident">BuilderType::Async</span> =&gt; <span class="macro">quote!</span> { <span class="ident">try_new_or_recover_async</span> },
-        <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> { <span class="ident">try_new_or_recover</span> },
-    };
-    <span class="kw">let</span> <span class="ident">or_recover_constructor_fn</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">builder_type</span>.<span class="ident">is_async</span>() {
-        <span class="macro">quote!</span> { <span class="kw">async</span> <span class="kw">fn</span> #<span class="ident">or_recover_ident</span> }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="kw">fn</span> #<span class="ident">or_recover_ident</span> }
-    };
-    <span class="kw">let</span> <span class="ident">constructor_fn</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-        <span class="ident">BuilderType::AsyncSend</span> =&gt; <span class="macro">quote!</span> { <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_new_async_send</span> },
-        <span class="ident">BuilderType::Async</span> =&gt; <span class="macro">quote!</span> { <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_new_async</span> },
-        <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> { <span class="kw">fn</span> <span class="ident">try_new</span> },
-    };
-    <span class="kw">let</span> <span class="ident">constructor_code</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">builder_type</span>.<span class="ident">is_async</span>() {
-        <span class="macro">quote!</span> { #<span class="ident">struct_name</span>::#<span class="ident">or_recover_ident</span>(#(#<span class="ident">builder_struct_field_names</span>),<span class="kw-2">*</span>).<span class="kw">await</span>.<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">error</span>, <span class="ident">_heads</span>)<span class="op">|</span> <span class="ident">error</span>) }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { #<span class="ident">struct_name</span>::#<span class="ident">or_recover_ident</span>(#(#<span class="ident">builder_struct_field_names</span>),<span class="kw-2">*</span>).<span class="ident">map_err</span>(<span class="op">|</span>(<span class="ident">error</span>, <span class="ident">_heads</span>)<span class="op">|</span> <span class="ident">error</span>) }
-    };
-    <span class="kw">let</span> <span class="ident">field_names</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">fields</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">field</span><span class="op">|</span> <span class="ident">field</span>.<span class="ident">name</span>.<span class="ident">clone</span>()).<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">constructor_def</span> <span class="op">=</span> <span class="macro">quote!</span> {
-        #<span class="ident">documentation</span>
-        #<span class="ident">visibility</span> #<span class="ident">constructor_fn</span><span class="op">&lt;</span><span class="ident">Error_</span><span class="op">&gt;</span>(#(#<span class="ident">params</span>),<span class="kw-2">*</span>) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>, <span class="ident">Error_</span><span class="op">&gt;</span> {
-            #<span class="ident">constructor_code</span>
-        }
-        #<span class="ident">or_recover_documentation</span>
-        #<span class="ident">visibility</span> #<span class="ident">or_recover_constructor_fn</span><span class="op">&lt;</span><span class="ident">Error_</span><span class="op">&gt;</span>(#(#<span class="ident">params</span>),<span class="kw-2">*</span>) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>, (<span class="ident">Error_</span>, <span class="ident">Heads</span><span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-            #(#<span class="ident">or_recover_code</span>)<span class="op">*</span>
-            <span class="ident">::core::result::Result::Ok</span>(<span class="self">Self</span> { #(#<span class="ident">field_names</span>),<span class="op">*</span> })
+        #or_recover_documentation
+        #visibility #or_recover_constructor_fn&lt;Error_&gt;(#(#params),<span class="kw-2">*</span>) -&gt; ::core::result::Result&lt;#struct_name &lt;#(#generic_args),<span class="kw-2">*</span>&gt;, (Error_, Heads&lt;#(#generic_args),<span class="kw-2">*</span>&gt;)&gt; {
+            #(#or_recover_code)*
+            ::core::result::Result::Ok(<span class="self">Self </span>{ #(#field_names),* })
         }
     };
-    <span class="ident">builder_struct_generic_producers</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { <span class="ident">Error_</span> });
-    <span class="ident">builder_struct_generic_consumers</span>.<span class="ident">push</span>(<span class="macro">quote!</span> { <span class="ident">Error_</span> });
-    <span class="kw">let</span> <span class="ident">generic_where</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>;
-    <span class="kw">let</span> <span class="ident">builder_fn</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">builder_type</span>.<span class="ident">is_async</span>() {
-        <span class="macro">quote!</span> { <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_build</span> }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="kw">fn</span> <span class="ident">try_build</span> }
+    builder_struct_generic_producers.push(<span class="macro">quote! </span>{ Error_ });
+    builder_struct_generic_consumers.push(<span class="macro">quote! </span>{ Error_ });
+    <span class="kw">let </span>generic_where = <span class="kw-2">&amp;</span>info.generics.where_clause;
+    <span class="kw">let </span>builder_fn = <span class="kw">if </span>builder_type.is_async() {
+        <span class="macro">quote! </span>{ <span class="kw">async fn </span>try_build }
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="kw">fn </span>try_build }
     };
-    <span class="kw">let</span> <span class="ident">or_recover_builder_fn</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">builder_type</span>.<span class="ident">is_async</span>() {
-        <span class="macro">quote!</span> { <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_build_or_recover</span> }
-    } <span class="kw">else</span> {
-        <span class="macro">quote!</span> { <span class="kw">fn</span> <span class="ident">try_build_or_recover</span> }
+    <span class="kw">let </span>or_recover_builder_fn = <span class="kw">if </span>builder_type.is_async() {
+        <span class="macro">quote! </span>{ <span class="kw">async fn </span>try_build_or_recover }
+    } <span class="kw">else </span>{
+        <span class="macro">quote! </span>{ <span class="kw">fn </span>try_build_or_recover }
     };
-    <span class="kw">let</span> <span class="ident">builder_code</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-        <span class="ident">BuilderType::AsyncSend</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new_async_send</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
-            ).<span class="kw">await</span>
-        },
-        <span class="ident">BuilderType::Async</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new_async</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
-            ).<span class="kw">await</span>
-        },
-        <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
+    <span class="kw">let </span>builder_code = <span class="kw">match </span>builder_type {
+        BuilderType::AsyncSend =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new_async_send(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
+            ).<span class="kw">await
+        </span>},
+        BuilderType::Async =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new_async(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
+            ).<span class="kw">await
+        </span>},
+        BuilderType::Sync =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
             )
         },
     };
-    <span class="kw">let</span> <span class="ident">or_recover_builder_code</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">builder_type</span> {
-        <span class="ident">BuilderType::AsyncSend</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new_or_recover_async_send</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
-            ).<span class="kw">await</span>
-        },
-        <span class="ident">BuilderType::Async</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new_or_recover_async</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
-            ).<span class="kw">await</span>
-        },
-        <span class="ident">BuilderType::Sync</span> =&gt; <span class="macro">quote!</span> {
-            #<span class="ident">struct_name::try_new_or_recover</span>(
-                #(<span class="self">self</span>.#<span class="ident">builder_struct_field_names</span>),<span class="op">*</span>
+    <span class="kw">let </span>or_recover_builder_code = <span class="kw">match </span>builder_type {
+        BuilderType::AsyncSend =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new_or_recover_async_send(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
+            ).<span class="kw">await
+        </span>},
+        BuilderType::Async =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new_or_recover_async(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
+            ).<span class="kw">await
+        </span>},
+        BuilderType::Sync =&gt; <span class="macro">quote! </span>{
+            #struct_name::try_new_or_recover(
+                #(<span class="self">self</span>.#builder_struct_field_names),*
             )
         },
     };
-    <span class="kw">let</span> <span class="ident">builder_def</span> <span class="op">=</span> <span class="macro">quote!</span> {
-        #<span class="ident">builder_documentation</span>
-        #<span class="ident">visibility</span> <span class="kw">struct</span> #<span class="ident">builder_struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">builder_struct_generic_producers</span>),<span class="kw-2">*</span><span class="op">&gt;</span> #<span class="ident">generic_where</span> {
-            #(#<span class="ident">visibility</span> #<span class="ident">builder_struct_fields</span>),<span class="op">*</span>
+    <span class="kw">let </span>builder_def = <span class="macro">quote! </span>{
+        #builder_documentation
+        #visibility <span class="kw">struct </span>#builder_struct_name &lt;#(#builder_struct_generic_producers),<span class="kw-2">*</span>&gt; #generic_where {
+            #(#visibility #builder_struct_fields),*
         }
-        <span class="kw">impl</span><span class="op">&lt;</span>#(#<span class="ident">builder_struct_generic_producers</span>),<span class="kw-2">*</span><span class="op">&gt;</span> #<span class="ident">builder_struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">builder_struct_generic_consumers</span>),<span class="kw-2">*</span><span class="op">&gt;</span> #<span class="ident">generic_where</span> {
-            <span class="attribute">#[<span class="ident">doc</span><span class="op">=</span>#<span class="ident">build_fn_documentation</span>]</span>
-            #<span class="ident">visibility</span> #<span class="ident">builder_fn</span>(<span class="self">self</span>) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>, <span class="ident">Error_</span><span class="op">&gt;</span> {
-                #<span class="ident">builder_code</span>
+        <span class="kw">impl</span>&lt;#(#builder_struct_generic_producers),<span class="kw-2">*</span>&gt; #builder_struct_name &lt;#(#builder_struct_generic_consumers),<span class="kw-2">*</span>&gt; #generic_where {
+            <span class="attribute">#[doc=#build_fn_documentation]
+            </span>#visibility #builder_fn(<span class="self">self</span>) -&gt; ::core::result::Result&lt;#struct_name &lt;#(#generic_args),<span class="kw-2">*</span>&gt;, Error_&gt; {
+                #builder_code
             }
-            <span class="attribute">#[<span class="ident">doc</span><span class="op">=</span>#<span class="ident">build_or_recover_fn_documentation</span>]</span>
-            #<span class="ident">visibility</span> #<span class="ident">or_recover_builder_fn</span>(<span class="self">self</span>) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">struct_name</span> <span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>, (<span class="ident">Error_</span>, <span class="ident">Heads</span><span class="op">&lt;</span>#(#<span class="ident">generic_args</span>),<span class="kw-2">*</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-                #<span class="ident">or_recover_builder_code</span>
+            <span class="attribute">#[doc=#build_or_recover_fn_documentation]
+            </span>#visibility #or_recover_builder_fn(<span class="self">self</span>) -&gt; ::core::result::Result&lt;#struct_name &lt;#(#generic_args),<span class="kw-2">*</span>&gt;, (Error_, Heads&lt;#(#generic_args),<span class="kw-2">*</span>&gt;)&gt; {
+                #or_recover_builder_code
             }
         }
     };
-    <span class="prelude-val">Ok</span>((<span class="ident">builder_struct_name</span>, <span class="ident">builder_def</span>, <span class="ident">constructor_def</span>))
+    <span class="prelude-val">Ok</span>((builder_struct_name, builder_def, constructor_def))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

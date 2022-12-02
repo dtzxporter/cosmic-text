@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/palette.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>palette.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/palette.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>palette.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -166,173 +166,173 @@
 <span id="166">166</span>
 <span id="167">167</span>
 <span id="168">168</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Collections of colors for layered outlines.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Collections of colors for layered outlines.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{
-    <span class="ident">string</span>::{<span class="ident">LocalizedString</span>, <span class="ident">StringId</span>},
-    <span class="ident">FontRef</span>,
+</span><span class="kw">use </span><span class="kw">super</span>::internal::<span class="kw-2">*</span>;
+<span class="kw">use super</span>::{
+    string::{LocalizedString, StringId},
+    FontRef,
 };
 
-<span class="kw">const</span> <span class="ident">CPAL</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;CPAL&quot;</span>);
+<span class="kw">const </span>CPAL: RawTag = raw_tag(<span class="string">b&quot;CPAL&quot;</span>);
 
-<span class="doccomment">/// Iterator over a collection of color palettes.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ColorPalettes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">font</span>: <span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">pos</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Iterator over a collection of color palettes.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>ColorPalettes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    font: FontRef&lt;<span class="lifetime">&#39;a</span>&gt;,
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    len: usize,
+    pos: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ColorPalettes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">font</span>: <span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="self">Self</span> {
-            <span class="ident">font</span>,
-            <span class="ident">data</span>,
-            <span class="ident">len</span>,
-            <span class="ident">pos</span>: <span class="number">0</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ColorPalettes&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new(font: FontRef&lt;<span class="lifetime">&#39;a</span>&gt;, data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = Bytes::new(data);
+        <span class="kw">let </span>len = data.read_or_default::&lt;u16&gt;(<span class="number">4</span>) <span class="kw">as </span>usize;
+        <span class="self">Self </span>{
+            font,
+            data,
+            len,
+            pos: <span class="number">0</span>,
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">table_data</span>(<span class="ident">CPAL</span>).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]);
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="kw-2">*</span><span class="ident">font</span>, <span class="ident">data</span>)
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = font.table_data(CPAL).unwrap_or(<span class="kw-2">&amp;</span>[]);
+        <span class="self">Self</span>::new(<span class="kw-2">*</span>font, data)
     }
 
-    <span class="comment">// Unused when render feature is disabled.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_font_and_offset</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">offset</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">data</span>.<span class="ident">get</span>(<span class="ident">offset</span> <span class="kw">as</span> <span class="ident">usize</span>..).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]);
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="kw-2">*</span><span class="ident">font</span>, <span class="ident">data</span>)
+    <span class="comment">// Unused when render feature is disabled.
+    </span><span class="attribute">#[allow(dead_code)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_font_and_offset(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;, offset: u32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = font.data.get(offset <span class="kw">as </span>usize..).unwrap_or(<span class="kw-2">&amp;</span>[]);
+        <span class="self">Self</span>::new(<span class="kw-2">*</span>font, data)
     }
 
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ColorPalette</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;ColorPalette&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">0</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">num_entries</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">12</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">first</span> <span class="op">*</span> <span class="number">4</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">ColorPalette</span> {
-            <span class="ident">font</span>: <span class="self">self</span>.<span class="ident">font</span>,
-            <span class="ident">data</span>: <span class="kw-2">*</span><span class="ident">b</span>,
-            <span class="ident">version</span>,
-            <span class="ident">index</span>,
-            <span class="ident">num_entries</span>,
-            <span class="ident">offset</span>,
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>version = b.read::&lt;u16&gt;(<span class="number">0</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>num_entries = b.read::&lt;u16&gt;(<span class="number">2</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>offset = b.read::&lt;u32&gt;(<span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>first = b.read::&lt;u16&gt;(<span class="number">12 </span>+ index <span class="kw">as </span>usize * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>offset = offset + first * <span class="number">4</span>;
+        <span class="prelude-val">Some</span>(ColorPalette {
+            font: <span class="self">self</span>.font,
+            data: <span class="kw-2">*</span>b,
+            version,
+            index,
+            num_entries,
+            offset,
         })
     }
 }
 
-<span class="macro">impl_iter!</span>(<span class="ident">ColorPalettes</span>, <span class="ident">ColorPalette</span>);
+<span class="macro">impl_iter!</span>(ColorPalettes, ColorPalette);
 
-<span class="doccomment">/// Collection of colors.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ColorPalette</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">font</span>: <span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">version</span>: <span class="ident">u16</span>,
-    <span class="ident">index</span>: <span class="ident">usize</span>,
-    <span class="ident">num_entries</span>: <span class="ident">u16</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Collection of colors.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>ColorPalette&lt;<span class="lifetime">&#39;a</span>&gt; {
+    font: FontRef&lt;<span class="lifetime">&#39;a</span>&gt;,
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    version: u16,
+    index: usize,
+    num_entries: u16,
+    offset: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ColorPalette</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns the index of the palette.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">index</span> <span class="kw">as</span> <span class="ident">u16</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ColorPalette&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Returns the index of the palette.
+    </span><span class="kw">pub fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.index <span class="kw">as </span>u16
     }
 
-    <span class="doccomment">/// Returns the name identifier for the palette, if available.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">StringId</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">version</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the name identifier for the palette, if available.
+    </span><span class="kw">pub fn </span>name_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;StringId&gt; {
+        <span class="kw">if </span><span class="self">self</span>.version == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">num_palettes</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="number">16</span> <span class="op">+</span> <span class="ident">num_palettes</span> <span class="op">*</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">labels_offset</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">labels_offset</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>num_palettes = d.read::&lt;u16&gt;(<span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>base = <span class="number">16 </span>+ num_palettes * <span class="number">2</span>;
+        <span class="kw">let </span>labels_offset = d.read::&lt;u32&gt;(base)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">if </span>labels_offset == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="prelude-val">Some</span>(<span class="ident">StringId::Other</span>(
-            <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">labels_offset</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span>,
+        <span class="prelude-val">Some</span>(StringId::Other(
+            d.read::&lt;u16&gt;(labels_offset + <span class="self">self</span>.index <span class="kw">as </span>usize * <span class="number">2</span>)<span class="question-mark">?</span>,
         ))
     }
 
-    <span class="doccomment">/// Returns the name for the palette, optionally for a particular</span>
-    <span class="doccomment">/// language.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">language</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">name_id</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">id</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">font</span>.<span class="ident">localized_strings</span>().<span class="ident">find_by_id</span>(<span class="ident">id</span>, <span class="ident">language</span>))
-            .<span class="ident">flatten</span>()
+    <span class="doccomment">/// Returns the name for the palette, optionally for a particular
+    /// language.
+    </span><span class="kw">pub fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>, language: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="self">self</span>.name_id()
+            .map(|id| <span class="self">self</span>.font.localized_strings().find_by_id(id, language))
+            .flatten()
     }
 
-    <span class="doccomment">/// Returns the theme usability of the palette, if available.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">usability</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Usability</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">flags</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="kw">match</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="number">0b11</span> {
-            <span class="number">0b01</span> =&gt; <span class="ident">Usability::Light</span>,
-            <span class="number">0b10</span> =&gt; <span class="ident">Usability::Dark</span>,
-            <span class="number">0b11</span> =&gt; <span class="ident">Usability::Both</span>,
-            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+    <span class="doccomment">/// Returns the theme usability of the palette, if available.
+    </span><span class="kw">pub fn </span>usability(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Usability&gt; {
+        <span class="kw">let </span>flags = <span class="self">self</span>.flags()<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(<span class="kw">match </span>flags &amp; <span class="number">0b11 </span>{
+            <span class="number">0b01 </span>=&gt; Usability::Light,
+            <span class="number">0b10 </span>=&gt; Usability::Dark,
+            <span class="number">0b11 </span>=&gt; Usability::Both,
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
         })
     }
 
-    <span class="doccomment">/// Returns the number of color entries in the palette.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">num_entries</span>
+    <span class="doccomment">/// Returns the number of color entries in the palette.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.num_entries
     }
 
-    <span class="doccomment">/// Returns whether this palette is empty.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">num_entries</span> <span class="op">==</span> <span class="number">0</span>
+    <span class="doccomment">/// Returns whether this palette is empty.
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.num_entries == <span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Returns the color for the specified entry in RGBA order.
+    </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u16) -&gt; [u8; <span class="number">4</span>] {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.num_entries {
+            <span class="kw">return </span>[<span class="number">0</span>; <span class="number">4</span>];
+        }
+        <span class="kw">let </span>offset = <span class="self">self</span>.offset + index <span class="kw">as </span>usize * <span class="number">4</span>;
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>b = d.read_or_default::&lt;u8&gt;(offset);
+        <span class="kw">let </span>g = d.read_or_default::&lt;u8&gt;(offset + <span class="number">1</span>);
+        <span class="kw">let </span>r = d.read_or_default::&lt;u8&gt;(offset + <span class="number">2</span>);
+        <span class="kw">let </span>a = d.read_or_default::&lt;u8&gt;(offset + <span class="number">3</span>);
+        [r, g, b, a]
     }
 
-    <span class="doccomment">/// Returns the color for the specified entry in RGBA order.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">u16</span>) -&gt; [<span class="ident">u8</span>; <span class="number">4</span>] {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">num_entries</span> {
-            <span class="kw">return</span> [<span class="number">0</span>; <span class="number">4</span>];
+    <span class="kw">fn </span>flags(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+        <span class="kw">if </span><span class="self">self</span>.version == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>;
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span>);
-        <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">1</span>);
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>);
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">3</span>);
-        [<span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>, <span class="ident">a</span>]
-    }
-
-    <span class="kw">fn</span> <span class="ident">flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">version</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>num_palettes = d.read::&lt;u16&gt;(<span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>base = <span class="number">12 </span>+ num_palettes * <span class="number">2</span>;
+        <span class="kw">let </span>types_offset = d.read::&lt;u32&gt;(base)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">if </span>types_offset == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">num_palettes</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="number">12</span> <span class="op">+</span> <span class="ident">num_palettes</span> <span class="op">*</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">types_offset</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">types_offset</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-        <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">types_offset</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>)
+        d.read::&lt;u32&gt;(types_offset + <span class="self">self</span>.index <span class="kw">as </span>usize * <span class="number">4</span>)
     }
 }
 
-<span class="doccomment">/// Theme of a palette with respect to background color.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Usability</span> {
-    <span class="doccomment">/// Usable with light backgrounds.</span>
-    <span class="ident">Light</span>,
-    <span class="doccomment">/// Usable with dark backgrounds.</span>
-    <span class="ident">Dark</span>,
-    <span class="doccomment">/// Usable with both light and dark backgrounds.</span>
-    <span class="ident">Both</span>,
+<span class="doccomment">/// Theme of a palette with respect to background color.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>Usability {
+    <span class="doccomment">/// Usable with light backgrounds.
+    </span>Light,
+    <span class="doccomment">/// Usable with dark backgrounds.
+    </span>Dark,
+    <span class="doccomment">/// Usable with both light and dark backgrounds.
+    </span>Both,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

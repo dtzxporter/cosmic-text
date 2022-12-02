@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/aliasable-0.1.3/src/vec.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vec.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../aliasable/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../aliasable/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../aliasable/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/aliasable-0.1.3/src/vec.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vec.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../aliasable/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../aliasable/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../aliasable/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -178,185 +178,185 @@
 <span id="178">178</span>
 <span id="179">179</span>
 <span id="180">180</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Aliasable `Vec`.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Aliasable `Vec`.
 
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>};
-<span class="kw">use</span> <span class="ident">core::pin::Pin</span>;
-<span class="kw">use</span> <span class="ident">core::ptr::NonNull</span>;
-<span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">fmt</span>, <span class="ident">mem</span>, <span class="ident">slice</span>};
+</span><span class="kw">use </span>core::ops::{Deref, DerefMut};
+<span class="kw">use </span>core::pin::Pin;
+<span class="kw">use </span>core::ptr::NonNull;
+<span class="kw">use </span>core::{fmt, mem, slice};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">alloc::vec::Vec</span> <span class="kw">as</span> <span class="ident">UniqueVec</span>;
+<span class="kw">pub use </span>alloc::vec::Vec <span class="kw">as </span>UniqueVec;
 
-<span class="doccomment">/// Basic aliasable (non `core::ptr::Unique`) alternative to</span>
-<span class="doccomment">/// [`alloc::vec::Vec`].</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">cap</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Basic aliasable (non `core::ptr::Unique`) alternative to
+/// [`alloc::vec::Vec`].
+</span><span class="kw">pub struct </span>AliasableVec&lt;T&gt; {
+    ptr: NonNull&lt;T&gt;,
+    len: usize,
+    cap: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Construct an `AliasableVec` from a [`UniqueVec`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_unique</span>(<span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">as_mut_ptr</span>();
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="ident">vec</span>.<span class="ident">capacity</span>();
+<span class="kw">impl</span>&lt;T&gt; AliasableVec&lt;T&gt; {
+    <span class="doccomment">/// Construct an `AliasableVec` from a [`UniqueVec`].
+    </span><span class="kw">pub fn </span>from_unique(<span class="kw-2">mut </span>vec: UniqueVec&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>ptr = vec.as_mut_ptr();
+        <span class="kw">let </span>len = vec.len();
+        <span class="kw">let </span>cap = vec.capacity();
 
-        <span class="ident">mem::forget</span>(<span class="ident">vec</span>);
+        mem::forget(vec);
 
-        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">NonNull::new_unchecked</span>(<span class="ident">ptr</span>) };
+        <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{ NonNull::new_unchecked(ptr) };
 
-        <span class="self">Self</span> { <span class="ident">ptr</span>, <span class="ident">len</span>, <span class="ident">cap</span> }
+        <span class="self">Self </span>{ ptr, len, cap }
     }
 
-    <span class="doccomment">/// Consumes the [`AliasableVec`] and converts it back into a</span>
-    <span class="doccomment">/// non-aliasable [`UniqueVec`].</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_unique</span>(<span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="comment">// SAFETY: As we are consuming the `Vec` structure we can safely assume</span>
-        <span class="comment">// any aliasing has ended and convert the aliasable `Vec` back to into</span>
-        <span class="comment">// an unaliasable `UniqueVec`.</span>
-        <span class="kw">let</span> <span class="ident">unique</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">vec</span>.<span class="ident">reclaim_as_unique_vec</span>() };
-        <span class="comment">// Forget the aliasable `Vec` so the allocation behind the `UniqueVec`</span>
-        <span class="comment">// is not deallocated.</span>
-        <span class="ident">mem::forget</span>(<span class="ident">vec</span>);
-        <span class="comment">// Return the `UniqueVec`.</span>
-        <span class="ident">unique</span>
+    <span class="doccomment">/// Consumes the [`AliasableVec`] and converts it back into a
+    /// non-aliasable [`UniqueVec`].
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>into_unique(<span class="kw-2">mut </span>vec: AliasableVec&lt;T&gt;) -&gt; UniqueVec&lt;T&gt; {
+        <span class="comment">// SAFETY: As we are consuming the `Vec` structure we can safely assume
+        // any aliasing has ended and convert the aliasable `Vec` back to into
+        // an unaliasable `UniqueVec`.
+        </span><span class="kw">let </span>unique = <span class="kw">unsafe </span>{ vec.reclaim_as_unique_vec() };
+        <span class="comment">// Forget the aliasable `Vec` so the allocation behind the `UniqueVec`
+        // is not deallocated.
+        </span>mem::forget(vec);
+        <span class="comment">// Return the `UniqueVec`.
+        </span>unique
     }
 
-    <span class="doccomment">/// Convert a pinned [`AliasableVec`] to a `core::ptr::Unique` backed pinned</span>
-    <span class="doccomment">/// [`UniqueVec`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_unique_pin</span>(<span class="ident">pin</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="comment">// SAFETY: The pointer is not changed, just the container.</span>
-        <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">aliasable</span> <span class="op">=</span> <span class="ident">Pin::into_inner_unchecked</span>(<span class="ident">pin</span>);
-            <span class="ident">Pin::new_unchecked</span>(<span class="ident">AliasableVec::into_unique</span>(<span class="ident">aliasable</span>))
+    <span class="doccomment">/// Convert a pinned [`AliasableVec`] to a `core::ptr::Unique` backed pinned
+    /// [`UniqueVec`].
+    </span><span class="kw">pub fn </span>into_unique_pin(pin: Pin&lt;AliasableVec&lt;T&gt;&gt;) -&gt; Pin&lt;UniqueVec&lt;T&gt;&gt; {
+        <span class="comment">// SAFETY: The pointer is not changed, just the container.
+        </span><span class="kw">unsafe </span>{
+            <span class="kw">let </span>aliasable = Pin::into_inner_unchecked(pin);
+            Pin::new_unchecked(AliasableVec::into_unique(aliasable))
         }
     }
 
-    <span class="doccomment">/// Convert a pinned `core::ptr::Unique` backed [`UniqueVec`] to a</span>
-    <span class="doccomment">/// pinned [`AliasableVec`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_unique_pin</span>(<span class="ident">pin</span>: <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">unique</span> <span class="op">=</span> <span class="ident">Pin::into_inner_unchecked</span>(<span class="ident">pin</span>);
-            <span class="ident">Pin::new_unchecked</span>(<span class="ident">AliasableVec::from</span>(<span class="ident">unique</span>))
+    <span class="doccomment">/// Convert a pinned `core::ptr::Unique` backed [`UniqueVec`] to a
+    /// pinned [`AliasableVec`].
+    </span><span class="kw">pub fn </span>from_unique_pin(pin: Pin&lt;UniqueVec&lt;T&gt;&gt;) -&gt; Pin&lt;AliasableVec&lt;T&gt;&gt; {
+        <span class="kw">unsafe </span>{
+            <span class="kw">let </span>unique = Pin::into_inner_unchecked(pin);
+            Pin::new_unchecked(AliasableVec::from(unique))
         }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">reclaim_as_unique_vec</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">UniqueVec::from_raw_parts</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_mut</span>(), <span class="self">self</span>.<span class="ident">len</span>, <span class="self">self</span>.<span class="ident">cap</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">unsafe fn </span>reclaim_as_unique_vec(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; UniqueVec&lt;T&gt; {
+        UniqueVec::from_raw_parts(<span class="self">self</span>.ptr.as_mut(), <span class="self">self</span>.len, <span class="self">self</span>.cap)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">vec</span>: <span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_unique</span>(<span class="ident">vec</span>)
+<span class="kw">impl</span>&lt;T&gt; From&lt;UniqueVec&lt;T&gt;&gt; <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>from(vec: UniqueVec&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::from_unique(vec)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UniqueVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">vec</span>: <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">AliasableVec::into_unique</span>(<span class="ident">vec</span>)
+<span class="kw">impl</span>&lt;T&gt; From&lt;AliasableVec&lt;T&gt;&gt; <span class="kw">for </span>UniqueVec&lt;T&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>from(vec: AliasableVec&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        AliasableVec::into_unique(vec)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="comment">// As the `Vec` structure is being dropped we can safely assume any</span>
-        <span class="comment">// aliasing has ended and convert the aliasable `Vec` back to into an</span>
-        <span class="comment">// unaliasable `UniqueVec` to handle the deallocation.</span>
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">reclaim_as_unique_vec</span>() };
+<span class="kw">impl</span>&lt;T&gt; Drop <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="comment">// As the `Vec` structure is being dropped we can safely assume any
+        // aliasing has ended and convert the aliasable `Vec` back to into an
+        // unaliasable `UniqueVec` to handle the deallocation.
+        </span><span class="kw">let _ </span>= <span class="kw">unsafe </span>{ <span class="self">self</span>.reclaim_as_unique_vec() };
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">T</span>];
+<span class="kw">impl</span>&lt;T&gt; Deref <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="kw">type </span>Target = [T];
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
-        <span class="comment">// SAFETY: We own the data, so we can return a reference to it.</span>
-        <span class="kw">unsafe</span> { <span class="ident">slice::from_raw_parts</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>(), <span class="self">self</span>.<span class="ident">len</span>) }
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[T] {
+        <span class="comment">// SAFETY: We own the data, so we can return a reference to it.
+        </span><span class="kw">unsafe </span>{ slice::from_raw_parts(<span class="self">self</span>.ptr.as_ptr(), <span class="self">self</span>.len) }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>] {
-        <span class="comment">// SAFETY: We own the data, so we can return a reference to it.</span>
-        <span class="kw">unsafe</span> { <span class="ident">slice::from_raw_parts_mut</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>(), <span class="self">self</span>.<span class="ident">len</span>) }
+<span class="kw">impl</span>&lt;T&gt; DerefMut <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[T] {
+        <span class="comment">// SAFETY: We own the data, so we can return a reference to it.
+        </span><span class="kw">unsafe </span>{ slice::from_raw_parts_mut(<span class="self">self</span>.ptr.as_ptr(), <span class="self">self</span>.len) }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>] {
-        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>
-    }
+<span class="kw">impl</span>&lt;T&gt; AsRef&lt;[T]&gt; <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[T] {
+        <span class="kw-2">&amp;*</span><span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>] {
-        <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="self">self</span>
-    }
+<span class="kw">impl</span>&lt;T&gt; AsMut&lt;[T]&gt; <span class="kw">for </span>AliasableVec&lt;T&gt; {
+    <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[T] {
+        <span class="kw-2">&amp;mut *</span><span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">fmt::Debug</span>,
+<span class="kw">impl</span>&lt;T&gt; fmt::Debug <span class="kw">for </span>AliasableVec&lt;T&gt;
+<span class="kw">where
+    </span>T: fmt::Debug,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">fmt::Debug::fmt</span>(<span class="self">self</span>.<span class="ident">as_ref</span>(), <span class="ident">f</span>)
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+        fmt::Debug::fmt(<span class="self">self</span>.as_ref(), f)
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Send</span> {}
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Sync</span> {}
+<span class="kw">unsafe impl</span>&lt;T&gt; Send <span class="kw">for </span>AliasableVec&lt;T&gt; <span class="kw">where </span>T: Send {}
+<span class="kw">unsafe impl</span>&lt;T&gt; Sync <span class="kw">for </span>AliasableVec&lt;T&gt; <span class="kw">where </span>T: Sync {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;traits&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident"><span class="kw">crate</span>::StableDeref</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;traits&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T&gt; <span class="kw">crate</span>::StableDeref <span class="kw">for </span>AliasableVec&lt;T&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;traits&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident"><span class="kw">crate</span>::AliasableDeref</span> <span class="kw">for</span> <span class="ident">AliasableVec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;traits&quot;</span>)]
+</span><span class="kw">unsafe impl</span>&lt;T&gt; <span class="kw">crate</span>::AliasableDeref <span class="kw">for </span>AliasableVec&lt;T&gt; {}
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::AliasableVec</span>;
-    <span class="kw">use</span> <span class="ident">alloc</span>::{<span class="ident">format</span>, <span class="ident">vec</span>};
-    <span class="kw">use</span> <span class="ident">core::pin::Pin</span>;
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="kw">use </span><span class="kw">super</span>::AliasableVec;
+    <span class="kw">use </span>alloc::{format, vec};
+    <span class="kw">use </span>core::pin::Pin;
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_new</span>() {
-        <span class="kw">let</span> <span class="ident">aliasable</span> <span class="op">=</span> <span class="ident">AliasableVec::from_unique</span>(<span class="macro">vec!</span>[<span class="number">10</span>]);
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">aliasable</span>, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
-        <span class="kw">let</span> <span class="ident">unique</span> <span class="op">=</span> <span class="ident">AliasableVec::into_unique</span>(<span class="ident">aliasable</span>);
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">unique</span>, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_new() {
+        <span class="kw">let </span>aliasable = AliasableVec::from_unique(<span class="macro">vec!</span>[<span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;*</span>aliasable, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
+        <span class="kw">let </span>unique = AliasableVec::into_unique(aliasable);
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;*</span>unique, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_new_pin</span>() {
-        <span class="kw">let</span> <span class="ident">aliasable</span> <span class="op">=</span> <span class="ident">AliasableVec::from_unique_pin</span>(<span class="ident">Pin::new</span>(<span class="macro">vec!</span>[<span class="number">10</span>]));
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">aliasable</span>, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
-        <span class="kw">let</span> <span class="ident">unique</span> <span class="op">=</span> <span class="ident">AliasableVec::into_unique_pin</span>(<span class="ident">aliasable</span>);
-        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">unique</span>, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_new_pin() {
+        <span class="kw">let </span>aliasable = AliasableVec::from_unique_pin(Pin::new(<span class="macro">vec!</span>[<span class="number">10</span>]));
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;*</span>aliasable, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
+        <span class="kw">let </span>unique = AliasableVec::into_unique_pin(aliasable);
+        <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;*</span>unique, <span class="kw-2">&amp;</span>[<span class="number">10</span>]);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_refs</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">aliasable</span> <span class="op">=</span> <span class="ident">AliasableVec::from_unique</span>(<span class="macro">vec!</span>[<span class="number">10</span>]);
-        <span class="kw">let</span> <span class="ident">ptr</span>: <span class="kw-2">*const</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">aliasable</span>;
-        <span class="kw">let</span> <span class="ident">as_mut_ptr</span>: <span class="kw-2">*const</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="ident">aliasable</span>.<span class="ident">as_mut</span>();
-        <span class="kw">let</span> <span class="ident">as_ref_ptr</span>: <span class="kw-2">*const</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="ident">aliasable</span>.<span class="ident">as_ref</span>();
-        <span class="macro">assert_eq!</span>(<span class="ident">ptr</span>, <span class="ident">as_mut_ptr</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">ptr</span>, <span class="ident">as_ref_ptr</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_refs() {
+        <span class="kw">let </span><span class="kw-2">mut </span>aliasable = AliasableVec::from_unique(<span class="macro">vec!</span>[<span class="number">10</span>]);
+        <span class="kw">let </span>ptr: <span class="kw-2">*const </span>[u8] = <span class="kw-2">&amp;*</span>aliasable;
+        <span class="kw">let </span>as_mut_ptr: <span class="kw-2">*const </span>[u8] = aliasable.as_mut();
+        <span class="kw">let </span>as_ref_ptr: <span class="kw-2">*const </span>[u8] = aliasable.as_ref();
+        <span class="macro">assert_eq!</span>(ptr, as_mut_ptr);
+        <span class="macro">assert_eq!</span>(ptr, as_ref_ptr);
     }
 
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_debug</span>() {
-        <span class="kw">let</span> <span class="ident">aliasable</span> <span class="op">=</span> <span class="ident">AliasableVec::from_unique</span>(<span class="macro">vec!</span>[<span class="number">10</span>]);
-        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">aliasable</span>), <span class="string">&quot;[10]&quot;</span>);
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_debug() {
+        <span class="kw">let </span>aliasable = AliasableVec::from_unique(<span class="macro">vec!</span>[<span class="number">10</span>]);
+        <span class="macro">assert_eq!</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, aliasable), <span class="string">&quot;[10]&quot;</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="aliasable" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="aliasable" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

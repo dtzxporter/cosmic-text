@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/position.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>position.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/position.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>position.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -664,671 +664,671 @@
 <span id="664">664</span>
 <span id="665">665</span>
 <span id="666">666</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">ttf_parser::GlyphId</span>;
-<span class="kw">use</span> <span class="ident">ttf_parser::opentype_layout::LookupIndex</span>;
-<span class="kw">use</span> <span class="ident">ttf_parser::gpos</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>ttf_parser::GlyphId;
+<span class="kw">use </span>ttf_parser::opentype_layout::LookupIndex;
+<span class="kw">use </span>ttf_parser::gpos::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Direction</span>, <span class="ident">Face</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer</span>::{<span class="ident">Buffer</span>, <span class="ident">BufferScratchFlags</span>, <span class="ident">GlyphPosition</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan::ShapePlan</span>;
+<span class="kw">use crate</span>::{Direction, Face};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::{Buffer, BufferScratchFlags, GlyphPosition};
+<span class="kw">use </span><span class="kw">crate</span>::plan::ShapePlan;
 
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">lookup_flags</span>, <span class="ident">LayoutLookup</span>, <span class="ident">LayoutTable</span>, <span class="ident">TableIndex</span>, <span class="ident">PositioningTable</span>, <span class="ident">PositioningLookup</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::apply</span>::{<span class="ident">Apply</span>, <span class="ident">ApplyContext</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::matching::SkippyIter</span>;
+<span class="kw">use super</span>::{lookup_flags, LayoutLookup, LayoutTable, TableIndex, PositioningTable, PositioningLookup};
+<span class="kw">use </span><span class="kw">super</span>::apply::{Apply, ApplyContext};
+<span class="kw">use </span><span class="kw">super</span>::matching::SkippyIter;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_start</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> <span class="ident">pos</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">pos</span>[..<span class="ident">len</span>] {
-        <span class="ident">pos</span>.<span class="ident">set_attach_chain</span>(<span class="number">0</span>);
-        <span class="ident">pos</span>.<span class="ident">set_attach_type</span>(<span class="number">0</span>);
+<span class="kw">pub fn </span>position_start(<span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>pos <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.pos[..len] {
+        pos.set_attach_chain(<span class="number">0</span>);
+        pos.set_attach_type(<span class="number">0</span>);
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position</span>(<span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="ident"><span class="kw">super</span>::apply_layout_table</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>, <span class="ident">face</span>.<span class="ident">gpos</span>.<span class="ident">as_ref</span>());
+<span class="kw">pub fn </span>position(plan: <span class="kw-2">&amp;</span>ShapePlan, face: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">super</span>::apply_layout_table(plan, face, buffer, face.gpos.as_ref());
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_finish_advances</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {}
+<span class="kw">pub fn </span>position_finish_advances(<span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>Buffer) {}
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_finish_offsets</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">let</span> <span class="ident">direction</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">direction</span>;
+<span class="kw">pub fn </span>position_finish_offsets(<span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">let </span>direction = buffer.direction;
 
-    <span class="comment">// Handle attachments</span>
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_GPOS_ATTACHMENT</span>) {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
-            <span class="ident">propagate_attachment_offsets</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">pos</span>, <span class="ident">len</span>, <span class="ident">i</span>, <span class="ident">direction</span>);
+    <span class="comment">// Handle attachments
+    </span><span class="kw">if </span>buffer.scratch_flags.contains(BufferScratchFlags::HAS_GPOS_ATTACHMENT) {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+            propagate_attachment_offsets(<span class="kw-2">&amp;mut </span>buffer.pos, len, i, direction);
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">propagate_attachment_offsets</span>(
-    <span class="ident">pos</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">GlyphPosition</span>],
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">i</span>: <span class="ident">usize</span>,
-    <span class="ident">direction</span>: <span class="ident">Direction</span>,
+<span class="kw">fn </span>propagate_attachment_offsets(
+    pos: <span class="kw-2">&amp;mut </span>[GlyphPosition],
+    len: usize,
+    i: usize,
+    direction: Direction,
 ) {
-    <span class="comment">// Adjusts offsets of attached glyphs (both cursive and mark) to accumulate</span>
-    <span class="comment">// offset of glyph they are attached to.</span>
-    <span class="kw">let</span> <span class="ident">chain</span> <span class="op">=</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">attach_chain</span>();
-    <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">attach_type</span>();
-    <span class="kw">if</span> <span class="ident">chain</span> <span class="op">==</span> <span class="number">0</span> {
+    <span class="comment">// Adjusts offsets of attached glyphs (both cursive and mark) to accumulate
+    // offset of glyph they are attached to.
+    </span><span class="kw">let </span>chain = pos[i].attach_chain();
+    <span class="kw">let </span>kind = pos[i].attach_type();
+    <span class="kw">if </span>chain == <span class="number">0 </span>{
         <span class="kw">return</span>;
     }
 
-    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">set_attach_chain</span>(<span class="number">0</span>);
+    pos[i].set_attach_chain(<span class="number">0</span>);
 
-    <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">isize::from</span>(<span class="ident">chain</span>)) <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="kw">if</span> <span class="ident">j</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">len</span> {
+    <span class="kw">let </span>j = (i <span class="kw">as </span>isize + isize::from(chain)) <span class="kw">as _</span>;
+    <span class="kw">if </span>j &gt;= len {
         <span class="kw">return</span>;
     }
 
-    <span class="ident">propagate_attachment_offsets</span>(<span class="ident">pos</span>, <span class="ident">len</span>, <span class="ident">j</span>, <span class="ident">direction</span>);
+    propagate_attachment_offsets(pos, len, j, direction);
 
-    <span class="kw">match</span> <span class="ident">kind</span> {
-        <span class="ident">attach_type::MARK</span> =&gt; {
-            <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span>;
-            <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_offset</span>;
+    <span class="kw">match </span>kind {
+        attach_type::MARK =&gt; {
+            pos[i].x_offset += pos[j].x_offset;
+            pos[i].y_offset += pos[j].y_offset;
 
-            <span class="macro">assert!</span>(<span class="ident">j</span> <span class="op">&lt;</span> <span class="ident">i</span>);
-            <span class="kw">if</span> <span class="ident">direction</span>.<span class="ident">is_forward</span>() {
-                <span class="kw">for</span> <span class="ident">k</span> <span class="kw">in</span> <span class="ident">j</span>..<span class="ident">i</span> {
-                    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">k</span>].<span class="ident">x_advance</span>;
-                    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">k</span>].<span class="ident">y_advance</span>;
+            <span class="macro">assert!</span>(j &lt; i);
+            <span class="kw">if </span>direction.is_forward() {
+                <span class="kw">for </span>k <span class="kw">in </span>j..i {
+                    pos[i].x_offset -= pos[k].x_advance;
+                    pos[i].y_offset -= pos[k].y_advance;
                 }
-            } <span class="kw">else</span> {
-                <span class="kw">for</span> <span class="ident">k</span> <span class="kw">in</span> <span class="ident">j</span><span class="op">+</span><span class="number">1</span>..<span class="ident">i</span><span class="op">+</span><span class="number">1</span> {
-                    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">k</span>].<span class="ident">x_advance</span>;
-                    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">k</span>].<span class="ident">y_advance</span>;
-                }
-            }
-        }
-        <span class="ident">attach_type::CURSIVE</span> =&gt; {
-            <span class="kw">if</span> <span class="ident">direction</span>.<span class="ident">is_horizontal</span>() {
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_offset</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span>;
-            }
-        }
-        <span class="kw">_</span> =&gt; {}
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">LayoutTable</span> <span class="kw">for</span> <span class="ident">PositioningTable</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">INDEX</span>: <span class="ident">TableIndex</span> <span class="op">=</span> <span class="ident">TableIndex::GPOS</span>;
-    <span class="kw">const</span> <span class="ident">IN_PLACE</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">true</span>;
-
-    <span class="kw">type</span> <span class="ident">Lookup</span> <span class="op">=</span> <span class="ident">PositioningLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">get_lookup</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">LookupIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Lookup</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">lookups</span>.<span class="ident">get</span>(<span class="ident">usize::from</span>(<span class="ident">index</span>))
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">LayoutLookup</span> <span class="kw">for</span> <span class="ident">PositioningLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">props</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-        <span class="self">self</span>.<span class="ident">props</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_reverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">false</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">covers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">coverage</span>.<span class="ident">contains</span>(<span class="ident">glyph</span>)
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">PositioningLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">covers</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>()) {
-            <span class="kw">for</span> <span class="ident">subtable</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">subtables</span> {
-                <span class="kw">if</span> <span class="ident">subtable</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>).<span class="ident">is_some</span>() {
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+            } <span class="kw">else </span>{
+                <span class="kw">for </span>k <span class="kw">in </span>j+<span class="number">1</span>..i+<span class="number">1 </span>{
+                    pos[i].x_offset += pos[k].x_advance;
+                    pos[i].y_offset += pos[k].y_advance;
                 }
             }
         }
-
-        <span class="prelude-val">None</span>
+        attach_type::CURSIVE =&gt; {
+            <span class="kw">if </span>direction.is_horizontal() {
+                pos[i].y_offset += pos[j].y_offset;
+            } <span class="kw">else </span>{
+                pos[i].x_offset += pos[j].x_offset;
+            }
+        }
+        <span class="kw">_ </span>=&gt; {}
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">PositioningSubtable</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Single</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::Pair</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::Cursive</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::MarkToBase</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::MarkToLigature</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::MarkToMark</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::Context</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
-            <span class="ident"><span class="self">Self</span>::ChainContext</span>(<span class="ident">t</span>) =&gt; <span class="ident">t</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>),
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LayoutTable <span class="kw">for </span>PositioningTable&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">const </span>INDEX: TableIndex = TableIndex::GPOS;
+    <span class="kw">const </span>IN_PLACE: bool = <span class="bool-val">true</span>;
+
+    <span class="kw">type </span>Lookup = PositioningLookup&lt;<span class="lifetime">&#39;a</span>&gt;;
+
+    <span class="kw">fn </span>get_lookup(<span class="kw-2">&amp;</span><span class="self">self</span>, index: LookupIndex) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>::Lookup&gt; {
+        <span class="self">self</span>.lookups.get(usize::from(index))
+    }
+}
+
+<span class="kw">impl </span>LayoutLookup <span class="kw">for </span>PositioningLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>props(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
+        <span class="self">self</span>.props
+    }
+
+    <span class="kw">fn </span>is_reverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>covers(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph: GlyphId) -&gt; bool {
+        <span class="self">self</span>.coverage.contains(glyph)
+    }
+}
+
+<span class="kw">impl </span>Apply <span class="kw">for </span>PositioningLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.covers(ctx.buffer.cur(<span class="number">0</span>).as_glyph()) {
+            <span class="kw">for </span>subtable <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.subtables {
+                <span class="kw">if </span>subtable.apply(ctx).is_some() {
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(());
+                }
+            }
+        }
+
+        <span class="prelude-val">None
+    </span>}
+}
+
+<span class="kw">impl </span>Apply <span class="kw">for </span>PositioningSubtable&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Single(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::Pair(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::Cursive(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::MarkToBase(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::MarkToLigature(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::MarkToMark(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::Context(t) =&gt; t.apply(ctx),
+            <span class="self">Self</span>::ChainContext(t) =&gt; t.apply(ctx),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">SingleAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">record</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">coverage</span>, <span class="ident">value</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw-2">*</span><span class="ident">value</span>
+<span class="kw">impl </span>Apply <span class="kw">for </span>SingleAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">let </span>record = <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { coverage, value } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw-2">*</span>value
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">coverage</span>, <span class="ident">values</span> } =&gt; {
-                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="ident">values</span>.<span class="ident">get</span>(<span class="ident">index</span>)<span class="question-mark">?</span>
-            }
+            <span class="self">Self</span>::Format2 { coverage, values } =&gt; {
+                <span class="kw">let </span>index = coverage.get(glyph)<span class="question-mark">?</span>;
+                values.get(index)<span class="question-mark">?
+            </span>}
         };
-        <span class="ident">record</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>);
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        record.apply(ctx, ctx.buffer.idx);
+        ctx.buffer.idx += <span class="number">1</span>;
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">PairAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coverage</span>().<span class="ident">get</span>(<span class="ident">first</span>)<span class="question-mark">?</span>;
+<span class="kw">impl </span>Apply <span class="kw">for </span>PairAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>first = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">let </span>index = <span class="self">self</span>.coverage().get(first)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">next</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, ctx.buffer.idx, <span class="number">1</span>, <span class="bool-val">false</span>);
+        <span class="kw">if </span>!iter.next() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">pos</span>].<span class="ident">as_glyph</span>();
+        <span class="kw">let </span>pos = iter.index();
+        <span class="kw">let </span>second = ctx.buffer.info[pos].as_glyph();
 
-        <span class="kw">let</span> <span class="ident">records</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">sets</span>, .. } =&gt; {
-                <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">index</span>)<span class="question-mark">?</span>.<span class="ident">get</span>(<span class="ident">second</span>)
+        <span class="kw">let </span>records = <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { sets, .. } =&gt; {
+                sets.get(index)<span class="question-mark">?</span>.get(second)
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">classes</span>, <span class="ident">matrix</span>, .. } =&gt; {
-                <span class="kw">let</span> <span class="ident">classes</span> <span class="op">=</span> (<span class="ident">classes</span>.<span class="number">0</span>.<span class="ident">get</span>(<span class="ident">first</span>), <span class="ident">classes</span>.<span class="number">1</span>.<span class="ident">get</span>(<span class="ident">second</span>));
-                <span class="ident">matrix</span>.<span class="ident">get</span>(<span class="ident">classes</span>)
+            <span class="self">Self</span>::Format2 { classes, matrix, .. } =&gt; {
+                <span class="kw">let </span>classes = (classes.<span class="number">0</span>.get(first), classes.<span class="number">1</span>.get(second));
+                matrix.get(classes)
             }
         }<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">flag1</span> <span class="op">=</span> <span class="ident">records</span>.<span class="number">0</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>);
-        <span class="kw">let</span> <span class="ident">flag2</span> <span class="op">=</span> <span class="ident">records</span>.<span class="number">1</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">pos</span>);
-        <span class="comment">// Note the intentional use of &quot;|&quot; instead of short-circuit &quot;||&quot;.</span>
-        <span class="kw">if</span> <span class="ident">flag1</span> <span class="op">|</span> <span class="ident">flag2</span> {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">pos</span> <span class="op">+</span> <span class="number">1</span>);
+        <span class="kw">let </span>flag1 = records.<span class="number">0</span>.apply(ctx, ctx.buffer.idx);
+        <span class="kw">let </span>flag2 = records.<span class="number">1</span>.apply(ctx, pos);
+        <span class="comment">// Note the intentional use of &quot;|&quot; instead of short-circuit &quot;||&quot;.
+        </span><span class="kw">if </span>flag1 | flag2 {
+            ctx.buffer.unsafe_to_break(ctx.buffer.idx, pos + <span class="number">1</span>);
         }
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">=</span> <span class="ident">pos</span> <span class="op">+</span> <span class="ident">usize::from</span>(<span class="ident">flag2</span>);
+        ctx.buffer.idx = pos + usize::from(flag2);
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">CursiveAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">this</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
+<span class="kw">impl </span>Apply <span class="kw">for </span>CursiveAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>this = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
 
-        <span class="kw">let</span> <span class="ident">index_this</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">this</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">entry_this</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sets</span>.<span class="ident">entry</span>(<span class="ident">index_this</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>index_this = <span class="self">self</span>.coverage.get(this)<span class="question-mark">?</span>;
+        <span class="kw">let </span>entry_this = <span class="self">self</span>.sets.entry(index_this)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">prev</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, ctx.buffer.idx, <span class="number">1</span>, <span class="bool-val">false</span>);
+        <span class="kw">if </span>!iter.prev() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-        <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">i</span>].<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">index_prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">prev</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">exit_prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sets</span>.<span class="ident">exit</span>(<span class="ident">index_prev</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>i = iter.index();
+        <span class="kw">let </span>prev = ctx.buffer.info[i].as_glyph();
+        <span class="kw">let </span>index_prev = <span class="self">self</span>.coverage.get(prev)<span class="question-mark">?</span>;
+        <span class="kw">let </span>exit_prev = <span class="self">self</span>.sets.exit(index_prev)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> (<span class="ident">exit_x</span>, <span class="ident">exit_y</span>) <span class="op">=</span> <span class="ident">exit_prev</span>.<span class="ident">get</span>(<span class="ident">ctx</span>.<span class="ident">face</span>);
-        <span class="kw">let</span> (<span class="ident">entry_x</span>, <span class="ident">entry_y</span>) <span class="op">=</span> <span class="ident">entry_this</span>.<span class="ident">get</span>(<span class="ident">ctx</span>.<span class="ident">face</span>);
+        <span class="kw">let </span>(exit_x, exit_y) = exit_prev.get(ctx.face);
+        <span class="kw">let </span>(entry_x, entry_y) = entry_this.get(ctx.face);
 
-        <span class="kw">let</span> <span class="ident">direction</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span>;
-        <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>;
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">i</span>, <span class="ident">j</span>);
+        <span class="kw">let </span>direction = ctx.buffer.direction;
+        <span class="kw">let </span>j = ctx.buffer.idx;
+        ctx.buffer.unsafe_to_break(i, j);
 
-        <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">pos</span>;
-        <span class="kw">match</span> <span class="ident">direction</span> {
-            <span class="ident">Direction::LeftToRight</span> =&gt; {
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">exit_x</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span>;
-                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">entry_x</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
+        <span class="kw">let </span>pos = <span class="kw-2">&amp;mut </span>ctx.buffer.pos;
+        <span class="kw">match </span>direction {
+            Direction::LeftToRight =&gt; {
+                pos[i].x_advance = exit_x + pos[i].x_offset;
+                <span class="kw">let </span>d = entry_x + pos[j].x_offset;
+                pos[j].x_advance -= d;
+                pos[j].x_offset -= d;
             }
-            <span class="ident">Direction::RightToLeft</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">exit_x</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span>;
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">entry_x</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span>;
+            Direction::RightToLeft =&gt; {
+                <span class="kw">let </span>d = exit_x + pos[i].x_offset;
+                pos[i].x_advance -= d;
+                pos[i].x_offset -= d;
+                pos[j].x_advance = entry_x + pos[j].x_offset;
             }
-            <span class="ident">Direction::TopToBottom</span> =&gt; {
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_advance</span> <span class="op">=</span> <span class="ident">exit_y</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span>;
-                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">entry_y</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_offset</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
+            Direction::TopToBottom =&gt; {
+                pos[i].y_advance = exit_y + pos[i].y_offset;
+                <span class="kw">let </span>d = entry_y + pos[j].y_offset;
+                pos[j].y_advance -= d;
+                pos[j].y_offset -= d;
             }
-            <span class="ident">Direction::BottomToTop</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">exit_y</span> <span class="op">+</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span>;
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">d</span>;
-                <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_advance</span> <span class="op">=</span> <span class="ident">entry_y</span>;
+            Direction::BottomToTop =&gt; {
+                <span class="kw">let </span>d = exit_y + pos[i].y_offset;
+                pos[i].y_advance -= d;
+                pos[i].y_offset -= d;
+                pos[j].y_advance = entry_y;
             }
-            <span class="ident">Direction::Invalid</span> =&gt; {}
+            Direction::Invalid =&gt; {}
         }
 
-        <span class="comment">// Cross-direction adjustment</span>
+        <span class="comment">// Cross-direction adjustment
 
-        <span class="comment">// We attach child to parent (think graph theory and rooted trees whereas</span>
-        <span class="comment">// the root stays on baseline and each node aligns itself against its</span>
-        <span class="comment">// parent.</span>
-        <span class="comment">//</span>
-        <span class="comment">// Optimize things for the case of RightToLeft, as that&#39;s most common in</span>
-        <span class="comment">// Arabic.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">child</span> <span class="op">=</span> <span class="ident">i</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parent</span> <span class="op">=</span> <span class="ident">j</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x_offset</span> <span class="op">=</span> <span class="ident">entry_x</span> <span class="op">-</span> <span class="ident">exit_x</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_offset</span> <span class="op">=</span> <span class="ident">entry_y</span> <span class="op">-</span> <span class="ident">exit_y</span>;
+        // We attach child to parent (think graph theory and rooted trees whereas
+        // the root stays on baseline and each node aligns itself against its
+        // parent.
+        //
+        // Optimize things for the case of RightToLeft, as that&#39;s most common in
+        // Arabic.
+        </span><span class="kw">let </span><span class="kw-2">mut </span>child = i;
+        <span class="kw">let </span><span class="kw-2">mut </span>parent = j;
+        <span class="kw">let </span><span class="kw-2">mut </span>x_offset = entry_x - exit_x;
+        <span class="kw">let </span><span class="kw-2">mut </span>y_offset = entry_y - exit_y;
 
-        <span class="comment">// Low bits are lookup flags, so we want to truncate.</span>
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">lookup_props</span> <span class="kw">as</span> <span class="ident">u16</span> <span class="op">&amp;</span> <span class="ident">lookup_flags::RIGHT_TO_LEFT</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">core::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">child</span>, <span class="kw-2">&amp;mut</span> <span class="ident">parent</span>);
-            <span class="ident">x_offset</span> <span class="op">=</span> <span class="op">-</span><span class="ident">x_offset</span>;
-            <span class="ident">y_offset</span> <span class="op">=</span> <span class="op">-</span><span class="ident">y_offset</span>;
+        <span class="comment">// Low bits are lookup flags, so we want to truncate.
+        </span><span class="kw">if </span>ctx.lookup_props <span class="kw">as </span>u16 &amp; lookup_flags::RIGHT_TO_LEFT == <span class="number">0 </span>{
+            core::mem::swap(<span class="kw-2">&amp;mut </span>child, <span class="kw-2">&amp;mut </span>parent);
+            x_offset = -x_offset;
+            y_offset = -y_offset;
         }
 
-        <span class="comment">// If child was already connected to someone else, walk through its old</span>
-        <span class="comment">// chain and reverse the link direction, such that the whole tree of its</span>
-        <span class="comment">// previous connection now attaches to new parent.  Watch out for case</span>
-        <span class="comment">// where new parent is on the path from old chain...</span>
-        <span class="ident">reverse_cursive_minor_offset</span>(<span class="ident">pos</span>, <span class="ident">child</span>, <span class="ident">direction</span>, <span class="ident">parent</span>);
+        <span class="comment">// If child was already connected to someone else, walk through its old
+        // chain and reverse the link direction, such that the whole tree of its
+        // previous connection now attaches to new parent.  Watch out for case
+        // where new parent is on the path from old chain...
+        </span>reverse_cursive_minor_offset(pos, child, direction, parent);
 
-        <span class="ident">pos</span>[<span class="ident">child</span>].<span class="ident">set_attach_type</span>(<span class="ident">attach_type::CURSIVE</span>);
-        <span class="ident">pos</span>[<span class="ident">child</span>].<span class="ident">set_attach_chain</span>((<span class="ident">parent</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">child</span> <span class="kw">as</span> <span class="ident">isize</span>) <span class="kw">as</span> <span class="ident">i16</span>);
+        pos[child].set_attach_type(attach_type::CURSIVE);
+        pos[child].set_attach_chain((parent <span class="kw">as </span>isize - child <span class="kw">as </span>isize) <span class="kw">as </span>i16);
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">scratch_flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">BufferScratchFlags::HAS_GPOS_ATTACHMENT</span>;
-        <span class="kw">if</span> <span class="ident">direction</span>.<span class="ident">is_horizontal</span>() {
-            <span class="ident">pos</span>[<span class="ident">child</span>].<span class="ident">y_offset</span> <span class="op">=</span> <span class="ident">y_offset</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">pos</span>[<span class="ident">child</span>].<span class="ident">x_offset</span> <span class="op">=</span> <span class="ident">x_offset</span>;
+        ctx.buffer.scratch_flags |= BufferScratchFlags::HAS_GPOS_ATTACHMENT;
+        <span class="kw">if </span>direction.is_horizontal() {
+            pos[child].y_offset = y_offset;
+        } <span class="kw">else </span>{
+            pos[child].x_offset = x_offset;
         }
 
-        <span class="comment">// If parent was attached to child, break them free.</span>
-        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/2469</span>
-        <span class="kw">if</span> <span class="ident">pos</span>[<span class="ident">parent</span>].<span class="ident">attach_chain</span>() <span class="op">==</span> <span class="op">-</span><span class="ident">pos</span>[<span class="ident">child</span>].<span class="ident">attach_chain</span>() {
-            <span class="ident">pos</span>[<span class="ident">parent</span>].<span class="ident">set_attach_chain</span>(<span class="number">0</span>);
+        <span class="comment">// If parent was attached to child, break them free.
+        // https://github.com/harfbuzz/harfbuzz/issues/2469
+        </span><span class="kw">if </span>pos[parent].attach_chain() == -pos[child].attach_chain() {
+            pos[parent].set_attach_chain(<span class="number">0</span>);
         }
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        ctx.buffer.idx += <span class="number">1</span>;
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="kw">fn</span> <span class="ident">reverse_cursive_minor_offset</span>(
-    <span class="ident">pos</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">GlyphPosition</span>],
-    <span class="ident">i</span>: <span class="ident">usize</span>,
-    <span class="ident">direction</span>: <span class="ident">Direction</span>,
-    <span class="ident">new_parent</span>: <span class="ident">usize</span>,
+<span class="kw">fn </span>reverse_cursive_minor_offset(
+    pos: <span class="kw-2">&amp;mut </span>[GlyphPosition],
+    i: usize,
+    direction: Direction,
+    new_parent: usize,
 ) {
-    <span class="kw">let</span> <span class="ident">chain</span> <span class="op">=</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">attach_chain</span>();
-    <span class="kw">let</span> <span class="ident">attach_type</span> <span class="op">=</span> <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">attach_type</span>();
-    <span class="kw">if</span> <span class="ident">chain</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">attach_type</span> <span class="op">&amp;</span> <span class="ident">attach_type::CURSIVE</span> <span class="op">==</span> <span class="number">0</span> {
+    <span class="kw">let </span>chain = pos[i].attach_chain();
+    <span class="kw">let </span>attach_type = pos[i].attach_type();
+    <span class="kw">if </span>chain == <span class="number">0 </span>|| attach_type &amp; attach_type::CURSIVE == <span class="number">0 </span>{
         <span class="kw">return</span>;
     }
 
-    <span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">set_attach_chain</span>(<span class="number">0</span>);
+    pos[i].set_attach_chain(<span class="number">0</span>);
 
-    <span class="comment">// Stop if we see new parent in the chain.</span>
-    <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">isize::from</span>(<span class="ident">chain</span>)) <span class="kw">as</span> <span class="kw">_</span>;
-    <span class="kw">if</span> <span class="ident">j</span> <span class="op">==</span> <span class="ident">new_parent</span> {
+    <span class="comment">// Stop if we see new parent in the chain.
+    </span><span class="kw">let </span>j = (i <span class="kw">as </span>isize + isize::from(chain)) <span class="kw">as _</span>;
+    <span class="kw">if </span>j == new_parent {
         <span class="kw">return</span>;
     }
 
-    <span class="ident">reverse_cursive_minor_offset</span>(<span class="ident">pos</span>, <span class="ident">j</span>, <span class="ident">direction</span>, <span class="ident">new_parent</span>);
+    reverse_cursive_minor_offset(pos, j, direction, new_parent);
 
-    <span class="kw">if</span> <span class="ident">direction</span>.<span class="ident">is_horizontal</span>() {
-        <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">y_offset</span> <span class="op">=</span> <span class="op">-</span><span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">y_offset</span>;
-    } <span class="kw">else</span> {
-        <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">x_offset</span> <span class="op">=</span> <span class="op">-</span><span class="ident">pos</span>[<span class="ident">i</span>].<span class="ident">x_offset</span>;
+    <span class="kw">if </span>direction.is_horizontal() {
+        pos[j].y_offset = -pos[i].y_offset;
+    } <span class="kw">else </span>{
+        pos[j].x_offset = -pos[i].x_offset;
     }
 
-    <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">set_attach_chain</span>(<span class="op">-</span><span class="ident">chain</span>);
-    <span class="ident">pos</span>[<span class="ident">j</span>].<span class="ident">set_attach_type</span>(<span class="ident">attach_type</span>);
+    pos[j].set_attach_chain(-chain);
+    pos[j].set_attach_type(attach_type);
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">MarkToBaseAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">buffer</span>;
-        <span class="kw">let</span> <span class="ident">mark_glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">mark_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mark_coverage</span>.<span class="ident">get</span>(<span class="ident">mark_glyph</span>)<span class="question-mark">?</span>;
+<span class="kw">impl </span>Apply <span class="kw">for </span>MarkToBaseAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>buffer = <span class="kw-2">&amp;</span>ctx.buffer;
+        <span class="kw">let </span>mark_glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">let </span>mark_index = <span class="self">self</span>.mark_coverage.get(mark_glyph)<span class="question-mark">?</span>;
 
-        <span class="comment">// Now we search backwards for a non-mark glyph</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="ident">iter</span>.<span class="ident">set_lookup_props</span>(<span class="ident">u32::from</span>(<span class="ident">lookup_flags::IGNORE_MARKS</span>));
+        <span class="comment">// Now we search backwards for a non-mark glyph
+        </span><span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, buffer.idx, <span class="number">1</span>, <span class="bool-val">false</span>);
+        iter.set_lookup_props(u32::from(lookup_flags::IGNORE_MARKS));
 
-        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">buffer</span>.<span class="ident">info</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">prev</span>() {
-                <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>info = <span class="kw-2">&amp;</span>buffer.info;
+        <span class="kw">loop </span>{
+            <span class="kw">if </span>!iter.prev() {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
             }
 
-            <span class="comment">// We only want to attach to the first of a MultipleSubst sequence.</span>
-            <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/740</span>
-            <span class="comment">// Reject others...</span>
-            <span class="comment">// ...but stop if we find a mark in the MultipleSubst sequence:</span>
-            <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1020</span>
-            <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">is_multiplied</span>()
-                <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_comp</span>() <span class="op">==</span> <span class="number">0</span>
-                <span class="op">|</span><span class="op">|</span> <span class="ident">idx</span> <span class="op">==</span> <span class="number">0</span>
-                <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>[<span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">is_mark</span>()
-                <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_id</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">info</span>[<span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">lig_id</span>()
-                <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_comp</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">info</span>[<span class="ident">idx</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">lig_comp</span>() <span class="op">+</span> <span class="number">1</span>
-            {
+            <span class="comment">// We only want to attach to the first of a MultipleSubst sequence.
+            // https://github.com/harfbuzz/harfbuzz/issues/740
+            // Reject others...
+            // ...but stop if we find a mark in the MultipleSubst sequence:
+            // https://github.com/harfbuzz/harfbuzz/issues/1020
+            </span><span class="kw">let </span>idx = iter.index();
+            <span class="kw">if </span>!info[idx].is_multiplied()
+                || info[idx].lig_comp() == <span class="number">0
+                </span>|| idx == <span class="number">0
+                </span>|| info[idx - <span class="number">1</span>].is_mark()
+                || info[idx].lig_id() != info[idx - <span class="number">1</span>].lig_id()
+                || info[idx].lig_comp() != info[idx - <span class="number">1</span>].lig_comp() + <span class="number">1
+            </span>{
                 <span class="kw">break</span>;
             }
-            <span class="ident">iter</span>.<span class="ident">reject</span>();
+            iter.reject();
         }
 
-        <span class="comment">// Checking that matched glyph is actually a base glyph by GDEF is too strong; disabled</span>
+        <span class="comment">// Checking that matched glyph is actually a base glyph by GDEF is too strong; disabled
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-        <span class="kw">let</span> <span class="ident">base_glyph</span> <span class="op">=</span> <span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">base_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">base_coverage</span>.<span class="ident">get</span>(<span class="ident">base_glyph</span>)<span class="question-mark">?</span>;
+        </span><span class="kw">let </span>idx = iter.index();
+        <span class="kw">let </span>base_glyph = info[idx].as_glyph();
+        <span class="kw">let </span>base_index = <span class="self">self</span>.base_coverage.get(base_glyph)<span class="question-mark">?</span>;
 
-        <span class="self">self</span>.<span class="ident">marks</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="self">self</span>.<span class="ident">anchors</span>, <span class="ident">mark_index</span>, <span class="ident">base_index</span>, <span class="ident">idx</span>)
+        <span class="self">self</span>.marks.apply(ctx, <span class="self">self</span>.anchors, mark_index, base_index, idx)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">MarkToLigatureAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">buffer</span>;
-        <span class="kw">let</span> <span class="ident">mark_glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">mark_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mark_coverage</span>.<span class="ident">get</span>(<span class="ident">mark_glyph</span>)<span class="question-mark">?</span>;
+<span class="kw">impl </span>Apply <span class="kw">for </span>MarkToLigatureAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>buffer = <span class="kw-2">&amp;</span>ctx.buffer;
+        <span class="kw">let </span>mark_glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">let </span>mark_index = <span class="self">self</span>.mark_coverage.get(mark_glyph)<span class="question-mark">?</span>;
 
-        <span class="comment">// Now we search backwards for a non-mark glyph</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="ident">iter</span>.<span class="ident">set_lookup_props</span>(<span class="ident">u32::from</span>(<span class="ident">lookup_flags::IGNORE_MARKS</span>));
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">prev</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="comment">// Now we search backwards for a non-mark glyph
+        </span><span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, buffer.idx, <span class="number">1</span>, <span class="bool-val">false</span>);
+        iter.set_lookup_props(u32::from(lookup_flags::IGNORE_MARKS));
+        <span class="kw">if </span>!iter.prev() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="comment">// Checking that matched glyph is actually a ligature by GDEF is too strong; disabled</span>
+        <span class="comment">// Checking that matched glyph is actually a ligature by GDEF is too strong; disabled
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-        <span class="kw">let</span> <span class="ident">lig_glyph</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">lig_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ligature_coverage</span>.<span class="ident">get</span>(<span class="ident">lig_glyph</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">lig_attach</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ligature_array</span>.<span class="ident">get</span>(<span class="ident">lig_index</span>)<span class="question-mark">?</span>;
+        </span><span class="kw">let </span>idx = iter.index();
+        <span class="kw">let </span>lig_glyph = buffer.info[idx].as_glyph();
+        <span class="kw">let </span>lig_index = <span class="self">self</span>.ligature_coverage.get(lig_glyph)<span class="question-mark">?</span>;
+        <span class="kw">let </span>lig_attach = <span class="self">self</span>.ligature_array.get(lig_index)<span class="question-mark">?</span>;
 
-        <span class="comment">// Find component to attach to</span>
-        <span class="kw">let</span> <span class="ident">comp_count</span> <span class="op">=</span> <span class="ident">lig_attach</span>.<span class="ident">rows</span>;
-        <span class="kw">if</span> <span class="ident">comp_count</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="comment">// Find component to attach to
+        </span><span class="kw">let </span>comp_count = lig_attach.rows;
+        <span class="kw">if </span>comp_count == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="comment">// We must now check whether the ligature ID of the current mark glyph</span>
-        <span class="comment">// is identical to the ligature ID of the found ligature.  If yes, we</span>
-        <span class="comment">// can directly use the component index.  If not, we attach the mark</span>
-        <span class="comment">// glyph to the last component of the ligature.</span>
-        <span class="kw">let</span> <span class="ident">lig_id</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_id</span>();
-        <span class="kw">let</span> <span class="ident">mark_id</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">lig_id</span>();
-        <span class="kw">let</span> <span class="ident">mark_comp</span> <span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">lig_comp</span>());
-        <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="ident">lig_id</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">lig_id</span> <span class="op">==</span> <span class="ident">mark_id</span> <span class="op">&amp;&amp;</span> <span class="ident">mark_comp</span> <span class="op">&gt;</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">comp_index</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">matches</span> { <span class="ident">mark_comp</span>.<span class="ident">min</span>(<span class="ident">comp_count</span>) } <span class="kw">else</span> { <span class="ident">comp_count</span> } <span class="op">-</span> <span class="number">1</span>;
+        <span class="comment">// We must now check whether the ligature ID of the current mark glyph
+        // is identical to the ligature ID of the found ligature.  If yes, we
+        // can directly use the component index.  If not, we attach the mark
+        // glyph to the last component of the ligature.
+        </span><span class="kw">let </span>lig_id = buffer.info[idx].lig_id();
+        <span class="kw">let </span>mark_id = buffer.cur(<span class="number">0</span>).lig_id();
+        <span class="kw">let </span>mark_comp = u16::from(buffer.cur(<span class="number">0</span>).lig_comp());
+        <span class="kw">let </span>matches = lig_id != <span class="number">0 </span>&amp;&amp; lig_id == mark_id &amp;&amp; mark_comp &gt; <span class="number">0</span>;
+        <span class="kw">let </span>comp_index = <span class="kw">if </span>matches { mark_comp.min(comp_count) } <span class="kw">else </span>{ comp_count } - <span class="number">1</span>;
 
-        <span class="self">self</span>.<span class="ident">marks</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">lig_attach</span>, <span class="ident">mark_index</span>, <span class="ident">comp_index</span>, <span class="ident">idx</span>)
+        <span class="self">self</span>.marks.apply(ctx, lig_attach, mark_index, comp_index, idx)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">MarkToMarkAdjustment</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">buffer</span>;
-        <span class="kw">let</span> <span class="ident">mark1_glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">mark1_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mark1_coverage</span>.<span class="ident">get</span>(<span class="ident">mark1_glyph</span>)<span class="question-mark">?</span>;
+<span class="kw">impl </span>Apply <span class="kw">for </span>MarkToMarkAdjustment&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>buffer = <span class="kw-2">&amp;</span>ctx.buffer;
+        <span class="kw">let </span>mark1_glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">let </span>mark1_index = <span class="self">self</span>.mark1_coverage.get(mark1_glyph)<span class="question-mark">?</span>;
 
-        <span class="comment">// Now we search backwards for a suitable mark glyph until a non-mark glyph</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="ident">iter</span>.<span class="ident">set_lookup_props</span>(<span class="ident">ctx</span>.<span class="ident">lookup_props</span> <span class="op">&amp;</span> <span class="op">!</span><span class="ident">u32::from</span>(<span class="ident">lookup_flags::IGNORE_FLAGS</span>));
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">prev</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="comment">// Now we search backwards for a suitable mark glyph until a non-mark glyph
+        </span><span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, buffer.idx, <span class="number">1</span>, <span class="bool-val">false</span>);
+        iter.set_lookup_props(ctx.lookup_props &amp; !u32::from(lookup_flags::IGNORE_FLAGS));
+        <span class="kw">if </span>!iter.prev() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">is_mark</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span>idx = iter.index();
+        <span class="kw">if </span>!buffer.info[idx].is_mark() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">id1</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">lig_id</span>();
-        <span class="kw">let</span> <span class="ident">id2</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_id</span>();
-        <span class="kw">let</span> <span class="ident">comp1</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">lig_comp</span>();
-        <span class="kw">let</span> <span class="ident">comp2</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">lig_comp</span>();
+        <span class="kw">let </span>id1 = buffer.cur(<span class="number">0</span>).lig_id();
+        <span class="kw">let </span>id2 = buffer.info[idx].lig_id();
+        <span class="kw">let </span>comp1 = buffer.cur(<span class="number">0</span>).lig_comp();
+        <span class="kw">let </span>comp2 = buffer.info[idx].lig_comp();
 
-        <span class="kw">let</span> <span class="ident">matches</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">id1</span> <span class="op">==</span> <span class="ident">id2</span> {
-            <span class="comment">// Marks belonging to the same base</span>
-            <span class="comment">// or marks belonging to the same ligature component.</span>
-            <span class="ident">id1</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">comp1</span> <span class="op">==</span> <span class="ident">comp2</span>
-        } <span class="kw">else</span> {
-            <span class="comment">// If ligature ids don&#39;t match, it may be the case that one of the marks</span>
-            <span class="comment">// itself is a ligature.  In which case match.</span>
-            (<span class="ident">id1</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">comp1</span> <span class="op">==</span> <span class="number">0</span>) <span class="op">|</span><span class="op">|</span> (<span class="ident">id2</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">comp2</span> <span class="op">==</span> <span class="number">0</span>)
+        <span class="kw">let </span>matches = <span class="kw">if </span>id1 == id2 {
+            <span class="comment">// Marks belonging to the same base
+            // or marks belonging to the same ligature component.
+            </span>id1 == <span class="number">0 </span>|| comp1 == comp2
+        } <span class="kw">else </span>{
+            <span class="comment">// If ligature ids don&#39;t match, it may be the case that one of the marks
+            // itself is a ligature.  In which case match.
+            </span>(id1 &gt; <span class="number">0 </span>&amp;&amp; comp1 == <span class="number">0</span>) || (id2 &gt; <span class="number">0 </span>&amp;&amp; comp2 == <span class="number">0</span>)
         };
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">matches</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        <span class="kw">if </span>!matches {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">mark2_glyph</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">as_glyph</span>();
-        <span class="kw">let</span> <span class="ident">mark2_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mark2_coverage</span>.<span class="ident">get</span>(<span class="ident">mark2_glyph</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>mark2_glyph = buffer.info[idx].as_glyph();
+        <span class="kw">let </span>mark2_index = <span class="self">self</span>.mark2_coverage.get(mark2_glyph)<span class="question-mark">?</span>;
 
-        <span class="self">self</span>.<span class="ident">marks</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="self">self</span>.<span class="ident">mark2_matrix</span>, <span class="ident">mark1_index</span>, <span class="ident">mark2_index</span>, <span class="ident">idx</span>)
+        <span class="self">self</span>.marks.apply(ctx, <span class="self">self</span>.mark2_matrix, mark1_index, mark2_index, idx)
     }
 }
 
-<span class="kw">trait</span> <span class="ident">ValueRecordExt</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span>;
+<span class="kw">trait </span>ValueRecordExt {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, idx: usize) -&gt; bool;
 }
 
-<span class="kw">impl</span> <span class="ident">ValueRecordExt</span> <span class="kw">for</span> <span class="ident">ValueRecord</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">idx</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">horizontal</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_horizontal</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">pos</span>[<span class="ident">idx</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">false</span>;
+<span class="kw">impl </span>ValueRecordExt <span class="kw">for </span>ValueRecord&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, idx: usize) -&gt; bool {
+        <span class="kw">let </span>horizontal = ctx.buffer.direction.is_horizontal();
+        <span class="kw">let </span><span class="kw-2">mut </span>pos = ctx.buffer.pos[idx];
+        <span class="kw">let </span><span class="kw-2">mut </span>worked = <span class="bool-val">false</span>;
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x_placement</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">x_placement</span>);
-            <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span><span class="self">self</span>.x_placement != <span class="number">0 </span>{
+            pos.x_offset += i32::from(<span class="self">self</span>.x_placement);
+            worked = <span class="bool-val">true</span>;
         }
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">y_placement</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">y_placement</span>);
-            <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span><span class="self">self</span>.y_placement != <span class="number">0 </span>{
+            pos.y_offset += i32::from(<span class="self">self</span>.y_placement);
+            worked = <span class="bool-val">true</span>;
         }
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x_advance</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">horizontal</span> {
-            <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">x_advance</span>);
-            <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span><span class="self">self</span>.x_advance != <span class="number">0 </span>&amp;&amp; horizontal {
+            pos.x_advance += i32::from(<span class="self">self</span>.x_advance);
+            worked = <span class="bool-val">true</span>;
         }
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">y_advance</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">horizontal</span> {
-            <span class="comment">// y_advance values grow downward but font-space grows upward, hence negation</span>
-            <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">y_advance</span>);
-            <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span><span class="self">self</span>.y_advance != <span class="number">0 </span>&amp;&amp; !horizontal {
+            <span class="comment">// y_advance values grow downward but font-space grows upward, hence negation
+            </span>pos.y_advance -= i32::from(<span class="self">self</span>.y_advance);
+            worked = <span class="bool-val">true</span>;
         }
 
         {
-            <span class="kw">let</span> (<span class="ident">ppem_x</span>, <span class="ident">ppem_y</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">pixels_per_em</span>().<span class="ident">unwrap_or</span>((<span class="number">0</span>, <span class="number">0</span>));
-            <span class="kw">let</span> <span class="ident">coords</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">ttfp_face</span>.<span class="ident">variation_coordinates</span>().<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">use_x_device</span> <span class="op">=</span> <span class="ident">ppem_x</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coords</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">use_y_device</span> <span class="op">=</span> <span class="ident">ppem_y</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coords</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+            <span class="kw">let </span>(ppem_x, ppem_y) = ctx.face.pixels_per_em().unwrap_or((<span class="number">0</span>, <span class="number">0</span>));
+            <span class="kw">let </span>coords = ctx.face.ttfp_face.variation_coordinates().len();
+            <span class="kw">let </span>use_x_device = ppem_x != <span class="number">0 </span>|| coords != <span class="number">0</span>;
+            <span class="kw">let </span>use_y_device = ppem_y != <span class="number">0 </span>|| coords != <span class="number">0</span>;
 
-            <span class="kw">if</span> <span class="ident">use_x_device</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_placement_device</span> {
-                    <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_x_delta</span>(<span class="ident">ctx</span>.<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-                    <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>; <span class="comment">// TODO: even when 0?</span>
+            <span class="kw">if </span>use_x_device {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.x_placement_device {
+                    pos.x_offset += device.get_x_delta(ctx.face).unwrap_or(<span class="number">0</span>);
+                    worked = <span class="bool-val">true</span>; <span class="comment">// TODO: even when 0?
+                </span>}
+            }
+
+            <span class="kw">if </span>use_y_device {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.y_placement_device {
+                    pos.y_offset += device.get_y_delta(ctx.face).unwrap_or(<span class="number">0</span>);
+                    worked = <span class="bool-val">true</span>;
                 }
             }
 
-            <span class="kw">if</span> <span class="ident">use_y_device</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_placement_device</span> {
-                    <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_y_delta</span>(<span class="ident">ctx</span>.<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-                    <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="kw">if </span>horizontal &amp;&amp; use_x_device {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.x_advance_device {
+                    pos.x_advance += device.get_x_delta(ctx.face).unwrap_or(<span class="number">0</span>);
+                    worked = <span class="bool-val">true</span>;
                 }
             }
 
-            <span class="kw">if</span> <span class="ident">horizontal</span> <span class="op">&amp;&amp;</span> <span class="ident">use_x_device</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_advance_device</span> {
-                    <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="op">+</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_x_delta</span>(<span class="ident">ctx</span>.<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-                    <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                }
-            }
-
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">horizontal</span> <span class="op">&amp;&amp;</span> <span class="ident">use_y_device</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_advance_device</span> {
-                    <span class="comment">// y_advance values grow downward but face-space grows upward, hence negation</span>
-                    <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="op">-</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_y_delta</span>(<span class="ident">ctx</span>.<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-                    <span class="ident">worked</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="kw">if </span>!horizontal &amp;&amp; use_y_device {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.y_advance_device {
+                    <span class="comment">// y_advance values grow downward but face-space grows upward, hence negation
+                    </span>pos.y_advance -= device.get_y_delta(ctx.face).unwrap_or(<span class="number">0</span>);
+                    worked = <span class="bool-val">true</span>;
                 }
             }
         }
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">pos</span>[<span class="ident">idx</span>] <span class="op">=</span> <span class="ident">pos</span>;
-        <span class="ident">worked</span>
+        ctx.buffer.pos[idx] = pos;
+        worked
     }
 }
 
-<span class="kw">trait</span> <span class="ident">MarkArrayExt</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(
+<span class="kw">trait </span>MarkArrayExt {
+    <span class="kw">fn </span>apply(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>,
-        <span class="ident">anchors</span>: <span class="ident">AnchorMatrix</span>,
-        <span class="ident">mark_index</span>: <span class="ident">u16</span>,
-        <span class="ident">glyph_index</span>: <span class="ident">u16</span>,
-        <span class="ident">glyph_pos</span>: <span class="ident">usize</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+        ctx: <span class="kw-2">&amp;mut </span>ApplyContext,
+        anchors: AnchorMatrix,
+        mark_index: u16,
+        glyph_index: u16,
+        glyph_pos: usize,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">MarkArrayExt</span> <span class="kw">for</span> <span class="ident">MarkArray</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(
+<span class="kw">impl </span>MarkArrayExt <span class="kw">for </span>MarkArray&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>,
-        <span class="ident">anchors</span>: <span class="ident">AnchorMatrix</span>,
-        <span class="ident">mark_index</span>: <span class="ident">u16</span>,
-        <span class="ident">glyph_index</span>: <span class="ident">u16</span>,
-        <span class="ident">glyph_pos</span>: <span class="ident">usize</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="comment">// If this subtable doesn&#39;t have an anchor for this base and this class</span>
-        <span class="comment">// return `None` such that the subsequent subtables have a chance at it.</span>
-        <span class="kw">let</span> (<span class="ident">mark_class</span>, <span class="ident">mark_anchor</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">mark_index</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">base_anchor</span> <span class="op">=</span> <span class="ident">anchors</span>.<span class="ident">get</span>(<span class="ident">glyph_index</span>, <span class="ident">mark_class</span>)<span class="question-mark">?</span>;
+        ctx: <span class="kw-2">&amp;mut </span>ApplyContext,
+        anchors: AnchorMatrix,
+        mark_index: u16,
+        glyph_index: u16,
+        glyph_pos: usize,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="comment">// If this subtable doesn&#39;t have an anchor for this base and this class
+        // return `None` such that the subsequent subtables have a chance at it.
+        </span><span class="kw">let </span>(mark_class, mark_anchor) = <span class="self">self</span>.get(mark_index)<span class="question-mark">?</span>;
+        <span class="kw">let </span>base_anchor = anchors.get(glyph_index, mark_class)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> (<span class="ident">mark_x</span>, <span class="ident">mark_y</span>) <span class="op">=</span> <span class="ident">mark_anchor</span>.<span class="ident">get</span>(<span class="ident">ctx</span>.<span class="ident">face</span>);
-        <span class="kw">let</span> (<span class="ident">base_x</span>, <span class="ident">base_y</span>) <span class="op">=</span> <span class="ident">base_anchor</span>.<span class="ident">get</span>(<span class="ident">ctx</span>.<span class="ident">face</span>);
+        <span class="kw">let </span>(mark_x, mark_y) = mark_anchor.get(ctx.face);
+        <span class="kw">let </span>(base_x, base_y) = base_anchor.get(ctx.face);
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">glyph_pos</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>);
+        ctx.buffer.unsafe_to_break(glyph_pos, ctx.buffer.idx);
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>;
-        <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur_pos_mut</span>();
-        <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">=</span> <span class="ident">base_x</span> <span class="op">-</span> <span class="ident">mark_x</span>;
-        <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">=</span> <span class="ident">base_y</span> <span class="op">-</span> <span class="ident">mark_y</span>;
-        <span class="ident">pos</span>.<span class="ident">set_attach_type</span>(<span class="ident">attach_type::MARK</span>);
-        <span class="ident">pos</span>.<span class="ident">set_attach_chain</span>((<span class="ident">glyph_pos</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">idx</span> <span class="kw">as</span> <span class="ident">isize</span>) <span class="kw">as</span> <span class="ident">i16</span>);
+        <span class="kw">let </span>idx = ctx.buffer.idx;
+        <span class="kw">let </span>pos = ctx.buffer.cur_pos_mut();
+        pos.x_offset = base_x - mark_x;
+        pos.y_offset = base_y - mark_y;
+        pos.set_attach_type(attach_type::MARK);
+        pos.set_attach_chain((glyph_pos <span class="kw">as </span>isize - idx <span class="kw">as </span>isize) <span class="kw">as </span>i16);
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">scratch_flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">BufferScratchFlags::HAS_GPOS_ATTACHMENT</span>;
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        ctx.buffer.scratch_flags |= BufferScratchFlags::HAS_GPOS_ATTACHMENT;
+        ctx.buffer.idx += <span class="number">1</span>;
 
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">attach_type</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MARK</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">1</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CURSIVE</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
+<span class="kw">pub mod </span>attach_type {
+    <span class="kw">pub const </span>MARK: u8 = <span class="number">1</span>;
+    <span class="kw">pub const </span>CURSIVE: u8 = <span class="number">2</span>;
 }
 
-<span class="doccomment">/// Just like TryFrom&lt;N&gt;, but for numeric types not supported by the Rust&#39;s std.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TryNumFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
-    <span class="doccomment">/// Casts between numeric types.</span>
-    <span class="kw">fn</span> <span class="ident">try_num_from</span>(<span class="kw">_</span>: <span class="ident">T</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Just like TryFrom&lt;N&gt;, but for numeric types not supported by the Rust&#39;s std.
+</span><span class="kw">pub trait </span>TryNumFrom&lt;T&gt;: Sized {
+    <span class="doccomment">/// Casts between numeric types.
+    </span><span class="kw">fn </span>try_num_from(<span class="kw">_</span>: T) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">TryNumFrom</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">i32</span> {
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">try_num_from</span>(<span class="ident">v</span>: <span class="ident">f32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="comment">// Based on https://github.com/rust-num/num-traits/blob/master/src/cast.rs</span>
+<span class="kw">impl </span>TryNumFrom&lt;f32&gt; <span class="kw">for </span>i32 {
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>try_num_from(v: f32) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="comment">// Based on https://github.com/rust-num/num-traits/blob/master/src/cast.rs
 
-        <span class="comment">// Float as int truncates toward zero, so we want to allow values</span>
-        <span class="comment">// in the exclusive range `(MIN-1, MAX+1)`.</span>
+        // Float as int truncates toward zero, so we want to allow values
+        // in the exclusive range `(MIN-1, MAX+1)`.
 
-        <span class="comment">// We can&#39;t represent `MIN-1` exactly, but there&#39;s no fractional part</span>
-        <span class="comment">// at this magnitude, so we can just use a `MIN` inclusive boundary.</span>
-        <span class="kw">const</span> <span class="ident">MIN</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">core::i32::MIN</span> <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="comment">// We can&#39;t represent `MAX` exactly, but it will round up to exactly</span>
-        <span class="comment">// `MAX+1` (a power of two) when we cast it.</span>
-        <span class="kw">const</span> <span class="ident">MAX_P1</span>: <span class="ident">f32</span> <span class="op">=</span> <span class="ident">core::i32::MAX</span> <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="kw">if</span> <span class="ident">v</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">MIN</span> <span class="op">&amp;&amp;</span> <span class="ident">v</span> <span class="op">&lt;</span> <span class="ident">MAX_P1</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">v</span> <span class="kw">as</span> <span class="ident">i32</span>)
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
+        // We can&#39;t represent `MIN-1` exactly, but there&#39;s no fractional part
+        // at this magnitude, so we can just use a `MIN` inclusive boundary.
+        </span><span class="kw">const </span>MIN: f32 = core::i32::MIN <span class="kw">as </span>f32;
+        <span class="comment">// We can&#39;t represent `MAX` exactly, but it will round up to exactly
+        // `MAX+1` (a power of two) when we cast it.
+        </span><span class="kw">const </span>MAX_P1: f32 = core::i32::MAX <span class="kw">as </span>f32;
+        <span class="kw">if </span>v &gt;= MIN &amp;&amp; v &lt; MAX_P1 {
+            <span class="prelude-val">Some</span>(v <span class="kw">as </span>i32)
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
     }
 }
 
-<span class="kw">trait</span> <span class="ident">DeviceExt</span> {
-    <span class="kw">fn</span> <span class="ident">get_x_delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">get_y_delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>;
+<span class="kw">trait </span>DeviceExt {
+    <span class="kw">fn </span>get_x_delta(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; <span class="prelude-ty">Option</span>&lt;i32&gt;;
+    <span class="kw">fn </span>get_y_delta(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; <span class="prelude-ty">Option</span>&lt;i32&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">DeviceExt</span> <span class="kw">for</span> <span class="ident">Device</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">get_x_delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Device::Hinting</span>(<span class="ident">hinting</span>) =&gt; <span class="ident">hinting</span>.<span class="ident">x_delta</span>(<span class="ident">face</span>.<span class="ident">units_per_em</span>, <span class="ident">face</span>.<span class="ident">pixels_per_em</span>()),
-            <span class="ident">Device::Variation</span>(<span class="ident">variation</span>) =&gt; {
-                <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">gdef</span><span class="question-mark">?</span>
-                    .<span class="ident">glyph_variation_delta</span>(<span class="ident">variation</span>.<span class="ident">outer_index</span>, <span class="ident">variation</span>.<span class="ident">inner_index</span>, <span class="ident">face</span>.<span class="ident">variation_coordinates</span>())
-                    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">float</span><span class="op">|</span> <span class="ident">i32::try_num_from</span>(<span class="ident"><span class="kw">crate</span>::round</span>(<span class="ident">float</span>)))
+<span class="kw">impl </span>DeviceExt <span class="kw">for </span>Device&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>get_x_delta(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; <span class="prelude-ty">Option</span>&lt;i32&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            Device::Hinting(hinting) =&gt; hinting.x_delta(face.units_per_em, face.pixels_per_em()),
+            Device::Variation(variation) =&gt; {
+                face.tables().gdef<span class="question-mark">?
+                    </span>.glyph_variation_delta(variation.outer_index, variation.inner_index, face.variation_coordinates())
+                    .and_then(|float| i32::try_num_from(<span class="kw">crate</span>::round(float)))
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">get_y_delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Device::Hinting</span>(<span class="ident">hinting</span>) =&gt; <span class="ident">hinting</span>.<span class="ident">y_delta</span>(<span class="ident">face</span>.<span class="ident">units_per_em</span>, <span class="ident">face</span>.<span class="ident">pixels_per_em</span>()),
-            <span class="ident">Device::Variation</span>(<span class="ident">variation</span>) =&gt; {
-                <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">gdef</span><span class="question-mark">?</span>
-                    .<span class="ident">glyph_variation_delta</span>(<span class="ident">variation</span>.<span class="ident">outer_index</span>, <span class="ident">variation</span>.<span class="ident">inner_index</span>, <span class="ident">face</span>.<span class="ident">variation_coordinates</span>())
-                    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">float</span><span class="op">|</span> <span class="ident">i32::try_num_from</span>(<span class="ident"><span class="kw">crate</span>::round</span>(<span class="ident">float</span>)))
+    <span class="kw">fn </span>get_y_delta(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; <span class="prelude-ty">Option</span>&lt;i32&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            Device::Hinting(hinting) =&gt; hinting.y_delta(face.units_per_em, face.pixels_per_em()),
+            Device::Variation(variation) =&gt; {
+                face.tables().gdef<span class="question-mark">?
+                    </span>.glyph_variation_delta(variation.outer_index, variation.inner_index, face.variation_coordinates())
+                    .and_then(|float| i32::try_num_from(<span class="kw">crate</span>::round(float)))
             }
         }
     }
 }
 
 
-<span class="kw">trait</span> <span class="ident">AnchorExt</span> {
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; (<span class="ident">i32</span>, <span class="ident">i32</span>);
+<span class="kw">trait </span>AnchorExt {
+    <span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; (i32, i32);
 }
 
-<span class="kw">impl</span> <span class="ident">AnchorExt</span> <span class="kw">for</span> <span class="ident">Anchor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) -&gt; (<span class="ident">i32</span>, <span class="ident">i32</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">x</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">i32::from</span>(<span class="self">self</span>.<span class="ident">y</span>);
+<span class="kw">impl </span>AnchorExt <span class="kw">for </span>Anchor&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>Face) -&gt; (i32, i32) {
+        <span class="kw">let </span><span class="kw-2">mut </span>x = i32::from(<span class="self">self</span>.x);
+        <span class="kw">let </span><span class="kw-2">mut </span>y = i32::from(<span class="self">self</span>.y);
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x_device</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">y_device</span>.<span class="ident">is_some</span>() {
-            <span class="kw">let</span> (<span class="ident">ppem_x</span>, <span class="ident">ppem_y</span>) <span class="op">=</span> <span class="ident">face</span>.<span class="ident">pixels_per_em</span>().<span class="ident">unwrap_or</span>((<span class="number">0</span>, <span class="number">0</span>));
-            <span class="kw">let</span> <span class="ident">coords</span> <span class="op">=</span> <span class="ident">face</span>.<span class="ident">ttfp_face</span>.<span class="ident">variation_coordinates</span>().<span class="ident">len</span>();
+        <span class="kw">if </span><span class="self">self</span>.x_device.is_some() || <span class="self">self</span>.y_device.is_some() {
+            <span class="kw">let </span>(ppem_x, ppem_y) = face.pixels_per_em().unwrap_or((<span class="number">0</span>, <span class="number">0</span>));
+            <span class="kw">let </span>coords = face.ttfp_face.variation_coordinates().len();
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_device</span> {
-                <span class="kw">if</span> <span class="ident">ppem_x</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coords</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_x_delta</span>(<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.x_device {
+                <span class="kw">if </span>ppem_x != <span class="number">0 </span>|| coords != <span class="number">0 </span>{
+                    x += device.get_x_delta(face).unwrap_or(<span class="number">0</span>);
                 }
             }
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_device</span> {
-                <span class="kw">if</span> <span class="ident">ppem_y</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coords</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_y_delta</span>(<span class="ident">face</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(device) = <span class="self">self</span>.y_device {
+                <span class="kw">if </span>ppem_y != <span class="number">0 </span>|| coords != <span class="number">0 </span>{
+                    y += device.get_y_delta(face).unwrap_or(<span class="number">0</span>);
                 }
             }
         }
 
-        (<span class="ident">x</span>, <span class="ident">y</span>)
+        (x, y)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

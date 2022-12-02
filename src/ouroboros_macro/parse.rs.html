@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ouroboros_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/ouroboros_macro-0.15.5/src/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../ouroboros_macro/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ouroboros_macro/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -269,97 +269,97 @@
 <span id="269">269</span>
 <span id="270">270</span>
 <span id="271">271</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Delimiter</span>, <span class="ident">Span</span>, <span class="ident">TokenTree</span>};
-<span class="kw">use</span> <span class="ident">quote::format_ident</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">spanned::Spanned</span>, <span class="ident">Attribute</span>, <span class="ident">Error</span>, <span class="ident">Fields</span>, <span class="ident">GenericParam</span>, <span class="ident">ItemStruct</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>proc_macro2::{Delimiter, Span, TokenTree};
+<span class="kw">use </span>quote::format_ident;
+<span class="kw">use </span>syn::{spanned::Spanned, Attribute, Error, Fields, GenericParam, ItemStruct};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">covariance_detection::type_is_covariant_over_this_lifetime</span>,
-    <span class="ident">info_structures</span>::{<span class="ident">BorrowRequest</span>, <span class="ident">Derive</span>, <span class="ident">FieldType</span>, <span class="ident">StructFieldInfo</span>, <span class="ident">StructInfo</span>},
-    <span class="ident">utils::submodule_contents_visiblity</span>,
+<span class="kw">use crate</span>::{
+    covariance_detection::type_is_covariant_over_this_lifetime,
+    info_structures::{BorrowRequest, Derive, FieldType, StructFieldInfo, StructInfo},
+    utils::submodule_contents_visiblity,
 };
 
-<span class="kw">fn</span> <span class="ident">handle_borrows_attr</span>(
-    <span class="ident">field_info</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">StructFieldInfo</span>],
-    <span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="ident">Attribute</span>,
-    <span class="ident">borrows</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BorrowRequest</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">borrow_mut</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">waiting_for_comma</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">tokens</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">possible_error</span> <span class="op">=</span> <span class="ident">Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>, <span class="string">&quot;Invalid syntax for borrows() macro.&quot;</span>);
-    <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">TokenTree::Group</span>(<span class="ident">group</span>)) <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">into_iter</span>().<span class="ident">next</span>() {
-        <span class="ident">group</span>.<span class="ident">stream</span>()
-    } <span class="kw">else</span> {
-        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">possible_error</span>);
+<span class="kw">fn </span>handle_borrows_attr(
+    field_info: <span class="kw-2">&amp;mut </span>[StructFieldInfo],
+    attr: <span class="kw-2">&amp;</span>Attribute,
+    borrows: <span class="kw-2">&amp;mut </span>Vec&lt;BorrowRequest&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>borrow_mut = <span class="bool-val">false</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>waiting_for_comma = <span class="bool-val">false</span>;
+    <span class="kw">let </span>tokens = attr.tokens.clone();
+    <span class="kw">let </span>possible_error = Error::new_spanned(<span class="kw-2">&amp;</span>tokens, <span class="string">&quot;Invalid syntax for borrows() macro.&quot;</span>);
+    <span class="kw">let </span>tokens = <span class="kw">if let </span><span class="prelude-val">Some</span>(TokenTree::Group(group)) = tokens.into_iter().next() {
+        group.stream()
+    } <span class="kw">else </span>{
+        <span class="kw">return </span><span class="prelude-val">Err</span>(possible_error);
     };
-    <span class="kw">for</span> <span class="ident">token</span> <span class="kw">in</span> <span class="ident">tokens</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TokenTree::Ident</span>(<span class="ident">ident</span>) <span class="op">=</span> <span class="ident">token</span> {
-            <span class="kw">if</span> <span class="ident">waiting_for_comma</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">ident</span>, <span class="string">&quot;Expected comma.&quot;</span>));
+    <span class="kw">for </span>token <span class="kw">in </span>tokens {
+        <span class="kw">if let </span>TokenTree::Ident(ident) = token {
+            <span class="kw">if </span>waiting_for_comma {
+                <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(<span class="kw-2">&amp;</span>ident, <span class="string">&quot;Expected comma.&quot;</span>));
             }
-            <span class="kw">let</span> <span class="ident">istr</span> <span class="op">=</span> <span class="ident">ident</span>.<span class="ident">to_string</span>();
-            <span class="kw">if</span> <span class="ident">istr</span> <span class="op">==</span> <span class="string">&quot;mut&quot;</span> {
-                <span class="kw">if</span> <span class="ident">borrow_mut</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">ident</span>, <span class="string">&quot;Unexpected double &#39;mut&#39;&quot;</span>));
+            <span class="kw">let </span>istr = ident.to_string();
+            <span class="kw">if </span>istr == <span class="string">&quot;mut&quot; </span>{
+                <span class="kw">if </span>borrow_mut {
+                    <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(<span class="kw-2">&amp;</span>ident, <span class="string">&quot;Unexpected double &#39;mut&#39;&quot;</span>));
                 }
-                <span class="ident">borrow_mut</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">field_info</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">istr</span>);
-                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="ident">index</span> {
-                    <span class="ident">v</span>
-                } <span class="kw">else</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(
-                        <span class="kw-2">&amp;</span><span class="ident">ident</span>,
+                borrow_mut = <span class="bool-val">true</span>;
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>index = field_info.iter().position(|item| item.name == istr);
+                <span class="kw">let </span>index = <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = index {
+                    v
+                } <span class="kw">else </span>{
+                    <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(
+                        <span class="kw-2">&amp;</span>ident,
                         <span class="macro">concat!</span>(
                             <span class="string">&quot;Unknown identifier, make sure that it is spelled &quot;</span>,
-                            <span class="string">&quot;correctly and defined above the location it is borrowed.&quot;</span>
-                        ),
+                            <span class="string">&quot;correctly and defined above the location it is borrowed.&quot;
+                        </span>),
                     ));
                 };
-                <span class="kw">if</span> <span class="ident">borrow_mut</span> {
-                    <span class="kw">if</span> <span class="ident">field_info</span>[<span class="ident">index</span>].<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::Borrowed</span> {
-                        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(
-                            <span class="kw-2">&amp;</span><span class="ident">ident</span>,
+                <span class="kw">if </span>borrow_mut {
+                    <span class="kw">if </span>field_info[index].field_type == FieldType::Borrowed {
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(
+                            <span class="kw-2">&amp;</span>ident,
                             <span class="string">&quot;Cannot borrow mutably, this field was previously borrowed immutably.&quot;</span>,
                         ));
                     }
-                    <span class="kw">if</span> <span class="ident">field_info</span>[<span class="ident">index</span>].<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::BorrowedMut</span> {
-                        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">ident</span>, <span class="string">&quot;Cannot borrow mutably twice.&quot;</span>));
+                    <span class="kw">if </span>field_info[index].field_type == FieldType::BorrowedMut {
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(<span class="kw-2">&amp;</span>ident, <span class="string">&quot;Cannot borrow mutably twice.&quot;</span>));
                     }
-                    <span class="ident">field_info</span>[<span class="ident">index</span>].<span class="ident">field_type</span> <span class="op">=</span> <span class="ident">FieldType::BorrowedMut</span>;
-                } <span class="kw">else</span> {
-                    <span class="kw">if</span> <span class="ident">field_info</span>[<span class="ident">index</span>].<span class="ident">field_type</span> <span class="op">==</span> <span class="ident">FieldType::BorrowedMut</span> {
-                        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(
-                            <span class="kw-2">&amp;</span><span class="ident">ident</span>,
+                    field_info[index].field_type = FieldType::BorrowedMut;
+                } <span class="kw">else </span>{
+                    <span class="kw">if </span>field_info[index].field_type == FieldType::BorrowedMut {
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(
+                            <span class="kw-2">&amp;</span>ident,
                             <span class="string">&quot;Cannot borrow as immutable as it was previously borrowed mutably.&quot;</span>,
                         ));
                     }
-                    <span class="ident">field_info</span>[<span class="ident">index</span>].<span class="ident">field_type</span> <span class="op">=</span> <span class="ident">FieldType::Borrowed</span>;
+                    field_info[index].field_type = FieldType::Borrowed;
                 }
-                <span class="ident">borrows</span>.<span class="ident">push</span>(<span class="ident">BorrowRequest</span> {
-                    <span class="ident">index</span>,
-                    <span class="ident">mutable</span>: <span class="ident">borrow_mut</span>,
+                borrows.push(BorrowRequest {
+                    index,
+                    mutable: borrow_mut,
                 });
-                <span class="ident">waiting_for_comma</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                <span class="ident">borrow_mut</span> <span class="op">=</span> <span class="bool-val">false</span>;
+                waiting_for_comma = <span class="bool-val">true</span>;
+                borrow_mut = <span class="bool-val">false</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TokenTree::Punct</span>(<span class="ident">punct</span>) <span class="op">=</span> <span class="ident">token</span> {
-            <span class="kw">if</span> <span class="ident">punct</span>.<span class="ident">as_char</span>() <span class="op">==</span> <span class="string">&#39;,&#39;</span> {
-                <span class="kw">if</span> <span class="ident">waiting_for_comma</span> {
-                    <span class="ident">waiting_for_comma</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                } <span class="kw">else</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(<span class="kw-2">&amp;</span><span class="ident">punct</span>, <span class="string">&quot;Unexpected extra comma.&quot;</span>));
+        } <span class="kw">else if let </span>TokenTree::Punct(punct) = token {
+            <span class="kw">if </span>punct.as_char() == <span class="string">&#39;,&#39; </span>{
+                <span class="kw">if </span>waiting_for_comma {
+                    waiting_for_comma = <span class="bool-val">false</span>;
+                } <span class="kw">else </span>{
+                    <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(<span class="kw-2">&amp;</span>punct, <span class="string">&quot;Unexpected extra comma.&quot;</span>));
                 }
-            } <span class="kw">else</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">punct</span>,
+            } <span class="kw">else </span>{
+                <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(
+                    <span class="kw-2">&amp;</span>punct,
                     <span class="string">&quot;Unexpected punctuation, expected comma or identifier.&quot;</span>,
                 ));
             }
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new_spanned</span>(
-                <span class="kw-2">&amp;</span><span class="ident">token</span>,
+        } <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new_spanned(
+                <span class="kw-2">&amp;</span>token,
                 <span class="string">&quot;Unexpected token, expected comma or identifier.&quot;</span>,
             ));
         }
@@ -367,178 +367,178 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">parse_derive_token</span>(<span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Derive</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">token</span> {
-        <span class="ident">TokenTree::Ident</span>(<span class="ident">ident</span>) =&gt; <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">ident</span>.<span class="ident">to_string</span>()[..] {
-            <span class="string">&quot;Debug&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">Derive::Debug</span>)),
-            <span class="string">&quot;PartialEq&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">Derive::PartialEq</span>)),
-            <span class="string">&quot;Eq&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">Derive::Eq</span>)),
-            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-                <span class="ident">ident</span>.<span class="ident">span</span>(),
-                <span class="macro">format!</span>(<span class="string">&quot;{} cannot be derived for self-referencing structs&quot;</span>, <span class="ident">ident</span>),
+<span class="kw">fn </span>parse_derive_token(token: <span class="kw-2">&amp;</span>TokenTree) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Derive&gt;, Error&gt; {
+    <span class="kw">match </span>token {
+        TokenTree::Ident(ident) =&gt; <span class="kw">match </span><span class="kw-2">&amp;</span>ident.to_string()[..] {
+            <span class="string">&quot;Debug&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(Derive::Debug)),
+            <span class="string">&quot;PartialEq&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(Derive::PartialEq)),
+            <span class="string">&quot;Eq&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(Derive::Eq)),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(Error::new(
+                ident.span(),
+                <span class="macro">format!</span>(<span class="string">&quot;{} cannot be derived for self-referencing structs&quot;</span>, ident),
             )),
         },
-        <span class="ident">TokenTree::Punct</span>(..) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
-        <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">token</span>.<span class="ident">span</span>(), <span class="string">&quot;bad syntax&quot;</span>)),
+        TokenTree::Punct(..) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+        <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(Error::new(token.span(), <span class="string">&quot;bad syntax&quot;</span>)),
     }
 }
 
-<span class="kw">fn</span> <span class="ident">parse_derive_attribute</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="ident">Attribute</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Derive</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">attr</span>.<span class="ident">tokens</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">TokenTree::Group</span>(<span class="ident">body</span>)) <span class="op">=</span> <span class="ident">body</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">next</span>() {
-        <span class="kw">if</span> <span class="ident">body</span>.<span class="ident">delimiter</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Delimiter::Parenthesis</span> {
+<span class="kw">fn </span>parse_derive_attribute(attr: <span class="kw-2">&amp;</span>Attribute) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;Derive&gt;, Error&gt; {
+    <span class="kw">let </span>body = <span class="kw-2">&amp;</span>attr.tokens;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(TokenTree::Group(body)) = body.clone().into_iter().next() {
+        <span class="kw">if </span>body.delimiter() != Delimiter::Parenthesis {
             <span class="macro">panic!</span>(<span class="string">&quot;TODO: nice error, bad define syntax&quot;</span>)
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">derives</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">for</span> <span class="ident">token</span> <span class="kw">in</span> <span class="ident">body</span>.<span class="ident">stream</span>().<span class="ident">into_iter</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">derive</span>) <span class="op">=</span> <span class="ident">parse_derive_token</span>(<span class="kw-2">&amp;</span><span class="ident">token</span>)<span class="question-mark">?</span> {
-                <span class="ident">derives</span>.<span class="ident">push</span>(<span class="ident">derive</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>derives = Vec::new();
+        <span class="kw">for </span>token <span class="kw">in </span>body.stream().into_iter() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(derive) = parse_derive_token(<span class="kw-2">&amp;</span>token)<span class="question-mark">? </span>{
+                derives.push(derive);
             }
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">derives</span>)
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">attr</span>.<span class="ident">span</span>(), <span class="string">&quot;bad syntax&quot;</span>))
+        <span class="prelude-val">Ok</span>(derives)
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Err</span>(Error::new(attr.span(), <span class="string">&quot;bad syntax&quot;</span>))
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_struct</span>(<span class="ident">def</span>: <span class="kw-2">&amp;</span><span class="ident">ItemStruct</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">StructInfo</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">vis</span> <span class="op">=</span> <span class="ident">def</span>.<span class="ident">vis</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">generics</span> <span class="op">=</span> <span class="ident">def</span>.<span class="ident">generics</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">actual_struct_def</span> <span class="op">=</span> <span class="ident">def</span>.<span class="ident">clone</span>();
-    <span class="ident">actual_struct_def</span>.<span class="ident">vis</span> <span class="op">=</span> <span class="ident">vis</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">match</span> <span class="kw-2">&amp;mut</span> <span class="ident">actual_struct_def</span>.<span class="ident">fields</span> {
-        <span class="ident">Fields::Named</span>(<span class="ident">def_fields</span>) =&gt; {
-            <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">def_fields</span>.<span class="ident">named</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">borrows</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">self_referencing</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">covariant</span> <span class="op">=</span> <span class="ident">type_is_covariant_over_this_lifetime</span>(<span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">ty</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">remove_attrs</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">attr</span>) <span class="kw">in</span> <span class="ident">field</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">attr</span>.<span class="ident">path</span>;
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">leading_colon</span>.<span class="ident">is_some</span>() {
+<span class="kw">pub fn </span>parse_struct(def: <span class="kw-2">&amp;</span>ItemStruct) -&gt; <span class="prelude-ty">Result</span>&lt;StructInfo, Error&gt; {
+    <span class="kw">let </span>vis = def.vis.clone();
+    <span class="kw">let </span>generics = def.generics.clone();
+    <span class="kw">let </span><span class="kw-2">mut </span>actual_struct_def = def.clone();
+    actual_struct_def.vis = vis.clone();
+    <span class="kw">let </span><span class="kw-2">mut </span>fields = Vec::new();
+    <span class="kw">match </span><span class="kw-2">&amp;mut </span>actual_struct_def.fields {
+        Fields::Named(def_fields) =&gt; {
+            <span class="kw">for </span>field <span class="kw">in </span><span class="kw-2">&amp;mut </span>def_fields.named {
+                <span class="kw">let </span><span class="kw-2">mut </span>borrows = Vec::new();
+                <span class="kw">let </span><span class="kw-2">mut </span>self_referencing = <span class="bool-val">false</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>covariant = type_is_covariant_over_this_lifetime(<span class="kw-2">&amp;</span>field.ty);
+                <span class="kw">let </span><span class="kw-2">mut </span>remove_attrs = Vec::new();
+                <span class="kw">for </span>(index, attr) <span class="kw">in </span>field.attrs.iter().enumerate() {
+                    <span class="kw">let </span>path = <span class="kw-2">&amp;</span>attr.path;
+                    <span class="kw">if </span>path.leading_colon.is_some() {
                         <span class="kw">continue</span>;
                     }
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
+                    <span class="kw">if </span>path.segments.len() != <span class="number">1 </span>{
                         <span class="kw">continue</span>;
                     }
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;borrows&quot;</span> {
-                        <span class="kw">if</span> <span class="ident">self_referencing</span> {
+                    <span class="kw">if </span>path.segments.first().unwrap().ident == <span class="string">&quot;borrows&quot; </span>{
+                        <span class="kw">if </span>self_referencing {
                             <span class="macro">panic!</span>(<span class="string">&quot;TODO: Nice error, used #[borrows()] twice.&quot;</span>);
                         }
-                        <span class="ident">self_referencing</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                        <span class="ident">handle_borrows_attr</span>(<span class="kw-2">&amp;mut</span> <span class="ident">fields</span>[..], <span class="ident">attr</span>, <span class="kw-2">&amp;mut</span> <span class="ident">borrows</span>)<span class="question-mark">?</span>;
-                        <span class="ident">remove_attrs</span>.<span class="ident">push</span>(<span class="ident">index</span>);
+                        self_referencing = <span class="bool-val">true</span>;
+                        handle_borrows_attr(<span class="kw-2">&amp;mut </span>fields[..], attr, <span class="kw-2">&amp;mut </span>borrows)<span class="question-mark">?</span>;
+                        remove_attrs.push(index);
                     }
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;covariant&quot;</span> {
-                        <span class="kw">if</span> <span class="ident">covariant</span>.<span class="ident">is_some</span>() {
+                    <span class="kw">if </span>path.segments.first().unwrap().ident == <span class="string">&quot;covariant&quot; </span>{
+                        <span class="kw">if </span>covariant.is_some() {
                             <span class="macro">panic!</span>(<span class="string">&quot;TODO: Nice error, covariance specified twice.&quot;</span>);
                         }
-                        <span class="ident">covariant</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
-                        <span class="ident">remove_attrs</span>.<span class="ident">push</span>(<span class="ident">index</span>);
+                        covariant = <span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
+                        remove_attrs.push(index);
                     }
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;not_covariant&quot;</span> {
-                        <span class="kw">if</span> <span class="ident">covariant</span>.<span class="ident">is_some</span>() {
+                    <span class="kw">if </span>path.segments.first().unwrap().ident == <span class="string">&quot;not_covariant&quot; </span>{
+                        <span class="kw">if </span>covariant.is_some() {
                             <span class="macro">panic!</span>(<span class="string">&quot;TODO: Nice error, covariance specified twice.&quot;</span>);
                         }
-                        <span class="ident">covariant</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
-                        <span class="ident">remove_attrs</span>.<span class="ident">push</span>(<span class="ident">index</span>);
+                        covariant = <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
+                        remove_attrs.push(index);
                     }
                 }
-                <span class="comment">// We should not be able to access the field outside of the hidden module where</span>
-                <span class="comment">// everything is generated.</span>
-                <span class="kw">let</span> <span class="ident">with_vis</span> <span class="op">=</span> <span class="ident">submodule_contents_visiblity</span>(<span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">vis</span>.<span class="ident">clone</span>());
-                <span class="ident">fields</span>.<span class="ident">push</span>(<span class="ident">StructFieldInfo</span> {
-                    <span class="ident">name</span>: <span class="ident">field</span>.<span class="ident">ident</span>.<span class="ident">clone</span>().<span class="ident">expect</span>(<span class="string">&quot;Named field has no name.&quot;</span>),
-                    <span class="ident">typ</span>: <span class="ident">field</span>.<span class="ident">ty</span>.<span class="ident">clone</span>(),
-                    <span class="ident">field_type</span>: <span class="ident">FieldType::Tail</span>,
-                    <span class="ident">vis</span>: <span class="ident">with_vis</span>,
-                    <span class="ident">borrows</span>,
-                    <span class="ident">self_referencing</span>,
-                    <span class="ident">covariant</span>,
+                <span class="comment">// We should not be able to access the field outside of the hidden module where
+                // everything is generated.
+                </span><span class="kw">let </span>with_vis = submodule_contents_visiblity(<span class="kw-2">&amp;</span>field.vis.clone());
+                fields.push(StructFieldInfo {
+                    name: field.ident.clone().expect(<span class="string">&quot;Named field has no name.&quot;</span>),
+                    typ: field.ty.clone(),
+                    field_type: FieldType::Tail,
+                    vis: with_vis,
+                    borrows,
+                    self_referencing,
+                    covariant,
                 });
             }
         }
-        <span class="ident">Fields::Unnamed</span>(<span class="ident">_fields</span>) =&gt; {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-                <span class="ident">Span::call_site</span>(),
+        Fields::Unnamed(_fields) =&gt; {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+                Span::call_site(),
                 <span class="string">&quot;Tuple structs are not supported yet.&quot;</span>,
             ))
         }
-        <span class="ident">Fields::Unit</span> =&gt; {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-                <span class="ident">Span::call_site</span>(),
+        Fields::Unit =&gt; {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+                Span::call_site(),
                 <span class="string">&quot;Unit structs cannot be self-referential.&quot;</span>,
             ))
         }
     }
-    <span class="kw">if</span> <span class="ident">fields</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="number">2</span> {
-        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-            <span class="ident">Span::call_site</span>(),
+    <span class="kw">if </span>fields.len() &lt; <span class="number">2 </span>{
+        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+            Span::call_site(),
             <span class="string">&quot;Self-referencing structs must have at least 2 fields.&quot;</span>,
         ));
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">has_non_tail</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">fields</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">field</span>.<span class="ident">field_type</span>.<span class="ident">is_tail</span>() {
-            <span class="ident">has_non_tail</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>has_non_tail = <span class="bool-val">false</span>;
+    <span class="kw">for </span>field <span class="kw">in </span><span class="kw-2">&amp;</span>fields {
+        <span class="kw">if </span>!field.field_type.is_tail() {
+            has_non_tail = <span class="bool-val">true</span>;
             <span class="kw">break</span>;
         }
     }
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">has_non_tail</span> {
-        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-            <span class="ident">Span::call_site</span>(),
+    <span class="kw">if </span>!has_non_tail {
+        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+            Span::call_site(),
             <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                 <span class="macro">concat!</span>(
                     <span class="string">&quot;Self-referencing struct cannot be made entirely of tail fields, try adding &quot;</span>,
-                    <span class="string">&quot;#[borrows({0})] to a field defined after {0}.&quot;</span>
-                ),
-                <span class="ident">fields</span>[<span class="number">0</span>].<span class="ident">name</span>
+                    <span class="string">&quot;#[borrows({0})] to a field defined after {0}.&quot;
+                </span>),
+                fields[<span class="number">0</span>].name
             ),
         ));
     }
-    <span class="kw">let</span> <span class="ident">first_lifetime</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">GenericParam::Lifetime</span>(<span class="ident">param</span>)) <span class="op">=</span> <span class="ident">generics</span>.<span class="ident">params</span>.<span class="ident">first</span>() {
-        <span class="ident">param</span>.<span class="ident">lifetime</span>.<span class="ident">ident</span>.<span class="ident">clone</span>()
-    } <span class="kw">else</span> {
+    <span class="kw">let </span>first_lifetime = <span class="kw">if let </span><span class="prelude-val">Some</span>(GenericParam::Lifetime(param)) = generics.params.first() {
+        param.lifetime.ident.clone()
+    } <span class="kw">else </span>{
         <span class="macro">format_ident!</span>(<span class="string">&quot;static&quot;</span>)
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attributes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">derives</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">def</span>.<span class="ident">attrs</span> {
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">segments</span>;
-        <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">p</span>.<span class="ident">span</span>(), <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Unsupported attribute&quot;</span>)));
+    <span class="kw">let </span><span class="kw-2">mut </span>attributes = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>derives = Vec::new();
+    <span class="kw">for </span>attr <span class="kw">in </span><span class="kw-2">&amp;</span>def.attrs {
+        <span class="kw">let </span>p = <span class="kw-2">&amp;</span>attr.path.segments;
+        <span class="kw">if </span>p.len() == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(p.span(), <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Unsupported attribute&quot;</span>)));
         }
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">p</span>[<span class="number">0</span>].<span class="ident">ident</span>.<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">good</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">name</span>[..] {
-            <span class="string">&quot;clippy&quot;</span> <span class="op">|</span> <span class="string">&quot;allow&quot;</span> <span class="op">|</span> <span class="string">&quot;deny&quot;</span> <span class="op">|</span> <span class="string">&quot;doc&quot;</span> =&gt; <span class="bool-val">true</span>,
-            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+        <span class="kw">let </span>name = p[<span class="number">0</span>].ident.to_string();
+        <span class="kw">let </span>good = <span class="kw">match </span><span class="kw-2">&amp;</span>name[..] {
+            <span class="string">&quot;clippy&quot; </span>| <span class="string">&quot;allow&quot; </span>| <span class="string">&quot;deny&quot; </span>| <span class="string">&quot;doc&quot; </span>=&gt; <span class="bool-val">true</span>,
+            <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         };
-        <span class="kw">if</span> <span class="ident">good</span> {
-            <span class="ident">attributes</span>.<span class="ident">push</span>(<span class="ident">attr</span>.<span class="ident">clone</span>())
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;derive&quot;</span> {
-            <span class="kw">if</span> <span class="ident">derives</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-                    <span class="ident">attr</span>.<span class="ident">span</span>(),
+        <span class="kw">if </span>good {
+            attributes.push(attr.clone())
+        } <span class="kw">else if </span>name == <span class="string">&quot;derive&quot; </span>{
+            <span class="kw">if </span>derives.len() &gt; <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+                    attr.span(),
                     <span class="string">&quot;Multiple derive attributes not allowed&quot;</span>,
                 ));
-            } <span class="kw">else</span> {
-                <span class="ident">derives</span> <span class="op">=</span> <span class="ident">parse_derive_attribute</span>(<span class="ident">attr</span>)<span class="question-mark">?</span>;
+            } <span class="kw">else </span>{
+                derives = parse_derive_attribute(attr)<span class="question-mark">?</span>;
             }
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">p</span>.<span class="ident">span</span>(), <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Unsupported attribute&quot;</span>)));
+        } <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(p.span(), <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Unsupported attribute&quot;</span>)));
         }
     }
 
-    <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">StructInfo</span> {
-        <span class="ident">derives</span>,
-        <span class="ident">ident</span>: <span class="ident">def</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(),
-        <span class="ident">generics</span>: <span class="ident">def</span>.<span class="ident">generics</span>.<span class="ident">clone</span>(),
-        <span class="ident">fields</span>,
-        <span class="ident">vis</span>,
-        <span class="ident">first_lifetime</span>,
-        <span class="ident">attributes</span>,
+    <span class="kw">return </span><span class="prelude-val">Ok</span>(StructInfo {
+        derives,
+        ident: def.ident.clone(),
+        generics: def.generics.clone(),
+        fields,
+        vis,
+        first_lifetime,
+        attributes,
     });
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ouroboros_macro" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

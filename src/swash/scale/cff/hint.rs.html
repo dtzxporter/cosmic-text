@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/cff/hint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/scale/cff/hint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -997,1004 +997,1004 @@
 <span id="997">997</span>
 <span id="998">998</span>
 <span id="999">999</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::cff</span>::{<span class="ident">DictionarySink</span>, <span class="ident">Glyph</span>, <span class="ident">GlyphSink</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal::fixed</span>::{<span class="ident">muldiv</span>, <span class="ident">Fixed</span>};
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::cff::{DictionarySink, Glyph, GlyphSink};
+<span class="kw">use </span><span class="kw">super</span>::internal::fixed::{muldiv, Fixed};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::TRACE</span>;
+<span class="kw">use </span><span class="kw">super</span>::TRACE;
 
-<span class="doccomment">/// Hinting state for a compact font format glyph.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Note that hinter states depend on the scale, subfont index and</span>
-<span class="doccomment">/// variation coordinates of a glyph. They can be retained and reused</span>
-<span class="doccomment">/// if those values remain the same.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HinterState</span> {
-    <span class="ident">scale</span>: <span class="ident">Fixed</span>,
-    <span class="ident">fscale</span>: <span class="ident">f32</span>,
-    <span class="ident">blues</span>: <span class="ident">BlueValues</span>,
-    <span class="ident">other_blues</span>: <span class="ident">BlueValues</span>,
-    <span class="ident">family_blues</span>: <span class="ident">BlueValues</span>,
-    <span class="ident">family_other_blues</span>: <span class="ident">BlueValues</span>,
-    <span class="ident">blue_scale</span>: <span class="ident">Fixed</span>,
-    <span class="ident">blue_shift</span>: <span class="ident">Fixed</span>,
-    <span class="ident">blue_fuzz</span>: <span class="ident">Fixed</span>,
-    <span class="ident">language_group</span>: <span class="ident">u8</span>,
-    <span class="ident">supress_overshoot</span>: <span class="ident">bool</span>,
-    <span class="ident">em_box_hints</span>: <span class="ident">bool</span>,
-    <span class="ident">boost</span>: <span class="ident">Fixed</span>,
-    <span class="ident">zones</span>: [<span class="ident">BlueZone</span>; <span class="ident">MAX_BLUE_ZONES</span>],
-    <span class="ident">zone_count</span>: <span class="ident">u16</span>,
+<span class="doccomment">/// Hinting state for a compact font format glyph.
+///
+/// Note that hinter states depend on the scale, subfont index and
+/// variation coordinates of a glyph. They can be retained and reused
+/// if those values remain the same.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>HinterState {
+    scale: Fixed,
+    fscale: f32,
+    blues: BlueValues,
+    other_blues: BlueValues,
+    family_blues: BlueValues,
+    family_other_blues: BlueValues,
+    blue_scale: Fixed,
+    blue_shift: Fixed,
+    blue_fuzz: Fixed,
+    language_group: u8,
+    supress_overshoot: bool,
+    em_box_hints: bool,
+    boost: Fixed,
+    zones: [BlueZone; MAX_BLUE_ZONES],
+    zone_count: u16,
 }
 
-<span class="kw">impl</span> <span class="ident">HinterState</span> {
-    <span class="doccomment">/// Creates a new hinting state for the specified glyph, scale and</span>
-    <span class="doccomment">/// variation coordinates.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">glyph</span>: <span class="kw-2">&amp;</span><span class="ident">Glyph</span>, <span class="ident">scale</span>: <span class="ident">f32</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">Self</span> {
-            <span class="ident">scale</span>: <span class="ident">Fixed::from_f32</span>(<span class="ident">scale</span>),
-            <span class="ident">fscale</span>: <span class="ident">scale</span>,
-            <span class="ident">blues</span>: <span class="ident">BlueValues::new</span>(),
-            <span class="ident">other_blues</span>: <span class="ident">BlueValues::new</span>(),
-            <span class="ident">family_blues</span>: <span class="ident">BlueValues::new</span>(),
-            <span class="ident">family_other_blues</span>: <span class="ident">BlueValues::new</span>(),
-            <span class="ident">blue_scale</span>: <span class="ident">DEFAULT_BLUE_SCALE</span>,
-            <span class="ident">blue_shift</span>: <span class="ident">DEFAULT_BLUE_SHIFT</span>,
-            <span class="ident">blue_fuzz</span>: <span class="ident">DEFAULT_BLUE_FUZZ</span>,
-            <span class="ident">language_group</span>: <span class="number">0</span>,
-            <span class="ident">supress_overshoot</span>: <span class="bool-val">false</span>,
-            <span class="ident">em_box_hints</span>: <span class="bool-val">false</span>,
-            <span class="ident">boost</span>: <span class="ident">Fixed</span>(<span class="number">0</span>),
-            <span class="ident">zones</span>: [<span class="ident">BlueZone::default</span>(); <span class="ident">MAX_BLUE_ZONES</span>],
-            <span class="ident">zone_count</span>: <span class="number">0</span>,
+<span class="kw">impl </span>HinterState {
+    <span class="doccomment">/// Creates a new hinting state for the specified glyph, scale and
+    /// variation coordinates.
+    </span><span class="kw">pub fn </span>new(glyph: <span class="kw-2">&amp;</span>Glyph, scale: f32, coords: <span class="kw-2">&amp;</span>[i16]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>state = <span class="self">Self </span>{
+            scale: Fixed::from_f32(scale),
+            fscale: scale,
+            blues: BlueValues::new(),
+            other_blues: BlueValues::new(),
+            family_blues: BlueValues::new(),
+            family_other_blues: BlueValues::new(),
+            blue_scale: DEFAULT_BLUE_SCALE,
+            blue_shift: DEFAULT_BLUE_SHIFT,
+            blue_fuzz: DEFAULT_BLUE_FUZZ,
+            language_group: <span class="number">0</span>,
+            supress_overshoot: <span class="bool-val">false</span>,
+            em_box_hints: <span class="bool-val">false</span>,
+            boost: Fixed(<span class="number">0</span>),
+            zones: [BlueZone::default(); MAX_BLUE_ZONES],
+            zone_count: <span class="number">0</span>,
         };
-        <span class="ident">glyph</span>.<span class="ident">eval_private_dict</span>(<span class="ident">coords</span>, <span class="kw-2">&amp;mut</span> <span class="ident">state</span>);
-        <span class="ident">state</span>.<span class="ident">initialize_zones</span>();
-        <span class="ident">state</span>
+        glyph.eval_private_dict(coords, <span class="kw-2">&amp;mut </span>state);
+        state.initialize_zones();
+        state
     }
 
-    <span class="doccomment">/// Returns the current scaling factor of the hinter state.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">fscale</span>
+    <span class="doccomment">/// Returns the current scaling factor of the hinter state.
+    </span><span class="kw">pub fn </span>scale(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="self">self</span>.fscale
     }
 
-    <span class="kw">fn</span> <span class="ident">initialize_zones</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">em_box_hints</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">language_group</span> <span class="op">==</span> <span class="number">1</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">blues</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">2</span> {
-                <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">blues</span>.<span class="ident">values</span>();
-                <span class="kw">if</span> <span class="ident">v</span>[<span class="number">0</span>].<span class="number">0</span> <span class="op">&lt;</span> <span class="ident">ICF_BOTTOM</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">v</span>[<span class="number">0</span>].<span class="number">1</span> <span class="op">&lt;</span> <span class="ident">ICF_BOTTOM</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">v</span>[<span class="number">1</span>].<span class="number">0</span> <span class="op">&gt;</span> <span class="ident">ICF_TOP</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">v</span>[<span class="number">1</span>].<span class="number">1</span> <span class="op">&gt;</span> <span class="ident">ICF_TOP</span>
+    <span class="kw">fn </span>initialize_zones(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.em_box_hints = <span class="bool-val">false</span>;
+        <span class="kw">if </span><span class="self">self</span>.language_group == <span class="number">1 </span>{
+            <span class="kw">if </span><span class="self">self</span>.blues.len == <span class="number">2 </span>{
+                <span class="kw">let </span>v = <span class="self">self</span>.blues.values();
+                <span class="kw">if </span>v[<span class="number">0</span>].<span class="number">0 </span>&lt; ICF_BOTTOM
+                    &amp;&amp; v[<span class="number">0</span>].<span class="number">1 </span>&lt; ICF_BOTTOM
+                    &amp;&amp; v[<span class="number">1</span>].<span class="number">0 </span>&gt; ICF_TOP
+                    &amp;&amp; v[<span class="number">1</span>].<span class="number">1 </span>&gt; ICF_TOP
                 {
-                    <span class="self">self</span>.<span class="ident">em_box_hints</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                    <span class="self">self</span>.em_box_hints = <span class="bool-val">true</span>;
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">blues</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">em_box_hints</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            } <span class="kw">else if </span><span class="self">self</span>.blues.len == <span class="number">0 </span>{
+                <span class="self">self</span>.em_box_hints = <span class="bool-val">true</span>;
             }
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">em_box_hints</span> {
+        <span class="kw">if </span><span class="self">self</span>.em_box_hints {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">zones</span> <span class="op">=</span> [<span class="ident">BlueZone::default</span>(); <span class="ident">MAX_BLUE_ZONES</span>];
-        <span class="kw">let</span> <span class="ident">darken_y</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">max_height</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="number">0usize</span>;
-        <span class="kw">for</span> <span class="ident">blue</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">blues</span>.<span class="ident">values</span>() {
-            <span class="kw">let</span> <span class="ident">bottom</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">top</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>;
-            <span class="kw">if</span> <span class="ident">height</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="number">0</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>zones = [BlueZone::default(); MAX_BLUE_ZONES];
+        <span class="kw">let </span>darken_y = Fixed(<span class="number">0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>max_height = Fixed(<span class="number">0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>z = <span class="number">0usize</span>;
+        <span class="kw">for </span>blue <span class="kw">in </span><span class="self">self</span>.blues.values() {
+            <span class="kw">let </span>bottom = blue.<span class="number">0</span>;
+            <span class="kw">let </span>top = blue.<span class="number">1</span>;
+            <span class="kw">let </span>height = top - bottom;
+            <span class="kw">if </span>height.<span class="number">0 </span>&lt; <span class="number">0 </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">max_height</span> {
-                <span class="ident">max_height</span> <span class="op">=</span> <span class="ident">height</span>;
+            <span class="kw">if </span>height &gt; max_height {
+                max_height = height;
             }
-            <span class="kw">let</span> <span class="ident">zone</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">zones</span>[<span class="ident">z</span>];
-            <span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">=</span> <span class="ident">bottom</span>;
-            <span class="ident">zone</span>.<span class="ident">top</span> <span class="op">=</span> <span class="ident">top</span>;
-            <span class="kw">if</span> <span class="ident">z</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="ident">zone</span>.<span class="ident">is_bottom</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">top</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">zone</span>.<span class="ident">top</span> <span class="op">+</span><span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">darken_y</span>;
-                <span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">+</span><span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">darken_y</span>;
-                <span class="ident">zone</span>.<span class="ident">is_bottom</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">zone</span>.<span class="ident">bottom</span>;
+            <span class="kw">let </span>zone = <span class="kw-2">&amp;mut </span>zones[z];
+            zone.bottom = bottom;
+            zone.top = top;
+            <span class="kw">if </span>z == <span class="number">0 </span>{
+                zone.is_bottom = <span class="bool-val">true</span>;
+                zone.flat = top;
+            } <span class="kw">else </span>{
+                zone.top += Fixed(<span class="number">2</span>) * darken_y;
+                zone.bottom += Fixed(<span class="number">2</span>) * darken_y;
+                zone.is_bottom = <span class="bool-val">false</span>;
+                zone.flat = zone.bottom;
             }
-            <span class="ident">z</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            z += <span class="number">1</span>;
         }
-        <span class="kw">let</span> <span class="ident">units_per_pixel</span> <span class="op">=</span> <span class="ident">Fixed::ONE</span> <span class="op">/</span> <span class="self">self</span>.<span class="ident">scale</span>;
-        <span class="kw">for</span> <span class="ident">blue</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">other_blues</span>.<span class="ident">values</span>() {
-            <span class="kw">let</span> <span class="ident">bottom</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">top</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>;
-            <span class="kw">if</span> <span class="ident">height</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="number">0</span> {
+        <span class="kw">let </span>units_per_pixel = Fixed::ONE / <span class="self">self</span>.scale;
+        <span class="kw">for </span>blue <span class="kw">in </span><span class="self">self</span>.other_blues.values() {
+            <span class="kw">let </span>bottom = blue.<span class="number">0</span>;
+            <span class="kw">let </span>top = blue.<span class="number">1</span>;
+            <span class="kw">let </span>height = top - bottom;
+            <span class="kw">if </span>height.<span class="number">0 </span>&lt; <span class="number">0 </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">max_height</span> {
-                <span class="ident">max_height</span> <span class="op">=</span> <span class="ident">height</span>;
+            <span class="kw">if </span>height &gt; max_height {
+                max_height = height;
             }
-            <span class="kw">let</span> <span class="ident">zone</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">zones</span>[<span class="ident">z</span>];
-            <span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">=</span> <span class="ident">bottom</span>;
-            <span class="ident">zone</span>.<span class="ident">top</span> <span class="op">=</span> <span class="ident">top</span>;
-            <span class="ident">zone</span>.<span class="ident">is_bottom</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">top</span>;
-            <span class="ident">z</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">let </span>zone = <span class="kw-2">&amp;mut </span>zones[z];
+            zone.bottom = bottom;
+            zone.top = top;
+            zone.is_bottom = <span class="bool-val">true</span>;
+            zone.flat = top;
+            z += <span class="number">1</span>;
         }
-        <span class="kw">for</span> <span class="ident">zone</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">zones</span>[..<span class="ident">z</span>] {
-            <span class="kw">let</span> <span class="ident">flat</span> <span class="op">=</span> <span class="ident">zone</span>.<span class="ident">flat</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">min_diff</span> <span class="op">=</span> <span class="ident">Fixed::MAX</span>;
-            <span class="kw">if</span> <span class="ident">zone</span>.<span class="ident">is_bottom</span> {
-                <span class="kw">for</span> <span class="ident">blue</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">family_other_blues</span>.<span class="ident">values</span>() {
-                    <span class="kw">let</span> <span class="ident">family_flat</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">1</span>;
-                    <span class="kw">let</span> <span class="ident">diff</span> <span class="op">=</span> (<span class="ident">flat</span> <span class="op">-</span> <span class="ident">family_flat</span>).<span class="ident">abs</span>();
-                    <span class="kw">if</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">min_diff</span> <span class="op">&amp;&amp;</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">units_per_pixel</span> {
-                        <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">family_flat</span>;
-                        <span class="ident">min_diff</span> <span class="op">=</span> <span class="ident">diff</span>;
-                        <span class="kw">if</span> <span class="ident">diff</span>.<span class="number">0</span> <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">for </span>zone <span class="kw">in </span><span class="kw-2">&amp;mut </span>zones[..z] {
+            <span class="kw">let </span>flat = zone.flat;
+            <span class="kw">let </span><span class="kw-2">mut </span>min_diff = Fixed::MAX;
+            <span class="kw">if </span>zone.is_bottom {
+                <span class="kw">for </span>blue <span class="kw">in </span><span class="self">self</span>.family_other_blues.values() {
+                    <span class="kw">let </span>family_flat = blue.<span class="number">1</span>;
+                    <span class="kw">let </span>diff = (flat - family_flat).abs();
+                    <span class="kw">if </span>diff &lt; min_diff &amp;&amp; diff &lt; units_per_pixel {
+                        zone.flat = family_flat;
+                        min_diff = diff;
+                        <span class="kw">if </span>diff.<span class="number">0 </span>== <span class="number">0 </span>{
                             <span class="kw">break</span>;
                         }
                     }
                 }
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">family_blues</span>.<span class="ident">len</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">family_flat</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">family_blues</span>.<span class="ident">values</span>[<span class="number">0</span>].<span class="number">1</span>;
-                    <span class="kw">let</span> <span class="ident">diff</span> <span class="op">=</span> (<span class="ident">flat</span> <span class="op">-</span> <span class="ident">family_flat</span>).<span class="ident">abs</span>();
-                    <span class="kw">if</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">min_diff</span> <span class="op">&amp;&amp;</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">units_per_pixel</span> {
-                        <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">family_flat</span>;
+                <span class="kw">if </span><span class="self">self</span>.family_blues.len &gt; <span class="number">0 </span>{
+                    <span class="kw">let </span>family_flat = <span class="self">self</span>.family_blues.values[<span class="number">0</span>].<span class="number">1</span>;
+                    <span class="kw">let </span>diff = (flat - family_flat).abs();
+                    <span class="kw">if </span>diff &lt; min_diff &amp;&amp; diff &lt; units_per_pixel {
+                        zone.flat = family_flat;
                     }
                 }
-            } <span class="kw">else</span> {
-                <span class="kw">for</span> <span class="ident">blue</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">family_blues</span>.<span class="ident">values</span>().<span class="ident">iter</span>().<span class="ident">skip</span>(<span class="number">1</span>) {
-                    <span class="kw">let</span> <span class="ident">family_flat</span> <span class="op">=</span> <span class="ident">blue</span>.<span class="number">0</span> <span class="op">+</span> <span class="ident">Fixed</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">darken_y</span>;
-                    <span class="kw">let</span> <span class="ident">diff</span> <span class="op">=</span> (<span class="ident">flat</span> <span class="op">-</span> <span class="ident">family_flat</span>).<span class="ident">abs</span>();
-                    <span class="kw">if</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">min_diff</span> <span class="op">&amp;&amp;</span> <span class="ident">diff</span> <span class="op">&lt;</span> <span class="ident">units_per_pixel</span> {
-                        <span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">family_flat</span>;
-                        <span class="ident">min_diff</span> <span class="op">=</span> <span class="ident">diff</span>;
-                        <span class="kw">if</span> <span class="ident">diff</span>.<span class="number">0</span> <span class="op">==</span> <span class="number">0</span> {
+            } <span class="kw">else </span>{
+                <span class="kw">for </span>blue <span class="kw">in </span><span class="self">self</span>.family_blues.values().iter().skip(<span class="number">1</span>) {
+                    <span class="kw">let </span>family_flat = blue.<span class="number">0 </span>+ Fixed(<span class="number">2</span>) * darken_y;
+                    <span class="kw">let </span>diff = (flat - family_flat).abs();
+                    <span class="kw">if </span>diff &lt; min_diff &amp;&amp; diff &lt; units_per_pixel {
+                        zone.flat = family_flat;
+                        min_diff = diff;
+                        <span class="kw">if </span>diff.<span class="number">0 </span>== <span class="number">0 </span>{
                             <span class="kw">break</span>;
                         }
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">max_height</span>.<span class="number">0</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">blue_scale</span> <span class="op">&gt;</span> (<span class="ident">Fixed::ONE</span> <span class="op">/</span> <span class="ident">max_height</span>) {
-            <span class="self">self</span>.<span class="ident">blue_scale</span> <span class="op">=</span> <span class="ident">Fixed::ONE</span> <span class="op">/</span> <span class="ident">max_height</span>;
+        <span class="kw">if </span>max_height.<span class="number">0 </span>&gt; <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.blue_scale &gt; (Fixed::ONE / max_height) {
+            <span class="self">self</span>.blue_scale = Fixed::ONE / max_height;
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">scale</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">blue_scale</span> {
-            <span class="self">self</span>.<span class="ident">supress_overshoot</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="self">self</span>.<span class="ident">boost</span> <span class="op">=</span> <span class="ident">Fixed::from_f32</span>(<span class="number">0.6</span>)
-                <span class="op">-</span> <span class="ident">Fixed</span>(<span class="ident">muldiv</span>(
-                    <span class="ident">Fixed::from_f32</span>(<span class="number">0.6</span>).<span class="number">0</span>,
-                    <span class="self">self</span>.<span class="ident">scale</span>.<span class="number">0</span>,
-                    <span class="self">self</span>.<span class="ident">blue_scale</span>.<span class="number">0</span>,
+        <span class="kw">if </span><span class="self">self</span>.scale &lt; <span class="self">self</span>.blue_scale {
+            <span class="self">self</span>.supress_overshoot = <span class="bool-val">true</span>;
+            <span class="self">self</span>.boost = Fixed::from_f32(<span class="number">0.6</span>)
+                - Fixed(muldiv(
+                    Fixed::from_f32(<span class="number">0.6</span>).<span class="number">0</span>,
+                    <span class="self">self</span>.scale.<span class="number">0</span>,
+                    <span class="self">self</span>.blue_scale.<span class="number">0</span>,
                 ));
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">boost</span>.<span class="number">0</span> <span class="op">&gt;</span> <span class="number">0x7FFF</span> {
-                <span class="self">self</span>.<span class="ident">boost</span>.<span class="number">0</span> <span class="op">=</span> <span class="number">0x7FFF</span>;
+            <span class="kw">if </span><span class="self">self</span>.boost.<span class="number">0 </span>&gt; <span class="number">0x7FFF </span>{
+                <span class="self">self</span>.boost.<span class="number">0 </span>= <span class="number">0x7FFF</span>;
             }
         }
-        <span class="kw">if</span> <span class="ident">darken_y</span>.<span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">boost</span>.<span class="number">0</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">if </span>darken_y.<span class="number">0 </span>!= <span class="number">0 </span>{
+            <span class="self">self</span>.boost.<span class="number">0 </span>= <span class="number">0</span>;
         }
-        <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>;
-        <span class="kw">let</span> <span class="ident">boost</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">boost</span>;
-        <span class="kw">for</span> <span class="ident">zone</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">zones</span>[..<span class="ident">z</span>] {
-            <span class="kw">let</span> <span class="ident">boost</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">zone</span>.<span class="ident">is_bottom</span> { <span class="op">-</span><span class="ident">boost</span> } <span class="kw">else</span> { <span class="ident">boost</span> };
-            <span class="ident">zone</span>.<span class="ident">ds_flat</span> <span class="op">=</span> (<span class="ident">zone</span>.<span class="ident">flat</span> <span class="op">*</span> <span class="ident">scale</span> <span class="op">+</span> <span class="ident">boost</span>).<span class="ident">round</span>();
+        <span class="kw">let </span>scale = <span class="self">self</span>.scale;
+        <span class="kw">let </span>boost = <span class="self">self</span>.boost;
+        <span class="kw">for </span>zone <span class="kw">in </span><span class="kw-2">&amp;mut </span>zones[..z] {
+            <span class="kw">let </span>boost = <span class="kw">if </span>zone.is_bottom { -boost } <span class="kw">else </span>{ boost };
+            zone.ds_flat = (zone.flat * scale + boost).round();
         }
-        <span class="self">self</span>.<span class="ident">zones</span> <span class="op">=</span> <span class="ident">zones</span>;
-        <span class="self">self</span>.<span class="ident">zone_count</span> <span class="op">=</span> <span class="ident">z</span> <span class="kw">as</span> <span class="ident">u16</span>;
+        <span class="self">self</span>.zones = zones;
+        <span class="self">self</span>.zone_count = z <span class="kw">as </span>u16;
     }
 
-    <span class="kw">fn</span> <span class="ident">capture</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">bottom</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Hint</span>, <span class="ident">top</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Hint</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">fuzz</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">blue_fuzz</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">captured</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">adjustment</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="kw">for</span> <span class="ident">zone</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">zones</span>[..<span class="self">self</span>.<span class="ident">zone_count</span> <span class="kw">as</span> <span class="ident">usize</span>] {
-            <span class="kw">if</span> <span class="ident">zone</span>.<span class="ident">is_bottom</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">bottom</span>.<span class="ident">is_bottom</span>()
-                <span class="op">&amp;&amp;</span> (<span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">-</span> <span class="ident">fuzz</span>) <span class="op">&lt;</span><span class="op">=</span> <span class="ident">bottom</span>.<span class="ident">coord</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">bottom</span>.<span class="ident">coord</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="ident">zone</span>.<span class="ident">top</span> <span class="op">+</span> <span class="ident">fuzz</span>)
+    <span class="kw">fn </span>capture(<span class="kw-2">&amp;</span><span class="self">self</span>, bottom: <span class="kw-2">&amp;mut </span>Hint, top: <span class="kw-2">&amp;mut </span>Hint) -&gt; bool {
+        <span class="kw">let </span>fuzz = <span class="self">self</span>.blue_fuzz;
+        <span class="kw">let </span><span class="kw-2">mut </span>captured = <span class="bool-val">false</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>adjustment = Fixed(<span class="number">0</span>);
+        <span class="kw">for </span>zone <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.zones[..<span class="self">self</span>.zone_count <span class="kw">as </span>usize] {
+            <span class="kw">if </span>zone.is_bottom
+                &amp;&amp; bottom.is_bottom()
+                &amp;&amp; (zone.bottom - fuzz) &lt;= bottom.coord
+                &amp;&amp; bottom.coord &lt;= (zone.top + fuzz)
             {
-                <span class="ident">adjustment</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">supress_overshoot</span> {
-                    <span class="ident">zone</span>.<span class="ident">ds_flat</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">zone</span>.<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>.<span class="ident">coord</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">blue_shift</span> {
-                    <span class="ident">bottom</span>.<span class="ident">ds_coord</span>.<span class="ident">round</span>().<span class="ident">min</span>(<span class="ident">zone</span>.<span class="ident">ds_flat</span> <span class="op">-</span> <span class="ident">Fixed::ONE</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">bottom</span>.<span class="ident">ds_coord</span>.<span class="ident">round</span>()
-                } <span class="op">-</span> <span class="ident">bottom</span>.<span class="ident">ds_coord</span>;
-                <span class="ident">captured</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                adjustment = <span class="kw">if </span><span class="self">self</span>.supress_overshoot {
+                    zone.ds_flat
+                } <span class="kw">else if </span>zone.top - bottom.coord &gt;= <span class="self">self</span>.blue_shift {
+                    bottom.ds_coord.round().min(zone.ds_flat - Fixed::ONE)
+                } <span class="kw">else </span>{
+                    bottom.ds_coord.round()
+                } - bottom.ds_coord;
+                captured = <span class="bool-val">true</span>;
                 <span class="kw">break</span>;
             }
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">zone</span>.<span class="ident">is_bottom</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">top</span>.<span class="ident">is_top</span>()
-                <span class="op">&amp;&amp;</span> (<span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">-</span> <span class="ident">fuzz</span>) <span class="op">&lt;</span><span class="op">=</span> <span class="ident">top</span>.<span class="ident">coord</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">top</span>.<span class="ident">coord</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="ident">zone</span>.<span class="ident">top</span> <span class="op">+</span> <span class="ident">fuzz</span>)
+            <span class="kw">if </span>!zone.is_bottom
+                &amp;&amp; top.is_top()
+                &amp;&amp; (zone.bottom - fuzz) &lt;= top.coord
+                &amp;&amp; top.coord &lt;= (zone.top + fuzz)
             {
-                <span class="ident">adjustment</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">supress_overshoot</span> {
-                    <span class="ident">zone</span>.<span class="ident">ds_flat</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">top</span>.<span class="ident">coord</span> <span class="op">-</span> <span class="ident">zone</span>.<span class="ident">bottom</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">blue_shift</span> {
-                    <span class="ident">top</span>.<span class="ident">ds_coord</span>.<span class="ident">round</span>().<span class="ident">max</span>(<span class="ident">zone</span>.<span class="ident">ds_flat</span> <span class="op">+</span> <span class="ident">Fixed::ONE</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">top</span>.<span class="ident">ds_coord</span>.<span class="ident">round</span>()
-                } <span class="op">-</span> <span class="ident">top</span>.<span class="ident">ds_coord</span>;
-                <span class="ident">captured</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                adjustment = <span class="kw">if </span><span class="self">self</span>.supress_overshoot {
+                    zone.ds_flat
+                } <span class="kw">else if </span>top.coord - zone.bottom &gt;= <span class="self">self</span>.blue_shift {
+                    top.ds_coord.round().max(zone.ds_flat + Fixed::ONE)
+                } <span class="kw">else </span>{
+                    top.ds_coord.round()
+                } - top.ds_coord;
+                captured = <span class="bool-val">true</span>;
                 <span class="kw">break</span>;
             }
         }
-        <span class="kw">if</span> <span class="ident">captured</span> {
-            <span class="kw">if</span> <span class="ident">bottom</span>.<span class="ident">is_valid</span>() {
-                <span class="ident">bottom</span>.<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
-                <span class="ident">bottom</span>.<span class="ident">lock</span>();
+        <span class="kw">if </span>captured {
+            <span class="kw">if </span>bottom.is_valid() {
+                bottom.ds_coord += adjustment;
+                bottom.lock();
             }
-            <span class="kw">if</span> <span class="ident">top</span>.<span class="ident">is_valid</span>() {
-                <span class="ident">top</span>.<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
-                <span class="ident">top</span>.<span class="ident">lock</span>();
+            <span class="kw">if </span>top.is_valid() {
+                top.ds_coord += adjustment;
+                top.lock();
             }
         }
-        <span class="ident">captured</span>
+        captured
     }
 
-    <span class="comment">// pub(super) fn dump_blues(&amp;self) {</span>
-    <span class="comment">//     for (i, zone) in (&amp;self.zones[..self.zone_count as usize]).iter().enumerate() {</span>
-    <span class="comment">//         println!(</span>
-    <span class="comment">//             &quot;[{}] {} t: {} b: {} f: {} ds: {}&quot;,</span>
-    <span class="comment">//             i,</span>
-    <span class="comment">//             if zone.is_bottom { &quot;B&quot; } else { &quot;T&quot; },</span>
-    <span class="comment">//             zone.top.0,</span>
-    <span class="comment">//             zone.bottom.0,</span>
-    <span class="comment">//             zone.flat.0,</span>
-    <span class="comment">//             zone.ds_flat.0,</span>
-    <span class="comment">//         );</span>
-    <span class="comment">//     }</span>
-    <span class="comment">// }</span>
+    <span class="comment">// pub(super) fn dump_blues(&amp;self) {
+    //     for (i, zone) in (&amp;self.zones[..self.zone_count as usize]).iter().enumerate() {
+    //         println!(
+    //             &quot;[{}] {} t: {} b: {} f: {} ds: {}&quot;,
+    //             i,
+    //             if zone.is_bottom { &quot;B&quot; } else { &quot;T&quot; },
+    //             zone.top.0,
+    //             zone.bottom.0,
+    //             zone.flat.0,
+    //             zone.ds_flat.0,
+    //         );
+    //     }
+    // }
+</span>}
+
+<span class="kw">pub struct </span>Hinter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, Sink&gt; {
+    state: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>HinterState,
+    sink: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="kw-2">mut </span>Sink,
+    stem_hints: [StemHint; MAX_STEM_HINTS],
+    stem_count: u8,
+    mask: HintMask,
+    initial_map: HintMap,
+    map: HintMap,
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Hinter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">Sink</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HinterState</span>,
-    <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="ident">Sink</span>,
-    <span class="ident">stem_hints</span>: [<span class="ident">StemHint</span>; <span class="ident">MAX_STEM_HINTS</span>],
-    <span class="ident">stem_count</span>: <span class="ident">u8</span>,
-    <span class="ident">mask</span>: <span class="ident">HintMask</span>,
-    <span class="ident">initial_map</span>: <span class="ident">HintMap</span>,
-    <span class="ident">map</span>: <span class="ident">HintMap</span>,
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">Sink</span>: <span class="ident">GlyphSink</span><span class="op">&gt;</span> <span class="ident">Hinter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">Sink</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HinterState</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="ident">Sink</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">state</span>,
-            <span class="ident">sink</span>,
-            <span class="ident">stem_hints</span>: [<span class="ident">StemHint::default</span>(); <span class="ident">MAX_STEM_HINTS</span>],
-            <span class="ident">stem_count</span>: <span class="number">0</span>,
-            <span class="ident">mask</span>: <span class="ident">HintMask::all</span>(),
-            <span class="ident">initial_map</span>: <span class="ident">HintMap::new</span>(),
-            <span class="ident">map</span>: <span class="ident">HintMap::new</span>(),
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, Sink: GlyphSink&gt; Hinter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, Sink&gt; {
+    <span class="kw">pub fn </span>new(state: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>HinterState, sink: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="kw-2">mut </span>Sink) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            state,
+            sink,
+            stem_hints: [StemHint::default(); MAX_STEM_HINTS],
+            stem_count: <span class="number">0</span>,
+            mask: HintMask::all(),
+            initial_map: HintMap::new(),
+            map: HintMap::new(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">hint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">coord</span>: <span class="ident">f32</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">map</span>.<span class="ident">valid</span> {
-            <span class="self">self</span>.<span class="ident">build_hint_map</span>(<span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">mask</span>), <span class="ident">Fixed</span>(<span class="number">0</span>));
+    <span class="kw">fn </span>hint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, coord: f32) -&gt; f32 {
+        <span class="kw">if </span>!<span class="self">self</span>.map.valid {
+            <span class="self">self</span>.build_hint_map(<span class="prelude-val">Some</span>(<span class="self">self</span>.mask), Fixed(<span class="number">0</span>));
         }
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> (<span class="ident">coord</span> <span class="op">*</span> <span class="number">65536.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">mapped</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">map</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">scale</span>, <span class="ident">Fixed</span>(<span class="ident">f</span>));
-        ((<span class="ident">mapped</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">10</span>) <span class="kw">as</span> <span class="ident">f32</span>) <span class="op">/</span> <span class="number">64.</span>
-    }
+        <span class="kw">let </span>f = (coord * <span class="number">65536.</span>) <span class="kw">as </span>i32;
+        <span class="kw">let </span>mapped = <span class="self">self</span>.map.map(<span class="self">self</span>.state.scale, Fixed(f));
+        ((mapped.<span class="number">0 </span>&gt;&gt; <span class="number">10</span>) <span class="kw">as </span>f32) / <span class="number">64.
+    </span>}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">scale</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">coord</span>: <span class="ident">f32</span>) -&gt; <span class="ident">f32</span> {
-        ((<span class="ident">Fixed::from_f32</span>(<span class="ident">coord</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">scale</span>).<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">10</span>) <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="number">64.</span>
-    }
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>scale(<span class="kw-2">&amp;</span><span class="self">self</span>, coord: f32) -&gt; f32 {
+        ((Fixed::from_f32(coord) * <span class="self">self</span>.state.scale).<span class="number">0 </span>&gt;&gt; <span class="number">10</span>) <span class="kw">as </span>f32 / <span class="number">64.
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">add_stem</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">Fixed</span>, <span class="ident">max</span>: <span class="ident">Fixed</span>) {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stem_count</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">MAX_STEM_HINTS</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">valid</span> {
+    <span class="kw">fn </span>add_stem(<span class="kw-2">&amp;mut </span><span class="self">self</span>, min: Fixed, max: Fixed) {
+        <span class="kw">let </span>index = <span class="self">self</span>.stem_count <span class="kw">as </span>usize;
+        <span class="kw">if </span>index &gt;= MAX_STEM_HINTS || <span class="self">self</span>.map.valid {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="ident">stem</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">stem_hints</span>[<span class="ident">index</span>];
-        <span class="ident">stem</span>.<span class="ident">min</span> <span class="op">=</span> <span class="ident">min</span>;
-        <span class="ident">stem</span>.<span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>;
-        <span class="ident">stem</span>.<span class="ident">used</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="ident">stem</span>.<span class="ident">ds_min</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="ident">stem</span>.<span class="ident">ds_max</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="self">self</span>.<span class="ident">stem_count</span> <span class="op">=</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>;
+        <span class="kw">let </span>stem = <span class="kw-2">&amp;mut </span><span class="self">self</span>.stem_hints[index];
+        stem.min = min;
+        stem.max = max;
+        stem.used = <span class="bool-val">false</span>;
+        stem.ds_min = Fixed(<span class="number">0</span>);
+        stem.ds_max = Fixed(<span class="number">0</span>);
+        <span class="self">self</span>.stem_count = index <span class="kw">as </span>u8 + <span class="number">1</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">build_hint_map</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HintMask</span><span class="op">&gt;</span>, <span class="ident">origin</span>: <span class="ident">Fixed</span>) {
-        <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">build</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>,
-            <span class="ident">mask</span>,
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">initial_map</span>),
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">stem_hints</span>[..<span class="self">self</span>.<span class="ident">stem_count</span> <span class="kw">as</span> <span class="ident">usize</span>],
-            <span class="ident">origin</span>,
+    <span class="kw">fn </span>build_hint_map(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: <span class="prelude-ty">Option</span>&lt;HintMask&gt;, origin: Fixed) {
+        <span class="self">self</span>.map.build(
+            <span class="kw-2">&amp;</span><span class="self">self</span>.state,
+            mask,
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>.initial_map),
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.stem_hints[..<span class="self">self</span>.stem_count <span class="kw">as </span>usize],
+            origin,
             <span class="bool-val">false</span>,
         );
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">Sink</span>: <span class="ident">GlyphSink</span><span class="op">&gt;</span> <span class="ident">GlyphSink</span> <span class="kw">for</span> <span class="ident">Hinter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">Sink</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">hstem</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">y</span>: <span class="ident">f32</span>, <span class="ident">dy</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> (<span class="ident">y</span> <span class="op">*</span> <span class="number">65536.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> (<span class="ident">dy</span> <span class="op">*</span> <span class="number">65536.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="self">self</span>.<span class="ident">add_stem</span>(<span class="ident">Fixed</span>(<span class="ident">y</span>), <span class="ident">Fixed</span>(<span class="ident">dy</span>));
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, Sink: GlyphSink&gt; GlyphSink <span class="kw">for </span>Hinter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, Sink&gt; {
+    <span class="kw">fn </span>hstem(<span class="kw-2">&amp;mut </span><span class="self">self</span>, y: f32, dy: f32) {
+        <span class="kw">let </span>y = (y * <span class="number">65536.</span>) <span class="kw">as </span>i32;
+        <span class="kw">let </span>dy = (dy * <span class="number">65536.</span>) <span class="kw">as </span>i32;
+        <span class="self">self</span>.add_stem(Fixed(y), Fixed(dy));
     }
 
-    <span class="kw">fn</span> <span class="ident">hint_mask</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mask</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hint_mask</span> <span class="op">=</span> <span class="ident">HintMask::new</span>();
-        <span class="ident">hint_mask</span>.<span class="ident">set_mask</span>(<span class="ident">mask</span>);
-        <span class="kw">if</span> <span class="ident">TRACE</span> {
-            <span class="comment">//println!(&quot;Got hintmask: {:?}&quot;, mask);</span>
-        }
-        <span class="kw">if</span> <span class="ident">hint_mask</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">mask</span> {
-            <span class="self">self</span>.<span class="ident">mask</span> <span class="op">=</span> <span class="ident">hint_mask</span>;
-            <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>hint_mask(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: <span class="kw-2">&amp;</span>[u8]) {
+        <span class="kw">let </span><span class="kw-2">mut </span>hint_mask = HintMask::new();
+        hint_mask.set_mask(mask);
+        <span class="kw">if </span>TRACE {
+            <span class="comment">//println!(&quot;Got hintmask: {:?}&quot;, mask);
+        </span>}
+        <span class="kw">if </span>hint_mask != <span class="self">self</span>.mask {
+            <span class="self">self</span>.mask = hint_mask;
+            <span class="self">self</span>.map.valid = <span class="bool-val">false</span>;
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">counter_mask</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mask</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hint_mask</span> <span class="op">=</span> <span class="ident">HintMask::new</span>();
-        <span class="ident">hint_mask</span>.<span class="ident">set_mask</span>(<span class="ident">mask</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HintMap::new</span>();
-        <span class="ident">map</span>.<span class="ident">build</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">hint_mask</span>),
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">initial_map</span>),
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">stem_hints</span>[..<span class="self">self</span>.<span class="ident">stem_count</span> <span class="kw">as</span> <span class="ident">usize</span>],
-            <span class="ident">Fixed</span>(<span class="number">0</span>),
+    <span class="kw">fn </span>counter_mask(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: <span class="kw-2">&amp;</span>[u8]) {
+        <span class="kw">let </span><span class="kw-2">mut </span>hint_mask = HintMask::new();
+        hint_mask.set_mask(mask);
+        <span class="kw">let </span><span class="kw-2">mut </span>map = HintMap::new();
+        map.build(
+            <span class="kw-2">&amp;</span><span class="self">self</span>.state,
+            <span class="prelude-val">Some</span>(hint_mask),
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>.initial_map),
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.stem_hints[..<span class="self">self</span>.stem_count <span class="kw">as </span>usize],
+            Fixed(<span class="number">0</span>),
             <span class="bool-val">false</span>,
         );
     }
 
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>(<span class="ident">x</span>);
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">y</span>);
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">move_to</span>(<span class="ident">x</span>, <span class="ident">y</span>);
+    <span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: f32, y: f32) {
+        <span class="kw">let </span>x = <span class="self">self</span>.scale(x);
+        <span class="kw">let </span>y = <span class="self">self</span>.hint(y);
+        <span class="self">self</span>.sink.move_to(x, y);
     }
 
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>(<span class="ident">x</span>);
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">y</span>);
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">line_to</span>(<span class="ident">x</span>, <span class="ident">y</span>);
+    <span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: f32, y: f32) {
+        <span class="kw">let </span>x = <span class="self">self</span>.scale(x);
+        <span class="kw">let </span>y = <span class="self">self</span>.hint(y);
+        <span class="self">self</span>.sink.line_to(x, y);
     }
 
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cx1</span>: <span class="ident">f32</span>, <span class="ident">cy1</span>: <span class="ident">f32</span>, <span class="ident">cx2</span>: <span class="ident">f32</span>, <span class="ident">cy2</span>: <span class="ident">f32</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>) {
-        <span class="kw">let</span> <span class="ident">cx1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>(<span class="ident">cx1</span>);
-        <span class="kw">let</span> <span class="ident">cy1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">cy1</span>);
-        <span class="kw">let</span> <span class="ident">cx2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>(<span class="ident">cx2</span>);
-        <span class="kw">let</span> <span class="ident">cy2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">cy2</span>);
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scale</span>(<span class="ident">x</span>);
-        <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hint</span>(<span class="ident">y</span>);
-        <span class="self">self</span>.<span class="ident">sink</span>.<span class="ident">curve_to</span>(<span class="ident">cx1</span>, <span class="ident">cy1</span>, <span class="ident">cx2</span>, <span class="ident">cy2</span>, <span class="ident">x</span>, <span class="ident">y</span>);
+    <span class="kw">fn </span>curve_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cx1: f32, cy1: f32, cx2: f32, cy2: f32, x: f32, y: f32) {
+        <span class="kw">let </span>cx1 = <span class="self">self</span>.scale(cx1);
+        <span class="kw">let </span>cy1 = <span class="self">self</span>.hint(cy1);
+        <span class="kw">let </span>cx2 = <span class="self">self</span>.scale(cx2);
+        <span class="kw">let </span>cy2 = <span class="self">self</span>.hint(cy2);
+        <span class="kw">let </span>x = <span class="self">self</span>.scale(x);
+        <span class="kw">let </span>y = <span class="self">self</span>.hint(y);
+        <span class="self">self</span>.sink.curve_to(cx1, cy1, cx2, cy2, x, y);
     }
 
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {}
+    <span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {}
 }
 
-<span class="kw">const</span> <span class="ident">ICF_TOP</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="number">880</span>);
-<span class="kw">const</span> <span class="ident">ICF_BOTTOM</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="op">-</span><span class="number">120</span>);
+<span class="kw">const </span>ICF_TOP: Fixed = Fixed::from_i32(<span class="number">880</span>);
+<span class="kw">const </span>ICF_BOTTOM: Fixed = Fixed::from_i32(-<span class="number">120</span>);
 
-<span class="kw">const</span> <span class="ident">MAX_BLUE_VALUES</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">7</span>;
-<span class="kw">const</span> <span class="ident">MAX_BLUE_ZONES</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">12</span>;
-<span class="kw">const</span> <span class="ident">MAX_STEM_HINTS</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">48</span>;
-<span class="kw">const</span> <span class="ident">MAX_HINTS</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">MAX_STEM_HINTS</span> <span class="op">*</span> <span class="number">2</span>;
+<span class="kw">const </span>MAX_BLUE_VALUES: usize = <span class="number">7</span>;
+<span class="kw">const </span>MAX_BLUE_ZONES: usize = <span class="number">12</span>;
+<span class="kw">const </span>MAX_STEM_HINTS: usize = <span class="number">48</span>;
+<span class="kw">const </span>MAX_HINTS: usize = MAX_STEM_HINTS * <span class="number">2</span>;
 
-<span class="kw">const</span> <span class="ident">HINT_MASK_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> (<span class="ident">MAX_STEM_HINTS</span> <span class="op">+</span> <span class="number">7</span>) <span class="op">/</span> <span class="number">4</span>;
+<span class="kw">const </span>HINT_MASK_SIZE: usize = (MAX_STEM_HINTS + <span class="number">7</span>) / <span class="number">4</span>;
 
-<span class="kw">const</span> <span class="ident">DEFAULT_BLUE_SCALE</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed</span>((<span class="number">0.039625</span> <span class="op">*</span> <span class="number">65536.</span> <span class="op">+</span> <span class="number">0.5</span>) <span class="kw">as</span> <span class="ident">i32</span>);
-<span class="kw">const</span> <span class="ident">DEFAULT_BLUE_SHIFT</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="number">7</span>);
-<span class="kw">const</span> <span class="ident">DEFAULT_BLUE_FUZZ</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::ONE</span>;
+<span class="kw">const </span>DEFAULT_BLUE_SCALE: Fixed = Fixed((<span class="number">0.039625 </span>* <span class="number">65536. </span>+ <span class="number">0.5</span>) <span class="kw">as </span>i32);
+<span class="kw">const </span>DEFAULT_BLUE_SHIFT: Fixed = Fixed::from_i32(<span class="number">7</span>);
+<span class="kw">const </span>DEFAULT_BLUE_FUZZ: Fixed = Fixed::ONE;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">StemHint</span> {
-    <span class="ident">used</span>: <span class="ident">bool</span>,
-    <span class="ident">min</span>: <span class="ident">Fixed</span>,
-    <span class="ident">max</span>: <span class="ident">Fixed</span>,
-    <span class="ident">ds_min</span>: <span class="ident">Fixed</span>,
-    <span class="ident">ds_max</span>: <span class="ident">Fixed</span>,
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">struct </span>StemHint {
+    used: bool,
+    min: Fixed,
+    max: Fixed,
+    ds_min: Fixed,
+    ds_max: Fixed,
 }
 
-<span class="comment">// Hint flags</span>
-<span class="kw">const</span> <span class="ident">GHOST_BOTTOM</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x1</span>;
-<span class="kw">const</span> <span class="ident">GHOST_TOP</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x2</span>;
-<span class="kw">const</span> <span class="ident">PAIR_BOTTOM</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x4</span>;
-<span class="kw">const</span> <span class="ident">PAIR_TOP</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x8</span>;
-<span class="kw">const</span> <span class="ident">LOCKED</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x10</span>;
-<span class="kw">const</span> <span class="ident">SYNTHETIC</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x20</span>;
+<span class="comment">// Hint flags
+</span><span class="kw">const </span>GHOST_BOTTOM: u8 = <span class="number">0x1</span>;
+<span class="kw">const </span>GHOST_TOP: u8 = <span class="number">0x2</span>;
+<span class="kw">const </span>PAIR_BOTTOM: u8 = <span class="number">0x4</span>;
+<span class="kw">const </span>PAIR_TOP: u8 = <span class="number">0x8</span>;
+<span class="kw">const </span>LOCKED: u8 = <span class="number">0x10</span>;
+<span class="kw">const </span>SYNTHETIC: u8 = <span class="number">0x20</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Hint</span> {
-    <span class="ident">flags</span>: <span class="ident">u8</span>,
-    <span class="ident">index</span>: <span class="ident">u8</span>,
-    <span class="ident">coord</span>: <span class="ident">Fixed</span>,
-    <span class="ident">ds_coord</span>: <span class="ident">Fixed</span>,
-    <span class="ident">scale</span>: <span class="ident">Fixed</span>,
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">struct </span>Hint {
+    flags: u8,
+    index: u8,
+    coord: Fixed,
+    ds_coord: Fixed,
+    scale: Fixed,
 }
 
-<span class="kw">impl</span> <span class="ident">Hint</span> {
-    <span class="kw">fn</span> <span class="ident">is_valid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+<span class="kw">impl </span>Hint {
+    <span class="kw">fn </span>is_valid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_bottom(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; (GHOST_BOTTOM | PAIR_BOTTOM) != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_top(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; (GHOST_TOP | PAIR_TOP) != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_pair(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; (PAIR_BOTTOM | PAIR_TOP) != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_pair_top(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; PAIR_TOP != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_locked(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; LOCKED != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_synthetic(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; SYNTHETIC != <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>lock(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.flags |= LOCKED
     }
 
-    <span class="kw">fn</span> <span class="ident">is_bottom</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="ident">GHOST_BOTTOM</span> <span class="op">|</span> <span class="ident">PAIR_BOTTOM</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_top</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="ident">GHOST_TOP</span> <span class="op">|</span> <span class="ident">PAIR_TOP</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_pair</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="ident">PAIR_BOTTOM</span> <span class="op">|</span> <span class="ident">PAIR_TOP</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_pair_top</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">PAIR_TOP</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_locked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">LOCKED</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_synthetic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">SYNTHETIC</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">lock</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">LOCKED</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">setup</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">stem</span>: <span class="kw-2">&amp;</span><span class="ident">StemHint</span>,
-        <span class="ident">index</span>: <span class="ident">u8</span>,
-        <span class="ident">origin</span>: <span class="ident">Fixed</span>,
-        <span class="ident">scale</span>: <span class="ident">Fixed</span>,
-        <span class="ident">darken_y</span>: <span class="ident">Fixed</span>,
-        <span class="ident">is_bottom</span>: <span class="ident">bool</span>,
+    <span class="kw">fn </span>setup(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        stem: <span class="kw-2">&amp;</span>StemHint,
+        index: u8,
+        origin: Fixed,
+        scale: Fixed,
+        darken_y: Fixed,
+        is_bottom: bool,
     ) {
-        <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">max</span> <span class="op">-</span> <span class="ident">stem</span>.<span class="ident">min</span>;
-        <span class="kw">if</span> <span class="ident">width</span> <span class="op">==</span> <span class="ident">Fixed::from_i32</span>(<span class="op">-</span><span class="number">21</span>) {
-            <span class="kw">if</span> <span class="ident">is_bottom</span> {
-                <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">max</span>;
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">GHOST_BOTTOM</span>;
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>width = stem.max - stem.min;
+        <span class="kw">if </span>width == Fixed::from_i32(-<span class="number">21</span>) {
+            <span class="kw">if </span>is_bottom {
+                <span class="self">self</span>.coord = stem.max;
+                <span class="self">self</span>.flags = GHOST_BOTTOM;
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.flags = <span class="number">0</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">width</span> <span class="op">==</span> <span class="ident">Fixed::from_i32</span>(<span class="op">-</span><span class="number">20</span>) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">is_bottom</span> {
-                <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">min</span>;
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">GHOST_TOP</span>;
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="number">0</span>;
+        } <span class="kw">else if </span>width == Fixed::from_i32(-<span class="number">20</span>) {
+            <span class="kw">if </span>!is_bottom {
+                <span class="self">self</span>.coord = stem.min;
+                <span class="self">self</span>.flags = GHOST_TOP;
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.flags = <span class="number">0</span>;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">width</span> <span class="op">&lt;</span> <span class="ident">Fixed</span>(<span class="number">0</span>) {
-            <span class="kw">if</span> <span class="ident">is_bottom</span> {
-                <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">max</span>;
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">PAIR_BOTTOM</span>;
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">min</span>;
-                <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">PAIR_TOP</span>;
+        } <span class="kw">else if </span>width &lt; Fixed(<span class="number">0</span>) {
+            <span class="kw">if </span>is_bottom {
+                <span class="self">self</span>.coord = stem.max;
+                <span class="self">self</span>.flags = PAIR_BOTTOM;
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.coord = stem.min;
+                <span class="self">self</span>.flags = PAIR_TOP;
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_bottom</span> {
-            <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">min</span>;
-            <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">PAIR_BOTTOM</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">max</span>;
-            <span class="self">self</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">PAIR_TOP</span>;
+        } <span class="kw">else if </span>is_bottom {
+            <span class="self">self</span>.coord = stem.min;
+            <span class="self">self</span>.flags = PAIR_BOTTOM;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.coord = stem.max;
+            <span class="self">self</span>.flags = PAIR_TOP;
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_top</span>() {
-            <span class="self">self</span>.<span class="ident">coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">Fixed::from_i32</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">darken_y</span>;
+        <span class="kw">if </span><span class="self">self</span>.is_top() {
+            <span class="self">self</span>.coord += Fixed::from_i32(<span class="number">2</span>) * darken_y;
         }
-        <span class="self">self</span>.<span class="ident">coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">origin</span>;
-        <span class="self">self</span>.<span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span>;
-        <span class="self">self</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">index</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">flags</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">stem</span>.<span class="ident">used</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_top</span>() {
-                <span class="self">self</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">ds_max</span>;
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="ident">stem</span>.<span class="ident">ds_min</span>;
+        <span class="self">self</span>.coord += origin;
+        <span class="self">self</span>.scale = scale;
+        <span class="self">self</span>.index = index;
+        <span class="kw">if </span><span class="self">self</span>.flags != <span class="number">0 </span>&amp;&amp; stem.used {
+            <span class="kw">if </span><span class="self">self</span>.is_top() {
+                <span class="self">self</span>.ds_coord = stem.ds_max;
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.ds_coord = stem.ds_min;
             }
-            <span class="self">self</span>.<span class="ident">lock</span>();
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coord</span> <span class="op">*</span> <span class="ident">scale</span>;
+            <span class="self">self</span>.lock();
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.ds_coord = <span class="self">self</span>.coord * scale;
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">HintMap</span> {
-    <span class="ident">hints</span>: [<span class="ident">Hint</span>; <span class="ident">MAX_HINTS</span>],
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">valid</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>HintMap {
+    hints: [Hint; MAX_HINTS],
+    len: usize,
+    valid: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">HintMap</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">hints</span>: [<span class="ident">Hint::default</span>(); <span class="ident">MAX_HINTS</span>],
-            <span class="ident">len</span>: <span class="number">0</span>,
-            <span class="ident">valid</span>: <span class="bool-val">false</span>,
+<span class="kw">impl </span>HintMap {
+    <span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            hints: [Hint::default(); MAX_HINTS],
+            len: <span class="number">0</span>,
+            valid: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.len = <span class="number">0</span>;
+        <span class="self">self</span>.valid = <span class="bool-val">false</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">Fixed</span>, <span class="ident">coord</span>: <span class="ident">Fixed</span>) -&gt; <span class="ident">Fixed</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="ident">coord</span> <span class="op">*</span> <span class="ident">scale</span>;
+    <span class="kw">fn </span>map(<span class="kw-2">&amp;</span><span class="self">self</span>, scale: Fixed, coord: Fixed) -&gt; Fixed {
+        <span class="kw">if </span><span class="self">self</span>.len == <span class="number">0 </span>{
+            <span class="kw">return </span>coord * scale;
         }
-        <span class="kw">let</span> <span class="ident">limit</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">limit</span> <span class="op">&amp;&amp;</span> <span class="ident">coord</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">coord</span> {
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">let </span>limit = <span class="self">self</span>.len - <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+        <span class="kw">while </span>i &lt; limit &amp;&amp; coord &gt;= <span class="self">self</span>.hints[i + <span class="number">1</span>].coord {
+            i += <span class="number">1</span>;
         }
-        <span class="kw">while</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">coord</span> {
-            <span class="ident">i</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">while </span>i &gt; <span class="number">0 </span>&amp;&amp; coord &lt; <span class="self">self</span>.hints[i].coord {
+            i -= <span class="number">1</span>;
         }
-        <span class="kw">let</span> <span class="ident">hint</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>];
-        <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="number">0</span>].<span class="ident">coord</span> {
-            ((<span class="ident">coord</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="number">0</span>].<span class="ident">coord</span>) <span class="op">*</span> <span class="ident">scale</span>) <span class="op">+</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="number">0</span>].<span class="ident">ds_coord</span>
-        } <span class="kw">else</span> {
-            ((<span class="ident">coord</span> <span class="op">-</span> <span class="ident">hint</span>.<span class="ident">coord</span>) <span class="op">*</span> <span class="ident">hint</span>.<span class="ident">scale</span>) <span class="op">+</span> <span class="ident">hint</span>.<span class="ident">ds_coord</span>
+        <span class="kw">let </span>hint = <span class="kw-2">&amp;</span><span class="self">self</span>.hints[i];
+        <span class="kw">if </span>i == <span class="number">0 </span>&amp;&amp; coord &lt; <span class="self">self</span>.hints[<span class="number">0</span>].coord {
+            ((coord - <span class="self">self</span>.hints[<span class="number">0</span>].coord) * scale) + <span class="self">self</span>.hints[<span class="number">0</span>].ds_coord
+        } <span class="kw">else </span>{
+            ((coord - hint.coord) * hint.scale) + hint.ds_coord
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">bottom</span>: <span class="kw-2">&amp;</span><span class="ident">Hint</span>, <span class="ident">top</span>: <span class="kw-2">&amp;</span><span class="ident">Hint</span>, <span class="ident">scale</span>: <span class="ident">Fixed</span>, <span class="ident">initial</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">HintMap</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> (<span class="ident">is_pair</span>, <span class="kw-2">mut</span> <span class="ident">first</span>) <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">bottom</span>.<span class="ident">is_valid</span>() {
-            (<span class="bool-val">false</span>, <span class="kw-2">*</span><span class="ident">top</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">top</span>.<span class="ident">is_valid</span>() {
-            (<span class="bool-val">false</span>, <span class="kw-2">*</span><span class="ident">bottom</span>)
-        } <span class="kw">else</span> {
-            (<span class="bool-val">true</span>, <span class="kw-2">*</span><span class="ident">bottom</span>)
+    <span class="kw">fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bottom: <span class="kw-2">&amp;</span>Hint, top: <span class="kw-2">&amp;</span>Hint, scale: Fixed, initial: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>HintMap&gt;) {
+        <span class="kw">let </span>(is_pair, <span class="kw-2">mut </span>first) = <span class="kw">if </span>!bottom.is_valid() {
+            (<span class="bool-val">false</span>, <span class="kw-2">*</span>top)
+        } <span class="kw">else if </span>!top.is_valid() {
+            (<span class="bool-val">false</span>, <span class="kw-2">*</span>bottom)
+        } <span class="kw">else </span>{
+            (<span class="bool-val">true</span>, <span class="kw-2">*</span>bottom)
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">top</span>;
-        <span class="kw">if</span> <span class="ident">is_pair</span> <span class="op">&amp;&amp;</span> <span class="ident">top</span>.<span class="ident">coord</span> <span class="op">&lt;</span> <span class="ident">bottom</span>.<span class="ident">coord</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>second = <span class="kw-2">*</span>top;
+        <span class="kw">if </span>is_pair &amp;&amp; top.coord &lt; bottom.coord {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_pair</span> { <span class="number">2</span> } <span class="kw">else</span> { <span class="number">1</span> };
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">+</span> <span class="ident">count</span> <span class="op">&gt;</span> <span class="ident">MAX_HINTS</span> {
+        <span class="kw">let </span>count = <span class="kw">if </span>is_pair { <span class="number">2 </span>} <span class="kw">else </span>{ <span class="number">1 </span>};
+        <span class="kw">if </span><span class="self">self</span>.len + count &gt; MAX_HINTS {
             <span class="kw">return</span>;
         }
-        <span class="kw">if</span> <span class="ident">TRACE</span> {
-            <span class="comment">// println!(</span>
-            <span class="comment">//     &quot;  Got hint at {} ({})&quot;,</span>
-            <span class="comment">//     first.coord.to_f32(),</span>
-            <span class="comment">//     first.ds_coord.to_f32()</span>
-            <span class="comment">// );</span>
-            <span class="comment">// if is_pair {</span>
-            <span class="comment">//     println!(</span>
-            <span class="comment">//         &quot;  Got hint at {} ({})&quot;,</span>
-            <span class="comment">//         second.coord.to_f32(),</span>
-            <span class="comment">//         second.ds_coord.to_f32()</span>
-            <span class="comment">//     );</span>
-            <span class="comment">// }</span>
-        }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">insertion_index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">insertion_index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span>].<span class="ident">coord</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">first</span>.<span class="ident">coord</span> {
+        <span class="kw">if </span>TRACE {
+            <span class="comment">// println!(
+            //     &quot;  Got hint at {} ({})&quot;,
+            //     first.coord.to_f32(),
+            //     first.ds_coord.to_f32()
+            // );
+            // if is_pair {
+            //     println!(
+            //         &quot;  Got hint at {} ({})&quot;,
+            //         second.coord.to_f32(),
+            //         second.ds_coord.to_f32()
+            //     );
+            // }
+        </span>}
+        <span class="kw">let </span><span class="kw-2">mut </span>insertion_index = <span class="number">0</span>;
+        <span class="kw">while </span>insertion_index &lt; <span class="self">self</span>.len {
+            <span class="kw">if </span><span class="self">self</span>.hints[insertion_index].coord &gt;= first.coord {
                 <span class="kw">break</span>;
             }
-            <span class="ident">insertion_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            insertion_index += <span class="number">1</span>;
         }
-        <span class="kw">if</span> <span class="ident">insertion_index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">current</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span>];
-            <span class="kw">if</span> (<span class="ident">current</span>.<span class="ident">coord</span> <span class="op">==</span> <span class="ident">first</span>.<span class="ident">coord</span>)
-                <span class="op">|</span><span class="op">|</span> (<span class="ident">is_pair</span> <span class="op">&amp;&amp;</span> <span class="ident">current</span>.<span class="ident">coord</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">second</span>.<span class="ident">coord</span>)
-                <span class="op">|</span><span class="op">|</span> <span class="ident">current</span>.<span class="ident">is_pair_top</span>()
+        <span class="kw">if </span>insertion_index &lt; <span class="self">self</span>.len {
+            <span class="kw">let </span>current = <span class="kw-2">&amp;</span><span class="self">self</span>.hints[insertion_index];
+            <span class="kw">if </span>(current.coord == first.coord)
+                || (is_pair &amp;&amp; current.coord &lt;= second.coord)
+                || current.is_pair_top()
             {
                 <span class="kw">return</span>;
             }
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">first</span>.<span class="ident">is_locked</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">initial</span>) <span class="op">=</span> <span class="ident">initial</span> {
-                <span class="kw">if</span> <span class="ident">is_pair</span> {
-                    <span class="kw">let</span> <span class="ident">mid</span> <span class="op">=</span> <span class="ident">initial</span>.<span class="ident">map</span>(<span class="ident">scale</span>, (<span class="ident">second</span>.<span class="ident">coord</span> <span class="op">+</span> <span class="ident">first</span>.<span class="ident">coord</span>) <span class="op">/</span> <span class="number">2</span>);
-                    <span class="kw">let</span> <span class="ident">half</span> <span class="op">=</span> (<span class="ident">second</span>.<span class="ident">coord</span> <span class="op">-</span> <span class="ident">first</span>.<span class="ident">coord</span>) <span class="op">/</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">scale</span>;
-                    <span class="ident">first</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="ident">mid</span> <span class="op">-</span> <span class="ident">half</span>;
-                    <span class="ident">second</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="ident">mid</span> <span class="op">+</span> <span class="ident">half</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">first</span>.<span class="ident">ds_coord</span> <span class="op">=</span> <span class="ident">initial</span>.<span class="ident">map</span>(<span class="ident">scale</span>, <span class="ident">first</span>.<span class="ident">coord</span>);
+        <span class="kw">if </span>!first.is_locked() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref </span>initial) = initial {
+                <span class="kw">if </span>is_pair {
+                    <span class="kw">let </span>mid = initial.map(scale, (second.coord + first.coord) / <span class="number">2</span>);
+                    <span class="kw">let </span>half = (second.coord - first.coord) / <span class="number">2 </span>* scale;
+                    first.ds_coord = mid - half;
+                    second.ds_coord = mid + half;
+                } <span class="kw">else </span>{
+                    first.ds_coord = initial.map(scale, first.coord);
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">insertion_index</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">first</span>.<span class="ident">ds_coord</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">ds_coord</span> {
+        <span class="kw">if </span>insertion_index &gt; <span class="number">0 </span>&amp;&amp; first.ds_coord &lt; <span class="self">self</span>.hints[insertion_index - <span class="number">1</span>].ds_coord {
             <span class="kw">return</span>;
         }
-        <span class="kw">if</span> <span class="ident">insertion_index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span>
-            <span class="op">&amp;&amp;</span> ((<span class="ident">is_pair</span> <span class="op">&amp;&amp;</span> <span class="ident">second</span>.<span class="ident">ds_coord</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span>].<span class="ident">ds_coord</span>)
-                <span class="op">|</span><span class="op">|</span> <span class="ident">first</span>.<span class="ident">ds_coord</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span>].<span class="ident">ds_coord</span>)
+        <span class="kw">if </span>insertion_index &lt; <span class="self">self</span>.len
+            &amp;&amp; ((is_pair &amp;&amp; second.ds_coord &gt; <span class="self">self</span>.hints[insertion_index].ds_coord)
+                || first.ds_coord &gt; <span class="self">self</span>.hints[insertion_index].ds_coord)
         {
             <span class="kw">return</span>;
         }
-        <span class="kw">if</span> <span class="ident">insertion_index</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">src_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dst_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">+</span> <span class="ident">count</span> <span class="op">-</span> <span class="number">1</span>;
-            <span class="kw">loop</span> {
-                <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">dst_index</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">src_index</span>];
-                <span class="kw">if</span> <span class="ident">src_index</span> <span class="op">==</span> <span class="ident">insertion_index</span> {
+        <span class="kw">if </span>insertion_index != <span class="self">self</span>.len {
+            <span class="kw">let </span><span class="kw-2">mut </span>src_index = <span class="self">self</span>.len - <span class="number">1</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>dst_index = <span class="self">self</span>.len + count - <span class="number">1</span>;
+            <span class="kw">loop </span>{
+                <span class="self">self</span>.hints[dst_index] = <span class="self">self</span>.hints[src_index];
+                <span class="kw">if </span>src_index == insertion_index {
                     <span class="kw">break</span>;
                 }
-                <span class="ident">src_index</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">dst_index</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                src_index -= <span class="number">1</span>;
+                dst_index -= <span class="number">1</span>;
             }
         }
-        <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span>] <span class="op">=</span> <span class="ident">first</span>;
-        <span class="kw">if</span> <span class="ident">is_pair</span> {
-            <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">insertion_index</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">second</span>;
+        <span class="self">self</span>.hints[insertion_index] = first;
+        <span class="kw">if </span>is_pair {
+            <span class="self">self</span>.hints[insertion_index + <span class="number">1</span>] = second;
         }
-        <span class="kw">if</span> <span class="ident">TRACE</span> {
-            <span class="comment">// println!(</span>
-            <span class="comment">//     &quot;  Inserting hint at {} ({})&quot;,</span>
-            <span class="comment">//     first.coord.to_f32(),</span>
-            <span class="comment">//     first.ds_coord.to_f32()</span>
-            <span class="comment">// );</span>
-            <span class="comment">// if is_pair {</span>
-            <span class="comment">//     println!(</span>
-            <span class="comment">//         &quot;  Inserting hint at {} ({})&quot;,</span>
-            <span class="comment">//         second.coord.to_f32(),</span>
-            <span class="comment">//         second.ds_coord.to_f32()</span>
-            <span class="comment">//     );</span>
-            <span class="comment">// }</span>
-        }
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">+</span><span class="op">=</span> <span class="ident">count</span>;
+        <span class="kw">if </span>TRACE {
+            <span class="comment">// println!(
+            //     &quot;  Inserting hint at {} ({})&quot;,
+            //     first.coord.to_f32(),
+            //     first.ds_coord.to_f32()
+            // );
+            // if is_pair {
+            //     println!(
+            //         &quot;  Inserting hint at {} ({})&quot;,
+            //         second.coord.to_f32(),
+            //         second.ds_coord.to_f32()
+            //     );
+            // }
+        </span>}
+        <span class="self">self</span>.len += count;
     }
 
-    <span class="kw">fn</span> <span class="ident">adjust</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">saved</span> <span class="op">=</span> [(<span class="number">0usize</span>, <span class="ident">Fixed</span>(<span class="number">0</span>)); <span class="ident">MAX_HINTS</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">saved_count</span> <span class="op">=</span> <span class="number">0usize</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">limit</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>;
-        <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">limit</span> {
-            <span class="kw">let</span> <span class="ident">is_pair</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">is_pair</span>();
-            <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_pair</span> { <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span> } <span class="kw">else</span> { <span class="ident">i</span> };
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">is_locked</span>() {
-                <span class="kw">let</span> <span class="ident">frac_down</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">ds_coord</span>.<span class="ident">fract</span>();
-                <span class="kw">let</span> <span class="ident">frac_up</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">ds_coord</span>.<span class="ident">fract</span>();
-                <span class="kw">let</span> <span class="ident">down_move_down</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>) <span class="op">-</span> <span class="ident">frac_down</span>;
-                <span class="kw">let</span> <span class="ident">up_move_down</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>) <span class="op">-</span> <span class="ident">frac_up</span>;
-                <span class="kw">let</span> <span class="ident">down_move_up</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">frac_down</span> <span class="op">==</span> <span class="ident">Fixed</span>(<span class="number">0</span>) {
-                    <span class="ident">Fixed</span>(<span class="number">0</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">Fixed::ONE</span> <span class="op">-</span> <span class="ident">frac_down</span>
+    <span class="kw">fn </span>adjust(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">let </span><span class="kw-2">mut </span>saved = [(<span class="number">0usize</span>, Fixed(<span class="number">0</span>)); MAX_HINTS];
+        <span class="kw">let </span><span class="kw-2">mut </span>saved_count = <span class="number">0usize</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+        <span class="kw">let </span>limit = <span class="self">self</span>.len;
+        <span class="kw">while </span>i &lt; limit {
+            <span class="kw">let </span>is_pair = <span class="self">self</span>.hints[i].is_pair();
+            <span class="kw">let </span>j = <span class="kw">if </span>is_pair { i + <span class="number">1 </span>} <span class="kw">else </span>{ i };
+            <span class="kw">if </span>!<span class="self">self</span>.hints[i].is_locked() {
+                <span class="kw">let </span>frac_down = <span class="self">self</span>.hints[i].ds_coord.fract();
+                <span class="kw">let </span>frac_up = <span class="self">self</span>.hints[j].ds_coord.fract();
+                <span class="kw">let </span>down_move_down = Fixed(<span class="number">0</span>) - frac_down;
+                <span class="kw">let </span>up_move_down = Fixed(<span class="number">0</span>) - frac_up;
+                <span class="kw">let </span>down_move_up = <span class="kw">if </span>frac_down == Fixed(<span class="number">0</span>) {
+                    Fixed(<span class="number">0</span>)
+                } <span class="kw">else </span>{
+                    Fixed::ONE - frac_down
                 };
-                <span class="kw">let</span> <span class="ident">up_move_up</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">frac_up</span> <span class="op">==</span> <span class="ident">Fixed</span>(<span class="number">0</span>) {
-                    <span class="ident">Fixed</span>(<span class="number">0</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">Fixed::ONE</span> <span class="op">-</span> <span class="ident">frac_up</span>
+                <span class="kw">let </span>up_move_up = <span class="kw">if </span>frac_up == Fixed(<span class="number">0</span>) {
+                    Fixed(<span class="number">0</span>)
+                } <span class="kw">else </span>{
+                    Fixed::ONE - frac_up
                 };
-                <span class="kw">let</span> <span class="ident">move_up</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">down_move_up</span>.<span class="number">0</span>.<span class="ident">min</span>(<span class="ident">up_move_up</span>.<span class="number">0</span>));
-                <span class="kw">let</span> <span class="ident">move_down</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">down_move_down</span>.<span class="number">0</span>.<span class="ident">max</span>(<span class="ident">up_move_down</span>.<span class="number">0</span>));
-                <span class="kw">const</span> <span class="ident">MIN_COUNTER</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0x8000</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">save_edge</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                <span class="kw">let</span> <span class="ident">adjustment</span>;
-                <span class="kw">if</span> <span class="ident">j</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>
-                    <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">ds_coord</span>
-                        <span class="op">&gt;</span><span class="op">=</span> (<span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">ds_coord</span> <span class="op">+</span> <span class="ident">move_up</span> <span class="op">+</span> <span class="ident">MIN_COUNTER</span>)
+                <span class="kw">let </span>move_up = Fixed(down_move_up.<span class="number">0</span>.min(up_move_up.<span class="number">0</span>));
+                <span class="kw">let </span>move_down = Fixed(down_move_down.<span class="number">0</span>.max(up_move_down.<span class="number">0</span>));
+                <span class="kw">const </span>MIN_COUNTER: Fixed = Fixed(<span class="number">0x8000</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>save_edge = <span class="bool-val">false</span>;
+                <span class="kw">let </span>adjustment;
+                <span class="kw">if </span>j &gt;= <span class="self">self</span>.len - <span class="number">1
+                    </span>|| <span class="self">self</span>.hints[j + <span class="number">1</span>].ds_coord
+                        &gt;= (<span class="self">self</span>.hints[j].ds_coord + move_up + MIN_COUNTER)
                 {
-                    <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span>
-                        <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">ds_coord</span>
-                            <span class="op">&lt;</span><span class="op">=</span> (<span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">ds_coord</span> <span class="op">+</span> <span class="ident">move_down</span> <span class="op">-</span> <span class="ident">MIN_COUNTER</span>)
+                    <span class="kw">if </span>i == <span class="number">0
+                        </span>|| <span class="self">self</span>.hints[i - <span class="number">1</span>].ds_coord
+                            &lt;= (<span class="self">self</span>.hints[i].ds_coord + move_down - MIN_COUNTER)
                     {
-                        <span class="ident">adjustment</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">-</span><span class="ident">move_down</span> <span class="op">&lt;</span> <span class="ident">move_up</span> {
-                            <span class="ident">move_down</span>
-                        } <span class="kw">else</span> {
-                            <span class="ident">move_up</span>
+                        adjustment = <span class="kw">if </span>-move_down &lt; move_up {
+                            move_down
+                        } <span class="kw">else </span>{
+                            move_up
                         };
-                    } <span class="kw">else</span> {
-                        <span class="ident">adjustment</span> <span class="op">=</span> <span class="ident">move_up</span>;
+                    } <span class="kw">else </span>{
+                        adjustment = move_up;
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span>
-                    <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">ds_coord</span>
-                        <span class="op">&lt;</span><span class="op">=</span> (<span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">ds_coord</span> <span class="op">+</span> <span class="ident">move_down</span> <span class="op">-</span> <span class="ident">MIN_COUNTER</span>)
+                } <span class="kw">else if </span>i == <span class="number">0
+                    </span>|| <span class="self">self</span>.hints[i - <span class="number">1</span>].ds_coord
+                        &lt;= (<span class="self">self</span>.hints[i].ds_coord + move_down - MIN_COUNTER)
                 {
-                    <span class="ident">adjustment</span> <span class="op">=</span> <span class="ident">move_down</span>;
-                    <span class="ident">save_edge</span> <span class="op">=</span> <span class="ident">move_up</span> <span class="op">&lt;</span> <span class="op">-</span><span class="ident">move_down</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">adjustment</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-                    <span class="ident">save_edge</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                    adjustment = move_down;
+                    save_edge = move_up &lt; -move_down;
+                } <span class="kw">else </span>{
+                    adjustment = Fixed(<span class="number">0</span>);
+                    save_edge = <span class="bool-val">true</span>;
                 }
-                <span class="kw">if</span> <span class="ident">save_edge</span> <span class="op">&amp;&amp;</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">is_locked</span>() {
-                    <span class="ident">saved</span>[<span class="ident">saved_count</span>] <span class="op">=</span> (<span class="ident">j</span>, <span class="ident">move_up</span> <span class="op">-</span> <span class="ident">adjustment</span>);
-                    <span class="ident">saved_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw">if </span>save_edge &amp;&amp; j &lt; <span class="self">self</span>.len - <span class="number">1 </span>&amp;&amp; !<span class="self">self</span>.hints[j + <span class="number">1</span>].is_locked() {
+                    saved[saved_count] = (j, move_up - adjustment);
+                    saved_count += <span class="number">1</span>;
                 }
-                <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
-                <span class="kw">if</span> <span class="ident">is_pair</span> {
-                    <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
+                <span class="self">self</span>.hints[i].ds_coord += adjustment;
+                <span class="kw">if </span>is_pair {
+                    <span class="self">self</span>.hints[j].ds_coord += adjustment;
                 }
             }
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>].<span class="ident">coord</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">coord</span> {
-                <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>];
-                <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
-                <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">scale</span> <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">ds_coord</span> <span class="op">-</span> <span class="ident">b</span>.<span class="ident">ds_coord</span>) <span class="op">/</span> (<span class="ident">a</span>.<span class="ident">coord</span> <span class="op">-</span> <span class="ident">b</span>.<span class="ident">coord</span>);
+            <span class="kw">if </span>i &gt; <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.hints[i].coord != <span class="self">self</span>.hints[i - <span class="number">1</span>].coord {
+                <span class="kw">let </span>a = <span class="self">self</span>.hints[i];
+                <span class="kw">let </span>b = <span class="self">self</span>.hints[i - <span class="number">1</span>];
+                <span class="self">self</span>.hints[i - <span class="number">1</span>].scale = (a.ds_coord - b.ds_coord) / (a.coord - b.coord);
             }
-            <span class="kw">if</span> <span class="ident">is_pair</span> {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">coord</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">coord</span> {
-                    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>];
-                    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>];
-                    <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">scale</span> <span class="op">=</span> (<span class="ident">a</span>.<span class="ident">ds_coord</span> <span class="op">-</span> <span class="ident">b</span>.<span class="ident">ds_coord</span>) <span class="op">/</span> (<span class="ident">a</span>.<span class="ident">coord</span> <span class="op">-</span> <span class="ident">b</span>.<span class="ident">coord</span>);
+            <span class="kw">if </span>is_pair {
+                <span class="kw">if </span><span class="self">self</span>.hints[j].coord != <span class="self">self</span>.hints[j - <span class="number">1</span>].coord {
+                    <span class="kw">let </span>a = <span class="self">self</span>.hints[j];
+                    <span class="kw">let </span>b = <span class="self">self</span>.hints[j - <span class="number">1</span>];
+                    <span class="self">self</span>.hints[j - <span class="number">1</span>].scale = (a.ds_coord - b.ds_coord) / (a.coord - b.coord);
                 }
-                <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                i += <span class="number">1</span>;
             }
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            i += <span class="number">1</span>;
         }
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">saved_count</span>).<span class="ident">rev</span>() {
-            <span class="kw">let</span> (<span class="ident">j</span>, <span class="ident">adjustment</span>) <span class="op">=</span> <span class="ident">saved</span>[<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">ds_coord</span>
-                <span class="op">&gt;</span><span class="op">=</span> (<span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">ds_coord</span> <span class="op">+</span> <span class="ident">adjustment</span> <span class="op">+</span> <span class="ident">Fixed::from_f32</span>(<span class="number">0.5</span>))
+        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..saved_count).rev() {
+            <span class="kw">let </span>(j, adjustment) = saved[i];
+            <span class="kw">if </span><span class="self">self</span>.hints[j + <span class="number">1</span>].ds_coord
+                &gt;= (<span class="self">self</span>.hints[j].ds_coord + adjustment + Fixed::from_f32(<span class="number">0.5</span>))
             {
-                <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span>].<span class="ident">is_pair</span>() {
-                    <span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">ds_coord</span> <span class="op">+</span><span class="op">=</span> <span class="ident">adjustment</span>;
+                <span class="self">self</span>.hints[j].ds_coord += adjustment;
+                <span class="kw">if </span><span class="self">self</span>.hints[j].is_pair() {
+                    <span class="self">self</span>.hints[j - <span class="number">1</span>].ds_coord += adjustment;
                 }
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">build</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">state</span>: <span class="kw-2">&amp;</span><span class="ident">HinterState</span>,
-        <span class="ident">mask</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HintMask</span><span class="op">&gt;</span>,
-        <span class="kw-2">mut</span> <span class="ident">initial_map</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">HintMap</span><span class="op">&gt;</span>,
-        <span class="ident">stems</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">StemHint</span>],
-        <span class="ident">origin</span>: <span class="ident">Fixed</span>,
-        <span class="ident">initial</span>: <span class="ident">bool</span>,
+    <span class="kw">fn </span>build(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        state: <span class="kw-2">&amp;</span>HinterState,
+        mask: <span class="prelude-ty">Option</span>&lt;HintMask&gt;,
+        <span class="kw-2">mut </span>initial_map: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span>HintMap&gt;,
+        stems: <span class="kw-2">&amp;mut </span>[StemHint],
+        origin: Fixed,
+        initial: bool,
     ) {
-        <span class="kw">let</span> <span class="ident">scale</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">scale</span>;
-        <span class="kw">let</span> <span class="ident">darken_y</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="number">0</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">initial</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">initial_map</span>) <span class="op">=</span> <span class="ident">initial_map</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">initial_map</span>.<span class="ident">valid</span> {
-                    <span class="ident">initial_map</span>.<span class="ident">build</span>(<span class="ident">state</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="ident">stems</span>, <span class="ident">origin</span>, <span class="bool-val">true</span>);
+        <span class="kw">let </span>scale = state.scale;
+        <span class="kw">let </span>darken_y = Fixed(<span class="number">0</span>);
+        <span class="kw">if </span>!initial {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>initial_map) = initial_map {
+                <span class="kw">if </span>!initial_map.valid {
+                    initial_map.build(state, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, stems, origin, <span class="bool-val">true</span>);
                 }
             }
         }
-        <span class="kw">let</span> <span class="ident">initial_map</span> <span class="op">=</span> <span class="ident">initial_map</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="ident">HintMap</span>);
-        <span class="self">self</span>.<span class="ident">clear</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">mask</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">HintMask::all</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">mask</span>.<span class="ident">valid</span> {
-            <span class="ident">mask</span> <span class="op">=</span> <span class="ident">HintMask::all</span>();
+        <span class="kw">let </span>initial_map = initial_map.map(|x| x <span class="kw">as </span><span class="kw-2">&amp;</span>HintMap);
+        <span class="self">self</span>.clear();
+        <span class="kw">let </span><span class="kw-2">mut </span>mask = mask.unwrap_or_else(HintMask::all);
+        <span class="kw">if </span>!mask.valid {
+            mask = HintMask::all();
         }
-        <span class="kw">if</span> <span class="ident">state</span>.<span class="ident">em_box_hints</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bottom</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-            <span class="ident">bottom</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">ICF_BOTTOM</span> <span class="op">-</span> <span class="ident">Fixed</span>(<span class="number">1</span>);
-            <span class="ident">bottom</span>.<span class="ident">ds_coord</span> <span class="op">=</span> (<span class="ident">bottom</span>.<span class="ident">coord</span> <span class="op">*</span> <span class="ident">scale</span>).<span class="ident">round</span>() <span class="op">-</span> <span class="ident">Fixed::from_f32</span>(<span class="number">0.5</span>);
-            <span class="ident">bottom</span>.<span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span>;
-            <span class="ident">bottom</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">GHOST_BOTTOM</span> <span class="op">|</span> <span class="ident">LOCKED</span> <span class="op">|</span> <span class="ident">SYNTHETIC</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">top</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-            <span class="ident">top</span>.<span class="ident">coord</span> <span class="op">=</span> <span class="ident">ICF_TOP</span> <span class="op">+</span> <span class="ident">Fixed</span>(<span class="number">1</span>);
-            <span class="ident">top</span>.<span class="ident">ds_coord</span> <span class="op">=</span> (<span class="ident">top</span>.<span class="ident">coord</span> <span class="op">*</span> <span class="ident">scale</span>).<span class="ident">round</span>() <span class="op">+</span> <span class="ident">Fixed::from_f32</span>(<span class="number">0.5</span>);
-            <span class="ident">top</span>.<span class="ident">scale</span> <span class="op">=</span> <span class="ident">scale</span>;
-            <span class="ident">top</span>.<span class="ident">flags</span> <span class="op">=</span> <span class="ident">GHOST_TOP</span> <span class="op">|</span> <span class="ident">LOCKED</span> <span class="op">|</span> <span class="ident">SYNTHETIC</span>;
-            <span class="kw">let</span> <span class="ident">invalid</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-            <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">bottom</span>, <span class="kw-2">&amp;</span><span class="ident">invalid</span>, <span class="ident">scale</span>, <span class="ident">initial_map</span>);
-            <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">invalid</span>, <span class="kw-2">&amp;</span><span class="ident">top</span>, <span class="ident">scale</span>, <span class="ident">initial_map</span>);
+        <span class="kw">if </span>state.em_box_hints {
+            <span class="kw">let </span><span class="kw-2">mut </span>bottom = Hint::default();
+            bottom.coord = ICF_BOTTOM - Fixed(<span class="number">1</span>);
+            bottom.ds_coord = (bottom.coord * scale).round() - Fixed::from_f32(<span class="number">0.5</span>);
+            bottom.scale = scale;
+            bottom.flags = GHOST_BOTTOM | LOCKED | SYNTHETIC;
+            <span class="kw">let </span><span class="kw-2">mut </span>top = Hint::default();
+            top.coord = ICF_TOP + Fixed(<span class="number">1</span>);
+            top.ds_coord = (top.coord * scale).round() + Fixed::from_f32(<span class="number">0.5</span>);
+            top.scale = scale;
+            top.flags = GHOST_TOP | LOCKED | SYNTHETIC;
+            <span class="kw">let </span>invalid = Hint::default();
+            <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>bottom, <span class="kw-2">&amp;</span>invalid, scale, initial_map);
+            <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>invalid, <span class="kw-2">&amp;</span>top, scale, initial_map);
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tmp_mask</span> <span class="op">=</span> <span class="ident">mask</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">stem</span>) <span class="kw">in</span> <span class="ident">stems</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">tmp_mask</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
+        <span class="kw">let </span><span class="kw-2">mut </span>tmp_mask = mask;
+        <span class="kw">for </span>(i, stem) <span class="kw">in </span>stems.iter().enumerate() {
+            <span class="kw">if </span>!tmp_mask.get(i) {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bottom</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">top</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-            <span class="ident">bottom</span>.<span class="ident">setup</span>(<span class="ident">stem</span>, <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">origin</span>, <span class="ident">scale</span>, <span class="ident">darken_y</span>, <span class="bool-val">true</span>);
-            <span class="ident">top</span>.<span class="ident">setup</span>(<span class="ident">stem</span>, <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">origin</span>, <span class="ident">scale</span>, <span class="ident">darken_y</span>, <span class="bool-val">false</span>);
-            <span class="kw">if</span> <span class="ident">bottom</span>.<span class="ident">is_locked</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">top</span>.<span class="ident">is_locked</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">state</span>.<span class="ident">capture</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bottom</span>, <span class="kw-2">&amp;mut</span> <span class="ident">top</span>) {
-                <span class="kw">if</span> <span class="ident">initial</span> {
-                    <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">bottom</span>, <span class="kw-2">&amp;</span><span class="ident">top</span>, <span class="ident">scale</span>, <span class="prelude-val">None</span>);
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">bottom</span>, <span class="kw-2">&amp;</span><span class="ident">top</span>, <span class="ident">scale</span>, <span class="ident">initial_map</span>);
+            <span class="kw">let </span><span class="kw-2">mut </span>bottom = Hint::default();
+            <span class="kw">let </span><span class="kw-2">mut </span>top = Hint::default();
+            bottom.setup(stem, i <span class="kw">as </span>u8, origin, scale, darken_y, <span class="bool-val">true</span>);
+            top.setup(stem, i <span class="kw">as </span>u8, origin, scale, darken_y, <span class="bool-val">false</span>);
+            <span class="kw">if </span>bottom.is_locked() || top.is_locked() || state.capture(<span class="kw-2">&amp;mut </span>bottom, <span class="kw-2">&amp;mut </span>top) {
+                <span class="kw">if </span>initial {
+                    <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>bottom, <span class="kw-2">&amp;</span>top, scale, <span class="prelude-val">None</span>);
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>bottom, <span class="kw-2">&amp;</span>top, scale, initial_map);
                 }
-                <span class="ident">tmp_mask</span>.<span class="ident">clear</span>(<span class="ident">i</span>);
+                tmp_mask.clear(i);
             }
         }
-        <span class="kw">if</span> <span class="ident">initial</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="number">0</span>].<span class="ident">coord</span>.<span class="number">0</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hints</span>[<span class="self">self</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">coord</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="number">0</span> {
-                <span class="kw">let</span> <span class="ident">edge</span> <span class="op">=</span> <span class="ident">Hint</span> {
-                    <span class="ident">flags</span>: <span class="ident">GHOST_BOTTOM</span> <span class="op">|</span> <span class="ident">LOCKED</span> <span class="op">|</span> <span class="ident">SYNTHETIC</span>,
-                    <span class="ident">scale</span>,
-                    ..<span class="ident">Default::default</span>()
+        <span class="kw">if </span>initial {
+            <span class="kw">if </span><span class="self">self</span>.len == <span class="number">0 </span>|| <span class="self">self</span>.hints[<span class="number">0</span>].coord.<span class="number">0 </span>&gt; <span class="number">0 </span>|| <span class="self">self</span>.hints[<span class="self">self</span>.len - <span class="number">1</span>].coord.<span class="number">0 </span>&lt; <span class="number">0 </span>{
+                <span class="kw">let </span>edge = Hint {
+                    flags: GHOST_BOTTOM | LOCKED | SYNTHETIC,
+                    scale,
+                    ..Default::default()
                 };
-                <span class="kw">let</span> <span class="ident">invalid</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-                <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">edge</span>, <span class="kw-2">&amp;</span><span class="ident">invalid</span>, <span class="ident">scale</span>, <span class="prelude-val">None</span>);
+                <span class="kw">let </span>invalid = Hint::default();
+                <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>edge, <span class="kw-2">&amp;</span>invalid, scale, <span class="prelude-val">None</span>);
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">stem</span>) <span class="kw">in</span> <span class="ident">stems</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">tmp_mask</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>(i, stem) <span class="kw">in </span>stems.iter().enumerate() {
+                <span class="kw">if </span>!tmp_mask.get(i) {
                     <span class="kw">continue</span>;
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bottom</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">top</span> <span class="op">=</span> <span class="ident">Hint::default</span>();
-                <span class="ident">bottom</span>.<span class="ident">setup</span>(<span class="ident">stem</span>, <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">origin</span>, <span class="ident">scale</span>, <span class="ident">darken_y</span>, <span class="bool-val">true</span>);
-                <span class="ident">top</span>.<span class="ident">setup</span>(<span class="ident">stem</span>, <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">origin</span>, <span class="ident">scale</span>, <span class="ident">darken_y</span>, <span class="bool-val">false</span>);
-                <span class="self">self</span>.<span class="ident">insert</span>(<span class="kw-2">&amp;</span><span class="ident">bottom</span>, <span class="kw-2">&amp;</span><span class="ident">top</span>, <span class="ident">scale</span>, <span class="ident">initial_map</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>bottom = Hint::default();
+                <span class="kw">let </span><span class="kw-2">mut </span>top = Hint::default();
+                bottom.setup(stem, i <span class="kw">as </span>u8, origin, scale, darken_y, <span class="bool-val">true</span>);
+                top.setup(stem, i <span class="kw">as </span>u8, origin, scale, darken_y, <span class="bool-val">false</span>);
+                <span class="self">self</span>.insert(<span class="kw-2">&amp;</span>bottom, <span class="kw-2">&amp;</span>top, scale, initial_map);
             }
         }
-        <span class="self">self</span>.<span class="ident">dump</span>();
-        <span class="self">self</span>.<span class="ident">adjust</span>();
-        <span class="self">self</span>.<span class="ident">dump</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">initial</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span> {
-                <span class="kw">let</span> <span class="ident">hint</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">hints</span>[<span class="ident">i</span>];
-                <span class="kw">if</span> <span class="ident">hint</span>.<span class="ident">is_synthetic</span>() {
+        <span class="self">self</span>.dump();
+        <span class="self">self</span>.adjust();
+        <span class="self">self</span>.dump();
+        <span class="kw">if </span>!initial {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.len {
+                <span class="kw">let </span>hint = <span class="kw-2">&amp;</span><span class="self">self</span>.hints[i];
+                <span class="kw">if </span>hint.is_synthetic() {
                     <span class="kw">continue</span>;
                 }
-                <span class="kw">let</span> <span class="ident">stem</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">stems</span>[<span class="ident">hint</span>.<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-                <span class="kw">if</span> <span class="ident">hint</span>.<span class="ident">is_top</span>() {
-                    <span class="ident">stem</span>.<span class="ident">ds_max</span> <span class="op">=</span> <span class="ident">hint</span>.<span class="ident">ds_coord</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">stem</span>.<span class="ident">ds_min</span> <span class="op">=</span> <span class="ident">hint</span>.<span class="ident">ds_coord</span>;
+                <span class="kw">let </span>stem = <span class="kw-2">&amp;mut </span>stems[hint.index <span class="kw">as </span>usize];
+                <span class="kw">if </span>hint.is_top() {
+                    stem.ds_max = hint.ds_coord;
+                } <span class="kw">else </span>{
+                    stem.ds_min = hint.ds_coord;
                 }
-                <span class="ident">stem</span>.<span class="ident">used</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                stem.used = <span class="bool-val">true</span>;
             }
-            <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="self">self</span>.valid = <span class="bool-val">true</span>;
         }
-        <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="self">self</span>.valid = <span class="bool-val">true</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">dump</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="comment">// if !TRACE {</span>
-        <span class="comment">//     return;</span>
-        <span class="comment">// }</span>
-        <span class="comment">// for i in 0..self.len {</span>
-        <span class="comment">//     let hint = self.hints[i];</span>
-        <span class="comment">//     println!(</span>
-        <span class="comment">//         &quot;[{}] {} {} {} {}{}{}{}{}{}&quot;,</span>
-        <span class="comment">//         hint.index,</span>
-        <span class="comment">//         hint.coord.to_f32(),</span>
-        <span class="comment">//         hint.ds_coord.to_f32() / hint.scale.to_f32(),</span>
-        <span class="comment">//         hint.scale.to_f32() * 65536.,</span>
-        <span class="comment">//         if hint.is_pair() { &quot;p&quot; } else { &quot;&quot; },</span>
-        <span class="comment">//         if hint.flags &amp; (GHOST_BOTTOM | GHOST_TOP) != 0 {</span>
-        <span class="comment">//             &quot;g&quot;</span>
-        <span class="comment">//         } else {</span>
-        <span class="comment">//             &quot;&quot;</span>
-        <span class="comment">//         },</span>
-        <span class="comment">//         if hint.is_top() { &quot;t&quot; } else { &quot;&quot; },</span>
-        <span class="comment">//         if hint.is_bottom() { &quot;b&quot; } else { &quot;&quot; },</span>
-        <span class="comment">//         if hint.is_locked() { &quot;L&quot; } else { &quot;&quot; },</span>
-        <span class="comment">//         if hint.is_synthetic() { &quot;S&quot; } else { &quot;&quot; },</span>
-        <span class="comment">//     );</span>
-        <span class="comment">// }</span>
-        <span class="comment">// println!(&quot;-------------------------------&quot;);</span>
-    }
+    <span class="kw">fn </span>dump(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="comment">// if !TRACE {
+        //     return;
+        // }
+        // for i in 0..self.len {
+        //     let hint = self.hints[i];
+        //     println!(
+        //         &quot;[{}] {} {} {} {}{}{}{}{}{}&quot;,
+        //         hint.index,
+        //         hint.coord.to_f32(),
+        //         hint.ds_coord.to_f32() / hint.scale.to_f32(),
+        //         hint.scale.to_f32() * 65536.,
+        //         if hint.is_pair() { &quot;p&quot; } else { &quot;&quot; },
+        //         if hint.flags &amp; (GHOST_BOTTOM | GHOST_TOP) != 0 {
+        //             &quot;g&quot;
+        //         } else {
+        //             &quot;&quot;
+        //         },
+        //         if hint.is_top() { &quot;t&quot; } else { &quot;&quot; },
+        //         if hint.is_bottom() { &quot;b&quot; } else { &quot;&quot; },
+        //         if hint.is_locked() { &quot;L&quot; } else { &quot;&quot; },
+        //         if hint.is_synthetic() { &quot;S&quot; } else { &quot;&quot; },
+        //     );
+        // }
+        // println!(&quot;-------------------------------&quot;);
+    </span>}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HintMask</span> {
-    <span class="ident">mask</span>: [<span class="ident">u8</span>; <span class="ident">HINT_MASK_SIZE</span>],
-    <span class="ident">valid</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Copy, Clone, PartialEq)]
+</span><span class="kw">pub struct </span>HintMask {
+    mask: [u8; HINT_MASK_SIZE],
+    valid: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">HintMask</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">mask</span>: [<span class="number">0u8</span>; <span class="ident">HINT_MASK_SIZE</span>],
-            <span class="ident">valid</span>: <span class="bool-val">false</span>,
+<span class="kw">impl </span>HintMask {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            mask: [<span class="number">0u8</span>; HINT_MASK_SIZE],
+            valid: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">all</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">mask</span>: [<span class="number">0xFF</span>; <span class="ident">HINT_MASK_SIZE</span>],
-            <span class="ident">valid</span>: <span class="bool-val">true</span>,
+    <span class="kw">pub fn </span>all() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            mask: [<span class="number">0xFF</span>; HINT_MASK_SIZE],
+            valid: <span class="bool-val">true</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">clear_all</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">mask</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="ident">HINT_MASK_SIZE</span>];
-        <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="kw">fn </span>clear_all(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.mask = [<span class="number">0u8</span>; HINT_MASK_SIZE];
+        <span class="self">self</span>.valid = <span class="bool-val">true</span>;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_mask</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mask</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
-        <span class="self">self</span>.<span class="ident">clear_all</span>();
-        <span class="kw">if</span> <span class="ident">mask</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">HINT_MASK_SIZE</span> {
+    <span class="kw">pub fn </span>set_mask(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: <span class="kw-2">&amp;</span>[u8]) {
+        <span class="self">self</span>.clear_all();
+        <span class="kw">if </span>mask.len() &gt; HINT_MASK_SIZE {
             <span class="kw">return</span>;
         }
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">mask</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="self">self</span>.<span class="ident">mask</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="kw-2">*</span><span class="ident">b</span>;
+        <span class="kw">for </span>(i, b) <span class="kw">in </span>mask.iter().enumerate() {
+            <span class="self">self</span>.mask[i] = <span class="kw-2">*</span>b;
         }
-        <span class="self">self</span>.<span class="ident">valid</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="self">self</span>.valid = <span class="bool-val">true</span>;
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">bit</span>: <span class="ident">usize</span>) {
-        <span class="self">self</span>.<span class="ident">mask</span>[<span class="ident">bit</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>] <span class="op">|</span><span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="number">7</span> <span class="op">-</span> (<span class="ident">bit</span> <span class="op">&amp;</span> <span class="number">0x7</span>));
+    <span class="attribute">#[inline]
+    #[allow(dead_code)]
+    </span><span class="kw">pub fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bit: usize) {
+        <span class="self">self</span>.mask[bit &gt;&gt; <span class="number">3</span>] |= <span class="number">1 </span>&lt;&lt; (<span class="number">7 </span>- (bit &amp; <span class="number">0x7</span>));
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">bit</span>: <span class="ident">usize</span>) {
-        <span class="self">self</span>.<span class="ident">mask</span>[<span class="ident">bit</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>] <span class="op">&amp;=</span> <span class="op">!</span>(<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="number">7</span> <span class="op">-</span> (<span class="ident">bit</span> <span class="op">&amp;</span> <span class="number">0x7</span>)));
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bit: usize) {
+        <span class="self">self</span>.mask[bit &gt;&gt; <span class="number">3</span>] &amp;= !(<span class="number">1 </span>&lt;&lt; (<span class="number">7 </span>- (bit &amp; <span class="number">0x7</span>)));
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">bit</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">mask</span>[<span class="ident">bit</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>] <span class="op">&amp;</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="number">7</span> <span class="op">-</span> (<span class="ident">bit</span> <span class="op">&amp;</span> <span class="number">0x7</span>))) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, bit: usize) -&gt; bool {
+        <span class="self">self</span>.mask[bit &gt;&gt; <span class="number">3</span>] &amp; (<span class="number">1 </span>&lt;&lt; (<span class="number">7 </span>- (bit &amp; <span class="number">0x7</span>))) != <span class="number">0
+    </span>}
 
-    <span class="comment">// pub fn dump(&amp;self) {</span>
-    <span class="comment">//     for i in 0..MAX_STEM_HINTS {</span>
-    <span class="comment">//         print!(&quot;{}&quot;, self.get(i) as u8);</span>
-    <span class="comment">//     }</span>
-    <span class="comment">//     println!();</span>
-    <span class="comment">//     for b in &amp;self.mask {</span>
-    <span class="comment">//         print!(&quot;{:#8b}&quot;, *b)</span>
-    <span class="comment">//     }</span>
-    <span class="comment">//     println!();</span>
-    <span class="comment">// }</span>
+    <span class="comment">// pub fn dump(&amp;self) {
+    //     for i in 0..MAX_STEM_HINTS {
+    //         print!(&quot;{}&quot;, self.get(i) as u8);
+    //     }
+    //     println!();
+    //     for b in &amp;self.mask {
+    //         print!(&quot;{:#8b}&quot;, *b)
+    //     }
+    //     println!();
+    // }
+</span>}
+
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">struct </span>BlueZone {
+    is_bottom: bool,
+    bottom: Fixed,
+    top: Fixed,
+    flat: Fixed,
+    ds_flat: Fixed,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">BlueZone</span> {
-    <span class="ident">is_bottom</span>: <span class="ident">bool</span>,
-    <span class="ident">bottom</span>: <span class="ident">Fixed</span>,
-    <span class="ident">top</span>: <span class="ident">Fixed</span>,
-    <span class="ident">flat</span>: <span class="ident">Fixed</span>,
-    <span class="ident">ds_flat</span>: <span class="ident">Fixed</span>,
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">struct </span>BlueValues {
+    values: [(Fixed, Fixed); MAX_BLUE_VALUES],
+    len: u32,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">BlueValues</span> {
-    <span class="ident">values</span>: [(<span class="ident">Fixed</span>, <span class="ident">Fixed</span>); <span class="ident">MAX_BLUE_VALUES</span>],
-    <span class="ident">len</span>: <span class="ident">u32</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">BlueValues</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>BlueValues {
+    <span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 
-    <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">f32</span>]) {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">values</span>.<span class="ident">len</span>().<span class="ident">min</span>(<span class="ident">MAX_BLUE_VALUES</span> <span class="op">*</span> <span class="number">2</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> <span class="op">/</span> <span class="number">2</span> {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">values</span>[<span class="ident">i</span> <span class="op">*</span> <span class="number">2</span>];
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">values</span>[<span class="ident">i</span> <span class="op">*</span> <span class="number">2</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="self">self</span>.<span class="ident">values</span>[<span class="ident">i</span>] <span class="op">=</span> (<span class="ident">Fixed::from_i32</span>(<span class="ident">a</span> <span class="kw">as</span> <span class="ident">i32</span>), <span class="ident">Fixed::from_i32</span>(<span class="ident">b</span> <span class="kw">as</span> <span class="ident">i32</span>));
+    <span class="kw">fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, values: <span class="kw-2">&amp;</span>[f32]) {
+        <span class="kw">let </span>len = values.len().min(MAX_BLUE_VALUES * <span class="number">2</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len / <span class="number">2 </span>{
+            <span class="kw">let </span>a = values[i * <span class="number">2</span>];
+            <span class="kw">let </span>b = values[i * <span class="number">2 </span>+ <span class="number">1</span>];
+            <span class="self">self</span>.values[i] = (Fixed::from_i32(a <span class="kw">as </span>i32), Fixed::from_i32(b <span class="kw">as </span>i32));
         }
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">len</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">/</span> <span class="number">2</span>;
+        <span class="self">self</span>.len = len <span class="kw">as </span>u32 / <span class="number">2</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">values</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[(<span class="ident">Fixed</span>, <span class="ident">Fixed</span>)] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">values</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>]
+    <span class="kw">fn </span>values(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[(Fixed, Fixed)] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.values[..<span class="self">self</span>.len <span class="kw">as </span>usize]
     }
 }
 
-<span class="kw">impl</span> <span class="ident">DictionarySink</span> <span class="kw">for</span> <span class="ident">HinterState</span> {
-    <span class="kw">fn</span> <span class="ident">blue_values</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">f32</span>]) {
-        <span class="self">self</span>.<span class="ident">blues</span>.<span class="ident">set</span>(<span class="ident">values</span>);
+<span class="kw">impl </span>DictionarySink <span class="kw">for </span>HinterState {
+    <span class="kw">fn </span>blue_values(<span class="kw-2">&amp;mut </span><span class="self">self</span>, values: <span class="kw-2">&amp;</span>[f32]) {
+        <span class="self">self</span>.blues.set(values);
     }
 
-    <span class="kw">fn</span> <span class="ident">family_blues</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">f32</span>]) {
-        <span class="self">self</span>.<span class="ident">family_blues</span>.<span class="ident">set</span>(<span class="ident">values</span>);
+    <span class="kw">fn </span>family_blues(<span class="kw-2">&amp;mut </span><span class="self">self</span>, values: <span class="kw-2">&amp;</span>[f32]) {
+        <span class="self">self</span>.family_blues.set(values);
     }
 
-    <span class="kw">fn</span> <span class="ident">other_blues</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">f32</span>]) {
-        <span class="self">self</span>.<span class="ident">other_blues</span>.<span class="ident">set</span>(<span class="ident">values</span>);
+    <span class="kw">fn </span>other_blues(<span class="kw-2">&amp;mut </span><span class="self">self</span>, values: <span class="kw-2">&amp;</span>[f32]) {
+        <span class="self">self</span>.other_blues.set(values);
     }
 
-    <span class="kw">fn</span> <span class="ident">family_other_blues</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">values</span>: <span class="kw-2">&amp;</span>[<span class="ident">f32</span>]) {
-        <span class="self">self</span>.<span class="ident">family_other_blues</span>.<span class="ident">set</span>(<span class="ident">values</span>);
+    <span class="kw">fn </span>family_other_blues(<span class="kw-2">&amp;mut </span><span class="self">self</span>, values: <span class="kw-2">&amp;</span>[f32]) {
+        <span class="self">self</span>.family_other_blues.set(values);
     }
 
-    <span class="kw">fn</span> <span class="ident">blue_scale</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">scale</span>: <span class="ident">f32</span>) {
-        <span class="self">self</span>.<span class="ident">blue_scale</span> <span class="op">=</span> <span class="ident">Fixed::from_f32</span>(<span class="ident">scale</span>);
+    <span class="kw">fn </span>blue_scale(<span class="kw-2">&amp;mut </span><span class="self">self</span>, scale: f32) {
+        <span class="self">self</span>.blue_scale = Fixed::from_f32(scale);
     }
 
-    <span class="kw">fn</span> <span class="ident">blue_shift</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">shift</span>: <span class="ident">f32</span>) {
-        <span class="self">self</span>.<span class="ident">blue_shift</span> <span class="op">=</span> <span class="ident">Fixed::from_f32</span>(<span class="ident">shift</span>);
+    <span class="kw">fn </span>blue_shift(<span class="kw-2">&amp;mut </span><span class="self">self</span>, shift: f32) {
+        <span class="self">self</span>.blue_shift = Fixed::from_f32(shift);
     }
 
-    <span class="kw">fn</span> <span class="ident">blue_fuzz</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">fuzz</span>: <span class="ident">f32</span>) {
-        <span class="self">self</span>.<span class="ident">blue_fuzz</span> <span class="op">=</span> <span class="ident">Fixed::from_f32</span>(<span class="ident">fuzz</span>);
+    <span class="kw">fn </span>blue_fuzz(<span class="kw-2">&amp;mut </span><span class="self">self</span>, fuzz: f32) {
+        <span class="self">self</span>.blue_fuzz = Fixed::from_f32(fuzz);
     }
 
-    <span class="kw">fn</span> <span class="ident">language_group</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">group</span>: <span class="ident">u32</span>) {
-        <span class="self">self</span>.<span class="ident">language_group</span> <span class="op">=</span> <span class="ident">group</span> <span class="kw">as</span> <span class="ident">u8</span>;
+    <span class="kw">fn </span>language_group(<span class="kw-2">&amp;mut </span><span class="self">self</span>, group: u32) {
+        <span class="self">self</span>.language_group = group <span class="kw">as </span>u8;
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

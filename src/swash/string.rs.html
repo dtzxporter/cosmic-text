@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -482,389 +482,389 @@
 <span id="482">482</span>
 </pre><pre class="rust"><code><span class="doccomment">/*!
 Localized names and other metadata.
-*/</span>
+*/
 
-<span class="kw">use</span> <span class="ident">std::fmt::Write</span>;
+</span><span class="kw">use </span>std::fmt::Write;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::FontRef</span>;
+<span class="kw">use </span><span class="kw">super</span>::internal::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">super</span>::FontRef;
 
-<span class="kw">const</span> <span class="ident">NAME</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;name&quot;</span>);
+<span class="kw">const </span>NAME: RawTag = raw_tag(<span class="string">b&quot;name&quot;</span>);
 
-<span class="doccomment">/// Identifier for well-known localized strings in a font.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">StringId</span> {
-    <span class="ident">Copyright</span>,
-    <span class="ident">Family</span>,
-    <span class="ident">SubFamily</span>,
-    <span class="ident">UniqueId</span>,
-    <span class="ident">Full</span>,
-    <span class="ident">Version</span>,
-    <span class="ident">PostScript</span>,
-    <span class="ident">Trademark</span>,
-    <span class="ident">Manufacturer</span>,
-    <span class="ident">Designer</span>,
-    <span class="ident">Description</span>,
-    <span class="ident">VendorUrl</span>,
-    <span class="ident">DesignerUrl</span>,
-    <span class="ident">License</span>,
-    <span class="ident">LicenseUrl</span>,
-    <span class="ident">TypographicFamily</span>,
-    <span class="ident">TypographicSubFamily</span>,
-    <span class="ident">CompatibleFull</span>,
-    <span class="ident">SampleText</span>,
-    <span class="ident">PostScriptCid</span>,
-    <span class="ident">WwsFamily</span>,
-    <span class="ident">WwsSubFamily</span>,
-    <span class="ident">LightBackgroundPalette</span>,
-    <span class="ident">DarkBackgroundPalette</span>,
-    <span class="ident">VariationsPostScriptNamePrefix</span>,
-    <span class="ident">Other</span>(<span class="ident">u16</span>),
+<span class="doccomment">/// Identifier for well-known localized strings in a font.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>StringId {
+    Copyright,
+    Family,
+    SubFamily,
+    UniqueId,
+    Full,
+    Version,
+    PostScript,
+    Trademark,
+    Manufacturer,
+    Designer,
+    Description,
+    VendorUrl,
+    DesignerUrl,
+    License,
+    LicenseUrl,
+    TypographicFamily,
+    TypographicSubFamily,
+    CompatibleFull,
+    SampleText,
+    PostScriptCid,
+    WwsFamily,
+    WwsSubFamily,
+    LightBackgroundPalette,
+    DarkBackgroundPalette,
+    VariationsPostScriptNamePrefix,
+    Other(u16),
 }
 
-<span class="kw">impl</span> <span class="ident">StringId</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">value</span>: <span class="ident">u16</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">use</span> <span class="ident">StringId</span>::<span class="kw-2">*</span>;
-        <span class="kw">match</span> <span class="ident">value</span> {
-            <span class="number">0</span> =&gt; <span class="ident">Copyright</span>,
-            <span class="number">1</span> =&gt; <span class="ident">Family</span>,
-            <span class="number">2</span> =&gt; <span class="ident">SubFamily</span>,
-            <span class="number">3</span> =&gt; <span class="ident">UniqueId</span>,
-            <span class="number">4</span> =&gt; <span class="ident">Full</span>,
-            <span class="number">5</span> =&gt; <span class="ident">Version</span>,
-            <span class="number">6</span> =&gt; <span class="ident">PostScript</span>,
-            <span class="number">7</span> =&gt; <span class="ident">Trademark</span>,
-            <span class="number">8</span> =&gt; <span class="ident">Manufacturer</span>,
-            <span class="number">9</span> =&gt; <span class="ident">Designer</span>,
-            <span class="number">10</span> =&gt; <span class="ident">Description</span>,
-            <span class="number">11</span> =&gt; <span class="ident">VendorUrl</span>,
-            <span class="number">12</span> =&gt; <span class="ident">DesignerUrl</span>,
-            <span class="number">13</span> =&gt; <span class="ident">License</span>,
-            <span class="number">14</span> =&gt; <span class="ident">LicenseUrl</span>,
-            <span class="number">16</span> =&gt; <span class="ident">TypographicFamily</span>,
-            <span class="number">17</span> =&gt; <span class="ident">TypographicSubFamily</span>,
-            <span class="number">18</span> =&gt; <span class="ident">CompatibleFull</span>,
-            <span class="number">19</span> =&gt; <span class="ident">SampleText</span>,
-            <span class="number">20</span> =&gt; <span class="ident">PostScriptCid</span>,
-            <span class="number">21</span> =&gt; <span class="ident">WwsFamily</span>,
-            <span class="number">22</span> =&gt; <span class="ident">WwsSubFamily</span>,
-            <span class="number">23</span> =&gt; <span class="ident">LightBackgroundPalette</span>,
-            <span class="number">24</span> =&gt; <span class="ident">DarkBackgroundPalette</span>,
-            <span class="number">25</span> =&gt; <span class="ident">VariationsPostScriptNamePrefix</span>,
-            <span class="kw">_</span> =&gt; <span class="ident">Other</span>(<span class="ident">value</span>),
+<span class="kw">impl </span>StringId {
+    <span class="kw">pub fn </span>from_raw(value: u16) -&gt; <span class="self">Self </span>{
+        <span class="kw">use </span>StringId::<span class="kw-2">*</span>;
+        <span class="kw">match </span>value {
+            <span class="number">0 </span>=&gt; Copyright,
+            <span class="number">1 </span>=&gt; Family,
+            <span class="number">2 </span>=&gt; SubFamily,
+            <span class="number">3 </span>=&gt; UniqueId,
+            <span class="number">4 </span>=&gt; Full,
+            <span class="number">5 </span>=&gt; Version,
+            <span class="number">6 </span>=&gt; PostScript,
+            <span class="number">7 </span>=&gt; Trademark,
+            <span class="number">8 </span>=&gt; Manufacturer,
+            <span class="number">9 </span>=&gt; Designer,
+            <span class="number">10 </span>=&gt; Description,
+            <span class="number">11 </span>=&gt; VendorUrl,
+            <span class="number">12 </span>=&gt; DesignerUrl,
+            <span class="number">13 </span>=&gt; License,
+            <span class="number">14 </span>=&gt; LicenseUrl,
+            <span class="number">16 </span>=&gt; TypographicFamily,
+            <span class="number">17 </span>=&gt; TypographicSubFamily,
+            <span class="number">18 </span>=&gt; CompatibleFull,
+            <span class="number">19 </span>=&gt; SampleText,
+            <span class="number">20 </span>=&gt; PostScriptCid,
+            <span class="number">21 </span>=&gt; WwsFamily,
+            <span class="number">22 </span>=&gt; WwsSubFamily,
+            <span class="number">23 </span>=&gt; LightBackgroundPalette,
+            <span class="number">24 </span>=&gt; DarkBackgroundPalette,
+            <span class="number">25 </span>=&gt; VariationsPostScriptNamePrefix,
+            <span class="kw">_ </span>=&gt; Other(value),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_raw</span>(<span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="kw">use</span> <span class="ident">StringId</span>::<span class="kw-2">*</span>;
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Other</span>(<span class="ident">id</span>) =&gt; <span class="ident">id</span>,
-            <span class="ident">Copyright</span> =&gt; <span class="number">0</span>,
-            <span class="ident">Family</span> =&gt; <span class="number">1</span>,
-            <span class="ident">SubFamily</span> =&gt; <span class="number">2</span>,
-            <span class="ident">UniqueId</span> =&gt; <span class="number">3</span>,
-            <span class="ident">Full</span> =&gt; <span class="number">4</span>,
-            <span class="ident">Version</span> =&gt; <span class="number">5</span>,
-            <span class="ident">PostScript</span> =&gt; <span class="number">6</span>,
-            <span class="ident">Trademark</span> =&gt; <span class="number">7</span>,
-            <span class="ident">Manufacturer</span> =&gt; <span class="number">8</span>,
-            <span class="ident">Designer</span> =&gt; <span class="number">9</span>,
-            <span class="ident">Description</span> =&gt; <span class="number">10</span>,
-            <span class="ident">VendorUrl</span> =&gt; <span class="number">11</span>,
-            <span class="ident">DesignerUrl</span> =&gt; <span class="number">12</span>,
-            <span class="ident">License</span> =&gt; <span class="number">13</span>,
-            <span class="ident">LicenseUrl</span> =&gt; <span class="number">14</span>,
-            <span class="ident">TypographicFamily</span> =&gt; <span class="number">16</span>,
-            <span class="ident">TypographicSubFamily</span> =&gt; <span class="number">17</span>,
-            <span class="ident">CompatibleFull</span> =&gt; <span class="number">18</span>,
-            <span class="ident">SampleText</span> =&gt; <span class="number">19</span>,
-            <span class="ident">PostScriptCid</span> =&gt; <span class="number">20</span>,
-            <span class="ident">WwsFamily</span> =&gt; <span class="number">21</span>,
-            <span class="ident">WwsSubFamily</span> =&gt; <span class="number">22</span>,
-            <span class="ident">LightBackgroundPalette</span> =&gt; <span class="number">23</span>,
-            <span class="ident">DarkBackgroundPalette</span> =&gt; <span class="number">24</span>,
-            <span class="ident">VariationsPostScriptNamePrefix</span> =&gt; <span class="number">25</span>,
+    <span class="kw">pub fn </span>to_raw(<span class="self">self</span>) -&gt; u16 {
+        <span class="kw">use </span>StringId::<span class="kw-2">*</span>;
+        <span class="kw">match </span><span class="self">self </span>{
+            Other(id) =&gt; id,
+            Copyright =&gt; <span class="number">0</span>,
+            Family =&gt; <span class="number">1</span>,
+            SubFamily =&gt; <span class="number">2</span>,
+            UniqueId =&gt; <span class="number">3</span>,
+            Full =&gt; <span class="number">4</span>,
+            Version =&gt; <span class="number">5</span>,
+            PostScript =&gt; <span class="number">6</span>,
+            Trademark =&gt; <span class="number">7</span>,
+            Manufacturer =&gt; <span class="number">8</span>,
+            Designer =&gt; <span class="number">9</span>,
+            Description =&gt; <span class="number">10</span>,
+            VendorUrl =&gt; <span class="number">11</span>,
+            DesignerUrl =&gt; <span class="number">12</span>,
+            License =&gt; <span class="number">13</span>,
+            LicenseUrl =&gt; <span class="number">14</span>,
+            TypographicFamily =&gt; <span class="number">16</span>,
+            TypographicSubFamily =&gt; <span class="number">17</span>,
+            CompatibleFull =&gt; <span class="number">18</span>,
+            SampleText =&gt; <span class="number">19</span>,
+            PostScriptCid =&gt; <span class="number">20</span>,
+            WwsFamily =&gt; <span class="number">21</span>,
+            WwsSubFamily =&gt; <span class="number">22</span>,
+            LightBackgroundPalette =&gt; <span class="number">23</span>,
+            DarkBackgroundPalette =&gt; <span class="number">24</span>,
+            VariationsPostScriptNamePrefix =&gt; <span class="number">25</span>,
         }
     }
 }
 
-<span class="doccomment">/// Iterator over a collection of localized strings.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocalizedStrings</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">pos</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Iterator over a collection of localized strings.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>LocalizedStrings&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    len: usize,
+    pos: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">LocalizedStrings</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">2</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="self">Self</span> { <span class="ident">data</span>, <span class="ident">len</span>, <span class="ident">pos</span>: <span class="number">0</span> }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LocalizedStrings&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = Bytes::new(data);
+        <span class="kw">let </span>len = data.read_or_default::&lt;u16&gt;(<span class="number">2</span>) <span class="kw">as </span>usize;
+        <span class="self">Self </span>{ data, len, pos: <span class="number">0 </span>}
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">font</span>.<span class="ident">table_data</span>(<span class="ident">NAME</span>).<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]))
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(font.table_data(NAME).unwrap_or(<span class="kw-2">&amp;</span>[]))
     }
 
-    <span class="doccomment">/// Searches for a string with the specified identifier, and if specified,</span>
-    <span class="doccomment">/// language.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ## Iteration behavior</span>
-    <span class="doccomment">/// This function searches the entire string collection without regard</span>
-    <span class="doccomment">/// for the current state of the iterator.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_by_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">StringId</span>, <span class="ident">language</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">first</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="ident">raw_id</span> <span class="op">=</span> <span class="ident">id</span>.<span class="ident">to_raw</span>();
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">rec</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">rec</span>) =&gt; <span class="ident">rec</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+    <span class="doccomment">/// Searches for a string with the specified identifier, and if specified,
+    /// language.
+    ///
+    /// ## Iteration behavior
+    /// This function searches the entire string collection without regard
+    /// for the current state of the iterator.
+    </span><span class="kw">pub fn </span>find_by_id(<span class="kw-2">&amp;</span><span class="self">self</span>, id: StringId, language: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>first = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>best = <span class="prelude-val">None</span>;
+        <span class="kw">let </span>raw_id = id.to_raw();
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.len() {
+            <span class="kw">let </span>rec = <span class="kw">match </span><span class="self">self</span>.get(i) {
+                <span class="prelude-val">Some</span>(rec) =&gt; rec,
+                <span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="kw">if</span> <span class="ident">rec</span>.<span class="ident">raw_id</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">raw_id</span> {
+            <span class="kw">if </span>rec.raw_id() != raw_id {
                 <span class="kw">continue</span>;
             }
-            <span class="kw">if</span> <span class="ident">first</span>.<span class="ident">is_none</span>() {
-                <span class="ident">first</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">rec</span>);
+            <span class="kw">if </span>first.is_none() {
+                first = <span class="prelude-val">Some</span>(rec);
             }
-            <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="ident">rec</span>.<span class="ident">encoding</span>();
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">lang</span>) <span class="op">=</span> <span class="ident">language</span> {
-                <span class="kw">if</span> <span class="ident">rec</span>.<span class="ident">language</span>().<span class="ident">starts_with</span>(<span class="ident">lang</span>) {
-                    <span class="kw">if</span> <span class="ident">encoding</span> <span class="op">==</span> <span class="ident">Encoding::Unicode</span> {
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">rec</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">encoding</span>.<span class="ident">is_decodable</span>() {
-                        <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">rec</span>);
+            <span class="kw">let </span>encoding = rec.encoding();
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(lang) = language {
+                <span class="kw">if </span>rec.language().starts_with(lang) {
+                    <span class="kw">if </span>encoding == Encoding::Unicode {
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(rec);
+                    } <span class="kw">else if </span>encoding.is_decodable() {
+                        best = <span class="prelude-val">Some</span>(rec);
                     }
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">rec</span>.<span class="ident">language</span>() <span class="op">==</span> <span class="string">&quot;&quot;</span> {
-                <span class="kw">if</span> <span class="ident">encoding</span> <span class="op">==</span> <span class="ident">Encoding::Unicode</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">rec</span>);
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">encoding</span>.<span class="ident">is_decodable</span>() {
-                    <span class="ident">best</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">rec</span>);
+            } <span class="kw">else if </span>rec.language() == <span class="string">&quot;&quot; </span>{
+                <span class="kw">if </span>encoding == Encoding::Unicode {
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(rec);
+                } <span class="kw">else if </span>encoding.is_decodable() {
+                    best = <span class="prelude-val">Some</span>(rec);
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">best</span>.<span class="ident">is_some</span>() {
-            <span class="ident">best</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">language</span>.<span class="ident">is_none</span>() {
-            <span class="ident">first</span>
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
+        <span class="kw">if </span>best.is_some() {
+            best
+        } <span class="kw">else if </span>language.is_none() {
+            first
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
     }
 
-    <span class="doccomment">/// Returns the string at the specified index.</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the string at the specified index.
+    </span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="prelude-ty">Option</span>&lt;LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="number">6</span> <span class="op">+</span> <span class="ident">index</span> <span class="op">*</span> <span class="number">12</span>;
-        <span class="ident">b</span>.<span class="ident">ensure_range</span>(<span class="ident">offset</span>, <span class="number">12</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">LocalizedString</span> {
-            <span class="ident">data</span>: <span class="kw-2">*</span><span class="ident">b</span>,
-            <span class="ident">storage</span>: <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>) <span class="kw">as</span> <span class="ident">usize</span>,
-            <span class="ident">offset</span>,
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>offset = <span class="number">6 </span>+ index * <span class="number">12</span>;
+        b.ensure_range(offset, <span class="number">12</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(LocalizedString {
+            data: <span class="kw-2">*</span>b,
+            storage: b.read_or_default::&lt;u16&gt;(<span class="number">4</span>) <span class="kw">as </span>usize,
+            offset,
         })
     }
 }
 
-<span class="macro">impl_iter!</span>(<span class="ident">LocalizedStrings</span>, <span class="ident">LocalizedString</span>);
+<span class="macro">impl_iter!</span>(LocalizedStrings, LocalizedString);
 
-<span class="doccomment">/// Represents a single localized string in a font.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Localized strings contain an [identifier](StringId) that describes the</span>
-<span class="doccomment">/// content of the string (such as family name, copyright notice, sample text, etc),</span>
-<span class="doccomment">/// a language that specifies the audience for which the string is intended and</span>
-<span class="doccomment">/// some encoded data containing the value of the string. A string with a</span>
-<span class="doccomment">/// particular identifier can appear multiple times in a font with various</span>
-<span class="doccomment">/// languages and encodings.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">storage</span>: <span class="ident">usize</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Represents a single localized string in a font.
+///
+/// Localized strings contain an [identifier](StringId) that describes the
+/// content of the string (such as family name, copyright notice, sample text, etc),
+/// a language that specifies the audience for which the string is intended and
+/// some encoded data containing the value of the string. A string with a
+/// particular identifier can appear multiple times in a font with various
+/// languages and encodings.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    storage: usize,
+    offset: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns the string identifier.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">StringId</span> {
-        <span class="ident">StringId::from_raw</span>(<span class="self">self</span>.<span class="ident">raw_id</span>())
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Returns the string identifier.
+    </span><span class="kw">pub fn </span>id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; StringId {
+        StringId::from_raw(<span class="self">self</span>.raw_id())
     }
 
-    <span class="doccomment">/// Returns the language of the string.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">language</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="ident">get_language</span>(<span class="self">self</span>.<span class="ident">platform_id</span>(), <span class="self">self</span>.<span class="ident">language_id</span>())
+    <span class="doccomment">/// Returns the language of the string.
+    </span><span class="kw">pub fn </span>language(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        get_language(<span class="self">self</span>.platform_id(), <span class="self">self</span>.language_id())
     }
 
-    <span class="doccomment">/// Returns true if the encoding for the string is unicode.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_unicode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">encoding</span>() <span class="op">==</span> <span class="ident">Encoding::Unicode</span>
+    <span class="doccomment">/// Returns true if the encoding for the string is unicode.
+    </span><span class="kw">pub fn </span>is_unicode(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.encoding() == Encoding::Unicode
     }
 
-    <span class="doccomment">/// Returns true if the string can be decoded.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_decodable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">encoding</span>().<span class="ident">is_decodable</span>()
+    <span class="doccomment">/// Returns true if the string can be decoded.
+    </span><span class="kw">pub fn </span>is_decodable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.encoding().is_decodable()
     }
 
-    <span class="doccomment">/// Returns an iterator over the sequence of characters representing the</span>
-    <span class="doccomment">/// decoded string if the encoding is known. Will generate an empty string</span>
-    <span class="doccomment">/// otherwise.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">encoding</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">encoding</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">encoding</span>.<span class="ident">is_decodable</span>() {
-            <span class="kw">return</span> <span class="ident">Chars</span> {
-                <span class="ident">record</span>: <span class="kw-2">*</span><span class="self">self</span>,
-                <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">encoding</span>,
-                <span class="ident">offset</span>: <span class="number">0</span>,
-                <span class="ident">len</span>: <span class="number">0</span>,
-                <span class="ident">cur</span>: <span class="number">0</span>,
+    <span class="doccomment">/// Returns an iterator over the sequence of characters representing the
+    /// decoded string if the encoding is known. Will generate an empty string
+    /// otherwise.
+    </span><span class="kw">pub fn </span>chars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Chars&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw">let </span>encoding = <span class="self">self</span>.encoding();
+        <span class="kw">if </span>!encoding.is_decodable() {
+            <span class="kw">return </span>Chars {
+                record: <span class="kw-2">*</span><span class="self">self</span>,
+                bytes: <span class="kw-2">&amp;</span>[],
+                encoding,
+                offset: <span class="number">0</span>,
+                len: <span class="number">0</span>,
+                cur: <span class="number">0</span>,
             };
         }
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">10</span>) <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">storage</span>;
-        <span class="ident">Chars</span> {
-            <span class="ident">record</span>: <span class="kw-2">*</span><span class="self">self</span>,
-            <span class="ident">bytes</span>: <span class="kw">if</span> <span class="ident">encoding</span> <span class="op">==</span> <span class="ident">Encoding::MacRoman</span> {
-                <span class="self">self</span>.<span class="ident">bytes</span>().<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[])
-            } <span class="kw">else</span> {
+        <span class="kw">let </span>len = <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">8</span>) <span class="kw">as </span>usize;
+        <span class="kw">let </span>offset = <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">10</span>) <span class="kw">as </span>usize + <span class="self">self</span>.storage;
+        Chars {
+            record: <span class="kw-2">*</span><span class="self">self</span>,
+            bytes: <span class="kw">if </span>encoding == Encoding::MacRoman {
+                <span class="self">self</span>.bytes().unwrap_or(<span class="kw-2">&amp;</span>[])
+            } <span class="kw">else </span>{
                 <span class="kw-2">&amp;</span>[]
             },
-            <span class="ident">encoding</span>,
-            <span class="ident">offset</span>,
-            <span class="ident">len</span>,
-            <span class="ident">cur</span>: <span class="number">0</span>,
+            encoding,
+            offset,
+            len,
+            cur: <span class="number">0</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">raw_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">6</span>).<span class="ident">unwrap_or</span>(<span class="number">0xFFFF</span>)
+    <span class="kw">fn </span>raw_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.data.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">6</span>).unwrap_or(<span class="number">0xFFFF</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">platform_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span>)
+    <span class="kw">fn </span>platform_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset)
     }
 
-    <span class="kw">fn</span> <span class="ident">encoding_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)
+    <span class="kw">fn </span>encoding_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">2</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">language_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)
+    <span class="kw">fn </span>language_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.data.read_or_default::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">4</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">encoding</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Encoding</span> {
-        <span class="ident">Encoding::from_raw_parts</span>(<span class="self">self</span>.<span class="ident">platform_id</span>(), <span class="self">self</span>.<span class="ident">encoding_id</span>())
+    <span class="kw">fn </span>encoding(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Encoding {
+        Encoding::from_raw_parts(<span class="self">self</span>.platform_id(), <span class="self">self</span>.encoding_id())
     }
 
-    <span class="kw">fn</span> <span class="ident">bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="number">10</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">storage</span>;
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">read_bytes</span>(<span class="ident">offset</span>, <span class="ident">len</span>)
+    <span class="kw">fn </span>bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; {
+        <span class="kw">let </span>len = <span class="self">self</span>.data.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>offset = <span class="self">self</span>.data.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="number">10</span>)<span class="question-mark">? </span><span class="kw">as </span>usize + <span class="self">self</span>.storage;
+        <span class="self">self</span>.data.read_bytes(offset, len)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">core::fmt::Display</span> <span class="kw">for</span> <span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">core::fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">core::fmt::Result</span> {
-        <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">chars</span>() {
-            <span class="ident">f</span>.<span class="ident">write_char</span>(<span class="ident">c</span>)<span class="question-mark">?</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; core::fmt::Display <span class="kw">for </span>LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>core::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; core::fmt::Result {
+        <span class="kw">for </span>c <span class="kw">in </span><span class="self">self</span>.chars() {
+            f.write_char(c)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="doccomment">/// Iterator over the characters in a localized string.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">record</span>: <span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">bytes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">encoding</span>: <span class="ident">Encoding</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-    <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="ident">cur</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// Iterator over the characters in a localized string.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Chars&lt;<span class="lifetime">&#39;a</span>&gt; {
+    record: LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt;,
+    bytes: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    encoding: Encoding,
+    offset: usize,
+    len: usize,
+    cur: usize,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">char</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>Chars&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Item = char;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cur &gt;= <span class="self">self</span>.len {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">use</span> <span class="ident">core::char::from_u32</span>;
-        <span class="kw">let</span> <span class="ident">rep</span> <span class="op">=</span> <span class="ident">core::char::REPLACEMENT_CHARACTER</span>;
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">record</span>.<span class="ident">data</span>;
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">encoding</span> {
-            <span class="ident">Encoding::Unicode</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">cur</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-                <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-                <span class="kw">if</span> (<span class="number">0xD800</span>..<span class="number">0xDC00</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) {
-                    <span class="kw">let</span> <span class="ident">c2</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">cur</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-                    <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-                    <span class="ident">c</span> <span class="op">=</span> ((<span class="ident">c</span> <span class="op">&amp;</span> <span class="number">0x3FF</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">10</span>) <span class="op">+</span> (<span class="ident">c2</span> <span class="op">&amp;</span> <span class="number">0x3FF</span>) <span class="op">+</span> <span class="number">0x10000</span>;
+        <span class="kw">use </span>core::char::from_u32;
+        <span class="kw">let </span>rep = core::char::REPLACEMENT_CHARACTER;
+        <span class="kw">let </span>d = <span class="kw-2">&amp;</span><span class="self">self</span>.record.data;
+        <span class="kw">match </span><span class="self">self</span>.encoding {
+            Encoding::Unicode =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>c = d.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="self">self</span>.cur)<span class="question-mark">? </span><span class="kw">as </span>u32;
+                <span class="self">self</span>.cur += <span class="number">2</span>;
+                <span class="kw">if </span>(<span class="number">0xD800</span>..<span class="number">0xDC00</span>).contains(<span class="kw-2">&amp;</span>c) {
+                    <span class="kw">let </span>c2 = d.read::&lt;u16&gt;(<span class="self">self</span>.offset + <span class="self">self</span>.cur)<span class="question-mark">? </span><span class="kw">as </span>u32;
+                    <span class="self">self</span>.cur += <span class="number">2</span>;
+                    c = ((c &amp; <span class="number">0x3FF</span>) &lt;&lt; <span class="number">10</span>) + (c2 &amp; <span class="number">0x3FF</span>) + <span class="number">0x10000</span>;
                 }
-                <span class="prelude-val">Some</span>(<span class="ident">from_u32</span>(<span class="ident">c</span>).<span class="ident">unwrap_or</span>(<span class="ident">rep</span>))
+                <span class="prelude-val">Some</span>(from_u32(c).unwrap_or(rep))
             }
-            <span class="ident">Encoding::MacRoman</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">bytes</span>[<span class="self">self</span>.<span class="ident">cur</span>] <span class="kw">as</span> <span class="ident">u32</span>;
-                <span class="self">self</span>.<span class="ident">cur</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">if</span> <span class="ident">c</span> <span class="op">&gt;</span> <span class="number">127</span> {
-                    <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">c</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">128</span>;
-                    <span class="prelude-val">Some</span>(<span class="ident">from_u32</span>(<span class="ident">MAC_ROMAN</span>[<span class="ident">idx</span>] <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">unwrap_or</span>(<span class="ident">rep</span>))
-                } <span class="kw">else</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">from_u32</span>(<span class="ident">c</span>).<span class="ident">unwrap_or</span>(<span class="ident">rep</span>))
+            Encoding::MacRoman =&gt; {
+                <span class="kw">let </span>c = <span class="self">self</span>.bytes[<span class="self">self</span>.cur] <span class="kw">as </span>u32;
+                <span class="self">self</span>.cur += <span class="number">1</span>;
+                <span class="kw">if </span>c &gt; <span class="number">127 </span>{
+                    <span class="kw">let </span>idx = c <span class="kw">as </span>usize - <span class="number">128</span>;
+                    <span class="prelude-val">Some</span>(from_u32(MAC_ROMAN[idx] <span class="kw">as </span>u32).unwrap_or(rep))
+                } <span class="kw">else </span>{
+                    <span class="prelude-val">Some</span>(from_u32(c).unwrap_or(rep))
                 }
             }
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">IntoIterator</span> <span class="kw">for</span> <span class="ident">LocalizedString</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">Chars</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">char</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; IntoIterator <span class="kw">for </span>LocalizedString&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>IntoIter = Chars&lt;<span class="lifetime">&#39;a</span>&gt;;
+    <span class="kw">type </span>Item = char;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::IntoIter</span> {
-        <span class="self">self</span>.<span class="ident">chars</span>()
+    <span class="kw">fn </span>into_iter(<span class="self">self</span>) -&gt; <span class="self">Self</span>::IntoIter {
+        <span class="self">self</span>.chars()
     }
 }
 
-<span class="doccomment">/// Encoding of a localized string.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Fonts can contain a variety of platform specific and legacy encodings.</span>
-<span class="doccomment">/// Only the ones we decode are listed here.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Encoding</span> {
-    <span class="ident">Unicode</span>,
-    <span class="ident">MacRoman</span>,
-    <span class="ident">Other</span> { <span class="ident">platform_id</span>: <span class="ident">u16</span>, <span class="ident">encoding_id</span>: <span class="ident">u16</span> },
+<span class="doccomment">/// Encoding of a localized string.
+///
+/// Fonts can contain a variety of platform specific and legacy encodings.
+/// Only the ones we decode are listed here.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Debug)]
+</span><span class="kw">pub enum </span>Encoding {
+    Unicode,
+    MacRoman,
+    Other { platform_id: u16, encoding_id: u16 },
 }
 
-<span class="kw">impl</span> <span class="ident">Encoding</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_raw_parts</span>(<span class="ident">platform_id</span>: <span class="ident">u16</span>, <span class="ident">encoding_id</span>: <span class="ident">u16</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> (<span class="ident">platform_id</span>, <span class="ident">encoding_id</span>) {
-            (<span class="number">0</span>, <span class="kw">_</span>) =&gt; <span class="ident"><span class="self">Self</span>::Unicode</span>,
-            (<span class="number">1</span>, <span class="number">0</span>) =&gt; <span class="ident"><span class="self">Self</span>::MacRoman</span>,
-            (<span class="number">3</span>, <span class="number">0</span>) =&gt; <span class="ident"><span class="self">Self</span>::Unicode</span>,
-            (<span class="number">3</span>, <span class="number">1</span>) =&gt; <span class="ident"><span class="self">Self</span>::Unicode</span>,
-            (<span class="number">3</span>, <span class="number">10</span>) =&gt; <span class="ident"><span class="self">Self</span>::Unicode</span>,
-            <span class="kw">_</span> =&gt; <span class="ident"><span class="self">Self</span>::Other</span> {
-                <span class="ident">platform_id</span>,
-                <span class="ident">encoding_id</span>,
+<span class="kw">impl </span>Encoding {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_raw_parts(platform_id: u16, encoding_id: u16) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span>(platform_id, encoding_id) {
+            (<span class="number">0</span>, <span class="kw">_</span>) =&gt; <span class="self">Self</span>::Unicode,
+            (<span class="number">1</span>, <span class="number">0</span>) =&gt; <span class="self">Self</span>::MacRoman,
+            (<span class="number">3</span>, <span class="number">0</span>) =&gt; <span class="self">Self</span>::Unicode,
+            (<span class="number">3</span>, <span class="number">1</span>) =&gt; <span class="self">Self</span>::Unicode,
+            (<span class="number">3</span>, <span class="number">10</span>) =&gt; <span class="self">Self</span>::Unicode,
+            <span class="kw">_ </span>=&gt; <span class="self">Self</span>::Other {
+                platform_id,
+                encoding_id,
             },
         }
     }
 
-    <span class="doccomment">/// Returns true if this encoding is can be turned into a string.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_decodable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="op">!</span><span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident"><span class="self">Self</span>::Other</span> { .. })
+    <span class="doccomment">/// Returns true if this encoding is can be turned into a string.
+    </span><span class="kw">pub fn </span>is_decodable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !<span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::Other { .. })
     }
 }
 
-<span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-<span class="kw">const</span> <span class="ident">MAC_ROMAN</span>: [<span class="ident">u16</span>; <span class="number">128</span>] <span class="op">=</span> [
+<span class="attribute">#[rustfmt::skip]
+</span><span class="kw">const </span>MAC_ROMAN: [u16; <span class="number">128</span>] = [
     <span class="number">196</span>, <span class="number">197</span>, <span class="number">199</span>, <span class="number">201</span>, <span class="number">209</span>, <span class="number">214</span>, <span class="number">220</span>, <span class="number">225</span>, <span class="number">224</span>, <span class="number">226</span>, <span class="number">228</span>, <span class="number">227</span>, <span class="number">229</span>, <span class="number">231</span>, <span class="number">233</span>,
     <span class="number">232</span>, <span class="number">234</span>, <span class="number">235</span>, <span class="number">237</span>, <span class="number">236</span>, <span class="number">238</span>, <span class="number">239</span>, <span class="number">241</span>, <span class="number">243</span>, <span class="number">242</span>, <span class="number">244</span>, <span class="number">246</span>, <span class="number">245</span>, <span class="number">250</span>, <span class="number">249</span>,
     <span class="number">251</span>, <span class="number">252</span>, <span class="number">8224</span>, <span class="number">176</span>, <span class="number">162</span>, <span class="number">163</span>, <span class="number">167</span>, <span class="number">8226</span>, <span class="number">182</span>, <span class="number">223</span>, <span class="number">174</span>, <span class="number">169</span>, <span class="number">8482</span>, <span class="number">180</span>,
@@ -877,8 +877,8 @@ Localized names and other metadata.
     <span class="number">731</span>, <span class="number">711</span>,
 ];
 
-<span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-<span class="kw">const</span> <span class="ident">LANGUAGES</span>: [(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>); <span class="number">334</span>] <span class="op">=</span> [
+<span class="attribute">#[rustfmt::skip]
+</span><span class="kw">const </span>LANGUAGES: [(u32, <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str); <span class="number">334</span>] = [
     (<span class="number">0x10000</span>, <span class="string">&quot;en&quot;</span>), (<span class="number">0x10001</span>, <span class="string">&quot;fr&quot;</span>), (<span class="number">0x10002</span>, <span class="string">&quot;de&quot;</span>), (<span class="number">0x10003</span>, <span class="string">&quot;it&quot;</span>), (<span class="number">0x10004</span>, <span class="string">&quot;nl&quot;</span>),
     (<span class="number">0x10005</span>, <span class="string">&quot;sv&quot;</span>), (<span class="number">0x10006</span>, <span class="string">&quot;es&quot;</span>), (<span class="number">0x10007</span>, <span class="string">&quot;da&quot;</span>), (<span class="number">0x10008</span>, <span class="string">&quot;pt&quot;</span>), (<span class="number">0x10009</span>, <span class="string">&quot;no&quot;</span>),
     (<span class="number">0x1000A</span>, <span class="string">&quot;he&quot;</span>), (<span class="number">0x1000B</span>, <span class="string">&quot;ja&quot;</span>), (<span class="number">0x1000C</span>, <span class="string">&quot;ar&quot;</span>), (<span class="number">0x1000D</span>, <span class="string">&quot;fi&quot;</span>), (<span class="number">0x1000E</span>, <span class="string">&quot;el&quot;</span>),
@@ -948,19 +948,19 @@ Localized names and other metadata.
     (<span class="number">0x3500A</span>, <span class="string">&quot;es&quot;</span>), (<span class="number">0x3540A</span>, <span class="string">&quot;es&quot;</span>), (<span class="number">0x3E40A</span>, <span class="string">&quot;es&quot;</span>), (<span class="number">0x3E40C</span>, <span class="string">&quot;fr&quot;</span>),
 ];
 
-<span class="kw">fn</span> <span class="ident">get_language</span>(<span class="ident">platform_id</span>: <span class="ident">u16</span>, <span class="ident">language_id</span>: <span class="ident">u16</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-    <span class="kw">match</span> <span class="ident">platform_id</span> {
-        <span class="number">0</span> =&gt; <span class="string">&quot;&quot;</span>,
-        <span class="number">1</span> <span class="op">|</span> <span class="number">3</span> =&gt; {
-            <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> (<span class="ident">platform_id</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span> <span class="op">|</span> <span class="ident">language_id</span> <span class="kw">as</span> <span class="ident">u32</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">idx</span>) <span class="op">=</span> <span class="ident">LANGUAGES</span>.<span class="ident">binary_search_by</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>)) {
-                <span class="ident">LANGUAGES</span>[<span class="ident">idx</span>].<span class="number">1</span>
-            } <span class="kw">else</span> {
-                <span class="string">&quot;zz&quot;</span>
-            }
+<span class="kw">fn </span>get_language(platform_id: u16, language_id: u16) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+    <span class="kw">match </span>platform_id {
+        <span class="number">0 </span>=&gt; <span class="string">&quot;&quot;</span>,
+        <span class="number">1 </span>| <span class="number">3 </span>=&gt; {
+            <span class="kw">let </span>key = (platform_id <span class="kw">as </span>u32) &lt;&lt; <span class="number">16 </span>| language_id <span class="kw">as </span>u32;
+            <span class="kw">if let </span><span class="prelude-val">Ok</span>(idx) = LANGUAGES.binary_search_by(|x| x.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>key)) {
+                LANGUAGES[idx].<span class="number">1
+            </span>} <span class="kw">else </span>{
+                <span class="string">&quot;zz&quot;
+            </span>}
         }
-        <span class="kw">_</span> =&gt; <span class="string">&quot;zz&quot;</span>,
+        <span class="kw">_ </span>=&gt; <span class="string">&quot;zz&quot;</span>,
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

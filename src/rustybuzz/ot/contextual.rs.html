@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/contextual.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contextual.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/contextual.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>contextual.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -410,126 +410,126 @@
 <span id="410">410</span>
 <span id="411">411</span>
 <span id="412">412</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">ttf_parser</span>::{<span class="ident">GlyphId</span>, <span class="ident">LazyArray16</span>};
-<span class="kw">use</span> <span class="ident">ttf_parser::opentype_layout</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>ttf_parser::{GlyphId, LazyArray16};
+<span class="kw">use </span>ttf_parser::opentype_layout::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::MAX_CONTEXT_LENGTH</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::apply</span>::{<span class="ident">Apply</span>, <span class="ident">ApplyContext</span>, <span class="ident">WouldApply</span>, <span class="ident">WouldApplyContext</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::matching</span>::{
-    <span class="ident">match_backtrack</span>, <span class="ident">match_glyph</span>, <span class="ident">match_input</span>, <span class="ident">match_lookahead</span>,
-    <span class="ident">MatchFunc</span>, <span class="ident">Matched</span>,
+<span class="kw">use </span><span class="kw">super</span>::MAX_CONTEXT_LENGTH;
+<span class="kw">use </span><span class="kw">super</span>::apply::{Apply, ApplyContext, WouldApply, WouldApplyContext};
+<span class="kw">use </span><span class="kw">super</span>::matching::{
+    match_backtrack, match_glyph, match_input, match_lookahead,
+    MatchFunc, Matched,
 };
 
-<span class="kw">impl</span> <span class="ident">WouldApply</span> <span class="kw">for</span> <span class="ident">ContextLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="number">0</span>];
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">coverage</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)
-                    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">index</span><span class="op">|</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">index</span>))
-                    .<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">set</span><span class="op">|</span> <span class="ident">set</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_glyph</span>))
+<span class="kw">impl </span>WouldApply <span class="kw">for </span>ContextLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext) -&gt; bool {
+        <span class="kw">let </span>glyph = ctx.glyphs[<span class="number">0</span>];
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { coverage, sets } =&gt; {
+                coverage.get(glyph)
+                    .and_then(|index| sets.get(index))
+                    .map_or(<span class="bool-val">false</span>, |set| set.would_apply(ctx, <span class="kw-2">&amp;</span>match_glyph))
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">classes</span>, <span class="ident">sets</span>, .. } =&gt; {
-                <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">classes</span>.<span class="ident">get</span>(<span class="ident">glyph</span>);
-                <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">class</span>).<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">set</span><span class="op">|</span> <span class="ident">set</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">classes</span>)))
+            <span class="self">Self</span>::Format2 { classes, sets, .. } =&gt; {
+                <span class="kw">let </span>class = classes.get(glyph);
+                sets.get(class).map_or(<span class="bool-val">false</span>, |set| set.would_apply(ctx, <span class="kw-2">&amp;</span>match_class(classes)))
             }
-            <span class="ident"><span class="self">Self</span>::Format3</span> { <span class="ident">coverages</span>, .. } =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">usize::from</span>(<span class="ident">coverages</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="number">1</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">coverages</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">coverage</span>)<span class="op">|</span> {
-                        <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>]).<span class="ident">is_some</span>()
+            <span class="self">Self</span>::Format3 { coverages, .. } =&gt; {
+                ctx.glyphs.len() == usize::from(coverages.len()) + <span class="number">1
+                    </span>&amp;&amp; coverages.into_iter().enumerate().all(|(i, coverage)| {
+                        coverage.get(ctx.glyphs[i + <span class="number">1</span>]).is_some()
                     })
             }
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">ContextLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">coverage</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">index</span><span class="op">|</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">index</span>))<span class="question-mark">?</span>;
-                <span class="ident">set</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_glyph</span>)
+<span class="kw">impl </span>Apply <span class="kw">for </span>ContextLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { coverage, sets } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw">let </span>set = coverage.get(glyph).and_then(|index| sets.get(index))<span class="question-mark">?</span>;
+                set.apply(ctx, <span class="kw-2">&amp;</span>match_glyph)
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">coverage</span>, <span class="ident">classes</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">classes</span>.<span class="ident">get</span>(<span class="ident">glyph</span>);
-                <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">class</span>)<span class="question-mark">?</span>;
-                <span class="ident">set</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">classes</span>))
+            <span class="self">Self</span>::Format2 { coverage, classes, sets } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw">let </span>class = classes.get(glyph);
+                <span class="kw">let </span>set = sets.get(class)<span class="question-mark">?</span>;
+                set.apply(ctx, <span class="kw-2">&amp;</span>match_class(classes))
             }
-            <span class="ident"><span class="self">Self</span>::Format3</span> { <span class="ident">coverage</span>, <span class="ident">coverages</span>, <span class="ident">lookups</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">coverages_len</span> <span class="op">=</span> <span class="ident">coverages</span>.<span class="ident">len</span>();
+            <span class="self">Self</span>::Format3 { coverage, coverages, lookups } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw">let </span>coverages_len = coverages.len();
 
-                <span class="kw">let</span> <span class="ident">match_func</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">coverages_len</span> <span class="op">-</span> <span class="ident">num_items</span>;
-                    <span class="kw">let</span> <span class="ident">coverage</span> <span class="op">=</span> <span class="ident">coverages</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>).<span class="ident">is_some</span>()
+                <span class="kw">let </span>match_func = |glyph, num_items| {
+                    <span class="kw">let </span>index = coverages_len - num_items;
+                    <span class="kw">let </span>coverage = coverages.get(index).unwrap();
+                    coverage.get(glyph).is_some()
                 };
 
-                <span class="ident">match_input</span>(<span class="ident">ctx</span>, <span class="ident">coverages_len</span> <span class="kw">as</span> <span class="ident">u16</span>, <span class="kw-2">&amp;</span><span class="ident">match_func</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">matched</span><span class="op">|</span> {
-                    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="ident">matched</span>.<span class="ident">len</span>);
-                    <span class="ident">apply_lookup</span>(<span class="ident">ctx</span>, <span class="ident">usize::from</span>(<span class="ident">coverages_len</span>), <span class="ident">matched</span>, <span class="ident">lookups</span>);
+                match_input(ctx, coverages_len <span class="kw">as </span>u16, <span class="kw-2">&amp;</span>match_func).map(|matched| {
+                    ctx.buffer.unsafe_to_break(ctx.buffer.idx, ctx.buffer.idx + matched.len);
+                    apply_lookup(ctx, usize::from(coverages_len), matched, lookups);
                 })
             }
         }
     }
 }
 
-<span class="kw">trait</span> <span class="ident">SequenceRuleSetExt</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">trait </span>SequenceRuleSetExt {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool;
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">SequenceRuleSetExt</span> <span class="kw">for</span> <span class="ident">SequenceRuleSet</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">rule</span><span class="op">|</span> <span class="ident">rule</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="ident">match_func</span>))
+<span class="kw">impl </span>SequenceRuleSetExt <span class="kw">for </span>SequenceRuleSet&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool {
+        <span class="self">self</span>.into_iter().any(|rule| rule.would_apply(ctx, match_func))
     }
 
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">rule</span><span class="op">|</span> <span class="ident">rule</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">match_func</span>).<span class="ident">is_some</span>()) { <span class="prelude-val">Some</span>(()) } <span class="kw">else</span> { <span class="prelude-val">None</span> }
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.into_iter().any(|rule| rule.apply(ctx, match_func).is_some()) { <span class="prelude-val">Some</span>(()) } <span class="kw">else </span>{ <span class="prelude-val">None </span>}
     }
 }
 
-<span class="kw">trait</span> <span class="ident">SequenceRuleExt</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">trait </span>SequenceRuleExt {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool;
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">SequenceRuleExt</span> <span class="kw">for</span> <span class="ident">SequenceRule</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">ctx</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">input</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="number">1</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">value</span>)<span class="op">|</span> {
-                <span class="ident">match_func</span>(<span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>], <span class="ident">value</span>)
+<span class="kw">impl </span>SequenceRuleExt <span class="kw">for </span>SequenceRule&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool {
+        ctx.glyphs.len() == usize::from(<span class="self">self</span>.input.len()) + <span class="number">1
+            </span>&amp;&amp; <span class="self">self</span>.input.into_iter().enumerate().all(|(i, value)| {
+                match_func(ctx.glyphs[i + <span class="number">1</span>], value)
             })
     }
 
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="ident">apply_context</span>(<span class="ident">ctx</span>, <span class="self">self</span>.<span class="ident">input</span>, <span class="ident">match_func</span>, <span class="self">self</span>.<span class="ident">lookups</span>)
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        apply_context(ctx, <span class="self">self</span>.input, match_func, <span class="self">self</span>.lookups)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">WouldApply</span> <span class="kw">for</span> <span class="ident">ChainedContextLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="number">0</span>];
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">coverage</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph_id</span>)
-                    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">index</span><span class="op">|</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">index</span>))
-                    .<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">set</span><span class="op">|</span> <span class="ident">set</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_glyph</span>))
+<span class="kw">impl </span>WouldApply <span class="kw">for </span>ChainedContextLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext) -&gt; bool {
+        <span class="kw">let </span>glyph_id = ctx.glyphs[<span class="number">0</span>];
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { coverage, sets } =&gt; {
+                coverage.get(glyph_id)
+                    .and_then(|index| sets.get(index))
+                    .map_or(<span class="bool-val">false</span>, |set| set.would_apply(ctx, <span class="kw-2">&amp;</span>match_glyph))
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">input_classes</span>, <span class="ident">sets</span>, .. } =&gt; {
-                <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">input_classes</span>.<span class="ident">get</span>(<span class="ident">glyph_id</span>);
-                <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">class</span>)
-                    .<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">set</span><span class="op">|</span> <span class="ident">set</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">input_classes</span>)))
+            <span class="self">Self</span>::Format2 { input_classes, sets, .. } =&gt; {
+                <span class="kw">let </span>class = input_classes.get(glyph_id);
+                sets.get(class)
+                    .map_or(<span class="bool-val">false</span>, |set| set.would_apply(ctx, <span class="kw-2">&amp;</span>match_class(input_classes)))
             }
-            <span class="ident"><span class="self">Self</span>::Format3</span> { <span class="ident">backtrack_coverages</span>, <span class="ident">input_coverages</span>, <span class="ident">lookahead_coverages</span>, .. } =&gt; {
-                (<span class="op">!</span><span class="ident">ctx</span>.<span class="ident">zero_context</span> <span class="op">|</span><span class="op">|</span> (<span class="ident">backtrack_coverages</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">lookahead_coverages</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>))
-                    <span class="op">&amp;&amp;</span> (
-                        <span class="ident">ctx</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">usize::from</span>(<span class="ident">input_coverages</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="number">1</span>
-                            <span class="op">&amp;&amp;</span> <span class="ident">input_coverages</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">coverage</span>)<span class="op">|</span> {
-                                <span class="ident">coverage</span>.<span class="ident">contains</span>(<span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>])
+            <span class="self">Self</span>::Format3 { backtrack_coverages, input_coverages, lookahead_coverages, .. } =&gt; {
+                (!ctx.zero_context || (backtrack_coverages.len() == <span class="number">0 </span>&amp;&amp; lookahead_coverages.len() == <span class="number">0</span>))
+                    &amp;&amp; (
+                        ctx.glyphs.len() == usize::from(input_coverages.len()) + <span class="number">1
+                            </span>&amp;&amp; input_coverages.into_iter().enumerate().all(|(i, coverage)| {
+                                coverage.contains(ctx.glyphs[i + <span class="number">1</span>])
                             })
                     )
             }
@@ -537,290 +537,290 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Apply</span> <span class="kw">for</span> <span class="ident">ChainedContextLookup</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">as_glyph</span>();
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Format1</span> { <span class="ident">coverage</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">index</span>)<span class="question-mark">?</span>;
-                <span class="ident">set</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, [<span class="kw-2">&amp;</span><span class="ident">match_glyph</span>, <span class="kw-2">&amp;</span><span class="ident">match_glyph</span>, <span class="kw-2">&amp;</span><span class="ident">match_glyph</span>])
+<span class="kw">impl </span>Apply <span class="kw">for </span>ChainedContextLookup&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>glyph = ctx.buffer.cur(<span class="number">0</span>).as_glyph();
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            <span class="self">Self</span>::Format1 { coverage, sets } =&gt; {
+                <span class="kw">let </span>index = coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw">let </span>set = sets.get(index)<span class="question-mark">?</span>;
+                set.apply(ctx, [<span class="kw-2">&amp;</span>match_glyph, <span class="kw-2">&amp;</span>match_glyph, <span class="kw-2">&amp;</span>match_glyph])
             }
-            <span class="ident"><span class="self">Self</span>::Format2</span> { <span class="ident">coverage</span>, <span class="ident">backtrack_classes</span>, <span class="ident">input_classes</span>, <span class="ident">lookahead_classes</span>, <span class="ident">sets</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">input_classes</span>.<span class="ident">get</span>(<span class="ident">glyph</span>);
-                <span class="kw">let</span> <span class="ident">set</span> <span class="op">=</span> <span class="ident">sets</span>.<span class="ident">get</span>(<span class="ident">class</span>)<span class="question-mark">?</span>;
-                <span class="ident">set</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, [
-                    <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">backtrack_classes</span>),
-                    <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">input_classes</span>),
-                    <span class="kw-2">&amp;</span><span class="ident">match_class</span>(<span class="ident">lookahead_classes</span>),
+            <span class="self">Self</span>::Format2 { coverage, backtrack_classes, input_classes, lookahead_classes, sets } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
+                <span class="kw">let </span>class = input_classes.get(glyph);
+                <span class="kw">let </span>set = sets.get(class)<span class="question-mark">?</span>;
+                set.apply(ctx, [
+                    <span class="kw-2">&amp;</span>match_class(backtrack_classes),
+                    <span class="kw-2">&amp;</span>match_class(input_classes),
+                    <span class="kw-2">&amp;</span>match_class(lookahead_classes),
                 ])
             }
-            <span class="ident"><span class="self">Self</span>::Format3</span> { <span class="ident">coverage</span>, <span class="ident">backtrack_coverages</span>, <span class="ident">input_coverages</span>, <span class="ident">lookahead_coverages</span>, <span class="ident">lookups</span> } =&gt; {
-                <span class="ident">coverage</span>.<span class="ident">get</span>(<span class="ident">glyph</span>)<span class="question-mark">?</span>;
+            <span class="self">Self</span>::Format3 { coverage, backtrack_coverages, input_coverages, lookahead_coverages, lookups } =&gt; {
+                coverage.get(glyph)<span class="question-mark">?</span>;
 
-                <span class="kw">let</span> <span class="ident">back</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">backtrack_coverages</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-                    <span class="kw">let</span> <span class="ident">coverage</span> <span class="op">=</span> <span class="ident">backtrack_coverages</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">coverage</span>.<span class="ident">contains</span>(<span class="ident">glyph</span>)
+                <span class="kw">let </span>back = |glyph, num_items| {
+                    <span class="kw">let </span>index = backtrack_coverages.len() - num_items;
+                    <span class="kw">let </span>coverage = backtrack_coverages.get(index).unwrap();
+                    coverage.contains(glyph)
                 };
 
-                <span class="kw">let</span> <span class="ident">ahead</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">lookahead_coverages</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-                    <span class="kw">let</span> <span class="ident">coverage</span> <span class="op">=</span> <span class="ident">lookahead_coverages</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">coverage</span>.<span class="ident">contains</span>(<span class="ident">glyph</span>)
+                <span class="kw">let </span>ahead = |glyph, num_items| {
+                    <span class="kw">let </span>index = lookahead_coverages.len() - num_items;
+                    <span class="kw">let </span>coverage = lookahead_coverages.get(index).unwrap();
+                    coverage.contains(glyph)
                 };
 
-                <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">input_coverages</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-                    <span class="kw">let</span> <span class="ident">coverage</span> <span class="op">=</span> <span class="ident">input_coverages</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">coverage</span>.<span class="ident">contains</span>(<span class="ident">glyph</span>)
+                <span class="kw">let </span>input = |glyph, num_items| {
+                    <span class="kw">let </span>index = input_coverages.len() - num_items;
+                    <span class="kw">let </span>coverage = input_coverages.get(index).unwrap();
+                    coverage.contains(glyph)
                 };
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">matched</span>) <span class="op">=</span> <span class="ident">match_input</span>(<span class="ident">ctx</span>, <span class="ident">input_coverages</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">input</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">start_idx</span>) <span class="op">=</span> <span class="ident">match_backtrack</span>(<span class="ident">ctx</span>, <span class="ident">backtrack_coverages</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">back</span>) {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">end_idx</span>) <span class="op">=</span> <span class="ident">match_lookahead</span>(<span class="ident">ctx</span>, <span class="ident">lookahead_coverages</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">ahead</span>, <span class="ident">matched</span>.<span class="ident">len</span>) {
-                            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break_from_outbuffer</span>(<span class="ident">start_idx</span>, <span class="ident">end_idx</span>);
-                            <span class="ident">apply_lookup</span>(<span class="ident">ctx</span>, <span class="ident">usize::from</span>(<span class="ident">input_coverages</span>.<span class="ident">len</span>()), <span class="ident">matched</span>, <span class="ident">lookups</span>);
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(matched) = match_input(ctx, input_coverages.len(), <span class="kw-2">&amp;</span>input) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(start_idx) = match_backtrack(ctx, backtrack_coverages.len(), <span class="kw-2">&amp;</span>back) {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(end_idx) = match_lookahead(ctx, lookahead_coverages.len(), <span class="kw-2">&amp;</span>ahead, matched.len) {
+                            ctx.buffer.unsafe_to_break_from_outbuffer(start_idx, end_idx);
+                            apply_lookup(ctx, usize::from(input_coverages.len()), matched, lookups);
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(());
                         }
                     }
                 }
 
-                <span class="prelude-val">None</span>
-            }
+                <span class="prelude-val">None
+            </span>}
         }
     }
 }
 
-<span class="kw">trait</span> <span class="ident">ChainRuleSetExt</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_funcs</span>: [<span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">trait </span>ChainRuleSetExt {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool;
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_funcs: [<span class="kw-2">&amp;</span>MatchFunc; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">ChainRuleSetExt</span> <span class="kw">for</span> <span class="ident">ChainedSequenceRuleSet</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">rule</span><span class="op">|</span> <span class="ident">rule</span>.<span class="ident">would_apply</span>(<span class="ident">ctx</span>, <span class="ident">match_func</span>))
+<span class="kw">impl </span>ChainRuleSetExt <span class="kw">for </span>ChainedSequenceRuleSet&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool {
+        <span class="self">self</span>.into_iter().any(|rule| rule.would_apply(ctx, match_func))
     }
 
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_funcs</span>: [<span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">rule</span><span class="op">|</span> <span class="ident">rule</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>, <span class="ident">match_funcs</span>).<span class="ident">is_some</span>()) { <span class="prelude-val">Some</span>(()) } <span class="kw">else</span> { <span class="prelude-val">None</span> }
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_funcs: [<span class="kw-2">&amp;</span>MatchFunc; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.into_iter().any(|rule| rule.apply(ctx, match_funcs).is_some()) { <span class="prelude-val">Some</span>(()) } <span class="kw">else </span>{ <span class="prelude-val">None </span>}
     }
 }
 
-<span class="kw">trait</span> <span class="ident">ChainRuleExt</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_funcs</span>: [<span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">trait </span>ChainRuleExt {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool;
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_funcs: [<span class="kw-2">&amp;</span>MatchFunc; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">ChainRuleExt</span> <span class="kw">for</span> <span class="ident">ChainedSequenceRule</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">would_apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">WouldApplyContext</span>, <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>) -&gt; <span class="ident">bool</span> {
-        (<span class="op">!</span><span class="ident">ctx</span>.<span class="ident">zero_context</span> <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">backtrack</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">lookahead</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>))
-            <span class="op">&amp;&amp;</span> (
-                <span class="ident">ctx</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">input</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="number">1</span>
-                    <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">value</span>)<span class="op">|</span> {
-                        <span class="ident">match_func</span>(<span class="ident">ctx</span>.<span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>], <span class="ident">value</span>)
+<span class="kw">impl </span>ChainRuleExt <span class="kw">for </span>ChainedSequenceRule&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>would_apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;</span>WouldApplyContext, match_func: <span class="kw-2">&amp;</span>MatchFunc) -&gt; bool {
+        (!ctx.zero_context || (<span class="self">self</span>.backtrack.len() == <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.lookahead.len() == <span class="number">0</span>))
+            &amp;&amp; (
+                ctx.glyphs.len() == usize::from(<span class="self">self</span>.input.len()) + <span class="number">1
+                    </span>&amp;&amp; <span class="self">self</span>.input.into_iter().enumerate().all(|(i, value)| {
+                        match_func(ctx.glyphs[i + <span class="number">1</span>], value)
                     })
             )
     }
 
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">match_funcs</span>: [<span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="ident">apply_chain_context</span>(
-            <span class="ident">ctx</span>,
-            <span class="self">self</span>.<span class="ident">backtrack</span>,
-            <span class="self">self</span>.<span class="ident">input</span>,
-            <span class="self">self</span>.<span class="ident">lookahead</span>,
-            <span class="ident">match_funcs</span>,
-            <span class="self">self</span>.<span class="ident">lookups</span>,
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>ApplyContext, match_funcs: [<span class="kw-2">&amp;</span>MatchFunc; <span class="number">3</span>]) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        apply_chain_context(
+            ctx,
+            <span class="self">self</span>.backtrack,
+            <span class="self">self</span>.input,
+            <span class="self">self</span>.lookahead,
+            match_funcs,
+            <span class="self">self</span>.lookups,
         )
     }
 }
 
-<span class="kw">fn</span> <span class="ident">apply_context</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>,
-    <span class="ident">input</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>,
-    <span class="ident">lookups</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">SequenceLookupRecord</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">match_func</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-        <span class="ident">match_func</span>(<span class="ident">glyph</span>, <span class="ident">value</span>)
+<span class="kw">fn </span>apply_context(
+    ctx: <span class="kw-2">&amp;mut </span>ApplyContext,
+    input: LazyArray16&lt;u16&gt;,
+    match_func: <span class="kw-2">&amp;</span>MatchFunc,
+    lookups: LazyArray16&lt;SequenceLookupRecord&gt;,
+) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+    <span class="kw">let </span>match_func = |glyph, num_items| {
+        <span class="kw">let </span>index = input.len() - num_items;
+        <span class="kw">let </span>value = input.get(index).unwrap();
+        match_func(glyph, value)
     };
 
-    <span class="ident">match_input</span>(<span class="ident">ctx</span>, <span class="ident">input</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">match_func</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">matched</span><span class="op">|</span> {
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="ident">matched</span>.<span class="ident">len</span>);
-        <span class="ident">apply_lookup</span>(<span class="ident">ctx</span>, <span class="ident">usize::from</span>(<span class="ident">input</span>.<span class="ident">len</span>()), <span class="ident">matched</span>, <span class="ident">lookups</span>);
+    match_input(ctx, input.len(), <span class="kw-2">&amp;</span>match_func).map(|matched| {
+        ctx.buffer.unsafe_to_break(ctx.buffer.idx, ctx.buffer.idx + matched.len);
+        apply_lookup(ctx, usize::from(input.len()), matched, lookups);
     })
 }
 
-<span class="kw">fn</span> <span class="ident">apply_chain_context</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>,
-    <span class="ident">backtrack</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="ident">input</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="ident">lookahead</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="ident">match_funcs</span>: [<span class="kw-2">&amp;</span><span class="ident">MatchFunc</span>; <span class="number">3</span>],
-    <span class="ident">lookups</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">SequenceLookupRecord</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">f1</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">backtrack</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">backtrack</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-        <span class="ident">match_funcs</span>[<span class="number">0</span>](<span class="ident">glyph</span>, <span class="ident">value</span>)
+<span class="kw">fn </span>apply_chain_context(
+    ctx: <span class="kw-2">&amp;mut </span>ApplyContext,
+    backtrack: LazyArray16&lt;u16&gt;,
+    input: LazyArray16&lt;u16&gt;,
+    lookahead: LazyArray16&lt;u16&gt;,
+    match_funcs: [<span class="kw-2">&amp;</span>MatchFunc; <span class="number">3</span>],
+    lookups: LazyArray16&lt;SequenceLookupRecord&gt;,
+) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+    <span class="kw">let </span>f1 = |glyph, num_items| {
+        <span class="kw">let </span>index = backtrack.len() - num_items;
+        <span class="kw">let </span>value = backtrack.get(index).unwrap();
+        match_funcs[<span class="number">0</span>](glyph, value)
     };
 
-    <span class="kw">let</span> <span class="ident">f2</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">lookahead</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">lookahead</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-        <span class="ident">match_funcs</span>[<span class="number">2</span>](<span class="ident">glyph</span>, <span class="ident">value</span>)
+    <span class="kw">let </span>f2 = |glyph, num_items| {
+        <span class="kw">let </span>index = lookahead.len() - num_items;
+        <span class="kw">let </span>value = lookahead.get(index).unwrap();
+        match_funcs[<span class="number">2</span>](glyph, value)
     };
 
-    <span class="kw">let</span> <span class="ident">f3</span> <span class="op">=</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">num_items</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">num_items</span>;
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">unwrap</span>();
-        <span class="ident">match_funcs</span>[<span class="number">1</span>](<span class="ident">glyph</span>, <span class="ident">value</span>)
+    <span class="kw">let </span>f3 = |glyph, num_items| {
+        <span class="kw">let </span>index = input.len() - num_items;
+        <span class="kw">let </span>value = input.get(index).unwrap();
+        match_funcs[<span class="number">1</span>](glyph, value)
     };
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">matched</span>) <span class="op">=</span> <span class="ident">match_input</span>(<span class="ident">ctx</span>, <span class="ident">input</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">f3</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">start_idx</span>) <span class="op">=</span> <span class="ident">match_backtrack</span>(<span class="ident">ctx</span>, <span class="ident">backtrack</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">f1</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">end_idx</span>) <span class="op">=</span> <span class="ident">match_lookahead</span>(<span class="ident">ctx</span>, <span class="ident">lookahead</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">f2</span>, <span class="ident">matched</span>.<span class="ident">len</span>) {
-                <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break_from_outbuffer</span>(<span class="ident">start_idx</span>, <span class="ident">end_idx</span>);
-                <span class="ident">apply_lookup</span>(<span class="ident">ctx</span>, <span class="ident">usize::from</span>(<span class="ident">input</span>.<span class="ident">len</span>()), <span class="ident">matched</span>, <span class="ident">lookups</span>);
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(matched) = match_input(ctx, input.len(), <span class="kw-2">&amp;</span>f3) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(start_idx) = match_backtrack(ctx, backtrack.len(), <span class="kw-2">&amp;</span>f1) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(end_idx) = match_lookahead(ctx, lookahead.len(), <span class="kw-2">&amp;</span>f2, matched.len) {
+                ctx.buffer.unsafe_to_break_from_outbuffer(start_idx, end_idx);
+                apply_lookup(ctx, usize::from(input.len()), matched, lookups);
+                <span class="kw">return </span><span class="prelude-val">Some</span>(());
             }
         }
     }
 
-    <span class="prelude-val">None</span>
-}
+    <span class="prelude-val">None
+</span>}
 
-<span class="kw">fn</span> <span class="ident">apply_lookup</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>,
-    <span class="ident">input_len</span>: <span class="ident">usize</span>,
-    <span class="kw-2">mut</span> <span class="ident">matched</span>: <span class="ident">Matched</span>,
-    <span class="ident">lookups</span>: <span class="ident">LazyArray16</span><span class="op">&lt;</span><span class="ident">SequenceLookupRecord</span><span class="op">&gt;</span>,
+<span class="kw">fn </span>apply_lookup(
+    ctx: <span class="kw-2">&amp;mut </span>ApplyContext,
+    input_len: usize,
+    <span class="kw-2">mut </span>matched: Matched,
+    lookups: LazyArray16&lt;SequenceLookupRecord&gt;,
 ) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">input_len</span> <span class="op">+</span> <span class="number">1</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>count = input_len + <span class="number">1</span>;
 
-    <span class="comment">// All positions are distance from beginning of *output* buffer.</span>
-    <span class="comment">// Adjust.</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">end</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">backtrack_len</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">backtrack_len</span>();
-        <span class="kw">let</span> <span class="ident">delta</span> <span class="op">=</span> <span class="ident">backtrack_len</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="kw">as</span> <span class="ident">isize</span>;
+    <span class="comment">// All positions are distance from beginning of *output* buffer.
+    // Adjust.
+    </span><span class="kw">let </span><span class="kw-2">mut </span>end = {
+        <span class="kw">let </span>backtrack_len = ctx.buffer.backtrack_len();
+        <span class="kw">let </span>delta = backtrack_len <span class="kw">as </span>isize - ctx.buffer.idx <span class="kw">as </span>isize;
 
-        <span class="comment">// Convert positions to new indexing.</span>
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-            <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">j</span>] <span class="op">=</span> (<span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">j</span>] <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// Convert positions to new indexing.
+        </span><span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..count {
+            matched.positions[j] = (matched.positions[j] <span class="kw">as </span>isize + delta) <span class="kw">as _</span>;
         }
 
-        <span class="ident">backtrack_len</span> <span class="op">+</span> <span class="ident">matched</span>.<span class="ident">len</span>
+        backtrack_len + matched.len
     };
 
-    <span class="kw">for</span> <span class="ident">record</span> <span class="kw">in</span> <span class="ident">lookups</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">successful</span> {
+    <span class="kw">for </span>record <span class="kw">in </span>lookups {
+        <span class="kw">if </span>!ctx.buffer.successful {
             <span class="kw">break</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="ident">record</span>.<span class="ident">sequence_index</span>);
-        <span class="kw">if</span> <span class="ident">idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">count</span> {
+        <span class="kw">let </span>idx = usize::from(record.sequence_index);
+        <span class="kw">if </span>idx &gt;= count {
             <span class="kw">continue</span>;
         }
 
-        <span class="comment">// Don&#39;t recurse to ourself at same position.</span>
-        <span class="comment">// Note that this test is too naive, it doesn&#39;t catch longer loops.</span>
-        <span class="kw">if</span> <span class="ident">idx</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">record</span>.<span class="ident">lookup_list_index</span> <span class="op">==</span> <span class="ident">ctx</span>.<span class="ident">lookup_index</span> {
+        <span class="comment">// Don&#39;t recurse to ourself at same position.
+        // Note that this test is too naive, it doesn&#39;t catch longer loops.
+        </span><span class="kw">if </span>idx == <span class="number">0 </span>&amp;&amp; record.lookup_list_index == ctx.lookup_index {
             <span class="kw">continue</span>;
         }
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">idx</span>]) {
+        <span class="kw">if </span>!ctx.buffer.move_to(matched.positions[idx]) {
             <span class="kw">break</span>;
         }
 
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if </span>ctx.buffer.max_ops &lt;= <span class="number">0 </span>{
             <span class="kw">break</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">orig_len</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">backtrack_len</span>() <span class="op">+</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">lookahead_len</span>();
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">recurse</span>(<span class="ident">record</span>.<span class="ident">lookup_list_index</span>).<span class="ident">is_none</span>() {
+        <span class="kw">let </span>orig_len = ctx.buffer.backtrack_len() + ctx.buffer.lookahead_len();
+        <span class="kw">if </span>ctx.recurse(record.lookup_list_index).is_none() {
             <span class="kw">continue</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">new_len</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">backtrack_len</span>() <span class="op">+</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">lookahead_len</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">delta</span> <span class="op">=</span> <span class="ident">new_len</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">orig_len</span> <span class="kw">as</span> <span class="ident">isize</span>;
-        <span class="kw">if</span> <span class="ident">delta</span> <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">let </span>new_len = ctx.buffer.backtrack_len() + ctx.buffer.lookahead_len();
+        <span class="kw">let </span><span class="kw-2">mut </span>delta = new_len <span class="kw">as </span>isize - orig_len <span class="kw">as </span>isize;
+        <span class="kw">if </span>delta == <span class="number">0 </span>{
             <span class="kw">continue</span>;
         }
 
-        <span class="comment">// Recursed lookup changed buffer len.  Adjust.</span>
-        <span class="comment">//</span>
-        <span class="comment">// TODO:</span>
-        <span class="comment">//</span>
-        <span class="comment">// Right now, if buffer length increased by n, we assume n new glyphs</span>
-        <span class="comment">// were added right after the current position, and if buffer length</span>
-        <span class="comment">// was decreased by n, we assume n match positions after the current</span>
-        <span class="comment">// one where removed.  The former (buffer length increased) case is</span>
-        <span class="comment">// fine, but the decrease case can be improved in at least two ways,</span>
-        <span class="comment">// both of which are significant:</span>
-        <span class="comment">//</span>
-        <span class="comment">//   - If recursed-to lookup is MultipleSubst and buffer length</span>
-        <span class="comment">//     decreased, then it&#39;s current match position that was deleted,</span>
-        <span class="comment">//     NOT the one after it.</span>
-        <span class="comment">//</span>
-        <span class="comment">//   - If buffer length was decreased by n, it does not necessarily</span>
-        <span class="comment">//     mean that n match positions where removed, as there might</span>
-        <span class="comment">//     have been marks and default-ignorables in the sequence.  We</span>
-        <span class="comment">//     should instead drop match positions between current-position</span>
-        <span class="comment">//     and current-position + n instead.</span>
-        <span class="comment">//</span>
-        <span class="comment">// It should be possible to construct tests for both of these cases.</span>
+        <span class="comment">// Recursed lookup changed buffer len.  Adjust.
+        //
+        // TODO:
+        //
+        // Right now, if buffer length increased by n, we assume n new glyphs
+        // were added right after the current position, and if buffer length
+        // was decreased by n, we assume n match positions after the current
+        // one where removed.  The former (buffer length increased) case is
+        // fine, but the decrease case can be improved in at least two ways,
+        // both of which are significant:
+        //
+        //   - If recursed-to lookup is MultipleSubst and buffer length
+        //     decreased, then it&#39;s current match position that was deleted,
+        //     NOT the one after it.
+        //
+        //   - If buffer length was decreased by n, it does not necessarily
+        //     mean that n match positions where removed, as there might
+        //     have been marks and default-ignorables in the sequence.  We
+        //     should instead drop match positions between current-position
+        //     and current-position + n instead.
+        //
+        // It should be possible to construct tests for both of these cases.
 
-        <span class="ident">end</span> <span class="op">=</span> (<span class="ident">end</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
-        <span class="kw">if</span> <span class="ident">end</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">idx</span>] {
-            <span class="comment">// End might end up being smaller than match_positions[idx] if the recursed</span>
-            <span class="comment">// lookup ended up removing many items, more than we have had matched.</span>
-            <span class="comment">// Just never rewind end back and get out of here.</span>
-            <span class="comment">// https://bugs.chromium.org/p/chromium/issues/detail?id=659496</span>
-            <span class="ident">end</span> <span class="op">=</span> <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">idx</span>];
+        </span>end = (end <span class="kw">as </span>isize + delta) <span class="kw">as _</span>;
+        <span class="kw">if </span>end &lt;= matched.positions[idx] {
+            <span class="comment">// End might end up being smaller than match_positions[idx] if the recursed
+            // lookup ended up removing many items, more than we have had matched.
+            // Just never rewind end back and get out of here.
+            // https://bugs.chromium.org/p/chromium/issues/detail?id=659496
+            </span>end = matched.positions[idx];
 
-            <span class="comment">// There can&#39;t be any further changes.</span>
-            <span class="kw">break</span>;
+            <span class="comment">// There can&#39;t be any further changes.
+            </span><span class="kw">break</span>;
         }
 
-        <span class="comment">// next now is the position after the recursed lookup.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>;
+        <span class="comment">// next now is the position after the recursed lookup.
+        </span><span class="kw">let </span><span class="kw-2">mut </span>next = idx + <span class="number">1</span>;
 
-        <span class="kw">if</span> <span class="ident">delta</span> <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="kw">if</span> <span class="ident">delta</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="ident">count</span> <span class="op">&gt;</span> <span class="ident">MAX_CONTEXT_LENGTH</span> {
+        <span class="kw">if </span>delta &gt; <span class="number">0 </span>{
+            <span class="kw">if </span>delta <span class="kw">as </span>usize + count &gt; MAX_CONTEXT_LENGTH {
                 <span class="kw">break</span>;
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// NOTE: delta is negative.</span>
-            <span class="ident">delta</span> <span class="op">=</span> <span class="ident">delta</span>.<span class="ident">max</span>(<span class="ident">next</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">count</span> <span class="kw">as</span> <span class="ident">isize</span>);
-            <span class="ident">next</span> <span class="op">=</span> (<span class="ident">next</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">-</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        } <span class="kw">else </span>{
+            <span class="comment">// NOTE: delta is negative.
+            </span>delta = delta.max(next <span class="kw">as </span>isize - count <span class="kw">as </span>isize);
+            next = (next <span class="kw">as </span>isize - delta) <span class="kw">as _</span>;
         }
 
-        <span class="comment">// Shift!</span>
-        <span class="ident">matched</span>.<span class="ident">positions</span>.<span class="ident">copy_within</span>(<span class="ident">next</span> .. <span class="ident">count</span>, (<span class="ident">next</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>);
-        <span class="ident">next</span> <span class="op">=</span> (<span class="ident">next</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
-        <span class="ident">count</span> <span class="op">=</span> (<span class="ident">count</span> <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// Shift!
+        </span>matched.positions.copy_within(next .. count, (next <span class="kw">as </span>isize + delta) <span class="kw">as _</span>);
+        next = (next <span class="kw">as </span>isize + delta) <span class="kw">as _</span>;
+        count = (count <span class="kw">as </span>isize + delta) <span class="kw">as _</span>;
 
-        <span class="comment">// Fill in new entries.</span>
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">idx</span><span class="op">+</span><span class="number">1</span>..<span class="ident">next</span> {
-            <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">+</span> <span class="number">1</span>;
+        <span class="comment">// Fill in new entries.
+        </span><span class="kw">for </span>j <span class="kw">in </span>idx+<span class="number">1</span>..next {
+            matched.positions[j] = matched.positions[j - <span class="number">1</span>] + <span class="number">1</span>;
         }
 
-        <span class="comment">// And fixup the rest.</span>
-        <span class="kw">while</span> <span class="ident">next</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-            <span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">next</span>] <span class="op">=</span> (<span class="ident">matched</span>.<span class="ident">positions</span>[<span class="ident">next</span>] <span class="kw">as</span> <span class="ident">isize</span> <span class="op">+</span> <span class="ident">delta</span>) <span class="kw">as</span> <span class="kw">_</span>;
-            <span class="ident">next</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="comment">// And fixup the rest.
+        </span><span class="kw">while </span>next &lt; count {
+            matched.positions[next] = (matched.positions[next] <span class="kw">as </span>isize + delta) <span class="kw">as _</span>;
+            next += <span class="number">1</span>;
         }
     }
 
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="ident">end</span>);
+    ctx.buffer.move_to(end);
 }
 
-<span class="doccomment">/// Value represents glyph class.</span>
-<span class="kw">fn</span> <span class="ident">match_class</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">class_def</span>: <span class="ident">ClassDefinition</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">GlyphId</span>, <span class="ident">u16</span>) -&gt; <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;a</span> {
-    <span class="kw">move</span> <span class="op">|</span><span class="ident">glyph</span>, <span class="ident">value</span><span class="op">|</span> <span class="ident">class_def</span>.<span class="ident">get</span>(<span class="ident">glyph</span>) <span class="op">==</span> <span class="ident">value</span>
+<span class="doccomment">/// Value represents glyph class.
+</span><span class="kw">fn </span>match_class&lt;<span class="lifetime">&#39;a</span>&gt;(class_def: ClassDefinition&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="kw">impl </span>Fn(GlyphId, u16) -&gt; bool + <span class="lifetime">&#39;a </span>{
+    <span class="kw">move </span>|glyph, value| class_def.get(glyph) == value
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

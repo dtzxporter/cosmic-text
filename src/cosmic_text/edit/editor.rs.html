@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/edit/editor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>editor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../cosmic_text/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/edit/editor.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>editor.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../cosmic_text/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -676,489 +676,489 @@
 <span id="676">676</span>
 <span id="677">677</span>
 <span id="678">678</span>
-</pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
+</pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-<span class="kw">use</span> <span class="ident">alloc::string</span>::{<span class="ident">String</span>, <span class="ident">ToString</span>};
-<span class="kw">use</span> <span class="ident">core::cmp</span>;
-<span class="kw">use</span> <span class="ident">unicode_segmentation::UnicodeSegmentation</span>;
+</span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>alloc::string::{String, ToString};
+<span class="kw">use </span>core::cmp;
+<span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Action</span>, <span class="ident">AttrsList</span>, <span class="ident">Buffer</span>, <span class="ident">BufferLine</span>, <span class="ident">Cursor</span>, <span class="ident">Edit</span>, <span class="ident">LayoutCursor</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Color</span>;
+<span class="kw">use crate</span>::{Action, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">crate</span>::Color;
 
-<span class="doccomment">/// A wrapper of [`Buffer`] for easy editing</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">buffer</span>: <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">cursor</span>: <span class="ident">Cursor</span>,
-    <span class="ident">cursor_x_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
-    <span class="ident">select_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span>,
-    <span class="ident">cursor_moved</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// A wrapper of [`Buffer`] for easy editing
+</span><span class="kw">pub struct </span>Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
+    buffer: Buffer&lt;<span class="lifetime">&#39;a</span>&gt;,
+    cursor: Cursor,
+    cursor_x_opt: <span class="prelude-ty">Option</span>&lt;i32&gt;,
+    select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;,
+    cursor_moved: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a new [`Editor`] with the provided [`Buffer`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">buffer</span>: <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">buffer</span>,
-            <span class="ident">cursor</span>: <span class="ident">Cursor::default</span>(),
-            <span class="ident">cursor_x_opt</span>: <span class="prelude-val">None</span>,
-            <span class="ident">select_opt</span>: <span class="prelude-val">None</span>,
-            <span class="ident">cursor_moved</span>: <span class="bool-val">false</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Create a new [`Editor`] with the provided [`Buffer`]
+    </span><span class="kw">pub fn </span>new(buffer: Buffer&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            buffer,
+            cursor: Cursor::default(),
+            cursor_x_opt: <span class="prelude-val">None</span>,
+            select_opt: <span class="prelude-val">None</span>,
+            cursor_moved: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">set_layout_cursor</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cursor</span>: <span class="ident">LayoutCursor</span>) {
-        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">line_layout</span>(<span class="ident">cursor</span>.<span class="ident">line</span>).<span class="ident">expect</span>(<span class="string">&quot;layout not found&quot;</span>);
+    <span class="kw">fn </span>set_layout_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cursor: LayoutCursor) {
+        <span class="kw">let </span>layout = <span class="self">self</span>.buffer.line_layout(cursor.line).expect(<span class="string">&quot;layout not found&quot;</span>);
 
-        <span class="kw">let</span> <span class="ident">layout_line</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">layout</span>.<span class="ident">get</span>(<span class="ident">cursor</span>.<span class="ident">layout</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="kw">match</span> <span class="ident">layout</span>.<span class="ident">last</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
-                <span class="prelude-val">None</span> =&gt; <span class="macro">todo!</span>(<span class="string">&quot;layout cursor in line with no layouts&quot;</span>),
+        <span class="kw">let </span>layout_line = <span class="kw">match </span>layout.get(cursor.layout) {
+            <span class="prelude-val">Some</span>(some) =&gt; some,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>layout.last() {
+                <span class="prelude-val">Some</span>(some) =&gt; some,
+                <span class="prelude-val">None </span>=&gt; <span class="macro">todo!</span>(<span class="string">&quot;layout cursor in line with no layouts&quot;</span>),
             }
         };
 
-        <span class="kw">let</span> <span class="ident">new_index</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">layout_line</span>.<span class="ident">glyphs</span>.<span class="ident">get</span>(<span class="ident">cursor</span>.<span class="ident">glyph</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) =&gt; <span class="ident">glyph</span>.<span class="ident">start</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="kw">match</span> <span class="ident">layout_line</span>.<span class="ident">glyphs</span>.<span class="ident">last</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) =&gt; <span class="ident">glyph</span>.<span class="ident">end</span>,
-                <span class="comment">//TODO: is this correct?</span>
-                <span class="prelude-val">None</span> =&gt; <span class="number">0</span>,
+        <span class="kw">let </span>new_index = <span class="kw">match </span>layout_line.glyphs.get(cursor.glyph) {
+            <span class="prelude-val">Some</span>(glyph) =&gt; glyph.start,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>layout_line.glyphs.last() {
+                <span class="prelude-val">Some</span>(glyph) =&gt; glyph.end,
+                <span class="comment">//TODO: is this correct?
+                </span><span class="prelude-val">None </span>=&gt; <span class="number">0</span>,
             }
         };
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">!</span><span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">!</span><span class="op">=</span> <span class="ident">new_index</span> {
-            <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">line</span>;
-            <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">new_index</span>;
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+        <span class="kw">if </span><span class="self">self</span>.cursor.line != cursor.line || <span class="self">self</span>.cursor.index != new_index {
+            <span class="self">self</span>.cursor.line = cursor.line;
+            <span class="self">self</span>.cursor.index = new_index;
+            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Edit</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Editor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">buffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Edit&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.buffer
     }
 
-    <span class="kw">fn</span> <span class="ident">buffer_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>
+    <span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer
     }
 
-    <span class="kw">fn</span> <span class="ident">cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cursor</span> {
-        <span class="self">self</span>.<span class="ident">cursor</span>
+    <span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor {
+        <span class="self">self</span>.cursor
     }
 
-    <span class="kw">fn</span> <span class="ident">select_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">select_opt</span>
+    <span class="kw">fn </span>select_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Cursor&gt; {
+        <span class="self">self</span>.select_opt
     }
 
-    <span class="kw">fn</span> <span class="ident">set_select_opt</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">select_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">select_opt</span> <span class="op">!</span><span class="op">=</span> <span class="ident">select_opt</span> {
-            <span class="self">self</span>.<span class="ident">select_opt</span> <span class="op">=</span> <span class="ident">select_opt</span>;
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+    <span class="kw">fn </span>set_select_opt(<span class="kw-2">&amp;mut </span><span class="self">self</span>, select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;) {
+        <span class="kw">if </span><span class="self">self</span>.select_opt != select_opt {
+            <span class="self">self</span>.select_opt = select_opt;
+            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">shape_as_needed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor_moved</span> {
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">shape_until_cursor</span>(<span class="self">self</span>.<span class="ident">cursor</span>);
-            <span class="self">self</span>.<span class="ident">cursor_moved</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">shape_until_scroll</span>();
+    <span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.cursor_moved {
+            <span class="self">self</span>.buffer.shape_until_cursor(<span class="self">self</span>.cursor);
+            <span class="self">self</span>.cursor_moved = <span class="bool-val">false</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.buffer.shape_until_scroll();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">copy_selection</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">select</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">select_opt</span><span class="question-mark">?</span>;
+    <span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
+        <span class="kw">let </span>select = <span class="self">self</span>.select_opt<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">select</span>.<span class="ident">line</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>) {
-            <span class="ident">cmp::Ordering::Greater</span> =&gt; (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>),
-            <span class="ident">cmp::Ordering::Less</span> =&gt; (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>),
-            <span class="ident">cmp::Ordering::Equal</span> =&gt; {
-                <span class="comment">/* select.line == self.cursor.line */</span>
-                <span class="kw">if</span> <span class="ident">select</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                    (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>)
-                } <span class="kw">else</span> {
-                    <span class="comment">/* select.index &gt;= self.cursor.index */</span>
-                    (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>)
+        <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
+            cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
+            cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
+            cmp::Ordering::Equal =&gt; {
+                <span class="comment">/* select.line == self.cursor.line */
+                </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
+                    (select, <span class="self">self</span>.cursor)
+                } <span class="kw">else </span>{
+                    <span class="comment">/* select.index &gt;= self.cursor.index */
+                    </span>(<span class="self">self</span>.cursor, select)
                 }
             }
         };
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">selection</span> <span class="op">=</span> <span class="ident">String::new</span>();
-        <span class="comment">// Take the selection from the first line</span>
-        {
-            <span class="comment">// Add selected part of line to string</span>
-            <span class="kw">if</span> <span class="ident">start</span>.<span class="ident">line</span> <span class="op">==</span> <span class="ident">end</span>.<span class="ident">line</span> {
-                <span class="ident">selection</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">text</span>()[<span class="ident">start</span>.<span class="ident">index</span>..<span class="ident">end</span>.<span class="ident">index</span>]);
-            } <span class="kw">else</span> {
-                <span class="ident">selection</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">text</span>()[<span class="ident">start</span>.<span class="ident">index</span>..]);
-                <span class="ident">selection</span>.<span class="ident">push</span>(<span class="string">&#39;\n&#39;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>selection = String::new();
+        <span class="comment">// Take the selection from the first line
+        </span>{
+            <span class="comment">// Add selected part of line to string
+            </span><span class="kw">if </span>start.line == end.line {
+                selection.push_str(<span class="kw-2">&amp;</span><span class="self">self</span>.buffer.lines[start.line].text()[start.index..end.index]);
+            } <span class="kw">else </span>{
+                selection.push_str(<span class="kw-2">&amp;</span><span class="self">self</span>.buffer.lines[start.line].text()[start.index..]);
+                selection.push(<span class="string">&#39;\n&#39;</span>);
             }
         }
 
-        <span class="comment">// Take the selection from all interior lines (if they exist)</span>
-        <span class="kw">for</span> <span class="ident">line_i</span> <span class="kw">in</span> <span class="ident">start</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">end</span>.<span class="ident">line</span> {
-            <span class="ident">selection</span>.<span class="ident">push_str</span>(<span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">line_i</span>].<span class="ident">text</span>());
-            <span class="ident">selection</span>.<span class="ident">push</span>(<span class="string">&#39;\n&#39;</span>);
+        <span class="comment">// Take the selection from all interior lines (if they exist)
+        </span><span class="kw">for </span>line_i <span class="kw">in </span>start.line + <span class="number">1</span>..end.line {
+            selection.push_str(<span class="self">self</span>.buffer.lines[line_i].text());
+            selection.push(<span class="string">&#39;\n&#39;</span>);
         }
 
-        <span class="comment">// Take the selection from the last line</span>
-        <span class="kw">if</span> <span class="ident">end</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="ident">start</span>.<span class="ident">line</span> {
-            <span class="comment">// Add selected part of line to string</span>
-            <span class="ident">selection</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">end</span>.<span class="ident">line</span>].<span class="ident">text</span>()[..<span class="ident">end</span>.<span class="ident">index</span>]);
+        <span class="comment">// Take the selection from the last line
+        </span><span class="kw">if </span>end.line &gt; start.line {
+            <span class="comment">// Add selected part of line to string
+            </span>selection.push_str(<span class="kw-2">&amp;</span><span class="self">self</span>.buffer.lines[end.line].text()[..end.index]);
         }
 
-        <span class="prelude-val">Some</span>(<span class="ident">selection</span>)
+        <span class="prelude-val">Some</span>(selection)
     }
 
-    <span class="kw">fn</span> <span class="ident">delete_selection</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">select</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">select_opt</span>.<span class="ident">take</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="bool-val">false</span>,
+    <span class="kw">fn </span>delete_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">let </span>select = <span class="kw">match </span><span class="self">self</span>.select_opt.take() {
+            <span class="prelude-val">Some</span>(some) =&gt; some,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="bool-val">false</span>,
         };
 
-        <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">select</span>.<span class="ident">line</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>) {
-            <span class="ident">cmp::Ordering::Greater</span> =&gt; (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>),
-            <span class="ident">cmp::Ordering::Less</span> =&gt; (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>),
-            <span class="ident">cmp::Ordering::Equal</span> =&gt; {
-                <span class="comment">/* select.line == self.cursor.line */</span>
-                <span class="kw">if</span> <span class="ident">select</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                    (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>)
-                } <span class="kw">else</span> {
-                    <span class="comment">/* select.index &gt;= self.cursor.index */</span>
-                    (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>)
+        <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
+            cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
+            cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
+            cmp::Ordering::Equal =&gt; {
+                <span class="comment">/* select.line == self.cursor.line */
+                </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
+                    (select, <span class="self">self</span>.cursor)
+                } <span class="kw">else </span>{
+                    <span class="comment">/* select.index &gt;= self.cursor.index */
+                    </span>(<span class="self">self</span>.cursor, select)
                 }
             }
         };
 
-        <span class="comment">// Reset cursor to start of selection</span>
-        <span class="self">self</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">start</span>;
+        <span class="comment">// Reset cursor to start of selection
+        </span><span class="self">self</span>.cursor = start;
 
-        <span class="comment">// Delete the selection from the last line</span>
-        <span class="kw">let</span> <span class="ident">end_line_opt</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">end</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="ident">start</span>.<span class="ident">line</span> {
-            <span class="comment">// Get part of line after selection</span>
-            <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">end</span>.<span class="ident">line</span>].<span class="ident">split_off</span>(<span class="ident">end</span>.<span class="ident">index</span>);
+        <span class="comment">// Delete the selection from the last line
+        </span><span class="kw">let </span>end_line_opt = <span class="kw">if </span>end.line &gt; start.line {
+            <span class="comment">// Get part of line after selection
+            </span><span class="kw">let </span>after = <span class="self">self</span>.buffer.lines[end.line].split_off(end.index);
 
-            <span class="comment">// Remove end line</span>
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">remove</span>(<span class="ident">end</span>.<span class="ident">line</span>);
+            <span class="comment">// Remove end line
+            </span><span class="self">self</span>.buffer.lines.remove(end.line);
 
-            <span class="prelude-val">Some</span>(<span class="ident">after</span>)
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        };
+            <span class="prelude-val">Some</span>(after)
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>};
 
-        <span class="comment">// Delete interior lines (in reverse for safety)</span>
-        <span class="kw">for</span> <span class="ident">line_i</span> <span class="kw">in</span> (<span class="ident">start</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">end</span>.<span class="ident">line</span>).<span class="ident">rev</span>() {
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">remove</span>(<span class="ident">line_i</span>);
+        <span class="comment">// Delete interior lines (in reverse for safety)
+        </span><span class="kw">for </span>line_i <span class="kw">in </span>(start.line + <span class="number">1</span>..end.line).rev() {
+            <span class="self">self</span>.buffer.lines.remove(line_i);
         }
 
-        <span class="comment">// Delete the selection from the first line</span>
-        {
-            <span class="comment">// Get part after selection if start line is also end line</span>
-            <span class="kw">let</span> <span class="ident">after_opt</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">start</span>.<span class="ident">line</span> <span class="op">==</span> <span class="ident">end</span>.<span class="ident">line</span> {
-                <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">split_off</span>(<span class="ident">end</span>.<span class="ident">index</span>))
-            } <span class="kw">else</span> {
-                <span class="prelude-val">None</span>
-            };
+        <span class="comment">// Delete the selection from the first line
+        </span>{
+            <span class="comment">// Get part after selection if start line is also end line
+            </span><span class="kw">let </span>after_opt = <span class="kw">if </span>start.line == end.line {
+                <span class="prelude-val">Some</span>(<span class="self">self</span>.buffer.lines[start.line].split_off(end.index))
+            } <span class="kw">else </span>{
+                <span class="prelude-val">None
+            </span>};
 
-            <span class="comment">// Delete selected part of line</span>
-            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">split_off</span>(<span class="ident">start</span>.<span class="ident">index</span>);
+            <span class="comment">// Delete selected part of line
+            </span><span class="self">self</span>.buffer.lines[start.line].split_off(start.index);
 
-            <span class="comment">// Re-add part of line after selection</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">after</span>) <span class="op">=</span> <span class="ident">after_opt</span> {
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">append</span>(<span class="ident">after</span>);
+            <span class="comment">// Re-add part of line after selection
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(after) = after_opt {
+                <span class="self">self</span>.buffer.lines[start.line].append(after);
             }
 
-            <span class="comment">// Re-add valid parts of end line</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">end_line</span>) <span class="op">=</span> <span class="ident">end_line_opt</span> {
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">start</span>.<span class="ident">line</span>].<span class="ident">append</span>(<span class="ident">end_line</span>);
+            <span class="comment">// Re-add valid parts of end line
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(end_line) = end_line_opt {
+                <span class="self">self</span>.buffer.lines[start.line].append(end_line);
             }
         }
 
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">action</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">action</span>: <span class="ident">Action</span>) {
-        <span class="kw">let</span> <span class="ident">old_cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span>;
+    <span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action) {
+        <span class="kw">let </span>old_cursor = <span class="self">self</span>.cursor;
 
-        <span class="kw">match</span> <span class="ident">action</span> {
-            <span class="ident">Action::Previous</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="comment">// Find previous character index</span>
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev_index</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">text</span>().<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>) {
-                        <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                            <span class="ident">prev_index</span> <span class="op">=</span> <span class="ident">i</span>;
-                        } <span class="kw">else</span> {
+        <span class="kw">match </span>action {
+            Action::Previous =&gt; {
+                <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
+                <span class="kw">if </span><span class="self">self</span>.cursor.index &gt; <span class="number">0 </span>{
+                    <span class="comment">// Find previous character index
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>prev_index = <span class="number">0</span>;
+                    <span class="kw">for </span>(i, <span class="kw">_</span>) <span class="kw">in </span>line.text().grapheme_indices(<span class="bool-val">true</span>) {
+                        <span class="kw">if </span>i &lt; <span class="self">self</span>.cursor.index {
+                            prev_index = i;
+                        } <span class="kw">else </span>{
                             <span class="kw">break</span>;
                         }
                     }
 
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">prev_index</span>;
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">text</span>().<span class="ident">len</span>();
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+                    <span class="self">self</span>.cursor.index = prev_index;
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line &gt; <span class="number">0 </span>{
+                    <span class="self">self</span>.cursor.line -= <span class="number">1</span>;
+                    <span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len();
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
-                <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             },
-            <span class="ident">Action::Next</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="ident">line</span>.<span class="ident">text</span>().<span class="ident">len</span>() {
-                    <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">c</span>) <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">text</span>().<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>) {
-                        <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                            <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="ident">c</span>.<span class="ident">len</span>();
-                            <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+            Action::Next =&gt; {
+                <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
+                <span class="kw">if </span><span class="self">self</span>.cursor.index &lt; line.text().len() {
+                    <span class="kw">for </span>(i, c) <span class="kw">in </span>line.text().grapheme_indices(<span class="bool-val">true</span>) {
+                        <span class="kw">if </span>i == <span class="self">self</span>.cursor.index {
+                            <span class="self">self</span>.cursor.index += c.len();
+                            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                             <span class="kw">break</span>;
                         }
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">len</span>() {
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line + <span class="number">1 </span>&lt; <span class="self">self</span>.buffer.lines.len() {
+                    <span class="self">self</span>.cursor.line += <span class="number">1</span>;
+                    <span class="self">self</span>.cursor.index = <span class="number">0</span>;
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
-                <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             },
-            <span class="ident">Action::Left</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">rtl_opt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">shape_opt</span>().<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">shape</span><span class="op">|</span> <span class="ident">shape</span>.<span class="ident">rtl</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rtl</span>) <span class="op">=</span> <span class="ident">rtl_opt</span> {
-                    <span class="kw">if</span> <span class="ident">rtl</span> {
-                        <span class="self">self</span>.<span class="ident">action</span>(<span class="ident">Action::Next</span>);
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">action</span>(<span class="ident">Action::Previous</span>);
+            Action::Left =&gt; {
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
+                    <span class="kw">if </span>rtl {
+                        <span class="self">self</span>.action(Action::Next);
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.action(Action::Previous);
                     }
                 }
             },
-            <span class="ident">Action::Right</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">rtl_opt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">shape_opt</span>().<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">shape</span><span class="op">|</span> <span class="ident">shape</span>.<span class="ident">rtl</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rtl</span>) <span class="op">=</span> <span class="ident">rtl_opt</span> {
-                    <span class="kw">if</span> <span class="ident">rtl</span> {
-                        <span class="self">self</span>.<span class="ident">action</span>(<span class="ident">Action::Previous</span>);
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">action</span>(<span class="ident">Action::Next</span>);
+            Action::Right =&gt; {
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
+                    <span class="kw">if </span>rtl {
+                        <span class="self">self</span>.action(Action::Previous);
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.action(Action::Next);
                     }
                 }
             },
-            <span class="ident">Action::Up</span> =&gt; {
-                <span class="comment">//TODO: make this preserve X as best as possible!</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">layout_cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>);
+            Action::Up =&gt; {
+                <span class="comment">//TODO: make this preserve X as best as possible!
+                </span><span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
 
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor_x_opt</span>.<span class="ident">is_none</span>() {
-                    <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                        <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="comment">//TODO: glyph x position</span>
-                    );
+                <span class="kw">if </span><span class="self">self</span>.cursor_x_opt.is_none() {
+                    <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">Some</span>(
+                        cursor.glyph <span class="kw">as </span>i32 <span class="comment">//TODO: glyph x position
+                    </span>);
                 }
 
-                <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">=</span> <span class="ident">usize::max_value</span>();
+                <span class="kw">if </span>cursor.layout &gt; <span class="number">0 </span>{
+                    cursor.layout -= <span class="number">1</span>;
+                } <span class="kw">else if </span>cursor.line &gt; <span class="number">0 </span>{
+                    cursor.line -= <span class="number">1</span>;
+                    cursor.layout = usize::max_value();
                 }
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cursor_x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor_x_opt</span> {
-                    <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="op">=</span> <span class="ident">cursor_x</span> <span class="kw">as</span> <span class="ident">usize</span>; <span class="comment">//TODO: glyph x position</span>
-                }
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(cursor_x) = <span class="self">self</span>.cursor_x_opt {
+                    cursor.glyph = cursor_x <span class="kw">as </span>usize; <span class="comment">//TODO: glyph x position
+                </span>}
 
-                <span class="self">self</span>.<span class="ident">set_layout_cursor</span>(<span class="ident">cursor</span>);
+                <span class="self">self</span>.set_layout_cursor(cursor);
             },
-            <span class="ident">Action::Down</span> =&gt; {
-                <span class="comment">//TODO: make this preserve X as best as possible!</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">layout_cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>);
+            Action::Down =&gt; {
+                <span class="comment">//TODO: make this preserve X as best as possible!
+                </span><span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
 
-                <span class="kw">let</span> <span class="ident">layout_len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">line_layout</span>(<span class="ident">cursor</span>.<span class="ident">line</span>).<span class="ident">expect</span>(<span class="string">&quot;layout not found&quot;</span>).<span class="ident">len</span>();
+                <span class="kw">let </span>layout_len = <span class="self">self</span>.buffer.line_layout(cursor.line).expect(<span class="string">&quot;layout not found&quot;</span>).len();
 
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor_x_opt</span>.<span class="ident">is_none</span>() {
-                    <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                        <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="comment">//TODO: glyph x position</span>
-                    );
+                <span class="kw">if </span><span class="self">self</span>.cursor_x_opt.is_none() {
+                    <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">Some</span>(
+                        cursor.glyph <span class="kw">as </span>i32 <span class="comment">//TODO: glyph x position
+                    </span>);
                 }
 
-                <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">layout_len</span> {
-                    <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">len</span>() {
-                    <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="ident">cursor</span>.<span class="ident">layout</span> <span class="op">=</span> <span class="number">0</span>;
+                <span class="kw">if </span>cursor.layout + <span class="number">1 </span>&lt; layout_len {
+                    cursor.layout += <span class="number">1</span>;
+                } <span class="kw">else if </span>cursor.line + <span class="number">1 </span>&lt; <span class="self">self</span>.buffer.lines.len() {
+                    cursor.line += <span class="number">1</span>;
+                    cursor.layout = <span class="number">0</span>;
                 }
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cursor_x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor_x_opt</span> {
-                    <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="op">=</span> <span class="ident">cursor_x</span> <span class="kw">as</span> <span class="ident">usize</span>; <span class="comment">//TODO: glyph x position</span>
-                }
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(cursor_x) = <span class="self">self</span>.cursor_x_opt {
+                    cursor.glyph = cursor_x <span class="kw">as </span>usize; <span class="comment">//TODO: glyph x position
+                </span>}
 
-                <span class="self">self</span>.<span class="ident">set_layout_cursor</span>(<span class="ident">cursor</span>);
+                <span class="self">self</span>.set_layout_cursor(cursor);
             },
-            <span class="ident">Action::Home</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">layout_cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>);
-                <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="self">self</span>.<span class="ident">set_layout_cursor</span>(<span class="ident">cursor</span>);
-                <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            Action::Home =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
+                cursor.glyph = <span class="number">0</span>;
+                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             },
-            <span class="ident">Action::End</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">layout_cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>);
-                <span class="ident">cursor</span>.<span class="ident">glyph</span> <span class="op">=</span> <span class="ident">usize::max_value</span>();
-                <span class="self">self</span>.<span class="ident">set_layout_cursor</span>(<span class="ident">cursor</span>);
-                <span class="self">self</span>.<span class="ident">cursor_x_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            Action::End =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
+                cursor.glyph = usize::max_value();
+                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
-            <span class="ident">Action::PageUp</span> =&gt; {
-                <span class="comment">//TODO: move cursor</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scroll</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">scroll</span>();
-                <span class="ident">scroll</span> <span class="op">-</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">visible_lines</span>();
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_scroll</span>(<span class="ident">scroll</span>);
+            Action::PageUp =&gt; {
+                <span class="comment">//TODO: move cursor
+                </span><span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
+                scroll -= <span class="self">self</span>.buffer.visible_lines();
+                <span class="self">self</span>.buffer.set_scroll(scroll);
             },
-            <span class="ident">Action::PageDown</span> =&gt; {
-                <span class="comment">//TODO: move cursor</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scroll</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">scroll</span>();
-                <span class="ident">scroll</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">visible_lines</span>();
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_scroll</span>(<span class="ident">scroll</span>);
+            Action::PageDown =&gt; {
+                <span class="comment">//TODO: move cursor
+                </span><span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
+                scroll += <span class="self">self</span>.buffer.visible_lines();
+                <span class="self">self</span>.buffer.set_scroll(scroll);
             },
-            <span class="ident">Action::Escape</span> =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">select_opt</span>.<span class="ident">take</span>().<span class="ident">is_some</span>() {
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+            Action::Escape =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.select_opt.take().is_some() {
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
             },
-            <span class="ident">Action::Insert</span>(<span class="ident">character</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">character</span>.<span class="ident">is_control</span>()
-                <span class="op">&amp;&amp;</span> <span class="op">!</span>[<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">character</span>)
+            Action::Insert(character) =&gt; {
+                <span class="kw">if </span>character.is_control()
+                &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character)
                 {
-                    <span class="comment">// Filter out special chars (except for tab), use Action instead</span>
-                    <span class="macro">log::debug!</span>(<span class="string">&quot;Refusing to insert control character {:?}&quot;</span>, <span class="ident">character</span>);
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">delete_selection</span>();
+                    <span class="comment">// Filter out special chars (except for tab), use Action instead
+                    </span><span class="macro">log::debug!</span>(<span class="string">&quot;Refusing to insert control character {:?}&quot;</span>, character);
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.delete_selection();
 
-                    <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
+                    <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
 
-                    <span class="comment">// Collect text after insertion as a line</span>
-                    <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
+                    <span class="comment">// Collect text after insertion as a line
+                    </span><span class="kw">let </span>after = line.split_off(<span class="self">self</span>.cursor.index);
 
-                    <span class="comment">// Append the inserted text</span>
-                    <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">BufferLine::new</span>(
-                        <span class="ident">character</span>.<span class="ident">to_string</span>(),
-                        <span class="ident">AttrsList::new</span>(<span class="ident">line</span>.<span class="ident">attrs_list</span>().<span class="ident">defaults</span>() <span class="comment">/*TODO: provide attrs?*/</span>)
+                    <span class="comment">// Append the inserted text
+                    </span>line.append(BufferLine::new(
+                        character.to_string(),
+                        AttrsList::new(line.attrs_list().defaults() <span class="comment">/*TODO: provide attrs?*/</span>)
                     ));
 
-                    <span class="comment">// Append the text after insertion</span>
-                    <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">after</span>);
+                    <span class="comment">// Append the text after insertion
+                    </span>line.append(after);
 
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="ident">character</span>.<span class="ident">len_utf8</span>();
+                    <span class="self">self</span>.cursor.index += character.len_utf8();
                 }
             },
-            <span class="ident">Action::Enter</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">delete_selection</span>();
+            Action::Enter =&gt; {
+                <span class="self">self</span>.delete_selection();
 
-                <span class="kw">let</span> <span class="ident">new_line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
+                <span class="kw">let </span>new_line = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].split_off(<span class="self">self</span>.cursor.index);
 
-                <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
+                <span class="self">self</span>.cursor.line += <span class="number">1</span>;
+                <span class="self">self</span>.cursor.index = <span class="number">0</span>;
 
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">insert</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>, <span class="ident">new_line</span>);
+                <span class="self">self</span>.buffer.lines.insert(<span class="self">self</span>.cursor.line, new_line);
             },
-            <span class="ident">Action::Backspace</span> =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">delete_selection</span>() {
-                    <span class="comment">// Deleted selection</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
+            Action::Backspace =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.delete_selection() {
+                    <span class="comment">// Deleted selection
+                </span>} <span class="kw">else if </span><span class="self">self</span>.cursor.index &gt; <span class="number">0 </span>{
+                    <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
 
-                    <span class="comment">// Get text line after cursor</span>
-                    <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
+                    <span class="comment">// Get text line after cursor
+                    </span><span class="kw">let </span>after = line.split_off(<span class="self">self</span>.cursor.index);
 
-                    <span class="comment">// Find previous character index</span>
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev_index</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">line</span>.<span class="ident">text</span>().<span class="ident">char_indices</span>() {
-                        <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                            <span class="ident">prev_index</span> <span class="op">=</span> <span class="ident">i</span>;
-                        } <span class="kw">else</span> {
+                    <span class="comment">// Find previous character index
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>prev_index = <span class="number">0</span>;
+                    <span class="kw">for </span>(i, <span class="kw">_</span>) <span class="kw">in </span>line.text().char_indices() {
+                        <span class="kw">if </span>i &lt; <span class="self">self</span>.cursor.index {
+                            prev_index = i;
+                        } <span class="kw">else </span>{
                             <span class="kw">break</span>;
                         }
                     }
 
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">prev_index</span>;
+                    <span class="self">self</span>.cursor.index = prev_index;
 
-                    <span class="comment">// Remove character</span>
-                    <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>);
+                    <span class="comment">// Remove character
+                    </span>line.split_off(<span class="self">self</span>.cursor.index);
 
-                    <span class="comment">// Add text after cursor</span>
-                    <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">after</span>);
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">line_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>;
-                    <span class="kw">let</span> <span class="ident">old_line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">remove</span>(<span class="ident">line_index</span>);
-                    <span class="ident">line_index</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="comment">// Add text after cursor
+                    </span>line.append(after);
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line &gt; <span class="number">0 </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>line_index = <span class="self">self</span>.cursor.line;
+                    <span class="kw">let </span>old_line = <span class="self">self</span>.buffer.lines.remove(line_index);
+                    line_index -= <span class="number">1</span>;
 
-                    <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="ident">line_index</span>];
+                    <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[line_index];
 
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">=</span> <span class="ident">line_index</span>;
-                    <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">text</span>().<span class="ident">len</span>();
+                    <span class="self">self</span>.cursor.line = line_index;
+                    <span class="self">self</span>.cursor.index = line.text().len();
 
-                    <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">old_line</span>);
+                    line.append(old_line);
                 }
             },
-            <span class="ident">Action::Delete</span> =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">delete_selection</span>() {
-                    <span class="comment">// Deleted selection</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">text</span>().<span class="ident">len</span>() {
-                    <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>];
+            Action::Delete =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.delete_selection() {
+                    <span class="comment">// Deleted selection
+                </span>} <span class="kw">else if </span><span class="self">self</span>.cursor.index &lt; <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len() {
+                    <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
 
-                    <span class="kw">let</span> <span class="ident">range_opt</span> <span class="op">=</span> <span class="ident">line</span>
-                        .<span class="ident">text</span>()
-                        .<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">take_while</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">*</span><span class="ident">i</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span>)
-                        .<span class="ident">last</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">c</span>)<span class="op">|</span> {
-                            <span class="ident">i</span>..(<span class="ident">i</span> <span class="op">+</span> <span class="ident">c</span>.<span class="ident">len</span>())
+                    <span class="kw">let </span>range_opt = line
+                        .text()
+                        .grapheme_indices(<span class="bool-val">true</span>)
+                        .take_while(|(i, <span class="kw">_</span>)| <span class="kw-2">*</span>i &lt;= <span class="self">self</span>.cursor.index)
+                        .last()
+                        .map(|(i, c)| {
+                            i..(i + c.len())
                         });
 
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">range</span>) <span class="op">=</span> <span class="ident">range_opt</span> {
-                        <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">=</span> <span class="ident">range</span>.<span class="ident">start</span>;
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(range) = range_opt {
+                        <span class="self">self</span>.cursor.index = range.start;
 
-                        <span class="comment">// Get text after deleted EGC</span>
-                        <span class="kw">let</span> <span class="ident">after</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="ident">range</span>.<span class="ident">end</span>);
+                        <span class="comment">// Get text after deleted EGC
+                        </span><span class="kw">let </span>after = line.split_off(range.end);
 
-                        <span class="comment">// Delete EGC</span>
-                        <span class="ident">line</span>.<span class="ident">split_off</span>(<span class="ident">range</span>.<span class="ident">start</span>);
+                        <span class="comment">// Delete EGC
+                        </span>line.split_off(range.start);
 
-                        <span class="comment">// Add text after deleted EGC</span>
-                        <span class="ident">line</span>.<span class="ident">append</span>(<span class="ident">after</span>);
+                        <span class="comment">// Add text after deleted EGC
+                        </span>line.append(after);
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">len</span>() {
-                    <span class="kw">let</span> <span class="ident">old_line</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>.<span class="ident">remove</span>(<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">+</span> <span class="number">1</span>);
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">lines</span>[<span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>].<span class="ident">append</span>(<span class="ident">old_line</span>);
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line + <span class="number">1 </span>&lt; <span class="self">self</span>.buffer.lines.len() {
+                    <span class="kw">let </span>old_line = <span class="self">self</span>.buffer.lines.remove(<span class="self">self</span>.cursor.line + <span class="number">1</span>);
+                    <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].append(old_line);
                 }
             },
-            <span class="ident">Action::Click</span> { <span class="ident">x</span>, <span class="ident">y</span> } =&gt; {
-                <span class="self">self</span>.<span class="ident">select_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            Action::Click { x, y } =&gt; {
+                <span class="self">self</span>.select_opt = <span class="prelude-val">None</span>;
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">new_cursor</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">hit</span>(<span class="ident">x</span>, <span class="ident">y</span>) {
-                    <span class="kw">if</span> <span class="ident">new_cursor</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span> {
-                        <span class="self">self</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">new_cursor</span>;
-                        <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
-                    }
-                }
-            },
-            <span class="ident">Action::Drag</span> { <span class="ident">x</span>, <span class="ident">y</span> } =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">select_opt</span>.<span class="ident">is_none</span>() {
-                    <span class="self">self</span>.<span class="ident">select_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">cursor</span>);
-                    <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
-                }
-
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">new_cursor</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">hit</span>(<span class="ident">x</span>, <span class="ident">y</span>) {
-                    <span class="kw">if</span> <span class="ident">new_cursor</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span> {
-                        <span class="self">self</span>.<span class="ident">cursor</span> <span class="op">=</span> <span class="ident">new_cursor</span>;
-                        <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_redraw</span>(<span class="bool-val">true</span>);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x, y) {
+                    <span class="kw">if </span>new_cursor != <span class="self">self</span>.cursor {
+                        <span class="self">self</span>.cursor = new_cursor;
+                        <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                     }
                 }
             },
-            <span class="ident">Action::Scroll</span> { <span class="ident">lines</span> } =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scroll</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">scroll</span>();
-                <span class="ident">scroll</span> <span class="op">+</span><span class="op">=</span> <span class="ident">lines</span>;
-                <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">set_scroll</span>(<span class="ident">scroll</span>);
+            Action::Drag { x, y } =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.select_opt.is_none() {
+                    <span class="self">self</span>.select_opt = <span class="prelude-val">Some</span>(<span class="self">self</span>.cursor);
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                }
+
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x, y) {
+                    <span class="kw">if </span>new_cursor != <span class="self">self</span>.cursor {
+                        <span class="self">self</span>.cursor = new_cursor;
+                        <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                    }
+                }
+            },
+            Action::Scroll { lines } =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
+                scroll += lines;
+                <span class="self">self</span>.buffer.set_scroll(scroll);
             }
         }
 
-        <span class="kw">if</span> <span class="ident">old_cursor</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cursor</span> {
-            <span class="self">self</span>.<span class="ident">cursor_moved</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span>old_cursor != <span class="self">self</span>.cursor {
+            <span class="self">self</span>.cursor_moved = <span class="bool-val">true</span>;
 
             <span class="comment">/*TODO
             if let Some(glyph) = run.glyphs.get(new_cursor_glyph) {
@@ -1174,185 +1174,185 @@
                     text_glyph
                 );
             }
-            */</span>
-        }
+            */
+        </span>}
     }
 
-    <span class="doccomment">/// Draw the editor</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">draw</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">cache</span>: <span class="kw-2">&amp;mut</span> <span class="ident"><span class="kw">crate</span>::SwashCache</span>, <span class="ident">color</span>: <span class="ident">Color</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>)
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">i32</span>, <span class="ident">i32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">Color</span>)
+    <span class="doccomment">/// Draw the editor
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+    </span><span class="kw">fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, <span class="kw-2">mut </span>f: F)
+        <span class="kw">where </span>F: FnMut(i32, i32, u32, u32, Color)
     {
-        <span class="kw">let</span> <span class="ident">font_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">metrics</span>().<span class="ident">font_size</span>;
-        <span class="kw">let</span> <span class="ident">line_height</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">metrics</span>().<span class="ident">line_height</span>;
+        <span class="kw">let </span>font_size = <span class="self">self</span>.buffer.metrics().font_size;
+        <span class="kw">let </span>line_height = <span class="self">self</span>.buffer.metrics().line_height;
 
-        <span class="kw">for</span> <span class="ident">run</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">layout_runs</span>() {
-            <span class="kw">let</span> <span class="ident">line_i</span> <span class="op">=</span> <span class="ident">run</span>.<span class="ident">line_i</span>;
-            <span class="kw">let</span> <span class="ident">line_y</span> <span class="op">=</span> <span class="ident">run</span>.<span class="ident">line_y</span>;
+        <span class="kw">for </span>run <span class="kw">in </span><span class="self">self</span>.buffer.layout_runs() {
+            <span class="kw">let </span>line_i = run.line_i;
+            <span class="kw">let </span>line_y = run.line_y;
 
-            <span class="kw">let</span> <span class="ident">cursor_glyph_opt</span> <span class="op">=</span> <span class="op">|</span><span class="ident">cursor</span>: <span class="kw-2">&amp;</span><span class="ident">Cursor</span><span class="op">|</span> -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">f32</span>)<span class="op">&gt;</span> {
-                <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">line</span> <span class="op">==</span> <span class="ident">line_i</span> {
-                    <span class="kw">for</span> (<span class="ident">glyph_i</span>, <span class="ident">glyph</span>) <span class="kw">in</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                        <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">==</span> <span class="ident">glyph</span>.<span class="ident">start</span> {
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">glyph_i</span>, <span class="number">0.0</span>));
-                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&gt;</span> <span class="ident">glyph</span>.<span class="ident">start</span> <span class="op">&amp;&amp;</span> <span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="ident">glyph</span>.<span class="ident">end</span> {
-                            <span class="comment">// Guess x offset based on characters</span>
-                            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">before</span> <span class="op">=</span> <span class="number">0</span>;
-                            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total</span> <span class="op">=</span> <span class="number">0</span>;
+            <span class="kw">let </span>cursor_glyph_opt = |cursor: <span class="kw-2">&amp;</span>Cursor| -&gt; <span class="prelude-ty">Option</span>&lt;(usize, f32)&gt; {
+                <span class="kw">if </span>cursor.line == line_i {
+                    <span class="kw">for </span>(glyph_i, glyph) <span class="kw">in </span>run.glyphs.iter().enumerate() {
+                        <span class="kw">if </span>cursor.index == glyph.start {
+                            <span class="kw">return </span><span class="prelude-val">Some</span>((glyph_i, <span class="number">0.0</span>));
+                        } <span class="kw">else if </span>cursor.index &gt; glyph.start &amp;&amp; cursor.index &lt; glyph.end {
+                            <span class="comment">// Guess x offset based on characters
+                            </span><span class="kw">let </span><span class="kw-2">mut </span>before = <span class="number">0</span>;
+                            <span class="kw">let </span><span class="kw-2">mut </span>total = <span class="number">0</span>;
 
-                            <span class="kw">let</span> <span class="ident">cluster</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">run</span>.<span class="ident">text</span>[<span class="ident">glyph</span>.<span class="ident">start</span>..<span class="ident">glyph</span>.<span class="ident">end</span>];
-                            <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">cluster</span>.<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>) {
-                                <span class="kw">if</span> <span class="ident">glyph</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">cursor</span>.<span class="ident">index</span> {
-                                    <span class="ident">before</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                            <span class="kw">let </span>cluster = <span class="kw-2">&amp;</span>run.text[glyph.start..glyph.end];
+                            <span class="kw">for </span>(i, <span class="kw">_</span>) <span class="kw">in </span>cluster.grapheme_indices(<span class="bool-val">true</span>) {
+                                <span class="kw">if </span>glyph.start + i &lt; cursor.index {
+                                    before += <span class="number">1</span>;
                                 }
-                                <span class="ident">total</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                                total += <span class="number">1</span>;
                             }
 
-                            <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">w</span> <span class="op">*</span> (<span class="ident">before</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="op">/</span> (<span class="ident">total</span> <span class="kw">as</span> <span class="ident">f32</span>);
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">glyph_i</span>, <span class="ident">offset</span>));
+                            <span class="kw">let </span>offset = glyph.w * (before <span class="kw">as </span>f32) / (total <span class="kw">as </span>f32);
+                            <span class="kw">return </span><span class="prelude-val">Some</span>((glyph_i, offset));
                         }
                     }
-                    <span class="kw">match</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">last</span>() {
-                        <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) =&gt; {
-                            <span class="kw">if</span> <span class="ident">cursor</span>.<span class="ident">index</span> <span class="op">==</span> <span class="ident">glyph</span>.<span class="ident">end</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">len</span>(), <span class="number">0.0</span>));
+                    <span class="kw">match </span>run.glyphs.last() {
+                        <span class="prelude-val">Some</span>(glyph) =&gt; {
+                            <span class="kw">if </span>cursor.index == glyph.end {
+                                <span class="kw">return </span><span class="prelude-val">Some</span>((run.glyphs.len(), <span class="number">0.0</span>));
                             }
                         },
-                        <span class="prelude-val">None</span> =&gt; {
-                            <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="number">0.0</span>));
+                        <span class="prelude-val">None </span>=&gt; {
+                            <span class="kw">return </span><span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="number">0.0</span>));
                         }
                     }
                 }
-                <span class="prelude-val">None</span>
-            };
+                <span class="prelude-val">None
+            </span>};
 
-            <span class="comment">// Highlight selection (TODO: HIGHLIGHT COLOR!)</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">select</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">select_opt</span> {
-                <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">select</span>.<span class="ident">line</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">line</span>) {
-                    <span class="ident">cmp::Ordering::Greater</span> =&gt; (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>),
-                    <span class="ident">cmp::Ordering::Less</span> =&gt; (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>),
-                    <span class="ident">cmp::Ordering::Equal</span> =&gt; {
-                        <span class="comment">/* select.line == self.cursor.line */</span>
-                        <span class="kw">if</span> <span class="ident">select</span>.<span class="ident">index</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">cursor</span>.<span class="ident">index</span> {
-                            (<span class="ident">select</span>, <span class="self">self</span>.<span class="ident">cursor</span>)
-                        } <span class="kw">else</span> {
-                            <span class="comment">/* select.index &gt;= self.cursor.index */</span>
-                            (<span class="self">self</span>.<span class="ident">cursor</span>, <span class="ident">select</span>)
+            <span class="comment">// Highlight selection (TODO: HIGHLIGHT COLOR!)
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(select) = <span class="self">self</span>.select_opt {
+                <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
+                    cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
+                    cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
+                    cmp::Ordering::Equal =&gt; {
+                        <span class="comment">/* select.line == self.cursor.line */
+                        </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
+                            (select, <span class="self">self</span>.cursor)
+                        } <span class="kw">else </span>{
+                            <span class="comment">/* select.index &gt;= self.cursor.index */
+                            </span>(<span class="self">self</span>.cursor, select)
                         }
                     }
                 };
 
-                <span class="kw">if</span> <span class="ident">line_i</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">start</span>.<span class="ident">line</span> <span class="op">&amp;&amp;</span> <span class="ident">line_i</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span>.<span class="ident">line</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">iter</span>() {
-                        <span class="comment">// Guess x offset based on characters</span>
-                        <span class="kw">let</span> <span class="ident">cluster</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">run</span>.<span class="ident">text</span>[<span class="ident">glyph</span>.<span class="ident">start</span>..<span class="ident">glyph</span>.<span class="ident">end</span>];
-                        <span class="kw">let</span> <span class="ident">total</span> <span class="op">=</span> <span class="ident">cluster</span>.<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>).<span class="ident">count</span>();
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c_x</span> <span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">x</span>;
-                        <span class="kw">let</span> <span class="ident">c_w</span> <span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">w</span> <span class="op">/</span> <span class="ident">total</span> <span class="kw">as</span> <span class="ident">f32</span>;
-                        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">c</span>) <span class="kw">in</span> <span class="ident">cluster</span>.<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>) {
-                            <span class="kw">let</span> <span class="ident">c_start</span> <span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span>;
-                            <span class="kw">let</span> <span class="ident">c_end</span> <span class="op">=</span> <span class="ident">glyph</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">+</span> <span class="ident">c</span>.<span class="ident">len</span>();
-                            <span class="kw">if</span> (<span class="ident">start</span>.<span class="ident">line</span> <span class="op">!</span><span class="op">=</span> <span class="ident">line_i</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c_end</span> <span class="op">&gt;</span> <span class="ident">start</span>.<span class="ident">index</span>)
-                            <span class="op">&amp;&amp;</span> (<span class="ident">end</span>.<span class="ident">line</span> <span class="op">!</span><span class="op">=</span> <span class="ident">line_i</span> <span class="op">|</span><span class="op">|</span> <span class="ident">c_start</span> <span class="op">&lt;</span> <span class="ident">end</span>.<span class="ident">index</span>) {
-                                <span class="ident">range_opt</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">range_opt</span>.<span class="ident">take</span>() {
-                                    <span class="prelude-val">Some</span>((<span class="ident">min</span>, <span class="ident">max</span>)) =&gt; <span class="prelude-val">Some</span>((
-                                        <span class="ident">cmp::min</span>(<span class="ident">min</span>, <span class="ident">c_x</span> <span class="kw">as</span> <span class="ident">i32</span>),
-                                        <span class="ident">cmp::max</span>(<span class="ident">max</span>, (<span class="ident">c_x</span> <span class="op">+</span> <span class="ident">c_w</span>) <span class="kw">as</span> <span class="ident">i32</span>),
+                <span class="kw">if </span>line_i &gt;= start.line &amp;&amp; line_i &lt;= end.line {
+                    <span class="kw">let </span><span class="kw-2">mut </span>range_opt = <span class="prelude-val">None</span>;
+                    <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {
+                        <span class="comment">// Guess x offset based on characters
+                        </span><span class="kw">let </span>cluster = <span class="kw-2">&amp;</span>run.text[glyph.start..glyph.end];
+                        <span class="kw">let </span>total = cluster.grapheme_indices(<span class="bool-val">true</span>).count();
+                        <span class="kw">let </span><span class="kw-2">mut </span>c_x = glyph.x;
+                        <span class="kw">let </span>c_w = glyph.w / total <span class="kw">as </span>f32;
+                        <span class="kw">for </span>(i, c) <span class="kw">in </span>cluster.grapheme_indices(<span class="bool-val">true</span>) {
+                            <span class="kw">let </span>c_start = glyph.start + i;
+                            <span class="kw">let </span>c_end = glyph.start + i + c.len();
+                            <span class="kw">if </span>(start.line != line_i || c_end &gt; start.index)
+                            &amp;&amp; (end.line != line_i || c_start &lt; end.index) {
+                                range_opt = <span class="kw">match </span>range_opt.take() {
+                                    <span class="prelude-val">Some</span>((min, max)) =&gt; <span class="prelude-val">Some</span>((
+                                        cmp::min(min, c_x <span class="kw">as </span>i32),
+                                        cmp::max(max, (c_x + c_w) <span class="kw">as </span>i32),
                                     )),
-                                    <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Some</span>((
-                                        <span class="ident">c_x</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                                        (<span class="ident">c_x</span> <span class="op">+</span> <span class="ident">c_w</span>) <span class="kw">as</span> <span class="ident">i32</span>,
+                                    <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>((
+                                        c_x <span class="kw">as </span>i32,
+                                        (c_x + c_w) <span class="kw">as </span>i32,
                                     ))
                                 };
-                            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">min</span>, <span class="ident">max</span>)) <span class="op">=</span> <span class="ident">range_opt</span>.<span class="ident">take</span>() {
-                                <span class="ident">f</span>(
-                                    <span class="ident">min</span>,
-                                    <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span>,
-                                    <span class="ident">cmp::max</span>(<span class="number">0</span>, <span class="ident">max</span> <span class="op">-</span> <span class="ident">min</span>) <span class="kw">as</span> <span class="ident">u32</span>,
-                                    <span class="ident">line_height</span> <span class="kw">as</span> <span class="ident">u32</span>,
-                                    <span class="ident">Color::rgba</span>(<span class="ident">color</span>.<span class="ident">r</span>(), <span class="ident">color</span>.<span class="ident">g</span>(), <span class="ident">color</span>.<span class="ident">b</span>(), <span class="number">0x33</span>)
+                            } <span class="kw">else if let </span><span class="prelude-val">Some</span>((min, max)) = range_opt.take() {
+                                f(
+                                    min,
+                                    line_y - font_size,
+                                    cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
+                                    line_height <span class="kw">as </span>u32,
+                                    Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>)
                                 );
                             }
-                            <span class="ident">c_x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">c_w</span>;
+                            c_x += c_w;
                         }
                     }
 
-                    <span class="kw">if</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">end</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="ident">line_i</span>{
-                        <span class="comment">// Highlight all of internal empty lines</span>
-                        <span class="ident">range_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">size</span>().<span class="number">0</span>));
+                    <span class="kw">if </span>run.glyphs.is_empty() &amp;&amp; end.line &gt; line_i{
+                        <span class="comment">// Highlight all of internal empty lines
+                        </span>range_opt = <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="self">self</span>.buffer.size().<span class="number">0</span>));
                     }
 
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="kw-2">mut</span> <span class="ident">min</span>, <span class="kw-2">mut</span> <span class="ident">max</span>)) <span class="op">=</span> <span class="ident">range_opt</span>.<span class="ident">take</span>() {
-                        <span class="kw">if</span> <span class="ident">end</span>.<span class="ident">line</span> <span class="op">&gt;</span> <span class="ident">line_i</span> {
-                            <span class="comment">// Draw to end of line</span>
-                            <span class="kw">if</span> <span class="ident">run</span>.<span class="ident">rtl</span> {
-                                <span class="ident">min</span> <span class="op">=</span> <span class="number">0</span>;
-                            } <span class="kw">else</span> {
-                                <span class="ident">max</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">size</span>().<span class="number">0</span>;
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw-2">mut </span>min, <span class="kw-2">mut </span>max)) = range_opt.take() {
+                        <span class="kw">if </span>end.line &gt; line_i {
+                            <span class="comment">// Draw to end of line
+                            </span><span class="kw">if </span>run.rtl {
+                                min = <span class="number">0</span>;
+                            } <span class="kw">else </span>{
+                                max = <span class="self">self</span>.buffer.size().<span class="number">0</span>;
                             }
                         }
-                        <span class="ident">f</span>(
-                            <span class="ident">min</span>,
-                            <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span>,
-                            <span class="ident">cmp::max</span>(<span class="number">0</span>, <span class="ident">max</span> <span class="op">-</span> <span class="ident">min</span>) <span class="kw">as</span> <span class="ident">u32</span>,
-                            <span class="ident">line_height</span> <span class="kw">as</span> <span class="ident">u32</span>,
-                            <span class="ident">Color::rgba</span>(<span class="ident">color</span>.<span class="ident">r</span>(), <span class="ident">color</span>.<span class="ident">g</span>(), <span class="ident">color</span>.<span class="ident">b</span>(), <span class="number">0x33</span>)
+                        f(
+                            min,
+                            line_y - font_size,
+                            cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
+                            line_height <span class="kw">as </span>u32,
+                            Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>)
                         );
                     }
                 }
             }
 
-            <span class="comment">// Draw cursor</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">cursor_glyph</span>, <span class="ident">cursor_glyph_offset</span>)) <span class="op">=</span> <span class="ident">cursor_glyph_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursor</span>) {
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">get</span>(<span class="ident">cursor_glyph</span>) {
-                    <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) =&gt; {
-                        <span class="comment">// Start of detected glyph</span>
-                        <span class="kw">if</span> <span class="ident">glyph</span>.<span class="ident">rtl</span> {
-                            (<span class="ident">glyph</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">glyph</span>.<span class="ident">w</span> <span class="op">-</span> <span class="ident">cursor_glyph_offset</span>) <span class="kw">as</span> <span class="ident">i32</span>
-                        } <span class="kw">else</span> {
-                            (<span class="ident">glyph</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">cursor_glyph_offset</span>) <span class="kw">as</span> <span class="ident">i32</span>
+            <span class="comment">// Draw cursor
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>((cursor_glyph, cursor_glyph_offset)) = cursor_glyph_opt(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor) {
+                <span class="kw">let </span>x = <span class="kw">match </span>run.glyphs.get(cursor_glyph) {
+                    <span class="prelude-val">Some</span>(glyph) =&gt; {
+                        <span class="comment">// Start of detected glyph
+                        </span><span class="kw">if </span>glyph.rtl {
+                            (glyph.x + glyph.w - cursor_glyph_offset) <span class="kw">as </span>i32
+                        } <span class="kw">else </span>{
+                            (glyph.x + cursor_glyph_offset) <span class="kw">as </span>i32
                         }
                     },
-                    <span class="prelude-val">None</span> =&gt; <span class="kw">match</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">last</span>() {
-                        <span class="prelude-val">Some</span>(<span class="ident">glyph</span>) =&gt; {
-                            <span class="comment">// End of last glyph</span>
-                            <span class="kw">if</span> <span class="ident">glyph</span>.<span class="ident">rtl</span> {
-                                <span class="ident">glyph</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>
-                            } <span class="kw">else</span> {
-                                (<span class="ident">glyph</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">glyph</span>.<span class="ident">w</span>) <span class="kw">as</span> <span class="ident">i32</span>
+                    <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>run.glyphs.last() {
+                        <span class="prelude-val">Some</span>(glyph) =&gt; {
+                            <span class="comment">// End of last glyph
+                            </span><span class="kw">if </span>glyph.rtl {
+                                glyph.x <span class="kw">as </span>i32
+                            } <span class="kw">else </span>{
+                                (glyph.x + glyph.w) <span class="kw">as </span>i32
                             }
                         },
-                        <span class="prelude-val">None</span> =&gt; {
-                            <span class="comment">// Start of empty line</span>
-                            <span class="number">0</span>
-                        }
+                        <span class="prelude-val">None </span>=&gt; {
+                            <span class="comment">// Start of empty line
+                            </span><span class="number">0
+                        </span>}
                     }
                 };
 
-                <span class="ident">f</span>(
-                    <span class="ident">x</span>,
-                    <span class="ident">line_y</span> <span class="op">-</span> <span class="ident">font_size</span>,
+                f(
+                    x,
+                    line_y - font_size,
                     <span class="number">1</span>,
-                    <span class="ident">line_height</span> <span class="kw">as</span> <span class="ident">u32</span>,
-                    <span class="ident">color</span>,
+                    line_height <span class="kw">as </span>u32,
+                    color,
                 );
             }
 
-            <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="ident">run</span>.<span class="ident">glyphs</span>.<span class="ident">iter</span>() {
-                <span class="kw">let</span> (<span class="ident">cache_key</span>, <span class="ident">x_int</span>, <span class="ident">y_int</span>) <span class="op">=</span> (<span class="ident">glyph</span>.<span class="ident">cache_key</span>, <span class="ident">glyph</span>.<span class="ident">x_int</span>, <span class="ident">glyph</span>.<span class="ident">y_int</span>);
+            <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {
+                <span class="kw">let </span>(cache_key, x_int, y_int) = (glyph.cache_key, glyph.x_int, glyph.y_int);
 
-                <span class="kw">let</span> <span class="ident">glyph_color</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">glyph</span>.<span class="ident">color_opt</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
-                    <span class="prelude-val">None</span> =&gt; <span class="ident">color</span>,
+                <span class="kw">let </span>glyph_color = <span class="kw">match </span>glyph.color_opt {
+                    <span class="prelude-val">Some</span>(some) =&gt; some,
+                    <span class="prelude-val">None </span>=&gt; color,
                 };
 
-                <span class="ident">cache</span>.<span class="ident">with_pixels</span>(<span class="ident">cache_key</span>, <span class="ident">glyph_color</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">color</span><span class="op">|</span> {
-                    <span class="ident">f</span>(<span class="ident">x_int</span> <span class="op">+</span> <span class="ident">x</span>, <span class="ident">line_y</span> <span class="op">+</span> <span class="ident">y_int</span> <span class="op">+</span> <span class="ident">y</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="ident">color</span>);
+                cache.with_pixels(cache_key, glyph_color, |x, y, color| {
+                    f(x_int + x, line_y + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
                 });
             }
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

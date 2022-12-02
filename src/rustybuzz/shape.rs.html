@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/shape.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/shape.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -534,535 +534,535 @@
 <span id="534">534</span>
 <span id="535">535</span>
 <span id="536">536</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>core::convert::TryFrom;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">aat</span>, <span class="ident">ot</span>, <span class="ident">fallback</span>, <span class="ident">normalize</span>, <span class="ident">Direction</span>, <span class="ident">Face</span>, <span class="ident">Feature</span>, <span class="ident">GlyphBuffer</span>, <span class="ident">UnicodeBuffer</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer</span>::{
-    <span class="ident">glyph_flag</span>, <span class="ident">Buffer</span>, <span class="ident">BufferClusterLevel</span>, <span class="ident">BufferFlags</span>, <span class="ident">BufferScratchFlags</span>, <span class="ident">GlyphInfo</span>,
-    <span class="ident">GlyphPropsFlags</span>,
+<span class="kw">use crate</span>::{aat, ot, fallback, normalize, Direction, Face, Feature, GlyphBuffer, UnicodeBuffer};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::{
+    glyph_flag, Buffer, BufferClusterLevel, BufferFlags, BufferScratchFlags, GlyphInfo,
+    GlyphPropsFlags,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::complex::ZeroWidthMarksMode</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan::ShapePlan</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::unicode</span>::{<span class="ident">CharExt</span>, <span class="ident">GeneralCategory</span>};
+<span class="kw">use </span><span class="kw">crate</span>::complex::ZeroWidthMarksMode;
+<span class="kw">use </span><span class="kw">crate</span>::plan::ShapePlan;
+<span class="kw">use </span><span class="kw">crate</span>::unicode::{CharExt, GeneralCategory};
 
-<span class="doccomment">/// Shapes the buffer content using provided font and features.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Consumes the buffer. You can then run `GlyphBuffer::clear` to get the `UnicodeBuffer` back</span>
-<span class="doccomment">/// without allocating a new one.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">features</span>: <span class="kw-2">&amp;</span>[<span class="ident">Feature</span>], <span class="ident">buffer</span>: <span class="ident">UnicodeBuffer</span>) -&gt; <span class="ident">GlyphBuffer</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="number">0</span>;
-    <span class="ident">buffer</span>.<span class="ident">guess_segment_properties</span>();
+<span class="doccomment">/// Shapes the buffer content using provided font and features.
+///
+/// Consumes the buffer. You can then run `GlyphBuffer::clear` to get the `UnicodeBuffer` back
+/// without allocating a new one.
+</span><span class="kw">pub fn </span>shape(face: <span class="kw-2">&amp;</span>Face, features: <span class="kw-2">&amp;</span>[Feature], buffer: UnicodeBuffer) -&gt; GlyphBuffer {
+    <span class="kw">let </span><span class="kw-2">mut </span>buffer = buffer.<span class="number">0</span>;
+    buffer.guess_segment_properties();
 
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="kw">let</span> <span class="ident">plan</span> <span class="op">=</span> <span class="ident">ShapePlan::new</span>(
-            <span class="ident">face</span>,
-            <span class="ident">buffer</span>.<span class="ident">direction</span>,
-            <span class="ident">buffer</span>.<span class="ident">script</span>,
-            <span class="ident">buffer</span>.<span class="ident">language</span>.<span class="ident">as_ref</span>(),
-            <span class="ident">features</span>,
+    <span class="kw">if </span>buffer.len &gt; <span class="number">0 </span>{
+        <span class="kw">let </span>plan = ShapePlan::new(
+            face,
+            buffer.direction,
+            buffer.script,
+            buffer.language.as_ref(),
+            features,
         );
 
-        <span class="comment">// Save the original direction, we use it later.</span>
-        <span class="kw">let</span> <span class="ident">target_direction</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">direction</span>;
-        <span class="ident">shape_internal</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span> {
-            <span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">plan</span>,
-            <span class="ident">face</span>,
-            <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>,
-            <span class="ident">user_features</span>: <span class="ident">features</span>,
-            <span class="ident">target_direction</span>,
+        <span class="comment">// Save the original direction, we use it later.
+        </span><span class="kw">let </span>target_direction = buffer.direction;
+        shape_internal(<span class="kw-2">&amp;mut </span>ShapeContext {
+            plan: <span class="kw-2">&amp;</span>plan,
+            face,
+            buffer: <span class="kw-2">&amp;mut </span>buffer,
+            user_features: features,
+            target_direction,
         });
     }
 
-    <span class="ident">GlyphBuffer</span>(<span class="ident">buffer</span>)
+    GlyphBuffer(buffer)
 }
 
-<span class="kw">struct</span> <span class="ident">ShapeContext</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ShapePlan</span>,
-    <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Face</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">buffer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Buffer</span>,
-    <span class="ident">user_features</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Feature</span>],
-    <span class="comment">// Transient stuff</span>
-    <span class="ident">target_direction</span>: <span class="ident">Direction</span>,
+<span class="kw">struct </span>ShapeContext&lt;<span class="lifetime">&#39;a</span>&gt; {
+    plan: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>ShapePlan,
+    face: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Face&lt;<span class="lifetime">&#39;a</span>&gt;,
+    buffer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Buffer,
+    user_features: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Feature],
+    <span class="comment">// Transient stuff
+    </span>target_direction: Direction,
 }
 
-<span class="comment">// Pull it all together!</span>
-<span class="kw">fn</span> <span class="ident">shape_internal</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">scratch_flags</span> <span class="op">=</span> <span class="ident">BufferScratchFlags::empty</span>();
+<span class="comment">// Pull it all together!
+</span><span class="kw">fn </span>shape_internal(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    ctx.buffer.scratch_flags = BufferScratchFlags::empty();
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>.<span class="ident">checked_mul</span>(<span class="ident">Buffer::MAX_LEN_FACTOR</span>) {
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">max_len</span> <span class="op">=</span> <span class="ident">len</span>.<span class="ident">max</span>(<span class="ident">Buffer::MAX_LEN_MIN</span>);
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(len) = ctx.buffer.len.checked_mul(Buffer::MAX_LEN_FACTOR) {
+        ctx.buffer.max_len = len.max(Buffer::MAX_LEN_MIN);
     }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">len</span>) <span class="op">=</span> <span class="ident">i32::try_from</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ops</span>) <span class="op">=</span> <span class="ident">len</span>.<span class="ident">checked_mul</span>(<span class="ident">Buffer::MAX_OPS_FACTOR</span>) {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">=</span> <span class="ident">ops</span>.<span class="ident">max</span>(<span class="ident">Buffer::MAX_OPS_MIN</span>);
+    <span class="kw">if let </span><span class="prelude-val">Ok</span>(len) = i32::try_from(ctx.buffer.len) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(ops) = len.checked_mul(Buffer::MAX_OPS_FACTOR) {
+            ctx.buffer.max_ops = ops.max(Buffer::MAX_OPS_MIN);
         }
     }
 
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">clear_output</span>();
+    ctx.buffer.clear_output();
 
-    <span class="ident">initialize_masks</span>(<span class="ident">ctx</span>);
-    <span class="ident">set_unicode_props</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    <span class="ident">insert_dotted_circle</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>, <span class="ident">ctx</span>.<span class="ident">face</span>);
+    initialize_masks(ctx);
+    set_unicode_props(ctx.buffer);
+    insert_dotted_circle(ctx.buffer, ctx.face);
 
-    <span class="ident">form_clusters</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
+    form_clusters(ctx.buffer);
 
-    <span class="ident">ensure_native_direction</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
+    ensure_native_direction(ctx.buffer);
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">shaper</span>.<span class="ident">preprocess_text</span> {
-        <span class="ident">func</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = ctx.plan.shaper.preprocess_text {
+        func(ctx.plan, ctx.face, ctx.buffer);
     }
 
-    <span class="ident">substitute_pre</span>(<span class="ident">ctx</span>);
-    <span class="ident">position</span>(<span class="ident">ctx</span>);
-    <span class="ident">substitute_post</span>(<span class="ident">ctx</span>);
+    substitute_pre(ctx);
+    position(ctx);
+    substitute_post(ctx);
 
-    <span class="ident">propagate_flags</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
+    propagate_flags(ctx.buffer);
 
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">target_direction</span>;
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">max_len</span> <span class="op">=</span> <span class="ident">Buffer::MAX_LEN_DEFAULT</span>;
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">=</span> <span class="ident">Buffer::MAX_OPS_DEFAULT</span>;
+    ctx.buffer.direction = ctx.target_direction;
+    ctx.buffer.max_len = Buffer::MAX_LEN_DEFAULT;
+    ctx.buffer.max_ops = Buffer::MAX_OPS_DEFAULT;
 }
 
-<span class="kw">fn</span> <span class="ident">substitute_pre</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">substitute_default</span>(<span class="ident">ctx</span>);
-    <span class="ident">substitute_complex</span>(<span class="ident">ctx</span>);
+<span class="kw">fn </span>substitute_pre(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    substitute_default(ctx);
+    substitute_complex(ctx);
 }
 
-<span class="kw">fn</span> <span class="ident">substitute_post</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">hide_default_ignorables</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>, <span class="ident">ctx</span>.<span class="ident">face</span>);
+<span class="kw">fn </span>substitute_post(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    hide_default_ignorables(ctx.buffer, ctx.face);
 
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">apply_morx</span> {
-        <span class="ident">aat::remove_deleted_glyphs</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
+    <span class="kw">if </span>ctx.plan.apply_morx {
+        aat::remove_deleted_glyphs(ctx.buffer);
     }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">shaper</span>.<span class="ident">postprocess_glyphs</span> {
-        <span class="ident">func</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">substitute_default</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">rotate_chars</span>(<span class="ident">ctx</span>);
-
-    <span class="ident">normalize::normalize</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="ident">setup_masks</span>(<span class="ident">ctx</span>);
-
-    <span class="comment">// This is unfortunate to go here, but necessary...</span>
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">fallback_mark_positioning</span> {
-        <span class="ident">fallback::recategorize_marks</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-
-    <span class="ident">map_glyphs_fast</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
-}
-
-<span class="kw">fn</span> <span class="ident">substitute_complex</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">ot::substitute_start</span>(<span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">fallback_glyph_classes</span> {
-        <span class="ident">synthesize_glyph_classes</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-
-    <span class="ident">substitute_by_plan</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-}
-
-<span class="kw">fn</span> <span class="ident">substitute_by_plan</span>(<span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">if</span> <span class="ident">plan</span>.<span class="ident">apply_morx</span> {
-        <span class="ident">aat::substitute</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
-    } <span class="kw">else</span> {
-        <span class="ident">ot::substitute</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = ctx.plan.shaper.postprocess_glyphs {
+        func(ctx.plan, ctx.face, ctx.buffer);
     }
 }
 
-<span class="kw">fn</span> <span class="ident">position</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">clear_positions</span>();
+<span class="kw">fn </span>substitute_default(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    rotate_chars(ctx);
 
-    <span class="ident">position_default</span>(<span class="ident">ctx</span>);
+    normalize::normalize(ctx.plan, ctx.face, ctx.buffer);
 
-    <span class="ident">position_complex</span>(<span class="ident">ctx</span>);
+    setup_masks(ctx);
 
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_backward</span>() {
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">reverse</span>();
+    <span class="comment">// This is unfortunate to go here, but necessary...
+    </span><span class="kw">if </span>ctx.plan.fallback_mark_positioning {
+        fallback::recategorize_marks(ctx.plan, ctx.face, ctx.buffer);
+    }
+
+    map_glyphs_fast(ctx.buffer);
+}
+
+<span class="kw">fn </span>substitute_complex(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    ot::substitute_start(ctx.face, ctx.buffer);
+
+    <span class="kw">if </span>ctx.plan.fallback_glyph_classes {
+        synthesize_glyph_classes(ctx.buffer);
+    }
+
+    substitute_by_plan(ctx.plan, ctx.face, ctx.buffer);
+}
+
+<span class="kw">fn </span>substitute_by_plan(plan: <span class="kw-2">&amp;</span>ShapePlan, face: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">if </span>plan.apply_morx {
+        aat::substitute(plan, face, buffer);
+    } <span class="kw">else </span>{
+        ot::substitute(plan, face, buffer);
     }
 }
 
-<span class="kw">fn</span> <span class="ident">position_default</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>;
+<span class="kw">fn </span>position(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    ctx.buffer.clear_positions();
 
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_horizontal</span>() {
-        <span class="kw">for</span> (<span class="ident">info</span>, <span class="ident">pos</span>) <span class="kw">in</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>].<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">pos</span>[..<span class="ident">len</span>]) {
-            <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">glyph_h_advance</span>(<span class="ident">info</span>.<span class="ident">as_glyph</span>());
+    position_default(ctx);
+
+    position_complex(ctx);
+
+    <span class="kw">if </span>ctx.buffer.direction.is_backward() {
+        ctx.buffer.reverse();
+    }
+}
+
+<span class="kw">fn </span>position_default(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    <span class="kw">let </span>len = ctx.buffer.len;
+
+    <span class="kw">if </span>ctx.buffer.direction.is_horizontal() {
+        <span class="kw">for </span>(info, pos) <span class="kw">in </span>ctx.buffer.info[..len].iter().zip(<span class="kw-2">&amp;mut </span>ctx.buffer.pos[..len]) {
+            pos.x_advance = ctx.face.glyph_h_advance(info.as_glyph());
         }
-    } <span class="kw">else</span> {
-        <span class="kw">for</span> (<span class="ident">info</span>, <span class="ident">pos</span>) <span class="kw">in</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>].<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">pos</span>[..<span class="ident">len</span>]) {
-            <span class="kw">let</span> <span class="ident">glyph</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">as_glyph</span>();
-            <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">glyph_v_advance</span>(<span class="ident">glyph</span>);
-            <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">glyph_h_origin</span>(<span class="ident">glyph</span>);
-            <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">glyph_v_origin</span>(<span class="ident">glyph</span>);
-        }
-    }
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_SPACE_FALLBACK</span>) {
-        <span class="ident">fallback::adjust_spaces</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">position_complex</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="comment">// If the font has no GPOS and direction is forward, then when</span>
-    <span class="comment">// zeroing mark widths, we shift the mark with it, such that the</span>
-    <span class="comment">// mark is positioned hanging over the previous glyph.  When</span>
-    <span class="comment">// direction is backward we don&#39;t shift and it will end up</span>
-    <span class="comment">// hanging over the next glyph after the final reordering.</span>
-    <span class="comment">//</span>
-    <span class="comment">// Note: If fallback positioning happens, we don&#39;t care about</span>
-    <span class="comment">// this as it will be overriden.</span>
-    <span class="kw">let</span> <span class="ident">adjust_offsets_when_zeroing</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">adjust_mark_positioning_when_zeroing</span>
-        <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_forward</span>();
-
-    <span class="comment">// We change glyph origin to what GPOS expects (horizontal), apply GPOS, change it back.</span>
-
-    <span class="ident">ot::position_start</span>(<span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">zero_marks</span> <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">shaper</span>.<span class="ident">zero_width_marks</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">ZeroWidthMarksMode::ByGdefEarly</span>) {
-        <span class="ident">zero_mark_widths_by_gdef</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>, <span class="ident">adjust_offsets_when_zeroing</span>);
-    }
-
-    <span class="ident">position_by_plan</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">zero_marks</span> <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">shaper</span>.<span class="ident">zero_width_marks</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">ZeroWidthMarksMode::ByGdefLate</span>) {
-        <span class="ident">zero_mark_widths_by_gdef</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>, <span class="ident">adjust_offsets_when_zeroing</span>);
-    }
-
-    <span class="comment">// Finish off.  Has to follow a certain order.</span>
-    <span class="ident">ot::position_finish_advances</span>(<span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    <span class="ident">zero_width_default_ignorables</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">apply_morx</span> {
-        <span class="ident">aat::zero_width_deleted_glyphs</span>(<span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-
-    <span class="ident">ot::position_finish_offsets</span>(<span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">fallback_mark_positioning</span> {
-        <span class="ident">fallback::position_marks</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>, <span class="ident">adjust_offsets_when_zeroing</span>);
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">position_by_plan</span>(<span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">if</span> <span class="ident">plan</span>.<span class="ident">apply_gpos</span> {
-        <span class="ident">ot::position</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">plan</span>.<span class="ident">apply_kerx</span> {
-        <span class="ident">aat::position</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">plan</span>.<span class="ident">apply_kern</span> {
-        <span class="ident">ot::kern</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
-    }
-
-    <span class="kw">if</span> <span class="ident">plan</span>.<span class="ident">apply_trak</span> {
-        <span class="ident">aat::track</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">initialize_masks</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="kw">let</span> <span class="ident">global_mask</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">ot_map</span>.<span class="ident">global_mask</span>();
-    <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">reset_masks</span>(<span class="ident">global_mask</span>);
-}
-
-<span class="kw">fn</span> <span class="ident">setup_masks</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="ident">setup_masks_fraction</span>(<span class="ident">ctx</span>);
-
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">shaper</span>.<span class="ident">setup_masks</span> {
-        <span class="ident">func</span>(<span class="ident">ctx</span>.<span class="ident">plan</span>, <span class="ident">ctx</span>.<span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
-    }
-
-    <span class="kw">for</span> <span class="ident">feature</span> <span class="kw">in</span> <span class="ident">ctx</span>.<span class="ident">user_features</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">feature</span>.<span class="ident">is_global</span>() {
-            <span class="kw">let</span> (<span class="ident">mask</span>, <span class="ident">shift</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">ot_map</span>.<span class="ident">mask</span>(<span class="ident">feature</span>.<span class="ident">tag</span>);
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">set_masks</span>(<span class="ident">feature</span>.<span class="ident">value</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">shift</span>, <span class="ident">mask</span>, <span class="ident">feature</span>.<span class="ident">start</span>, <span class="ident">feature</span>.<span class="ident">end</span>);
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>(info, pos) <span class="kw">in </span>ctx.buffer.info[..len].iter().zip(<span class="kw-2">&amp;mut </span>ctx.buffer.pos[..len]) {
+            <span class="kw">let </span>glyph = info.as_glyph();
+            pos.y_advance = ctx.face.glyph_v_advance(glyph);
+            pos.x_offset -= ctx.face.glyph_h_origin(glyph);
+            pos.y_offset -= ctx.face.glyph_v_origin(glyph);
         }
     }
+
+    <span class="kw">if </span>ctx.buffer.scratch_flags.contains(BufferScratchFlags::HAS_SPACE_FALLBACK) {
+        fallback::adjust_spaces(ctx.plan, ctx.face, ctx.buffer);
+    }
 }
 
-<span class="kw">fn</span> <span class="ident">setup_masks_fraction</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>;
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_NON_ASCII</span>) <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">has_frac</span> {
+<span class="kw">fn </span>position_complex(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    <span class="comment">// If the font has no GPOS and direction is forward, then when
+    // zeroing mark widths, we shift the mark with it, such that the
+    // mark is positioned hanging over the previous glyph.  When
+    // direction is backward we don&#39;t shift and it will end up
+    // hanging over the next glyph after the final reordering.
+    //
+    // Note: If fallback positioning happens, we don&#39;t care about
+    // this as it will be overriden.
+    </span><span class="kw">let </span>adjust_offsets_when_zeroing = ctx.plan.adjust_mark_positioning_when_zeroing
+        &amp;&amp; ctx.buffer.direction.is_forward();
+
+    <span class="comment">// We change glyph origin to what GPOS expects (horizontal), apply GPOS, change it back.
+
+    </span>ot::position_start(ctx.face, ctx.buffer);
+
+    <span class="kw">if </span>ctx.plan.zero_marks &amp;&amp; ctx.plan.shaper.zero_width_marks == <span class="prelude-val">Some</span>(ZeroWidthMarksMode::ByGdefEarly) {
+        zero_mark_widths_by_gdef(ctx.buffer, adjust_offsets_when_zeroing);
+    }
+
+    position_by_plan(ctx.plan, ctx.face, ctx.buffer);
+
+    <span class="kw">if </span>ctx.plan.zero_marks &amp;&amp; ctx.plan.shaper.zero_width_marks == <span class="prelude-val">Some</span>(ZeroWidthMarksMode::ByGdefLate) {
+        zero_mark_widths_by_gdef(ctx.buffer, adjust_offsets_when_zeroing);
+    }
+
+    <span class="comment">// Finish off.  Has to follow a certain order.
+    </span>ot::position_finish_advances(ctx.face, ctx.buffer);
+    zero_width_default_ignorables(ctx.buffer);
+
+    <span class="kw">if </span>ctx.plan.apply_morx {
+        aat::zero_width_deleted_glyphs(ctx.buffer);
+    }
+
+    ot::position_finish_offsets(ctx.face, ctx.buffer);
+
+    <span class="kw">if </span>ctx.plan.fallback_mark_positioning {
+        fallback::position_marks(ctx.plan, ctx.face, ctx.buffer, adjust_offsets_when_zeroing);
+    }
+}
+
+<span class="kw">fn </span>position_by_plan(plan: <span class="kw-2">&amp;</span>ShapePlan, face: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">if </span>plan.apply_gpos {
+        ot::position(plan, face, buffer);
+    } <span class="kw">else if </span>plan.apply_kerx {
+        aat::position(plan, face, buffer);
+    } <span class="kw">else if </span>plan.apply_kern {
+        ot::kern(plan, face, buffer);
+    }
+
+    <span class="kw">if </span>plan.apply_trak {
+        aat::track(plan, face, buffer);
+    }
+}
+
+<span class="kw">fn </span>initialize_masks(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    <span class="kw">let </span>global_mask = ctx.plan.ot_map.global_mask();
+    ctx.buffer.reset_masks(global_mask);
+}
+
+<span class="kw">fn </span>setup_masks(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    setup_masks_fraction(ctx);
+
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = ctx.plan.shaper.setup_masks {
+        func(ctx.plan, ctx.face, ctx.buffer);
+    }
+
+    <span class="kw">for </span>feature <span class="kw">in </span>ctx.user_features {
+        <span class="kw">if </span>!feature.is_global() {
+            <span class="kw">let </span>(mask, shift) = ctx.plan.ot_map.mask(feature.tag);
+            ctx.buffer.set_masks(feature.value &lt;&lt; shift, mask, feature.start, feature.end);
+        }
+    }
+}
+
+<span class="kw">fn </span>setup_masks_fraction(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    <span class="kw">let </span>buffer = <span class="kw-2">&amp;mut </span>ctx.buffer;
+    <span class="kw">if </span>!buffer.scratch_flags.contains(BufferScratchFlags::HAS_NON_ASCII) || !ctx.plan.has_frac {
         <span class="kw">return</span>;
     }
 
-    <span class="kw">let</span> (<span class="ident">pre_mask</span>, <span class="ident">post_mask</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_forward</span>() {
-        (<span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">numr_mask</span> <span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">frac_mask</span>, <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">frac_mask</span> <span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">dnom_mask</span>)
-    } <span class="kw">else</span> {
-        (<span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">frac_mask</span> <span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">dnom_mask</span>, <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">numr_mask</span> <span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">frac_mask</span>)
+    <span class="kw">let </span>(pre_mask, post_mask) = <span class="kw">if </span>buffer.direction.is_forward() {
+        (ctx.plan.numr_mask | ctx.plan.frac_mask, ctx.plan.frac_mask | ctx.plan.dnom_mask)
+    } <span class="kw">else </span>{
+        (ctx.plan.frac_mask | ctx.plan.dnom_mask, ctx.plan.numr_mask | ctx.plan.frac_mask)
     };
 
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="comment">// FRACTION SLASH</span>
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">i</span>].<span class="ident">glyph_id</span> <span class="op">==</span> <span class="number">0x2044</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">i</span>;
-            <span class="kw">while</span> <span class="ident">start</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">start</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">general_category</span>() <span class="op">==</span> <span class="ident">GeneralCategory::DecimalNumber</span> {
-                <span class="ident">start</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+    <span class="kw">while </span>i &lt; len {
+        <span class="comment">// FRACTION SLASH
+        </span><span class="kw">if </span>buffer.info[i].glyph_id == <span class="number">0x2044 </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>start = i;
+            <span class="kw">while </span>start &gt; <span class="number">0 </span>&amp;&amp; buffer.info[start - <span class="number">1</span>].general_category() == GeneralCategory::DecimalNumber {
+                start -= <span class="number">1</span>;
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>;
-            <span class="kw">while</span> <span class="ident">end</span> <span class="op">&lt;</span> <span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">end</span>].<span class="ident">general_category</span>() <span class="op">==</span> <span class="ident">GeneralCategory::DecimalNumber</span> {
-                <span class="ident">end</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>end = i + <span class="number">1</span>;
+            <span class="kw">while </span>end &lt; len &amp;&amp; buffer.info[end].general_category() == GeneralCategory::DecimalNumber {
+                end += <span class="number">1</span>;
             }
 
-            <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+            buffer.unsafe_to_break(start, end);
 
-            <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">start</span>..<span class="ident">i</span>] {
-                <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">pre_mask</span>;
+            <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[start..i] {
+                info.mask |= pre_mask;
             }
 
-            <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">i</span>].<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">frac_mask</span>;
+            buffer.info[i].mask |= ctx.plan.frac_mask;
 
-            <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>..<span class="ident">end</span>] {
-                <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">post_mask</span>;
+            <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[i+<span class="number">1</span>..end] {
+                info.mask |= post_mask;
             }
 
-            <span class="ident">i</span> <span class="op">=</span> <span class="ident">end</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            i = end;
+        } <span class="kw">else </span>{
+            i += <span class="number">1</span>;
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">set_unicode_props</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="comment">// Implement enough of Unicode Graphemes here that shaping</span>
-    <span class="comment">// in reverse-direction wouldn&#39;t break graphemes.  Namely,</span>
-    <span class="comment">// we mark all marks and ZWJ and ZWJ,Extended_Pictographic</span>
-    <span class="comment">// sequences as continuations.  The foreach_grapheme()</span>
-    <span class="comment">// macro uses this bit.</span>
-    <span class="comment">//</span>
-    <span class="comment">// https://www.unicode.org/reports/tr29/#Regex_Definitions</span>
+<span class="kw">fn </span>set_unicode_props(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="comment">// Implement enough of Unicode Graphemes here that shaping
+    // in reverse-direction wouldn&#39;t break graphemes.  Namely,
+    // we mark all marks and ZWJ and ZWJ,Extended_Pictographic
+    // sequences as continuations.  The foreach_grapheme()
+    // macro uses this bit.
+    //
+    // https://www.unicode.org/reports/tr29/#Regex_Definitions
 
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
+    </span><span class="kw">let </span>len = buffer.len;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">i</span>];
-        <span class="ident">info</span>.<span class="ident">init_unicode_props</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+    <span class="kw">while </span>i &lt; len {
+        <span class="kw">let </span>info = <span class="kw-2">&amp;mut </span>buffer.info[i];
+        info.init_unicode_props(<span class="kw-2">&amp;mut </span>buffer.scratch_flags);
 
-        <span class="comment">// Marks are already set as continuation by the above line.</span>
-        <span class="comment">// Handle Emoji_Modifier and ZWJ-continuation.</span>
-        <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">general_category</span>() <span class="op">==</span> <span class="ident">GeneralCategory::ModifierSymbol</span>
-            <span class="op">&amp;&amp;</span> <span class="macro">matches!</span>(<span class="ident">info</span>.<span class="ident">glyph_id</span>, <span class="number">0x1F3FB</span>..<span class="op">=</span><span class="number">0x1F3FF</span>)
+        <span class="comment">// Marks are already set as continuation by the above line.
+        // Handle Emoji_Modifier and ZWJ-continuation.
+        </span><span class="kw">if </span>info.general_category() == GeneralCategory::ModifierSymbol
+            &amp;&amp; <span class="macro">matches!</span>(info.glyph_id, <span class="number">0x1F3FB</span>..=<span class="number">0x1F3FF</span>)
         {
-            <span class="ident">info</span>.<span class="ident">set_continuation</span>();
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">is_zwj</span>() {
-            <span class="ident">info</span>.<span class="ident">set_continuation</span>();
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">next</span>) <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>].<span class="ident">get_mut</span>(<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>) {
-                <span class="kw">if</span> <span class="ident">next</span>.<span class="ident">as_char</span>().<span class="ident">is_emoji_extended_pictographic</span>() {
-                    <span class="ident">next</span>.<span class="ident">init_unicode_props</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>);
-                    <span class="ident">next</span>.<span class="ident">set_continuation</span>();
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            info.set_continuation();
+        } <span class="kw">else if </span>info.is_zwj() {
+            info.set_continuation();
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(next) = buffer.info[..len].get_mut(i + <span class="number">1</span>) {
+                <span class="kw">if </span>next.as_char().is_emoji_extended_pictographic() {
+                    next.init_unicode_props(<span class="kw-2">&amp;mut </span>buffer.scratch_flags);
+                    next.set_continuation();
+                    i += <span class="number">1</span>;
                 }
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="macro">matches!</span>(<span class="ident">info</span>.<span class="ident">glyph_id</span>, <span class="number">0xE0020</span>..<span class="op">=</span><span class="number">0xE007F</span>) {
-            <span class="comment">// Or part of the Other_Grapheme_Extend that is not marks.</span>
-            <span class="comment">// As of Unicode 11 that is just:</span>
-            <span class="comment">//</span>
-            <span class="comment">// 200C          ; Other_Grapheme_Extend # Cf       ZERO WIDTH NON-JOINER</span>
-            <span class="comment">// FF9E..FF9F    ; Other_Grapheme_Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDTH KATAKANA</span>
-            <span class="comment">// SEMI-VOICED SOUND MARK E0020..E007F  ; Other_Grapheme_Extend # Cf  [96] TAG SPACE..CANCEL TAG</span>
-            <span class="comment">//</span>
-            <span class="comment">// ZWNJ is special, we don&#39;t want to merge it as there&#39;s no need, and keeping</span>
-            <span class="comment">// it separate results in more granular clusters.  Ignore Katakana for now.</span>
-            <span class="comment">// Tags are used for Emoji sub-region flag sequences:</span>
-            <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1556</span>
-            <span class="ident">info</span>.<span class="ident">set_continuation</span>();
+        } <span class="kw">else if </span><span class="macro">matches!</span>(info.glyph_id, <span class="number">0xE0020</span>..=<span class="number">0xE007F</span>) {
+            <span class="comment">// Or part of the Other_Grapheme_Extend that is not marks.
+            // As of Unicode 11 that is just:
+            //
+            // 200C          ; Other_Grapheme_Extend # Cf       ZERO WIDTH NON-JOINER
+            // FF9E..FF9F    ; Other_Grapheme_Extend # Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDTH KATAKANA
+            // SEMI-VOICED SOUND MARK E0020..E007F  ; Other_Grapheme_Extend # Cf  [96] TAG SPACE..CANCEL TAG
+            //
+            // ZWNJ is special, we don&#39;t want to merge it as there&#39;s no need, and keeping
+            // it separate results in more granular clusters.  Ignore Katakana for now.
+            // Tags are used for Emoji sub-region flag sequences:
+            // https://github.com/harfbuzz/harfbuzz/issues/1556
+            </span>info.set_continuation();
         }
 
-        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        i += <span class="number">1</span>;
     }
 }
 
-<span class="kw">fn</span> <span class="ident">insert_dotted_circle</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) {
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::DO_NOT_INSERT_DOTTED_CIRCLE</span>)
-        <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::BEGINNING_OF_TEXT</span>)
-        <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">context_len</span>[<span class="number">0</span>] <span class="op">==</span> <span class="number">0</span>
-        <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="number">0</span>].<span class="ident">is_unicode_mark</span>()
-        <span class="op">&amp;&amp;</span> <span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="number">0x25CC</span>)
+<span class="kw">fn </span>insert_dotted_circle(buffer: <span class="kw-2">&amp;mut </span>Buffer, face: <span class="kw-2">&amp;</span>Face) {
+    <span class="kw">if </span>!buffer.flags.contains(BufferFlags::DO_NOT_INSERT_DOTTED_CIRCLE)
+        &amp;&amp; buffer.flags.contains(BufferFlags::BEGINNING_OF_TEXT)
+        &amp;&amp; buffer.context_len[<span class="number">0</span>] == <span class="number">0
+        </span>&amp;&amp; buffer.info[<span class="number">0</span>].is_unicode_mark()
+        &amp;&amp; face.has_glyph(<span class="number">0x25CC</span>)
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">GlyphInfo</span> {
-            <span class="ident">glyph_id</span>: <span class="number">0x25CC</span>,
-            <span class="ident">mask</span>: <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">mask</span>,
-            <span class="ident">cluster</span>: <span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">cluster</span>,
-            <span class="ident">var1</span>: <span class="number">0</span>,
-            <span class="ident">var2</span>: <span class="number">0</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>info = GlyphInfo {
+            glyph_id: <span class="number">0x25CC</span>,
+            mask: buffer.cur(<span class="number">0</span>).mask,
+            cluster: buffer.cur(<span class="number">0</span>).cluster,
+            var1: <span class="number">0</span>,
+            var2: <span class="number">0</span>,
         };
 
-        <span class="ident">info</span>.<span class="ident">init_unicode_props</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>);
-        <span class="ident">buffer</span>.<span class="ident">clear_output</span>();
-        <span class="ident">buffer</span>.<span class="ident">output_info</span>(<span class="ident">info</span>);
+        info.init_unicode_props(<span class="kw-2">&amp;mut </span>buffer.scratch_flags);
+        buffer.clear_output();
+        buffer.output_info(info);
 
-        <span class="kw">while</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">buffer</span>.<span class="ident">successful</span> {
-            <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+        <span class="kw">while </span>buffer.idx &lt; buffer.len &amp;&amp; buffer.successful {
+            buffer.next_glyph();
         }
 
-        <span class="ident">buffer</span>.<span class="ident">swap_buffers</span>();
+        buffer.swap_buffers();
     }
 }
 
-<span class="kw">fn</span> <span class="ident">form_clusters</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_NON_ASCII</span>) {
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">cluster_level</span> <span class="op">==</span> <span class="ident">BufferClusterLevel::MonotoneGraphemes</span> {
-            <span class="macro">foreach_grapheme!</span>(<span class="ident">buffer</span>, <span class="ident">start</span>, <span class="ident">end</span>, {
-                <span class="ident">buffer</span>.<span class="ident">merge_clusters</span>(<span class="ident">start</span>, <span class="ident">end</span>)
+<span class="kw">fn </span>form_clusters(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">if </span>buffer.scratch_flags.contains(BufferScratchFlags::HAS_NON_ASCII) {
+        <span class="kw">if </span>buffer.cluster_level == BufferClusterLevel::MonotoneGraphemes {
+            <span class="macro">foreach_grapheme!</span>(buffer, start, end, {
+                buffer.merge_clusters(start, end)
             });
-        } <span class="kw">else</span> {
-            <span class="macro">foreach_grapheme!</span>(<span class="ident">buffer</span>, <span class="ident">start</span>, <span class="ident">end</span>, {
-                <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">foreach_grapheme!</span>(buffer, start, end, {
+                buffer.unsafe_to_break(start, end);
             });
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">ensure_native_direction</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">direction</span>;
-    <span class="kw">let</span> <span class="ident">hor</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">script</span>.<span class="ident">and_then</span>(<span class="ident">Direction::from_script</span>).<span class="ident">unwrap_or_default</span>();
+<span class="kw">fn </span>ensure_native_direction(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>dir = buffer.direction;
+    <span class="kw">let </span>hor = buffer.script.and_then(Direction::from_script).unwrap_or_default();
 
-    <span class="kw">if</span> (<span class="ident">dir</span>.<span class="ident">is_horizontal</span>() <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">!</span><span class="op">=</span> <span class="ident">hor</span> <span class="op">&amp;&amp;</span> <span class="ident">hor</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Direction::Invalid</span>)
-        <span class="op">|</span><span class="op">|</span> (<span class="ident">dir</span>.<span class="ident">is_vertical</span>() <span class="op">&amp;&amp;</span> <span class="ident">dir</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Direction::TopToBottom</span>)
+    <span class="kw">if </span>(dir.is_horizontal() &amp;&amp; dir != hor &amp;&amp; hor != Direction::Invalid)
+        || (dir.is_vertical() &amp;&amp; dir != Direction::TopToBottom)
     {
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">cluster_level</span> <span class="op">==</span> <span class="ident">BufferClusterLevel::MonotoneCharacters</span> {
-            <span class="macro">foreach_grapheme!</span>(<span class="ident">buffer</span>, <span class="ident">start</span>, <span class="ident">end</span>, {
-                <span class="ident">buffer</span>.<span class="ident">merge_clusters</span>(<span class="ident">start</span>, <span class="ident">end</span>);
-                <span class="ident">buffer</span>.<span class="ident">reverse_range</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+        <span class="kw">if </span>buffer.cluster_level == BufferClusterLevel::MonotoneCharacters {
+            <span class="macro">foreach_grapheme!</span>(buffer, start, end, {
+                buffer.merge_clusters(start, end);
+                buffer.reverse_range(start, end);
             });
-        } <span class="kw">else</span> {
-            <span class="macro">foreach_grapheme!</span>(<span class="ident">buffer</span>, <span class="ident">start</span>, <span class="ident">end</span>, {
-                <span class="comment">// form_clusters() merged clusters already, we don&#39;t merge.</span>
-                <span class="ident">buffer</span>.<span class="ident">reverse_range</span>(<span class="ident">start</span>, <span class="ident">end</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">foreach_grapheme!</span>(buffer, start, end, {
+                <span class="comment">// form_clusters() merged clusters already, we don&#39;t merge.
+                </span>buffer.reverse_range(start, end);
             })
         }
 
-        <span class="ident">buffer</span>.<span class="ident">reverse</span>();
-        <span class="ident">buffer</span>.<span class="ident">direction</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">reverse</span>();
+        buffer.reverse();
+        buffer.direction = buffer.direction.reverse();
     }
 }
 
-<span class="kw">fn</span> <span class="ident">rotate_chars</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ShapeContext</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>;
+<span class="kw">fn </span>rotate_chars(ctx: <span class="kw-2">&amp;mut </span>ShapeContext) {
+    <span class="kw">let </span>len = ctx.buffer.len;
 
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">target_direction</span>.<span class="ident">is_backward</span>() {
-        <span class="kw">let</span> <span class="ident">rtlm_mask</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">rtlm_mask</span>;
+    <span class="kw">if </span>ctx.target_direction.is_backward() {
+        <span class="kw">let </span>rtlm_mask = ctx.plan.rtlm_mask;
 
-        <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">info</span>.<span class="ident">as_char</span>().<span class="ident">mirrored</span>().<span class="ident">map</span>(<span class="ident">u32::from</span>) {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">c</span>) {
-                    <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">c</span>;
+        <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>ctx.buffer.info[..len] {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = info.as_char().mirrored().map(u32::from) {
+                <span class="kw">if </span>ctx.face.has_glyph(c) {
+                    info.glyph_id = c;
                     <span class="kw">continue</span>;
                 }
             }
-            <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">rtlm_mask</span>;
+            info.mask |= rtlm_mask;
         }
     }
 
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">target_direction</span>.<span class="ident">is_vertical</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">plan</span>.<span class="ident">has_vert</span> {
-        <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">info</span>.<span class="ident">as_char</span>().<span class="ident">vertical</span>().<span class="ident">map</span>(<span class="ident">u32::from</span>) {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">face</span>.<span class="ident">has_glyph</span>(<span class="ident">c</span>) {
-                    <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">c</span>;
+    <span class="kw">if </span>ctx.target_direction.is_vertical() &amp;&amp; !ctx.plan.has_vert {
+        <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>ctx.buffer.info[..len] {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = info.as_char().vertical().map(u32::from) {
+                <span class="kw">if </span>ctx.face.has_glyph(c) {
+                    info.glyph_id = c;
                 }
             }
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">map_glyphs_fast</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="comment">// Normalization process sets up glyph_index(), we just copy it.</span>
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-        <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">glyph_index</span>();
+<span class="kw">fn </span>map_glyphs_fast(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="comment">// Normalization process sets up glyph_index(), we just copy it.
+    </span><span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[..len] {
+        info.glyph_id = info.glyph_index();
     }
 }
 
-<span class="kw">fn</span> <span class="ident">synthesize_glyph_classes</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-        <span class="comment">// Never mark default-ignorables as marks.</span>
-        <span class="comment">// They won&#39;t get in the way of lookups anyway,</span>
-        <span class="comment">// but having them as mark will cause them to be skipped</span>
-        <span class="comment">// over if the lookup-flag says so, but at least for the</span>
-        <span class="comment">// Mongolian variation selectors, looks like Uniscribe</span>
-        <span class="comment">// marks them as non-mark.  Some Mongolian fonts without</span>
-        <span class="comment">// GDEF rely on this.  Another notable character that</span>
-        <span class="comment">// this applies to is COMBINING GRAPHEME JOINER.</span>
-        <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">general_category</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">GeneralCategory::NonspacingMark</span>
-            <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>.<span class="ident">is_default_ignorable</span>()
+<span class="kw">fn </span>synthesize_glyph_classes(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[..len] {
+        <span class="comment">// Never mark default-ignorables as marks.
+        // They won&#39;t get in the way of lookups anyway,
+        // but having them as mark will cause them to be skipped
+        // over if the lookup-flag says so, but at least for the
+        // Mongolian variation selectors, looks like Uniscribe
+        // marks them as non-mark.  Some Mongolian fonts without
+        // GDEF rely on this.  Another notable character that
+        // this applies to is COMBINING GRAPHEME JOINER.
+        </span><span class="kw">let </span>class = <span class="kw">if </span>info.general_category() != GeneralCategory::NonspacingMark
+            || info.is_default_ignorable()
         {
-            <span class="ident">GlyphPropsFlags::BASE_GLYPH</span>
-        } <span class="kw">else</span> {
-            <span class="ident">GlyphPropsFlags::MARK</span>
+            GlyphPropsFlags::BASE_GLYPH
+        } <span class="kw">else </span>{
+            GlyphPropsFlags::MARK
         };
 
-        <span class="ident">info</span>.<span class="ident">set_glyph_props</span>(<span class="ident">class</span>.<span class="ident">bits</span>());
+        info.set_glyph_props(class.bits());
     }
 }
 
-<span class="kw">fn</span> <span class="ident">zero_width_default_ignorables</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_DEFAULT_IGNORABLES</span>)
-        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::PRESERVE_DEFAULT_IGNORABLES</span>)
-        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::REMOVE_DEFAULT_IGNORABLES</span>)
+<span class="kw">fn </span>zero_width_default_ignorables(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">if </span>buffer.scratch_flags.contains(BufferScratchFlags::HAS_DEFAULT_IGNORABLES)
+        &amp;&amp; !buffer.flags.contains(BufferFlags::PRESERVE_DEFAULT_IGNORABLES)
+        &amp;&amp; !buffer.flags.contains(BufferFlags::REMOVE_DEFAULT_IGNORABLES)
     {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-        <span class="kw">for</span> (<span class="ident">info</span>, <span class="ident">pos</span>) <span class="kw">in</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>].<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">pos</span>[..<span class="ident">len</span>]) {
-            <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">is_default_ignorable</span>() {
-                <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>len = buffer.len;
+        <span class="kw">for </span>(info, pos) <span class="kw">in </span>buffer.info[..len].iter().zip(<span class="kw-2">&amp;mut </span>buffer.pos[..len]) {
+            <span class="kw">if </span>info.is_default_ignorable() {
+                pos.x_advance = <span class="number">0</span>;
+                pos.y_advance = <span class="number">0</span>;
+                pos.x_offset = <span class="number">0</span>;
+                pos.y_offset = <span class="number">0</span>;
             }
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">zero_mark_widths_by_gdef</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">adjust_offsets</span>: <span class="ident">bool</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> (<span class="ident">info</span>, <span class="ident">pos</span>) <span class="kw">in</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>].<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">pos</span>[..<span class="ident">len</span>]) {
-        <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">is_mark</span>() {
-            <span class="kw">if</span> <span class="ident">adjust_offsets</span> {
-                <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">pos</span>.<span class="ident">x_advance</span>;
-                <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="op">-</span><span class="op">=</span> <span class="ident">pos</span>.<span class="ident">y_advance</span>;
+<span class="kw">fn </span>zero_mark_widths_by_gdef(buffer: <span class="kw-2">&amp;mut </span>Buffer, adjust_offsets: bool) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>(info, pos) <span class="kw">in </span>buffer.info[..len].iter().zip(<span class="kw-2">&amp;mut </span>buffer.pos[..len]) {
+        <span class="kw">if </span>info.is_mark() {
+            <span class="kw">if </span>adjust_offsets {
+                pos.x_offset -= pos.x_advance;
+                pos.y_offset -= pos.y_advance;
             }
 
-            <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="op">=</span> <span class="number">0</span>;
+            pos.x_advance = <span class="number">0</span>;
+            pos.y_advance = <span class="number">0</span>;
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">hide_default_ignorables</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>) {
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_DEFAULT_IGNORABLES</span>)
-        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::PRESERVE_DEFAULT_IGNORABLES</span>)
+<span class="kw">fn </span>hide_default_ignorables(buffer: <span class="kw-2">&amp;mut </span>Buffer, face: <span class="kw-2">&amp;</span>Face) {
+    <span class="kw">if </span>buffer.scratch_flags.contains(BufferScratchFlags::HAS_DEFAULT_IGNORABLES)
+        &amp;&amp; !buffer.flags.contains(BufferFlags::PRESERVE_DEFAULT_IGNORABLES)
     {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">buffer</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">BufferFlags::REMOVE_DEFAULT_IGNORABLES</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">invisible</span>) <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">invisible</span>.<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">face</span>.<span class="ident">glyph_index</span>(<span class="ident">u32::from</span>(<span class="string">&#39; &#39;</span>))) {
-                <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-                <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-                    <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">is_default_ignorable</span>() {
-                        <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">invisible</span>.<span class="number">0</span>);
+        <span class="kw">if </span>!buffer.flags.contains(BufferFlags::REMOVE_DEFAULT_IGNORABLES) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(invisible) = buffer.invisible.or_else(|| face.glyph_index(u32::from(<span class="string">&#39; &#39;</span>))) {
+                <span class="kw">let </span>len = buffer.len;
+                <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[..len] {
+                    <span class="kw">if </span>info.is_default_ignorable() {
+                        info.glyph_id = u32::from(invisible.<span class="number">0</span>);
                     }
                 }
                 <span class="kw">return</span>;
             }
         }
 
-        <span class="ident">buffer</span>.<span class="ident">delete_glyphs_inplace</span>(<span class="ident">GlyphInfo::is_default_ignorable</span>);
+        buffer.delete_glyphs_inplace(GlyphInfo::is_default_ignorable);
     }
 }
 
-<span class="kw">fn</span> <span class="ident">propagate_flags</span>(<span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="comment">// Propagate cluster-level glyph flags to be the same on all cluster glyphs.</span>
-    <span class="comment">// Simplifies using them.</span>
-    <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">scratch_flags</span>.<span class="ident">contains</span>(<span class="ident">BufferScratchFlags::HAS_UNSAFE_TO_BREAK</span>) {
-        <span class="macro">foreach_cluster!</span>(<span class="ident">buffer</span>, <span class="ident">start</span>, <span class="ident">end</span>, {
-            <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">start</span>..<span class="ident">end</span>] {
-                <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">glyph_flag::UNSAFE_TO_BREAK</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">start</span>..<span class="ident">end</span>] {
-                        <span class="ident">info</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">glyph_flag::UNSAFE_TO_BREAK</span>;
+<span class="kw">fn </span>propagate_flags(buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="comment">// Propagate cluster-level glyph flags to be the same on all cluster glyphs.
+    // Simplifies using them.
+    </span><span class="kw">if </span>buffer.scratch_flags.contains(BufferScratchFlags::HAS_UNSAFE_TO_BREAK) {
+        <span class="macro">foreach_cluster!</span>(buffer, start, end, {
+            <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;</span>buffer.info[start..end] {
+                <span class="kw">if </span>info.mask &amp; glyph_flag::UNSAFE_TO_BREAK != <span class="number">0 </span>{
+                    <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[start..end] {
+                        info.mask |= glyph_flag::UNSAFE_TO_BREAK;
                     }
                     <span class="kw">break</span>;
                 }
@@ -1071,4 +1071,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

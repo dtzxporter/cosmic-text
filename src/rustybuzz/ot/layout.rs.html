@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/layout.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>layout.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/layout.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>layout.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -289,296 +289,296 @@
 <span id="289">289</span>
 <span id="290">290</span>
 <span id="291">291</span>
-</pre><pre class="rust"><code><span class="doccomment">//! OpenType layout.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! OpenType layout.
 
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Index</span>, <span class="ident">IndexMut</span>};
+</span><span class="kw">use </span>core::ops::{Index, IndexMut};
 
-<span class="kw">use</span> <span class="ident">ttf_parser::GlyphId</span>;
-<span class="kw">use</span> <span class="ident">ttf_parser::opentype_layout</span>::{<span class="ident">FeatureIndex</span>, <span class="ident">LanguageIndex</span>, <span class="ident">LookupIndex</span>, <span class="ident">ScriptIndex</span>};
+<span class="kw">use </span>ttf_parser::GlyphId;
+<span class="kw">use </span>ttf_parser::opentype_layout::{FeatureIndex, LanguageIndex, LookupIndex, ScriptIndex};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Face</span>, <span class="ident">Tag</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer::Buffer</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::common::TagExt</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan::ShapePlan</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::apply</span>::{<span class="ident">Apply</span>, <span class="ident">ApplyContext</span>};
+<span class="kw">use crate</span>::{Face, Tag};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::Buffer;
+<span class="kw">use </span><span class="kw">crate</span>::common::TagExt;
+<span class="kw">use </span><span class="kw">crate</span>::plan::ShapePlan;
+<span class="kw">use </span><span class="kw">super</span>::apply::{Apply, ApplyContext};
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_NESTING_LEVEL</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">6</span>;
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_CONTEXT_LENGTH</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">64</span>;
+<span class="kw">pub const </span>MAX_NESTING_LEVEL: usize = <span class="number">6</span>;
+<span class="kw">pub const </span>MAX_CONTEXT_LENGTH: usize = <span class="number">64</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TableIndex</span> {
-    <span class="ident">GSUB</span> <span class="op">=</span> <span class="number">0</span>,
-    <span class="ident">GPOS</span> <span class="op">=</span> <span class="number">1</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>TableIndex {
+    GSUB = <span class="number">0</span>,
+    GPOS = <span class="number">1</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">TableIndex</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>() -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">TableIndex</span><span class="op">&gt;</span> {
-        [<span class="ident"><span class="self">Self</span>::GSUB</span>, <span class="ident"><span class="self">Self</span>::GPOS</span>].<span class="ident">iter</span>().<span class="ident">copied</span>()
+<span class="kw">impl </span>TableIndex {
+    <span class="kw">pub fn </span>iter() -&gt; <span class="kw">impl </span>Iterator&lt;Item = TableIndex&gt; {
+        [<span class="self">Self</span>::GSUB, <span class="self">Self</span>::GPOS].iter().copied()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">TableIndex</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">T</span>] {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span>;
+<span class="kw">impl</span>&lt;T&gt; Index&lt;TableIndex&gt; <span class="kw">for </span>[T] {
+    <span class="kw">type </span>Output = T;
 
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>[<span class="ident">table_index</span> <span class="kw">as</span> <span class="ident">usize</span>]
+    <span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output {
+        <span class="kw-2">&amp;</span><span class="self">self</span>[table_index <span class="kw">as </span>usize]
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">IndexMut</span><span class="op">&lt;</span><span class="ident">TableIndex</span><span class="op">&gt;</span> <span class="kw">for</span> [<span class="ident">T</span>] {
-    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>[<span class="ident">table_index</span> <span class="kw">as</span> <span class="ident">usize</span>]
+<span class="kw">impl</span>&lt;T&gt; IndexMut&lt;TableIndex&gt; <span class="kw">for </span>[T] {
+    <span class="kw">fn </span>index_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, table_index: TableIndex) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Output {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>[table_index <span class="kw">as </span>usize]
     }
 }
 
-<span class="doccomment">/// A lookup-based layout table (GSUB or GPOS).</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">LayoutTable</span> {
-    <span class="doccomment">/// The index of this table.</span>
-    <span class="kw">const</span> <span class="ident">INDEX</span>: <span class="ident">TableIndex</span>;
+<span class="doccomment">/// A lookup-based layout table (GSUB or GPOS).
+</span><span class="kw">pub trait </span>LayoutTable {
+    <span class="doccomment">/// The index of this table.
+    </span><span class="kw">const </span>INDEX: TableIndex;
 
-    <span class="doccomment">/// Whether lookups in this table can be applied to the buffer in-place.</span>
-    <span class="kw">const</span> <span class="ident">IN_PLACE</span>: <span class="ident">bool</span>;
+    <span class="doccomment">/// Whether lookups in this table can be applied to the buffer in-place.
+    </span><span class="kw">const </span>IN_PLACE: bool;
 
-    <span class="doccomment">/// The kind of lookup stored in this table.</span>
-    <span class="kw">type</span> <span class="ident">Lookup</span>: <span class="ident">LayoutLookup</span>;
+    <span class="doccomment">/// The kind of lookup stored in this table.
+    </span><span class="kw">type </span>Lookup: LayoutLookup;
 
-    <span class="doccomment">/// Get the lookup at the specified index.</span>
-    <span class="kw">fn</span> <span class="ident">get_lookup</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">LookupIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Lookup</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Get the lookup at the specified index.
+    </span><span class="kw">fn </span>get_lookup(<span class="kw-2">&amp;</span><span class="self">self</span>, index: LookupIndex) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>::Lookup&gt;;
 }
 
-<span class="doccomment">/// A lookup in a layout table.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">LayoutLookup</span>: <span class="ident">Apply</span> {
-    <span class="doccomment">/// The lookup&#39;s lookup_props.</span>
-    <span class="kw">fn</span> <span class="ident">props</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span>;
+<span class="doccomment">/// A lookup in a layout table.
+</span><span class="kw">pub trait </span>LayoutLookup: Apply {
+    <span class="doccomment">/// The lookup&#39;s lookup_props.
+    </span><span class="kw">fn </span>props(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32;
 
-    <span class="doccomment">/// Whether the lookup has to be applied backwards.</span>
-    <span class="kw">fn</span> <span class="ident">is_reverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+    <span class="doccomment">/// Whether the lookup has to be applied backwards.
+    </span><span class="kw">fn </span>is_reverse(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
 
-    <span class="doccomment">/// Whether any subtable of the lookup could apply at a specific glyph.</span>
-    <span class="kw">fn</span> <span class="ident">covers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">glyph</span>: <span class="ident">GlyphId</span>) -&gt; <span class="ident">bool</span>;
+    <span class="doccomment">/// Whether any subtable of the lookup could apply at a specific glyph.
+    </span><span class="kw">fn </span>covers(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph: GlyphId) -&gt; bool;
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">LayoutTableExt</span> {
-    <span class="kw">fn</span> <span class="ident">select_script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">script_tags</span>: <span class="kw-2">&amp;</span>[<span class="ident">Tag</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">bool</span>, <span class="ident">ScriptIndex</span>, <span class="ident">Tag</span>)<span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">select_script_language</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>, <span class="ident">lang_tags</span>: <span class="kw-2">&amp;</span>[<span class="ident">Tag</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">get_required_language_feature</span>(
+<span class="kw">pub trait </span>LayoutTableExt {
+    <span class="kw">fn </span>select_script(<span class="kw-2">&amp;</span><span class="self">self</span>, script_tags: <span class="kw-2">&amp;</span>[Tag]) -&gt; <span class="prelude-ty">Option</span>&lt;(bool, ScriptIndex, Tag)&gt;;
+    <span class="kw">fn </span>select_script_language(<span class="kw-2">&amp;</span><span class="self">self</span>, script_index: ScriptIndex, lang_tags: <span class="kw-2">&amp;</span>[Tag]) -&gt; <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;;
+    <span class="kw">fn </span>get_required_language_feature(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>,
-        <span class="ident">lang_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">FeatureIndex</span>, <span class="ident">Tag</span>)<span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">find_language_feature</span>(
+        script_index: ScriptIndex,
+        lang_index: <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;(FeatureIndex, Tag)&gt;;
+    <span class="kw">fn </span>find_language_feature(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>,
-        <span class="ident">lang_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>,
-        <span class="ident">feature_tag</span>: <span class="ident">Tag</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FeatureIndex</span><span class="op">&gt;</span>;
+        script_index: ScriptIndex,
+        lang_index: <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;,
+        feature_tag: Tag,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;FeatureIndex&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">LayoutTableExt</span> <span class="kw">for</span> <span class="ident">ttf_parser::opentype_layout::LayoutTable</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns true + index and tag of the first found script tag in the given GSUB or GPOS table</span>
-    <span class="doccomment">/// or false + index and tag if falling back to a default script.</span>
-    <span class="kw">fn</span> <span class="ident">select_script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">script_tags</span>: <span class="kw-2">&amp;</span>[<span class="ident">Tag</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">bool</span>, <span class="ident">ScriptIndex</span>, <span class="ident">Tag</span>)<span class="op">&gt;</span> {
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">tag</span> <span class="kw">in</span> <span class="ident">script_tags</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">scripts</span>.<span class="ident">index</span>(<span class="ident">tag</span>) {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="bool-val">true</span>, <span class="ident">index</span>, <span class="ident">tag</span>));
+<span class="kw">impl </span>LayoutTableExt <span class="kw">for </span>ttf_parser::opentype_layout::LayoutTable&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="doccomment">/// Returns true + index and tag of the first found script tag in the given GSUB or GPOS table
+    /// or false + index and tag if falling back to a default script.
+    </span><span class="kw">fn </span>select_script(<span class="kw-2">&amp;</span><span class="self">self</span>, script_tags: <span class="kw-2">&amp;</span>[Tag]) -&gt; <span class="prelude-ty">Option</span>&lt;(bool, ScriptIndex, Tag)&gt; {
+        <span class="kw">for </span><span class="kw-2">&amp;</span>tag <span class="kw">in </span>script_tags {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = <span class="self">self</span>.scripts.index(tag) {
+                <span class="kw">return </span><span class="prelude-val">Some</span>((<span class="bool-val">true</span>, index, tag));
             }
         }
 
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">tag</span> <span class="kw">in</span> <span class="kw-2">&amp;</span>[
-            <span class="comment">// try finding &#39;DFLT&#39;</span>
-            <span class="ident">Tag::default_script</span>(),
-            <span class="comment">// try with &#39;dflt&#39;; MS site has had typos and many fonts use it now :(</span>
-            <span class="ident">Tag::default_language</span>(),
-            <span class="comment">// try with &#39;latn&#39;; some old fonts put their features there even though</span>
-            <span class="comment">// they&#39;re really trying to support Thai, for example :(</span>
-            <span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;latn&quot;</span>),
+        <span class="kw">for </span><span class="kw-2">&amp;</span>tag <span class="kw">in </span><span class="kw-2">&amp;</span>[
+            <span class="comment">// try finding &#39;DFLT&#39;
+            </span>Tag::default_script(),
+            <span class="comment">// try with &#39;dflt&#39;; MS site has had typos and many fonts use it now :(
+            </span>Tag::default_language(),
+            <span class="comment">// try with &#39;latn&#39;; some old fonts put their features there even though
+            // they&#39;re really trying to support Thai, for example :(
+            </span>Tag::from_bytes(<span class="string">b&quot;latn&quot;</span>),
         ] {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">scripts</span>.<span class="ident">index</span>(<span class="ident">tag</span>) {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="bool-val">false</span>, <span class="ident">index</span>, <span class="ident">tag</span>));
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = <span class="self">self</span>.scripts.index(tag) {
+                <span class="kw">return </span><span class="prelude-val">Some</span>((<span class="bool-val">false</span>, index, tag));
             }
         }
 
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="doccomment">/// Returns the index of the first found language tag in the given GSUB or GPOS table,</span>
-    <span class="doccomment">/// underneath the specified script index.</span>
-    <span class="kw">fn</span> <span class="ident">select_script_language</span>(
+    <span class="doccomment">/// Returns the index of the first found language tag in the given GSUB or GPOS table,
+    /// underneath the specified script index.
+    </span><span class="kw">fn </span>select_script_language(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>,
-        <span class="ident">lang_tags</span>: <span class="kw-2">&amp;</span>[<span class="ident">Tag</span>],
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">script</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scripts</span>.<span class="ident">get</span>(<span class="ident">script_index</span>)<span class="question-mark">?</span>;
+        script_index: ScriptIndex,
+        lang_tags: <span class="kw-2">&amp;</span>[Tag],
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt; {
+        <span class="kw">let </span>script = <span class="self">self</span>.scripts.get(script_index)<span class="question-mark">?</span>;
 
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">tag</span> <span class="kw">in</span> <span class="ident">lang_tags</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">script</span>.<span class="ident">languages</span>.<span class="ident">index</span>(<span class="ident">tag</span>) {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>);
+        <span class="kw">for </span><span class="kw-2">&amp;</span>tag <span class="kw">in </span>lang_tags {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = script.languages.index(tag) {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(index);
             }
         }
 
-        <span class="comment">// try finding &#39;dflt&#39;</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">script</span>.<span class="ident">languages</span>.<span class="ident">index</span>(<span class="ident">Tag::default_language</span>()) {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>);
+        <span class="comment">// try finding &#39;dflt&#39;
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(index) = script.languages.index(Tag::default_language()) {
+            <span class="kw">return </span><span class="prelude-val">Some</span>(index);
         }
 
-        <span class="prelude-val">None</span>
+        <span class="prelude-val">None
+    </span>}
+
+    <span class="doccomment">/// Returns the index and tag of a required feature in the given GSUB or GPOS table,
+    /// underneath the specified script and language.
+    </span><span class="kw">fn </span>get_required_language_feature(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        script_index: ScriptIndex,
+        lang_index: <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;(FeatureIndex, Tag)&gt; {
+        <span class="kw">let </span>script = <span class="self">self</span>.scripts.get(script_index)<span class="question-mark">?</span>;
+        <span class="kw">let </span>sys = <span class="kw">match </span>lang_index {
+            <span class="prelude-val">Some</span>(index) =&gt; script.languages.get(index)<span class="question-mark">?</span>,
+            <span class="prelude-val">None </span>=&gt; script.default_language<span class="question-mark">?</span>,
+        };
+        <span class="kw">let </span>idx = sys.required_feature<span class="question-mark">?</span>;
+        <span class="kw">let </span>tag = <span class="self">self</span>.features.get(idx)<span class="question-mark">?</span>.tag;
+        <span class="prelude-val">Some</span>((idx, tag))
     }
 
-    <span class="doccomment">/// Returns the index and tag of a required feature in the given GSUB or GPOS table,</span>
-    <span class="doccomment">/// underneath the specified script and language.</span>
-    <span class="kw">fn</span> <span class="ident">get_required_language_feature</span>(
+    <span class="doccomment">/// Returns the index of a given feature tag in the given GSUB or GPOS table,
+    /// underneath the specified script and language.
+    </span><span class="kw">fn </span>find_language_feature(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>,
-        <span class="ident">lang_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">FeatureIndex</span>, <span class="ident">Tag</span>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">script</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scripts</span>.<span class="ident">get</span>(<span class="ident">script_index</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">sys</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">lang_index</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">index</span>) =&gt; <span class="ident">script</span>.<span class="ident">languages</span>.<span class="ident">get</span>(<span class="ident">index</span>)<span class="question-mark">?</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="ident">script</span>.<span class="ident">default_language</span><span class="question-mark">?</span>,
-        };
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">sys</span>.<span class="ident">required_feature</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">tag</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">get</span>(<span class="ident">idx</span>)<span class="question-mark">?</span>.<span class="ident">tag</span>;
-        <span class="prelude-val">Some</span>((<span class="ident">idx</span>, <span class="ident">tag</span>))
-    }
-
-    <span class="doccomment">/// Returns the index of a given feature tag in the given GSUB or GPOS table,</span>
-    <span class="doccomment">/// underneath the specified script and language.</span>
-    <span class="kw">fn</span> <span class="ident">find_language_feature</span>(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">script_index</span>: <span class="ident">ScriptIndex</span>,
-        <span class="ident">lang_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>,
-        <span class="ident">feature_tag</span>: <span class="ident">Tag</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FeatureIndex</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">script</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scripts</span>.<span class="ident">get</span>(<span class="ident">script_index</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">sys</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">lang_index</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">index</span>) =&gt; <span class="ident">script</span>.<span class="ident">languages</span>.<span class="ident">get</span>(<span class="ident">index</span>)<span class="question-mark">?</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="ident">script</span>.<span class="ident">default_language</span><span class="question-mark">?</span>,
+        script_index: ScriptIndex,
+        lang_index: <span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;,
+        feature_tag: Tag,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;FeatureIndex&gt; {
+        <span class="kw">let </span>script = <span class="self">self</span>.scripts.get(script_index)<span class="question-mark">?</span>;
+        <span class="kw">let </span>sys = <span class="kw">match </span>lang_index {
+            <span class="prelude-val">Some</span>(index) =&gt; script.languages.get(index)<span class="question-mark">?</span>,
+            <span class="prelude-val">None </span>=&gt; script.default_language<span class="question-mark">?</span>,
         };
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">sys</span>.<span class="ident">feature_indices</span>.<span class="ident">len</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">sys</span>.<span class="ident">feature_indices</span>.<span class="ident">get</span>(<span class="ident">i</span>) {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">features</span>.<span class="ident">get</span>(<span class="ident">index</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">tag</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">feature_tag</span>) {
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..sys.feature_indices.len() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = sys.feature_indices.get(i) {
+                <span class="kw">if </span><span class="self">self</span>.features.get(index).map(|v| v.tag) == <span class="prelude-val">Some</span>(feature_tag) {
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(index);
                 }
             }
         }
 
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 }
 
-<span class="doccomment">/// Applies the lookups in the given GSUB or GPOS table.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply_layout_table</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">LayoutTable</span><span class="op">&gt;</span>(
-    <span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>,
-    <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>,
-    <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>,
-    <span class="ident">table</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Applies the lookups in the given GSUB or GPOS table.
+</span><span class="kw">pub fn </span>apply_layout_table&lt;T: LayoutTable&gt;(
+    plan: <span class="kw-2">&amp;</span>ShapePlan,
+    face: <span class="kw-2">&amp;</span>Face,
+    buffer: <span class="kw-2">&amp;mut </span>Buffer,
+    table: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>T&gt;,
 ) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">ApplyContext::new</span>(<span class="ident">T::INDEX</span>, <span class="ident">face</span>, <span class="ident">buffer</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>ctx = ApplyContext::new(T::INDEX, face, buffer);
 
-    <span class="kw">for</span> (<span class="ident">stage_index</span>, <span class="ident">stage</span>) <span class="kw">in</span> <span class="ident">plan</span>.<span class="ident">ot_map</span>.<span class="ident">stages</span>(<span class="ident">T::INDEX</span>).<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-        <span class="kw">for</span> <span class="ident">lookup</span> <span class="kw">in</span> <span class="ident">plan</span>.<span class="ident">ot_map</span>.<span class="ident">stage_lookups</span>(<span class="ident">T::INDEX</span>, <span class="ident">stage_index</span>) {
-            <span class="ident">ctx</span>.<span class="ident">lookup_index</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">index</span>;
-            <span class="ident">ctx</span>.<span class="ident">lookup_mask</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">mask</span>;
-            <span class="ident">ctx</span>.<span class="ident">auto_zwj</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">auto_zwj</span>;
-            <span class="ident">ctx</span>.<span class="ident">auto_zwnj</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">auto_zwnj</span>;
+    <span class="kw">for </span>(stage_index, stage) <span class="kw">in </span>plan.ot_map.stages(T::INDEX).iter().enumerate() {
+        <span class="kw">for </span>lookup <span class="kw">in </span>plan.ot_map.stage_lookups(T::INDEX, stage_index) {
+            ctx.lookup_index = lookup.index;
+            ctx.lookup_mask = lookup.mask;
+            ctx.auto_zwj = lookup.auto_zwj;
+            ctx.auto_zwnj = lookup.auto_zwnj;
 
-            <span class="kw">if</span> <span class="ident">lookup</span>.<span class="ident">random</span> {
-                <span class="ident">ctx</span>.<span class="ident">random</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="number">0</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>);
+            <span class="kw">if </span>lookup.random {
+                ctx.random = <span class="bool-val">true</span>;
+                ctx.buffer.unsafe_to_break(<span class="number">0</span>, ctx.buffer.len);
             }
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">table</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">table</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">lookup</span>) <span class="op">=</span>  <span class="ident">table</span>.<span class="ident">get_lookup</span>(<span class="ident">lookup</span>.<span class="ident">index</span>) {
-                    <span class="ident">apply_string</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ctx</span>, <span class="ident">lookup</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(table) = <span class="kw-2">&amp;</span>table {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(lookup) =  table.get_lookup(lookup.index) {
+                    apply_string::&lt;T&gt;(<span class="kw-2">&amp;mut </span>ctx, lookup);
                 }
             }
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="ident">stage</span>.<span class="ident">pause_func</span> {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">clear_output</span>();
-            <span class="ident">func</span>(<span class="ident">plan</span>, <span class="ident">face</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = stage.pause_func {
+            ctx.buffer.clear_output();
+            func(plan, face, ctx.buffer);
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">apply_string</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">LayoutTable</span><span class="op">&gt;</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">lookup</span>: <span class="kw-2">&amp;</span><span class="ident">T::Lookup</span>) {
-    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">lookup_mask</span> <span class="op">==</span> <span class="number">0</span> {
+<span class="kw">fn </span>apply_string&lt;T: LayoutTable&gt;(ctx: <span class="kw-2">&amp;mut </span>ApplyContext, lookup: <span class="kw-2">&amp;</span>T::Lookup) {
+    <span class="kw">if </span>ctx.buffer.is_empty() || ctx.lookup_mask == <span class="number">0 </span>{
         <span class="kw">return</span>;
     }
 
-    <span class="ident">ctx</span>.<span class="ident">lookup_props</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">props</span>();
+    ctx.lookup_props = lookup.props();
 
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">lookup</span>.<span class="ident">is_reverse</span>() {
-        <span class="comment">// in/out forward substitution/positioning</span>
-        <span class="kw">if</span> <span class="ident">T::INDEX</span> <span class="op">==</span> <span class="ident">TableIndex::GSUB</span> {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">clear_output</span>();
+    <span class="kw">if </span>!lookup.is_reverse() {
+        <span class="comment">// in/out forward substitution/positioning
+        </span><span class="kw">if </span>T::INDEX == TableIndex::GSUB {
+            ctx.buffer.clear_output();
         }
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">=</span> <span class="number">0</span>;
+        ctx.buffer.idx = <span class="number">0</span>;
 
-        <span class="kw">if</span> <span class="ident">apply_forward</span>(<span class="ident">ctx</span>, <span class="ident">lookup</span>) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">T::IN_PLACE</span> {
-                <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">swap_buffers</span>();
-            } <span class="kw">else</span> {
-                <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">have_separate_output</span>);
+        <span class="kw">if </span>apply_forward(ctx, lookup) {
+            <span class="kw">if </span>!T::IN_PLACE {
+                ctx.buffer.swap_buffers();
+            } <span class="kw">else </span>{
+                <span class="macro">assert!</span>(!ctx.buffer.have_separate_output);
             }
         }
-    } <span class="kw">else</span> {
-        <span class="comment">// in-place backward substitution/positioning</span>
-        <span class="kw">if</span> <span class="ident">T::INDEX</span> <span class="op">==</span> <span class="ident">TableIndex::GSUB</span> {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">remove_output</span>();
+    } <span class="kw">else </span>{
+        <span class="comment">// in-place backward substitution/positioning
+        </span><span class="kw">if </span>T::INDEX == TableIndex::GSUB {
+            ctx.buffer.remove_output();
         }
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>;
-        <span class="ident">apply_backward</span>(<span class="ident">ctx</span>, <span class="ident">lookup</span>);
+        ctx.buffer.idx = ctx.buffer.len - <span class="number">1</span>;
+        apply_backward(ctx, lookup);
     }
 }
 
-<span class="kw">fn</span> <span class="ident">apply_forward</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">lookup</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Apply</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">while</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">successful</span> {
-        <span class="kw">let</span> <span class="ident">cur</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>);
-        <span class="kw">if</span> (<span class="ident">cur</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">ctx</span>.<span class="ident">lookup_mask</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">check_glyph_property</span>(<span class="ident">cur</span>, <span class="ident">ctx</span>.<span class="ident">lookup_props</span>)
-            <span class="op">&amp;&amp;</span> <span class="ident">lookup</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>).<span class="ident">is_some</span>()
+<span class="kw">fn </span>apply_forward(ctx: <span class="kw-2">&amp;mut </span>ApplyContext, lookup: <span class="kw-2">&amp;</span><span class="kw">impl </span>Apply) -&gt; bool {
+    <span class="kw">let </span><span class="kw-2">mut </span>ret = <span class="bool-val">false</span>;
+    <span class="kw">while </span>ctx.buffer.idx &lt; ctx.buffer.len &amp;&amp; ctx.buffer.successful {
+        <span class="kw">let </span>cur = ctx.buffer.cur(<span class="number">0</span>);
+        <span class="kw">if </span>(cur.mask &amp; ctx.lookup_mask) != <span class="number">0
+            </span>&amp;&amp; ctx.check_glyph_property(cur, ctx.lookup_props)
+            &amp;&amp; lookup.apply(ctx).is_some()
         {
-            <span class="ident">ret</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+            ret = <span class="bool-val">true</span>;
+        } <span class="kw">else </span>{
+            ctx.buffer.next_glyph();
         }
     }
-    <span class="ident">ret</span>
+    ret
 }
 
-<span class="kw">fn</span> <span class="ident">apply_backward</span>(<span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ApplyContext</span>, <span class="ident">lookup</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Apply</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">loop</span> {
-        <span class="kw">let</span> <span class="ident">cur</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>);
-        <span class="ident">ret</span> <span class="op">|</span><span class="op">=</span> (<span class="ident">cur</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">ctx</span>.<span class="ident">lookup_mask</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">check_glyph_property</span>(<span class="ident">cur</span>, <span class="ident">ctx</span>.<span class="ident">lookup_props</span>)
-            <span class="op">&amp;&amp;</span> <span class="ident">lookup</span>.<span class="ident">apply</span>(<span class="ident">ctx</span>).<span class="ident">is_some</span>();
+<span class="kw">fn </span>apply_backward(ctx: <span class="kw-2">&amp;mut </span>ApplyContext, lookup: <span class="kw-2">&amp;</span><span class="kw">impl </span>Apply) -&gt; bool {
+    <span class="kw">let </span><span class="kw-2">mut </span>ret = <span class="bool-val">false</span>;
+    <span class="kw">loop </span>{
+        <span class="kw">let </span>cur = ctx.buffer.cur(<span class="number">0</span>);
+        ret |= (cur.mask &amp; ctx.lookup_mask) != <span class="number">0
+            </span>&amp;&amp; ctx.check_glyph_property(cur, ctx.lookup_props)
+            &amp;&amp; lookup.apply(ctx).is_some();
 
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">if </span>ctx.buffer.idx == <span class="number">0 </span>{
             <span class="kw">break</span>;
         }
 
-        <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+        ctx.buffer.idx -= <span class="number">1</span>;
     }
-    <span class="ident">ret</span>
+    ret
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear_substitution_flags</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-        <span class="ident">info</span>.<span class="ident">clear_substituted</span>();
+<span class="kw">pub fn </span>clear_substitution_flags(<span class="kw">_</span>: <span class="kw-2">&amp;</span>ShapePlan, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[..len] {
+        info.clear_substituted();
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear_syllables</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span>;
-    <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span>[..<span class="ident">len</span>] {
-        <span class="ident">info</span>.<span class="ident">set_syllable</span>(<span class="number">0</span>);
+<span class="kw">pub fn </span>clear_syllables(<span class="kw">_</span>: <span class="kw-2">&amp;</span>ShapePlan, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">let </span>len = buffer.len;
+    <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info[..len] {
+        info.set_syllable(<span class="number">0</span>);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/unicode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>unicode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/unicode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>unicode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -869,181 +869,181 @@
 <span id="869">869</span>
 <span id="870">870</span>
 <span id="871">871</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::convert::TryFrom</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>core::convert::TryFrom;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">unicode_general_category::GeneralCategory</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">unicode_ccc::CanonicalCombiningClass</span>; <span class="comment">// TODO: prefer unic-ucd-normal::CanonicalCombiningClass</span>
+<span class="kw">pub use </span>unicode_general_category::GeneralCategory;
+<span class="kw">pub use </span>unicode_ccc::CanonicalCombiningClass; <span class="comment">// TODO: prefer unic-ucd-normal::CanonicalCombiningClass
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Script</span>;
+</span><span class="kw">use </span><span class="kw">crate</span>::Script;
 
-<span class="comment">// Space estimates based on:</span>
-<span class="comment">// https://unicode.org/charts/PDF/U2000.pdf</span>
-<span class="comment">// https://docs.microsoft.com/en-us/typography/develop/character-design-standards/whitespace</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Space</span> <span class="op">=</span> <span class="ident">u8</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">space</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM</span>: <span class="ident">u8</span>  <span class="op">=</span> <span class="number">1</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_2</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">2</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_3</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_4</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">4</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_5</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">5</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_6</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">6</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_EM_16</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">16</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_4_EM_18</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">17</span>; <span class="comment">// 4/18th of an EM!</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">18</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_FIGURE</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">19</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_PUNCTUATION</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">20</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPACE_NARROW</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">21</span>;
+<span class="comment">// Space estimates based on:
+// https://unicode.org/charts/PDF/U2000.pdf
+// https://docs.microsoft.com/en-us/typography/develop/character-design-standards/whitespace
+</span><span class="kw">pub type </span>Space = u8;
+<span class="kw">pub mod </span>space {
+    <span class="kw">pub const </span>SPACE_EM: u8  = <span class="number">1</span>;
+    <span class="kw">pub const </span>SPACE_EM_2: u8 = <span class="number">2</span>;
+    <span class="kw">pub const </span>SPACE_EM_3: u8 = <span class="number">3</span>;
+    <span class="kw">pub const </span>SPACE_EM_4: u8 = <span class="number">4</span>;
+    <span class="kw">pub const </span>SPACE_EM_5: u8 = <span class="number">5</span>;
+    <span class="kw">pub const </span>SPACE_EM_6: u8 = <span class="number">6</span>;
+    <span class="kw">pub const </span>SPACE_EM_16: u8 = <span class="number">16</span>;
+    <span class="kw">pub const </span>SPACE_4_EM_18: u8 = <span class="number">17</span>; <span class="comment">// 4/18th of an EM!
+    </span><span class="kw">pub const </span>SPACE: u8 = <span class="number">18</span>;
+    <span class="kw">pub const </span>SPACE_FIGURE: u8 = <span class="number">19</span>;
+    <span class="kw">pub const </span>SPACE_PUNCTUATION: u8 = <span class="number">20</span>;
+    <span class="kw">pub const </span>SPACE_NARROW: u8 = <span class="number">21</span>;
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">modified_combining_class</span> {
-    <span class="comment">// Hebrew</span>
-    <span class="comment">//</span>
-    <span class="comment">// We permute the &quot;fixed-position&quot; classes 10-26 into the order</span>
-    <span class="comment">// described in the SBL Hebrew manual:</span>
-    <span class="comment">//</span>
-    <span class="comment">// https://www.sbl-site.org/Fonts/SBLHebrewUserManual1.5x.pdf</span>
-    <span class="comment">//</span>
-    <span class="comment">// (as recommended by:</span>
-    <span class="comment">//  https://forum.fontlab.com/archive-old-microsoft-volt-group/vista-and-diacritic-ordering/msg22823/)</span>
-    <span class="comment">//</span>
-    <span class="comment">// More details here:</span>
-    <span class="comment">// https://bugzilla.mozilla.org/show_bug.cgi?id=662055</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC10</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">22</span>; <span class="comment">// sheva</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC11</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">15</span>; <span class="comment">// hataf segol</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC12</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">16</span>; <span class="comment">// hataf patah</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC13</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">17</span>; <span class="comment">// hataf qamats</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC14</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">23</span>; <span class="comment">// hiriq</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC15</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">18</span>; <span class="comment">// tsere</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC16</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">19</span>; <span class="comment">// segol</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC17</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">20</span>; <span class="comment">// patah</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC18</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">21</span>; <span class="comment">// qamats</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC19</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">14</span>; <span class="comment">// holam</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC20</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">24</span>; <span class="comment">// qubuts</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC21</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">12</span>; <span class="comment">// dagesh</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC22</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">25</span>; <span class="comment">// meteg</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC23</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">13</span>; <span class="comment">// rafe</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC24</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">10</span>; <span class="comment">// shin dot</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC25</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">11</span>; <span class="comment">// sin dot</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC26</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">26</span>; <span class="comment">// point varika</span>
+<span class="attribute">#[allow(dead_code)]
+</span><span class="kw">pub mod </span>modified_combining_class {
+    <span class="comment">// Hebrew
+    //
+    // We permute the &quot;fixed-position&quot; classes 10-26 into the order
+    // described in the SBL Hebrew manual:
+    //
+    // https://www.sbl-site.org/Fonts/SBLHebrewUserManual1.5x.pdf
+    //
+    // (as recommended by:
+    //  https://forum.fontlab.com/archive-old-microsoft-volt-group/vista-and-diacritic-ordering/msg22823/)
+    //
+    // More details here:
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=662055
+    </span><span class="kw">pub const </span>CCC10: u8 = <span class="number">22</span>; <span class="comment">// sheva
+    </span><span class="kw">pub const </span>CCC11: u8 = <span class="number">15</span>; <span class="comment">// hataf segol
+    </span><span class="kw">pub const </span>CCC12: u8 = <span class="number">16</span>; <span class="comment">// hataf patah
+    </span><span class="kw">pub const </span>CCC13: u8 = <span class="number">17</span>; <span class="comment">// hataf qamats
+    </span><span class="kw">pub const </span>CCC14: u8 = <span class="number">23</span>; <span class="comment">// hiriq
+    </span><span class="kw">pub const </span>CCC15: u8 = <span class="number">18</span>; <span class="comment">// tsere
+    </span><span class="kw">pub const </span>CCC16: u8 = <span class="number">19</span>; <span class="comment">// segol
+    </span><span class="kw">pub const </span>CCC17: u8 = <span class="number">20</span>; <span class="comment">// patah
+    </span><span class="kw">pub const </span>CCC18: u8 = <span class="number">21</span>; <span class="comment">// qamats
+    </span><span class="kw">pub const </span>CCC19: u8 = <span class="number">14</span>; <span class="comment">// holam
+    </span><span class="kw">pub const </span>CCC20: u8 = <span class="number">24</span>; <span class="comment">// qubuts
+    </span><span class="kw">pub const </span>CCC21: u8 = <span class="number">12</span>; <span class="comment">// dagesh
+    </span><span class="kw">pub const </span>CCC22: u8 = <span class="number">25</span>; <span class="comment">// meteg
+    </span><span class="kw">pub const </span>CCC23: u8 = <span class="number">13</span>; <span class="comment">// rafe
+    </span><span class="kw">pub const </span>CCC24: u8 = <span class="number">10</span>; <span class="comment">// shin dot
+    </span><span class="kw">pub const </span>CCC25: u8 = <span class="number">11</span>; <span class="comment">// sin dot
+    </span><span class="kw">pub const </span>CCC26: u8 = <span class="number">26</span>; <span class="comment">// point varika
 
-    <span class="comment">// Arabic</span>
-    <span class="comment">//</span>
-    <span class="comment">// Modify to move Shadda (ccc=33) before other marks.  See:</span>
-    <span class="comment">// https://unicode.org/faq/normalization.html#8</span>
-    <span class="comment">// https://unicode.org/faq/normalization.html#9</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC27</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">28</span>; <span class="comment">// fathatan</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC28</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">29</span>; <span class="comment">// dammatan</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC29</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">30</span>; <span class="comment">// kasratan</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC30</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">31</span>; <span class="comment">// fatha</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC31</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">32</span>; <span class="comment">// damma</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC32</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">33</span>; <span class="comment">// kasra</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC33</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">27</span>; <span class="comment">// shadda</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC34</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">34</span>; <span class="comment">// sukun</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC35</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">35</span>; <span class="comment">// superscript alef</span>
+    // Arabic
+    //
+    // Modify to move Shadda (ccc=33) before other marks.  See:
+    // https://unicode.org/faq/normalization.html#8
+    // https://unicode.org/faq/normalization.html#9
+    </span><span class="kw">pub const </span>CCC27: u8 = <span class="number">28</span>; <span class="comment">// fathatan
+    </span><span class="kw">pub const </span>CCC28: u8 = <span class="number">29</span>; <span class="comment">// dammatan
+    </span><span class="kw">pub const </span>CCC29: u8 = <span class="number">30</span>; <span class="comment">// kasratan
+    </span><span class="kw">pub const </span>CCC30: u8 = <span class="number">31</span>; <span class="comment">// fatha
+    </span><span class="kw">pub const </span>CCC31: u8 = <span class="number">32</span>; <span class="comment">// damma
+    </span><span class="kw">pub const </span>CCC32: u8 = <span class="number">33</span>; <span class="comment">// kasra
+    </span><span class="kw">pub const </span>CCC33: u8 = <span class="number">27</span>; <span class="comment">// shadda
+    </span><span class="kw">pub const </span>CCC34: u8 = <span class="number">34</span>; <span class="comment">// sukun
+    </span><span class="kw">pub const </span>CCC35: u8 = <span class="number">35</span>; <span class="comment">// superscript alef
 
-    <span class="comment">// Syriac</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC36</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">36</span>; <span class="comment">// superscript alaph</span>
+    // Syriac
+    </span><span class="kw">pub const </span>CCC36: u8 = <span class="number">36</span>; <span class="comment">// superscript alaph
 
-    <span class="comment">// Telugu</span>
-    <span class="comment">//</span>
-    <span class="comment">// Modify Telugu length marks (ccc=84, ccc=91).</span>
-    <span class="comment">// These are the only matras in the main Indic scripts range that have</span>
-    <span class="comment">// a non-zero ccc.  That makes them reorder with the Halant that is</span>
-    <span class="comment">// ccc=9.  Just zero them, we don&#39;t need them in our Indic shaper.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC84</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>; <span class="comment">// length mark</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC91</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0</span>; <span class="comment">// ai length mark</span>
+    // Telugu
+    //
+    // Modify Telugu length marks (ccc=84, ccc=91).
+    // These are the only matras in the main Indic scripts range that have
+    // a non-zero ccc.  That makes them reorder with the Halant that is
+    // ccc=9.  Just zero them, we don&#39;t need them in our Indic shaper.
+    </span><span class="kw">pub const </span>CCC84: u8 = <span class="number">0</span>; <span class="comment">// length mark
+    </span><span class="kw">pub const </span>CCC91: u8 = <span class="number">0</span>; <span class="comment">// ai length mark
 
-    <span class="comment">// Thai</span>
-    <span class="comment">//</span>
-    <span class="comment">// Modify U+0E38 and U+0E39 (ccc=103) to be reordered before U+0E3A (ccc=9).</span>
-    <span class="comment">// Assign 3, which is unassigned otherwise.</span>
-    <span class="comment">// Uniscribe does this reordering too.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC103</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">3</span>;   <span class="comment">// sara u / sara uu</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC107</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">107</span>; <span class="comment">// mai *</span>
+    // Thai
+    //
+    // Modify U+0E38 and U+0E39 (ccc=103) to be reordered before U+0E3A (ccc=9).
+    // Assign 3, which is unassigned otherwise.
+    // Uniscribe does this reordering too.
+    </span><span class="kw">pub const </span>CCC103: u8 = <span class="number">3</span>;   <span class="comment">// sara u / sara uu
+    </span><span class="kw">pub const </span>CCC107: u8 = <span class="number">107</span>; <span class="comment">// mai *
 
-    <span class="comment">// Lao</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC118</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">118</span>; <span class="comment">// sign u / sign uu</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC122</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">122</span>; <span class="comment">// mai *</span>
+    // Lao
+    </span><span class="kw">pub const </span>CCC118: u8 = <span class="number">118</span>; <span class="comment">// sign u / sign uu
+    </span><span class="kw">pub const </span>CCC122: u8 = <span class="number">122</span>; <span class="comment">// mai *
 
-    <span class="comment">// Tibetan</span>
-    <span class="comment">//</span>
-    <span class="comment">// In case of multiple vowel-signs, use u first (but after achung)</span>
-    <span class="comment">// this allows Dzongkha multi-vowel shortcuts to render correctly</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC129</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">129</span>; <span class="comment">// sign aa</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC130</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">132</span>; <span class="comment">// sign i</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CCC132</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">131</span>; <span class="comment">// sign u</span>
-}
+    // Tibetan
+    //
+    // In case of multiple vowel-signs, use u first (but after achung)
+    // this allows Dzongkha multi-vowel shortcuts to render correctly
+    </span><span class="kw">pub const </span>CCC129: u8 = <span class="number">129</span>; <span class="comment">// sign aa
+    </span><span class="kw">pub const </span>CCC130: u8 = <span class="number">132</span>; <span class="comment">// sign i
+    </span><span class="kw">pub const </span>CCC132: u8 = <span class="number">131</span>; <span class="comment">// sign u
+</span>}
 
-<span class="kw">const</span> <span class="ident">MODIFIED_COMBINING_CLASS</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">256</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-    <span class="ident">CanonicalCombiningClass::NotReordered</span> <span class="kw">as</span> <span class="ident">u8</span>,
-    <span class="ident">CanonicalCombiningClass::Overlay</span> <span class="kw">as</span> <span class="ident">u8</span>,
+<span class="kw">const </span>MODIFIED_COMBINING_CLASS: <span class="kw-2">&amp;</span>[u8; <span class="number">256</span>] = <span class="kw-2">&amp;</span>[
+    CanonicalCombiningClass::NotReordered <span class="kw">as </span>u8,
+    CanonicalCombiningClass::Overlay <span class="kw">as </span>u8,
     <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,
-    <span class="ident">CanonicalCombiningClass::Nukta</span> <span class="kw">as</span> <span class="ident">u8</span>,
-    <span class="ident">CanonicalCombiningClass::KanaVoicing</span> <span class="kw">as</span> <span class="ident">u8</span>,
-    <span class="ident">CanonicalCombiningClass::Virama</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::Nukta <span class="kw">as </span>u8,
+    CanonicalCombiningClass::KanaVoicing <span class="kw">as </span>u8,
+    CanonicalCombiningClass::Virama <span class="kw">as </span>u8,
 
-    <span class="comment">// Hebrew</span>
-    <span class="ident">modified_combining_class::CCC10</span>,
-    <span class="ident">modified_combining_class::CCC11</span>,
-    <span class="ident">modified_combining_class::CCC12</span>,
-    <span class="ident">modified_combining_class::CCC13</span>,
-    <span class="ident">modified_combining_class::CCC14</span>,
-    <span class="ident">modified_combining_class::CCC15</span>,
-    <span class="ident">modified_combining_class::CCC16</span>,
-    <span class="ident">modified_combining_class::CCC17</span>,
-    <span class="ident">modified_combining_class::CCC18</span>,
-    <span class="ident">modified_combining_class::CCC19</span>,
-    <span class="ident">modified_combining_class::CCC20</span>,
-    <span class="ident">modified_combining_class::CCC21</span>,
-    <span class="ident">modified_combining_class::CCC22</span>,
-    <span class="ident">modified_combining_class::CCC23</span>,
-    <span class="ident">modified_combining_class::CCC24</span>,
-    <span class="ident">modified_combining_class::CCC25</span>,
-    <span class="ident">modified_combining_class::CCC26</span>,
+    <span class="comment">// Hebrew
+    </span>modified_combining_class::CCC10,
+    modified_combining_class::CCC11,
+    modified_combining_class::CCC12,
+    modified_combining_class::CCC13,
+    modified_combining_class::CCC14,
+    modified_combining_class::CCC15,
+    modified_combining_class::CCC16,
+    modified_combining_class::CCC17,
+    modified_combining_class::CCC18,
+    modified_combining_class::CCC19,
+    modified_combining_class::CCC20,
+    modified_combining_class::CCC21,
+    modified_combining_class::CCC22,
+    modified_combining_class::CCC23,
+    modified_combining_class::CCC24,
+    modified_combining_class::CCC25,
+    modified_combining_class::CCC26,
 
-    <span class="comment">// Arabic</span>
-    <span class="ident">modified_combining_class::CCC27</span>,
-    <span class="ident">modified_combining_class::CCC28</span>,
-    <span class="ident">modified_combining_class::CCC29</span>,
-    <span class="ident">modified_combining_class::CCC30</span>,
-    <span class="ident">modified_combining_class::CCC31</span>,
-    <span class="ident">modified_combining_class::CCC32</span>,
-    <span class="ident">modified_combining_class::CCC33</span>,
-    <span class="ident">modified_combining_class::CCC34</span>,
-    <span class="ident">modified_combining_class::CCC35</span>,
+    <span class="comment">// Arabic
+    </span>modified_combining_class::CCC27,
+    modified_combining_class::CCC28,
+    modified_combining_class::CCC29,
+    modified_combining_class::CCC30,
+    modified_combining_class::CCC31,
+    modified_combining_class::CCC32,
+    modified_combining_class::CCC33,
+    modified_combining_class::CCC34,
+    modified_combining_class::CCC35,
 
-    <span class="comment">// Syriac</span>
-    <span class="ident">modified_combining_class::CCC36</span>,
+    <span class="comment">// Syriac
+    </span>modified_combining_class::CCC36,
 
     <span class="number">37</span>, <span class="number">38</span>, <span class="number">39</span>,
     <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>, <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">50</span>, <span class="number">51</span>, <span class="number">52</span>, <span class="number">53</span>, <span class="number">54</span>, <span class="number">55</span>, <span class="number">56</span>, <span class="number">57</span>, <span class="number">58</span>, <span class="number">59</span>,
     <span class="number">60</span>, <span class="number">61</span>, <span class="number">62</span>, <span class="number">63</span>, <span class="number">64</span>, <span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">68</span>, <span class="number">69</span>, <span class="number">70</span>, <span class="number">71</span>, <span class="number">72</span>, <span class="number">73</span>, <span class="number">74</span>, <span class="number">75</span>, <span class="number">76</span>, <span class="number">77</span>, <span class="number">78</span>, <span class="number">79</span>,
     <span class="number">80</span>, <span class="number">81</span>, <span class="number">82</span>, <span class="number">83</span>,
 
-    <span class="comment">// Telugu</span>
-    <span class="ident">modified_combining_class::CCC84</span>,
+    <span class="comment">// Telugu
+    </span>modified_combining_class::CCC84,
     <span class="number">85</span>, <span class="number">86</span>, <span class="number">87</span>, <span class="number">88</span>, <span class="number">89</span>, <span class="number">90</span>,
-    <span class="ident">modified_combining_class::CCC91</span>,
+    modified_combining_class::CCC91,
     <span class="number">92</span>, <span class="number">93</span>, <span class="number">94</span>, <span class="number">95</span>, <span class="number">96</span>, <span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">101</span>, <span class="number">102</span>,
 
-    <span class="comment">// Thai</span>
-    <span class="ident">modified_combining_class::CCC103</span>,
+    <span class="comment">// Thai
+    </span>modified_combining_class::CCC103,
     <span class="number">104</span>, <span class="number">105</span>, <span class="number">106</span>,
-    <span class="ident">modified_combining_class::CCC107</span>,
+    modified_combining_class::CCC107,
     <span class="number">108</span>, <span class="number">109</span>, <span class="number">110</span>, <span class="number">111</span>, <span class="number">112</span>, <span class="number">113</span>, <span class="number">114</span>, <span class="number">115</span>, <span class="number">116</span>, <span class="number">117</span>,
 
-    <span class="comment">// Lao</span>
-    <span class="ident">modified_combining_class::CCC118</span>,
+    <span class="comment">// Lao
+    </span>modified_combining_class::CCC118,
     <span class="number">119</span>, <span class="number">120</span>, <span class="number">121</span>,
-    <span class="ident">modified_combining_class::CCC122</span>,
+    modified_combining_class::CCC122,
     <span class="number">123</span>, <span class="number">124</span>, <span class="number">125</span>, <span class="number">126</span>, <span class="number">127</span>, <span class="number">128</span>,
 
-    <span class="comment">// Tibetan</span>
-    <span class="ident">modified_combining_class::CCC129</span>,
-    <span class="ident">modified_combining_class::CCC130</span>,
+    <span class="comment">// Tibetan
+    </span>modified_combining_class::CCC129,
+    modified_combining_class::CCC130,
     <span class="number">131</span>,
-    <span class="ident">modified_combining_class::CCC132</span>,
+    modified_combining_class::CCC132,
     <span class="number">133</span>, <span class="number">134</span>, <span class="number">135</span>, <span class="number">136</span>, <span class="number">137</span>, <span class="number">138</span>, <span class="number">139</span>,
 
 
@@ -1054,691 +1054,691 @@
     <span class="number">180</span>, <span class="number">181</span>, <span class="number">182</span>, <span class="number">183</span>, <span class="number">184</span>, <span class="number">185</span>, <span class="number">186</span>, <span class="number">187</span>, <span class="number">188</span>, <span class="number">189</span>,
     <span class="number">190</span>, <span class="number">191</span>, <span class="number">192</span>, <span class="number">193</span>, <span class="number">194</span>, <span class="number">195</span>, <span class="number">196</span>, <span class="number">197</span>, <span class="number">198</span>, <span class="number">199</span>,
 
-    <span class="ident">CanonicalCombiningClass::AttachedBelowLeft</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AttachedBelowLeft <span class="kw">as </span>u8,
     <span class="number">201</span>,
-    <span class="ident">CanonicalCombiningClass::AttachedBelow</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AttachedBelow <span class="kw">as </span>u8,
     <span class="number">203</span>, <span class="number">204</span>, <span class="number">205</span>, <span class="number">206</span>, <span class="number">207</span>, <span class="number">208</span>, <span class="number">209</span>, <span class="number">210</span>, <span class="number">211</span>, <span class="number">212</span>, <span class="number">213</span>,
-    <span class="ident">CanonicalCombiningClass::AttachedAbove</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AttachedAbove <span class="kw">as </span>u8,
     <span class="number">215</span>,
-    <span class="ident">CanonicalCombiningClass::AttachedAboveRight</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AttachedAboveRight <span class="kw">as </span>u8,
     <span class="number">217</span>,
-    <span class="ident">CanonicalCombiningClass::BelowLeft</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::BelowLeft <span class="kw">as </span>u8,
     <span class="number">219</span>,
-    <span class="ident">CanonicalCombiningClass::Below</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::Below <span class="kw">as </span>u8,
     <span class="number">221</span>,
-    <span class="ident">CanonicalCombiningClass::BelowRight</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::BelowRight <span class="kw">as </span>u8,
     <span class="number">223</span>,
-    <span class="ident">CanonicalCombiningClass::Left</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::Left <span class="kw">as </span>u8,
     <span class="number">225</span>,
-    <span class="ident">CanonicalCombiningClass::Right</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::Right <span class="kw">as </span>u8,
     <span class="number">227</span>,
-    <span class="ident">CanonicalCombiningClass::AboveLeft</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AboveLeft <span class="kw">as </span>u8,
     <span class="number">229</span>,
-    <span class="ident">CanonicalCombiningClass::Above</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::Above <span class="kw">as </span>u8,
     <span class="number">231</span>,
-    <span class="ident">CanonicalCombiningClass::AboveRight</span> <span class="kw">as</span> <span class="ident">u8</span>,
-    <span class="ident">CanonicalCombiningClass::DoubleBelow</span> <span class="kw">as</span> <span class="ident">u8</span>,
-    <span class="ident">CanonicalCombiningClass::DoubleAbove</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::AboveRight <span class="kw">as </span>u8,
+    CanonicalCombiningClass::DoubleBelow <span class="kw">as </span>u8,
+    CanonicalCombiningClass::DoubleAbove <span class="kw">as </span>u8,
     <span class="number">235</span>, <span class="number">236</span>, <span class="number">237</span>, <span class="number">238</span>, <span class="number">239</span>,
-    <span class="ident">CanonicalCombiningClass::IotaSubscript</span> <span class="kw">as</span> <span class="ident">u8</span>,
+    CanonicalCombiningClass::IotaSubscript <span class="kw">as </span>u8,
     <span class="number">241</span>, <span class="number">242</span>, <span class="number">243</span>, <span class="number">244</span>, <span class="number">245</span>, <span class="number">246</span>, <span class="number">247</span>, <span class="number">248</span>, <span class="number">249</span>, <span class="number">250</span>, <span class="number">251</span>, <span class="number">252</span>, <span class="number">253</span>, <span class="number">254</span>,
-    <span class="number">255</span>, <span class="comment">// RB_UNICODE_COMBINING_CLASS_INVALID</span>
-];
+    <span class="number">255</span>, <span class="comment">// RB_UNICODE_COMBINING_CLASS_INVALID
+</span>];
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">GeneralCategoryExt</span> {
-    <span class="kw">fn</span> <span class="ident">to_rb</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span>;
-    <span class="kw">fn</span> <span class="ident">from_rb</span>(<span class="ident">gc</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">is_mark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+<span class="kw">pub trait </span>GeneralCategoryExt {
+    <span class="kw">fn </span>to_rb(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32;
+    <span class="kw">fn </span>from_rb(gc: u32) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>is_mark(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
 }
 
-<span class="kw">impl</span> <span class="ident">GeneralCategoryExt</span> <span class="kw">for</span> <span class="ident">GeneralCategory</span> {
-    <span class="kw">fn</span> <span class="ident">to_rb</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GeneralCategory::ClosePunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::ConnectorPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::Control</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONTROL</span>,
-            <span class="ident">GeneralCategory::CurrencySymbol</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL</span>,
-            <span class="ident">GeneralCategory::DashPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::DecimalNumber</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER</span>,
-            <span class="ident">GeneralCategory::EnclosingMark</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK</span>,
-            <span class="ident">GeneralCategory::FinalPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::Format</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_FORMAT</span>,
-            <span class="ident">GeneralCategory::InitialPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::LetterNumber</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER</span>,
-            <span class="ident">GeneralCategory::LineSeparator</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR</span>,
-            <span class="ident">GeneralCategory::LowercaseLetter</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER</span>,
-            <span class="ident">GeneralCategory::MathSymbol</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL</span>,
-            <span class="ident">GeneralCategory::ModifierLetter</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER</span>,
-            <span class="ident">GeneralCategory::ModifierSymbol</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL</span>,
-            <span class="ident">GeneralCategory::NonspacingMark</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK</span>,
-            <span class="ident">GeneralCategory::OpenPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::OtherLetter</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER</span>,
-            <span class="ident">GeneralCategory::OtherNumber</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER</span>,
-            <span class="ident">GeneralCategory::OtherPunctuation</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION</span>,
-            <span class="ident">GeneralCategory::OtherSymbol</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL</span>,
-            <span class="ident">GeneralCategory::ParagraphSeparator</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR</span>,
-            <span class="ident">GeneralCategory::PrivateUse</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE</span>,
-            <span class="ident">GeneralCategory::SpaceSeparator</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR</span>,
-            <span class="ident">GeneralCategory::SpacingMark</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK</span>,
-            <span class="ident">GeneralCategory::Surrogate</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SURROGATE</span>,
-            <span class="ident">GeneralCategory::TitlecaseLetter</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER</span>,
-            <span class="ident">GeneralCategory::Unassigned</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED</span>,
-            <span class="ident">GeneralCategory::UppercaseLetter</span> =&gt; <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER</span>,
+<span class="kw">impl </span>GeneralCategoryExt <span class="kw">for </span>GeneralCategory {
+    <span class="kw">fn </span>to_rb(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            GeneralCategory::ClosePunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION,
+            GeneralCategory::ConnectorPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION,
+            GeneralCategory::Control =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONTROL,
+            GeneralCategory::CurrencySymbol =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL,
+            GeneralCategory::DashPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION,
+            GeneralCategory::DecimalNumber =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER,
+            GeneralCategory::EnclosingMark =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK,
+            GeneralCategory::FinalPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION,
+            GeneralCategory::Format =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_FORMAT,
+            GeneralCategory::InitialPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION,
+            GeneralCategory::LetterNumber =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER,
+            GeneralCategory::LineSeparator =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR,
+            GeneralCategory::LowercaseLetter =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER,
+            GeneralCategory::MathSymbol =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL,
+            GeneralCategory::ModifierLetter =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER,
+            GeneralCategory::ModifierSymbol =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL,
+            GeneralCategory::NonspacingMark =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK,
+            GeneralCategory::OpenPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION,
+            GeneralCategory::OtherLetter =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER,
+            GeneralCategory::OtherNumber =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER,
+            GeneralCategory::OtherPunctuation =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION,
+            GeneralCategory::OtherSymbol =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL,
+            GeneralCategory::ParagraphSeparator =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR,
+            GeneralCategory::PrivateUse =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE,
+            GeneralCategory::SpaceSeparator =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR,
+            GeneralCategory::SpacingMark =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK,
+            GeneralCategory::Surrogate =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_SURROGATE,
+            GeneralCategory::TitlecaseLetter =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER,
+            GeneralCategory::Unassigned =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED,
+            GeneralCategory::UppercaseLetter =&gt; hb_gc::RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">from_rb</span>(<span class="ident">gc</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> <span class="ident">gc</span> {
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::ClosePunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::ConnectorPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONTROL</span> =&gt; <span class="ident">GeneralCategory::Control</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL</span> =&gt; <span class="ident">GeneralCategory::CurrencySymbol</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::DashPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER</span> =&gt; <span class="ident">GeneralCategory::DecimalNumber</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK</span> =&gt; <span class="ident">GeneralCategory::EnclosingMark</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::FinalPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_FORMAT</span> =&gt; <span class="ident">GeneralCategory::Format</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::InitialPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER</span> =&gt; <span class="ident">GeneralCategory::LetterNumber</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR</span> =&gt; <span class="ident">GeneralCategory::LineSeparator</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER</span> =&gt; <span class="ident">GeneralCategory::LowercaseLetter</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL</span> =&gt; <span class="ident">GeneralCategory::MathSymbol</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER</span> =&gt; <span class="ident">GeneralCategory::ModifierLetter</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL</span> =&gt; <span class="ident">GeneralCategory::ModifierSymbol</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK</span> =&gt; <span class="ident">GeneralCategory::NonspacingMark</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::OpenPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER</span> =&gt; <span class="ident">GeneralCategory::OtherLetter</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER</span> =&gt; <span class="ident">GeneralCategory::OtherNumber</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION</span> =&gt; <span class="ident">GeneralCategory::OtherPunctuation</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL</span> =&gt; <span class="ident">GeneralCategory::OtherSymbol</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR</span> =&gt; <span class="ident">GeneralCategory::ParagraphSeparator</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE</span> =&gt; <span class="ident">GeneralCategory::PrivateUse</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR</span> =&gt; <span class="ident">GeneralCategory::SpaceSeparator</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK</span> =&gt; <span class="ident">GeneralCategory::SpacingMark</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_SURROGATE</span> =&gt; <span class="ident">GeneralCategory::Surrogate</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER</span> =&gt; <span class="ident">GeneralCategory::TitlecaseLetter</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED</span> =&gt; <span class="ident">GeneralCategory::Unassigned</span>,
-            <span class="ident">hb_gc::RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER</span> =&gt; <span class="ident">GeneralCategory::UppercaseLetter</span>,
-            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+    <span class="kw">fn </span>from_rb(gc: u32) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span>gc {
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION =&gt; GeneralCategory::ClosePunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION =&gt; GeneralCategory::ConnectorPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_CONTROL =&gt; GeneralCategory::Control,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL =&gt; GeneralCategory::CurrencySymbol,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION =&gt; GeneralCategory::DashPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER =&gt; GeneralCategory::DecimalNumber,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK =&gt; GeneralCategory::EnclosingMark,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION =&gt; GeneralCategory::FinalPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_FORMAT =&gt; GeneralCategory::Format,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION =&gt; GeneralCategory::InitialPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER =&gt; GeneralCategory::LetterNumber,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR =&gt; GeneralCategory::LineSeparator,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER =&gt; GeneralCategory::LowercaseLetter,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL =&gt; GeneralCategory::MathSymbol,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER =&gt; GeneralCategory::ModifierLetter,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL =&gt; GeneralCategory::ModifierSymbol,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK =&gt; GeneralCategory::NonspacingMark,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION =&gt; GeneralCategory::OpenPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER =&gt; GeneralCategory::OtherLetter,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER =&gt; GeneralCategory::OtherNumber,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION =&gt; GeneralCategory::OtherPunctuation,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL =&gt; GeneralCategory::OtherSymbol,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR =&gt; GeneralCategory::ParagraphSeparator,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE =&gt; GeneralCategory::PrivateUse,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR =&gt; GeneralCategory::SpaceSeparator,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK =&gt; GeneralCategory::SpacingMark,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_SURROGATE =&gt; GeneralCategory::Surrogate,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER =&gt; GeneralCategory::TitlecaseLetter,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED =&gt; GeneralCategory::Unassigned,
+            hb_gc::RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER =&gt; GeneralCategory::UppercaseLetter,
+            <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">is_mark</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GeneralCategory::SpacingMark</span> <span class="op">|</span>
-            <span class="ident">GeneralCategory::EnclosingMark</span> <span class="op">|</span>
-            <span class="ident">GeneralCategory::NonspacingMark</span> =&gt; <span class="bool-val">true</span>,
-            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+    <span class="kw">fn </span>is_mark(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+            GeneralCategory::SpacingMark |
+            GeneralCategory::EnclosingMark |
+            GeneralCategory::NonspacingMark =&gt; <span class="bool-val">true</span>,
+            <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">CharExt</span> {
-    <span class="kw">fn</span> <span class="ident">script</span>(<span class="self">self</span>) -&gt; <span class="ident">Script</span>;
-    <span class="kw">fn</span> <span class="ident">general_category</span>(<span class="self">self</span>) -&gt; <span class="ident">GeneralCategory</span>;
-    <span class="kw">fn</span> <span class="ident">combining_class</span>(<span class="self">self</span>) -&gt; <span class="ident">CanonicalCombiningClass</span>;
-    <span class="kw">fn</span> <span class="ident">space_fallback</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Space</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">modified_combining_class</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span>;
-    <span class="kw">fn</span> <span class="ident">mirrored</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">is_emoji_extended_pictographic</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">is_default_ignorable</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">is_variation_selector</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">vertical</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>;
+<span class="kw">pub trait </span>CharExt {
+    <span class="kw">fn </span>script(<span class="self">self</span>) -&gt; Script;
+    <span class="kw">fn </span>general_category(<span class="self">self</span>) -&gt; GeneralCategory;
+    <span class="kw">fn </span>combining_class(<span class="self">self</span>) -&gt; CanonicalCombiningClass;
+    <span class="kw">fn </span>space_fallback(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Space&gt;;
+    <span class="kw">fn </span>modified_combining_class(<span class="self">self</span>) -&gt; u8;
+    <span class="kw">fn </span>mirrored(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt;;
+    <span class="kw">fn </span>is_emoji_extended_pictographic(<span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>is_default_ignorable(<span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>is_variation_selector(<span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>vertical(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt;;
 }
 
-<span class="kw">impl</span> <span class="ident">CharExt</span> <span class="kw">for</span> <span class="ident">char</span> {
-    <span class="kw">fn</span> <span class="ident">script</span>(<span class="self">self</span>) -&gt; <span class="ident">Script</span> {
-        <span class="kw">use</span> <span class="ident">unicode_script</span> <span class="kw">as</span> <span class="ident">us</span>;
-        <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::script</span>;
+<span class="kw">impl </span>CharExt <span class="kw">for </span>char {
+    <span class="kw">fn </span>script(<span class="self">self</span>) -&gt; Script {
+        <span class="kw">use </span>unicode_script <span class="kw">as </span>us;
+        <span class="kw">use </span><span class="kw">crate</span>::script;
 
-        <span class="kw">match</span> <span class="ident">unicode_script::UnicodeScript::script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-            <span class="ident">us::Script::Common</span> =&gt; <span class="ident">script::COMMON</span>,
-            <span class="ident">us::Script::Inherited</span> =&gt; <span class="ident">script::INHERITED</span>,
-            <span class="ident">us::Script::Adlam</span> =&gt; <span class="ident">script::ADLAM</span>,
-            <span class="ident">us::Script::Ahom</span> =&gt; <span class="ident">script::AHOM</span>,
-            <span class="ident">us::Script::Anatolian_Hieroglyphs</span> =&gt; <span class="ident">script::ANATOLIAN_HIEROGLYPHS</span>,
-            <span class="ident">us::Script::Arabic</span> =&gt; <span class="ident">script::ARABIC</span>,
-            <span class="ident">us::Script::Armenian</span> =&gt; <span class="ident">script::ARMENIAN</span>,
-            <span class="ident">us::Script::Avestan</span> =&gt; <span class="ident">script::AVESTAN</span>,
-            <span class="ident">us::Script::Balinese</span> =&gt; <span class="ident">script::BALINESE</span>,
-            <span class="ident">us::Script::Bamum</span> =&gt; <span class="ident">script::BAMUM</span>,
-            <span class="ident">us::Script::Bassa_Vah</span> =&gt; <span class="ident">script::BASSA_VAH</span>,
-            <span class="ident">us::Script::Batak</span> =&gt; <span class="ident">script::BATAK</span>,
-            <span class="ident">us::Script::Bengali</span> =&gt; <span class="ident">script::BENGALI</span>,
-            <span class="ident">us::Script::Bhaiksuki</span> =&gt; <span class="ident">script::BHAIKSUKI</span>,
-            <span class="ident">us::Script::Bopomofo</span> =&gt; <span class="ident">script::BOPOMOFO</span>,
-            <span class="ident">us::Script::Brahmi</span> =&gt; <span class="ident">script::BRAHMI</span>,
-            <span class="ident">us::Script::Braille</span> =&gt; <span class="ident">script::BRAILLE</span>,
-            <span class="ident">us::Script::Buginese</span> =&gt; <span class="ident">script::BUGINESE</span>,
-            <span class="ident">us::Script::Buhid</span> =&gt; <span class="ident">script::BUHID</span>,
-            <span class="ident">us::Script::Canadian_Aboriginal</span> =&gt; <span class="ident">script::CANADIAN_SYLLABICS</span>,
-            <span class="ident">us::Script::Carian</span> =&gt; <span class="ident">script::CARIAN</span>,
-            <span class="ident">us::Script::Caucasian_Albanian</span> =&gt; <span class="ident">script::CAUCASIAN_ALBANIAN</span>,
-            <span class="ident">us::Script::Chakma</span> =&gt; <span class="ident">script::CHAKMA</span>,
-            <span class="ident">us::Script::Cham</span> =&gt; <span class="ident">script::CHAM</span>,
-            <span class="ident">us::Script::Cherokee</span> =&gt; <span class="ident">script::CHEROKEE</span>,
-            <span class="ident">us::Script::Chorasmian</span> =&gt; <span class="ident">script::CHORASMIAN</span>,
-            <span class="ident">us::Script::Coptic</span> =&gt; <span class="ident">script::COPTIC</span>,
-            <span class="ident">us::Script::Cuneiform</span> =&gt; <span class="ident">script::CUNEIFORM</span>,
-            <span class="ident">us::Script::Cypriot</span> =&gt; <span class="ident">script::CYPRIOT</span>,
-            <span class="ident">us::Script::Cyrillic</span> =&gt; <span class="ident">script::CYRILLIC</span>,
-            <span class="ident">us::Script::Deseret</span> =&gt; <span class="ident">script::DESERET</span>,
-            <span class="ident">us::Script::Devanagari</span> =&gt; <span class="ident">script::DEVANAGARI</span>,
-            <span class="ident">us::Script::Dives_Akuru</span> =&gt; <span class="ident">script::DIVES_AKURU</span>,
-            <span class="ident">us::Script::Dogra</span> =&gt; <span class="ident">script::DOGRA</span>,
-            <span class="ident">us::Script::Duployan</span> =&gt; <span class="ident">script::DUPLOYAN</span>,
-            <span class="ident">us::Script::Egyptian_Hieroglyphs</span> =&gt; <span class="ident">script::EGYPTIAN_HIEROGLYPHS</span>,
-            <span class="ident">us::Script::Elbasan</span> =&gt; <span class="ident">script::ELBASAN</span>,
-            <span class="ident">us::Script::Elymaic</span> =&gt; <span class="ident">script::ELYMAIC</span>,
-            <span class="ident">us::Script::Ethiopic</span> =&gt; <span class="ident">script::ETHIOPIC</span>,
-            <span class="ident">us::Script::Georgian</span> =&gt; <span class="ident">script::GEORGIAN</span>,
-            <span class="ident">us::Script::Glagolitic</span> =&gt; <span class="ident">script::GLAGOLITIC</span>,
-            <span class="ident">us::Script::Gothic</span> =&gt; <span class="ident">script::GOTHIC</span>,
-            <span class="ident">us::Script::Grantha</span> =&gt; <span class="ident">script::GRANTHA</span>,
-            <span class="ident">us::Script::Greek</span> =&gt; <span class="ident">script::GREEK</span>,
-            <span class="ident">us::Script::Gujarati</span> =&gt; <span class="ident">script::GUJARATI</span>,
-            <span class="ident">us::Script::Gunjala_Gondi</span> =&gt; <span class="ident">script::GUNJALA_GONDI</span>,
-            <span class="ident">us::Script::Gurmukhi</span> =&gt; <span class="ident">script::GURMUKHI</span>,
-            <span class="ident">us::Script::Han</span> =&gt; <span class="ident">script::HAN</span>,
-            <span class="ident">us::Script::Hangul</span> =&gt; <span class="ident">script::HANGUL</span>,
-            <span class="ident">us::Script::Hanifi_Rohingya</span> =&gt; <span class="ident">script::HANIFI_ROHINGYA</span>,
-            <span class="ident">us::Script::Hanunoo</span> =&gt; <span class="ident">script::HANUNOO</span>,
-            <span class="ident">us::Script::Hatran</span> =&gt; <span class="ident">script::HATRAN</span>,
-            <span class="ident">us::Script::Hebrew</span> =&gt; <span class="ident">script::HEBREW</span>,
-            <span class="ident">us::Script::Hiragana</span> =&gt; <span class="ident">script::HIRAGANA</span>,
-            <span class="ident">us::Script::Imperial_Aramaic</span> =&gt; <span class="ident">script::IMPERIAL_ARAMAIC</span>,
-            <span class="ident">us::Script::Inscriptional_Pahlavi</span> =&gt; <span class="ident">script::INSCRIPTIONAL_PAHLAVI</span>,
-            <span class="ident">us::Script::Inscriptional_Parthian</span> =&gt; <span class="ident">script::INSCRIPTIONAL_PARTHIAN</span>,
-            <span class="ident">us::Script::Javanese</span> =&gt; <span class="ident">script::JAVANESE</span>,
-            <span class="ident">us::Script::Kaithi</span> =&gt; <span class="ident">script::KAITHI</span>,
-            <span class="ident">us::Script::Kannada</span> =&gt; <span class="ident">script::KANNADA</span>,
-            <span class="ident">us::Script::Katakana</span> =&gt; <span class="ident">script::KATAKANA</span>,
-            <span class="ident">us::Script::Kayah_Li</span> =&gt; <span class="ident">script::KAYAH_LI</span>,
-            <span class="ident">us::Script::Kharoshthi</span> =&gt; <span class="ident">script::KHAROSHTHI</span>,
-            <span class="ident">us::Script::Khitan_Small_Script</span> =&gt; <span class="ident">script::KHITAN_SMALL_SCRIPT</span>,
-            <span class="ident">us::Script::Khmer</span> =&gt; <span class="ident">script::KHMER</span>,
-            <span class="ident">us::Script::Khojki</span> =&gt; <span class="ident">script::KHOJKI</span>,
-            <span class="ident">us::Script::Khudawadi</span> =&gt; <span class="ident">script::KHUDAWADI</span>,
-            <span class="ident">us::Script::Lao</span> =&gt; <span class="ident">script::LAO</span>,
-            <span class="ident">us::Script::Latin</span> =&gt; <span class="ident">script::LATIN</span>,
-            <span class="ident">us::Script::Lepcha</span> =&gt; <span class="ident">script::LEPCHA</span>,
-            <span class="ident">us::Script::Limbu</span> =&gt; <span class="ident">script::LIMBU</span>,
-            <span class="ident">us::Script::Linear_A</span> =&gt; <span class="ident">script::LINEAR_A</span>,
-            <span class="ident">us::Script::Linear_B</span> =&gt; <span class="ident">script::LINEAR_B</span>,
-            <span class="ident">us::Script::Lisu</span> =&gt; <span class="ident">script::LISU</span>,
-            <span class="ident">us::Script::Lycian</span> =&gt; <span class="ident">script::LYCIAN</span>,
-            <span class="ident">us::Script::Lydian</span> =&gt; <span class="ident">script::LYDIAN</span>,
-            <span class="ident">us::Script::Mahajani</span> =&gt; <span class="ident">script::MAHAJANI</span>,
-            <span class="ident">us::Script::Makasar</span> =&gt; <span class="ident">script::MAKASAR</span>,
-            <span class="ident">us::Script::Malayalam</span> =&gt; <span class="ident">script::MALAYALAM</span>,
-            <span class="ident">us::Script::Mandaic</span> =&gt; <span class="ident">script::MANDAIC</span>,
-            <span class="ident">us::Script::Manichaean</span> =&gt; <span class="ident">script::MANICHAEAN</span>,
-            <span class="ident">us::Script::Marchen</span> =&gt; <span class="ident">script::MARCHEN</span>,
-            <span class="ident">us::Script::Masaram_Gondi</span> =&gt; <span class="ident">script::MASARAM_GONDI</span>,
-            <span class="ident">us::Script::Medefaidrin</span> =&gt; <span class="ident">script::MEDEFAIDRIN</span>,
-            <span class="ident">us::Script::Meetei_Mayek</span> =&gt; <span class="ident">script::MEETEI_MAYEK</span>,
-            <span class="ident">us::Script::Mende_Kikakui</span> =&gt; <span class="ident">script::MENDE_KIKAKUI</span>,
-            <span class="ident">us::Script::Meroitic_Cursive</span> =&gt; <span class="ident">script::MEROITIC_CURSIVE</span>,
-            <span class="ident">us::Script::Meroitic_Hieroglyphs</span> =&gt; <span class="ident">script::MEROITIC_HIEROGLYPHS</span>,
-            <span class="ident">us::Script::Miao</span> =&gt; <span class="ident">script::MIAO</span>,
-            <span class="ident">us::Script::Modi</span> =&gt; <span class="ident">script::MODI</span>,
-            <span class="ident">us::Script::Mongolian</span> =&gt; <span class="ident">script::MONGOLIAN</span>,
-            <span class="ident">us::Script::Mro</span> =&gt; <span class="ident">script::MRO</span>,
-            <span class="ident">us::Script::Multani</span> =&gt; <span class="ident">script::MULTANI</span>,
-            <span class="ident">us::Script::Myanmar</span> =&gt; <span class="ident">script::MYANMAR</span>,
-            <span class="ident">us::Script::Nabataean</span> =&gt; <span class="ident">script::NABATAEAN</span>,
-            <span class="ident">us::Script::Nandinagari</span> =&gt; <span class="ident">script::NANDINAGARI</span>,
-            <span class="ident">us::Script::New_Tai_Lue</span> =&gt; <span class="ident">script::NEW_TAI_LUE</span>,
-            <span class="ident">us::Script::Newa</span> =&gt; <span class="ident">script::NEWA</span>,
-            <span class="ident">us::Script::Nko</span> =&gt; <span class="ident">script::NKO</span>,
-            <span class="ident">us::Script::Nushu</span> =&gt; <span class="ident">script::NUSHU</span>,
-            <span class="ident">us::Script::Nyiakeng_Puachue_Hmong</span> =&gt; <span class="ident">script::NYIAKENG_PUACHUE_HMONG</span>,
-            <span class="ident">us::Script::Ogham</span> =&gt; <span class="ident">script::OGHAM</span>,
-            <span class="ident">us::Script::Ol_Chiki</span> =&gt; <span class="ident">script::OL_CHIKI</span>,
-            <span class="ident">us::Script::Old_Hungarian</span> =&gt; <span class="ident">script::OLD_HUNGARIAN</span>,
-            <span class="ident">us::Script::Old_Italic</span> =&gt; <span class="ident">script::OLD_ITALIC</span>,
-            <span class="ident">us::Script::Old_North_Arabian</span> =&gt; <span class="ident">script::OLD_NORTH_ARABIAN</span>,
-            <span class="ident">us::Script::Old_Permic</span> =&gt; <span class="ident">script::OLD_PERMIC</span>,
-            <span class="ident">us::Script::Old_Persian</span> =&gt; <span class="ident">script::OLD_PERSIAN</span>,
-            <span class="ident">us::Script::Old_Sogdian</span> =&gt; <span class="ident">script::OLD_SOGDIAN</span>,
-            <span class="ident">us::Script::Old_South_Arabian</span> =&gt; <span class="ident">script::OLD_SOUTH_ARABIAN</span>,
-            <span class="ident">us::Script::Old_Turkic</span> =&gt; <span class="ident">script::OLD_TURKIC</span>,
-            <span class="ident">us::Script::Oriya</span> =&gt; <span class="ident">script::ORIYA</span>,
-            <span class="ident">us::Script::Osage</span> =&gt; <span class="ident">script::OSAGE</span>,
-            <span class="ident">us::Script::Osmanya</span> =&gt; <span class="ident">script::OSMANYA</span>,
-            <span class="ident">us::Script::Pahawh_Hmong</span> =&gt; <span class="ident">script::PAHAWH_HMONG</span>,
-            <span class="ident">us::Script::Palmyrene</span> =&gt; <span class="ident">script::PALMYRENE</span>,
-            <span class="ident">us::Script::Pau_Cin_Hau</span> =&gt; <span class="ident">script::PAU_CIN_HAU</span>,
-            <span class="ident">us::Script::Phags_Pa</span> =&gt; <span class="ident">script::PHAGS_PA</span>,
-            <span class="ident">us::Script::Phoenician</span> =&gt; <span class="ident">script::PHOENICIAN</span>,
-            <span class="ident">us::Script::Psalter_Pahlavi</span> =&gt; <span class="ident">script::PSALTER_PAHLAVI</span>,
-            <span class="ident">us::Script::Rejang</span> =&gt; <span class="ident">script::REJANG</span>,
-            <span class="ident">us::Script::Runic</span> =&gt; <span class="ident">script::RUNIC</span>,
-            <span class="ident">us::Script::Samaritan</span> =&gt; <span class="ident">script::SAMARITAN</span>,
-            <span class="ident">us::Script::Saurashtra</span> =&gt; <span class="ident">script::SAURASHTRA</span>,
-            <span class="ident">us::Script::Sharada</span> =&gt; <span class="ident">script::SHARADA</span>,
-            <span class="ident">us::Script::Shavian</span> =&gt; <span class="ident">script::SHAVIAN</span>,
-            <span class="ident">us::Script::Siddham</span> =&gt; <span class="ident">script::SIDDHAM</span>,
-            <span class="ident">us::Script::SignWriting</span> =&gt; <span class="ident">script::SIGNWRITING</span>,
-            <span class="ident">us::Script::Sinhala</span> =&gt; <span class="ident">script::SINHALA</span>,
-            <span class="ident">us::Script::Sogdian</span> =&gt; <span class="ident">script::SOGDIAN</span>,
-            <span class="ident">us::Script::Sora_Sompeng</span> =&gt; <span class="ident">script::SORA_SOMPENG</span>,
-            <span class="ident">us::Script::Soyombo</span> =&gt; <span class="ident">script::SOYOMBO</span>,
-            <span class="ident">us::Script::Sundanese</span> =&gt; <span class="ident">script::SUNDANESE</span>,
-            <span class="ident">us::Script::Syloti_Nagri</span> =&gt; <span class="ident">script::SYLOTI_NAGRI</span>,
-            <span class="ident">us::Script::Syriac</span> =&gt; <span class="ident">script::SYRIAC</span>,
-            <span class="ident">us::Script::Tagalog</span> =&gt; <span class="ident">script::TAGALOG</span>,
-            <span class="ident">us::Script::Tagbanwa</span> =&gt; <span class="ident">script::TAGBANWA</span>,
-            <span class="ident">us::Script::Tai_Le</span> =&gt; <span class="ident">script::TAI_LE</span>,
-            <span class="ident">us::Script::Tai_Tham</span> =&gt; <span class="ident">script::TAI_THAM</span>,
-            <span class="ident">us::Script::Tai_Viet</span> =&gt; <span class="ident">script::TAI_VIET</span>,
-            <span class="ident">us::Script::Takri</span> =&gt; <span class="ident">script::TAKRI</span>,
-            <span class="ident">us::Script::Tamil</span> =&gt; <span class="ident">script::TAMIL</span>,
-            <span class="ident">us::Script::Tangut</span> =&gt; <span class="ident">script::TANGUT</span>,
-            <span class="ident">us::Script::Telugu</span> =&gt; <span class="ident">script::TELUGU</span>,
-            <span class="ident">us::Script::Thaana</span> =&gt; <span class="ident">script::THAANA</span>,
-            <span class="ident">us::Script::Thai</span> =&gt; <span class="ident">script::THAI</span>,
-            <span class="ident">us::Script::Tibetan</span> =&gt; <span class="ident">script::TIBETAN</span>,
-            <span class="ident">us::Script::Tifinagh</span> =&gt; <span class="ident">script::TIFINAGH</span>,
-            <span class="ident">us::Script::Tirhuta</span> =&gt; <span class="ident">script::TIRHUTA</span>,
-            <span class="ident">us::Script::Ugaritic</span> =&gt; <span class="ident">script::UGARITIC</span>,
-            <span class="ident">us::Script::Vai</span> =&gt; <span class="ident">script::VAI</span>,
-            <span class="ident">us::Script::Wancho</span> =&gt; <span class="ident">script::WANCHO</span>,
-            <span class="ident">us::Script::Warang_Citi</span> =&gt; <span class="ident">script::WARANG_CITI</span>,
-            <span class="ident">us::Script::Yezidi</span> =&gt; <span class="ident">script::YEZIDI</span>,
-            <span class="ident">us::Script::Yi</span> =&gt; <span class="ident">script::YI</span>,
-            <span class="ident">us::Script::Zanabazar_Square</span> =&gt; <span class="ident">script::ZANABAZAR_SQUARE</span>,
-            <span class="kw">_</span> =&gt; <span class="ident">script::UNKNOWN</span>,
+        <span class="kw">match </span>unicode_script::UnicodeScript::script(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+            us::Script::Common =&gt; script::COMMON,
+            us::Script::Inherited =&gt; script::INHERITED,
+            us::Script::Adlam =&gt; script::ADLAM,
+            us::Script::Ahom =&gt; script::AHOM,
+            us::Script::Anatolian_Hieroglyphs =&gt; script::ANATOLIAN_HIEROGLYPHS,
+            us::Script::Arabic =&gt; script::ARABIC,
+            us::Script::Armenian =&gt; script::ARMENIAN,
+            us::Script::Avestan =&gt; script::AVESTAN,
+            us::Script::Balinese =&gt; script::BALINESE,
+            us::Script::Bamum =&gt; script::BAMUM,
+            us::Script::Bassa_Vah =&gt; script::BASSA_VAH,
+            us::Script::Batak =&gt; script::BATAK,
+            us::Script::Bengali =&gt; script::BENGALI,
+            us::Script::Bhaiksuki =&gt; script::BHAIKSUKI,
+            us::Script::Bopomofo =&gt; script::BOPOMOFO,
+            us::Script::Brahmi =&gt; script::BRAHMI,
+            us::Script::Braille =&gt; script::BRAILLE,
+            us::Script::Buginese =&gt; script::BUGINESE,
+            us::Script::Buhid =&gt; script::BUHID,
+            us::Script::Canadian_Aboriginal =&gt; script::CANADIAN_SYLLABICS,
+            us::Script::Carian =&gt; script::CARIAN,
+            us::Script::Caucasian_Albanian =&gt; script::CAUCASIAN_ALBANIAN,
+            us::Script::Chakma =&gt; script::CHAKMA,
+            us::Script::Cham =&gt; script::CHAM,
+            us::Script::Cherokee =&gt; script::CHEROKEE,
+            us::Script::Chorasmian =&gt; script::CHORASMIAN,
+            us::Script::Coptic =&gt; script::COPTIC,
+            us::Script::Cuneiform =&gt; script::CUNEIFORM,
+            us::Script::Cypriot =&gt; script::CYPRIOT,
+            us::Script::Cyrillic =&gt; script::CYRILLIC,
+            us::Script::Deseret =&gt; script::DESERET,
+            us::Script::Devanagari =&gt; script::DEVANAGARI,
+            us::Script::Dives_Akuru =&gt; script::DIVES_AKURU,
+            us::Script::Dogra =&gt; script::DOGRA,
+            us::Script::Duployan =&gt; script::DUPLOYAN,
+            us::Script::Egyptian_Hieroglyphs =&gt; script::EGYPTIAN_HIEROGLYPHS,
+            us::Script::Elbasan =&gt; script::ELBASAN,
+            us::Script::Elymaic =&gt; script::ELYMAIC,
+            us::Script::Ethiopic =&gt; script::ETHIOPIC,
+            us::Script::Georgian =&gt; script::GEORGIAN,
+            us::Script::Glagolitic =&gt; script::GLAGOLITIC,
+            us::Script::Gothic =&gt; script::GOTHIC,
+            us::Script::Grantha =&gt; script::GRANTHA,
+            us::Script::Greek =&gt; script::GREEK,
+            us::Script::Gujarati =&gt; script::GUJARATI,
+            us::Script::Gunjala_Gondi =&gt; script::GUNJALA_GONDI,
+            us::Script::Gurmukhi =&gt; script::GURMUKHI,
+            us::Script::Han =&gt; script::HAN,
+            us::Script::Hangul =&gt; script::HANGUL,
+            us::Script::Hanifi_Rohingya =&gt; script::HANIFI_ROHINGYA,
+            us::Script::Hanunoo =&gt; script::HANUNOO,
+            us::Script::Hatran =&gt; script::HATRAN,
+            us::Script::Hebrew =&gt; script::HEBREW,
+            us::Script::Hiragana =&gt; script::HIRAGANA,
+            us::Script::Imperial_Aramaic =&gt; script::IMPERIAL_ARAMAIC,
+            us::Script::Inscriptional_Pahlavi =&gt; script::INSCRIPTIONAL_PAHLAVI,
+            us::Script::Inscriptional_Parthian =&gt; script::INSCRIPTIONAL_PARTHIAN,
+            us::Script::Javanese =&gt; script::JAVANESE,
+            us::Script::Kaithi =&gt; script::KAITHI,
+            us::Script::Kannada =&gt; script::KANNADA,
+            us::Script::Katakana =&gt; script::KATAKANA,
+            us::Script::Kayah_Li =&gt; script::KAYAH_LI,
+            us::Script::Kharoshthi =&gt; script::KHAROSHTHI,
+            us::Script::Khitan_Small_Script =&gt; script::KHITAN_SMALL_SCRIPT,
+            us::Script::Khmer =&gt; script::KHMER,
+            us::Script::Khojki =&gt; script::KHOJKI,
+            us::Script::Khudawadi =&gt; script::KHUDAWADI,
+            us::Script::Lao =&gt; script::LAO,
+            us::Script::Latin =&gt; script::LATIN,
+            us::Script::Lepcha =&gt; script::LEPCHA,
+            us::Script::Limbu =&gt; script::LIMBU,
+            us::Script::Linear_A =&gt; script::LINEAR_A,
+            us::Script::Linear_B =&gt; script::LINEAR_B,
+            us::Script::Lisu =&gt; script::LISU,
+            us::Script::Lycian =&gt; script::LYCIAN,
+            us::Script::Lydian =&gt; script::LYDIAN,
+            us::Script::Mahajani =&gt; script::MAHAJANI,
+            us::Script::Makasar =&gt; script::MAKASAR,
+            us::Script::Malayalam =&gt; script::MALAYALAM,
+            us::Script::Mandaic =&gt; script::MANDAIC,
+            us::Script::Manichaean =&gt; script::MANICHAEAN,
+            us::Script::Marchen =&gt; script::MARCHEN,
+            us::Script::Masaram_Gondi =&gt; script::MASARAM_GONDI,
+            us::Script::Medefaidrin =&gt; script::MEDEFAIDRIN,
+            us::Script::Meetei_Mayek =&gt; script::MEETEI_MAYEK,
+            us::Script::Mende_Kikakui =&gt; script::MENDE_KIKAKUI,
+            us::Script::Meroitic_Cursive =&gt; script::MEROITIC_CURSIVE,
+            us::Script::Meroitic_Hieroglyphs =&gt; script::MEROITIC_HIEROGLYPHS,
+            us::Script::Miao =&gt; script::MIAO,
+            us::Script::Modi =&gt; script::MODI,
+            us::Script::Mongolian =&gt; script::MONGOLIAN,
+            us::Script::Mro =&gt; script::MRO,
+            us::Script::Multani =&gt; script::MULTANI,
+            us::Script::Myanmar =&gt; script::MYANMAR,
+            us::Script::Nabataean =&gt; script::NABATAEAN,
+            us::Script::Nandinagari =&gt; script::NANDINAGARI,
+            us::Script::New_Tai_Lue =&gt; script::NEW_TAI_LUE,
+            us::Script::Newa =&gt; script::NEWA,
+            us::Script::Nko =&gt; script::NKO,
+            us::Script::Nushu =&gt; script::NUSHU,
+            us::Script::Nyiakeng_Puachue_Hmong =&gt; script::NYIAKENG_PUACHUE_HMONG,
+            us::Script::Ogham =&gt; script::OGHAM,
+            us::Script::Ol_Chiki =&gt; script::OL_CHIKI,
+            us::Script::Old_Hungarian =&gt; script::OLD_HUNGARIAN,
+            us::Script::Old_Italic =&gt; script::OLD_ITALIC,
+            us::Script::Old_North_Arabian =&gt; script::OLD_NORTH_ARABIAN,
+            us::Script::Old_Permic =&gt; script::OLD_PERMIC,
+            us::Script::Old_Persian =&gt; script::OLD_PERSIAN,
+            us::Script::Old_Sogdian =&gt; script::OLD_SOGDIAN,
+            us::Script::Old_South_Arabian =&gt; script::OLD_SOUTH_ARABIAN,
+            us::Script::Old_Turkic =&gt; script::OLD_TURKIC,
+            us::Script::Oriya =&gt; script::ORIYA,
+            us::Script::Osage =&gt; script::OSAGE,
+            us::Script::Osmanya =&gt; script::OSMANYA,
+            us::Script::Pahawh_Hmong =&gt; script::PAHAWH_HMONG,
+            us::Script::Palmyrene =&gt; script::PALMYRENE,
+            us::Script::Pau_Cin_Hau =&gt; script::PAU_CIN_HAU,
+            us::Script::Phags_Pa =&gt; script::PHAGS_PA,
+            us::Script::Phoenician =&gt; script::PHOENICIAN,
+            us::Script::Psalter_Pahlavi =&gt; script::PSALTER_PAHLAVI,
+            us::Script::Rejang =&gt; script::REJANG,
+            us::Script::Runic =&gt; script::RUNIC,
+            us::Script::Samaritan =&gt; script::SAMARITAN,
+            us::Script::Saurashtra =&gt; script::SAURASHTRA,
+            us::Script::Sharada =&gt; script::SHARADA,
+            us::Script::Shavian =&gt; script::SHAVIAN,
+            us::Script::Siddham =&gt; script::SIDDHAM,
+            us::Script::SignWriting =&gt; script::SIGNWRITING,
+            us::Script::Sinhala =&gt; script::SINHALA,
+            us::Script::Sogdian =&gt; script::SOGDIAN,
+            us::Script::Sora_Sompeng =&gt; script::SORA_SOMPENG,
+            us::Script::Soyombo =&gt; script::SOYOMBO,
+            us::Script::Sundanese =&gt; script::SUNDANESE,
+            us::Script::Syloti_Nagri =&gt; script::SYLOTI_NAGRI,
+            us::Script::Syriac =&gt; script::SYRIAC,
+            us::Script::Tagalog =&gt; script::TAGALOG,
+            us::Script::Tagbanwa =&gt; script::TAGBANWA,
+            us::Script::Tai_Le =&gt; script::TAI_LE,
+            us::Script::Tai_Tham =&gt; script::TAI_THAM,
+            us::Script::Tai_Viet =&gt; script::TAI_VIET,
+            us::Script::Takri =&gt; script::TAKRI,
+            us::Script::Tamil =&gt; script::TAMIL,
+            us::Script::Tangut =&gt; script::TANGUT,
+            us::Script::Telugu =&gt; script::TELUGU,
+            us::Script::Thaana =&gt; script::THAANA,
+            us::Script::Thai =&gt; script::THAI,
+            us::Script::Tibetan =&gt; script::TIBETAN,
+            us::Script::Tifinagh =&gt; script::TIFINAGH,
+            us::Script::Tirhuta =&gt; script::TIRHUTA,
+            us::Script::Ugaritic =&gt; script::UGARITIC,
+            us::Script::Vai =&gt; script::VAI,
+            us::Script::Wancho =&gt; script::WANCHO,
+            us::Script::Warang_Citi =&gt; script::WARANG_CITI,
+            us::Script::Yezidi =&gt; script::YEZIDI,
+            us::Script::Yi =&gt; script::YI,
+            us::Script::Zanabazar_Square =&gt; script::ZANABAZAR_SQUARE,
+            <span class="kw">_ </span>=&gt; script::UNKNOWN,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">general_category</span>(<span class="self">self</span>) -&gt; <span class="ident">GeneralCategory</span> {
-        <span class="ident">unicode_general_category::get_general_category</span>(<span class="self">self</span>)
+    <span class="kw">fn </span>general_category(<span class="self">self</span>) -&gt; GeneralCategory {
+        unicode_general_category::get_general_category(<span class="self">self</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">combining_class</span>(<span class="self">self</span>) -&gt; <span class="ident">CanonicalCombiningClass</span> {
-        <span class="ident">unicode_ccc::get_canonical_combining_class</span>(<span class="self">self</span>)
+    <span class="kw">fn </span>combining_class(<span class="self">self</span>) -&gt; CanonicalCombiningClass {
+        unicode_ccc::get_canonical_combining_class(<span class="self">self</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">space_fallback</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Space</span><span class="op">&gt;</span> {
-        <span class="comment">// All GC=Zs chars that can use a fallback.</span>
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="string">&#39;\u{0020}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE</span>),               <span class="comment">// SPACE</span>
-            <span class="string">&#39;\u{00A0}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE</span>),               <span class="comment">// NO-BREAK SPACE</span>
-            <span class="string">&#39;\u{2000}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_2</span>),          <span class="comment">// EN QUAD</span>
-            <span class="string">&#39;\u{2001}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM</span>),            <span class="comment">// EM QUAD</span>
-            <span class="string">&#39;\u{2002}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_2</span>),          <span class="comment">// EN SPACE</span>
-            <span class="string">&#39;\u{2003}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM</span>),            <span class="comment">// EM SPACE</span>
-            <span class="string">&#39;\u{2004}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_3</span>),          <span class="comment">// THREE-PER-EM SPACE</span>
-            <span class="string">&#39;\u{2005}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_4</span>),          <span class="comment">// FOUR-PER-EM SPACE</span>
-            <span class="string">&#39;\u{2006}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_6</span>),          <span class="comment">// SIX-PER-EM SPACE</span>
-            <span class="string">&#39;\u{2007}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_FIGURE</span>),        <span class="comment">// FIGURE SPACE</span>
-            <span class="string">&#39;\u{2008}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_PUNCTUATION</span>),   <span class="comment">// PUNCTUATION SPACE</span>
-            <span class="string">&#39;\u{2009}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_5</span>),          <span class="comment">// THIN SPACE</span>
-            <span class="string">&#39;\u{200A}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM_16</span>),         <span class="comment">// HAIR SPACE</span>
-            <span class="string">&#39;\u{202F}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_NARROW</span>),        <span class="comment">// NARROW NO-BREAK SPACE</span>
-            <span class="string">&#39;\u{205F}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_4_EM_18</span>),       <span class="comment">// MEDIUM MATHEMATICAL SPACE</span>
-            <span class="string">&#39;\u{3000}&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">space::SPACE_EM</span>),            <span class="comment">// IDEOGRAPHIC SPACE</span>
-            <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,                                      <span class="comment">// OGHAM SPACE MARK</span>
+    <span class="kw">fn </span>space_fallback(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Space&gt; {
+        <span class="comment">// All GC=Zs chars that can use a fallback.
+        </span><span class="kw">match </span><span class="self">self </span>{
+            <span class="string">&#39;\u{0020}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE),               <span class="comment">// SPACE
+            </span><span class="string">&#39;\u{00A0}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE),               <span class="comment">// NO-BREAK SPACE
+            </span><span class="string">&#39;\u{2000}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_2),          <span class="comment">// EN QUAD
+            </span><span class="string">&#39;\u{2001}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM),            <span class="comment">// EM QUAD
+            </span><span class="string">&#39;\u{2002}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_2),          <span class="comment">// EN SPACE
+            </span><span class="string">&#39;\u{2003}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM),            <span class="comment">// EM SPACE
+            </span><span class="string">&#39;\u{2004}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_3),          <span class="comment">// THREE-PER-EM SPACE
+            </span><span class="string">&#39;\u{2005}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_4),          <span class="comment">// FOUR-PER-EM SPACE
+            </span><span class="string">&#39;\u{2006}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_6),          <span class="comment">// SIX-PER-EM SPACE
+            </span><span class="string">&#39;\u{2007}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_FIGURE),        <span class="comment">// FIGURE SPACE
+            </span><span class="string">&#39;\u{2008}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_PUNCTUATION),   <span class="comment">// PUNCTUATION SPACE
+            </span><span class="string">&#39;\u{2009}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_5),          <span class="comment">// THIN SPACE
+            </span><span class="string">&#39;\u{200A}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM_16),         <span class="comment">// HAIR SPACE
+            </span><span class="string">&#39;\u{202F}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_NARROW),        <span class="comment">// NARROW NO-BREAK SPACE
+            </span><span class="string">&#39;\u{205F}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_4_EM_18),       <span class="comment">// MEDIUM MATHEMATICAL SPACE
+            </span><span class="string">&#39;\u{3000}&#39; </span>=&gt; <span class="prelude-val">Some</span>(space::SPACE_EM),            <span class="comment">// IDEOGRAPHIC SPACE
+            </span><span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,                                      <span class="comment">// OGHAM SPACE MARK
+        </span>}
+    }
+
+    <span class="kw">fn </span>modified_combining_class(<span class="self">self</span>) -&gt; u8 {
+        <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="self">self</span>;
+
+        <span class="comment">// XXX This hack belongs to the Myanmar shaper.
+        </span><span class="kw">if </span>u == <span class="string">&#39;\u{1037}&#39;</span>{
+            u = <span class="string">&#39;\u{103A}&#39;</span>;
+        }
+
+        <span class="comment">// XXX This hack belongs to the USE shaper (for Tai Tham):
+        // Reorder SAKOT to ensure it comes after any tone marks.
+        </span><span class="kw">if </span>u == <span class="string">&#39;\u{1A60}&#39; </span>{
+            <span class="kw">return </span><span class="number">254</span>;
+        }
+
+        <span class="comment">// XXX This hack belongs to the Tibetan shaper:
+        // Reorder PADMA to ensure it comes after any vowel marks.
+        </span><span class="kw">if </span>u == <span class="string">&#39;\u{0FC6}&#39; </span>{
+            <span class="kw">return </span><span class="number">254</span>;
+        }
+
+        <span class="comment">// Reorder TSA -PHRU to reorder before U+0F74
+        </span><span class="kw">if </span>u == <span class="string">&#39;\u{0F39}&#39; </span>{
+            <span class="kw">return </span><span class="number">127</span>;
+        }
+
+        <span class="kw">let </span>k = unicode_ccc::get_canonical_combining_class(u);
+        MODIFIED_COMBINING_CLASS[k <span class="kw">as </span>usize]
+    }
+
+    <span class="kw">fn </span>mirrored(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+        unicode_bidi_mirroring::get_mirrored(<span class="self">self</span>)
+    }
+
+    <span class="kw">fn </span>is_emoji_extended_pictographic(<span class="self">self</span>) -&gt; bool {
+        <span class="comment">// Generated by scripts/gen-unicode-is-emoji-ext-pict.py
+        </span><span class="kw">match </span><span class="self">self </span><span class="kw">as </span>u32 {
+            <span class="number">0x00A9 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x00AE </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x203C </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2049 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2122 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2139 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2194</span>..=<span class="number">0x2199 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x21A9</span>..=<span class="number">0x21AA </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x231A</span>..=<span class="number">0x231B </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2328 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2388 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x23CF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x23E9</span>..=<span class="number">0x23F3 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x23F8</span>..=<span class="number">0x23FA </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x24C2 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x25AA</span>..=<span class="number">0x25AB </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x25B6 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x25C0 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x25FB</span>..=<span class="number">0x25FE </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2600</span>..=<span class="number">0x2605 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2607</span>..=<span class="number">0x2612 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2614</span>..=<span class="number">0x2685 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2690</span>..=<span class="number">0x2705 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2708</span>..=<span class="number">0x2712 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2714 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2716 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x271D </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2721 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2728 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2733</span>..=<span class="number">0x2734 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2744 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2747 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x274C </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x274E </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2753</span>..=<span class="number">0x2755 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2757 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2763</span>..=<span class="number">0x2767 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2795</span>..=<span class="number">0x2797 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x27A1 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x27B0 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x27BF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2934</span>..=<span class="number">0x2935 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2B05</span>..=<span class="number">0x2B07 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2B1B</span>..=<span class="number">0x2B1C </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2B50 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x2B55 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x3030 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x303D </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x3297 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x3299 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F000</span>..=<span class="number">0x1F0FF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F10D</span>..=<span class="number">0x1F10F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F12F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F16C</span>..=<span class="number">0x1F171 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F17E</span>..=<span class="number">0x1F17F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F18E </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F191</span>..=<span class="number">0x1F19A </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F1AD</span>..=<span class="number">0x1F1E5 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F201</span>..=<span class="number">0x1F20F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F21A </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F22F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F232</span>..=<span class="number">0x1F23A </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F23C</span>..=<span class="number">0x1F23F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F249</span>..=<span class="number">0x1F3FA </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F400</span>..=<span class="number">0x1F53D </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F546</span>..=<span class="number">0x1F64F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F680</span>..=<span class="number">0x1F6FF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F774</span>..=<span class="number">0x1F77F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F7D5</span>..=<span class="number">0x1F7FF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F80C</span>..=<span class="number">0x1F80F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F848</span>..=<span class="number">0x1F84F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F85A</span>..=<span class="number">0x1F85F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F888</span>..=<span class="number">0x1F88F </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F8AE</span>..=<span class="number">0x1F8FF </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F90C</span>..=<span class="number">0x1F93A </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F93C</span>..=<span class="number">0x1F945 </span>=&gt; <span class="bool-val">true</span>,
+            <span class="number">0x1F947</span>..=<span class="number">0x1FFFD </span>=&gt; <span class="bool-val">true</span>,
+            <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">modified_combining_class</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="self">self</span>;
-
-        <span class="comment">// XXX This hack belongs to the Myanmar shaper.</span>
-        <span class="kw">if</span> <span class="ident">u</span> <span class="op">==</span> <span class="string">&#39;\u{1037}&#39;</span>{
-            <span class="ident">u</span> <span class="op">=</span> <span class="string">&#39;\u{103A}&#39;</span>;
-        }
-
-        <span class="comment">// XXX This hack belongs to the USE shaper (for Tai Tham):</span>
-        <span class="comment">// Reorder SAKOT to ensure it comes after any tone marks.</span>
-        <span class="kw">if</span> <span class="ident">u</span> <span class="op">==</span> <span class="string">&#39;\u{1A60}&#39;</span> {
-            <span class="kw">return</span> <span class="number">254</span>;
-        }
-
-        <span class="comment">// XXX This hack belongs to the Tibetan shaper:</span>
-        <span class="comment">// Reorder PADMA to ensure it comes after any vowel marks.</span>
-        <span class="kw">if</span> <span class="ident">u</span> <span class="op">==</span> <span class="string">&#39;\u{0FC6}&#39;</span> {
-            <span class="kw">return</span> <span class="number">254</span>;
-        }
-
-        <span class="comment">// Reorder TSA -PHRU to reorder before U+0F74</span>
-        <span class="kw">if</span> <span class="ident">u</span> <span class="op">==</span> <span class="string">&#39;\u{0F39}&#39;</span> {
-            <span class="kw">return</span> <span class="number">127</span>;
-        }
-
-        <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">unicode_ccc::get_canonical_combining_class</span>(<span class="ident">u</span>);
-        <span class="ident">MODIFIED_COMBINING_CLASS</span>[<span class="ident">k</span> <span class="kw">as</span> <span class="ident">usize</span>]
-    }
-
-    <span class="kw">fn</span> <span class="ident">mirrored</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-        <span class="ident">unicode_bidi_mirroring::get_mirrored</span>(<span class="self">self</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">is_emoji_extended_pictographic</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="comment">// Generated by scripts/gen-unicode-is-emoji-ext-pict.py</span>
-        <span class="kw">match</span> <span class="self">self</span> <span class="kw">as</span> <span class="ident">u32</span> {
-            <span class="number">0x00A9</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x00AE</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x203C</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2049</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2122</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2139</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2194</span>..<span class="op">=</span><span class="number">0x2199</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x21A9</span>..<span class="op">=</span><span class="number">0x21AA</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x231A</span>..<span class="op">=</span><span class="number">0x231B</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2328</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2388</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x23CF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x23E9</span>..<span class="op">=</span><span class="number">0x23F3</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x23F8</span>..<span class="op">=</span><span class="number">0x23FA</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x24C2</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x25AA</span>..<span class="op">=</span><span class="number">0x25AB</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x25B6</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x25C0</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x25FB</span>..<span class="op">=</span><span class="number">0x25FE</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2600</span>..<span class="op">=</span><span class="number">0x2605</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2607</span>..<span class="op">=</span><span class="number">0x2612</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2614</span>..<span class="op">=</span><span class="number">0x2685</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2690</span>..<span class="op">=</span><span class="number">0x2705</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2708</span>..<span class="op">=</span><span class="number">0x2712</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2714</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2716</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x271D</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2721</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2728</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2733</span>..<span class="op">=</span><span class="number">0x2734</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2744</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2747</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x274C</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x274E</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2753</span>..<span class="op">=</span><span class="number">0x2755</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2757</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2763</span>..<span class="op">=</span><span class="number">0x2767</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2795</span>..<span class="op">=</span><span class="number">0x2797</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x27A1</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x27B0</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x27BF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2934</span>..<span class="op">=</span><span class="number">0x2935</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2B05</span>..<span class="op">=</span><span class="number">0x2B07</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2B1B</span>..<span class="op">=</span><span class="number">0x2B1C</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2B50</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x2B55</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x3030</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x303D</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x3297</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x3299</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F000</span>..<span class="op">=</span><span class="number">0x1F0FF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F10D</span>..<span class="op">=</span><span class="number">0x1F10F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F12F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F16C</span>..<span class="op">=</span><span class="number">0x1F171</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F17E</span>..<span class="op">=</span><span class="number">0x1F17F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F18E</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F191</span>..<span class="op">=</span><span class="number">0x1F19A</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F1AD</span>..<span class="op">=</span><span class="number">0x1F1E5</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F201</span>..<span class="op">=</span><span class="number">0x1F20F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F21A</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F22F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F232</span>..<span class="op">=</span><span class="number">0x1F23A</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F23C</span>..<span class="op">=</span><span class="number">0x1F23F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F249</span>..<span class="op">=</span><span class="number">0x1F3FA</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F400</span>..<span class="op">=</span><span class="number">0x1F53D</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F546</span>..<span class="op">=</span><span class="number">0x1F64F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F680</span>..<span class="op">=</span><span class="number">0x1F6FF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F774</span>..<span class="op">=</span><span class="number">0x1F77F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F7D5</span>..<span class="op">=</span><span class="number">0x1F7FF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F80C</span>..<span class="op">=</span><span class="number">0x1F80F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F848</span>..<span class="op">=</span><span class="number">0x1F84F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F85A</span>..<span class="op">=</span><span class="number">0x1F85F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F888</span>..<span class="op">=</span><span class="number">0x1F88F</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F8AE</span>..<span class="op">=</span><span class="number">0x1F8FF</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F90C</span>..<span class="op">=</span><span class="number">0x1F93A</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F93C</span>..<span class="op">=</span><span class="number">0x1F945</span> =&gt; <span class="bool-val">true</span>,
-            <span class="number">0x1F947</span>..<span class="op">=</span><span class="number">0x1FFFD</span> =&gt; <span class="bool-val">true</span>,
-            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
-        }
-    }
-
-    <span class="doccomment">/// Default_Ignorable codepoints:</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Note: While U+115F, U+1160, U+3164 and U+FFA0 are Default_Ignorable,</span>
-    <span class="doccomment">/// we do NOT want to hide them, as the way Uniscribe has implemented them</span>
-    <span class="doccomment">/// is with regular spacing glyphs, and that&#39;s the way fonts are made to work.</span>
-    <span class="doccomment">/// As such, we make exceptions for those four.</span>
-    <span class="doccomment">/// Also ignoring U+1BCA0..1BCA3. https://github.com/harfbuzz/harfbuzz/issues/503</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Unicode 7.0:</span>
-    <span class="doccomment">/// $ grep &#39;; Default_Ignorable_Code_Point &#39; DerivedCoreProperties.txt | sed &#39;s/;.*#/#/&#39;</span>
-    <span class="doccomment">/// 00AD          # Cf       SOFT HYPHEN</span>
-    <span class="doccomment">/// 034F          # Mn       COMBINING GRAPHEME JOINER</span>
-    <span class="doccomment">/// 061C          # Cf       ARABIC LETTER MARK</span>
-    <span class="doccomment">/// 115F..1160    # Lo   [2] HANGUL CHOSEONG FILLER..HANGUL JUNGSEONG FILLER</span>
-    <span class="doccomment">/// 17B4..17B5    # Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA</span>
-    <span class="doccomment">/// 180B..180D    # Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE</span>
-    <span class="doccomment">/// 180E          # Cf       MONGOLIAN VOWEL SEPARATOR</span>
-    <span class="doccomment">/// 200B..200F    # Cf   [5] ZERO WIDTH SPACE..RIGHT-TO-LEFT MARK</span>
-    <span class="doccomment">/// 202A..202E    # Cf   [5] LEFT-TO-RIGHT EMBEDDING..RIGHT-TO-LEFT OVERRIDE</span>
-    <span class="doccomment">/// 2060..2064    # Cf   [5] WORD JOINER..INVISIBLE PLUS</span>
-    <span class="doccomment">/// 2065          # Cn       &lt;reserved-2065&gt;</span>
-    <span class="doccomment">/// 2066..206F    # Cf  [10] LEFT-TO-RIGHT ISOLATE..NOMINAL DIGIT SHAPES</span>
-    <span class="doccomment">/// 3164          # Lo       HANGUL FILLER</span>
-    <span class="doccomment">/// FE00..FE0F    # Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16</span>
-    <span class="doccomment">/// FEFF          # Cf       ZERO WIDTH NO-BREAK SPACE</span>
-    <span class="doccomment">/// FFA0          # Lo       HALFWIDTH HANGUL FILLER</span>
-    <span class="doccomment">/// FFF0..FFF8    # Cn   [9] &lt;reserved-FFF0&gt;..&lt;reserved-FFF8&gt;</span>
-    <span class="doccomment">/// 1BCA0..1BCA3  # Cf   [4] SHORTHAND FORMAT LETTER OVERLAP..SHORTHAND FORMAT UP STEP</span>
-    <span class="doccomment">/// 1D173..1D17A  # Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE</span>
-    <span class="doccomment">/// E0000         # Cn       &lt;reserved-E0000&gt;</span>
-    <span class="doccomment">/// E0001         # Cf       LANGUAGE TAG</span>
-    <span class="doccomment">/// E0002..E001F  # Cn  [30] &lt;reserved-E0002&gt;..&lt;reserved-E001F&gt;</span>
-    <span class="doccomment">/// E0020..E007F  # Cf  [96] TAG SPACE..CANCEL TAG</span>
-    <span class="doccomment">/// E0080..E00FF  # Cn [128] &lt;reserved-E0080&gt;..&lt;reserved-E00FF&gt;</span>
-    <span class="doccomment">/// E0100..E01EF  # Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256</span>
-    <span class="doccomment">/// E01F0..E0FFF  # Cn [3600] &lt;reserved-E01F0&gt;..&lt;reserved-E0FFF&gt;</span>
-    <span class="kw">fn</span> <span class="ident">is_default_ignorable</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="self">self</span>);
-        <span class="kw">let</span> <span class="ident">plane</span> <span class="op">=</span> <span class="ident">ch</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span>;
-        <span class="kw">if</span> <span class="ident">plane</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="comment">// BMP</span>
-            <span class="kw">let</span> <span class="ident">page</span> <span class="op">=</span> <span class="ident">ch</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>;
-            <span class="kw">match</span> <span class="ident">page</span> {
-                <span class="number">0x00</span> =&gt; <span class="ident">ch</span> <span class="op">==</span> <span class="number">0x00AD</span>,
-                <span class="number">0x03</span> =&gt; <span class="ident">ch</span> <span class="op">==</span> <span class="number">0x034F</span>,
-                <span class="number">0x06</span> =&gt; <span class="ident">ch</span> <span class="op">==</span> <span class="number">0x061C</span>,
-                <span class="number">0x17</span> =&gt; (<span class="number">0x17B4</span>..<span class="op">=</span><span class="number">0x17B5</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="number">0x18</span> =&gt; (<span class="number">0x180B</span>..<span class="op">=</span><span class="number">0x180E</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="number">0x20</span> =&gt; (<span class="number">0x200B</span>..<span class="op">=</span><span class="number">0x200F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>) <span class="op">|</span><span class="op">|</span>
-                        (<span class="number">0x202A</span>..<span class="op">=</span><span class="number">0x202E</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>) <span class="op">|</span><span class="op">|</span>
-                        (<span class="number">0x2060</span>..<span class="op">=</span><span class="number">0x206F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="number">0xFE</span> =&gt; (<span class="number">0xFE00</span>..<span class="op">=</span><span class="number">0xFE0F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">ch</span> <span class="op">==</span> <span class="number">0xFEFF</span>,
-                <span class="number">0xFF</span> =&gt; (<span class="number">0xFFF0</span>..<span class="op">=</span><span class="number">0xFFF8</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+    <span class="doccomment">/// Default_Ignorable codepoints:
+    ///
+    /// Note: While U+115F, U+1160, U+3164 and U+FFA0 are Default_Ignorable,
+    /// we do NOT want to hide them, as the way Uniscribe has implemented them
+    /// is with regular spacing glyphs, and that&#39;s the way fonts are made to work.
+    /// As such, we make exceptions for those four.
+    /// Also ignoring U+1BCA0..1BCA3. https://github.com/harfbuzz/harfbuzz/issues/503
+    ///
+    /// Unicode 7.0:
+    /// $ grep &#39;; Default_Ignorable_Code_Point &#39; DerivedCoreProperties.txt | sed &#39;s/;.*#/#/&#39;
+    /// 00AD          # Cf       SOFT HYPHEN
+    /// 034F          # Mn       COMBINING GRAPHEME JOINER
+    /// 061C          # Cf       ARABIC LETTER MARK
+    /// 115F..1160    # Lo   [2] HANGUL CHOSEONG FILLER..HANGUL JUNGSEONG FILLER
+    /// 17B4..17B5    # Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA
+    /// 180B..180D    # Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE
+    /// 180E          # Cf       MONGOLIAN VOWEL SEPARATOR
+    /// 200B..200F    # Cf   [5] ZERO WIDTH SPACE..RIGHT-TO-LEFT MARK
+    /// 202A..202E    # Cf   [5] LEFT-TO-RIGHT EMBEDDING..RIGHT-TO-LEFT OVERRIDE
+    /// 2060..2064    # Cf   [5] WORD JOINER..INVISIBLE PLUS
+    /// 2065          # Cn       &lt;reserved-2065&gt;
+    /// 2066..206F    # Cf  [10] LEFT-TO-RIGHT ISOLATE..NOMINAL DIGIT SHAPES
+    /// 3164          # Lo       HANGUL FILLER
+    /// FE00..FE0F    # Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
+    /// FEFF          # Cf       ZERO WIDTH NO-BREAK SPACE
+    /// FFA0          # Lo       HALFWIDTH HANGUL FILLER
+    /// FFF0..FFF8    # Cn   [9] &lt;reserved-FFF0&gt;..&lt;reserved-FFF8&gt;
+    /// 1BCA0..1BCA3  # Cf   [4] SHORTHAND FORMAT LETTER OVERLAP..SHORTHAND FORMAT UP STEP
+    /// 1D173..1D17A  # Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
+    /// E0000         # Cn       &lt;reserved-E0000&gt;
+    /// E0001         # Cf       LANGUAGE TAG
+    /// E0002..E001F  # Cn  [30] &lt;reserved-E0002&gt;..&lt;reserved-E001F&gt;
+    /// E0020..E007F  # Cf  [96] TAG SPACE..CANCEL TAG
+    /// E0080..E00FF  # Cn [128] &lt;reserved-E0080&gt;..&lt;reserved-E00FF&gt;
+    /// E0100..E01EF  # Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
+    /// E01F0..E0FFF  # Cn [3600] &lt;reserved-E01F0&gt;..&lt;reserved-E0FFF&gt;
+    </span><span class="kw">fn </span>is_default_ignorable(<span class="self">self</span>) -&gt; bool {
+        <span class="kw">let </span>ch = u32::from(<span class="self">self</span>);
+        <span class="kw">let </span>plane = ch &gt;&gt; <span class="number">16</span>;
+        <span class="kw">if </span>plane == <span class="number">0 </span>{
+            <span class="comment">// BMP
+            </span><span class="kw">let </span>page = ch &gt;&gt; <span class="number">8</span>;
+            <span class="kw">match </span>page {
+                <span class="number">0x00 </span>=&gt; ch == <span class="number">0x00AD</span>,
+                <span class="number">0x03 </span>=&gt; ch == <span class="number">0x034F</span>,
+                <span class="number">0x06 </span>=&gt; ch == <span class="number">0x061C</span>,
+                <span class="number">0x17 </span>=&gt; (<span class="number">0x17B4</span>..=<span class="number">0x17B5</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="number">0x18 </span>=&gt; (<span class="number">0x180B</span>..=<span class="number">0x180E</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="number">0x20 </span>=&gt; (<span class="number">0x200B</span>..=<span class="number">0x200F</span>).contains(<span class="kw-2">&amp;</span>ch) ||
+                        (<span class="number">0x202A</span>..=<span class="number">0x202E</span>).contains(<span class="kw-2">&amp;</span>ch) ||
+                        (<span class="number">0x2060</span>..=<span class="number">0x206F</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="number">0xFE </span>=&gt; (<span class="number">0xFE00</span>..=<span class="number">0xFE0F</span>).contains(<span class="kw-2">&amp;</span>ch) || ch == <span class="number">0xFEFF</span>,
+                <span class="number">0xFF </span>=&gt; (<span class="number">0xFFF0</span>..=<span class="number">0xFFF8</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// Other planes</span>
-            <span class="kw">match</span> <span class="ident">plane</span> {
-                <span class="number">0x01</span> =&gt; (<span class="number">0x1D173</span>..<span class="op">=</span><span class="number">0x1D17A</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="number">0x0E</span> =&gt; (<span class="number">0xE0000</span>..<span class="op">=</span><span class="number">0xE0FFF</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>),
-                <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+        } <span class="kw">else </span>{
+            <span class="comment">// Other planes
+            </span><span class="kw">match </span>plane {
+                <span class="number">0x01 </span>=&gt; (<span class="number">0x1D173</span>..=<span class="number">0x1D17A</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="number">0x0E </span>=&gt; (<span class="number">0xE0000</span>..=<span class="number">0xE0FFF</span>).contains(<span class="kw-2">&amp;</span>ch),
+                <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">is_variation_selector</span>(<span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="comment">// U+180B..180D MONGOLIAN FREE VARIATION SELECTORs are handled in the</span>
-        <span class="comment">// Arabic shaper. No need to match them here.</span>
-        <span class="kw">let</span> <span class="ident">ch</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="self">self</span>);
-        (<span class="number">0x0FE00</span>..<span class="op">=</span><span class="number">0x0FE0F</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>) <span class="op">|</span><span class="op">|</span> <span class="comment">// VARIATION SELECTOR - 1..16</span>
-        (<span class="number">0xE0100</span>..<span class="op">=</span><span class="number">0xE01EF</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">ch</span>)    <span class="comment">// VARIATION SELECTOR - 17..256</span>
-    }
+    <span class="kw">fn </span>is_variation_selector(<span class="self">self</span>) -&gt; bool {
+        <span class="comment">// U+180B..180D MONGOLIAN FREE VARIATION SELECTORs are handled in the
+        // Arabic shaper. No need to match them here.
+        </span><span class="kw">let </span>ch = u32::from(<span class="self">self</span>);
+        (<span class="number">0x0FE00</span>..=<span class="number">0x0FE0F</span>).contains(<span class="kw-2">&amp;</span>ch) || <span class="comment">// VARIATION SELECTOR - 1..16
+        </span>(<span class="number">0xE0100</span>..=<span class="number">0xE01EF</span>).contains(<span class="kw-2">&amp;</span>ch)    <span class="comment">// VARIATION SELECTOR - 17..256
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">vertical</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="kw">match</span> <span class="ident">u32::from</span>(<span class="self">self</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span> {
-            <span class="number">0x20</span> =&gt; <span class="kw">match</span> <span class="self">self</span> {
-                <span class="string">&#39;\u{2013}&#39;</span> =&gt; <span class="string">&#39;\u{fe32}&#39;</span>, <span class="comment">// EN DASH</span>
-                <span class="string">&#39;\u{2014}&#39;</span> =&gt; <span class="string">&#39;\u{fe31}&#39;</span>, <span class="comment">// EM DASH</span>
-                <span class="string">&#39;\u{2025}&#39;</span> =&gt; <span class="string">&#39;\u{fe30}&#39;</span>, <span class="comment">// TWO DOT LEADER</span>
-                <span class="string">&#39;\u{2026}&#39;</span> =&gt; <span class="string">&#39;\u{fe19}&#39;</span>, <span class="comment">// HORIZONTAL ELLIPSIS</span>
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+    <span class="kw">fn </span>vertical(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+        <span class="prelude-val">Some</span>(<span class="kw">match </span>u32::from(<span class="self">self</span>) &gt;&gt; <span class="number">8 </span>{
+            <span class="number">0x20 </span>=&gt; <span class="kw">match </span><span class="self">self </span>{
+                <span class="string">&#39;\u{2013}&#39; </span>=&gt; <span class="string">&#39;\u{fe32}&#39;</span>, <span class="comment">// EN DASH
+                </span><span class="string">&#39;\u{2014}&#39; </span>=&gt; <span class="string">&#39;\u{fe31}&#39;</span>, <span class="comment">// EM DASH
+                </span><span class="string">&#39;\u{2025}&#39; </span>=&gt; <span class="string">&#39;\u{fe30}&#39;</span>, <span class="comment">// TWO DOT LEADER
+                </span><span class="string">&#39;\u{2026}&#39; </span>=&gt; <span class="string">&#39;\u{fe19}&#39;</span>, <span class="comment">// HORIZONTAL ELLIPSIS
+                </span><span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
             },
-            <span class="number">0x30</span> =&gt; <span class="kw">match</span> <span class="self">self</span> {
-                <span class="string">&#39;\u{3001}&#39;</span> =&gt; <span class="string">&#39;\u{fe11}&#39;</span>, <span class="comment">// IDEOGRAPHIC COMMA</span>
-                <span class="string">&#39;\u{3002}&#39;</span> =&gt; <span class="string">&#39;\u{fe12}&#39;</span>, <span class="comment">// IDEOGRAPHIC FULL STOP</span>
-                <span class="string">&#39;\u{3008}&#39;</span> =&gt; <span class="string">&#39;\u{fe3f}&#39;</span>, <span class="comment">// LEFT ANGLE BRACKET</span>
-                <span class="string">&#39;\u{3009}&#39;</span> =&gt; <span class="string">&#39;\u{fe40}&#39;</span>, <span class="comment">// RIGHT ANGLE BRACKET</span>
-                <span class="string">&#39;\u{300a}&#39;</span> =&gt; <span class="string">&#39;\u{fe3d}&#39;</span>, <span class="comment">// LEFT DOUBLE ANGLE BRACKET</span>
-                <span class="string">&#39;\u{300b}&#39;</span> =&gt; <span class="string">&#39;\u{fe3e}&#39;</span>, <span class="comment">// RIGHT DOUBLE ANGLE BRACKET</span>
-                <span class="string">&#39;\u{300c}&#39;</span> =&gt; <span class="string">&#39;\u{fe41}&#39;</span>, <span class="comment">// LEFT CORNER BRACKET</span>
-                <span class="string">&#39;\u{300d}&#39;</span> =&gt; <span class="string">&#39;\u{fe42}&#39;</span>, <span class="comment">// RIGHT CORNER BRACKET</span>
-                <span class="string">&#39;\u{300e}&#39;</span> =&gt; <span class="string">&#39;\u{fe43}&#39;</span>, <span class="comment">// LEFT WHITE CORNER BRACKET</span>
-                <span class="string">&#39;\u{300f}&#39;</span> =&gt; <span class="string">&#39;\u{fe44}&#39;</span>, <span class="comment">// RIGHT WHITE CORNER BRACKET</span>
-                <span class="string">&#39;\u{3010}&#39;</span> =&gt; <span class="string">&#39;\u{fe3b}&#39;</span>, <span class="comment">// LEFT BLACK LENTICULAR BRACKET</span>
-                <span class="string">&#39;\u{3011}&#39;</span> =&gt; <span class="string">&#39;\u{fe3c}&#39;</span>, <span class="comment">// RIGHT BLACK LENTICULAR BRACKET</span>
-                <span class="string">&#39;\u{3014}&#39;</span> =&gt; <span class="string">&#39;\u{fe39}&#39;</span>, <span class="comment">// LEFT TORTOISE SHELL BRACKET</span>
-                <span class="string">&#39;\u{3015}&#39;</span> =&gt; <span class="string">&#39;\u{fe3a}&#39;</span>, <span class="comment">// RIGHT TORTOISE SHELL BRACKET</span>
-                <span class="string">&#39;\u{3016}&#39;</span> =&gt; <span class="string">&#39;\u{fe17}&#39;</span>, <span class="comment">// LEFT WHITE LENTICULAR BRACKET</span>
-                <span class="string">&#39;\u{3017}&#39;</span> =&gt; <span class="string">&#39;\u{fe18}&#39;</span>, <span class="comment">// RIGHT WHITE LENTICULAR BRACKET</span>
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="number">0x30 </span>=&gt; <span class="kw">match </span><span class="self">self </span>{
+                <span class="string">&#39;\u{3001}&#39; </span>=&gt; <span class="string">&#39;\u{fe11}&#39;</span>, <span class="comment">// IDEOGRAPHIC COMMA
+                </span><span class="string">&#39;\u{3002}&#39; </span>=&gt; <span class="string">&#39;\u{fe12}&#39;</span>, <span class="comment">// IDEOGRAPHIC FULL STOP
+                </span><span class="string">&#39;\u{3008}&#39; </span>=&gt; <span class="string">&#39;\u{fe3f}&#39;</span>, <span class="comment">// LEFT ANGLE BRACKET
+                </span><span class="string">&#39;\u{3009}&#39; </span>=&gt; <span class="string">&#39;\u{fe40}&#39;</span>, <span class="comment">// RIGHT ANGLE BRACKET
+                </span><span class="string">&#39;\u{300a}&#39; </span>=&gt; <span class="string">&#39;\u{fe3d}&#39;</span>, <span class="comment">// LEFT DOUBLE ANGLE BRACKET
+                </span><span class="string">&#39;\u{300b}&#39; </span>=&gt; <span class="string">&#39;\u{fe3e}&#39;</span>, <span class="comment">// RIGHT DOUBLE ANGLE BRACKET
+                </span><span class="string">&#39;\u{300c}&#39; </span>=&gt; <span class="string">&#39;\u{fe41}&#39;</span>, <span class="comment">// LEFT CORNER BRACKET
+                </span><span class="string">&#39;\u{300d}&#39; </span>=&gt; <span class="string">&#39;\u{fe42}&#39;</span>, <span class="comment">// RIGHT CORNER BRACKET
+                </span><span class="string">&#39;\u{300e}&#39; </span>=&gt; <span class="string">&#39;\u{fe43}&#39;</span>, <span class="comment">// LEFT WHITE CORNER BRACKET
+                </span><span class="string">&#39;\u{300f}&#39; </span>=&gt; <span class="string">&#39;\u{fe44}&#39;</span>, <span class="comment">// RIGHT WHITE CORNER BRACKET
+                </span><span class="string">&#39;\u{3010}&#39; </span>=&gt; <span class="string">&#39;\u{fe3b}&#39;</span>, <span class="comment">// LEFT BLACK LENTICULAR BRACKET
+                </span><span class="string">&#39;\u{3011}&#39; </span>=&gt; <span class="string">&#39;\u{fe3c}&#39;</span>, <span class="comment">// RIGHT BLACK LENTICULAR BRACKET
+                </span><span class="string">&#39;\u{3014}&#39; </span>=&gt; <span class="string">&#39;\u{fe39}&#39;</span>, <span class="comment">// LEFT TORTOISE SHELL BRACKET
+                </span><span class="string">&#39;\u{3015}&#39; </span>=&gt; <span class="string">&#39;\u{fe3a}&#39;</span>, <span class="comment">// RIGHT TORTOISE SHELL BRACKET
+                </span><span class="string">&#39;\u{3016}&#39; </span>=&gt; <span class="string">&#39;\u{fe17}&#39;</span>, <span class="comment">// LEFT WHITE LENTICULAR BRACKET
+                </span><span class="string">&#39;\u{3017}&#39; </span>=&gt; <span class="string">&#39;\u{fe18}&#39;</span>, <span class="comment">// RIGHT WHITE LENTICULAR BRACKET
+                </span><span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
             },
-            <span class="number">0xfe</span> =&gt; <span class="kw">match</span> <span class="self">self</span> {
-                <span class="string">&#39;\u{fe4f}&#39;</span> =&gt; <span class="string">&#39;\u{fe34}&#39;</span>, <span class="comment">// WAVY LOW LINE</span>
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="number">0xfe </span>=&gt; <span class="kw">match </span><span class="self">self </span>{
+                <span class="string">&#39;\u{fe4f}&#39; </span>=&gt; <span class="string">&#39;\u{fe34}&#39;</span>, <span class="comment">// WAVY LOW LINE
+                </span><span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
             },
-            <span class="number">0xff</span> =&gt; <span class="kw">match</span> <span class="self">self</span> {
-                <span class="string">&#39;\u{ff01}&#39;</span> =&gt; <span class="string">&#39;\u{fe15}&#39;</span>, <span class="comment">// FULLWIDTH EXCLAMATION MARK</span>
-                <span class="string">&#39;\u{ff08}&#39;</span> =&gt; <span class="string">&#39;\u{fe35}&#39;</span>, <span class="comment">// FULLWIDTH LEFT PARENTHESIS</span>
-                <span class="string">&#39;\u{ff09}&#39;</span> =&gt; <span class="string">&#39;\u{fe36}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT PARENTHESIS</span>
-                <span class="string">&#39;\u{ff0c}&#39;</span> =&gt; <span class="string">&#39;\u{fe10}&#39;</span>, <span class="comment">// FULLWIDTH COMMA</span>
-                <span class="string">&#39;\u{ff1a}&#39;</span> =&gt; <span class="string">&#39;\u{fe13}&#39;</span>, <span class="comment">// FULLWIDTH COLON</span>
-                <span class="string">&#39;\u{ff1b}&#39;</span> =&gt; <span class="string">&#39;\u{fe14}&#39;</span>, <span class="comment">// FULLWIDTH SEMICOLON</span>
-                <span class="string">&#39;\u{ff1f}&#39;</span> =&gt; <span class="string">&#39;\u{fe16}&#39;</span>, <span class="comment">// FULLWIDTH QUESTION MARK</span>
-                <span class="string">&#39;\u{ff3b}&#39;</span> =&gt; <span class="string">&#39;\u{fe47}&#39;</span>, <span class="comment">// FULLWIDTH LEFT SQUARE BRACKET</span>
-                <span class="string">&#39;\u{ff3d}&#39;</span> =&gt; <span class="string">&#39;\u{fe48}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT SQUARE BRACKET</span>
-                <span class="string">&#39;\u{ff3f}&#39;</span> =&gt; <span class="string">&#39;\u{fe33}&#39;</span>, <span class="comment">// FULLWIDTH LOW LINE</span>
-                <span class="string">&#39;\u{ff5b}&#39;</span> =&gt; <span class="string">&#39;\u{fe37}&#39;</span>, <span class="comment">// FULLWIDTH LEFT CURLY BRACKET</span>
-                <span class="string">&#39;\u{ff5d}&#39;</span> =&gt; <span class="string">&#39;\u{fe38}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT CURLY BRACKET</span>
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="number">0xff </span>=&gt; <span class="kw">match </span><span class="self">self </span>{
+                <span class="string">&#39;\u{ff01}&#39; </span>=&gt; <span class="string">&#39;\u{fe15}&#39;</span>, <span class="comment">// FULLWIDTH EXCLAMATION MARK
+                </span><span class="string">&#39;\u{ff08}&#39; </span>=&gt; <span class="string">&#39;\u{fe35}&#39;</span>, <span class="comment">// FULLWIDTH LEFT PARENTHESIS
+                </span><span class="string">&#39;\u{ff09}&#39; </span>=&gt; <span class="string">&#39;\u{fe36}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT PARENTHESIS
+                </span><span class="string">&#39;\u{ff0c}&#39; </span>=&gt; <span class="string">&#39;\u{fe10}&#39;</span>, <span class="comment">// FULLWIDTH COMMA
+                </span><span class="string">&#39;\u{ff1a}&#39; </span>=&gt; <span class="string">&#39;\u{fe13}&#39;</span>, <span class="comment">// FULLWIDTH COLON
+                </span><span class="string">&#39;\u{ff1b}&#39; </span>=&gt; <span class="string">&#39;\u{fe14}&#39;</span>, <span class="comment">// FULLWIDTH SEMICOLON
+                </span><span class="string">&#39;\u{ff1f}&#39; </span>=&gt; <span class="string">&#39;\u{fe16}&#39;</span>, <span class="comment">// FULLWIDTH QUESTION MARK
+                </span><span class="string">&#39;\u{ff3b}&#39; </span>=&gt; <span class="string">&#39;\u{fe47}&#39;</span>, <span class="comment">// FULLWIDTH LEFT SQUARE BRACKET
+                </span><span class="string">&#39;\u{ff3d}&#39; </span>=&gt; <span class="string">&#39;\u{fe48}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT SQUARE BRACKET
+                </span><span class="string">&#39;\u{ff3f}&#39; </span>=&gt; <span class="string">&#39;\u{fe33}&#39;</span>, <span class="comment">// FULLWIDTH LOW LINE
+                </span><span class="string">&#39;\u{ff5b}&#39; </span>=&gt; <span class="string">&#39;\u{fe37}&#39;</span>, <span class="comment">// FULLWIDTH LEFT CURLY BRACKET
+                </span><span class="string">&#39;\u{ff5d}&#39; </span>=&gt; <span class="string">&#39;\u{fe38}&#39;</span>, <span class="comment">// FULLWIDTH RIGHT CURLY BRACKET
+                </span><span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
             }
-            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
         })
     }
 }
 
-<span class="kw">const</span> <span class="ident">S_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0xAC00</span>;
-<span class="kw">const</span> <span class="ident">L_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1100</span>;
-<span class="kw">const</span> <span class="ident">V_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x1161</span>;
-<span class="kw">const</span> <span class="ident">T_BASE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x11A7</span>;
-<span class="kw">const</span> <span class="ident">L_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">19</span>;
-<span class="kw">const</span> <span class="ident">V_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">21</span>;
-<span class="kw">const</span> <span class="ident">T_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">28</span>;
-<span class="kw">const</span> <span class="ident">N_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">V_COUNT</span> <span class="op">*</span> <span class="ident">T_COUNT</span>;
-<span class="kw">const</span> <span class="ident">S_COUNT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">L_COUNT</span> <span class="op">*</span> <span class="ident">N_COUNT</span>;
+<span class="kw">const </span>S_BASE: u32 = <span class="number">0xAC00</span>;
+<span class="kw">const </span>L_BASE: u32 = <span class="number">0x1100</span>;
+<span class="kw">const </span>V_BASE: u32 = <span class="number">0x1161</span>;
+<span class="kw">const </span>T_BASE: u32 = <span class="number">0x11A7</span>;
+<span class="kw">const </span>L_COUNT: u32 = <span class="number">19</span>;
+<span class="kw">const </span>V_COUNT: u32 = <span class="number">21</span>;
+<span class="kw">const </span>T_COUNT: u32 = <span class="number">28</span>;
+<span class="kw">const </span>N_COUNT: u32 = V_COUNT * T_COUNT;
+<span class="kw">const </span>S_COUNT: u32 = L_COUNT * N_COUNT;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compose</span>(<span class="ident">a</span>: <span class="ident">char</span>, <span class="ident">b</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ab</span>) <span class="op">=</span> <span class="ident">compose_hangul</span>(<span class="ident">a</span>, <span class="ident">b</span>) {
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">ab</span>);
+<span class="kw">pub fn </span>compose(a: char, b: char) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(ab) = compose_hangul(a, b) {
+        <span class="kw">return </span><span class="prelude-val">Some</span>(ab);
     }
 
-    <span class="kw">let</span> <span class="ident">needle</span> <span class="op">=</span> (<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">32</span> <span class="op">|</span> (<span class="ident">b</span> <span class="kw">as</span> <span class="ident">u64</span>);
-    <span class="ident"><span class="kw">crate</span>::unicode_norm::COMPOSITION_TABLE</span>
-        .<span class="ident">binary_search_by</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">needle</span>))
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idx</span><span class="op">|</span> <span class="ident"><span class="kw">crate</span>::unicode_norm::COMPOSITION_TABLE</span>[<span class="ident">idx</span>].<span class="number">1</span>)
-        .<span class="ident">ok</span>()
+    <span class="kw">let </span>needle = (a <span class="kw">as </span>u64) &lt;&lt; <span class="number">32 </span>| (b <span class="kw">as </span>u64);
+    <span class="kw">crate</span>::unicode_norm::COMPOSITION_TABLE
+        .binary_search_by(|item| item.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>needle))
+        .map(|idx| <span class="kw">crate</span>::unicode_norm::COMPOSITION_TABLE[idx].<span class="number">1</span>)
+        .ok()
 }
 
-<span class="kw">fn</span> <span class="ident">compose_hangul</span>(<span class="ident">a</span>: <span class="ident">char</span>, <span class="ident">b</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">a</span>);
-    <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">b</span>);
-    <span class="kw">if</span> <span class="ident">L_BASE</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">l</span> <span class="op">&amp;&amp;</span> <span class="ident">l</span> <span class="op">&lt;</span> (<span class="ident">L_BASE</span> <span class="op">+</span> <span class="ident">L_COUNT</span>) <span class="op">&amp;&amp;</span> <span class="ident">V_BASE</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">v</span> <span class="op">&amp;&amp;</span> <span class="ident">v</span> <span class="op">&lt;</span> (<span class="ident">V_BASE</span> <span class="op">+</span> <span class="ident">V_COUNT</span>) {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">S_BASE</span> <span class="op">+</span> (<span class="ident">l</span> <span class="op">-</span> <span class="ident">L_BASE</span>) <span class="op">*</span> <span class="ident">N_COUNT</span> <span class="op">+</span> (<span class="ident">v</span> <span class="op">-</span> <span class="ident">V_BASE</span>) <span class="op">*</span> <span class="ident">T_COUNT</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">char::try_from</span>(<span class="ident">r</span>).<span class="ident">unwrap</span>())
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">S_BASE</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">l</span> <span class="op">&amp;&amp;</span> <span class="ident">l</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="ident">S_BASE</span> <span class="op">+</span> <span class="ident">S_COUNT</span> <span class="op">-</span> <span class="ident">T_COUNT</span>)
-        <span class="op">&amp;&amp;</span> <span class="ident">T_BASE</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">v</span> <span class="op">&amp;&amp;</span> <span class="ident">v</span> <span class="op">&lt;</span> (<span class="ident">T_BASE</span> <span class="op">+</span> <span class="ident">T_COUNT</span>)
-        <span class="op">&amp;&amp;</span> (<span class="ident">l</span> <span class="op">-</span> <span class="ident">S_BASE</span>) <span class="op">%</span> <span class="ident">T_COUNT</span> <span class="op">==</span> <span class="number">0</span>
-    {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">l</span> <span class="op">+</span> (<span class="ident">v</span> <span class="op">-</span> <span class="ident">T_BASE</span>);
-        <span class="prelude-val">Some</span>(<span class="ident">char::try_from</span>(<span class="ident">r</span>).<span class="ident">unwrap</span>())
-    } <span class="kw">else</span> {
-        <span class="prelude-val">None</span>
-    }
+<span class="kw">fn </span>compose_hangul(a: char, b: char) -&gt; <span class="prelude-ty">Option</span>&lt;char&gt; {
+    <span class="kw">let </span>l = u32::from(a);
+    <span class="kw">let </span>v = u32::from(b);
+    <span class="kw">if </span>L_BASE &lt;= l &amp;&amp; l &lt; (L_BASE + L_COUNT) &amp;&amp; V_BASE &lt;= v &amp;&amp; v &lt; (V_BASE + V_COUNT) {
+        <span class="kw">let </span>r = S_BASE + (l - L_BASE) * N_COUNT + (v - V_BASE) * T_COUNT;
+        <span class="prelude-val">Some</span>(char::try_from(r).unwrap())
+    } <span class="kw">else if </span>S_BASE &lt;= l &amp;&amp; l &lt;= (S_BASE + S_COUNT - T_COUNT)
+        &amp;&amp; T_BASE &lt;= v &amp;&amp; v &lt; (T_BASE + T_COUNT)
+        &amp;&amp; (l - S_BASE) % T_COUNT == <span class="number">0
+    </span>{
+        <span class="kw">let </span>r = l + (v - T_BASE);
+        <span class="prelude-val">Some</span>(char::try_from(r).unwrap())
+    } <span class="kw">else </span>{
+        <span class="prelude-val">None
+    </span>}
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompose</span>(<span class="ident">ab</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">char</span>, <span class="ident">char</span>)<span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ab</span>) <span class="op">=</span> <span class="ident">decompose_hangul</span>(<span class="ident">ab</span>) {
-        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">ab</span>);
+<span class="kw">pub fn </span>decompose(ab: char) -&gt; <span class="prelude-ty">Option</span>&lt;(char, char)&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(ab) = decompose_hangul(ab) {
+        <span class="kw">return </span><span class="prelude-val">Some</span>(ab);
     }
 
-    <span class="ident"><span class="kw">crate</span>::unicode_norm::DECOMPOSITION_TABLE</span>
-        .<span class="ident">binary_search_by</span>(<span class="op">|</span><span class="ident">item</span><span class="op">|</span> <span class="ident">item</span>.<span class="number">0</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">ab</span>))
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idx</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">chars</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::unicode_norm::DECOMPOSITION_TABLE</span>[<span class="ident">idx</span>];
-            (<span class="ident">chars</span>.<span class="number">1</span>, <span class="ident">chars</span>.<span class="number">2</span>.<span class="ident">unwrap_or</span>(<span class="string">&#39;\0&#39;</span>))
+    <span class="kw">crate</span>::unicode_norm::DECOMPOSITION_TABLE
+        .binary_search_by(|item| item.<span class="number">0</span>.cmp(<span class="kw-2">&amp;</span>ab))
+        .map(|idx| {
+            <span class="kw">let </span>chars = <span class="kw-2">&amp;</span><span class="kw">crate</span>::unicode_norm::DECOMPOSITION_TABLE[idx];
+            (chars.<span class="number">1</span>, chars.<span class="number">2</span>.unwrap_or(<span class="string">&#39;\0&#39;</span>))
         })
-        .<span class="ident">ok</span>()
+        .ok()
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompose_hangul</span>(<span class="ident">ab</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">char</span>, <span class="ident">char</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">si</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">ab</span>).<span class="ident">wrapping_sub</span>(<span class="ident">S_BASE</span>);
-    <span class="kw">if</span> <span class="ident">si</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">S_COUNT</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">pub fn </span>decompose_hangul(ab: char) -&gt; <span class="prelude-ty">Option</span>&lt;(char, char)&gt; {
+    <span class="kw">let </span>si = u32::from(ab).wrapping_sub(S_BASE);
+    <span class="kw">if </span>si &gt;= S_COUNT {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
 
-    <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">si</span> <span class="op">%</span> <span class="ident">T_COUNT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-        <span class="comment">// LV,T</span>
-        (<span class="ident">S_BASE</span> <span class="op">+</span> (<span class="ident">si</span> <span class="op">/</span> <span class="ident">T_COUNT</span>) <span class="op">*</span> <span class="ident">T_COUNT</span>, <span class="ident">T_BASE</span> <span class="op">+</span> (<span class="ident">si</span> <span class="op">%</span> <span class="ident">T_COUNT</span>))
-    } <span class="kw">else</span> {
-        <span class="comment">// L,V</span>
-        (<span class="ident">L_BASE</span> <span class="op">+</span> (<span class="ident">si</span> <span class="op">/</span> <span class="ident">N_COUNT</span>), <span class="ident">V_BASE</span> <span class="op">+</span> (<span class="ident">si</span> <span class="op">%</span> <span class="ident">N_COUNT</span>) <span class="op">/</span> <span class="ident">T_COUNT</span>)
+    <span class="kw">let </span>(a, b) = <span class="kw">if </span>si % T_COUNT != <span class="number">0 </span>{
+        <span class="comment">// LV,T
+        </span>(S_BASE + (si / T_COUNT) * T_COUNT, T_BASE + (si % T_COUNT))
+    } <span class="kw">else </span>{
+        <span class="comment">// L,V
+        </span>(L_BASE + (si / N_COUNT), V_BASE + (si % N_COUNT) / T_COUNT)
     };
 
-    <span class="prelude-val">Some</span>((<span class="ident">char::try_from</span>(<span class="ident">a</span>).<span class="ident">unwrap</span>(), <span class="ident">char::try_from</span>(<span class="ident">b</span>).<span class="ident">unwrap</span>()))
+    <span class="prelude-val">Some</span>((char::try_from(a).unwrap(), char::try_from(b).unwrap()))
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">check_unicode_version</span>() {
-        <span class="macro">assert_eq!</span>(<span class="ident">unicode_bidi_mirroring::UNICODE_VERSION</span>,     (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">unicode_ccc::UNICODE_VERSION</span>,                (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">unicode_general_category::UNICODE_VERSION</span>,   (<span class="number">15</span>, <span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident">unicode_script::UNICODE_VERSION</span>,             (<span class="number">15</span>, <span class="number">0</span>, <span class="number">0</span>));
-        <span class="macro">assert_eq!</span>(<span class="ident"><span class="kw">crate</span>::unicode_norm::UNICODE_VERSION</span>,        (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">mod </span>tests {
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>check_unicode_version() {
+        <span class="macro">assert_eq!</span>(unicode_bidi_mirroring::UNICODE_VERSION,     (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert_eq!</span>(unicode_ccc::UNICODE_VERSION,                (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert_eq!</span>(unicode_general_category::UNICODE_VERSION,   (<span class="number">15</span>, <span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert_eq!</span>(unicode_script::UNICODE_VERSION,             (<span class="number">15</span>, <span class="number">0</span>, <span class="number">0</span>));
+        <span class="macro">assert_eq!</span>(<span class="kw">crate</span>::unicode_norm::UNICODE_VERSION,        (<span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>));
     }
 }
 
-<span class="comment">// TODO: remove</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">hb_gc</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_CONTROL</span>: <span class="ident">u32</span>                  <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_FORMAT</span>: <span class="ident">u32</span>                   <span class="op">=</span> <span class="number">1</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED</span>: <span class="ident">u32</span>               <span class="op">=</span> <span class="number">2</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE</span>: <span class="ident">u32</span>              <span class="op">=</span> <span class="number">3</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_SURROGATE</span>: <span class="ident">u32</span>                <span class="op">=</span> <span class="number">4</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">5</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER</span>: <span class="ident">u32</span>          <span class="op">=</span> <span class="number">6</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER</span>: <span class="ident">u32</span>             <span class="op">=</span> <span class="number">7</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">8</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">9</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK</span>: <span class="ident">u32</span>             <span class="op">=</span> <span class="number">10</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK</span>: <span class="ident">u32</span>           <span class="op">=</span> <span class="number">11</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">12</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER</span>: <span class="ident">u32</span>           <span class="op">=</span> <span class="number">13</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER</span>: <span class="ident">u32</span>            <span class="op">=</span> <span class="number">14</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER</span>: <span class="ident">u32</span>             <span class="op">=</span> <span class="number">15</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION</span>: <span class="ident">u32</span>      <span class="op">=</span> <span class="number">16</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">17</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION</span>: <span class="ident">u32</span>        <span class="op">=</span> <span class="number">18</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION</span>: <span class="ident">u32</span>        <span class="op">=</span> <span class="number">19</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION</span>: <span class="ident">u32</span>      <span class="op">=</span> <span class="number">20</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION</span>: <span class="ident">u32</span>        <span class="op">=</span> <span class="number">21</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION</span>: <span class="ident">u32</span>         <span class="op">=</span> <span class="number">22</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL</span>: <span class="ident">u32</span>          <span class="op">=</span> <span class="number">23</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL</span>: <span class="ident">u32</span>          <span class="op">=</span> <span class="number">24</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL</span>: <span class="ident">u32</span>              <span class="op">=</span> <span class="number">25</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL</span>: <span class="ident">u32</span>             <span class="op">=</span> <span class="number">26</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR</span>: <span class="ident">u32</span>           <span class="op">=</span> <span class="number">27</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR</span>: <span class="ident">u32</span>      <span class="op">=</span> <span class="number">28</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR</span>: <span class="ident">u32</span>          <span class="op">=</span> <span class="number">29</span>;
+<span class="comment">// TODO: remove
+</span><span class="kw">pub mod </span>hb_gc {
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_CONTROL: u32                  = <span class="number">0</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_FORMAT: u32                   = <span class="number">1</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_UNASSIGNED: u32               = <span class="number">2</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE: u32              = <span class="number">3</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_SURROGATE: u32                = <span class="number">4</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER: u32         = <span class="number">5</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER: u32          = <span class="number">6</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER: u32             = <span class="number">7</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER: u32         = <span class="number">8</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER: u32         = <span class="number">9</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_SPACING_MARK: u32             = <span class="number">10</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK: u32           = <span class="number">11</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK: u32         = <span class="number">12</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER: u32           = <span class="number">13</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER: u32            = <span class="number">14</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER: u32             = <span class="number">15</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION: u32      = <span class="number">16</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION: u32         = <span class="number">17</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION: u32        = <span class="number">18</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION: u32        = <span class="number">19</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION: u32      = <span class="number">20</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION: u32        = <span class="number">21</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION: u32         = <span class="number">22</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL: u32          = <span class="number">23</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL: u32          = <span class="number">24</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL: u32              = <span class="number">25</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL: u32             = <span class="number">26</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR: u32           = <span class="number">27</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR: u32      = <span class="number">28</span>;
+    <span class="kw">pub const </span>RB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR: u32          = <span class="number">29</span>;
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

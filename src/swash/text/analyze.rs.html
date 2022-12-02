@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/analyze.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analyze.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -336,290 +336,290 @@
 <span id="336">336</span>
 <span id="337">337</span>
 <span id="338">338</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">cluster::Boundary</span>, <span class="ident">Codepoint</span>, <span class="ident">LineBreak</span>, <span class="ident">Properties</span>, <span class="ident">WordBreak</span>};
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
+</pre><pre class="rust"><code><span class="kw">use super</span>::{cluster::Boundary, Codepoint, LineBreak, Properties, WordBreak};
+<span class="kw">use </span>core::borrow::Borrow;
 
-<span class="doccomment">/// Returns an iterator yielding unicode properties and boundary analysis for</span>
-<span class="doccomment">/// each character in the specified sequence.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">analyze</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">chars</span>: <span class="ident">I</span>) -&gt; <span class="ident">Analyze</span><span class="op">&lt;</span><span class="ident">I::IntoIter</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
-    <span class="ident">I::IntoIter</span>: <span class="ident">Clone</span>,
-    <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Returns an iterator yielding unicode properties and boundary analysis for
+/// each character in the specified sequence.
+</span><span class="kw">pub fn </span>analyze&lt;I&gt;(chars: I) -&gt; Analyze&lt;I::IntoIter&gt;
+<span class="kw">where
+    </span>I: IntoIterator,
+    I::IntoIter: Clone,
+    I::Item: Borrow&lt;char&gt;,
 {
-    <span class="ident">Analyze</span> {
-        <span class="ident">chars</span>: <span class="ident">chars</span>.<span class="ident">into_iter</span>(),
-        <span class="ident">state</span>: <span class="ident">BoundaryState::new</span>(),
+    Analyze {
+        chars: chars.into_iter(),
+        state: BoundaryState::new(),
     }
 }
 
-<span class="doccomment">/// Iterator that yields Unicode properties and boundary analysis.</span>
-<span class="doccomment">/// This iterator is created by the [`analyze`] function.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Analyze</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">chars</span>: <span class="ident">I</span>,
-    <span class="ident">state</span>: <span class="ident">BoundaryState</span>,
+<span class="doccomment">/// Iterator that yields Unicode properties and boundary analysis.
+/// This iterator is created by the [`analyze`] function.
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>Analyze&lt;I&gt; {
+    chars: I,
+    state: BoundaryState,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Analyze</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;I&gt; Iterator <span class="kw">for </span>Analyze&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator + Clone,
+    I::Item: Borrow&lt;char&gt;,
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Properties</span>, <span class="ident">Boundary</span>);
+    <span class="kw">type </span>Item = (Properties, Boundary);
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">chars</span>)
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="self">self</span>.state.next(<span class="kw-2">&amp;mut </span><span class="self">self</span>.chars)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Analyze</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns true if the analysis indicates that bidi resolution is</span>
-    <span class="doccomment">/// required.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">needs_bidi_resolution</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">needs_bidi</span>
+<span class="kw">impl</span>&lt;I&gt; Analyze&lt;I&gt; {
+    <span class="doccomment">/// Returns true if the analysis indicates that bidi resolution is
+    /// required.
+    </span><span class="kw">pub fn </span>needs_bidi_resolution(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.state.needs_bidi
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">BoundaryState</span> {
-    <span class="ident">prev</span>: <span class="ident">WordBreak</span>,
-    <span class="ident">prevent_next</span>: <span class="ident">bool</span>,
-    <span class="ident">ri_count</span>: <span class="ident">u8</span>,
-    <span class="ident">emoji</span>: <span class="ident">bool</span>,
-    <span class="ident">next_emoji</span>: <span class="ident">bool</span>,
-    <span class="ident">line_state</span>: (<span class="ident">u8</span>, <span class="ident">bool</span>),
-    <span class="ident">first</span>: <span class="ident">bool</span>,
-    <span class="ident">needs_bidi</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">struct </span>BoundaryState {
+    prev: WordBreak,
+    prevent_next: bool,
+    ri_count: u8,
+    emoji: bool,
+    next_emoji: bool,
+    line_state: (u8, bool),
+    first: bool,
+    needs_bidi: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">BoundaryState</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">prev</span>: <span class="ident">WordBreak::EX</span>,
-            <span class="ident">prevent_next</span>: <span class="bool-val">false</span>,
-            <span class="ident">ri_count</span>: <span class="number">0</span>,
-            <span class="ident">emoji</span>: <span class="bool-val">false</span>,
-            <span class="ident">next_emoji</span>: <span class="bool-val">false</span>,
-            <span class="ident">line_state</span>: (<span class="ident">sot</span>, <span class="bool-val">false</span>),
-            <span class="ident">first</span>: <span class="bool-val">true</span>,
-            <span class="ident">needs_bidi</span>: <span class="bool-val">false</span>,
+<span class="kw">impl </span>BoundaryState {
+    <span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            prev: WordBreak::EX,
+            prevent_next: <span class="bool-val">false</span>,
+            ri_count: <span class="number">0</span>,
+            emoji: <span class="bool-val">false</span>,
+            next_emoji: <span class="bool-val">false</span>,
+            line_state: (sot, <span class="bool-val">false</span>),
+            first: <span class="bool-val">true</span>,
+            needs_bidi: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">reset_state</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">emoji</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>reset_state(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.ri_count = <span class="number">0</span>;
+        <span class="self">self</span>.emoji = <span class="bool-val">false</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">check_word</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">props</span>: <span class="ident">Properties</span>, <span class="ident">iter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">I</span>) -&gt; <span class="ident">bool</span>
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-        <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>,
+    <span class="kw">fn </span>check_word&lt;I&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, props: Properties, iter: <span class="kw-2">&amp;mut </span>I) -&gt; bool
+    <span class="kw">where
+        </span>I: Iterator + Clone,
+        I::Item: Borrow&lt;char&gt;,
     {
-        <span class="kw">use</span> <span class="ident">WordBreak</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">props</span>.<span class="ident">word_break</span>();
-        <span class="kw">let</span> <span class="ident">emoji</span> <span class="op">=</span> <span class="ident">props</span>.<span class="ident">is_extended_pictographic</span>();
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">first</span> {
-            <span class="self">self</span>.<span class="ident">first</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">b</span>;
-            <span class="self">self</span>.<span class="ident">next_emoji</span> <span class="op">=</span> <span class="ident">emoji</span>;
-            <span class="kw">if</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">RI</span> {
-                <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">use </span>WordBreak::<span class="kw-2">*</span>;
+        <span class="kw">let </span>b = props.word_break();
+        <span class="kw">let </span>emoji = props.is_extended_pictographic();
+        <span class="kw">if </span><span class="self">self</span>.first {
+            <span class="self">self</span>.first = <span class="bool-val">false</span>;
+            <span class="self">self</span>.prev = b;
+            <span class="self">self</span>.next_emoji = emoji;
+            <span class="kw">if </span>b == RI {
+                <span class="self">self</span>.ri_count = <span class="number">1</span>;
             }
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="kw">let</span> <span class="ident">prev_emoji</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">emoji</span>;
-        <span class="self">self</span>.<span class="ident">emoji</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">emoji</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">next_emoji</span>;
-        <span class="self">self</span>.<span class="ident">next_emoji</span> <span class="op">=</span> <span class="ident">emoji</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prev</span>;
-        <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">b</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">prevent_next</span> {
-            <span class="self">self</span>.<span class="ident">prevent_next</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">let </span>prev_emoji = <span class="self">self</span>.emoji;
+        <span class="self">self</span>.emoji = <span class="self">self</span>.emoji || <span class="self">self</span>.next_emoji;
+        <span class="self">self</span>.next_emoji = emoji;
+        <span class="kw">let </span>a = <span class="self">self</span>.prev;
+        <span class="self">self</span>.prev = b;
+        <span class="kw">if </span><span class="self">self</span>.prevent_next {
+            <span class="self">self</span>.prevent_next = <span class="bool-val">false</span>;
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">CR</span> <span class="op">&amp;&amp;</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">LF</span> {
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a == CR &amp;&amp; b == LF {
+            <span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">let</span> <span class="ident">a_mask</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">mask</span>();
-        <span class="kw">let</span> <span class="ident">b_mask</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">mask</span>();
-        <span class="kw">const</span> <span class="ident">AH_LETTER</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">LE</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">HL</span>.<span class="ident">mask</span>();
-        <span class="kw">const</span> <span class="ident">MID_NUM_LET_Q</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">MB</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">SQ</span>.<span class="ident">mask</span>();
-        <span class="kw">const</span> <span class="ident">WB3_A</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">NL</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">CR</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">LF</span>.<span class="ident">mask</span>();
-        <span class="kw">if</span> <span class="ident">a_mask</span> <span class="op">&amp;</span> <span class="ident">WB3_A</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> <span class="ident">WB3_A</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// (Newline | CR | LF) ÷</span>
-            <span class="comment">// ÷ (Newline | CR | LF)</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+        <span class="kw">let </span>a_mask = a.mask();
+        <span class="kw">let </span>b_mask = b.mask();
+        <span class="kw">const </span>AH_LETTER: u32 = LE.mask() | HL.mask();
+        <span class="kw">const </span>MID_NUM_LET_Q: u32 = MB.mask() | SQ.mask();
+        <span class="kw">const </span>WB3_A: u32 = NL.mask() | CR.mask() | LF.mask();
+        <span class="kw">if </span>a_mask &amp; WB3_A != <span class="number">0 </span>|| b_mask &amp; WB3_A != <span class="number">0 </span>{
+            <span class="comment">// (Newline | CR | LF) ÷
+            // ÷ (Newline | CR | LF)
+            </span><span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">ZWJ</span> <span class="op">&amp;&amp;</span> <span class="ident">emoji</span> {
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a == ZWJ &amp;&amp; emoji {
+            <span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">const</span> <span class="ident">WB_4</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">Extend</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">FO</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">ZWJ</span>.<span class="ident">mask</span>();
-        <span class="kw">if</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> <span class="ident">WB_4</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// Ignore format and extend characters</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="self">self</span>.<span class="ident">prev</span> <span class="op">=</span> <span class="ident">a</span>;
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">const </span>WB_4: u32 = Extend.mask() | FO.mask() | ZWJ.mask();
+        <span class="kw">if </span>b_mask &amp; WB_4 != <span class="number">0 </span>{
+            <span class="comment">// Ignore format and extend characters
+            </span><span class="self">self</span>.reset_state();
+            <span class="self">self</span>.prev = a;
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">WSegSpace</span> <span class="op">&amp;&amp;</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">WSegSpace</span> {
-            <span class="comment">// WSegSpace × WSegSpace</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a == WSegSpace &amp;&amp; b == WSegSpace {
+            <span class="comment">// WSegSpace × WSegSpace
+            </span><span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">if</span> <span class="ident">a_mask</span> <span class="op">&amp;</span> <span class="ident">AH_LETTER</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// AHLetter × AHLetter</span>
-            <span class="comment">// AHLetter × Numeric</span>
-            <span class="kw">if</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> (<span class="ident">AH_LETTER</span> <span class="op">|</span> <span class="ident">NU</span>.<span class="ident">mask</span>()) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">reset_state</span>();
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a_mask &amp; AH_LETTER != <span class="number">0 </span>{
+            <span class="comment">// AHLetter × AHLetter
+            // AHLetter × Numeric
+            </span><span class="kw">if </span>b_mask &amp; (AH_LETTER | NU.mask()) != <span class="number">0 </span>{
+                <span class="self">self</span>.reset_state();
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="kw">if</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> (<span class="ident">ML</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">MID_NUM_LET_Q</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="comment">// AHLetter	× (MidLetter | MidNumLetQ) AHLetter</span>
-                <span class="comment">// AHLetter (MidLetter | MidNumLetQ) × AHLetter</span>
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">iter</span>
-                    .<span class="ident">clone</span>()
-                    .<span class="ident">next</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">borrow</span>().<span class="ident">properties</span>().<span class="ident">word_break</span>())
+            <span class="kw">if </span>b_mask &amp; (ML.mask() | MID_NUM_LET_Q) != <span class="number">0 </span>{
+                <span class="comment">// AHLetter	× (MidLetter | MidNumLetQ) AHLetter
+                // AHLetter (MidLetter | MidNumLetQ) × AHLetter
+                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(c) = iter
+                    .clone()
+                    .next()
+                    .map(|p| p.borrow().properties().word_break())
                 {
-                    <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">mask</span>() <span class="op">&amp;</span> <span class="ident">AH_LETTER</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                        <span class="self">self</span>.<span class="ident">prevent_next</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                        <span class="self">self</span>.<span class="ident">reset_state</span>();
-                        <span class="kw">return</span> <span class="bool-val">false</span>;
+                    <span class="kw">if </span>c.mask() &amp; AH_LETTER != <span class="number">0 </span>{
+                        <span class="self">self</span>.prevent_next = <span class="bool-val">true</span>;
+                        <span class="self">self</span>.reset_state();
+                        <span class="kw">return </span><span class="bool-val">false</span>;
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">HL</span> {
-            <span class="kw">if</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">SQ</span> {
-                <span class="self">self</span>.<span class="ident">reset_state</span>();
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a == HL {
+            <span class="kw">if </span>b == SQ {
+                <span class="self">self</span>.reset_state();
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="kw">if</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">DQ</span> {
-                <span class="comment">// Hebrew_Letter × Double_Quote Hebrew_Letter</span>
-                <span class="comment">// Hebrew_Letter Double_Quote × Hebrew_Letter</span>
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">iter</span>
-                    .<span class="ident">clone</span>()
-                    .<span class="ident">next</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">borrow</span>().<span class="ident">properties</span>().<span class="ident">word_break</span>())
+            <span class="kw">if </span>b == DQ {
+                <span class="comment">// Hebrew_Letter × Double_Quote Hebrew_Letter
+                // Hebrew_Letter Double_Quote × Hebrew_Letter
+                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(c) = iter
+                    .clone()
+                    .next()
+                    .map(|p| p.borrow().properties().word_break())
                 {
-                    <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="ident">HL</span> {
-                        <span class="self">self</span>.<span class="ident">prevent_next</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                        <span class="self">self</span>.<span class="ident">reset_state</span>();
-                        <span class="kw">return</span> <span class="bool-val">false</span>;
+                    <span class="kw">if </span>c == HL {
+                        <span class="self">self</span>.prevent_next = <span class="bool-val">true</span>;
+                        <span class="self">self</span>.reset_state();
+                        <span class="kw">return </span><span class="bool-val">false</span>;
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">a_mask</span> <span class="op">&amp;</span> <span class="ident">NU</span>.<span class="ident">mask</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// Numeric × Numeric</span>
-            <span class="comment">// Numeric × AHLetter</span>
-            <span class="kw">if</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> (<span class="ident">NU</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">AH_LETTER</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">reset_state</span>();
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a_mask &amp; NU.mask() != <span class="number">0 </span>{
+            <span class="comment">// Numeric × Numeric
+            // Numeric × AHLetter
+            </span><span class="kw">if </span>b_mask &amp; (NU.mask() | AH_LETTER) != <span class="number">0 </span>{
+                <span class="self">self</span>.reset_state();
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="kw">if</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> (<span class="ident">MN</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">MID_NUM_LET_Q</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">iter</span>
-                    .<span class="ident">clone</span>()
-                    .<span class="ident">next</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">borrow</span>().<span class="ident">properties</span>().<span class="ident">word_break</span>())
+            <span class="kw">if </span>b_mask &amp; (MN.mask() | MID_NUM_LET_Q) != <span class="number">0 </span>{
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = iter
+                    .clone()
+                    .next()
+                    .map(|p| p.borrow().properties().word_break())
                 {
-                    <span class="comment">// Numeric (MidNum | MidNumLetQ) × Numeric</span>
-                    <span class="comment">// Numeric × (MidNum | MidNumLetQ) Numeric</span>
-                    <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="ident">NU</span> {
-                        <span class="self">self</span>.<span class="ident">prevent_next</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                        <span class="self">self</span>.<span class="ident">reset_state</span>();
-                        <span class="kw">return</span> <span class="bool-val">false</span>;
+                    <span class="comment">// Numeric (MidNum | MidNumLetQ) × Numeric
+                    // Numeric × (MidNum | MidNumLetQ) Numeric
+                    </span><span class="kw">if </span>c == NU {
+                        <span class="self">self</span>.prevent_next = <span class="bool-val">true</span>;
+                        <span class="self">self</span>.reset_state();
+                        <span class="kw">return </span><span class="bool-val">false</span>;
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">KA</span> <span class="op">&amp;&amp;</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">KA</span> {
-            <span class="comment">// Katakana × Katakana</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>a == KA &amp;&amp; b == KA {
+            <span class="comment">// Katakana × Katakana
+            </span><span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">const</span> <span class="ident">WB13_A</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">AH_LETTER</span> <span class="op">|</span> <span class="ident">NU</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">KA</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">EX</span>.<span class="ident">mask</span>();
-        <span class="kw">if</span> <span class="ident">a_mask</span> <span class="op">&amp;</span> <span class="ident">WB13_A</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">EX</span> {
-            <span class="comment">// (AHLetter | Numeric | Katakana | ExtendNumLet) ×	ExtendNumLet</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">const </span>WB13_A: u32 = AH_LETTER | NU.mask() | KA.mask() | EX.mask();
+        <span class="kw">if </span>a_mask &amp; WB13_A != <span class="number">0 </span>&amp;&amp; b == EX {
+            <span class="comment">// (AHLetter | Numeric | Katakana | ExtendNumLet) ×	ExtendNumLet
+            </span><span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">const</span> <span class="ident">WB13_B</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">AH_LETTER</span> <span class="op">|</span> <span class="ident">NU</span>.<span class="ident">mask</span>() <span class="op">|</span> <span class="ident">KA</span>.<span class="ident">mask</span>();
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">EX</span> <span class="op">&amp;&amp;</span> <span class="ident">b_mask</span> <span class="op">&amp;</span> <span class="ident">WB13_B</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// ExtendNumLet × (AHLetter | Numeric | Katakana)</span>
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">const </span>WB13_B: u32 = AH_LETTER | NU.mask() | KA.mask();
+        <span class="kw">if </span>a == EX &amp;&amp; b_mask &amp; WB13_B != <span class="number">0 </span>{
+            <span class="comment">// ExtendNumLet × (AHLetter | Numeric | Katakana)
+            </span><span class="self">self</span>.reset_state();
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">if</span> <span class="ident">prev_emoji</span> <span class="op">&amp;&amp;</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">ZWJ</span> <span class="op">&amp;&amp;</span> <span class="ident">emoji</span> {
-            <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="kw">if </span>prev_emoji &amp;&amp; a == ZWJ &amp;&amp; emoji {
+            <span class="self">self</span>.ri_count = <span class="number">0</span>;
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">==</span> <span class="number">2</span> {
-            <span class="self">self</span>.<span class="ident">reset_state</span>();
-            <span class="kw">if</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">RI</span> {
-                <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">if </span><span class="self">self</span>.ri_count == <span class="number">2 </span>{
+            <span class="self">self</span>.reset_state();
+            <span class="kw">if </span>b == RI {
+                <span class="self">self</span>.ri_count = <span class="number">1</span>;
             }
-            <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">return </span><span class="bool-val">true</span>;
         }
-        <span class="kw">if</span> <span class="ident">b</span> <span class="op">==</span> <span class="ident">RI</span> {
-            <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">if</span> <span class="ident">a</span> <span class="op">!</span><span class="op">=</span> <span class="ident">RI</span> {
-                <span class="self">self</span>.<span class="ident">reset_state</span>();
-                <span class="self">self</span>.<span class="ident">ri_count</span> <span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">return</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span>b == RI {
+            <span class="self">self</span>.ri_count += <span class="number">1</span>;
+            <span class="kw">if </span>a != RI {
+                <span class="self">self</span>.reset_state();
+                <span class="self">self</span>.ri_count = <span class="number">1</span>;
+                <span class="kw">return </span><span class="bool-val">true</span>;
             }
-            <span class="self">self</span>.<span class="ident">emoji</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="self">self</span>.emoji = <span class="bool-val">false</span>;
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="self">self</span>.<span class="ident">reset_state</span>();
-        <span class="bool-val">true</span>
-    }
+        <span class="self">self</span>.reset_state();
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">check_line</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">props</span>: <span class="ident">Properties</span>) -&gt; <span class="ident">Boundary</span> {
-        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">line_state</span>;
-        <span class="kw">let</span> <span class="ident">lb</span> <span class="op">=</span> <span class="ident">props</span>.<span class="ident">line_break</span>();
-        <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">PAIR_TABLE</span>[<span class="ident">state</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">usize</span>][<span class="ident">lb</span> <span class="kw">as</span> <span class="ident">usize</span>];
-        <span class="kw">let</span> <span class="ident">mode</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">val</span> <span class="op">&amp;</span> <span class="ident">MANDATORY_BREAK_BIT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">Boundary::Mandatory</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">val</span> <span class="op">&amp;</span> <span class="ident">ALLOWED_BREAK_BIT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">state</span>.<span class="number">1</span> {
-            <span class="ident">Boundary::Line</span>
-        } <span class="kw">else</span> {
-            <span class="ident">Boundary::None</span>
+    <span class="kw">fn </span>check_line(<span class="kw-2">&amp;mut </span><span class="self">self</span>, props: Properties) -&gt; Boundary {
+        <span class="kw">let </span>state = <span class="self">self</span>.line_state;
+        <span class="kw">let </span>lb = props.line_break();
+        <span class="kw">let </span>val = PAIR_TABLE[state.<span class="number">0 </span><span class="kw">as </span>usize][lb <span class="kw">as </span>usize];
+        <span class="kw">let </span>mode = <span class="kw">if </span>val &amp; MANDATORY_BREAK_BIT != <span class="number">0 </span>{
+            Boundary::Mandatory
+        } <span class="kw">else if </span>val &amp; ALLOWED_BREAK_BIT != <span class="number">0 </span>&amp;&amp; !state.<span class="number">1 </span>{
+            Boundary::Line
+        } <span class="kw">else </span>{
+            Boundary::None
         };
-        <span class="self">self</span>.<span class="ident">line_state</span> <span class="op">=</span> (
-            <span class="ident">val</span> <span class="op">&amp;</span> <span class="op">!</span>(<span class="ident">ALLOWED_BREAK_BIT</span> <span class="op">|</span> <span class="ident">MANDATORY_BREAK_BIT</span>),
-            <span class="ident">lb</span> <span class="op">==</span> <span class="ident">LineBreak::ZWJ</span>,
+        <span class="self">self</span>.line_state = (
+            val &amp; !(ALLOWED_BREAK_BIT | MANDATORY_BREAK_BIT),
+            lb == LineBreak::ZWJ,
         );
-        <span class="ident">mode</span>
+        mode
     }
 
-    <span class="kw">fn</span> <span class="ident">next</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">iter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">I</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Properties</span>, <span class="ident">Boundary</span>)<span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-        <span class="ident">I::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>,
+    <span class="kw">fn </span>next&lt;I&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, iter: <span class="kw-2">&amp;mut </span>I) -&gt; <span class="prelude-ty">Option</span>&lt;(Properties, Boundary)&gt;
+    <span class="kw">where
+        </span>I: Iterator + Clone,
+        I::Item: Borrow&lt;char&gt;,
     {
-        <span class="kw">let</span> <span class="ident">props</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">borrow</span>().<span class="ident">properties</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">boundary</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">check_line</span>(<span class="ident">props</span>);
-        <span class="kw">let</span> <span class="ident">word</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">check_word</span>(<span class="ident">props</span>, <span class="ident">iter</span>);
-        <span class="kw">if</span> <span class="ident">boundary</span> <span class="kw">as</span> <span class="ident">u16</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">word</span> {
-            <span class="ident">boundary</span> <span class="op">=</span> <span class="ident">Boundary::Word</span>;
+        <span class="kw">let </span>props = iter.next()<span class="question-mark">?</span>.borrow().properties();
+        <span class="kw">let </span><span class="kw-2">mut </span>boundary = <span class="self">self</span>.check_line(props);
+        <span class="kw">let </span>word = <span class="self">self</span>.check_word(props, iter);
+        <span class="kw">if </span>boundary <span class="kw">as </span>u16 == <span class="number">0 </span>&amp;&amp; word {
+            boundary = Boundary::Word;
         }
-        <span class="self">self</span>.<span class="ident">needs_bidi</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">needs_bidi</span> <span class="op">|</span><span class="op">|</span> <span class="ident">props</span>.<span class="ident">bidi_class</span>().<span class="ident">needs_resolution</span>();
-        <span class="prelude-val">Some</span>((<span class="ident">props</span>, <span class="ident">boundary</span>))
+        <span class="self">self</span>.needs_bidi = <span class="self">self</span>.needs_bidi || props.bidi_class().needs_resolution();
+        <span class="prelude-val">Some</span>((props, boundary))
     }
 }
 
-<span class="kw">const</span> <span class="ident">ALLOWED_BREAK_BIT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x80</span>;
-<span class="kw">const</span> <span class="ident">MANDATORY_BREAK_BIT</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x40</span>;
+<span class="kw">const </span>ALLOWED_BREAK_BIT: u8 = <span class="number">0x80</span>;
+<span class="kw">const </span>MANDATORY_BREAK_BIT: u8 = <span class="number">0x40</span>;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
-<span class="kw">const</span> <span class="ident">sot</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">44</span>;
+<span class="attribute">#[allow(non_upper_case_globals)]
+</span><span class="kw">const </span>sot: u8 = <span class="number">44</span>;
 
-<span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
-<span class="kw">const</span> <span class="ident">PAIR_TABLE</span>: [[<span class="ident">u8</span>; <span class="number">44</span>]; <span class="number">53</span>] <span class="op">=</span> [
+<span class="attribute">#[rustfmt::skip]
+</span><span class="kw">const </span>PAIR_TABLE: [[u8; <span class="number">44</span>]; <span class="number">53</span>] = [
     [<span class="number">1</span>,<span class="number">1</span>,<span class="number">130</span>,<span class="number">3</span>,<span class="number">132</span>,<span class="number">5</span>,<span class="number">134</span>,<span class="number">28</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">140</span>,<span class="number">141</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">144</span>,<span class="number">145</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">148</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">26</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">29</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">162</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">37</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">1</span>,<span class="number">41</span>,<span class="number">1</span>,<span class="number">235</span>,],
     [<span class="number">1</span>,<span class="number">1</span>,<span class="number">130</span>,<span class="number">3</span>,<span class="number">132</span>,<span class="number">5</span>,<span class="number">134</span>,<span class="number">28</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">140</span>,<span class="number">141</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">144</span>,<span class="number">145</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">148</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">26</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">29</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">162</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">37</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">1</span>,<span class="number">41</span>,<span class="number">1</span>,<span class="number">235</span>,],
     [<span class="number">129</span>,<span class="number">129</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">132</span>,<span class="number">5</span>,<span class="number">134</span>,<span class="number">28</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">140</span>,<span class="number">141</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">144</span>,<span class="number">145</span>,<span class="number">146</span>,<span class="number">19</span>,<span class="number">148</span>,<span class="number">149</span>,<span class="number">22</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">26</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">157</span>,<span class="number">158</span>,<span class="number">159</span>,<span class="number">160</span>,<span class="number">33</span>,<span class="number">162</span>,<span class="number">129</span>,<span class="number">129</span>,<span class="number">50</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">129</span>,<span class="number">41</span>,<span class="number">2</span>,<span class="number">235</span>,],
@@ -675,4 +675,4 @@
     [<span class="number">129</span>,<span class="number">129</span>,<span class="number">130</span>,<span class="number">3</span>,<span class="number">132</span>,<span class="number">5</span>,<span class="number">134</span>,<span class="number">28</span>,<span class="number">8</span>,<span class="number">52</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">140</span>,<span class="number">141</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">144</span>,<span class="number">145</span>,<span class="number">146</span>,<span class="number">19</span>,<span class="number">148</span>,<span class="number">149</span>,<span class="number">22</span>,<span class="number">151</span>,<span class="number">152</span>,<span class="number">153</span>,<span class="number">26</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">157</span>,<span class="number">158</span>,<span class="number">159</span>,<span class="number">160</span>,<span class="number">33</span>,<span class="number">162</span>,<span class="number">129</span>,<span class="number">129</span>,<span class="number">37</span>,<span class="number">38</span>,<span class="number">39</span>,<span class="number">129</span>,<span class="number">41</span>,<span class="number">52</span>,<span class="number">235</span>,],
 ];
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

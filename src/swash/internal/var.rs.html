@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/internal/var.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>var.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/internal/var.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>var.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -463,470 +463,470 @@
 <span id="463">463</span>
 <span id="464">464</span>
 <span id="465">465</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Font and metric variation tables.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Font and metric variation tables.
 
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">fixed::Fixed</span>, <span class="ident">raw_tag</span>, <span class="ident">Array</span>, <span class="ident">Bytes</span>, <span class="ident">RawFont</span>, <span class="ident">RawTag</span>, <span class="ident">U24</span>};
+</span><span class="kw">use super</span>::{fixed::Fixed, raw_tag, Array, Bytes, RawFont, RawTag, U24};
 
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FVAR</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;fvar&quot;</span>);
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AVAR</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;avar&quot;</span>);
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HVAR</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;HVAR&quot;</span>);
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VVAR</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;VVAR&quot;</span>);
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MVAR</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;MVAR&quot;</span>);
+<span class="kw">pub const </span>FVAR: RawTag = raw_tag(<span class="string">b&quot;fvar&quot;</span>);
+<span class="kw">pub const </span>AVAR: RawTag = raw_tag(<span class="string">b&quot;avar&quot;</span>);
+<span class="kw">pub const </span>HVAR: RawTag = raw_tag(<span class="string">b&quot;HVAR&quot;</span>);
+<span class="kw">pub const </span>VVAR: RawTag = raw_tag(<span class="string">b&quot;VVAR&quot;</span>);
+<span class="kw">pub const </span>MVAR: RawTag = raw_tag(<span class="string">b&quot;MVAR&quot;</span>);
 
-<span class="doccomment">/// Font variations table.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Fvar</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">axis_offset</span>: <span class="ident">u16</span>,
-    <span class="ident">axis_count</span>: <span class="ident">u16</span>,
-    <span class="ident">axis_size</span>: <span class="ident">u16</span>,
-    <span class="ident">inst_count</span>: <span class="ident">u16</span>,
-    <span class="ident">inst_size</span>: <span class="ident">u16</span>,
+<span class="doccomment">/// Font variations table.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Fvar&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    axis_offset: u16,
+    axis_count: u16,
+    axis_size: u16,
+    inst_count: u16,
+    inst_size: u16,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Fvar</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-        <span class="kw">let</span> <span class="ident">axis_offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">4</span>);
-        <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">8</span>);
-        <span class="kw">let</span> <span class="ident">axis_size</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">10</span>);
-        <span class="kw">let</span> <span class="ident">inst_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">12</span>);
-        <span class="kw">let</span> <span class="ident">inst_size</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_or_default</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">14</span>);
-        <span class="self">Self</span> {
-            <span class="ident">data</span>: <span class="ident">b</span>,
-            <span class="ident">axis_offset</span>,
-            <span class="ident">axis_count</span>,
-            <span class="ident">axis_size</span>,
-            <span class="ident">inst_count</span>,
-            <span class="ident">inst_size</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Fvar&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>b = Bytes::new(data);
+        <span class="kw">let </span>axis_offset = b.read_or_default::&lt;u16&gt;(<span class="number">4</span>);
+        <span class="kw">let </span>axis_count = b.read_or_default::&lt;u16&gt;(<span class="number">8</span>);
+        <span class="kw">let </span>axis_size = b.read_or_default::&lt;u16&gt;(<span class="number">10</span>);
+        <span class="kw">let </span>inst_count = b.read_or_default::&lt;u16&gt;(<span class="number">12</span>);
+        <span class="kw">let </span>inst_size = b.read_or_default::&lt;u16&gt;(<span class="number">14</span>);
+        <span class="self">Self </span>{
+            data: b,
+            axis_offset,
+            axis_count,
+            axis_size,
+            inst_count,
+            inst_size,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw">impl</span> <span class="ident">RawFont</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">font</span>.<span class="ident">table_data</span>(<span class="ident">FVAR</span>)<span class="question-mark">?</span>))
+    <span class="kw">pub fn </span>from_font(font: <span class="kw">impl </span>RawFont&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Some</span>(<span class="self">Self</span>::new(font.table_data(FVAR)<span class="question-mark">?</span>))
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">axis_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">axis_count</span>
+    <span class="kw">pub fn </span>axis_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.axis_count
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_axis</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">u16</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VarAxis</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_count</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">pub fn </span>get_axis(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u16) -&gt; <span class="prelude-ty">Option</span>&lt;VarAxis&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.axis_count {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_offset</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">axis_size</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">tag</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>);
-        <span class="kw">let</span> <span class="ident">default</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">8</span>)<span class="question-mark">?</span>);
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">12</span>)<span class="question-mark">?</span>);
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">16</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">name_id</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">18</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(<span class="ident">VarAxis</span> {
-            <span class="ident">index</span>,
-            <span class="ident">tag</span>,
-            <span class="ident">name_id</span>,
-            <span class="ident">flags</span>,
-            <span class="ident">min</span>,
-            <span class="ident">default</span>,
-            <span class="ident">max</span>,
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>base = <span class="self">self</span>.axis_offset <span class="kw">as </span>usize;
+        <span class="kw">let </span>offset = base + index <span class="kw">as </span>usize * <span class="self">self</span>.axis_size <span class="kw">as </span>usize;
+        <span class="kw">let </span>tag = b.read::&lt;u32&gt;(offset)<span class="question-mark">?</span>;
+        <span class="kw">let </span>min = Fixed(b.read::&lt;i32&gt;(offset + <span class="number">4</span>)<span class="question-mark">?</span>);
+        <span class="kw">let </span>default = Fixed(b.read::&lt;i32&gt;(offset + <span class="number">8</span>)<span class="question-mark">?</span>);
+        <span class="kw">let </span>max = Fixed(b.read::&lt;i32&gt;(offset + <span class="number">12</span>)<span class="question-mark">?</span>);
+        <span class="kw">let </span>flags = b.read::&lt;u16&gt;(offset + <span class="number">16</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span>name_id = b.read::&lt;u16&gt;(offset + <span class="number">18</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Some</span>(VarAxis {
+            index,
+            tag,
+            name_id,
+            flags,
+            min,
+            default,
+            max,
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_axis_by_tag</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tag</span>: <span class="ident">RawTag</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VarAxis</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_offset</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">axis_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_size</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">axis_count</span> <span class="kw">as</span> <span class="ident">usize</span> {
-            <span class="kw">let</span> <span class="ident">tag_offset</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">*</span> <span class="ident">axis_size</span>;
-            <span class="kw">if</span> <span class="ident">b</span>.<span class="ident">read_u32</span>(<span class="ident">tag_offset</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">tag</span>) {
-                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">get_axis</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">u16</span>);
+    <span class="kw">pub fn </span>get_axis_by_tag(<span class="kw-2">&amp;</span><span class="self">self</span>, tag: RawTag) -&gt; <span class="prelude-ty">Option</span>&lt;VarAxis&gt; {
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>base = <span class="self">self</span>.axis_offset <span class="kw">as </span>usize;
+        <span class="kw">let </span>axis_size = <span class="self">self</span>.axis_size <span class="kw">as </span>usize;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.axis_count <span class="kw">as </span>usize {
+            <span class="kw">let </span>tag_offset = base + i * axis_size;
+            <span class="kw">if </span>b.read_u32(tag_offset) == <span class="prelude-val">Some</span>(tag) {
+                <span class="kw">return </span><span class="self">self</span>.get_axis(i <span class="kw">as </span>u16);
             }
         }
-        <span class="prelude-val">None</span>
+        <span class="prelude-val">None
+    </span>}
+
+    <span class="kw">pub fn </span>instance_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.inst_count
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instance_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u16</span> {
-        <span class="self">self</span>.<span class="ident">inst_count</span>
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_instance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">u16</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VarInstance</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inst_count</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">pub fn </span>get_instance(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u16) -&gt; <span class="prelude-ty">Option</span>&lt;VarInstance&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">if </span>index &gt;= <span class="self">self</span>.inst_count {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_offset</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> (<span class="self">self</span>.<span class="ident">axis_count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">axis_size</span> <span class="kw">as</span> <span class="ident">usize</span>);
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">inst_size</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">name_id</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">values</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read_array</span>::<span class="op">&lt;</span><span class="ident">Fixed</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>, <span class="self">self</span>.<span class="ident">axis_count</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">ps_name_offset</span> <span class="op">=</span> <span class="number">4</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">axis_count</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>;
-        <span class="kw">let</span> <span class="ident">postscript_name_id</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ps_name_offset</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">inst_size</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">2</span> {
-            <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">ps_name_offset</span>)
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        };
-        <span class="prelude-val">Some</span>(<span class="ident">VarInstance</span> {
-            <span class="ident">index</span>,
-            <span class="ident">name_id</span>,
-            <span class="ident">postscript_name_id</span>,
-            <span class="ident">values</span>,
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>base = <span class="self">self</span>.axis_offset <span class="kw">as </span>usize + (<span class="self">self</span>.axis_count <span class="kw">as </span>usize * <span class="self">self</span>.axis_size <span class="kw">as </span>usize);
+        <span class="kw">let </span>offset = base + index <span class="kw">as </span>usize * <span class="self">self</span>.inst_size <span class="kw">as </span>usize;
+        <span class="kw">let </span>name_id = b.read::&lt;u16&gt;(offset)<span class="question-mark">?</span>;
+        <span class="kw">let </span>values = b.read_array::&lt;Fixed&gt;(offset + <span class="number">4</span>, <span class="self">self</span>.axis_count <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+        <span class="kw">let </span>ps_name_offset = <span class="number">4 </span>+ <span class="self">self</span>.axis_count <span class="kw">as </span>usize * <span class="number">4</span>;
+        <span class="kw">let </span>postscript_name_id = <span class="kw">if </span>ps_name_offset == <span class="self">self</span>.inst_size <span class="kw">as </span>usize - <span class="number">2 </span>{
+            b.read::&lt;u16&gt;(ps_name_offset)
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>};
+        <span class="prelude-val">Some</span>(VarInstance {
+            index,
+            name_id,
+            postscript_name_id,
+            values,
         })
     }
 }
 
-<span class="doccomment">/// Axis of variation in a variable font.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VarAxis</span> {
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">tag</span>: <span class="ident">RawTag</span>,
-    <span class="kw">pub</span> <span class="ident">name_id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">flags</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">min</span>: <span class="ident">Fixed</span>,
-    <span class="kw">pub</span> <span class="ident">default</span>: <span class="ident">Fixed</span>,
-    <span class="kw">pub</span> <span class="ident">max</span>: <span class="ident">Fixed</span>,
+<span class="doccomment">/// Axis of variation in a variable font.
+</span><span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">pub struct </span>VarAxis {
+    <span class="kw">pub </span>index: u16,
+    <span class="kw">pub </span>tag: RawTag,
+    <span class="kw">pub </span>name_id: u16,
+    <span class="kw">pub </span>flags: u16,
+    <span class="kw">pub </span>min: Fixed,
+    <span class="kw">pub </span>default: Fixed,
+    <span class="kw">pub </span>max: Fixed,
 }
 
-<span class="kw">impl</span> <span class="ident">VarAxis</span> {
-    <span class="doccomment">/// Returns true if the axis should be hidden in a user interface.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_hidden</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="number">1</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
+<span class="kw">impl </span>VarAxis {
+    <span class="doccomment">/// Returns true if the axis should be hidden in a user interface.
+    </span><span class="kw">pub fn </span>is_hidden(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.flags &amp; <span class="number">1 </span>!= <span class="number">0
+    </span>}
 
-    <span class="doccomment">/// Returns a normalized axis coordinate for the specified value in 2.14</span>
-    <span class="doccomment">/// fixed point format.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">normalized_coord</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">value</span>: <span class="ident">Fixed</span>, <span class="ident">avar</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">u32</span>)<span class="op">&gt;</span>) -&gt; <span class="ident">i16</span> {
-        <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-        <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span> {
-            <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">min</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">max</span> {
-            <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span>;
+    <span class="doccomment">/// Returns a normalized axis coordinate for the specified value in 2.14
+    /// fixed point format.
+    </span><span class="kw">pub fn </span>normalized_coord(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut </span>value: Fixed, avar: <span class="prelude-ty">Option</span>&lt;(<span class="kw-2">&amp;</span>[u8], u32)&gt;) -&gt; i16 {
+        <span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+        <span class="kw">if </span>value &lt; <span class="self">self</span>.min {
+            value = <span class="self">self</span>.min;
+        } <span class="kw">else if </span>value &gt; <span class="self">self</span>.max {
+            value = <span class="self">self</span>.max;
         }
-        <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">value</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">default</span>) {
-            <span class="ident">Less</span> =&gt; <span class="op">-</span>((<span class="self">self</span>.<span class="ident">default</span> <span class="op">-</span> <span class="ident">value</span>) <span class="op">/</span> (<span class="self">self</span>.<span class="ident">default</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>)),
-            <span class="ident">Greater</span> =&gt; (<span class="ident">value</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">default</span>) <span class="op">/</span> (<span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">default</span>),
-            <span class="ident">Equal</span> =&gt; <span class="ident">Fixed</span>(<span class="number">0</span>),
+        value = <span class="kw">match </span>value.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.default) {
+            Less =&gt; -((<span class="self">self</span>.default - value) / (<span class="self">self</span>.default - <span class="self">self</span>.min)),
+            Greater =&gt; (value - <span class="self">self</span>.default) / (<span class="self">self</span>.max - <span class="self">self</span>.default),
+            Equal =&gt; Fixed(<span class="number">0</span>),
         };
-        <span class="ident">value</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">min</span>(<span class="ident">Fixed::ONE</span>).<span class="ident">max</span>(<span class="op">-</span><span class="ident">Fixed::ONE</span>);
-        <span class="ident">value</span> <span class="op">=</span> <span class="ident">avar</span>
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">data</span>, <span class="ident">avar</span>)<span class="op">|</span> <span class="ident">adjust_axis</span>(<span class="ident">data</span>, <span class="ident">avar</span>, <span class="self">self</span>.<span class="ident">index</span>, <span class="ident">value</span>))
-            .<span class="ident">flatten</span>()
-            .<span class="ident">unwrap_or</span>(<span class="ident">value</span>);
-        <span class="ident">value</span>.<span class="ident">to_f2dot14</span>()
+        value = value.min(Fixed::ONE).max(-Fixed::ONE);
+        value = avar
+            .map(|(data, avar)| adjust_axis(data, avar, <span class="self">self</span>.index, value))
+            .flatten()
+            .unwrap_or(value);
+        value.to_f2dot14()
     }
 }
 
-<span class="doccomment">/// Named instance in a variable font.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VarInstance</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">name_id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">postscript_name_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">values</span>: <span class="ident">Array</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Fixed</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Named instance in a variable font.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>VarInstance&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>index: u16,
+    <span class="kw">pub </span>name_id: u16,
+    <span class="kw">pub </span>postscript_name_id: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+    <span class="kw">pub </span>values: Array&lt;<span class="lifetime">&#39;a</span>, Fixed&gt;,
 }
 
-<span class="doccomment">/// Metrics variation table.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Mvar</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="ident">rec_size</span>: <span class="ident">usize</span>,
-    <span class="ident">rec_count</span>: <span class="ident">usize</span>,
-    <span class="ident">store</span>: <span class="ident">u32</span>,
+<span class="doccomment">/// Metrics variation table.
+</span><span class="kw">pub struct </span>Mvar&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    rec_size: usize,
+    rec_count: usize,
+    store: u32,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Mvar</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>], <span class="ident">mvar</span>: <span class="ident">u32</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>]) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">data</span>, <span class="ident">mvar</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">rec_size</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">6</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">rec_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">8</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">10</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-        <span class="kw">if</span> <span class="ident">rec_count</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">store</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Mvar&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub fn </span>new(data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], mvar: u32, coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16]) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>b = Bytes::with_offset(data, mvar <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+        <span class="kw">let </span>rec_size = b.read::&lt;u16&gt;(<span class="number">6</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>rec_count = b.read::&lt;u16&gt;(<span class="number">8</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>store = b.read::&lt;u16&gt;(<span class="number">10</span>)<span class="question-mark">? </span><span class="kw">as </span>u32;
+        <span class="kw">if </span>rec_count == <span class="number">0 </span>|| store == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="prelude-val">Some</span>(<span class="self">Self</span> {
-            <span class="ident">data</span>: <span class="ident">b</span>,
-            <span class="ident">coords</span>,
-            <span class="ident">rec_size</span>,
-            <span class="ident">rec_count</span>,
-            <span class="ident">store</span>,
+        <span class="prelude-val">Some</span>(<span class="self">Self </span>{
+            data: b,
+            coords,
+            rec_size,
+            rec_count,
+            store,
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">metric</span>: <span class="ident">RawTag</span>) -&gt; <span class="ident">f32</span> {
-        <span class="self">self</span>.<span class="ident">read_delta</span>(<span class="ident">metric</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">to_f32</span>()).<span class="ident">unwrap_or</span>(<span class="number">0.</span>)
+    <span class="kw">pub fn </span>delta(<span class="kw-2">&amp;</span><span class="self">self</span>, metric: RawTag) -&gt; f32 {
+        <span class="self">self</span>.read_delta(metric).map(|d| d.to_f32()).unwrap_or(<span class="number">0.</span>)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">read_delta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">metric</span>: <span class="ident">RawTag</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Fixed</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="number">12</span>;
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
-        <span class="kw">let</span> <span class="ident">rec_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rec_size</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rec_count</span>;
-        <span class="kw">while</span> <span class="ident">l</span> <span class="op">&lt;</span> <span class="ident">h</span> {
-            <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-            <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> (<span class="ident">l</span> <span class="op">+</span> <span class="ident">h</span>) <span class="op">/</span> <span class="number">2</span>;
-            <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">*</span> <span class="ident">rec_size</span>;
-            <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span>;
-            <span class="kw">match</span> <span class="ident">metric</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">t</span>) {
-                <span class="ident">Less</span> =&gt; <span class="ident">h</span> <span class="op">=</span> <span class="ident">i</span>,
-                <span class="ident">Greater</span> =&gt; <span class="ident">l</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>,
-                <span class="ident">Equal</span> =&gt; {
-                    <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">outer</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">6</span>)<span class="question-mark">?</span>;
-                    <span class="kw">return</span> <span class="ident">item_delta</span>(<span class="ident">b</span>.<span class="ident">data</span>(), <span class="self">self</span>.<span class="ident">store</span>, <span class="ident">outer</span>, <span class="ident">inner</span>, <span class="self">self</span>.<span class="ident">coords</span>);
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>read_delta(<span class="kw-2">&amp;</span><span class="self">self</span>, metric: RawTag) -&gt; <span class="prelude-ty">Option</span>&lt;Fixed&gt; {
+        <span class="kw">let </span>base = <span class="number">12</span>;
+        <span class="kw">let </span>b = <span class="kw-2">&amp;</span><span class="self">self</span>.data;
+        <span class="kw">let </span>rec_size = <span class="self">self</span>.rec_size;
+        <span class="kw">let </span><span class="kw-2">mut </span>l = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>h = <span class="self">self</span>.rec_count;
+        <span class="kw">while </span>l &lt; h {
+            <span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+            <span class="kw">let </span>i = (l + h) / <span class="number">2</span>;
+            <span class="kw">let </span>offset = base + i * rec_size;
+            <span class="kw">let </span>t = b.read::&lt;u32&gt;(offset)<span class="question-mark">?</span>;
+            <span class="kw">match </span>metric.cmp(<span class="kw-2">&amp;</span>t) {
+                Less =&gt; h = i,
+                Greater =&gt; l = i + <span class="number">1</span>,
+                Equal =&gt; {
+                    <span class="kw">let </span>inner = b.read::&lt;u16&gt;(offset + <span class="number">4</span>)<span class="question-mark">?</span>;
+                    <span class="kw">let </span>outer = b.read::&lt;u16&gt;(offset + <span class="number">6</span>)<span class="question-mark">?</span>;
+                    <span class="kw">return </span>item_delta(b.data(), <span class="self">self</span>.store, outer, inner, <span class="self">self</span>.coords);
                 }
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 }
 
-<span class="doccomment">/// Returns the advance delta for the specified glyph.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">advance_delta</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">xvar</span>: <span class="ident">u32</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>]) -&gt; <span class="ident">f32</span> {
-    <span class="ident">metric_delta</span>(<span class="ident">data</span>, <span class="ident">xvar</span>, <span class="number">8</span>, <span class="ident">glyph_id</span>, <span class="ident">coords</span>)
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">to_f32</span>())
-        .<span class="ident">unwrap_or</span>(<span class="number">0.</span>)
+<span class="doccomment">/// Returns the advance delta for the specified glyph.
+</span><span class="kw">pub fn </span>advance_delta(data: <span class="kw-2">&amp;</span>[u8], xvar: u32, glyph_id: u16, coords: <span class="kw-2">&amp;</span>[i16]) -&gt; f32 {
+    metric_delta(data, xvar, <span class="number">8</span>, glyph_id, coords)
+        .map(|d| d.to_f32())
+        .unwrap_or(<span class="number">0.</span>)
 }
 
-<span class="doccomment">/// Returns the side bearing delta for the specified glyph.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sb_delta</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">xvar</span>: <span class="ident">u32</span>, <span class="ident">glyph_id</span>: <span class="ident">u16</span>, <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>]) -&gt; <span class="ident">f32</span> {
-    <span class="ident">metric_delta</span>(<span class="ident">data</span>, <span class="ident">xvar</span>, <span class="number">12</span>, <span class="ident">glyph_id</span>, <span class="ident">coords</span>)
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">to_f32</span>())
-        .<span class="ident">unwrap_or</span>(<span class="number">0.</span>)
+<span class="doccomment">/// Returns the side bearing delta for the specified glyph.
+</span><span class="kw">pub fn </span>sb_delta(data: <span class="kw-2">&amp;</span>[u8], xvar: u32, glyph_id: u16, coords: <span class="kw-2">&amp;</span>[i16]) -&gt; f32 {
+    metric_delta(data, xvar, <span class="number">12</span>, glyph_id, coords)
+        .map(|d| d.to_f32())
+        .unwrap_or(<span class="number">0.</span>)
 }
 
-<span class="doccomment">/// Applies adjustments to a coordinate according to the optional axis</span>
-<span class="doccomment">/// variation table.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">adjust_axis</span>(<span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">avar</span>: <span class="ident">u32</span>, <span class="ident">axis</span>: <span class="ident">u16</span>, <span class="ident">coord</span>: <span class="ident">Fixed</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Fixed</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">avar</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="doccomment">/// Applies adjustments to a coordinate according to the optional axis
+/// variation table.
+</span><span class="kw">pub fn </span>adjust_axis(data: <span class="kw-2">&amp;</span>[u8], avar: u32, axis: u16, coord: Fixed) -&gt; <span class="prelude-ty">Option</span>&lt;Fixed&gt; {
+    <span class="kw">if </span>avar == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::with_offset</span>(<span class="ident">data</span>, <span class="ident">avar</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="number">6</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">axis</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">axis_count</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>b = Bytes::with_offset(data, avar <span class="kw">as </span>usize)<span class="question-mark">?</span>;
+    <span class="kw">let </span>axis_count = b.read::&lt;u16&gt;(<span class="number">6</span>)<span class="question-mark">?</span>;
+    <span class="kw">if </span>axis &gt;= axis_count {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="number">8</span>;
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">axis</span> {
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span> <span class="op">+</span> <span class="ident">count</span> <span class="op">*</span> <span class="number">2</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="number">8</span>;
+    <span class="kw">for _ in </span><span class="number">0</span>..axis {
+        <span class="kw">let </span>count = b.read::&lt;u16&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        offset += <span class="number">2 </span>+ count * <span class="number">2</span>;
     }
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-        <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="ident">from</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>);
-        <span class="kw">match</span> <span class="ident">from</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">coord</span>) {
-            <span class="ident">Equal</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>)),
-            <span class="ident">Greater</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="ident">Greater</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>);
-                <span class="kw">let</span> <span class="ident">prev_from</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">-</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>);
-                <span class="kw">let</span> <span class="ident">prev_to</span> <span class="op">=</span> <span class="ident">Fixed</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">-</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">*</span> <span class="number">4</span>);
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">prev_to</span> <span class="op">+</span> ((<span class="ident">to</span> <span class="op">-</span> <span class="ident">prev_to</span>) <span class="op">*</span> (<span class="ident">coord</span> <span class="op">-</span> <span class="ident">prev_from</span>) <span class="op">/</span> (<span class="ident">from</span> <span class="op">-</span> <span class="ident">prev_from</span>)));
+    <span class="kw">let </span>count = b.read::&lt;u16&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    offset += <span class="number">2</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..count {
+        <span class="kw">use </span>core::cmp::Ordering::<span class="kw-2">*</span>;
+        <span class="kw">let </span>from = Fixed(b.read::&lt;i16&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>);
+        <span class="kw">match </span>from.cmp(<span class="kw-2">&amp;</span>coord) {
+            Equal =&gt; <span class="kw">return </span><span class="prelude-val">Some</span>(Fixed(b.read::&lt;i16&gt;(offset + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>)),
+            Greater <span class="kw">if </span>i == <span class="number">0 </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
+            Greater =&gt; {
+                <span class="kw">let </span>to = Fixed(b.read::&lt;i16&gt;(offset + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>);
+                <span class="kw">let </span>prev_from = Fixed(b.read::&lt;i16&gt;(offset - <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>);
+                <span class="kw">let </span>prev_to = Fixed(b.read::&lt;i16&gt;(offset - <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>i32 * <span class="number">4</span>);
+                <span class="kw">return </span><span class="prelude-val">Some</span>(prev_to + ((to - prev_to) * (coord - prev_from) / (from - prev_from)));
             }
-            <span class="ident">Less</span> =&gt; <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>,
+            Less =&gt; offset += <span class="number">4</span>,
         }
     }
-    <span class="prelude-val">None</span>
-}
+    <span class="prelude-val">None
+</span>}
 
-<span class="doccomment">/// Returns a delta from an item variation store.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">item_delta</span>(
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    <span class="ident">offset</span>: <span class="ident">u32</span>,
-    <span class="ident">outer</span>: <span class="ident">u16</span>,
-    <span class="ident">inner</span>: <span class="ident">u16</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Fixed</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">offset</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="doccomment">/// Returns a delta from an item variation store.
+</span><span class="kw">pub fn </span>item_delta(
+    data: <span class="kw-2">&amp;</span>[u8],
+    offset: u32,
+    outer: u16,
+    inner: u16,
+    coords: <span class="kw-2">&amp;</span>[i16],
+) -&gt; <span class="prelude-ty">Option</span>&lt;Fixed&gt; {
+    <span class="kw">if </span>offset == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-    <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">offset</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">if</span> <span class="ident">outer</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">store</span> <span class="op">+</span> <span class="number">6</span>)<span class="question-mark">?</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>b = Bytes::new(data);
+    <span class="kw">let </span>store = offset <span class="kw">as </span>usize;
+    <span class="kw">if </span>outer &gt;= b.read::&lt;u16&gt;(store + <span class="number">6</span>)<span class="question-mark">? </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">region_base</span> <span class="op">=</span> <span class="ident">store</span> <span class="op">+</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">store</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">axis_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">region_base</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">region_record_size</span> <span class="op">=</span> <span class="ident">axis_count</span> <span class="op">*</span> <span class="number">6</span>;
-    <span class="kw">let</span> <span class="ident">region_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">region_base</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">data_base</span> <span class="op">=</span> <span class="ident">store</span> <span class="op">+</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">store</span> <span class="op">+</span> <span class="number">8</span> <span class="op">+</span> <span class="ident">outer</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">region_index_base</span> <span class="op">=</span> <span class="ident">data_base</span> <span class="op">+</span> <span class="number">6</span>;
-    <span class="kw">let</span> <span class="ident">region_index_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">data_base</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> (<span class="ident">short_count</span>, <span class="kw-2">mut</span> <span class="ident">delta_base</span>) <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">inner</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">short_count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">data_base</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">region_index_count</span>;
-        <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">data_base</span> <span class="op">+</span> <span class="number">6</span> <span class="op">+</span> <span class="ident">count</span> <span class="op">*</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">elem_len</span> <span class="op">=</span> (<span class="ident">count</span> <span class="op">-</span> <span class="ident">short_count</span>) <span class="op">+</span> <span class="ident">short_count</span> <span class="op">*</span> <span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">base</span> <span class="op">+</span> <span class="ident">inner</span> <span class="op">*</span> <span class="ident">elem_len</span>;
-        (<span class="ident">short_count</span>, <span class="ident">offset</span>)
+    <span class="kw">let </span>region_base = store + b.read::&lt;u32&gt;(store + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>axis_count = b.read::&lt;u16&gt;(region_base)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>region_record_size = axis_count * <span class="number">6</span>;
+    <span class="kw">let </span>region_count = b.read::&lt;u16&gt;(region_base + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>data_base = store + b.read::&lt;u32&gt;(store + <span class="number">8 </span>+ outer <span class="kw">as </span>usize * <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>region_index_base = data_base + <span class="number">6</span>;
+    <span class="kw">let </span>region_index_count = b.read::&lt;u16&gt;(data_base + <span class="number">4</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">let </span>(short_count, <span class="kw-2">mut </span>delta_base) = {
+        <span class="kw">let </span>inner = inner <span class="kw">as </span>usize;
+        <span class="kw">let </span>short_count = b.read::&lt;u16&gt;(data_base + <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">let </span>count = region_index_count;
+        <span class="kw">let </span>base = data_base + <span class="number">6 </span>+ count * <span class="number">2</span>;
+        <span class="kw">let </span>elem_len = (count - short_count) + short_count * <span class="number">2</span>;
+        <span class="kw">let </span>offset = base + inner * elem_len;
+        (short_count, offset)
     };
-    <span class="kw">const</span> <span class="ident">ZERO</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::ZERO</span>;
-    <span class="kw">const</span> <span class="ident">ONE</span>: <span class="ident">Fixed</span> <span class="op">=</span> <span class="ident">Fixed::ONE</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">idx</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">delta</span> <span class="op">=</span> <span class="ident">ZERO</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">region_index_count</span> {
-        <span class="kw">let</span> <span class="ident">region_index</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">region_index_base</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">region_index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">region_count</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">const </span>ZERO: Fixed = Fixed::ZERO;
+    <span class="kw">const </span>ONE: Fixed = Fixed::ONE;
+    <span class="kw">let </span><span class="kw-2">mut </span>idx = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>delta = ZERO;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..region_index_count {
+        <span class="kw">let </span>region_index = b.read::&lt;u16&gt;(region_index_base + i * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>usize;
+        <span class="kw">if </span>region_index &gt;= region_count {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">region_offset</span> <span class="op">=</span> <span class="ident">region_base</span> <span class="op">+</span> <span class="number">4</span> <span class="op">+</span> <span class="ident">region_index</span> <span class="op">*</span> <span class="ident">region_record_size</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">ONE</span>;
-        <span class="kw">for</span> <span class="ident">axis</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">axis_count</span> {
-            <span class="kw">let</span> <span class="ident">region_axis_base</span> <span class="op">=</span> <span class="ident">region_offset</span> <span class="op">+</span> <span class="ident">axis</span> <span class="op">*</span> <span class="number">6</span>;
-            <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">region_axis_base</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">peak</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">region_axis_base</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">region_axis_base</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>);
-            <span class="kw">let</span> <span class="ident">coord</span> <span class="op">=</span> <span class="ident">coords</span>
-                .<span class="ident">get</span>(<span class="ident">axis</span>)
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">Fixed::from_f2dot14</span>(<span class="kw-2">*</span><span class="ident">c</span>))
-                .<span class="ident">unwrap_or</span>(<span class="ident">ZERO</span>);
-            <span class="kw">if</span> <span class="ident">start</span> <span class="op">&gt;</span> <span class="ident">peak</span> <span class="op">|</span><span class="op">|</span> <span class="ident">peak</span> <span class="op">&gt;</span> <span class="ident">end</span> <span class="op">|</span><span class="op">|</span> <span class="ident">peak</span> <span class="op">==</span> <span class="ident">ZERO</span> <span class="op">|</span><span class="op">|</span> <span class="ident">start</span> <span class="op">&lt;</span> <span class="ident">ZERO</span> <span class="op">&amp;&amp;</span> <span class="ident">end</span> <span class="op">&gt;</span> <span class="ident">ZERO</span> {
+        <span class="kw">let </span>region_offset = region_base + <span class="number">4 </span>+ region_index * region_record_size;
+        <span class="kw">let </span><span class="kw-2">mut </span>scalar = ONE;
+        <span class="kw">for </span>axis <span class="kw">in </span><span class="number">0</span>..axis_count {
+            <span class="kw">let </span>region_axis_base = region_offset + axis * <span class="number">6</span>;
+            <span class="kw">let </span>start = Fixed::from_f2dot14(b.read::&lt;i16&gt;(region_axis_base)<span class="question-mark">?</span>);
+            <span class="kw">let </span>peak = Fixed::from_f2dot14(b.read::&lt;i16&gt;(region_axis_base + <span class="number">2</span>)<span class="question-mark">?</span>);
+            <span class="kw">let </span>end = Fixed::from_f2dot14(b.read::&lt;i16&gt;(region_axis_base + <span class="number">4</span>)<span class="question-mark">?</span>);
+            <span class="kw">let </span>coord = coords
+                .get(axis)
+                .map(|c| Fixed::from_f2dot14(<span class="kw-2">*</span>c))
+                .unwrap_or(ZERO);
+            <span class="kw">if </span>start &gt; peak || peak &gt; end || peak == ZERO || start &lt; ZERO &amp;&amp; end &gt; ZERO {
                 <span class="kw">continue</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="ident">start</span> <span class="op">|</span><span class="op">|</span> <span class="ident">coord</span> <span class="op">&gt;</span> <span class="ident">end</span> {
-                <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">ZERO</span>;
+            } <span class="kw">else if </span>coord &lt; start || coord &gt; end {
+                scalar = ZERO;
                 <span class="kw">break</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">coord</span> <span class="op">==</span> <span class="ident">peak</span> {
+            } <span class="kw">else if </span>coord == peak {
                 <span class="kw">continue</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">coord</span> <span class="op">&lt;</span> <span class="ident">peak</span> {
-                <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> (<span class="ident">coord</span> <span class="op">-</span> <span class="ident">start</span>) <span class="op">/</span> (<span class="ident">peak</span> <span class="op">-</span> <span class="ident">start</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">coord</span>) <span class="op">/</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">peak</span>)
+            } <span class="kw">else if </span>coord &lt; peak {
+                scalar = scalar * (coord - start) / (peak - start)
+            } <span class="kw">else </span>{
+                scalar = scalar * (end - coord) / (end - peak)
             };
         }
-        <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">short_count</span> {
-            <span class="ident">delta_base</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="ident">delta_base</span> <span class="op">-</span> <span class="number">1</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">i16</span>
-        } <span class="kw">else</span> {
-            <span class="ident">delta_base</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
-            <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>(<span class="ident">delta_base</span> <span class="op">-</span> <span class="number">2</span>)<span class="question-mark">?</span>
-        };
-        <span class="ident">idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="ident">delta</span> <span class="op">+</span><span class="op">=</span> <span class="ident">scalar</span> <span class="op">*</span> <span class="ident">Fixed::from_i32</span>(<span class="ident">val</span> <span class="kw">as</span> <span class="ident">i32</span>);
+        <span class="kw">let </span>val = <span class="kw">if </span>idx &gt;= short_count {
+            delta_base += <span class="number">1</span>;
+            b.read::&lt;i8&gt;(delta_base - <span class="number">1</span>)<span class="question-mark">? </span><span class="kw">as </span>i16
+        } <span class="kw">else </span>{
+            delta_base += <span class="number">2</span>;
+            b.read::&lt;i16&gt;(delta_base - <span class="number">2</span>)<span class="question-mark">?
+        </span>};
+        idx += <span class="number">1</span>;
+        delta += scalar * Fixed::from_i32(val <span class="kw">as </span>i32);
     }
-    <span class="prelude-val">Some</span>(<span class="ident">delta</span>)
+    <span class="prelude-val">Some</span>(delta)
 }
 
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">metric_delta</span>(
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    <span class="ident">base</span>: <span class="ident">u32</span>,
-    <span class="ident">which</span>: <span class="ident">usize</span>,
-    <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-    <span class="ident">coords</span>: <span class="kw-2">&amp;</span>[<span class="ident">i16</span>],
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Fixed</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">base</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+<span class="attribute">#[inline(always)]
+</span><span class="kw">fn </span>metric_delta(
+    data: <span class="kw-2">&amp;</span>[u8],
+    base: u32,
+    which: usize,
+    glyph_id: u16,
+    coords: <span class="kw-2">&amp;</span>[i16],
+) -&gt; <span class="prelude-ty">Option</span>&lt;Fixed&gt; {
+    <span class="kw">if </span>base == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">data</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">4</span>)<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">store</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>b = Bytes::new(data);
+    <span class="kw">let </span><span class="kw-2">mut </span>store = b.read::&lt;u32&gt;(base <span class="kw">as </span>usize + <span class="number">4</span>)<span class="question-mark">?</span>;
+    <span class="kw">if </span>store == <span class="number">0 </span>{
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
-    <span class="ident">store</span> <span class="op">+</span><span class="op">=</span> <span class="ident">base</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="ident">which</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">if</span> <span class="ident">offset</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="kw">if</span> <span class="ident">which</span> <span class="op">==</span> <span class="number">8</span> {
-            <span class="kw">return</span> <span class="ident">item_delta</span>(<span class="ident">data</span>, <span class="ident">store</span>, <span class="number">0</span>, <span class="ident">glyph_id</span>, <span class="ident">coords</span>);
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    store += base;
+    <span class="kw">let </span><span class="kw-2">mut </span>offset = b.read::&lt;u32&gt;(base <span class="kw">as </span>usize + which)<span class="question-mark">? </span><span class="kw">as </span>usize;
+    <span class="kw">if </span>offset == <span class="number">0 </span>{
+        <span class="kw">if </span>which == <span class="number">8 </span>{
+            <span class="kw">return </span>item_delta(data, store, <span class="number">0</span>, glyph_id, coords);
+        } <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     }
-    <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">base</span> <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>;
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="number">2</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">bit_count</span> <span class="op">=</span> (<span class="ident">format</span> <span class="op">&amp;</span> <span class="number">0xF</span>) <span class="op">+</span> <span class="number">1</span>;
-    <span class="kw">let</span> <span class="ident">entry_size</span> <span class="op">=</span> ((<span class="ident">format</span> <span class="op">&amp;</span> <span class="number">0x30</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">4</span>) <span class="op">+</span> <span class="number">1</span>;
-    <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="number">4</span>;
-    <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">count</span> {
-        <span class="ident">count</span> <span class="op">-</span> <span class="number">1</span>
-    } <span class="kw">else</span> {
-        <span class="ident">glyph_id</span>
-    } <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">entry_size</span> {
-        <span class="number">1</span> =&gt; <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="number">2</span> =&gt; <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span> <span class="op">*</span> <span class="number">2</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="number">3</span> =&gt; <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">U24</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span> <span class="op">*</span> <span class="number">3</span>)<span class="question-mark">?</span>.<span class="number">0</span>,
-        <span class="number">4</span> =&gt; <span class="ident">b</span>.<span class="ident">read</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">base</span> <span class="op">+</span> <span class="ident">index</span> <span class="op">*</span> <span class="number">4</span>)<span class="question-mark">?</span>,
-        <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+    offset += base <span class="kw">as </span>usize;
+    <span class="kw">let </span>format = b.read::&lt;u16&gt;(offset)<span class="question-mark">? </span><span class="kw">as </span>u32;
+    <span class="kw">let </span>count = b.read::&lt;u16&gt;(offset + <span class="number">2</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>bit_count = (format &amp; <span class="number">0xF</span>) + <span class="number">1</span>;
+    <span class="kw">let </span>entry_size = ((format &amp; <span class="number">0x30</span>) &gt;&gt; <span class="number">4</span>) + <span class="number">1</span>;
+    <span class="kw">let </span>base = offset + <span class="number">4</span>;
+    <span class="kw">let </span>index = <span class="kw">if </span>glyph_id &gt;= count {
+        count - <span class="number">1
+    </span>} <span class="kw">else </span>{
+        glyph_id
+    } <span class="kw">as </span>usize;
+    <span class="kw">let </span>entry = <span class="kw">match </span>entry_size {
+        <span class="number">1 </span>=&gt; b.read::&lt;u8&gt;(base + index)<span class="question-mark">? </span><span class="kw">as </span>u32,
+        <span class="number">2 </span>=&gt; b.read::&lt;u16&gt;(base + index * <span class="number">2</span>)<span class="question-mark">? </span><span class="kw">as </span>u32,
+        <span class="number">3 </span>=&gt; b.read::&lt;U24&gt;(base + index * <span class="number">3</span>)<span class="question-mark">?</span>.<span class="number">0</span>,
+        <span class="number">4 </span>=&gt; b.read::&lt;u32&gt;(base + index * <span class="number">4</span>)<span class="question-mark">?</span>,
+        <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
     };
-    <span class="kw">let</span> <span class="ident">outer</span> <span class="op">=</span> <span class="ident">entry</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">bit_count</span>;
-    <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">entry</span> <span class="op">&amp;</span> ((<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">bit_count</span>) <span class="op">-</span> <span class="number">1</span>);
-    <span class="ident">item_delta</span>(<span class="ident">data</span>, <span class="ident">store</span>, <span class="ident">outer</span> <span class="kw">as</span> <span class="ident">u16</span>, <span class="ident">inner</span> <span class="kw">as</span> <span class="ident">u16</span>, <span class="ident">coords</span>)
+    <span class="kw">let </span>outer = entry &gt;&gt; bit_count;
+    <span class="kw">let </span>inner = entry &amp; ((<span class="number">1 </span>&lt;&lt; bit_count) - <span class="number">1</span>);
+    item_delta(data, store, outer <span class="kw">as </span>u16, inner <span class="kw">as </span>u16, coords)
 }
 
-<span class="doccomment">/// Tags for metrics from the `MVAR` table.</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mvar_tags</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">raw_tag</span>, <span class="ident">RawTag</span>};
+<span class="doccomment">/// Tags for metrics from the `MVAR` table.
+</span><span class="kw">pub mod </span>mvar_tags {
+    <span class="kw">use super</span>::{raw_tag, RawTag};
 
-    <span class="doccomment">/// Horizontal ascender.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HASC</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hasc&quot;</span>);
-    <span class="doccomment">/// Horizontal descender.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HDSC</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hdsc&quot;</span>);
-    <span class="doccomment">/// Horizontal line gap.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HLGP</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hlgp&quot;</span>);
+    <span class="doccomment">/// Horizontal ascender.
+    </span><span class="kw">pub const </span>HASC: RawTag = raw_tag(<span class="string">b&quot;hasc&quot;</span>);
+    <span class="doccomment">/// Horizontal descender.
+    </span><span class="kw">pub const </span>HDSC: RawTag = raw_tag(<span class="string">b&quot;hdsc&quot;</span>);
+    <span class="doccomment">/// Horizontal line gap.
+    </span><span class="kw">pub const </span>HLGP: RawTag = raw_tag(<span class="string">b&quot;hlgp&quot;</span>);
 
-    <span class="doccomment">/// Horizontal caret rise.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HCRS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hcrs&quot;</span>);
-    <span class="doccomment">/// Horizontal caret run.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HCRN</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hcrn&quot;</span>);
-    <span class="doccomment">/// Horizontal caret offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HCOF</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hcof&quot;</span>);
+    <span class="doccomment">/// Horizontal caret rise.
+    </span><span class="kw">pub const </span>HCRS: RawTag = raw_tag(<span class="string">b&quot;hcrs&quot;</span>);
+    <span class="doccomment">/// Horizontal caret run.
+    </span><span class="kw">pub const </span>HCRN: RawTag = raw_tag(<span class="string">b&quot;hcrn&quot;</span>);
+    <span class="doccomment">/// Horizontal caret offset.
+    </span><span class="kw">pub const </span>HCOF: RawTag = raw_tag(<span class="string">b&quot;hcof&quot;</span>);
 
-    <span class="doccomment">/// Horizontal clipping ascent.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HCLA</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hcla&quot;</span>);
-    <span class="doccomment">/// Horizontal clipping descent.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HCLD</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;hcld&quot;</span>);
+    <span class="doccomment">/// Horizontal clipping ascent.
+    </span><span class="kw">pub const </span>HCLA: RawTag = raw_tag(<span class="string">b&quot;hcla&quot;</span>);
+    <span class="doccomment">/// Horizontal clipping descent.
+    </span><span class="kw">pub const </span>HCLD: RawTag = raw_tag(<span class="string">b&quot;hcld&quot;</span>);
 
-    <span class="doccomment">/// Vertical ascender.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VASC</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vasc&quot;</span>);
-    <span class="doccomment">/// Vertical descender.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VDSC</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vdsc&quot;</span>);
-    <span class="doccomment">/// Vertical line gap.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VLGP</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vlgp&quot;</span>);
+    <span class="doccomment">/// Vertical ascender.
+    </span><span class="kw">pub const </span>VASC: RawTag = raw_tag(<span class="string">b&quot;vasc&quot;</span>);
+    <span class="doccomment">/// Vertical descender.
+    </span><span class="kw">pub const </span>VDSC: RawTag = raw_tag(<span class="string">b&quot;vdsc&quot;</span>);
+    <span class="doccomment">/// Vertical line gap.
+    </span><span class="kw">pub const </span>VLGP: RawTag = raw_tag(<span class="string">b&quot;vlgp&quot;</span>);
 
-    <span class="doccomment">/// Vertical caret rise.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCRS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vcrs&quot;</span>);
-    <span class="doccomment">/// Vertical caret run.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCRN</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vcrn&quot;</span>);
-    <span class="doccomment">/// Vertical caret offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCOF</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;vcof&quot;</span>);
+    <span class="doccomment">/// Vertical caret rise.
+    </span><span class="kw">pub const </span>VCRS: RawTag = raw_tag(<span class="string">b&quot;vcrs&quot;</span>);
+    <span class="doccomment">/// Vertical caret run.
+    </span><span class="kw">pub const </span>VCRN: RawTag = raw_tag(<span class="string">b&quot;vcrn&quot;</span>);
+    <span class="doccomment">/// Vertical caret offset.
+    </span><span class="kw">pub const </span>VCOF: RawTag = raw_tag(<span class="string">b&quot;vcof&quot;</span>);
 
-    <span class="doccomment">/// X-height.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XHGT</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;xhgt&quot;</span>);
-    <span class="doccomment">/// Cap height.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CPHT</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;cpht&quot;</span>);
+    <span class="doccomment">/// X-height.
+    </span><span class="kw">pub const </span>XHGT: RawTag = raw_tag(<span class="string">b&quot;xhgt&quot;</span>);
+    <span class="doccomment">/// Cap height.
+    </span><span class="kw">pub const </span>CPHT: RawTag = raw_tag(<span class="string">b&quot;cpht&quot;</span>);
 
-    <span class="doccomment">/// Underline offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNDO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;undo&quot;</span>);
-    <span class="doccomment">/// Underline size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNDS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;unds&quot;</span>);
+    <span class="doccomment">/// Underline offset.
+    </span><span class="kw">pub const </span>UNDO: RawTag = raw_tag(<span class="string">b&quot;undo&quot;</span>);
+    <span class="doccomment">/// Underline size.
+    </span><span class="kw">pub const </span>UNDS: RawTag = raw_tag(<span class="string">b&quot;unds&quot;</span>);
 
-    <span class="doccomment">/// Strikeout offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STRO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;stro&quot;</span>);
-    <span class="doccomment">/// Strikeout size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STRS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;strs&quot;</span>);
+    <span class="doccomment">/// Strikeout offset.
+    </span><span class="kw">pub const </span>STRO: RawTag = raw_tag(<span class="string">b&quot;stro&quot;</span>);
+    <span class="doccomment">/// Strikeout size.
+    </span><span class="kw">pub const </span>STRS: RawTag = raw_tag(<span class="string">b&quot;strs&quot;</span>);
 
-    <span class="doccomment">/// Subscript x-offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SBXO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;sbxo&quot;</span>);
-    <span class="doccomment">/// Subscript y-offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SBYO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;sbyo&quot;</span>);
-    <span class="doccomment">/// Subscript x-size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SBXS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;sbxs&quot;</span>);
-    <span class="doccomment">/// Subscript y-size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SBYS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;sbys&quot;</span>);
+    <span class="doccomment">/// Subscript x-offset.
+    </span><span class="kw">pub const </span>SBXO: RawTag = raw_tag(<span class="string">b&quot;sbxo&quot;</span>);
+    <span class="doccomment">/// Subscript y-offset.
+    </span><span class="kw">pub const </span>SBYO: RawTag = raw_tag(<span class="string">b&quot;sbyo&quot;</span>);
+    <span class="doccomment">/// Subscript x-size.
+    </span><span class="kw">pub const </span>SBXS: RawTag = raw_tag(<span class="string">b&quot;sbxs&quot;</span>);
+    <span class="doccomment">/// Subscript y-size.
+    </span><span class="kw">pub const </span>SBYS: RawTag = raw_tag(<span class="string">b&quot;sbys&quot;</span>);
 
-    <span class="doccomment">/// Superscript x-offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPXO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;spxo&quot;</span>);
-    <span class="doccomment">/// Superscript y-offset.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPYO</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;spyo&quot;</span>);
-    <span class="doccomment">/// Superscript x-size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPXS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;spxs&quot;</span>);
-    <span class="doccomment">/// Superscript y-size.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SPYS</span>: <span class="ident">RawTag</span> <span class="op">=</span> <span class="ident">raw_tag</span>(<span class="string">b&quot;spys&quot;</span>);
+    <span class="doccomment">/// Superscript x-offset.
+    </span><span class="kw">pub const </span>SPXO: RawTag = raw_tag(<span class="string">b&quot;spxo&quot;</span>);
+    <span class="doccomment">/// Superscript y-offset.
+    </span><span class="kw">pub const </span>SPYO: RawTag = raw_tag(<span class="string">b&quot;spyo&quot;</span>);
+    <span class="doccomment">/// Superscript x-size.
+    </span><span class="kw">pub const </span>SPXS: RawTag = raw_tag(<span class="string">b&quot;spxs&quot;</span>);
+    <span class="doccomment">/// Superscript y-size.
+    </span><span class="kw">pub const </span>SPYS: RawTag = raw_tag(<span class="string">b&quot;spys&quot;</span>);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

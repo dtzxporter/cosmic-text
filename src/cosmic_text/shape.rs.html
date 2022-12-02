@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/shape.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/shape.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -665,672 +665,682 @@
 <span id="665">665</span>
 <span id="666">666</span>
 <span id="667">667</span>
-</pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+</pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-<span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
-<span class="kw">use</span> <span class="ident">core::mem</span>;
-<span class="kw">use</span> <span class="ident">unicode_script</span>::{<span class="ident">Script</span>, <span class="ident">UnicodeScript</span>};
-<span class="kw">use</span> <span class="ident">unicode_segmentation::UnicodeSegmentation</span>;
+</span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>alloc::vec::Vec;
+<span class="kw">use </span>unicode_bidi::Level;
+<span class="kw">use </span>core::mem;
+<span class="kw">use </span>core::ops::Range;
+<span class="kw">use </span>unicode_script::{Script, UnicodeScript};
+<span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AttrsList</span>, <span class="ident">CacheKey</span>, <span class="ident">Color</span>, <span class="ident">Font</span>, <span class="ident">FontSystem</span>, <span class="ident">LayoutGlyph</span>, <span class="ident">LayoutLine</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::fallback::FontFallbackIter</span>;
+<span class="kw">use crate</span>::{AttrsList, CacheKey, Color, Font, FontSystem, LayoutGlyph, LayoutLine};
+<span class="kw">use </span><span class="kw">crate</span>::fallback::FontFallbackIter;
 
-<span class="kw">fn</span> <span class="ident">shape_fallback</span>(
-    <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">Font</span>,
-    <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">attrs_list</span>: <span class="kw-2">&amp;</span><span class="ident">AttrsList</span>,
-    <span class="ident">start_run</span>: <span class="ident">usize</span>,
-    <span class="ident">end_run</span>: <span class="ident">usize</span>,
-    <span class="ident">span_rtl</span>: <span class="ident">bool</span>,
-) -&gt; (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ShapeGlyph</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) {
-    <span class="kw">let</span> <span class="ident">run</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">start_run</span>..<span class="ident">end_run</span>];
+<span class="kw">fn </span>shape_fallback(
+    font: <span class="kw-2">&amp;</span>Font,
+    line: <span class="kw-2">&amp;</span>str,
+    attrs_list: <span class="kw-2">&amp;</span>AttrsList,
+    start_run: usize,
+    end_run: usize,
+    span_rtl: bool,
+) -&gt; (Vec&lt;ShapeGlyph&gt;, Vec&lt;usize&gt;) {
+    <span class="kw">let </span>run = <span class="kw-2">&amp;</span>line[start_run..end_run];
 
-    <span class="kw">let</span> <span class="ident">font_scale</span> <span class="op">=</span> <span class="ident">font</span>.<span class="ident">rustybuzz</span>.<span class="ident">units_per_em</span>() <span class="kw">as</span> <span class="ident">f32</span>;
+    <span class="kw">let </span>font_scale = font.rustybuzz.units_per_em() <span class="kw">as </span>f32;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">rustybuzz::UnicodeBuffer::new</span>();
-    <span class="ident">buffer</span>.<span class="ident">set_direction</span>(<span class="kw">if</span> <span class="ident">span_rtl</span> {
-        <span class="ident">rustybuzz::Direction::RightToLeft</span>
-    } <span class="kw">else</span> {
-        <span class="ident">rustybuzz::Direction::LeftToRight</span>
+    <span class="kw">let </span><span class="kw-2">mut </span>buffer = rustybuzz::UnicodeBuffer::new();
+    buffer.set_direction(<span class="kw">if </span>span_rtl {
+        rustybuzz::Direction::RightToLeft
+    } <span class="kw">else </span>{
+        rustybuzz::Direction::LeftToRight
     });
-    <span class="ident">buffer</span>.<span class="ident">push_str</span>(<span class="ident">run</span>);
-    <span class="ident">buffer</span>.<span class="ident">guess_segment_properties</span>();
+    buffer.push_str(run);
+    buffer.guess_segment_properties();
 
-    <span class="kw">let</span> <span class="ident">rtl</span> <span class="op">=</span> <span class="macro">matches!</span>(<span class="ident">buffer</span>.<span class="ident">direction</span>(), <span class="ident">rustybuzz::Direction::RightToLeft</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">rtl</span>, <span class="ident">span_rtl</span>);
+    <span class="kw">let </span>rtl = <span class="macro">matches!</span>(buffer.direction(), rustybuzz::Direction::RightToLeft);
+    <span class="macro">assert_eq!</span>(rtl, span_rtl);
 
-    <span class="kw">let</span> <span class="ident">glyph_buffer</span> <span class="op">=</span> <span class="ident">rustybuzz::shape</span>(<span class="kw-2">&amp;</span><span class="ident">font</span>.<span class="ident">rustybuzz</span>, <span class="kw-2">&amp;</span>[], <span class="ident">buffer</span>);
-    <span class="kw">let</span> <span class="ident">glyph_infos</span> <span class="op">=</span> <span class="ident">glyph_buffer</span>.<span class="ident">glyph_infos</span>();
-    <span class="kw">let</span> <span class="ident">glyph_positions</span> <span class="op">=</span> <span class="ident">glyph_buffer</span>.<span class="ident">glyph_positions</span>();
+    <span class="kw">let </span>glyph_buffer = rustybuzz::shape(<span class="kw-2">&amp;</span>font.rustybuzz, <span class="kw-2">&amp;</span>[], buffer);
+    <span class="kw">let </span>glyph_infos = glyph_buffer.glyph_infos();
+    <span class="kw">let </span>glyph_positions = glyph_buffer.glyph_positions();
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">glyph_infos</span>.<span class="ident">len</span>());
-    <span class="kw">for</span> (<span class="ident">info</span>, <span class="ident">pos</span>) <span class="kw">in</span> <span class="ident">glyph_infos</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">glyph_positions</span>.<span class="ident">iter</span>()) {
-        <span class="kw">let</span> <span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">x_advance</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="ident">font_scale</span>;
-        <span class="kw">let</span> <span class="ident">y_advance</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">y_advance</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="ident">font_scale</span>;
-        <span class="kw">let</span> <span class="ident">x_offset</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">x_offset</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="ident">font_scale</span>;
-        <span class="kw">let</span> <span class="ident">y_offset</span> <span class="op">=</span> <span class="ident">pos</span>.<span class="ident">y_offset</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="ident">font_scale</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>missing = Vec::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>glyphs = Vec::with_capacity(glyph_infos.len());
+    <span class="kw">for </span>(info, pos) <span class="kw">in </span>glyph_infos.iter().zip(glyph_positions.iter()) {
+        <span class="kw">let </span>x_advance = pos.x_advance <span class="kw">as </span>f32 / font_scale;
+        <span class="kw">let </span>y_advance = pos.y_advance <span class="kw">as </span>f32 / font_scale;
+        <span class="kw">let </span>x_offset = pos.x_offset <span class="kw">as </span>f32 / font_scale;
+        <span class="kw">let </span>y_offset = pos.y_offset <span class="kw">as </span>f32 / font_scale;
 
-        <span class="kw">let</span> <span class="ident">start_glyph</span> <span class="op">=</span> <span class="ident">start_run</span> <span class="op">+</span> <span class="ident">info</span>.<span class="ident">cluster</span> <span class="kw">as</span> <span class="ident">usize</span>;
+        <span class="kw">let </span>start_glyph = start_run + info.cluster <span class="kw">as </span>usize;
 
-        <span class="comment">//println!(&quot;  {:?} {:?}&quot;, info, pos);</span>
-        <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">missing</span>.<span class="ident">push</span>(<span class="ident">start_glyph</span>);
+        <span class="comment">//println!(&quot;  {:?} {:?}&quot;, info, pos);
+        </span><span class="kw">if </span>info.glyph_id == <span class="number">0 </span>{
+            missing.push(start_glyph);
         }
 
-        <span class="ident">glyphs</span>.<span class="ident">push</span>(<span class="ident">ShapeGlyph</span> {
-            <span class="ident">start</span>: <span class="ident">start_glyph</span>,
-            <span class="ident">end</span>: <span class="ident">end_run</span>, <span class="comment">// Set later</span>
-            <span class="ident">x_advance</span>,
-            <span class="ident">y_advance</span>,
-            <span class="ident">x_offset</span>,
-            <span class="ident">y_offset</span>,
-            <span class="ident">font_id</span>: <span class="ident">font</span>.<span class="ident">info</span>.<span class="ident">id</span>,
-            <span class="ident">glyph_id</span>: <span class="ident">info</span>.<span class="ident">glyph_id</span>.<span class="ident">try_into</span>().<span class="ident">expect</span>(<span class="string">&quot;failed to cast glyph ID&quot;</span>),
-            <span class="ident">color_opt</span>: <span class="prelude-val">None</span>,
+        glyphs.push(ShapeGlyph {
+            start: start_glyph,
+            end: end_run, <span class="comment">// Set later
+            </span>x_advance,
+            y_advance,
+            x_offset,
+            y_offset,
+            font_id: font.info.id,
+            glyph_id: info.glyph_id.try_into().expect(<span class="string">&quot;failed to cast glyph ID&quot;</span>),
+            color_opt: <span class="prelude-val">None</span>,
         });
     }
 
-    <span class="comment">// Adjust end of glyphs</span>
-    <span class="kw">if</span> <span class="ident">rtl</span> {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">glyphs</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">next_start</span> <span class="op">=</span> <span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">start</span>;
-            <span class="kw">let</span> <span class="ident">next_end</span> <span class="op">=</span> <span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">end</span>;
-            <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>[<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="ident">prev</span>.<span class="ident">start</span> <span class="op">==</span> <span class="ident">next_start</span> {
-                <span class="ident">prev</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">next_end</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">prev</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">next_start</span>;
+    <span class="comment">// Adjust end of glyphs
+    </span><span class="kw">if </span>rtl {
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..glyphs.len() {
+            <span class="kw">let </span>next_start = glyphs[i - <span class="number">1</span>].start;
+            <span class="kw">let </span>next_end = glyphs[i - <span class="number">1</span>].end;
+            <span class="kw">let </span>prev = <span class="kw-2">&amp;mut </span>glyphs[i];
+            <span class="kw">if </span>prev.start == next_start {
+                prev.end = next_end;
+            } <span class="kw">else </span>{
+                prev.end = next_start;
             }
         }
-    } <span class="kw">else</span> {
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">1</span>..<span class="ident">glyphs</span>.<span class="ident">len</span>()).<span class="ident">rev</span>() {
-            <span class="kw">let</span> <span class="ident">next_start</span> <span class="op">=</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">start</span>;
-            <span class="kw">let</span> <span class="ident">next_end</span> <span class="op">=</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">end</span>;
-            <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
-            <span class="kw">if</span> <span class="ident">prev</span>.<span class="ident">start</span> <span class="op">==</span> <span class="ident">next_start</span> {
-                <span class="ident">prev</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">next_end</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">prev</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">next_start</span>;
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">1</span>..glyphs.len()).rev() {
+            <span class="kw">let </span>next_start = glyphs[i].start;
+            <span class="kw">let </span>next_end = glyphs[i].end;
+            <span class="kw">let </span>prev = <span class="kw-2">&amp;mut </span>glyphs[i - <span class="number">1</span>];
+            <span class="kw">if </span>prev.start == next_start {
+                prev.end = next_end;
+            } <span class="kw">else </span>{
+                prev.end = next_start;
             }
         }
     }
 
-    <span class="comment">// Set color</span>
-    <span class="comment">//TODO: these attributes should not be related to shaping</span>
-    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span> {
-        <span class="kw">let</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">attrs_list</span>.<span class="ident">get_span</span>(<span class="ident">glyph</span>.<span class="ident">start</span>);
-        <span class="ident">glyph</span>.<span class="ident">color_opt</span> <span class="op">=</span> <span class="ident">attrs</span>.<span class="ident">color_opt</span>;
+    <span class="comment">// Set color
+    //TODO: these attributes should not be related to shaping
+    </span><span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;mut </span>glyphs {
+        <span class="kw">let </span>attrs = attrs_list.get_span(glyph.start);
+        glyph.color_opt = attrs.color_opt;
     }
 
-    (<span class="ident">glyphs</span>, <span class="ident">missing</span>)
+    (glyphs, missing)
 }
 
-<span class="kw">fn</span> <span class="ident">shape_run</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-    <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
-    <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">attrs_list</span>: <span class="kw-2">&amp;</span><span class="ident">AttrsList</span>,
-    <span class="ident">start_run</span>: <span class="ident">usize</span>,
-    <span class="ident">end_run</span>: <span class="ident">usize</span>,
-    <span class="ident">span_rtl</span>: <span class="ident">bool</span>,
-) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ShapeGlyph</span><span class="op">&gt;</span> {
-    <span class="comment">//TODO: use smallvec?</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scripts</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">line</span>[<span class="ident">start_run</span>..<span class="ident">end_run</span>].<span class="ident">chars</span>() {
-        <span class="kw">match</span> <span class="ident">c</span>.<span class="ident">script</span>() {
-            <span class="ident">Script::Common</span> <span class="op">|</span>
-            <span class="ident">Script::Inherited</span> <span class="op">|</span>
-            <span class="ident">Script::Latin</span> <span class="op">|</span>
-            <span class="ident">Script::Unknown</span> =&gt; (),
-            <span class="ident">script</span> =&gt; <span class="kw">if</span> <span class="op">!</span> <span class="ident">scripts</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">script</span>) {
-                <span class="ident">scripts</span>.<span class="ident">push</span>(<span class="ident">script</span>);
+<span class="kw">fn </span>shape_run&lt;<span class="lifetime">&#39;a</span>&gt;(
+    font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
+    line: <span class="kw-2">&amp;</span>str,
+    attrs_list: <span class="kw-2">&amp;</span>AttrsList,
+    start_run: usize,
+    end_run: usize,
+    span_rtl: bool,
+) -&gt; Vec&lt;ShapeGlyph&gt; {
+    <span class="comment">//TODO: use smallvec?
+    </span><span class="kw">let </span><span class="kw-2">mut </span>scripts = Vec::new();
+    <span class="kw">for </span>c <span class="kw">in </span>line[start_run..end_run].chars() {
+        <span class="kw">match </span>c.script() {
+            Script::Common |
+            Script::Inherited |
+            Script::Latin |
+            Script::Unknown =&gt; (),
+            script =&gt; <span class="kw">if </span>! scripts.contains(<span class="kw-2">&amp;</span>script) {
+                scripts.push(script);
             },
         }
     }
 
     <span class="macro">log::trace!</span>(
         <span class="string">&quot;      Run {:?}: &#39;{}&#39;&quot;</span>,
-        <span class="ident">scripts</span>,
-        <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">start_run</span>..<span class="ident">end_run</span>],
+        scripts,
+        <span class="kw-2">&amp;</span>line[start_run..end_run],
     );
 
-    <span class="kw">let</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">attrs_list</span>.<span class="ident">get_span</span>(<span class="ident">start_run</span>);
+    <span class="kw">let </span>attrs = attrs_list.get_span(start_run);
 
-    <span class="kw">let</span> <span class="ident">font_matches</span> <span class="op">=</span> <span class="ident">font_system</span>.<span class="ident">get_font_matches</span>(<span class="ident">attrs</span>);
+    <span class="kw">let </span>font_matches = font_system.get_font_matches(attrs);
 
-    <span class="kw">let</span> <span class="ident">default_families</span> <span class="op">=</span> [<span class="ident">font_matches</span>.<span class="ident">default_family</span>.<span class="ident">as_str</span>()];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">font_iter</span> <span class="op">=</span> <span class="ident">FontFallbackIter::new</span>(
-        <span class="kw-2">&amp;</span><span class="ident">font_matches</span>.<span class="ident">fonts</span>,
-        <span class="kw-2">&amp;</span><span class="ident">default_families</span>,
-        <span class="ident">scripts</span>,
-        <span class="ident">font_matches</span>.<span class="ident">locale</span>
+    <span class="kw">let </span>default_families = [font_matches.default_family.as_str()];
+    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(
+        <span class="kw-2">&amp;</span>font_matches.fonts,
+        <span class="kw-2">&amp;</span>default_families,
+        scripts,
+        font_matches.locale
     );
 
-    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">glyphs</span>, <span class="kw-2">mut</span> <span class="ident">missing</span>) <span class="op">=</span> <span class="ident">shape_fallback</span>(
-        <span class="ident">font_iter</span>.<span class="ident">next</span>().<span class="ident">expect</span>(<span class="string">&quot;no default font found&quot;</span>),
-        <span class="ident">line</span>,
-        <span class="ident">attrs_list</span>,
-        <span class="ident">start_run</span>,
-        <span class="ident">end_run</span>,
-        <span class="ident">span_rtl</span>,
+    <span class="kw">let </span>(<span class="kw-2">mut </span>glyphs, <span class="kw-2">mut </span>missing) = shape_fallback(
+        font_iter.next().expect(<span class="string">&quot;no default font found&quot;</span>),
+        line,
+        attrs_list,
+        start_run,
+        end_run,
+        span_rtl,
     );
 
-    <span class="comment">//TODO: improve performance!</span>
-    <span class="kw">while</span> <span class="op">!</span><span class="ident">missing</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">font_iter</span>.<span class="ident">next</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">some</span>) =&gt; <span class="ident">some</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+    <span class="comment">//TODO: improve performance!
+    </span><span class="kw">while </span>!missing.is_empty() {
+        <span class="kw">let </span>font = <span class="kw">match </span>font_iter.next() {
+            <span class="prelude-val">Some</span>(some) =&gt; some,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
         };
 
-        <span class="macro">log::trace!</span>(<span class="string">&quot;Evaluating fallback with font &#39;{}&#39;&quot;</span>, <span class="ident">font</span>.<span class="ident">info</span>.<span class="ident">family</span>);
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">fb_glyphs</span>, <span class="ident">fb_missing</span>) <span class="op">=</span> <span class="ident">shape_fallback</span>(
-            <span class="ident">font</span>,
-            <span class="ident">line</span>,
-            <span class="ident">attrs_list</span>,
-            <span class="ident">start_run</span>,
-            <span class="ident">end_run</span>,
-            <span class="ident">span_rtl</span>,
+        <span class="macro">log::trace!</span>(<span class="string">&quot;Evaluating fallback with font &#39;{}&#39;&quot;</span>, font.info.family);
+        <span class="kw">let </span>(<span class="kw-2">mut </span>fb_glyphs, fb_missing) = shape_fallback(
+            font,
+            line,
+            attrs_list,
+            start_run,
+            end_run,
+            span_rtl,
         );
 
-        <span class="comment">// Insert all matching glyphs</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fb_i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">while</span> <span class="ident">fb_i</span> <span class="op">&lt;</span> <span class="ident">fb_glyphs</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">fb_glyphs</span>[<span class="ident">fb_i</span>].<span class="ident">start</span>;
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">fb_glyphs</span>[<span class="ident">fb_i</span>].<span class="ident">end</span>;
+        <span class="comment">// Insert all matching glyphs
+        </span><span class="kw">let </span><span class="kw-2">mut </span>fb_i = <span class="number">0</span>;
+        <span class="kw">while </span>fb_i &lt; fb_glyphs.len() {
+            <span class="kw">let </span>start = fb_glyphs[fb_i].start;
+            <span class="kw">let </span>end = fb_glyphs[fb_i].end;
 
-            <span class="comment">// Skip clusters that are not missing, or where the fallback font is missing</span>
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">missing</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">start</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">fb_missing</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">start</span>) {
-                <span class="ident">fb_i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="comment">// Skip clusters that are not missing, or where the fallback font is missing
+            </span><span class="kw">if </span>!missing.contains(<span class="kw-2">&amp;</span>start) || fb_missing.contains(<span class="kw-2">&amp;</span>start) {
+                fb_i += <span class="number">1</span>;
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">missing_i</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">while</span> <span class="ident">missing_i</span> <span class="op">&lt;</span> <span class="ident">missing</span>.<span class="ident">len</span>() {
-                <span class="kw">if</span> <span class="ident">missing</span>[<span class="ident">missing_i</span>] <span class="op">&gt;</span><span class="op">=</span> <span class="ident">start</span> <span class="op">&amp;&amp;</span> <span class="ident">missing</span>[<span class="ident">missing_i</span>] <span class="op">&lt;</span> <span class="ident">end</span> {
-                    <span class="comment">// println!(&quot;No longer missing {}&quot;, missing[missing_i]);</span>
-                    <span class="ident">missing</span>.<span class="ident">remove</span>(<span class="ident">missing_i</span>);
-                } <span class="kw">else</span> {
-                    <span class="ident">missing_i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>missing_i = <span class="number">0</span>;
+            <span class="kw">while </span>missing_i &lt; missing.len() {
+                <span class="kw">if </span>missing[missing_i] &gt;= start &amp;&amp; missing[missing_i] &lt; end {
+                    <span class="comment">// println!(&quot;No longer missing {}&quot;, missing[missing_i]);
+                    </span>missing.remove(missing_i);
+                } <span class="kw">else </span>{
+                    missing_i += <span class="number">1</span>;
                 }
             }
 
-            <span class="comment">// Find prior glyphs</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">glyphs</span>.<span class="ident">len</span>() {
-                <span class="kw">if</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">start</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">start</span> <span class="op">&amp;&amp;</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">end</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
+            <span class="comment">// Find prior glyphs
+            </span><span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+            <span class="kw">while </span>i &lt; glyphs.len() {
+                <span class="kw">if </span>glyphs[i].start &gt;= start &amp;&amp; glyphs[i].end &lt;= end {
                     <span class="kw">break</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                } <span class="kw">else </span>{
+                    i += <span class="number">1</span>;
                 }
             }
 
-            <span class="comment">// Remove prior glyphs</span>
-            <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">glyphs</span>.<span class="ident">len</span>() {
-                <span class="kw">if</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">start</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">start</span> <span class="op">&amp;&amp;</span> <span class="ident">glyphs</span>[<span class="ident">i</span>].<span class="ident">end</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
-                    <span class="kw">let</span> <span class="ident">_glyph</span> <span class="op">=</span> <span class="ident">glyphs</span>.<span class="ident">remove</span>(<span class="ident">i</span>);
-                    <span class="comment">// log::trace!(&quot;Removed {},{} from {}&quot;, _glyph.start, _glyph.end, i);</span>
-                } <span class="kw">else</span> {
+            <span class="comment">// Remove prior glyphs
+            </span><span class="kw">while </span>i &lt; glyphs.len() {
+                <span class="kw">if </span>glyphs[i].start &gt;= start &amp;&amp; glyphs[i].end &lt;= end {
+                    <span class="kw">let </span>_glyph = glyphs.remove(i);
+                    <span class="comment">// log::trace!(&quot;Removed {},{} from {}&quot;, _glyph.start, _glyph.end, i);
+                </span>} <span class="kw">else </span>{
                     <span class="kw">break</span>;
                 }
             }
 
-            <span class="kw">while</span> <span class="ident">fb_i</span> <span class="op">&lt;</span> <span class="ident">fb_glyphs</span>.<span class="ident">len</span>() {
-                <span class="kw">if</span> <span class="ident">fb_glyphs</span>[<span class="ident">fb_i</span>].<span class="ident">start</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">start</span> <span class="op">&amp;&amp;</span> <span class="ident">fb_glyphs</span>[<span class="ident">fb_i</span>].<span class="ident">end</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">end</span> {
-                    <span class="kw">let</span> <span class="ident">fb_glyph</span> <span class="op">=</span> <span class="ident">fb_glyphs</span>.<span class="ident">remove</span>(<span class="ident">fb_i</span>);
-                    <span class="comment">// log::trace!(&quot;Insert {},{} from font {} at {}&quot;, fb_glyph.start, fb_glyph.end, font_i, i);</span>
-                    <span class="ident">glyphs</span>.<span class="ident">insert</span>(<span class="ident">i</span>, <span class="ident">fb_glyph</span>);
-                    <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> {
+            <span class="kw">while </span>fb_i &lt; fb_glyphs.len() {
+                <span class="kw">if </span>fb_glyphs[fb_i].start &gt;= start &amp;&amp; fb_glyphs[fb_i].end &lt;= end {
+                    <span class="kw">let </span>fb_glyph = fb_glyphs.remove(fb_i);
+                    <span class="comment">// log::trace!(&quot;Insert {},{} from font {} at {}&quot;, fb_glyph.start, fb_glyph.end, font_i, i);
+                    </span>glyphs.insert(i, fb_glyph);
+                    i += <span class="number">1</span>;
+                } <span class="kw">else </span>{
                     <span class="kw">break</span>;
                 }
             }
         }
     }
 
-    <span class="comment">// Debug missing font fallbacks</span>
-    <span class="ident">font_iter</span>.<span class="ident">check_missing</span>(<span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">start_run</span>..<span class="ident">end_run</span>]);
+    <span class="comment">// Debug missing font fallbacks
+    </span>font_iter.check_missing(<span class="kw-2">&amp;</span>line[start_run..end_run]);
 
     <span class="comment">/*
     for glyph in glyphs.iter() {
         log::trace!(&quot;&#39;{}&#39;: {}, {}, {}, {}&quot;, &amp;line[glyph.start..glyph.end], glyph.x_advance, glyph.y_advance, glyph.x_offset, glyph.y_offset);
     }
-    */</span>
+    */
 
-    <span class="ident">glyphs</span>
+    </span>glyphs
 }
 
-<span class="doccomment">/// A shaped glyph</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapeGlyph</span> {
-    <span class="kw">pub</span> <span class="ident">start</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">end</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">x_advance</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">y_advance</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">x_offset</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">y_offset</span>: <span class="ident">f32</span>,
-    <span class="kw">pub</span> <span class="ident">font_id</span>: <span class="ident">fontdb::ID</span>,
-    <span class="kw">pub</span> <span class="ident">glyph_id</span>: <span class="ident">u16</span>,
-    <span class="kw">pub</span> <span class="ident">color_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Color</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A shaped glyph
+</span><span class="kw">pub struct </span>ShapeGlyph {
+    <span class="kw">pub </span>start: usize,
+    <span class="kw">pub </span>end: usize,
+    <span class="kw">pub </span>x_advance: f32,
+    <span class="kw">pub </span>y_advance: f32,
+    <span class="kw">pub </span>x_offset: f32,
+    <span class="kw">pub </span>y_offset: f32,
+    <span class="kw">pub </span>font_id: fontdb::ID,
+    <span class="kw">pub </span>glyph_id: u16,
+    <span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ShapeGlyph</span> {
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">font_size</span>: <span class="ident">i32</span>, <span class="ident">x</span>: <span class="ident">f32</span>, <span class="ident">y</span>: <span class="ident">f32</span>, <span class="ident">rtl</span>: <span class="ident">bool</span>) -&gt; <span class="ident">LayoutGlyph</span> {
-        <span class="kw">let</span> <span class="ident">x_offset</span> <span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x_offset</span>;
-        <span class="kw">let</span> <span class="ident">y_offset</span> <span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">y_offset</span>;
-        <span class="kw">let</span> <span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x_advance</span>;
+<span class="kw">impl </span>ShapeGlyph {
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;</span><span class="self">self</span>, font_size: i32, x: f32, y: f32, rtl: bool) -&gt; LayoutGlyph {
+        <span class="kw">let </span>x_offset = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.x_offset;
+        <span class="kw">let </span>y_offset = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.y_offset;
+        <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.x_advance;
 
-        <span class="kw">let</span> (<span class="ident">cache_key</span>, <span class="ident">x_int</span>, <span class="ident">y_int</span>) <span class="op">=</span> <span class="ident">CacheKey::new</span>(
-            <span class="self">self</span>.<span class="ident">font_id</span>,
-            <span class="self">self</span>.<span class="ident">glyph_id</span>,
-            <span class="ident">font_size</span>,
-            (<span class="ident">x</span> <span class="op">+</span> <span class="ident">x_offset</span>, <span class="ident">y</span> <span class="op">-</span> <span class="ident">y_offset</span>)
+        <span class="kw">let </span>(cache_key, x_int, y_int) = CacheKey::new(
+            <span class="self">self</span>.font_id,
+            <span class="self">self</span>.glyph_id,
+            font_size,
+            (x + x_offset, y - y_offset)
         );
-        <span class="ident">LayoutGlyph</span> {
-            <span class="ident">start</span>: <span class="self">self</span>.<span class="ident">start</span>,
-            <span class="ident">end</span>: <span class="self">self</span>.<span class="ident">end</span>,
-            <span class="ident">x</span>,
-            <span class="ident">w</span>: <span class="ident">x_advance</span>,
-            <span class="ident">rtl</span>,
-            <span class="ident">cache_key</span>,
-            <span class="ident">x_int</span>,
-            <span class="ident">y_int</span>,
-            <span class="ident">color_opt</span>: <span class="self">self</span>.<span class="ident">color_opt</span>,
+        LayoutGlyph {
+            start: <span class="self">self</span>.start,
+            end: <span class="self">self</span>.end,
+            x,
+            w: x_advance,
+            rtl,
+            cache_key,
+            x_int,
+            y_int,
+            color_opt: <span class="self">self</span>.color_opt,
         }
     }
 }
 
-<span class="doccomment">/// A shaped word (for word wrapping)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapeWord</span> {
-    <span class="kw">pub</span> <span class="ident">blank</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">glyphs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ShapeGlyph</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A shaped word (for word wrapping)
+</span><span class="kw">pub struct </span>ShapeWord {
+    <span class="kw">pub </span>blank: bool,
+    <span class="kw">pub </span>glyphs: Vec&lt;ShapeGlyph&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ShapeWord</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-        <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
-        <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">attrs_list</span>: <span class="kw-2">&amp;</span><span class="ident">AttrsList</span>,
-        <span class="ident">start_word</span>: <span class="ident">usize</span>,
-        <span class="ident">end_word</span>: <span class="ident">usize</span>,
-        <span class="ident">span_rtl</span>: <span class="ident">bool</span>,
-        <span class="ident">blank</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">word</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">start_word</span>..<span class="ident">end_word</span>];
+<span class="kw">impl </span>ShapeWord {
+    <span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;a</span>&gt;(
+        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
+        line: <span class="kw-2">&amp;</span>str,
+        attrs_list: <span class="kw-2">&amp;</span>AttrsList,
+        start_word: usize,
+        end_word: usize,
+        span_rtl: bool,
+        blank: bool,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>word = <span class="kw-2">&amp;</span>line[start_word..end_word];
 
         <span class="macro">log::trace!</span>(
             <span class="string">&quot;      Word{}: &#39;{}&#39;&quot;</span>,
-            <span class="kw">if</span> <span class="ident">blank</span> { <span class="string">&quot; BLANK&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> },
-            <span class="ident">word</span>
+            <span class="kw">if </span>blank { <span class="string">&quot; BLANK&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;&quot; </span>},
+            word
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>glyphs = Vec::new();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start_run</span> <span class="op">=</span> <span class="ident">start_word</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">attrs_list</span>.<span class="ident">defaults</span>();
-        <span class="kw">for</span> (<span class="ident">egc_i</span>, <span class="ident">_egc</span>) <span class="kw">in</span> <span class="ident">word</span>.<span class="ident">grapheme_indices</span>(<span class="bool-val">true</span>) {
-            <span class="kw">let</span> <span class="ident">start_egc</span> <span class="op">=</span> <span class="ident">start_word</span> <span class="op">+</span> <span class="ident">egc_i</span>;
-            <span class="kw">let</span> <span class="ident">attrs_egc</span> <span class="op">=</span> <span class="ident">attrs_list</span>.<span class="ident">get_span</span>(<span class="ident">start_egc</span>);
-            <span class="kw">if</span> <span class="op">!</span> <span class="ident">attrs</span>.<span class="ident">compatible</span>(<span class="kw-2">&amp;</span><span class="ident">attrs_egc</span>) {
-                <span class="comment">//TODO: more efficient</span>
-                <span class="ident">glyphs</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">shape_run</span>(
-                    <span class="ident">font_system</span>,
-                    <span class="ident">line</span>,
-                    <span class="ident">attrs_list</span>,
-                    <span class="ident">start_run</span>,
-                    <span class="ident">start_egc</span>,
-                    <span class="ident">span_rtl</span>
+        <span class="kw">let </span><span class="kw-2">mut </span>start_run = start_word;
+        <span class="kw">let </span><span class="kw-2">mut </span>attrs = attrs_list.defaults();
+        <span class="kw">for </span>(egc_i, _egc) <span class="kw">in </span>word.grapheme_indices(<span class="bool-val">true</span>) {
+            <span class="kw">let </span>start_egc = start_word + egc_i;
+            <span class="kw">let </span>attrs_egc = attrs_list.get_span(start_egc);
+            <span class="kw">if </span>! attrs.compatible(<span class="kw-2">&amp;</span>attrs_egc) {
+                <span class="comment">//TODO: more efficient
+                </span>glyphs.append(<span class="kw-2">&amp;mut </span>shape_run(
+                    font_system,
+                    line,
+                    attrs_list,
+                    start_run,
+                    start_egc,
+                    span_rtl
                 ));
 
-                <span class="ident">start_run</span> <span class="op">=</span> <span class="ident">start_egc</span>;
-                <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">attrs_egc</span>;
+                start_run = start_egc;
+                attrs = attrs_egc;
             }
         }
-        <span class="kw">if</span> <span class="ident">start_run</span> <span class="op">&lt;</span> <span class="ident">end_word</span> {
-            <span class="comment">//TODO: more efficient</span>
-            <span class="ident">glyphs</span>.<span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">shape_run</span>(
-                <span class="ident">font_system</span>,
-                <span class="ident">line</span>,
-                <span class="ident">attrs_list</span>,
-                <span class="ident">start_run</span>,
-                <span class="ident">end_word</span>,
-                <span class="ident">span_rtl</span>
+        <span class="kw">if </span>start_run &lt; end_word {
+            <span class="comment">//TODO: more efficient
+            </span>glyphs.append(<span class="kw-2">&amp;mut </span>shape_run(
+                font_system,
+                line,
+                attrs_list,
+                start_run,
+                end_word,
+                span_rtl
             ));
         }
 
-        <span class="self">Self</span> { <span class="ident">blank</span>, <span class="ident">glyphs</span> }
+        <span class="self">Self </span>{ blank, glyphs }
     }
 }
 
-<span class="doccomment">/// A shaped span (for bidirectional processing)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapeSpan</span> {
-    <span class="kw">pub</span> <span class="ident">rtl</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">words</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ShapeWord</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A shaped span (for bidirectional processing)
+</span><span class="kw">pub struct </span>ShapeSpan {
+    <span class="kw">pub </span>rtl: bool,
+    <span class="kw">pub </span>words: Vec&lt;ShapeWord&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ShapeSpan</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-        <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
-        <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">attrs_list</span>: <span class="kw-2">&amp;</span><span class="ident">AttrsList</span>,
-        <span class="ident">start_span</span>: <span class="ident">usize</span>,
-        <span class="ident">end_span</span>: <span class="ident">usize</span>,
-        <span class="ident">line_rtl</span>: <span class="ident">bool</span>,
-        <span class="ident">span_rtl</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">start_span</span>..<span class="ident">end_span</span>];
+<span class="kw">impl </span>ShapeSpan {
+    <span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;a</span>&gt;(
+        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
+        line: <span class="kw-2">&amp;</span>str,
+        attrs_list: <span class="kw-2">&amp;</span>AttrsList,
+        start_span: usize,
+        end_span: usize,
+        line_rtl: bool,
+        span_rtl: bool,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>span = <span class="kw-2">&amp;</span>line[start_span..end_span];
 
         <span class="macro">log::trace!</span>(
             <span class="string">&quot;  Span {}: &#39;{}&#39;&quot;</span>,
-            <span class="kw">if</span> <span class="ident">span_rtl</span> { <span class="string">&quot;RTL&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;LTR&quot;</span> },
-            <span class="ident">span</span>
+            <span class="kw">if </span>span_rtl { <span class="string">&quot;RTL&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;LTR&quot; </span>},
+            span
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">words</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>words = Vec::new();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start_word</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> (<span class="ident">end_lb</span>, <span class="kw">_</span>) <span class="kw">in</span> <span class="ident">unicode_linebreak::linebreaks</span>(<span class="ident">span</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start_lb</span> <span class="op">=</span> <span class="ident">end_lb</span>;
-            <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">c</span>) <span class="kw">in</span> <span class="ident">span</span>[<span class="ident">start_word</span>..<span class="ident">end_lb</span>].<span class="ident">char_indices</span>() {
-                <span class="kw">if</span> <span class="ident">start_word</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">==</span> <span class="ident">end_lb</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>start_word = <span class="number">0</span>;
+        <span class="kw">for </span>(end_lb, <span class="kw">_</span>) <span class="kw">in </span>unicode_linebreak::linebreaks(span) {
+            <span class="kw">let </span><span class="kw-2">mut </span>start_lb = end_lb;
+            <span class="kw">for </span>(i, c) <span class="kw">in </span>span[start_word..end_lb].char_indices() {
+                <span class="kw">if </span>start_word + i == end_lb {
                     <span class="kw">break</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_whitespace</span>() {
-                    <span class="ident">start_lb</span> <span class="op">=</span> <span class="ident">start_word</span> <span class="op">+</span> <span class="ident">i</span>;
+                } <span class="kw">else if </span>c.is_whitespace() {
+                    start_lb = start_word + i;
                 }
             }
-            <span class="kw">if</span> <span class="ident">start_word</span> <span class="op">&lt;</span> <span class="ident">start_lb</span> {
-                <span class="ident">words</span>.<span class="ident">push</span>(<span class="ident">ShapeWord::new</span>(
-                    <span class="ident">font_system</span>,
-                    <span class="ident">line</span>,
-                    <span class="ident">attrs_list</span>,
-                    <span class="ident">start_span</span> <span class="op">+</span> <span class="ident">start_word</span>,
-                    <span class="ident">start_span</span> <span class="op">+</span> <span class="ident">start_lb</span>,
-                    <span class="ident">span_rtl</span>,
+            <span class="kw">if </span>start_word &lt; start_lb {
+                words.push(ShapeWord::new(
+                    font_system,
+                    line,
+                    attrs_list,
+                    start_span + start_word,
+                    start_span + start_lb,
+                    span_rtl,
                     <span class="bool-val">false</span>,
                 ));
             }
-            <span class="kw">if</span> <span class="ident">start_lb</span> <span class="op">&lt;</span> <span class="ident">end_lb</span> {
-                <span class="ident">words</span>.<span class="ident">push</span>(<span class="ident">ShapeWord::new</span>(
-                    <span class="ident">font_system</span>,
-                    <span class="ident">line</span>,
-                    <span class="ident">attrs_list</span>,
-                    <span class="ident">start_span</span> <span class="op">+</span> <span class="ident">start_lb</span>,
-                    <span class="ident">start_span</span> <span class="op">+</span> <span class="ident">end_lb</span>,
-                    <span class="ident">span_rtl</span>,
+            <span class="kw">if </span>start_lb &lt; end_lb {
+                words.push(ShapeWord::new(
+                    font_system,
+                    line,
+                    attrs_list,
+                    start_span + start_lb,
+                    start_span + end_lb,
+                    span_rtl,
                     <span class="bool-val">true</span>,
                 ));
             }
-            <span class="ident">start_word</span> <span class="op">=</span> <span class="ident">end_lb</span>;
+            start_word = end_lb;
         }
 
-        <span class="comment">// Reverse glyphs in RTL lines</span>
-        <span class="kw">if</span> <span class="ident">line_rtl</span> {
-            <span class="kw">for</span> <span class="ident">word</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">words</span> {
-                <span class="ident">word</span>.<span class="ident">glyphs</span>.<span class="ident">reverse</span>();
+        <span class="comment">// Reverse glyphs in RTL lines
+        </span><span class="kw">if </span>line_rtl {
+            <span class="kw">for </span>word <span class="kw">in </span><span class="kw-2">&amp;mut </span>words {
+                word.glyphs.reverse();
             }
         }
 
-        <span class="comment">// Reverse words in spans that do not match line direction</span>
-        <span class="kw">if</span> <span class="ident">line_rtl</span> <span class="op">!</span><span class="op">=</span> <span class="ident">span_rtl</span> {
-            <span class="ident">words</span>.<span class="ident">reverse</span>();
+        <span class="comment">// Reverse words in spans that do not match line direction
+        </span><span class="kw">if </span>line_rtl != span_rtl {
+            words.reverse();
         }
 
-        <span class="ident">ShapeSpan</span> {
-            <span class="ident">rtl</span>: <span class="ident">span_rtl</span>,
-            <span class="ident">words</span>,
+        ShapeSpan {
+            rtl: span_rtl,
+            words,
         }
     }
 }
 
-<span class="doccomment">/// A shaped line (or paragraph)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapeLine</span> {
-    <span class="kw">pub</span> <span class="ident">rtl</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">spans</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ShapeSpan</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A shaped line (or paragraph)
+</span><span class="kw">pub struct </span>ShapeLine {
+    <span class="kw">pub </span>rtl: bool,
+    <span class="kw">pub </span>spans: Vec&lt;ShapeSpan&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ShapeLine</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
-        <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">FontSystem</span>,
-        <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">attrs_list</span>: <span class="kw-2">&amp;</span><span class="ident">AttrsList</span>
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">spans</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+<span class="kw">impl </span>ShapeLine {
+    <span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;a</span>&gt;(
+        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
+        line: <span class="kw-2">&amp;</span>str,
+        attrs_list: <span class="kw-2">&amp;</span>AttrsList
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>spans = Vec::new();
 
-        <span class="kw">let</span> <span class="ident">bidi</span> <span class="op">=</span> <span class="ident">unicode_bidi::BidiInfo::new</span>(<span class="ident">line</span>, <span class="prelude-val">None</span>);
-        <span class="kw">let</span> <span class="ident">rtl</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">bidi</span>.<span class="ident">paragraphs</span>.<span class="ident">is_empty</span>() {
-            <span class="bool-val">false</span>
-        } <span class="kw">else</span> {
-            <span class="macro">assert_eq!</span>(<span class="ident">bidi</span>.<span class="ident">paragraphs</span>.<span class="ident">len</span>(), <span class="number">1</span>);
-            <span class="kw">let</span> <span class="ident">para_info</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">bidi</span>.<span class="ident">paragraphs</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">line_rtl</span> <span class="op">=</span> <span class="ident">para_info</span>.<span class="ident">level</span>.<span class="ident">is_rtl</span>();
+        <span class="kw">let </span>bidi = unicode_bidi::BidiInfo::new(line, <span class="prelude-val">None</span>);
+        <span class="kw">let </span>rtl = <span class="kw">if </span>bidi.paragraphs.is_empty() {
+            <span class="bool-val">false
+        </span>} <span class="kw">else </span>{
+            <span class="macro">assert_eq!</span>(bidi.paragraphs.len(), <span class="number">1</span>);
+            <span class="kw">let </span>para_info = <span class="kw-2">&amp;</span>bidi.paragraphs[<span class="number">0</span>];
+            <span class="kw">let </span>line_rtl = para_info.level.is_rtl();
 
-            <span class="macro">log::trace!</span>(<span class="string">&quot;Line {}: &#39;{}&#39;&quot;</span>, <span class="kw">if</span> <span class="ident">line_rtl</span> { <span class="string">&quot;RTL&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;LTR&quot;</span> }, <span class="ident">line</span>);
+            <span class="macro">log::trace!</span>(<span class="string">&quot;Line {}: &#39;{}&#39;&quot;</span>, <span class="kw">if </span>line_rtl { <span class="string">&quot;RTL&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;LTR&quot; </span>}, line);
 
-            <span class="kw">let</span> <span class="ident">paragraph</span> <span class="op">=</span> <span class="ident">unicode_bidi::Paragraph::new</span>(<span class="kw-2">&amp;</span><span class="ident">bidi</span>, <span class="ident">para_info</span>);
+            <span class="kw">let </span>line_range = para_info.range.clone();
+            <span class="kw">let </span>(levels, runs) = bidi.visual_runs(para_info, line_range);
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">span_rtl</span> <span class="op">=</span> <span class="ident">line_rtl</span>;
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">paragraph</span>.<span class="ident">para</span>.<span class="ident">range</span>.<span class="ident">clone</span>() {
-                <span class="kw">let</span> <span class="ident">next_rtl</span> <span class="op">=</span> <span class="ident">paragraph</span>.<span class="ident">info</span>.<span class="ident">levels</span>[<span class="ident">i</span>].<span class="ident">is_rtl</span>();
-                <span class="kw">if</span> <span class="ident">span_rtl</span> <span class="op">!</span><span class="op">=</span> <span class="ident">next_rtl</span> {
-                    <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">ShapeSpan::new</span>(
-                        <span class="ident">font_system</span>,
-                        <span class="ident">line</span>,
-                        <span class="ident">attrs_list</span>,
-                        <span class="ident">start</span>,
-                        <span class="ident">i</span>,
-                        <span class="ident">line_rtl</span>,
-                        <span class="ident">span_rtl</span>
+            <span class="kw">if </span>line_rtl {
+                <span class="kw">for </span>range <span class="kw">in </span>runs.into_iter().rev() {
+                    <span class="kw">let </span>span_rtl = levels[range.start].is_rtl(); 
+                    spans.push(ShapeSpan::new(
+                        font_system,
+                        line,
+                        attrs_list,
+                        range.start,
+                        range.end,
+                        line_rtl,
+                        span_rtl
                     ));
-                    <span class="ident">span_rtl</span> <span class="op">=</span> <span class="ident">next_rtl</span>;
-                    <span class="ident">start</span> <span class="op">=</span> <span class="ident">i</span>;
+                }
+
+            }
+            <span class="kw">else </span>{
+                <span class="kw">for </span>range <span class="kw">in </span>runs.into_iter() {
+                    <span class="kw">let </span>span_rtl = levels[range.start].is_rtl(); <span class="comment">//paragraph.info.levels[i].is_rtl();
+                    </span>spans.push(ShapeSpan::new(
+                        font_system,
+                        line,
+                        attrs_list,
+                        range.start,
+                        range.end,
+                        line_rtl,
+                        span_rtl
+                    ));
                 }
             }
-            <span class="ident">spans</span>.<span class="ident">push</span>(<span class="ident">ShapeSpan::new</span>(
-                <span class="ident">font_system</span>,
-                <span class="ident">line</span>,
-                <span class="ident">attrs_list</span>,
-                <span class="ident">start</span>,
-                <span class="ident">line</span>.<span class="ident">len</span>(),
-                <span class="ident">line_rtl</span>,
-                <span class="ident">span_rtl</span>
-            ));
 
-            <span class="ident">line_rtl</span>
+            line_rtl
         };
 
-        <span class="self">Self</span> { <span class="ident">rtl</span>, <span class="ident">spans</span> }
+        <span class="self">Self </span>{ rtl, spans}
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout</span>(
+    <span class="kw">pub fn </span>layout(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">font_size</span>: <span class="ident">i32</span>,
-        <span class="ident">line_width</span>: <span class="ident">i32</span>,
-        <span class="ident">wrap_simple</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">layout_lines</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">1</span>);
+        font_size: i32,
+        line_width: i32,
+        wrap_simple: bool,
+    ) -&gt; Vec&lt;LayoutLine&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>layout_lines = Vec::with_capacity(<span class="number">1</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">push_line</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>push_line = <span class="bool-val">true</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>glyphs = Vec::new();
 
-        <span class="kw">let</span> <span class="ident">start_x</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> { <span class="ident">line_width</span> <span class="kw">as</span> <span class="ident">f32</span> } <span class="kw">else</span> { <span class="number">0.0</span> };
-        <span class="kw">let</span> <span class="ident">end_x</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> { <span class="number">0.0</span> } <span class="kw">else</span> { <span class="ident">line_width</span> <span class="kw">as</span> <span class="ident">f32</span> };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
-        <span class="kw">for</span> <span class="ident">span</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">spans</span> {
-            <span class="comment">//TODO: improve performance!</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">word_ranges</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">if</span> <span class="ident">wrap_simple</span> {
-                <span class="ident">word_ranges</span>.<span class="ident">push</span>((<span class="number">0</span>..<span class="ident">span</span>.<span class="ident">words</span>.<span class="ident">len</span>(), <span class="bool-val">false</span>));
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> <span class="op">!</span><span class="op">=</span> <span class="ident">span</span>.<span class="ident">rtl</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fit_x</span> <span class="op">=</span> <span class="ident">x</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fitting_end</span> <span class="op">=</span> <span class="ident">span</span>.<span class="ident">words</span>.<span class="ident">len</span>();
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">span</span>.<span class="ident">words</span>.<span class="ident">len</span>()).<span class="ident">rev</span>() {
-                    <span class="kw">let</span> <span class="ident">word</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">span</span>.<span class="ident">words</span>[<span class="ident">i</span>];
+        <span class="kw">let </span>start_x = <span class="kw">if </span><span class="self">self</span>.rtl { line_width <span class="kw">as </span>f32 } <span class="kw">else </span>{ <span class="number">0.0 </span>};
+        <span class="kw">let </span>end_x = <span class="kw">if </span><span class="self">self</span>.rtl { <span class="number">0.0 </span>} <span class="kw">else </span>{ line_width <span class="kw">as </span>f32 };
+        <span class="kw">let </span><span class="kw-2">mut </span>x = start_x;
+        <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="number">0.0</span>;
+        <span class="kw">for </span>span <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.spans {
+            <span class="comment">//TODO: improve performance!
+            </span><span class="kw">let </span><span class="kw-2">mut </span>word_ranges = Vec::new();
+            <span class="kw">if </span>wrap_simple {
+                word_ranges.push((<span class="number">0</span>..span.words.len(), <span class="bool-val">false</span>));
+            } <span class="kw">else if </span><span class="self">self</span>.rtl != span.rtl {
+                <span class="kw">let </span><span class="kw-2">mut </span>fit_x = x;
+                <span class="kw">let </span><span class="kw-2">mut </span>fitting_end = span.words.len();
+                <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..span.words.len()).rev() {
+                    <span class="kw">let </span>word = <span class="kw-2">&amp;</span>span.words[i];
 
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">word_size</span> <span class="op">=</span> <span class="number">0.0</span>;
-                    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">word</span>.<span class="ident">glyphs</span> {
-                        <span class="ident">word_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">glyph</span>.<span class="ident">x_advance</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>word_size = <span class="number">0.0</span>;
+                    <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs {
+                        word_size += font_size <span class="kw">as </span>f32 * glyph.x_advance;
                     }
 
-                    <span class="kw">let</span> <span class="ident">wrap</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                        <span class="ident">fit_x</span> <span class="op">-</span> <span class="ident">word_size</span> <span class="op">&lt;</span> <span class="ident">end_x</span>
-                    } <span class="kw">else</span> {
-                        <span class="ident">fit_x</span> <span class="op">+</span> <span class="ident">word_size</span> <span class="op">&gt;</span> <span class="ident">end_x</span>
+                    <span class="kw">let </span>wrap = <span class="kw">if </span><span class="self">self</span>.rtl {
+                        fit_x - word_size &lt; end_x
+                    } <span class="kw">else </span>{
+                        fit_x + word_size &gt; end_x
                     };
 
-                    <span class="kw">if</span> <span class="ident">wrap</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fitting_start</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>;
-                        <span class="kw">while</span> <span class="ident">fitting_start</span> <span class="op">&lt;</span> <span class="ident">fitting_end</span> {
-                            <span class="kw">if</span> <span class="ident">span</span>.<span class="ident">words</span>[<span class="ident">fitting_start</span>].<span class="ident">blank</span> {
-                                <span class="ident">fitting_start</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            } <span class="kw">else</span> {
+                    <span class="kw">if </span>wrap {
+                        <span class="kw">let </span><span class="kw-2">mut </span>fitting_start = i + <span class="number">1</span>;
+                        <span class="kw">while </span>fitting_start &lt; fitting_end {
+                            <span class="kw">if </span>span.words[fitting_start].blank {
+                                fitting_start += <span class="number">1</span>;
+                            } <span class="kw">else </span>{
                                 <span class="kw">break</span>;
                             }
                         }
-                        <span class="ident">word_ranges</span>.<span class="ident">push</span>((<span class="ident">fitting_start</span>..<span class="ident">fitting_end</span>, <span class="bool-val">true</span>));
-                        <span class="ident">fitting_end</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>;
+                        word_ranges.push((fitting_start..fitting_end, <span class="bool-val">true</span>));
+                        fitting_end = i + <span class="number">1</span>;
 
-                        <span class="ident">fit_x</span> <span class="op">=</span> <span class="ident">start_x</span>;
+                        fit_x = start_x;
                     }
 
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                        <span class="ident">fit_x</span> <span class="op">-</span><span class="op">=</span> <span class="ident">word_size</span>;
-                    } <span class="kw">else</span> {
-                        <span class="ident">fit_x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">word_size</span>;
+                    <span class="kw">if </span><span class="self">self</span>.rtl {
+                        fit_x -= word_size;
+                    } <span class="kw">else </span>{
+                        fit_x += word_size;
                     }
                 }
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">word_ranges</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">while</span> <span class="ident">fitting_end</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                        <span class="kw">if</span> <span class="ident">span</span>.<span class="ident">words</span>[<span class="ident">fitting_end</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">blank</span> {
-                            <span class="ident">fitting_end</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                        } <span class="kw">else</span> {
+                <span class="kw">if </span>!word_ranges.is_empty() {
+                    <span class="kw">while </span>fitting_end &gt; <span class="number">0 </span>{
+                        <span class="kw">if </span>span.words[fitting_end - <span class="number">1</span>].blank {
+                            fitting_end -= <span class="number">1</span>;
+                        } <span class="kw">else </span>{
                             <span class="kw">break</span>;
                         }
                     }
                 }
-                <span class="ident">word_ranges</span>.<span class="ident">push</span>((<span class="number">0</span>..<span class="ident">fitting_end</span>, <span class="bool-val">false</span>));
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fit_x</span> <span class="op">=</span> <span class="ident">x</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fitting_start</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">span</span>.<span class="ident">words</span>.<span class="ident">len</span>() {
-                    <span class="kw">let</span> <span class="ident">word</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">span</span>.<span class="ident">words</span>[<span class="ident">i</span>];
+                word_ranges.push((<span class="number">0</span>..fitting_end, <span class="bool-val">false</span>));
+            } <span class="kw">else </span>{
+                <span class="kw">let </span><span class="kw-2">mut </span>fit_x = x;
+                <span class="kw">let </span><span class="kw-2">mut </span>fitting_start = <span class="number">0</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..span.words.len() {
+                    <span class="kw">let </span>word = <span class="kw-2">&amp;</span>span.words[i];
 
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">word_size</span> <span class="op">=</span> <span class="number">0.0</span>;
-                    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">word</span>.<span class="ident">glyphs</span> {
-                        <span class="ident">word_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">glyph</span>.<span class="ident">x_advance</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>word_size = <span class="number">0.0</span>;
+                    <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs {
+                        word_size += font_size <span class="kw">as </span>f32 * glyph.x_advance;
                     }
 
-                    <span class="kw">let</span> <span class="ident">wrap</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                        <span class="ident">fit_x</span> <span class="op">-</span> <span class="ident">word_size</span> <span class="op">&lt;</span> <span class="ident">end_x</span>
-                    } <span class="kw">else</span> {
-                        <span class="ident">fit_x</span> <span class="op">+</span> <span class="ident">word_size</span> <span class="op">&gt;</span> <span class="ident">end_x</span>
+                    <span class="kw">let </span>wrap = <span class="kw">if </span><span class="self">self</span>.rtl {
+                        fit_x - word_size &lt; end_x
+                    } <span class="kw">else </span>{
+                        fit_x + word_size &gt; end_x
                     };
 
-                    <span class="kw">if</span> <span class="ident">wrap</span> {
-                        <span class="comment">//TODO: skip blanks</span>
-                        <span class="ident">word_ranges</span>.<span class="ident">push</span>((<span class="ident">fitting_start</span>..<span class="ident">i</span>, <span class="bool-val">true</span>));
-                        <span class="ident">fitting_start</span> <span class="op">=</span> <span class="ident">i</span>;
+                    <span class="kw">if </span>wrap {
+                        <span class="comment">//TODO: skip blanks
+                        </span>word_ranges.push((fitting_start..i, <span class="bool-val">true</span>));
+                        fitting_start = i;
 
-                        <span class="ident">fit_x</span> <span class="op">=</span> <span class="ident">start_x</span>;
+                        fit_x = start_x;
                     }
 
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                        <span class="ident">fit_x</span> <span class="op">-</span><span class="op">=</span> <span class="ident">word_size</span>;
-                    } <span class="kw">else</span> {
-                        <span class="ident">fit_x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">word_size</span>;
+                    <span class="kw">if </span><span class="self">self</span>.rtl {
+                        fit_x -= word_size;
+                    } <span class="kw">else </span>{
+                        fit_x += word_size;
                     }
                 }
-                <span class="ident">word_ranges</span>.<span class="ident">push</span>((<span class="ident">fitting_start</span>..<span class="ident">span</span>.<span class="ident">words</span>.<span class="ident">len</span>(), <span class="bool-val">false</span>));
+                word_ranges.push((fitting_start..span.words.len(), <span class="bool-val">false</span>));
             }
 
-            <span class="kw">for</span> (<span class="ident">range</span>, <span class="ident">wrap</span>) <span class="kw">in</span> <span class="ident">word_ranges</span> {
-                <span class="kw">for</span> <span class="ident">word</span> <span class="kw">in</span> <span class="ident">span</span>.<span class="ident">words</span>[<span class="ident">range</span>].<span class="ident">iter</span>() {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">word_size</span> <span class="op">=</span> <span class="number">0.0</span>;
-                    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">word</span>.<span class="ident">glyphs</span> {
-                        <span class="ident">word_size</span> <span class="op">+</span><span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">glyph</span>.<span class="ident">x_advance</span>;
+            <span class="kw">for </span>(range, wrap) <span class="kw">in </span>word_ranges {
+                <span class="kw">for </span>word <span class="kw">in </span>span.words[range].iter() {
+                    <span class="kw">let </span><span class="kw-2">mut </span>word_size = <span class="number">0.0</span>;
+                    <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs {
+                        word_size += font_size <span class="kw">as </span>f32 * glyph.x_advance;
                     }
 
-                    <span class="kw">let</span> <span class="ident">word_wrap</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                        <span class="ident">x</span> <span class="op">-</span> <span class="ident">word_size</span> <span class="op">&lt;</span> <span class="ident">end_x</span>
-                    } <span class="kw">else</span> {
-                        <span class="ident">x</span> <span class="op">+</span> <span class="ident">word_size</span> <span class="op">&gt;</span> <span class="ident">end_x</span>
+                    <span class="kw">let </span>word_wrap = <span class="kw">if </span><span class="self">self</span>.rtl {
+                        x - word_size &lt; end_x
+                    } <span class="kw">else </span>{
+                        x + word_size &gt; end_x
                     };
-                    <span class="kw">if</span> <span class="ident">word_wrap</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">wrap_simple</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">glyphs</span>.<span class="ident">is_empty</span>() {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                        <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                        <span class="ident">layout_lines</span>.<span class="ident">push</span>(
-                            <span class="ident">LayoutLine</span> {
-                                <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
+                    <span class="kw">if </span>word_wrap &amp;&amp; !wrap_simple &amp;&amp; !glyphs.is_empty() {
+                        <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
+                        mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
+                        layout_lines.push(
+                            LayoutLine {
+                                glyphs: glyphs_swap,
                             },
                         );
 
-                        <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
-                        <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
+                        x = start_x;
+                        y = <span class="number">0.0</span>;
                     }
 
-                    <span class="kw">for</span> <span class="ident">glyph</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">word</span>.<span class="ident">glyphs</span> {
-                        <span class="kw">let</span> <span class="ident">x_advance</span> <span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">glyph</span>.<span class="ident">x_advance</span>;
-                        <span class="kw">let</span> <span class="ident">y_advance</span> <span class="op">=</span> <span class="ident">font_size</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">*</span> <span class="ident">glyph</span>.<span class="ident">y_advance</span>;
+                    <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs {
+                        <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
+                        <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
 
-                        <span class="comment">//TODO: fix ordering when in bidi text</span>
-                        <span class="kw">let</span> <span class="ident">glyph_wrap</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                            <span class="ident">x</span> <span class="op">-</span> <span class="ident">x_advance</span> <span class="op">&lt;</span> <span class="ident">end_x</span>
-                        } <span class="kw">else</span> {
-                            <span class="ident">x</span> <span class="op">+</span> <span class="ident">x_advance</span> <span class="op">&gt;</span> <span class="ident">end_x</span>
+                        <span class="comment">//TODO: fix ordering when in bidi text
+                        </span><span class="kw">let </span>glyph_wrap = <span class="kw">if </span><span class="self">self</span>.rtl {
+                            x - x_advance &lt; end_x
+                        } <span class="kw">else </span>{
+                            x + x_advance &gt; end_x
                         };
 
-                        <span class="kw">if</span> <span class="ident">glyph_wrap</span> {
-                            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                            <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                            <span class="ident">layout_lines</span>.<span class="ident">push</span>(
-                                <span class="ident">LayoutLine</span> {
-                                    <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
+                        <span class="kw">if </span>glyph_wrap {
+                            <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
+                            mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
+                            layout_lines.push(
+                                LayoutLine {
+                                    glyphs: glyphs_swap,
                                 },
                             );
 
-                            <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
-                            <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
+                            x = start_x;
+                            y = <span class="number">0.0</span>;
                         }
 
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rtl</span> {
-                            <span class="ident">x</span> <span class="op">-</span><span class="op">=</span> <span class="ident">x_advance</span>;
+                        <span class="kw">if </span><span class="self">self</span>.rtl {
+                            x -= x_advance;
                         }
 
-                        <span class="ident">glyphs</span>.<span class="ident">push</span>(<span class="ident">glyph</span>.<span class="ident">layout</span>(<span class="ident">font_size</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">span</span>.<span class="ident">rtl</span>));
-                        <span class="ident">push_line</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                        glyphs.push(glyph.layout(font_size, x, y, span.rtl));
+                        push_line = <span class="bool-val">true</span>;
 
-                        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">rtl</span> {
-                            <span class="ident">x</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x_advance</span>;
+                        <span class="kw">if </span>!<span class="self">self</span>.rtl {
+                            x += x_advance;
                         }
-                        <span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="ident">y_advance</span>;
+                        y += y_advance;
                     }
                 }
 
-                <span class="kw">if</span> <span class="ident">wrap</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyphs_swap</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-                    <span class="ident">mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">glyphs</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyphs_swap</span>);
-                    <span class="ident">layout_lines</span>.<span class="ident">push</span>(
-                        <span class="ident">LayoutLine</span> {
-                            <span class="ident">glyphs</span>: <span class="ident">glyphs_swap</span>,
+                <span class="kw">if </span>wrap {
+                    <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
+                    mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
+                    layout_lines.push(
+                        LayoutLine {
+                            glyphs: glyphs_swap,
                         },
                     );
 
-                    <span class="ident">x</span> <span class="op">=</span> <span class="ident">start_x</span>;
-                    <span class="ident">y</span> <span class="op">=</span> <span class="number">0.0</span>;
+                    x = start_x;
+                    y = <span class="number">0.0</span>;
                 }
             }
         }
 
-        <span class="kw">if</span> <span class="ident">push_line</span> {
-            <span class="ident">layout_lines</span>.<span class="ident">push</span>(
-                <span class="ident">LayoutLine</span> {
-                    <span class="ident">glyphs</span>,
+        <span class="kw">if </span>push_line {
+            layout_lines.push(
+                LayoutLine {
+                    glyphs,
                 },
             );
         }
 
-        <span class="ident">layout_lines</span>
+        layout_lines
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

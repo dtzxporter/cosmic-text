@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/mask.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mask.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/mask.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mask.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -448,455 +448,455 @@
 <span id="448">448</span>
 <span id="449">449</span>
 <span id="450">450</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Mask generator.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Mask generator.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::{<span class="ident">Origin</span>, <span class="ident">Placement</span>, <span class="ident">Transform</span>, <span class="ident">Vector</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_data</span>::{<span class="ident">apply</span>, <span class="ident">PathData</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::scratch::Scratch</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::style</span>::{<span class="ident">Fill</span>, <span class="ident">Style</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::geometry::{Origin, Placement, Transform, Vector};
+<span class="kw">use </span><span class="kw">super</span>::path_data::{apply, PathData};
+<span class="kw">use </span><span class="kw">super</span>::scratch::Scratch;
+<span class="kw">use </span><span class="kw">super</span>::style::{Fill, Style};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::lib::Vec</span>;
-<span class="kw">use</span> <span class="ident">core::cell::RefCell</span>;
+<span class="kw">use </span><span class="kw">crate</span>::lib::Vec;
+<span class="kw">use </span>core::cell::RefCell;
 
-<span class="doccomment">/// The desired output image format for rendering.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Format</span> {
-    <span class="doccomment">/// 8-bit alpha mask.</span>
-    <span class="ident">Alpha</span>,
-    <span class="doccomment">/// 32-bit RGBA subpixel mask with 1/3 pixel offsets for the red and</span>
-    <span class="doccomment">/// blue channels.</span>
-    <span class="ident">Subpixel</span>,
-    <span class="doccomment">/// 32-bit RGBA subpixel mask with custom offsets.</span>
-    <span class="ident">CustomSubpixel</span>([<span class="ident">f32</span>; <span class="number">3</span>]),
+<span class="doccomment">/// The desired output image format for rendering.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Debug)]
+</span><span class="kw">pub enum </span>Format {
+    <span class="doccomment">/// 8-bit alpha mask.
+    </span>Alpha,
+    <span class="doccomment">/// 32-bit RGBA subpixel mask with 1/3 pixel offsets for the red and
+    /// blue channels.
+    </span>Subpixel,
+    <span class="doccomment">/// 32-bit RGBA subpixel mask with custom offsets.
+    </span>CustomSubpixel([f32; <span class="number">3</span>]),
 }
 
-<span class="kw">impl</span> <span class="ident">Format</span> {
-    <span class="doccomment">/// Creates a format for BGRA subpixel rendering.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">subpixel_bgra</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::CustomSubpixel</span>([<span class="number">0.3</span>, <span class="number">0.</span>, <span class="op">-</span><span class="number">0.3</span>])
+<span class="kw">impl </span>Format {
+    <span class="doccomment">/// Creates a format for BGRA subpixel rendering.
+    </span><span class="kw">pub fn </span>subpixel_bgra() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::CustomSubpixel([<span class="number">0.3</span>, <span class="number">0.</span>, -<span class="number">0.3</span>])
     }
 
-    <span class="doccomment">/// Returns the necessary buffer size to hold an image of the specified</span>
-    <span class="doccomment">/// width and height with this format.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buffer_size</span>(<span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">usize</span> {
-        (<span class="ident">width</span>
-            <span class="op">*</span> <span class="ident">height</span>
-            <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident"><span class="self">Self</span>::Alpha</span> =&gt; <span class="number">1</span>,
-                <span class="kw">_</span> =&gt; <span class="number">4</span>,
-            }) <span class="kw">as</span> <span class="ident">usize</span>
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Format</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Alpha</span>
+    <span class="doccomment">/// Returns the necessary buffer size to hold an image of the specified
+    /// width and height with this format.
+    </span><span class="kw">pub fn </span>buffer_size(<span class="self">self</span>, width: u32, height: u32) -&gt; usize {
+        (width
+            * height
+            * <span class="kw">match </span><span class="self">self </span>{
+                <span class="self">Self</span>::Alpha =&gt; <span class="number">1</span>,
+                <span class="kw">_ </span>=&gt; <span class="number">4</span>,
+            }) <span class="kw">as </span>usize
     }
 }
 
-<span class="doccomment">/// Builder for configuring and rendering a mask.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Mask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, <span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">D</span>,
-    <span class="ident">style</span>: <span class="ident">Style</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">transform</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span>,
-    <span class="ident">format</span>: <span class="ident">Format</span>,
-    <span class="ident">origin</span>: <span class="ident">Origin</span>,
-    <span class="ident">offset</span>: <span class="ident">Vector</span>,
-    <span class="ident">render_offset</span>: <span class="ident">Vector</span>,
-    <span class="ident">width</span>: <span class="ident">u32</span>,
-    <span class="ident">height</span>: <span class="ident">u32</span>,
-    <span class="ident">explicit_size</span>: <span class="ident">bool</span>,
-    <span class="ident">has_size</span>: <span class="ident">bool</span>,
-    <span class="ident">bounds_offset</span>: <span class="ident">Vector</span>,
-    <span class="ident">scratch</span>: <span class="ident">RefCell</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;s</span> <span class="kw-2">mut</span> <span class="ident">Scratch</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>Format {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Alpha
+    }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Mask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, <span class="ident">D</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">PathData</span>,
+<span class="doccomment">/// Builder for configuring and rendering a mask.
+</span><span class="kw">pub struct </span>Mask&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, D&gt; {
+    data: D,
+    style: Style&lt;<span class="lifetime">&#39;a</span>&gt;,
+    transform: <span class="prelude-ty">Option</span>&lt;Transform&gt;,
+    format: Format,
+    origin: Origin,
+    offset: Vector,
+    render_offset: Vector,
+    width: u32,
+    height: u32,
+    explicit_size: bool,
+    has_size: bool,
+    bounds_offset: Vector,
+    scratch: RefCell&lt;<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span><span class="kw-2">mut </span>Scratch&gt;&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, D&gt; Mask&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;s</span>, D&gt;
+<span class="kw">where
+    </span>D: PathData,
 {
-    <span class="doccomment">/// Creates a new mask builder for the specified path data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="ident">D</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">style</span>: <span class="ident">Style::Fill</span>(<span class="ident">Fill::NonZero</span>),
-            <span class="ident">transform</span>: <span class="prelude-val">None</span>,
-            <span class="ident">format</span>: <span class="ident">Format::Alpha</span>,
-            <span class="ident">origin</span>: <span class="ident">Origin::TopLeft</span>,
-            <span class="ident">offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">render_offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">width</span>: <span class="number">0</span>,
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">explicit_size</span>: <span class="bool-val">false</span>,
-            <span class="ident">has_size</span>: <span class="bool-val">false</span>,
-            <span class="ident">bounds_offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">scratch</span>: <span class="ident">RefCell::new</span>(<span class="prelude-val">None</span>),
+    <span class="doccomment">/// Creates a new mask builder for the specified path data.
+    </span><span class="kw">pub fn </span>new(data: D) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            data,
+            style: Style::Fill(Fill::NonZero),
+            transform: <span class="prelude-val">None</span>,
+            format: Format::Alpha,
+            origin: Origin::TopLeft,
+            offset: Vector::ZERO,
+            render_offset: Vector::ZERO,
+            width: <span class="number">0</span>,
+            height: <span class="number">0</span>,
+            explicit_size: <span class="bool-val">false</span>,
+            has_size: <span class="bool-val">false</span>,
+            bounds_offset: Vector::ZERO,
+            scratch: RefCell::new(<span class="prelude-val">None</span>),
         }
     }
 
-    <span class="doccomment">/// Creates a new mask builder for the specified path data and scratch memory.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_scratch</span>(<span class="ident">data</span>: <span class="ident">D</span>, <span class="ident">scratch</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;s</span> <span class="kw-2">mut</span> <span class="ident">Scratch</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">style</span>: <span class="ident">Style::Fill</span>(<span class="ident">Fill::NonZero</span>),
-            <span class="ident">transform</span>: <span class="prelude-val">None</span>,
-            <span class="ident">format</span>: <span class="ident">Format::Alpha</span>,
-            <span class="ident">origin</span>: <span class="ident">Origin::TopLeft</span>,
-            <span class="ident">offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">render_offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">width</span>: <span class="number">0</span>,
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">explicit_size</span>: <span class="bool-val">false</span>,
-            <span class="ident">has_size</span>: <span class="bool-val">false</span>,
-            <span class="ident">bounds_offset</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">scratch</span>: <span class="ident">RefCell::new</span>(<span class="prelude-val">Some</span>(<span class="ident">scratch</span>)),
+    <span class="doccomment">/// Creates a new mask builder for the specified path data and scratch memory.
+    </span><span class="kw">pub fn </span>with_scratch(data: D, scratch: <span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span><span class="kw-2">mut </span>Scratch) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            data,
+            style: Style::Fill(Fill::NonZero),
+            transform: <span class="prelude-val">None</span>,
+            format: Format::Alpha,
+            origin: Origin::TopLeft,
+            offset: Vector::ZERO,
+            render_offset: Vector::ZERO,
+            width: <span class="number">0</span>,
+            height: <span class="number">0</span>,
+            explicit_size: <span class="bool-val">false</span>,
+            has_size: <span class="bool-val">false</span>,
+            bounds_offset: Vector::ZERO,
+            scratch: RefCell::new(<span class="prelude-val">Some</span>(scratch)),
         }
     }
 
-    <span class="doccomment">/// Sets the style of the path. The default is a non-zero fill.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">style</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">style</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Style</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">style</span> <span class="op">=</span> <span class="ident">style</span>.<span class="ident">into</span>();
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets the style of the path. The default is a non-zero fill.
+    </span><span class="kw">pub fn </span>style(<span class="kw-2">&amp;mut </span><span class="self">self</span>, style: <span class="kw">impl </span>Into&lt;Style&lt;<span class="lifetime">&#39;a</span>&gt;&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.style = style.into();
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets the transformation matrix of the path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">transform</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">transform</span> <span class="op">=</span> <span class="ident">transform</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets the transformation matrix of the path.
+    </span><span class="kw">pub fn </span>transform(<span class="kw-2">&amp;mut </span><span class="self">self</span>, transform: <span class="prelude-ty">Option</span>&lt;Transform&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.transform = transform;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets the desired format of the mask. The default value is an 8-bit</span>
-    <span class="doccomment">/// alpha format.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">format</span>: <span class="ident">Format</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">format</span> <span class="op">=</span> <span class="ident">format</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets the desired format of the mask. The default value is an 8-bit
+    /// alpha format.
+    </span><span class="kw">pub fn </span>format(<span class="kw-2">&amp;mut </span><span class="self">self</span>, format: Format) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.format = format;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets the origin that defines the coordinate system for the mask.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">origin</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">origin</span>: <span class="ident">Origin</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">origin</span> <span class="op">=</span> <span class="ident">origin</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets the origin that defines the coordinate system for the mask.
+    </span><span class="kw">pub fn </span>origin(<span class="kw-2">&amp;mut </span><span class="self">self</span>, origin: Origin) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.origin = origin;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets the offset for the path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">offset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">offset</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset</span>.<span class="ident">into</span>();
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets the offset for the path.
+    </span><span class="kw">pub fn </span>offset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: <span class="kw">impl </span>Into&lt;Vector&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.offset = offset.into();
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets an explicit size for the mask. If left unspecified, the size will</span>
-    <span class="doccomment">/// be computed from the bounding box of the path after applying any</span>
-    <span class="doccomment">/// relevant style, offset and transform.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">width</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">height</span>;
-        <span class="self">self</span>.<span class="ident">explicit_size</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>.<span class="ident">has_size</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets an explicit size for the mask. If left unspecified, the size will
+    /// be computed from the bounding box of the path after applying any
+    /// relevant style, offset and transform.
+    </span><span class="kw">pub fn </span>size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, width: u32, height: u32) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.width = width;
+        <span class="self">self</span>.height = height;
+        <span class="self">self</span>.explicit_size = <span class="bool-val">true</span>;
+        <span class="self">self</span>.has_size = <span class="bool-val">true</span>;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Sets an additional rendering offset for the mask. This offset does not</span>
-    <span class="doccomment">/// affect bounds or size computations and is only applied during</span>
-    <span class="doccomment">/// rendering.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render_offset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">offset</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">render_offset</span> <span class="op">=</span> <span class="ident">offset</span>.<span class="ident">into</span>();
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Sets an additional rendering offset for the mask. This offset does not
+    /// affect bounds or size computations and is only applied during
+    /// rendering.
+    </span><span class="kw">pub fn </span>render_offset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, offset: <span class="kw">impl </span>Into&lt;Vector&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.render_offset = offset.into();
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Invokes a closure with the format, width and height of the mask provided</span>
-    <span class="doccomment">/// as arguments. This is primarily useful for preparing a target buffer without</span>
-    <span class="doccomment">/// interrupting the call chain.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inspect</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Format</span>, <span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">ensure_size</span>();
-        <span class="ident">f</span>(<span class="self">self</span>.<span class="ident">format</span>, <span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>);
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Invokes a closure with the format, width and height of the mask provided
+    /// as arguments. This is primarily useful for preparing a target buffer without
+    /// interrupting the call chain.
+    </span><span class="kw">pub fn </span>inspect(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>f: <span class="kw">impl </span>FnMut(Format, u32, u32)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.ensure_size();
+        f(<span class="self">self</span>.format, <span class="self">self</span>.width, <span class="self">self</span>.height);
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Renders the mask into a byte buffer. If specified, the pitch describes</span>
-    <span class="doccomment">/// the number of bytes between subsequent rows of the target buffer. This</span>
-    <span class="doccomment">/// is primarily useful for rendering into tiled images such as texture</span>
-    <span class="doccomment">/// atlases. If left unspecified, the buffer is assumed to be linear and</span>
-    <span class="doccomment">/// tightly packed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render_into</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>], <span class="ident">pitch</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>) -&gt; <span class="ident">Placement</span> {
-        <span class="kw">let</span> (<span class="ident">offset</span>, <span class="ident">placement</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">placement</span>();
-        <span class="kw">let</span> <span class="ident">pitch</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">pitch</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">pitch</span>) =&gt; <span class="ident">pitch</span>,
-            <span class="kw">_</span> =&gt; {
-                <span class="ident">placement</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>
-                    <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">format</span> {
-                        <span class="ident">Format::Alpha</span> =&gt; <span class="number">1</span>,
-                        <span class="kw">_</span> =&gt; <span class="number">4</span>,
+    <span class="doccomment">/// Renders the mask into a byte buffer. If specified, the pitch describes
+    /// the number of bytes between subsequent rows of the target buffer. This
+    /// is primarily useful for rendering into tiled images such as texture
+    /// atlases. If left unspecified, the buffer is assumed to be linear and
+    /// tightly packed.
+    </span><span class="kw">pub fn </span>render_into(<span class="kw-2">&amp;</span><span class="self">self</span>, buffer: <span class="kw-2">&amp;mut </span>[u8], pitch: <span class="prelude-ty">Option</span>&lt;usize&gt;) -&gt; Placement {
+        <span class="kw">let </span>(offset, placement) = <span class="self">self</span>.placement();
+        <span class="kw">let </span>pitch = <span class="kw">match </span>pitch {
+            <span class="prelude-val">Some</span>(pitch) =&gt; pitch,
+            <span class="kw">_ </span>=&gt; {
+                placement.width <span class="kw">as </span>usize
+                    * <span class="kw">match </span><span class="self">self</span>.format {
+                        Format::Alpha =&gt; <span class="number">1</span>,
+                        <span class="kw">_ </span>=&gt; <span class="number">4</span>,
                     }
             }
         };
-        <span class="ident">render</span>(<span class="self">self</span>, <span class="ident">offset</span>, <span class="kw-2">&amp;</span><span class="ident">placement</span>, <span class="ident">buffer</span>, <span class="ident">pitch</span>);
-        <span class="ident">placement</span>
+        render(<span class="self">self</span>, offset, <span class="kw-2">&amp;</span>placement, buffer, pitch);
+        placement
     }
 
-    <span class="doccomment">/// Renders the mask to a newly allocated buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">Placement</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> (<span class="ident">offset</span>, <span class="ident">placement</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">placement</span>();
-        <span class="ident">buf</span>.<span class="ident">resize</span>(
-            <span class="self">self</span>.<span class="ident">format</span>.<span class="ident">buffer_size</span>(<span class="ident">placement</span>.<span class="ident">width</span>, <span class="ident">placement</span>.<span class="ident">height</span>),
+    <span class="doccomment">/// Renders the mask to a newly allocated buffer.
+    </span><span class="kw">pub fn </span>render(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (Vec&lt;u8&gt;, Placement) {
+        <span class="kw">let </span><span class="kw-2">mut </span>buf = Vec::new();
+        <span class="kw">let </span>(offset, placement) = <span class="self">self</span>.placement();
+        buf.resize(
+            <span class="self">self</span>.format.buffer_size(placement.width, placement.height),
             <span class="number">0</span>,
         );
-        <span class="kw">let</span> <span class="ident">pitch</span> <span class="op">=</span> <span class="ident">placement</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>
-            <span class="op">*</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">format</span> {
-                <span class="ident">Format::Alpha</span> =&gt; <span class="number">1</span>,
-                <span class="kw">_</span> =&gt; <span class="number">4</span>,
+        <span class="kw">let </span>pitch = placement.width <span class="kw">as </span>usize
+            * <span class="kw">match </span><span class="self">self</span>.format {
+                Format::Alpha =&gt; <span class="number">1</span>,
+                <span class="kw">_ </span>=&gt; <span class="number">4</span>,
             };
-        <span class="ident">render</span>(<span class="self">self</span>, <span class="ident">offset</span>, <span class="kw-2">&amp;</span><span class="ident">placement</span>, <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>, <span class="ident">pitch</span>);
-        (<span class="ident">buf</span>, <span class="ident">placement</span>)
+        render(<span class="self">self</span>, offset, <span class="kw-2">&amp;</span>placement, <span class="kw-2">&amp;mut </span>buf, pitch);
+        (buf, placement)
     }
 
-    <span class="kw">fn</span> <span class="ident">ensure_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_size</span> {
+    <span class="kw">fn </span>ensure_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.has_size {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> (<span class="ident">offset</span>, <span class="ident">placement</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">placement</span>();
-        <span class="self">self</span>.<span class="ident">bounds_offset</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="self">self</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">placement</span>.<span class="ident">width</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">placement</span>.<span class="ident">height</span>;
-        <span class="self">self</span>.<span class="ident">explicit_size</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">has_size</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">let </span>(offset, placement) = <span class="self">self</span>.placement();
+        <span class="self">self</span>.bounds_offset = offset;
+        <span class="self">self</span>.width = placement.width;
+        <span class="self">self</span>.height = placement.height;
+        <span class="self">self</span>.explicit_size = <span class="bool-val">false</span>;
+        <span class="self">self</span>.has_size = <span class="bool-val">true</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">placement</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">Vector</span>, <span class="ident">Placement</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">placement</span> <span class="op">=</span> <span class="ident">Placement</span> {
-            <span class="ident">left</span>: <span class="number">0</span>,
-            <span class="ident">top</span>: <span class="number">0</span>,
-            <span class="ident">width</span>: <span class="self">self</span>.<span class="ident">width</span>,
-            <span class="ident">height</span>: <span class="self">self</span>.<span class="ident">height</span>,
+    <span class="kw">fn </span>placement(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (Vector, Placement) {
+        <span class="kw">let </span><span class="kw-2">mut </span>placement = Placement {
+            left: <span class="number">0</span>,
+            top: <span class="number">0</span>,
+            width: <span class="self">self</span>.width,
+            height: <span class="self">self</span>.height,
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">offset</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">explicit_size</span> {
-            <span class="kw">return</span> (<span class="ident">offset</span>, <span class="ident">placement</span>);
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">has_size</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scratch</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scratch</span>.<span class="ident">borrow_mut</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bounds</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scratch</span>) <span class="op">=</span> <span class="ident">scratch</span>.<span class="ident">as_mut</span>() {
-                <span class="ident">scratch</span>.<span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">style</span>, <span class="self">self</span>.<span class="ident">transform</span>)
-            } <span class="kw">else</span> {
-                <span class="ident"><span class="kw">super</span>::bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">style</span>, <span class="self">self</span>.<span class="ident">transform</span>)
+        <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="self">self</span>.offset;
+        <span class="kw">if </span><span class="self">self</span>.explicit_size {
+            <span class="kw">return </span>(offset, placement);
+        } <span class="kw">else if </span>!<span class="self">self</span>.has_size {
+            <span class="kw">let </span><span class="kw-2">mut </span>scratch = <span class="self">self</span>.scratch.borrow_mut();
+            <span class="kw">let </span><span class="kw-2">mut </span>bounds = <span class="kw">if let </span><span class="prelude-val">Some</span>(scratch) = scratch.as_mut() {
+                scratch.bounds(<span class="kw-2">&amp;</span><span class="self">self</span>.data, <span class="self">self</span>.style, <span class="self">self</span>.transform)
+            } <span class="kw">else </span>{
+                <span class="kw">super</span>::bounds(<span class="kw-2">&amp;</span><span class="self">self</span>.data, <span class="self">self</span>.style, <span class="self">self</span>.transform)
             };
-            <span class="ident">bounds</span>.<span class="ident">min</span> <span class="op">=</span> (<span class="ident">bounds</span>.<span class="ident">min</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>).<span class="ident">floor</span>();
-            <span class="ident">bounds</span>.<span class="ident">max</span> <span class="op">=</span> (<span class="ident">bounds</span>.<span class="ident">max</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>).<span class="ident">ceil</span>();
-            <span class="ident">offset</span> <span class="op">=</span> <span class="ident">Vector::new</span>(<span class="op">-</span><span class="ident">bounds</span>.<span class="ident">min</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1.</span>, <span class="op">-</span><span class="ident">bounds</span>.<span class="ident">min</span>.<span class="ident">y</span>);
-            <span class="ident">placement</span>.<span class="ident">width</span> <span class="op">=</span> <span class="ident">bounds</span>.<span class="ident">width</span>() <span class="kw">as</span> <span class="ident">u32</span> <span class="op">+</span> <span class="number">2</span>;
-            <span class="ident">placement</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">bounds</span>.<span class="ident">height</span>() <span class="kw">as</span> <span class="ident">u32</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">bounds_offset</span>;
+            bounds.min = (bounds.min + <span class="self">self</span>.offset).floor();
+            bounds.max = (bounds.max + <span class="self">self</span>.offset).ceil();
+            offset = Vector::new(-bounds.min.x + <span class="number">1.</span>, -bounds.min.y);
+            placement.width = bounds.width() <span class="kw">as </span>u32 + <span class="number">2</span>;
+            placement.height = bounds.height() <span class="kw">as </span>u32;
+        } <span class="kw">else </span>{
+            offset = <span class="self">self</span>.bounds_offset;
         }
-        <span class="ident">placement</span>.<span class="ident">left</span> <span class="op">=</span> <span class="op">-</span><span class="ident">offset</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="ident">placement</span>.<span class="ident">top</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Origin::BottomLeft</span> {
-            (<span class="op">-</span><span class="ident">offset</span>.<span class="ident">y</span>).<span class="ident">floor</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">f32</span>
-        } <span class="kw">else</span> {
-            <span class="op">-</span><span class="ident">offset</span>.<span class="ident">y</span>
-        } <span class="kw">as</span> <span class="ident">i32</span>;
-        (<span class="ident">offset</span>, <span class="ident">placement</span>)
+        placement.left = -offset.x <span class="kw">as </span>i32;
+        placement.top = <span class="kw">if </span><span class="self">self</span>.origin == Origin::BottomLeft {
+            (-offset.y).floor() + <span class="self">self</span>.height <span class="kw">as </span>f32
+        } <span class="kw">else </span>{
+            -offset.y
+        } <span class="kw">as </span>i32;
+        (offset, placement)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;c</span>, <span class="ident">D</span><span class="op">&gt;</span>(
-    <span class="ident">mask</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Mask</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;c</span>, <span class="ident">D</span><span class="op">&gt;</span>,
-    <span class="ident">offset</span>: <span class="ident">Vector</span>,
-    <span class="ident">placement</span>: <span class="kw-2">&amp;</span><span class="ident">Placement</span>,
-    <span class="ident">buf</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>],
-    <span class="ident">pitch</span>: <span class="ident">usize</span>,
-) <span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">PathData</span>,
+<span class="kw">pub fn </span>render&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;c</span>, D&gt;(
+    mask: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Mask&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;c</span>, D&gt;,
+    offset: Vector,
+    placement: <span class="kw-2">&amp;</span>Placement,
+    buf: <span class="kw-2">&amp;mut </span>[u8],
+    pitch: usize,
+) <span class="kw">where
+    </span>D: PathData,
 {
-    <span class="kw">let</span> <span class="ident">y_up</span> <span class="op">=</span> <span class="ident">mask</span>.<span class="ident">origin</span> <span class="op">==</span> <span class="ident">Origin::BottomLeft</span>;
-    <span class="kw">let</span> (<span class="ident">is_subpx</span>, <span class="ident">subpx</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">mask</span>.<span class="ident">format</span> {
-        <span class="ident">Format::Alpha</span> =&gt; (<span class="bool-val">false</span>, [<span class="ident">Vector::ZERO</span>; <span class="number">3</span>]),
-        <span class="ident">Format::Subpixel</span> =&gt; (
+    <span class="kw">let </span>y_up = mask.origin == Origin::BottomLeft;
+    <span class="kw">let </span>(is_subpx, subpx) = <span class="kw">match </span>mask.format {
+        Format::Alpha =&gt; (<span class="bool-val">false</span>, [Vector::ZERO; <span class="number">3</span>]),
+        Format::Subpixel =&gt; (
             <span class="bool-val">true</span>,
-            [<span class="ident">Vector::new</span>(<span class="op">-</span><span class="number">0.3</span>, <span class="number">0.</span>), <span class="ident">Vector::ZERO</span>, <span class="ident">Vector::new</span>(<span class="number">0.3</span>, <span class="number">0.</span>)],
+            [Vector::new(-<span class="number">0.3</span>, <span class="number">0.</span>), Vector::ZERO, Vector::new(<span class="number">0.3</span>, <span class="number">0.</span>)],
         ),
-        <span class="ident">Format::CustomSubpixel</span>(<span class="ident">subpx</span>) =&gt; (
+        Format::CustomSubpixel(subpx) =&gt; (
             <span class="bool-val">true</span>,
             [
-                <span class="ident">Vector::new</span>(<span class="ident">subpx</span>[<span class="number">0</span>], <span class="number">0.</span>),
-                <span class="ident">Vector::new</span>(<span class="ident">subpx</span>[<span class="number">1</span>], <span class="number">0.</span>),
-                <span class="ident">Vector::new</span>(<span class="ident">subpx</span>[<span class="number">2</span>], <span class="number">0.</span>),
+                Vector::new(subpx[<span class="number">0</span>], <span class="number">0.</span>),
+                Vector::new(subpx[<span class="number">1</span>], <span class="number">0.</span>),
+                Vector::new(subpx[<span class="number">2</span>], <span class="number">0.</span>),
             ],
         ),
     };
-    <span class="kw">let</span> <span class="ident">fill</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">mask</span>.<span class="ident">style</span> {
-        <span class="ident">Style::Fill</span>(<span class="ident">fill</span>) =&gt; <span class="ident">fill</span>,
-        <span class="kw">_</span> =&gt; <span class="ident">Fill::NonZero</span>,
+    <span class="kw">let </span>fill = <span class="kw">match </span>mask.style {
+        Style::Fill(fill) =&gt; fill,
+        <span class="kw">_ </span>=&gt; Fill::NonZero,
     };
-    <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">placement</span>.<span class="ident">width</span>;
-    <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">placement</span>.<span class="ident">height</span>;
-    <span class="kw">let</span> <span class="ident">shift</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">mask</span>.<span class="ident">render_offset</span>;
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">mask</span>.<span class="ident">data</span>;
-    <span class="kw">let</span> <span class="ident">style</span> <span class="op">=</span> <span class="ident">mask</span>.<span class="ident">style</span>;
-    <span class="kw">let</span> <span class="ident">transform</span> <span class="op">=</span> <span class="ident">mask</span>.<span class="ident">transform</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scratch</span> <span class="op">=</span> <span class="ident">mask</span>.<span class="ident">scratch</span>.<span class="ident">borrow_mut</span>();
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::raster</span>::{<span class="ident">AdaptiveStorage</span>, <span class="ident">Rasterizer</span>};
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scratch</span>) <span class="op">=</span> <span class="ident">scratch</span>.<span class="ident">as_mut</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ras</span> <span class="op">=</span> <span class="ident">Rasterizer::new</span>(<span class="kw-2">&amp;mut</span> <span class="ident">scratch</span>.<span class="ident">render</span>);
-        <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">scratch</span>.<span class="ident">inner</span>;
-        <span class="kw">if</span> <span class="ident">is_subpx</span> {
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">0</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">inner</span>.<span class="ident">apply</span>(<span class="ident">data</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+    <span class="kw">let </span>w = placement.width;
+    <span class="kw">let </span>h = placement.height;
+    <span class="kw">let </span>shift = offset + mask.render_offset;
+    <span class="kw">let </span>data = <span class="kw-2">&amp;</span>mask.data;
+    <span class="kw">let </span>style = mask.style;
+    <span class="kw">let </span>transform = mask.transform;
+    <span class="kw">let </span><span class="kw-2">mut </span>scratch = mask.scratch.borrow_mut();
+    <span class="kw">use </span><span class="kw">super</span>::raster::{AdaptiveStorage, Rasterizer};
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(scratch) = scratch.as_mut() {
+        <span class="kw">let </span><span class="kw-2">mut </span>ras = Rasterizer::new(<span class="kw-2">&amp;mut </span>scratch.render);
+        <span class="kw">let </span>inner = <span class="kw-2">&amp;mut </span>scratch.inner;
+        <span class="kw">if </span>is_subpx {
+            ras.rasterize_write(
+                shift + subpx[<span class="number">0</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    inner.apply(data.clone(), <span class="kw-2">&amp;</span>style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">1</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">inner</span>.<span class="ident">apply</span>(<span class="ident">data</span>, <span class="kw-2">&amp;</span><span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+            ras.rasterize_write(
+                shift + subpx[<span class="number">1</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    inner.apply(data, <span class="kw-2">&amp;</span>style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4 </span>+ <span class="number">1</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">2</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">inner</span>.<span class="ident">apply</span>(<span class="ident">data</span>, <span class="kw-2">&amp;</span><span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+            ras.rasterize_write(
+                shift + subpx[<span class="number">2</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    inner.apply(data, <span class="kw-2">&amp;</span>style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span> <span class="op">+</span> <span class="number">2</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4 </span>+ <span class="number">2</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-        } <span class="kw">else</span> {
-            <span class="ident">ras</span>.<span class="ident">rasterize</span>(
-                <span class="ident">shift</span>,
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">inner</span>.<span class="ident">apply</span>(<span class="ident">data</span>, <span class="kw-2">&amp;</span><span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+        } <span class="kw">else </span>{
+            ras.rasterize(
+                shift,
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    inner.apply(data, <span class="kw-2">&amp;</span>style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">buf</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
+                fill,
+                buf,
+                pitch,
+                y_up,
             );
         }
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">storage</span> <span class="op">=</span> <span class="ident">AdaptiveStorage::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ras</span> <span class="op">=</span> <span class="ident">Rasterizer::new</span>(<span class="kw-2">&amp;mut</span> <span class="ident">storage</span>);
-        <span class="kw">if</span> <span class="ident">is_subpx</span> {
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">0</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">apply</span>(<span class="ident">data</span>, <span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+    } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>storage = AdaptiveStorage::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>ras = Rasterizer::new(<span class="kw-2">&amp;mut </span>storage);
+        <span class="kw">if </span>is_subpx {
+            ras.rasterize_write(
+                shift + subpx[<span class="number">0</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    apply(data, style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">1</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">apply</span>(<span class="ident">data</span>, <span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+            ras.rasterize_write(
+                shift + subpx[<span class="number">1</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    apply(data, style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4 </span>+ <span class="number">1</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-            <span class="ident">ras</span>.<span class="ident">rasterize_write</span>(
-                <span class="ident">shift</span> <span class="op">+</span> <span class="ident">subpx</span>[<span class="number">2</span>],
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">apply</span>(<span class="ident">data</span>, <span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+            ras.rasterize_write(
+                shift + subpx[<span class="number">2</span>],
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    apply(data, style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">row_offset</span>, <span class="ident">x</span>, <span class="ident">count</span>, <span class="ident">coverage</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buf</span>[<span class="ident">row_offset</span>..];
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="number">4</span> <span class="op">+</span> <span class="number">2</span>;
-                    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">count</span> {
-                        <span class="ident">buf</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">coverage</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">4</span>;
+                fill,
+                pitch,
+                y_up,
+                <span class="kw-2">&amp;mut </span>|row_offset, x, count, coverage| {
+                    <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>buf[row_offset..];
+                    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = x * <span class="number">4 </span>+ <span class="number">2</span>;
+                    <span class="kw">while </span>i &lt; count {
+                        buf[j] = coverage;
+                        i += <span class="number">1</span>;
+                        j += <span class="number">4</span>;
                     }
                 },
             );
-        } <span class="kw">else</span> {
-            <span class="ident">ras</span>.<span class="ident">rasterize</span>(
-                <span class="ident">shift</span>,
-                <span class="ident">w</span>,
-                <span class="ident">h</span>,
-                <span class="kw-2">&amp;mut</span> <span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                    <span class="ident">apply</span>(<span class="ident">data</span>, <span class="ident">style</span>, <span class="ident">transform</span>, <span class="ident">r</span>);
+        } <span class="kw">else </span>{
+            ras.rasterize(
+                shift,
+                w,
+                h,
+                <span class="kw-2">&amp;mut </span>|r| {
+                    apply(data, style, transform, r);
                 },
-                <span class="ident">fill</span>,
-                <span class="ident">buf</span>,
-                <span class="ident">pitch</span>,
-                <span class="ident">y_up</span>,
+                fill,
+                buf,
+                pitch,
+                y_up,
             );
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

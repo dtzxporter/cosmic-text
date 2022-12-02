@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/matching.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matching.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/matching.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matching.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -300,307 +300,307 @@
 <span id="300">300</span>
 <span id="301">301</span>
 <span id="302">302</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Matching of glyph patterns.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Matching of glyph patterns.
 
-<span class="kw">use</span> <span class="ident">ttf_parser::GlyphId</span>;
+</span><span class="kw">use </span>ttf_parser::GlyphId;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Mask</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer::GlyphInfo</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">TableIndex</span>, <span class="ident">MAX_CONTEXT_LENGTH</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::apply::ApplyContext</span>;
+<span class="kw">use </span><span class="kw">crate</span>::Mask;
+<span class="kw">use </span><span class="kw">crate</span>::buffer::GlyphInfo;
+<span class="kw">use super</span>::{TableIndex, MAX_CONTEXT_LENGTH};
+<span class="kw">use </span><span class="kw">super</span>::apply::ApplyContext;
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MatchFunc</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">GlyphId</span>, <span class="ident">u16</span>) -&gt; <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>;
+<span class="kw">pub type </span>MatchFunc&lt;<span class="lifetime">&#39;a</span>&gt; = <span class="kw">dyn </span>Fn(GlyphId, u16) -&gt; bool + <span class="lifetime">&#39;a</span>;
 
-<span class="doccomment">/// Value represents glyph id.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_glyph</span>(<span class="ident">glyph</span>: <span class="ident">GlyphId</span>, <span class="ident">value</span>: <span class="ident">u16</span>) -&gt; <span class="ident">bool</span> {
-    <span class="ident">glyph</span> <span class="op">==</span> <span class="ident">GlyphId</span>(<span class="ident">value</span>)
+<span class="doccomment">/// Value represents glyph id.
+</span><span class="kw">pub fn </span>match_glyph(glyph: GlyphId, value: u16) -&gt; bool {
+    glyph == GlyphId(value)
 }
 
-<span class="comment">// TODO: Find out whether returning this by value is slow.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Matched</span> {
-    <span class="kw">pub</span> <span class="ident">len</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">positions</span>: [<span class="ident">usize</span>; <span class="ident">MAX_CONTEXT_LENGTH</span>],
-    <span class="kw">pub</span> <span class="ident">total_component_count</span>: <span class="ident">u8</span>,
+<span class="comment">// TODO: Find out whether returning this by value is slow.
+</span><span class="kw">pub struct </span>Matched {
+    <span class="kw">pub </span>len: usize,
+    <span class="kw">pub </span>positions: [usize; MAX_CONTEXT_LENGTH],
+    <span class="kw">pub </span>total_component_count: u8,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_input</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">ApplyContext</span>,
-    <span class="ident">input_len</span>: <span class="ident">u16</span>,
-    <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchingFunc</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Matched</span><span class="op">&gt;</span> {
-    <span class="comment">// This is perhaps the trickiest part of OpenType...  Remarks:</span>
-    <span class="comment">//</span>
-    <span class="comment">// - If all components of the ligature were marks, we call this a mark ligature.</span>
-    <span class="comment">//</span>
-    <span class="comment">// - If there is no GDEF, and the ligature is NOT a mark ligature, we categorize</span>
-    <span class="comment">//   it as a ligature glyph.</span>
-    <span class="comment">//</span>
-    <span class="comment">// - Ligatures cannot be formed across glyphs attached to different components</span>
-    <span class="comment">//   of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and</span>
-    <span class="comment">//   LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.</span>
-    <span class="comment">//   However, it would be wrong to ligate that SHADDA,FATHA sequence.</span>
-    <span class="comment">//   There are a couple of exceptions to this:</span>
-    <span class="comment">//</span>
-    <span class="comment">//   o If a ligature tries ligating with marks that belong to it itself, go ahead,</span>
-    <span class="comment">//     assuming that the font designer knows what they are doing (otherwise it can</span>
-    <span class="comment">//     break Indic stuff when a matra wants to ligate with a conjunct,</span>
-    <span class="comment">//</span>
-    <span class="comment">//   o If two marks want to ligate and they belong to different components of the</span>
-    <span class="comment">//     same ligature glyph, and said ligature glyph is to be ignored according to</span>
-    <span class="comment">//     mark-filtering rules, then allow.</span>
-    <span class="comment">//     https://github.com/harfbuzz/harfbuzz/issues/545</span>
+<span class="kw">pub fn </span>match_input(
+    ctx: <span class="kw-2">&amp;</span>ApplyContext,
+    input_len: u16,
+    match_func: <span class="kw-2">&amp;</span>MatchingFunc,
+) -&gt; <span class="prelude-ty">Option</span>&lt;Matched&gt; {
+    <span class="comment">// This is perhaps the trickiest part of OpenType...  Remarks:
+    //
+    // - If all components of the ligature were marks, we call this a mark ligature.
+    //
+    // - If there is no GDEF, and the ligature is NOT a mark ligature, we categorize
+    //   it as a ligature glyph.
+    //
+    // - Ligatures cannot be formed across glyphs attached to different components
+    //   of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and
+    //   LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.
+    //   However, it would be wrong to ligate that SHADDA,FATHA sequence.
+    //   There are a couple of exceptions to this:
+    //
+    //   o If a ligature tries ligating with marks that belong to it itself, go ahead,
+    //     assuming that the font designer knows what they are doing (otherwise it can
+    //     break Indic stuff when a matra wants to ligate with a conjunct,
+    //
+    //   o If two marks want to ligate and they belong to different components of the
+    //     same ligature glyph, and said ligature glyph is to be ignored according to
+    //     mark-filtering rules, then allow.
+    //     https://github.com/harfbuzz/harfbuzz/issues/545
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>)]</span>
-    <span class="kw">enum</span> <span class="ident">Ligbase</span> {
-        <span class="ident">NotChecked</span>,
-        <span class="ident">MayNotSkip</span>,
-        <span class="ident">MaySkip</span>,
+    </span><span class="attribute">#[derive(PartialEq)]
+    </span><span class="kw">enum </span>Ligbase {
+        NotChecked,
+        MayNotSkip,
+        MaySkip,
     }
 
-    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="ident">input_len</span>) <span class="op">+</span> <span class="number">1</span>;
-    <span class="kw">if</span> <span class="ident">count</span> <span class="op">&gt;</span> <span class="ident">MAX_CONTEXT_LENGTH</span> {
-        <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">let </span>count = usize::from(input_len) + <span class="number">1</span>;
+    <span class="kw">if </span>count &gt; MAX_CONTEXT_LENGTH {
+        <span class="kw">return </span><span class="prelude-val">None</span>;
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">input_len</span>, <span class="bool-val">false</span>);
-    <span class="ident">iter</span>.<span class="ident">enable_matching</span>(<span class="ident">match_func</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, ctx.buffer.idx, input_len, <span class="bool-val">false</span>);
+    iter.enable_matching(match_func);
 
-    <span class="kw">let</span> <span class="ident">first</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>);
-    <span class="kw">let</span> <span class="ident">first_lig_id</span> <span class="op">=</span> <span class="ident">first</span>.<span class="ident">lig_id</span>();
-    <span class="kw">let</span> <span class="ident">first_lig_comp</span> <span class="op">=</span> <span class="ident">first</span>.<span class="ident">lig_comp</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">positions</span> <span class="op">=</span> [<span class="number">0</span>; <span class="ident">MAX_CONTEXT_LENGTH</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_component_count</span> <span class="op">=</span> <span class="ident">first</span>.<span class="ident">lig_num_comps</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ligbase</span> <span class="op">=</span> <span class="ident">Ligbase::NotChecked</span>;
+    <span class="kw">let </span>first = ctx.buffer.cur(<span class="number">0</span>);
+    <span class="kw">let </span>first_lig_id = first.lig_id();
+    <span class="kw">let </span>first_lig_comp = first.lig_comp();
+    <span class="kw">let </span><span class="kw-2">mut </span>positions = [<span class="number">0</span>; MAX_CONTEXT_LENGTH];
+    <span class="kw">let </span><span class="kw-2">mut </span>total_component_count = first.lig_num_comps();
+    <span class="kw">let </span><span class="kw-2">mut </span>ligbase = Ligbase::NotChecked;
 
-    <span class="ident">positions</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span>;
+    positions[<span class="number">0</span>] = ctx.buffer.idx;
 
-    <span class="kw">for</span> <span class="ident">position</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">positions</span>[<span class="number">1</span>..<span class="ident">count</span>] {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">next</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">for </span>position <span class="kw">in </span><span class="kw-2">&amp;mut </span>positions[<span class="number">1</span>..count] {
+        <span class="kw">if </span>!iter.next() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
 
-        <span class="kw-2">*</span><span class="ident">position</span> <span class="op">=</span> <span class="ident">iter</span>.<span class="ident">index</span>();
+        <span class="kw-2">*</span>position = iter.index();
 
-        <span class="kw">let</span> <span class="ident">this</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">iter</span>.<span class="ident">index</span>()];
-        <span class="kw">let</span> <span class="ident">this_lig_id</span> <span class="op">=</span> <span class="ident">this</span>.<span class="ident">lig_id</span>();
-        <span class="kw">let</span> <span class="ident">this_lig_comp</span> <span class="op">=</span> <span class="ident">this</span>.<span class="ident">lig_comp</span>();
+        <span class="kw">let </span>this = ctx.buffer.info[iter.index()];
+        <span class="kw">let </span>this_lig_id = this.lig_id();
+        <span class="kw">let </span>this_lig_comp = this.lig_comp();
 
-        <span class="kw">if</span> <span class="ident">first_lig_id</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">first_lig_comp</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// If first component was attached to a previous ligature component,</span>
-            <span class="comment">// all subsequent components should be attached to the same ligature</span>
-            <span class="comment">// component, otherwise we shouldn&#39;t ligate them...</span>
-            <span class="kw">if</span> <span class="ident">first_lig_id</span> <span class="op">!</span><span class="op">=</span> <span class="ident">this_lig_id</span> <span class="op">|</span><span class="op">|</span> <span class="ident">first_lig_comp</span> <span class="op">!</span><span class="op">=</span> <span class="ident">this_lig_comp</span> {
-                <span class="comment">// ...unless, we are attached to a base ligature and that base</span>
-                <span class="comment">// ligature is ignorable.</span>
-                <span class="kw">if</span> <span class="ident">ligbase</span> <span class="op">==</span> <span class="ident">Ligbase::NotChecked</span> {
-                    <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">out_info</span>();
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">out_len</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                    <span class="kw">while</span> <span class="ident">j</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">out</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">lig_id</span>() <span class="op">==</span> <span class="ident">first_lig_id</span> {
-                        <span class="kw">if</span> <span class="ident">out</span>[<span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>].<span class="ident">lig_comp</span>() <span class="op">==</span> <span class="number">0</span> {
-                            <span class="ident">j</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="ident">found</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span>first_lig_id != <span class="number">0 </span>&amp;&amp; first_lig_comp != <span class="number">0 </span>{
+            <span class="comment">// If first component was attached to a previous ligature component,
+            // all subsequent components should be attached to the same ligature
+            // component, otherwise we shouldn&#39;t ligate them...
+            </span><span class="kw">if </span>first_lig_id != this_lig_id || first_lig_comp != this_lig_comp {
+                <span class="comment">// ...unless, we are attached to a base ligature and that base
+                // ligature is ignorable.
+                </span><span class="kw">if </span>ligbase == Ligbase::NotChecked {
+                    <span class="kw">let </span>out = ctx.buffer.out_info();
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = ctx.buffer.out_len;
+                    <span class="kw">let </span><span class="kw-2">mut </span>found = <span class="bool-val">false</span>;
+                    <span class="kw">while </span>j &gt; <span class="number">0 </span>&amp;&amp; out[j - <span class="number">1</span>].lig_id() == first_lig_id {
+                        <span class="kw">if </span>out[j - <span class="number">1</span>].lig_comp() == <span class="number">0 </span>{
+                            j -= <span class="number">1</span>;
+                            found = <span class="bool-val">true</span>;
                             <span class="kw">break</span>;
                         }
-                        <span class="ident">j</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                        j -= <span class="number">1</span>;
                     }
 
-                    <span class="ident">ligbase</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">found</span> <span class="op">&amp;&amp;</span> <span class="ident">iter</span>.<span class="ident">may_skip</span>(<span class="kw-2">&amp;</span><span class="ident">out</span>[<span class="ident">j</span>]) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
-                        <span class="ident">Ligbase::MaySkip</span>
-                    } <span class="kw">else</span> {
-                        <span class="ident">Ligbase::MayNotSkip</span>
+                    ligbase = <span class="kw">if </span>found &amp;&amp; iter.may_skip(<span class="kw-2">&amp;</span>out[j]) == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
+                        Ligbase::MaySkip
+                    } <span class="kw">else </span>{
+                        Ligbase::MayNotSkip
                     };
                 }
 
-                <span class="kw">if</span> <span class="ident">ligbase</span> <span class="op">==</span> <span class="ident">Ligbase::MayNotSkip</span> {
-                    <span class="kw">return</span> <span class="prelude-val">None</span>;
+                <span class="kw">if </span>ligbase == Ligbase::MayNotSkip {
+                    <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// If first component was NOT attached to a previous ligature component,</span>
-            <span class="comment">// all subsequent components should also NOT be attached to any ligature</span>
-            <span class="comment">// component, unless they are attached to the first component itself!</span>
-            <span class="kw">if</span> <span class="ident">this_lig_id</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">this_lig_comp</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> (<span class="ident">this_lig_id</span> <span class="op">!</span><span class="op">=</span> <span class="ident">first_lig_id</span>) {
-                <span class="kw">return</span> <span class="prelude-val">None</span>;
+        } <span class="kw">else </span>{
+            <span class="comment">// If first component was NOT attached to a previous ligature component,
+            // all subsequent components should also NOT be attached to any ligature
+            // component, unless they are attached to the first component itself!
+            </span><span class="kw">if </span>this_lig_id != <span class="number">0 </span>&amp;&amp; this_lig_comp != <span class="number">0 </span>&amp;&amp; (this_lig_id != first_lig_id) {
+                <span class="kw">return </span><span class="prelude-val">None</span>;
             }
         }
 
-        <span class="ident">total_component_count</span> <span class="op">+</span><span class="op">=</span> <span class="ident">this</span>.<span class="ident">lig_num_comps</span>();
+        total_component_count += this.lig_num_comps();
     }
 
-    <span class="prelude-val">Some</span>(<span class="ident">Matched</span> {
-        <span class="ident">len</span>: <span class="ident">iter</span>.<span class="ident">index</span>() <span class="op">-</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>,
-        <span class="ident">positions</span>,
-        <span class="ident">total_component_count</span>,
+    <span class="prelude-val">Some</span>(Matched {
+        len: iter.index() - ctx.buffer.idx + <span class="number">1</span>,
+        positions,
+        total_component_count,
     })
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_backtrack</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">ApplyContext</span>,
-    <span class="ident">backtrack_len</span>: <span class="ident">u16</span>,
-    <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchingFunc</span>
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">backtrack_len</span>(), <span class="ident">backtrack_len</span>, <span class="bool-val">true</span>);
-    <span class="ident">iter</span>.<span class="ident">enable_matching</span>(<span class="ident">match_func</span>);
+<span class="kw">pub fn </span>match_backtrack(
+    ctx: <span class="kw-2">&amp;</span>ApplyContext,
+    backtrack_len: u16,
+    match_func: <span class="kw-2">&amp;</span>MatchingFunc
+) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, ctx.buffer.backtrack_len(), backtrack_len, <span class="bool-val">true</span>);
+    iter.enable_matching(match_func);
 
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">backtrack_len</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">prev</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">for _ in </span><span class="number">0</span>..backtrack_len {
+        <span class="kw">if </span>!iter.prev() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     }
 
-    <span class="prelude-val">Some</span>(<span class="ident">iter</span>.<span class="ident">index</span>())
+    <span class="prelude-val">Some</span>(iter.index())
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_lookahead</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="ident">ApplyContext</span>,
-    <span class="ident">lookahead_len</span>: <span class="ident">u16</span>,
-    <span class="ident">match_func</span>: <span class="kw-2">&amp;</span><span class="ident">MatchingFunc</span>,
-    <span class="ident">offset</span>: <span class="ident">usize</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">SkippyIter::new</span>(<span class="ident">ctx</span>, <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="ident">offset</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">lookahead_len</span>, <span class="bool-val">true</span>);
-    <span class="ident">iter</span>.<span class="ident">enable_matching</span>(<span class="ident">match_func</span>);
+<span class="kw">pub fn </span>match_lookahead(
+    ctx: <span class="kw-2">&amp;</span>ApplyContext,
+    lookahead_len: u16,
+    match_func: <span class="kw-2">&amp;</span>MatchingFunc,
+    offset: usize,
+) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>iter = SkippyIter::new(ctx, ctx.buffer.idx + offset - <span class="number">1</span>, lookahead_len, <span class="bool-val">true</span>);
+    iter.enable_matching(match_func);
 
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">lookahead_len</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">iter</span>.<span class="ident">next</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">for _ in </span><span class="number">0</span>..lookahead_len {
+        <span class="kw">if </span>!iter.next() {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     }
 
-    <span class="prelude-val">Some</span>(<span class="ident">iter</span>.<span class="ident">index</span>() <span class="op">+</span> <span class="number">1</span>)
+    <span class="prelude-val">Some</span>(iter.index() + <span class="number">1</span>)
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MatchingFunc</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="ident">GlyphId</span>, <span class="ident">u16</span>) -&gt; <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>;
+<span class="kw">pub type </span>MatchingFunc&lt;<span class="lifetime">&#39;a</span>&gt; = <span class="kw">dyn </span>Fn(GlyphId, u16) -&gt; bool + <span class="lifetime">&#39;a</span>;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SkippyIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ApplyContext</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>,
-    <span class="ident">lookup_props</span>: <span class="ident">u32</span>,
-    <span class="ident">ignore_zwnj</span>: <span class="ident">bool</span>,
-    <span class="ident">ignore_zwj</span>: <span class="ident">bool</span>,
-    <span class="ident">mask</span>: <span class="ident">Mask</span>,
-    <span class="ident">syllable</span>: <span class="ident">u8</span>,
-    <span class="ident">matching</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">MatchingFunc</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">buf_len</span>: <span class="ident">usize</span>,
-    <span class="ident">buf_idx</span>: <span class="ident">usize</span>,
-    <span class="ident">num_items</span>: <span class="ident">u16</span>,
+<span class="kw">pub struct </span>SkippyIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; {
+    ctx: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>ApplyContext&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt;,
+    lookup_props: u32,
+    ignore_zwnj: bool,
+    ignore_zwj: bool,
+    mask: Mask,
+    syllable: u8,
+    matching: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>MatchingFunc&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+    buf_len: usize,
+    buf_idx: usize,
+    num_items: u16,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">SkippyIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ApplyContext</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>,
-        <span class="ident">start_buf_index</span>: <span class="ident">usize</span>,
-        <span class="ident">num_items</span>: <span class="ident">u16</span>,
-        <span class="ident">context_match</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="ident">SkippyIter</span> {
-            <span class="ident">ctx</span>,
-            <span class="ident">lookup_props</span>: <span class="ident">ctx</span>.<span class="ident">lookup_props</span>,
-            <span class="comment">// Ignore ZWNJ if we are matching GPOS, or matching GSUB context and asked to.</span>
-            <span class="ident">ignore_zwnj</span>: <span class="ident">ctx</span>.<span class="ident">table_index</span> <span class="op">==</span> <span class="ident">TableIndex::GPOS</span> <span class="op">|</span><span class="op">|</span> (<span class="ident">context_match</span> <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">auto_zwnj</span>),
-            <span class="comment">// Ignore ZWJ if we are matching context, or asked to.</span>
-            <span class="ident">ignore_zwj</span>: <span class="ident">context_match</span> <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">auto_zwj</span>,
-            <span class="ident">mask</span>: <span class="kw">if</span> <span class="ident">context_match</span> { <span class="ident">u32::MAX</span> } <span class="kw">else</span> { <span class="ident">ctx</span>.<span class="ident">lookup_mask</span> },
-            <span class="ident">syllable</span>: <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">==</span> <span class="ident">start_buf_index</span> {
-                <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">syllable</span>()
-            } <span class="kw">else</span> {
-                <span class="number">0</span>
-            },
-            <span class="ident">matching</span>: <span class="prelude-val">None</span>,
-            <span class="ident">buf_len</span>: <span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">len</span>,
-            <span class="ident">buf_idx</span>: <span class="ident">start_buf_index</span>,
-            <span class="ident">num_items</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; SkippyIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; {
+    <span class="kw">pub fn </span>new(
+        ctx: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>ApplyContext&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt;,
+        start_buf_index: usize,
+        num_items: u16,
+        context_match: bool,
+    ) -&gt; <span class="self">Self </span>{
+        SkippyIter {
+            ctx,
+            lookup_props: ctx.lookup_props,
+            <span class="comment">// Ignore ZWNJ if we are matching GPOS, or matching GSUB context and asked to.
+            </span>ignore_zwnj: ctx.table_index == TableIndex::GPOS || (context_match &amp;&amp; ctx.auto_zwnj),
+            <span class="comment">// Ignore ZWJ if we are matching context, or asked to.
+            </span>ignore_zwj: context_match || ctx.auto_zwj,
+            mask: <span class="kw">if </span>context_match { u32::MAX } <span class="kw">else </span>{ ctx.lookup_mask },
+            syllable: <span class="kw">if </span>ctx.buffer.idx == start_buf_index {
+                ctx.buffer.cur(<span class="number">0</span>).syllable()
+            } <span class="kw">else </span>{
+                <span class="number">0
+            </span>},
+            matching: <span class="prelude-val">None</span>,
+            buf_len: ctx.buffer.len,
+            buf_idx: start_buf_index,
+            num_items
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_lookup_props</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">lookup_props</span>: <span class="ident">u32</span>) {
-        <span class="self">self</span>.<span class="ident">lookup_props</span> <span class="op">=</span> <span class="ident">lookup_props</span>;
+    <span class="kw">pub fn </span>set_lookup_props(<span class="kw-2">&amp;mut </span><span class="self">self</span>, lookup_props: u32) {
+        <span class="self">self</span>.lookup_props = lookup_props;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_matching</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">func</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">MatchingFunc</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">matching</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>);
+    <span class="kw">pub fn </span>enable_matching(<span class="kw-2">&amp;mut </span><span class="self">self</span>, func: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>MatchingFunc&lt;<span class="lifetime">&#39;a</span>&gt;) {
+        <span class="self">self</span>.matching = <span class="prelude-val">Some</span>(func);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">buf_idx</span>
+    <span class="kw">pub fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.buf_idx
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">num_items</span> <span class="op">&gt;</span> <span class="number">0</span>);
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">buf_idx</span> <span class="op">+</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">num_items</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">buf_len</span> {
-            <span class="self">self</span>.<span class="ident">buf_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">buf_idx</span>];
+    <span class="kw">pub fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool {
+        <span class="macro">assert!</span>(<span class="self">self</span>.num_items &gt; <span class="number">0</span>);
+        <span class="kw">while </span><span class="self">self</span>.buf_idx + usize::from(<span class="self">self</span>.num_items) &lt; <span class="self">self</span>.buf_len {
+            <span class="self">self</span>.buf_idx += <span class="number">1</span>;
+            <span class="kw">let </span>info = <span class="kw-2">&amp;</span><span class="self">self</span>.ctx.buffer.info[<span class="self">self</span>.buf_idx];
 
-            <span class="kw">let</span> <span class="ident">skip</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">may_skip</span>(<span class="ident">info</span>);
-            <span class="kw">if</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
+            <span class="kw">let </span>skip = <span class="self">self</span>.may_skip(info);
+            <span class="kw">if </span>skip == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">let</span> <span class="ident">matched</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">may_match</span>(<span class="ident">info</span>);
-            <span class="kw">if</span> <span class="ident">matched</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) <span class="op">|</span><span class="op">|</span> (<span class="ident">matched</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)) {
-                <span class="self">self</span>.<span class="ident">num_items</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">let </span>matched = <span class="self">self</span>.may_match(info);
+            <span class="kw">if </span>matched == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) || (matched.is_none() &amp;&amp; skip == <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)) {
+                <span class="self">self</span>.num_items -= <span class="number">1</span>;
+                <span class="kw">return </span><span class="bool-val">true</span>;
             }
 
-            <span class="kw">if</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>) {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="kw">if </span>skip == <span class="prelude-val">Some</span>(<span class="bool-val">false</span>) {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
 
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prev</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">num_items</span> <span class="op">&gt;</span> <span class="number">0</span>);
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">buf_idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">num_items</span>) {
-            <span class="self">self</span>.<span class="ident">buf_idx</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">buffer</span>.<span class="ident">out_info</span>()[<span class="self">self</span>.<span class="ident">buf_idx</span>];
+    <span class="kw">pub fn </span>prev(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool {
+        <span class="macro">assert!</span>(<span class="self">self</span>.num_items &gt; <span class="number">0</span>);
+        <span class="kw">while </span><span class="self">self</span>.buf_idx &gt;= usize::from(<span class="self">self</span>.num_items) {
+            <span class="self">self</span>.buf_idx -= <span class="number">1</span>;
+            <span class="kw">let </span>info = <span class="kw-2">&amp;</span><span class="self">self</span>.ctx.buffer.out_info()[<span class="self">self</span>.buf_idx];
 
-            <span class="kw">let</span> <span class="ident">skip</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">may_skip</span>(<span class="ident">info</span>);
-            <span class="kw">if</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
+            <span class="kw">let </span>skip = <span class="self">self</span>.may_skip(info);
+            <span class="kw">if </span>skip == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) {
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">let</span> <span class="ident">matched</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">may_match</span>(<span class="ident">info</span>);
-            <span class="kw">if</span> <span class="ident">matched</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) <span class="op">|</span><span class="op">|</span> (<span class="ident">matched</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)) {
-                <span class="self">self</span>.<span class="ident">num_items</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">return</span> <span class="bool-val">true</span>;
+            <span class="kw">let </span>matched = <span class="self">self</span>.may_match(info);
+            <span class="kw">if </span>matched == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>) || (matched.is_none() &amp;&amp; skip == <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)) {
+                <span class="self">self</span>.num_items -= <span class="number">1</span>;
+                <span class="kw">return </span><span class="bool-val">true</span>;
             }
 
-            <span class="kw">if</span> <span class="ident">skip</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>) {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="kw">if </span>skip == <span class="prelude-val">Some</span>(<span class="bool-val">false</span>) {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
 
-        <span class="bool-val">false</span>
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">pub fn </span>reject(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.num_items += <span class="number">1</span>;
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reject</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">num_items</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-    }
-
-    <span class="kw">fn</span> <span class="ident">may_match</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">GlyphInfo</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> (<span class="ident">info</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">mask</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="ident">syllable</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">syllable</span> <span class="op">==</span> <span class="ident">info</span>.<span class="ident">syllable</span>()) {
-            <span class="self">self</span>.<span class="ident">matching</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">info</span>.<span class="ident">as_glyph</span>(), <span class="self">self</span>.<span class="ident">num_items</span>))
-        } <span class="kw">else</span> {
+    <span class="kw">fn </span>may_match(<span class="kw-2">&amp;</span><span class="self">self</span>, info: <span class="kw-2">&amp;</span>GlyphInfo) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">if </span>(info.mask &amp; <span class="self">self</span>.mask) != <span class="number">0 </span>&amp;&amp; (<span class="self">self</span>.syllable == <span class="number">0 </span>|| <span class="self">self</span>.syllable == info.syllable()) {
+            <span class="self">self</span>.matching.map(|f| f(info.as_glyph(), <span class="self">self</span>.num_items))
+        } <span class="kw">else </span>{
             <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">may_skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">info</span>: <span class="kw-2">&amp;</span><span class="ident">GlyphInfo</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">check_glyph_property</span>(<span class="ident">info</span>, <span class="self">self</span>.<span class="ident">lookup_props</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
+    <span class="kw">fn </span>may_skip(<span class="kw-2">&amp;</span><span class="self">self</span>, info: <span class="kw-2">&amp;</span>GlyphInfo) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">if </span>!<span class="self">self</span>.ctx.check_glyph_property(info, <span class="self">self</span>.lookup_props) {
+            <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
         }
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">info</span>.<span class="ident">is_default_ignorable</span>()
-            <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>.<span class="ident">is_hidden</span>()
-            <span class="op">|</span><span class="op">|</span> (<span class="op">!</span><span class="self">self</span>.<span class="ident">ignore_zwnj</span> <span class="op">&amp;&amp;</span> <span class="ident">info</span>.<span class="ident">is_zwnj</span>())
-            <span class="op">|</span><span class="op">|</span> (<span class="op">!</span><span class="self">self</span>.<span class="ident">ignore_zwj</span> <span class="op">&amp;&amp;</span> <span class="ident">info</span>.<span class="ident">is_zwj</span>())
+        <span class="kw">if </span>!info.is_default_ignorable()
+            || info.is_hidden()
+            || (!<span class="self">self</span>.ignore_zwnj &amp;&amp; info.is_zwnj())
+            || (!<span class="self">self</span>.ignore_zwj &amp;&amp; info.is_zwj())
         {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
+            <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
         }
 
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

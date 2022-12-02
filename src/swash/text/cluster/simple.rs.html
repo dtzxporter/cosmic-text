@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/simple.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>simple.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/simple.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>simple.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -233,240 +233,240 @@
 <span id="233">233</span>
 <span id="234">234</span>
 <span id="235">235</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Simple cluster formation (unicode grapheme cluster algorithm).</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Simple cluster formation (unicode grapheme cluster algorithm).
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span>::ClusterBreak</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">CharCluster</span>, <span class="ident">Emoji</span>, <span class="ident">ShapeClass</span>, <span class="ident">Token</span>, <span class="ident">Whitespace</span>, <span class="ident">MAX_CLUSTER_SIZE</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::ClusterBreak;
+<span class="kw">use super</span>::{CharCluster, Emoji, ShapeClass, Token, Whitespace, MAX_CLUSTER_SIZE};
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SimpleState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">chars</span>: <span class="ident">I</span>,
-    <span class="ident">cur</span>: <span class="ident">Token</span>,
-    <span class="ident">cur_kind</span>: <span class="ident">ClusterBreak</span>,
-    <span class="ident">cur_emoji</span>: <span class="ident">bool</span>,
-    <span class="ident">done</span>: <span class="ident">bool</span>,
+<span class="kw">pub struct </span>SimpleState&lt;I&gt; {
+    chars: I,
+    cur: Token,
+    cur_kind: ClusterBreak,
+    cur_emoji: bool,
+    done: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">SimpleState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Token</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;I&gt; SimpleState&lt;I&gt;
+<span class="kw">where
+    </span>I: Iterator&lt;Item = Token&gt;,
 {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">chars</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">first</span>) <span class="op">=</span> <span class="ident">chars</span>.<span class="ident">by_ref</span>().<span class="ident">next</span>() {
-            <span class="kw">let</span> (<span class="ident">kind</span>, <span class="ident">emoji</span>) <span class="op">=</span> <span class="ident">first</span>.<span class="ident">info</span>.<span class="ident">cluster_class</span>();
-            <span class="self">Self</span> {
-                <span class="ident">chars</span>,
-                <span class="ident">cur</span>: <span class="ident">first</span>,
-                <span class="ident">cur_kind</span>: <span class="ident">kind</span>,
-                <span class="ident">cur_emoji</span>: <span class="ident">emoji</span>,
-                <span class="ident">done</span>: <span class="bool-val">false</span>,
+    <span class="kw">pub fn </span>new(<span class="kw-2">mut </span>chars: I) -&gt; <span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(first) = chars.by_ref().next() {
+            <span class="kw">let </span>(kind, emoji) = first.info.cluster_class();
+            <span class="self">Self </span>{
+                chars,
+                cur: first,
+                cur_kind: kind,
+                cur_emoji: emoji,
+                done: <span class="bool-val">false</span>,
             }
-        } <span class="kw">else</span> {
-            <span class="self">Self</span> {
-                <span class="ident">chars</span>,
-                <span class="ident">cur</span>: <span class="ident">Token::default</span>(),
-                <span class="ident">cur_kind</span>: <span class="ident">ClusterBreak::XX</span>,
-                <span class="ident">cur_emoji</span>: <span class="bool-val">false</span>,
-                <span class="ident">done</span>: <span class="bool-val">true</span>,
+        } <span class="kw">else </span>{
+            <span class="self">Self </span>{
+                chars,
+                cur: Token::default(),
+                cur_kind: ClusterBreak::XX,
+                cur_emoji: <span class="bool-val">false</span>,
+                done: <span class="bool-val">true</span>,
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cluster</span>: <span class="kw-2">&amp;mut</span> <span class="ident">CharCluster</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">done</span> {
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="kw">pub fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cluster: <span class="kw-2">&amp;mut </span>CharCluster) -&gt; bool {
+        <span class="kw">if </span><span class="self">self</span>.done {
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
-        <span class="ident">Parser</span> { <span class="ident">s</span>: <span class="self">self</span>, <span class="ident">cluster</span> }.<span class="ident">parse</span>();
-        <span class="bool-val">true</span>
-    }
+        Parser { s: <span class="self">self</span>, cluster }.parse();
+        <span class="bool-val">true
+    </span>}
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">SimpleState</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>,
-    <span class="ident">cluster</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">CharCluster</span>,
+<span class="kw">pub struct </span>Parser&lt;<span class="lifetime">&#39;a</span>, I&gt; {
+    s: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>SimpleState&lt;I&gt;,
+    cluster: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>CharCluster,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Parser</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Token</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, I&gt; Parser&lt;<span class="lifetime">&#39;a</span>, I&gt;
+<span class="kw">where
+    </span>I: Iterator&lt;Item = Token&gt;,
 {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">ClusterBreak</span>::<span class="kw-2">*</span>;
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">accept</span>(<span class="ident">PP</span>)<span class="question-mark">?</span> {}
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">emoji</span>() {
-            <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_emoji</span>(<span class="ident">Emoji::Default</span>);
-            <span class="kw">while</span> <span class="self">self</span>.<span class="ident">emoji</span>() {
-                <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">parse_emoji_extension</span>()<span class="question-mark">?</span> {
+    <span class="kw">fn </span>parse(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">use </span>ClusterBreak::<span class="kw-2">*</span>;
+        <span class="kw">while </span><span class="self">self</span>.accept(PP)<span class="question-mark">? </span>{}
+        <span class="kw">if </span><span class="self">self</span>.emoji() {
+            <span class="self">self</span>.cluster.info_mut().set_emoji(Emoji::Default);
+            <span class="kw">while </span><span class="self">self</span>.emoji() {
+                <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
+                <span class="kw">if </span>!<span class="self">self</span>.parse_emoji_extension()<span class="question-mark">? </span>{
                     <span class="kw">break</span>;
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-                <span class="ident">CN</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Control</span>)<span class="question-mark">?</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">match </span><span class="self">self</span>.kind() {
+                CN =&gt; {
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Control)<span class="question-mark">?</span>;
                 }
-                <span class="ident">LF</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_space</span>(<span class="ident">Whitespace::Newline</span>);
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Control</span>)<span class="question-mark">?</span>;
+                LF =&gt; {
+                    <span class="self">self</span>.cluster.info_mut().set_space(Whitespace::Newline);
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Control)<span class="question-mark">?</span>;
                 }
-                <span class="ident">CR</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_space</span>(<span class="ident">Whitespace::Newline</span>);
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Control</span>)<span class="question-mark">?</span>;
-                    <span class="self">self</span>.<span class="ident">accept_as</span>(<span class="ident">LF</span>, <span class="ident">ShapeClass::Control</span>)<span class="question-mark">?</span>;
+                CR =&gt; {
+                    <span class="self">self</span>.cluster.info_mut().set_space(Whitespace::Newline);
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Control)<span class="question-mark">?</span>;
+                    <span class="self">self</span>.accept_as(LF, ShapeClass::Control)<span class="question-mark">?</span>;
                 }
-                <span class="ident">L</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
-                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-                        <span class="ident">L</span> <span class="op">|</span> <span class="ident">V</span> <span class="op">|</span> <span class="ident">LV</span> <span class="op">|</span> <span class="ident">LVT</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
+                L =&gt; {
+                    <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
+                    <span class="kw">match </span><span class="self">self</span>.kind() {
+                        L | V | LV | LVT =&gt; {
+                            <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
                         }
-                        <span class="kw">_</span> =&gt; {}
+                        <span class="kw">_ </span>=&gt; {}
                     }
                 }
-                <span class="ident">LV</span> <span class="op">|</span> <span class="ident">V</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
-                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-                        <span class="ident">V</span> <span class="op">|</span> <span class="ident">T</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
+                LV | V =&gt; {
+                    <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
+                    <span class="kw">match </span><span class="self">self</span>.kind() {
+                        V | T =&gt; {
+                            <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
                         }
-                        <span class="kw">_</span> =&gt; {}
+                        <span class="kw">_ </span>=&gt; {}
                     }
                 }
-                <span class="ident">LVT</span> <span class="op">|</span> <span class="ident">T</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
-                    <span class="self">self</span>.<span class="ident">accept</span>(<span class="ident">T</span>)<span class="question-mark">?</span>;
+                LVT | T =&gt; {
+                    <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
+                    <span class="self">self</span>.accept(T)<span class="question-mark">?</span>;
                 }
-                <span class="ident">RI</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept</span>(<span class="ident">RI</span>)<span class="question-mark">?</span>;
+                RI =&gt; {
+                    <span class="self">self</span>.accept(RI)<span class="question-mark">?</span>;
                 }
-                <span class="ident">EX</span> <span class="op">|</span> <span class="ident">SM</span> <span class="op">|</span> <span class="ident">ZWJ</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_broken</span>();
+                EX | SM | ZWJ =&gt; {
+                    <span class="self">self</span>.cluster.info_mut().set_broken();
                 }
-                <span class="kw">_</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_space_from_char</span>(<span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>.<span class="ident">ch</span>);
-                    <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
+                <span class="kw">_ </span>=&gt; {
+                    <span class="self">self</span>.cluster.info_mut().set_space_from_char(<span class="self">self</span>.s.cur.ch);
+                    <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
                 }
             }
         }
-        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">parse_extension</span>()<span class="question-mark">?</span> {}
+        <span class="kw">while </span><span class="self">self</span>.parse_extension()<span class="question-mark">? </span>{}
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">parse_emoji_extension</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">ClusterBreak</span>::<span class="kw-2">*</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-                <span class="ident">EX</span> =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>.<span class="ident">ch</span> <span class="kw">as</span> <span class="ident">u32</span> {
-                    <span class="number">0x200C</span> =&gt; <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Zwnj</span>)<span class="question-mark">?</span>,
-                    <span class="number">0xFE0F</span> =&gt; {
-                        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_emoji</span>(<span class="ident">Emoji::Color</span>);
-                        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">note_char</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>);
-                        <span class="self">self</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+    <span class="kw">fn </span>parse_emoji_extension(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">use </span>ClusterBreak::<span class="kw-2">*</span>;
+        <span class="kw">loop </span>{
+            <span class="kw">match </span><span class="self">self</span>.kind() {
+                EX =&gt; <span class="kw">match </span><span class="self">self</span>.s.cur.ch <span class="kw">as </span>u32 {
+                    <span class="number">0x200C </span>=&gt; <span class="self">self</span>.accept_any_as(ShapeClass::Zwnj)<span class="question-mark">?</span>,
+                    <span class="number">0xFE0F </span>=&gt; {
+                        <span class="self">self</span>.cluster.info_mut().set_emoji(Emoji::Color);
+                        <span class="self">self</span>.cluster.note_char(<span class="kw-2">&amp;</span><span class="self">self</span>.s.cur);
+                        <span class="self">self</span>.advance()<span class="question-mark">?</span>;
                     }
-                    <span class="number">0xFE0E</span> =&gt; {
-                        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">info_mut</span>().<span class="ident">set_emoji</span>(<span class="ident">Emoji::Text</span>);
-                        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">note_char</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>);
-                        <span class="self">self</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+                    <span class="number">0xFE0E </span>=&gt; {
+                        <span class="self">self</span>.cluster.info_mut().set_emoji(Emoji::Text);
+                        <span class="self">self</span>.cluster.note_char(<span class="kw-2">&amp;</span><span class="self">self</span>.s.cur);
+                        <span class="self">self</span>.advance()<span class="question-mark">?</span>;
                     }
-                    <span class="kw">_</span> =&gt; <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Mark</span>)<span class="question-mark">?</span>,
+                    <span class="kw">_ </span>=&gt; <span class="self">self</span>.accept_any_as(ShapeClass::Mark)<span class="question-mark">?</span>,
                 },
-                <span class="ident">ZWJ</span> =&gt; {
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Zwj</span>)<span class="question-mark">?</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
+                ZWJ =&gt; {
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Zwj)<span class="question-mark">?</span>;
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="bool-val">true</span>);
                 }
-                <span class="kw">_</span> =&gt; <span class="kw">break</span>,
+                <span class="kw">_ </span>=&gt; <span class="kw">break</span>,
             }
         }
         <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">parse_extension</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">ClusterBreak</span>::<span class="kw-2">*</span>;
-        <span class="prelude-val">Some</span>(<span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-            <span class="ident">EX</span> =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>.<span class="ident">ch</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">==</span> <span class="number">0x200C</span> {
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Zwnj</span>)<span class="question-mark">?</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>.<span class="ident">info</span>.<span class="ident">is_variation_selector</span>() {
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Vs</span>)<span class="question-mark">?</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">force_normalize</span>();
-                    <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Mark</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn </span>parse_extension(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">use </span>ClusterBreak::<span class="kw-2">*</span>;
+        <span class="prelude-val">Some</span>(<span class="kw">match </span><span class="self">self</span>.kind() {
+            EX =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.s.cur.ch <span class="kw">as </span>u32 == <span class="number">0x200C </span>{
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Zwnj)<span class="question-mark">?</span>;
+                } <span class="kw">else if </span><span class="self">self</span>.s.cur.info.is_variation_selector() {
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Vs)<span class="question-mark">?</span>;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.cluster.force_normalize();
+                    <span class="self">self</span>.accept_any_as(ShapeClass::Mark)<span class="question-mark">?</span>;
                 }
-                <span class="bool-val">true</span>
-            }
-            <span class="ident">SM</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">force_normalize</span>();
-                <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Mark</span>)<span class="question-mark">?</span>;
-                <span class="bool-val">true</span>
-            }
-            <span class="ident">ZWJ</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">ShapeClass::Zwj</span>)<span class="question-mark">?</span>;
-                <span class="bool-val">true</span>
-            }
-            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+                <span class="bool-val">true
+            </span>}
+            SM =&gt; {
+                <span class="self">self</span>.cluster.force_normalize();
+                <span class="self">self</span>.accept_any_as(ShapeClass::Mark)<span class="question-mark">?</span>;
+                <span class="bool-val">true
+            </span>}
+            ZWJ =&gt; {
+                <span class="self">self</span>.accept_any_as(ShapeClass::Zwj)<span class="question-mark">?</span>;
+                <span class="bool-val">true
+            </span>}
+            <span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
         })
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">emoji</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_emoji</span>
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>emoji(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.s.cur_emoji
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">kind</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ClusterBreak</span> {
-        <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_kind</span>
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>kind(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ClusterBreak {
+        <span class="self">self</span>.s.cur_kind
     }
 
-    <span class="kw">fn</span> <span class="ident">accept</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">ClusterBreak</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_kind</span> <span class="op">==</span> <span class="ident">kind</span> {
-            <span class="self">self</span>.<span class="ident">accept_any</span>()<span class="question-mark">?</span>;
+    <span class="kw">fn </span>accept(<span class="kw-2">&amp;mut </span><span class="self">self</span>, kind: ClusterBreak) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">if </span><span class="self">self</span>.s.cur_kind == kind {
+            <span class="self">self</span>.accept_any()<span class="question-mark">?</span>;
             <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
-        } <span class="kw">else</span> {
+        } <span class="kw">else </span>{
             <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">accept_as</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">ClusterBreak</span>, <span class="ident">as_kind</span>: <span class="ident">ShapeClass</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_kind</span> <span class="op">==</span> <span class="ident">kind</span> {
-            <span class="self">self</span>.<span class="ident">accept_any_as</span>(<span class="ident">as_kind</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn </span>accept_as(<span class="kw-2">&amp;mut </span><span class="self">self</span>, kind: ClusterBreak, as_kind: ShapeClass) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
+        <span class="kw">if </span><span class="self">self</span>.s.cur_kind == kind {
+            <span class="self">self</span>.accept_any_as(as_kind)<span class="question-mark">?</span>;
             <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
-        } <span class="kw">else</span> {
+        } <span class="kw">else </span>{
             <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">accept_any</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">push_cur</span>();
-        <span class="self">self</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+    <span class="kw">fn </span>accept_any(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="self">self</span>.push_cur();
+        <span class="self">self</span>.advance()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">accept_any_as</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">as_kind</span>: <span class="ident">ShapeClass</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>, <span class="ident">as_kind</span>);
-        <span class="self">self</span>.<span class="ident">advance</span>()<span class="question-mark">?</span>;
+    <span class="kw">fn </span>accept_any_as(<span class="kw-2">&amp;mut </span><span class="self">self</span>, as_kind: ShapeClass) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="self">self</span>.cluster.push(<span class="kw-2">&amp;</span><span class="self">self</span>.s.cur, as_kind);
+        <span class="self">self</span>.advance()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">==</span> <span class="ident">MAX_CLUSTER_SIZE</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="kw">fn </span>advance(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span><span class="self">self</span>.cluster.len() <span class="kw">as </span>usize == MAX_CLUSTER_SIZE {
+            <span class="kw">return </span><span class="prelude-val">None</span>;
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">input</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">chars</span>.<span class="ident">next</span>() {
-            <span class="kw">let</span> (<span class="ident">kind</span>, <span class="ident">emoji</span>) <span class="op">=</span> <span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">cluster_class</span>();
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span> <span class="op">=</span> <span class="ident">input</span>;
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_emoji</span> <span class="op">=</span> <span class="ident">emoji</span>;
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur_kind</span> <span class="op">=</span> <span class="ident">kind</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(input) = <span class="self">self</span>.s.chars.next() {
+            <span class="kw">let </span>(kind, emoji) = input.info.cluster_class();
+            <span class="self">self</span>.s.cur = input;
+            <span class="self">self</span>.s.cur_emoji = emoji;
+            <span class="self">self</span>.s.cur_kind = kind;
             <span class="prelude-val">Some</span>(())
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">s</span>.<span class="ident">done</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="prelude-val">None</span>
-        }
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.s.done = <span class="bool-val">true</span>;
+            <span class="prelude-val">None
+        </span>}
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">push_cur</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">cluster</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">s</span>.<span class="ident">cur</span>, <span class="ident">ShapeClass::Base</span>);
+    <span class="attribute">#[inline]
+    </span><span class="kw">fn </span>push_cur(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.cluster.push(<span class="kw-2">&amp;</span><span class="self">self</span>.s.cur, ShapeClass::Base);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

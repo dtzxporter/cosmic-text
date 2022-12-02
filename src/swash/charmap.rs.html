@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/charmap.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>charmap.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/charmap.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>charmap.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../swash/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -71,74 +71,74 @@
 <span id="71">71</span>
 </pre><pre class="rust"><code><span class="doccomment">/*!
 Mapping characters to nominal glyph identifiers.
-*/</span>
+*/
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal::cmap</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">FontRef</span>, <span class="ident">GlyphId</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::internal::cmap;
+<span class="kw">use super</span>::{FontRef, GlyphId};
 
-<span class="doccomment">/// Proxy for rematerializing a character map.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharmapProxy</span>(<span class="ident">u32</span>, <span class="ident">u8</span>, <span class="ident">bool</span>);
+<span class="doccomment">/// Proxy for rematerializing a character map.
+</span><span class="attribute">#[derive(Copy, Clone, Default, Debug)]
+</span><span class="kw">pub struct </span>CharmapProxy(u32, u8, bool);
 
-<span class="kw">impl</span> <span class="ident">CharmapProxy</span> {
-    <span class="doccomment">/// Creates character map proxy from the specified font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">offset</span>, <span class="ident">format</span>, <span class="ident">symbol</span>)) <span class="op">=</span> <span class="ident">cmap::subtable</span>(<span class="ident">font</span>) {
-            <span class="self">Self</span>(<span class="ident">offset</span>, <span class="ident">format</span>, <span class="ident">symbol</span>)
-        } <span class="kw">else</span> {
+<span class="kw">impl </span>CharmapProxy {
+    <span class="doccomment">/// Creates character map proxy from the specified font.
+    </span><span class="kw">pub fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef) -&gt; <span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>((offset, format, symbol)) = cmap::subtable(font) {
+            <span class="self">Self</span>(offset, format, symbol)
+        } <span class="kw">else </span>{
             <span class="self">Self</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="bool-val">false</span>)
         }
     }
 
-    <span class="doccomment">/// Materializes a character map from the specified font. This proxy must</span>
-    <span class="doccomment">/// have been created from the same font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">materialize</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">Charmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-        <span class="ident">Charmap</span> {
-            <span class="ident">data</span>: <span class="ident">font</span>.<span class="ident">data</span>,
-            <span class="ident">proxy</span>: <span class="kw-2">*</span><span class="self">self</span>,
+    <span class="doccomment">/// Materializes a character map from the specified font. This proxy must
+    /// have been created from the same font.
+    </span><span class="kw">pub fn </span>materialize&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; Charmap&lt;<span class="lifetime">&#39;a</span>&gt; {
+        Charmap {
+            data: font.data,
+            proxy: <span class="kw-2">*</span><span class="self">self</span>,
         }
     }
 }
 
-<span class="doccomment">/// Maps characters to nominal glyph identifiers.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Charmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-    <span class="ident">proxy</span>: <span class="ident">CharmapProxy</span>,
+<span class="doccomment">/// Maps characters to nominal glyph identifiers.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Charmap&lt;<span class="lifetime">&#39;a</span>&gt; {
+    data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+    proxy: CharmapProxy,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Charmap</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a character map from the specified font.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">proxy</span> <span class="op">=</span> <span class="ident">CharmapProxy::from_font</span>(<span class="ident">font</span>);
-        <span class="self">Self</span> {
-            <span class="ident">data</span>: <span class="ident">font</span>.<span class="ident">data</span>,
-            <span class="ident">proxy</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Charmap&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Creates a character map from the specified font.
+    </span><span class="kw">pub fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>proxy = CharmapProxy::from_font(font);
+        <span class="self">Self </span>{
+            data: font.data,
+            proxy,
         }
     }
 
-    <span class="doccomment">/// Returns the associated proxy.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">proxy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">CharmapProxy</span> {
-        <span class="self">self</span>.<span class="ident">proxy</span>
+    <span class="doccomment">/// Returns the associated proxy.
+    </span><span class="kw">pub fn </span>proxy(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; CharmapProxy {
+        <span class="self">self</span>.proxy
     }
 
-    <span class="doccomment">/// Returns a nominal glyph identifier for the specified codepoint.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">codepoint</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="ident">GlyphId</span> {
-        <span class="kw">let</span> <span class="ident">codepoint</span> <span class="op">=</span> <span class="ident">codepoint</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">cmap::map</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">0</span>, <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">1</span>, <span class="ident">codepoint</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
-        <span class="comment">// Remap U+0000..=U+00FF to U+F000..=U+F0FF for symbol encodings</span>
-        <span class="kw">if</span> <span class="ident">glyph_id</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">2</span> <span class="op">&amp;&amp;</span> <span class="ident">codepoint</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0x00FF</span> {
-            <span class="ident">glyph_id</span> <span class="op">=</span>
-                <span class="ident">cmap::map</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">0</span>, <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">1</span>, <span class="ident">codepoint</span> <span class="op">+</span> <span class="number">0xF000</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>);
+    <span class="doccomment">/// Returns a nominal glyph identifier for the specified codepoint.
+    </span><span class="kw">pub fn </span>map(<span class="kw-2">&amp;</span><span class="self">self</span>, codepoint: <span class="kw">impl </span>Into&lt;u32&gt;) -&gt; GlyphId {
+        <span class="kw">let </span>codepoint = codepoint.into();
+        <span class="kw">let </span><span class="kw-2">mut </span>glyph_id = cmap::map(<span class="self">self</span>.data, <span class="self">self</span>.proxy.<span class="number">0</span>, <span class="self">self</span>.proxy.<span class="number">1</span>, codepoint).unwrap_or(<span class="number">0</span>);
+        <span class="comment">// Remap U+0000..=U+00FF to U+F000..=U+F0FF for symbol encodings
+        </span><span class="kw">if </span>glyph_id == <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.proxy.<span class="number">2 </span>&amp;&amp; codepoint &lt;= <span class="number">0x00FF </span>{
+            glyph_id =
+                cmap::map(<span class="self">self</span>.data, <span class="self">self</span>.proxy.<span class="number">0</span>, <span class="self">self</span>.proxy.<span class="number">1</span>, codepoint + <span class="number">0xF000</span>).unwrap_or(<span class="number">0</span>);
         }
-        <span class="ident">glyph_id</span>
+        glyph_id
     }
 
-    <span class="doccomment">/// Invokes the specified closure with all codepoint/glyph identifier</span>
-    <span class="doccomment">/// pairs in the character map.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">u32</span>, <span class="ident">GlyphId</span>)) {
-        <span class="ident">cmap::enumerate</span>(<span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">proxy</span>.<span class="number">0</span>, <span class="ident">f</span>);
+    <span class="doccomment">/// Invokes the specified closure with all codepoint/glyph identifier
+    /// pairs in the character map.
+    </span><span class="kw">pub fn </span>enumerate(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw">impl </span>FnMut(u32, GlyphId)) {
+        cmap::enumerate(<span class="self">self</span>.data, <span class="self">self</span>.proxy.<span class="number">0</span>, f);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

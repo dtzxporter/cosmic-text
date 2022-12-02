@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/plan.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>plan.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/plan.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>plan.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rustybuzz/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -313,320 +313,320 @@
 <span id="313">313</span>
 <span id="314">314</span>
 <span id="315">315</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
-<span class="kw">use</span> <span class="ident">core::any::Any</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>alloc::boxed::Box;
+<span class="kw">use </span>core::any::Any;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">aat</span>, <span class="ident">Direction</span>, <span class="ident">Face</span>, <span class="ident">Feature</span>, <span class="ident">Language</span>, <span class="ident">Mask</span>, <span class="ident">Tag</span>, <span class="ident">Script</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::complex</span>::{<span class="ident">complex_categorize</span>, <span class="ident">ComplexShaper</span>, <span class="ident">DEFAULT_SHAPER</span>, <span class="ident">DUMBER_SHAPER</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ot</span>::{<span class="self">self</span>, <span class="ident">feature</span>, <span class="ident">FeatureFlags</span>, <span class="ident">TableIndex</span>};
+<span class="kw">use crate</span>::{aat, Direction, Face, Feature, Language, Mask, Tag, Script};
+<span class="kw">use </span><span class="kw">crate</span>::complex::{complex_categorize, ComplexShaper, DEFAULT_SHAPER, DUMBER_SHAPER};
+<span class="kw">use </span><span class="kw">crate</span>::ot::{<span class="self">self</span>, feature, FeatureFlags, TableIndex};
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapePlan</span> {
-    <span class="kw">pub</span> <span class="ident">direction</span>: <span class="ident">Direction</span>,
-    <span class="kw">pub</span> <span class="ident">script</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Script</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">shaper</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">ComplexShaper</span>,
-    <span class="kw">pub</span> <span class="ident">ot_map</span>: <span class="ident">ot::Map</span>,
-    <span class="kw">pub</span> <span class="ident">aat_map</span>: <span class="ident">aat::Map</span>,
-    <span class="ident">data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Any</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub struct </span>ShapePlan {
+    <span class="kw">pub </span>direction: Direction,
+    <span class="kw">pub </span>script: <span class="prelude-ty">Option</span>&lt;Script&gt;,
+    <span class="kw">pub </span>shaper: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>ComplexShaper,
+    <span class="kw">pub </span>ot_map: ot::Map,
+    <span class="kw">pub </span>aat_map: aat::Map,
+    data: <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Any&gt;&gt;,
 
-    <span class="kw">pub</span> <span class="ident">frac_mask</span>: <span class="ident">Mask</span>,
-    <span class="kw">pub</span> <span class="ident">numr_mask</span>: <span class="ident">Mask</span>,
-    <span class="kw">pub</span> <span class="ident">dnom_mask</span>: <span class="ident">Mask</span>,
-    <span class="kw">pub</span> <span class="ident">rtlm_mask</span>: <span class="ident">Mask</span>,
-    <span class="kw">pub</span> <span class="ident">kern_mask</span>: <span class="ident">Mask</span>,
-    <span class="kw">pub</span> <span class="ident">trak_mask</span>: <span class="ident">Mask</span>,
+    <span class="kw">pub </span>frac_mask: Mask,
+    <span class="kw">pub </span>numr_mask: Mask,
+    <span class="kw">pub </span>dnom_mask: Mask,
+    <span class="kw">pub </span>rtlm_mask: Mask,
+    <span class="kw">pub </span>kern_mask: Mask,
+    <span class="kw">pub </span>trak_mask: Mask,
 
-    <span class="kw">pub</span> <span class="ident">requested_kerning</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">requested_tracking</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">has_frac</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">has_vert</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">has_gpos_mark</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">zero_marks</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">fallback_glyph_classes</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">fallback_mark_positioning</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">adjust_mark_positioning_when_zeroing</span>: <span class="ident">bool</span>,
+    <span class="kw">pub </span>requested_kerning: bool,
+    <span class="kw">pub </span>requested_tracking: bool,
+    <span class="kw">pub </span>has_frac: bool,
+    <span class="kw">pub </span>has_vert: bool,
+    <span class="kw">pub </span>has_gpos_mark: bool,
+    <span class="kw">pub </span>zero_marks: bool,
+    <span class="kw">pub </span>fallback_glyph_classes: bool,
+    <span class="kw">pub </span>fallback_mark_positioning: bool,
+    <span class="kw">pub </span>adjust_mark_positioning_when_zeroing: bool,
 
-    <span class="kw">pub</span> <span class="ident">apply_gpos</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">apply_kern</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">apply_kerx</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">apply_morx</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">apply_trak</span>: <span class="ident">bool</span>,
+    <span class="kw">pub </span>apply_gpos: bool,
+    <span class="kw">pub </span>apply_kern: bool,
+    <span class="kw">pub </span>apply_kerx: bool,
+    <span class="kw">pub </span>apply_morx: bool,
+    <span class="kw">pub </span>apply_trak: bool,
 }
 
-<span class="kw">impl</span> <span class="ident">ShapePlan</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>,
-        <span class="ident">direction</span>: <span class="ident">Direction</span>,
-        <span class="ident">script</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Script</span><span class="op">&gt;</span>,
-        <span class="ident">language</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Language</span><span class="op">&gt;</span>,
-        <span class="ident">user_features</span>: <span class="kw-2">&amp;</span>[<span class="ident">Feature</span>],
-    ) -&gt; <span class="self">Self</span> {
-        <span class="macro">assert_ne!</span>(<span class="ident">direction</span>, <span class="ident">Direction::Invalid</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">planner</span> <span class="op">=</span> <span class="ident">ShapePlanner::new</span>(<span class="ident">face</span>, <span class="ident">direction</span>, <span class="ident">script</span>, <span class="ident">language</span>);
-        <span class="ident">planner</span>.<span class="ident">collect_features</span>(<span class="ident">user_features</span>);
-        <span class="ident">planner</span>.<span class="ident">compile</span>()
+<span class="kw">impl </span>ShapePlan {
+    <span class="kw">pub fn </span>new(
+        face: <span class="kw-2">&amp;</span>Face,
+        direction: Direction,
+        script: <span class="prelude-ty">Option</span>&lt;Script&gt;,
+        language: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Language&gt;,
+        user_features: <span class="kw-2">&amp;</span>[Feature],
+    ) -&gt; <span class="self">Self </span>{
+        <span class="macro">assert_ne!</span>(direction, Direction::Invalid);
+        <span class="kw">let </span><span class="kw-2">mut </span>planner = ShapePlanner::new(face, direction, script, language);
+        planner.collect_features(user_features);
+        planner.compile()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">T</span> {
-        <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">downcast_ref</span>().<span class="ident">unwrap</span>()
+    <span class="kw">pub fn </span>data&lt;T: <span class="lifetime">&#39;static</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T {
+        <span class="self">self</span>.data.as_ref().unwrap().downcast_ref().unwrap()
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShapePlanner</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Face</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">direction</span>: <span class="ident">Direction</span>,
-    <span class="kw">pub</span> <span class="ident">script</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Script</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">ot_map</span>: <span class="ident">ot::MapBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">aat_map</span>: <span class="ident">aat::MapBuilder</span>,
-    <span class="kw">pub</span> <span class="ident">apply_morx</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">script_zero_marks</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">script_fallback_mark_positioning</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">shaper</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">ComplexShaper</span>,
+<span class="kw">pub struct </span>ShapePlanner&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>face: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Face&lt;<span class="lifetime">&#39;a</span>&gt;,
+    <span class="kw">pub </span>direction: Direction,
+    <span class="kw">pub </span>script: <span class="prelude-ty">Option</span>&lt;Script&gt;,
+    <span class="kw">pub </span>ot_map: ot::MapBuilder&lt;<span class="lifetime">&#39;a</span>&gt;,
+    <span class="kw">pub </span>aat_map: aat::MapBuilder,
+    <span class="kw">pub </span>apply_morx: bool,
+    <span class="kw">pub </span>script_zero_marks: bool,
+    <span class="kw">pub </span>script_fallback_mark_positioning: bool,
+    <span class="kw">pub </span>shaper: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>ComplexShaper,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ShapePlanner</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Face</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-        <span class="ident">direction</span>: <span class="ident">Direction</span>,
-        <span class="ident">script</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Script</span><span class="op">&gt;</span>,
-        <span class="ident">language</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Language</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">ot_map</span> <span class="op">=</span> <span class="ident">ot::MapBuilder::new</span>(<span class="ident">face</span>, <span class="ident">script</span>, <span class="ident">language</span>);
-        <span class="kw">let</span> <span class="ident">aat_map</span> <span class="op">=</span> <span class="ident">aat::MapBuilder::default</span>();
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ShapePlanner&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>new(
+        face: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Face&lt;<span class="lifetime">&#39;a</span>&gt;,
+        direction: Direction,
+        script: <span class="prelude-ty">Option</span>&lt;Script&gt;,
+        language: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Language&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>ot_map = ot::MapBuilder::new(face, script, language);
+        <span class="kw">let </span>aat_map = aat::MapBuilder::default();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shaper</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">script</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">script</span>) =&gt; <span class="ident">complex_categorize</span>(
-                <span class="ident">script</span>,
-                <span class="ident">direction</span>,
-                <span class="ident">ot_map</span>.<span class="ident">chosen_script</span>(<span class="ident">TableIndex::GSUB</span>),
+        <span class="kw">let </span><span class="kw-2">mut </span>shaper = <span class="kw">match </span>script {
+            <span class="prelude-val">Some</span>(script) =&gt; complex_categorize(
+                script,
+                direction,
+                ot_map.chosen_script(TableIndex::GSUB),
             ),
-            <span class="prelude-val">None</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">DEFAULT_SHAPER</span>,
+            <span class="prelude-val">None </span>=&gt; <span class="kw-2">&amp;</span>DEFAULT_SHAPER,
         };
 
-        <span class="kw">let</span> <span class="ident">script_zero_marks</span> <span class="op">=</span> <span class="ident">shaper</span>.<span class="ident">zero_width_marks</span>.<span class="ident">is_some</span>();
-        <span class="kw">let</span> <span class="ident">script_fallback_mark_positioning</span> <span class="op">=</span> <span class="ident">shaper</span>.<span class="ident">fallback_position</span>;
+        <span class="kw">let </span>script_zero_marks = shaper.zero_width_marks.is_some();
+        <span class="kw">let </span>script_fallback_mark_positioning = shaper.fallback_position;
 
-        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/2124</span>
-        <span class="kw">let</span> <span class="ident">apply_morx</span> <span class="op">=</span> <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">morx</span>.<span class="ident">is_some</span>() <span class="op">&amp;&amp;</span> (<span class="ident">direction</span>.<span class="ident">is_horizontal</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">face</span>.<span class="ident">gsub</span>.<span class="ident">is_none</span>());
+        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/2124
+        </span><span class="kw">let </span>apply_morx = face.tables().morx.is_some() &amp;&amp; (direction.is_horizontal() || face.gsub.is_none());
 
-        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1528</span>
-        <span class="kw">if</span> <span class="ident">apply_morx</span> <span class="op">&amp;&amp;</span> <span class="ident">shaper</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="kw">_</span> <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DEFAULT_SHAPER</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="kw">_</span> {
-            <span class="ident">shaper</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DUMBER_SHAPER</span>;
+        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1528
+        </span><span class="kw">if </span>apply_morx &amp;&amp; shaper <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ </span>!= <span class="kw-2">&amp;</span>DEFAULT_SHAPER <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ </span>{
+            shaper = <span class="kw-2">&amp;</span>DUMBER_SHAPER;
         }
 
-        <span class="ident">ShapePlanner</span> {
-            <span class="ident">face</span>,
-            <span class="ident">direction</span>,
-            <span class="ident">script</span>,
-            <span class="ident">ot_map</span>,
-            <span class="ident">aat_map</span>,
-            <span class="ident">apply_morx</span>,
-            <span class="ident">script_zero_marks</span>,
-            <span class="ident">script_fallback_mark_positioning</span>,
-            <span class="ident">shaper</span>,
+        ShapePlanner {
+            face,
+            direction,
+            script,
+            ot_map,
+            aat_map,
+            apply_morx,
+            script_zero_marks,
+            script_fallback_mark_positioning,
+            shaper,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">collect_features</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">user_features</span>: <span class="kw-2">&amp;</span>[<span class="ident">Feature</span>]) {
-        <span class="kw">const</span> <span class="ident">COMMON_FEATURES</span>: <span class="kw-2">&amp;</span>[(<span class="ident">Tag</span>, <span class="ident">FeatureFlags</span>)] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            (<span class="ident">feature::ABOVE_BASE_MARK_POSITIONING</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::BELOW_BASE_MARK_POSITIONING</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::GLYPH_COMPOSITION_DECOMPOSITION</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::LOCALIZED_FORMS</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::MARK_POSITIONING</span>, <span class="ident">FeatureFlags::GLOBAL_MANUAL_JOINERS</span>),
-            (<span class="ident">feature::MARK_TO_MARK_POSITIONING</span>, <span class="ident">FeatureFlags::GLOBAL_MANUAL_JOINERS</span>),
-            (<span class="ident">feature::REQUIRED_LIGATURES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
+    <span class="kw">fn </span>collect_features(<span class="kw-2">&amp;mut </span><span class="self">self</span>, user_features: <span class="kw-2">&amp;</span>[Feature]) {
+        <span class="kw">const </span>COMMON_FEATURES: <span class="kw-2">&amp;</span>[(Tag, FeatureFlags)] = <span class="kw-2">&amp;</span>[
+            (feature::ABOVE_BASE_MARK_POSITIONING, FeatureFlags::GLOBAL),
+            (feature::BELOW_BASE_MARK_POSITIONING, FeatureFlags::GLOBAL),
+            (feature::GLYPH_COMPOSITION_DECOMPOSITION, FeatureFlags::GLOBAL),
+            (feature::LOCALIZED_FORMS, FeatureFlags::GLOBAL),
+            (feature::MARK_POSITIONING, FeatureFlags::GLOBAL_MANUAL_JOINERS),
+            (feature::MARK_TO_MARK_POSITIONING, FeatureFlags::GLOBAL_MANUAL_JOINERS),
+            (feature::REQUIRED_LIGATURES, FeatureFlags::GLOBAL),
         ];
 
-        <span class="kw">const</span> <span class="ident">HORIZONTAL_FEATURES</span>: <span class="kw-2">&amp;</span>[(<span class="ident">Tag</span>, <span class="ident">FeatureFlags</span>)] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            (<span class="ident">feature::CONTEXTUAL_ALTERNATES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::CONTEXTUAL_LIGATURES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::CURSIVE_POSITIONING</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::DISTANCES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::KERNING</span>, <span class="ident">FeatureFlags::GLOBAL_HAS_FALLBACK</span>),
-            (<span class="ident">feature::STANDARD_LIGATURES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
-            (<span class="ident">feature::REQUIRED_CONTEXTUAL_ALTERNATES</span>, <span class="ident">FeatureFlags::GLOBAL</span>),
+        <span class="kw">const </span>HORIZONTAL_FEATURES: <span class="kw-2">&amp;</span>[(Tag, FeatureFlags)] = <span class="kw-2">&amp;</span>[
+            (feature::CONTEXTUAL_ALTERNATES, FeatureFlags::GLOBAL),
+            (feature::CONTEXTUAL_LIGATURES, FeatureFlags::GLOBAL),
+            (feature::CURSIVE_POSITIONING, FeatureFlags::GLOBAL),
+            (feature::DISTANCES, FeatureFlags::GLOBAL),
+            (feature::KERNING, FeatureFlags::GLOBAL_HAS_FALLBACK),
+            (feature::STANDARD_LIGATURES, FeatureFlags::GLOBAL),
+            (feature::REQUIRED_CONTEXTUAL_ALTERNATES, FeatureFlags::GLOBAL),
         ];
 
-        <span class="kw">let</span> <span class="ident">empty</span> <span class="op">=</span> <span class="ident">FeatureFlags::empty</span>();
+        <span class="kw">let </span>empty = FeatureFlags::empty();
 
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::REQUIRED_VARIATION_ALTERNATES</span>, <span class="ident">empty</span>, <span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_gsub_pause</span>(<span class="prelude-val">None</span>);
+        <span class="self">self</span>.ot_map.enable_feature(feature::REQUIRED_VARIATION_ALTERNATES, empty, <span class="number">1</span>);
+        <span class="self">self</span>.ot_map.add_gsub_pause(<span class="prelude-val">None</span>);
 
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">direction</span> {
-            <span class="ident">Direction::LeftToRight</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::LEFT_TO_RIGHT_ALTERNATES</span>, <span class="ident">empty</span>, <span class="number">1</span>);
-                <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::LEFT_TO_RIGHT_MIRRORED_FORMS</span>, <span class="ident">empty</span>, <span class="number">1</span>);
+        <span class="kw">match </span><span class="self">self</span>.direction {
+            Direction::LeftToRight =&gt; {
+                <span class="self">self</span>.ot_map.enable_feature(feature::LEFT_TO_RIGHT_ALTERNATES, empty, <span class="number">1</span>);
+                <span class="self">self</span>.ot_map.enable_feature(feature::LEFT_TO_RIGHT_MIRRORED_FORMS, empty, <span class="number">1</span>);
             }
-            <span class="ident">Direction::RightToLeft</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::RIGHT_TO_LEFT_ALTERNATES</span>, <span class="ident">empty</span>, <span class="number">1</span>);
-                <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::RIGHT_TO_LEFT_MIRRORED_FORMS</span>, <span class="ident">empty</span>, <span class="number">1</span>);
+            Direction::RightToLeft =&gt; {
+                <span class="self">self</span>.ot_map.enable_feature(feature::RIGHT_TO_LEFT_ALTERNATES, empty, <span class="number">1</span>);
+                <span class="self">self</span>.ot_map.add_feature(feature::RIGHT_TO_LEFT_MIRRORED_FORMS, empty, <span class="number">1</span>);
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
 
-        <span class="comment">// Automatic fractions.</span>
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::FRACTIONS</span>, <span class="ident">empty</span>, <span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::NUMERATORS</span>, <span class="ident">empty</span>, <span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature::DENOMINATORS</span>, <span class="ident">empty</span>, <span class="number">1</span>);
+        <span class="comment">// Automatic fractions.
+        </span><span class="self">self</span>.ot_map.add_feature(feature::FRACTIONS, empty, <span class="number">1</span>);
+        <span class="self">self</span>.ot_map.add_feature(feature::NUMERATORS, empty, <span class="number">1</span>);
+        <span class="self">self</span>.ot_map.add_feature(feature::DENOMINATORS, empty, <span class="number">1</span>);
 
-        <span class="comment">// Random!</span>
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::RANDOMIZE</span>, <span class="ident">FeatureFlags::RANDOM</span>, <span class="ident">ot::Map::MAX_VALUE</span>);
+        <span class="comment">// Random!
+        </span><span class="self">self</span>.ot_map.enable_feature(feature::RANDOMIZE, FeatureFlags::RANDOM, ot::Map::MAX_VALUE);
 
-        <span class="comment">// Tracking.  We enable dummy feature here just to allow disabling</span>
-        <span class="comment">// AAT &#39;trak&#39; table using features.</span>
-        <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1303</span>
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;trak&quot;</span>), <span class="ident">FeatureFlags::HAS_FALLBACK</span>, <span class="number">1</span>);
+        <span class="comment">// Tracking.  We enable dummy feature here just to allow disabling
+        // AAT &#39;trak&#39; table using features.
+        // https://github.com/harfbuzz/harfbuzz/issues/1303
+        </span><span class="self">self</span>.ot_map.enable_feature(Tag::from_bytes(<span class="string">b&quot;trak&quot;</span>), FeatureFlags::HAS_FALLBACK, <span class="number">1</span>);
 
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;HARF&quot;</span>), <span class="ident">empty</span>, <span class="number">1</span>);
+        <span class="self">self</span>.ot_map.enable_feature(Tag::from_bytes(<span class="string">b&quot;HARF&quot;</span>), empty, <span class="number">1</span>);
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shaper</span>.<span class="ident">collect_features</span> {
-            <span class="ident">func</span>(<span class="self">self</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = <span class="self">self</span>.shaper.collect_features {
+            func(<span class="self">self</span>);
         }
 
-        <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;BUZZ&quot;</span>), <span class="ident">empty</span>, <span class="number">1</span>);
+        <span class="self">self</span>.ot_map.enable_feature(Tag::from_bytes(<span class="string">b&quot;BUZZ&quot;</span>), empty, <span class="number">1</span>);
 
-        <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">tag</span>, <span class="ident">flags</span>) <span class="kw">in</span> <span class="ident">COMMON_FEATURES</span> {
-            <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">tag</span>, <span class="ident">flags</span>, <span class="number">1</span>);
+        <span class="kw">for </span><span class="kw-2">&amp;</span>(tag, flags) <span class="kw">in </span>COMMON_FEATURES {
+            <span class="self">self</span>.ot_map.add_feature(tag, flags, <span class="number">1</span>);
         }
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">direction</span>.<span class="ident">is_horizontal</span>() {
-            <span class="kw">for</span> <span class="kw-2">&amp;</span>(<span class="ident">tag</span>, <span class="ident">flags</span>) <span class="kw">in</span> <span class="ident">HORIZONTAL_FEATURES</span> {
-                <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">tag</span>, <span class="ident">flags</span>, <span class="number">1</span>);
+        <span class="kw">if </span><span class="self">self</span>.direction.is_horizontal() {
+            <span class="kw">for </span><span class="kw-2">&amp;</span>(tag, flags) <span class="kw">in </span>HORIZONTAL_FEATURES {
+                <span class="self">self</span>.ot_map.add_feature(tag, flags, <span class="number">1</span>);
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// We really want to find a &#39;vert&#39; feature if there&#39;s any in the font, no</span>
-            <span class="comment">// matter which script/langsys it is listed (or not) under.</span>
-            <span class="comment">// See various bugs referenced from:</span>
-            <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/63</span>
-            <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">enable_feature</span>(<span class="ident">feature::VERTICAL_WRITING</span>, <span class="ident">FeatureFlags::GLOBAL_SEARCH</span>, <span class="number">1</span>);
+        } <span class="kw">else </span>{
+            <span class="comment">// We really want to find a &#39;vert&#39; feature if there&#39;s any in the font, no
+            // matter which script/langsys it is listed (or not) under.
+            // See various bugs referenced from:
+            // https://github.com/harfbuzz/harfbuzz/issues/63
+            </span><span class="self">self</span>.ot_map.enable_feature(feature::VERTICAL_WRITING, FeatureFlags::GLOBAL_SEARCH, <span class="number">1</span>);
         }
 
-        <span class="kw">for</span> <span class="ident">feature</span> <span class="kw">in</span> <span class="ident">user_features</span> {
-            <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">feature</span>.<span class="ident">is_global</span>() { <span class="ident">FeatureFlags::GLOBAL</span> } <span class="kw">else</span> { <span class="ident">empty</span> };
-            <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">add_feature</span>(<span class="ident">feature</span>.<span class="ident">tag</span>, <span class="ident">flags</span>, <span class="ident">feature</span>.<span class="ident">value</span>);
+        <span class="kw">for </span>feature <span class="kw">in </span>user_features {
+            <span class="kw">let </span>flags = <span class="kw">if </span>feature.is_global() { FeatureFlags::GLOBAL } <span class="kw">else </span>{ empty };
+            <span class="self">self</span>.ot_map.add_feature(feature.tag, flags, feature.value);
         }
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">apply_morx</span> {
-            <span class="kw">for</span> <span class="ident">feature</span> <span class="kw">in</span> <span class="ident">user_features</span> {
-                <span class="self">self</span>.<span class="ident">aat_map</span>.<span class="ident">add_feature</span>(<span class="self">self</span>.<span class="ident">face</span>, <span class="ident">feature</span>.<span class="ident">tag</span>, <span class="ident">feature</span>.<span class="ident">value</span>);
+        <span class="kw">if </span><span class="self">self</span>.apply_morx {
+            <span class="kw">for </span>feature <span class="kw">in </span>user_features {
+                <span class="self">self</span>.aat_map.add_feature(<span class="self">self</span>.face, feature.tag, feature.value);
             }
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shaper</span>.<span class="ident">override_features</span> {
-            <span class="ident">func</span>(<span class="self">self</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = <span class="self">self</span>.shaper.override_features {
+            func(<span class="self">self</span>);
         }
     }
 
-    <span class="comment">// TODO: to just self</span>
-    <span class="kw">fn</span> <span class="ident">compile</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">ShapePlan</span> {
-        <span class="kw">let</span> <span class="ident">ot_map</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ot_map</span>.<span class="ident">compile</span>();
+    <span class="comment">// TODO: to just self
+    </span><span class="kw">fn </span>compile(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; ShapePlan {
+        <span class="kw">let </span>ot_map = <span class="self">self</span>.ot_map.compile();
 
-        <span class="kw">let</span> <span class="ident">aat_map</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">apply_morx</span> {
-            <span class="self">self</span>.<span class="ident">aat_map</span>.<span class="ident">compile</span>(<span class="self">self</span>.<span class="ident">face</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">aat::Map::default</span>()
+        <span class="kw">let </span>aat_map = <span class="kw">if </span><span class="self">self</span>.apply_morx {
+            <span class="self">self</span>.aat_map.compile(<span class="self">self</span>.face)
+        } <span class="kw">else </span>{
+            aat::Map::default()
         };
 
-        <span class="kw">let</span> <span class="ident">frac_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::FRACTIONS</span>);
-        <span class="kw">let</span> <span class="ident">numr_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::NUMERATORS</span>);
-        <span class="kw">let</span> <span class="ident">dnom_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::DENOMINATORS</span>);
-        <span class="kw">let</span> <span class="ident">has_frac</span> <span class="op">=</span> <span class="ident">frac_mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> (<span class="ident">numr_mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">dnom_mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="kw">let </span>frac_mask = ot_map.one_mask(feature::FRACTIONS);
+        <span class="kw">let </span>numr_mask = ot_map.one_mask(feature::NUMERATORS);
+        <span class="kw">let </span>dnom_mask = ot_map.one_mask(feature::DENOMINATORS);
+        <span class="kw">let </span>has_frac = frac_mask != <span class="number">0 </span>|| (numr_mask != <span class="number">0 </span>&amp;&amp; dnom_mask != <span class="number">0</span>);
 
-        <span class="kw">let</span> <span class="ident">rtlm_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::RIGHT_TO_LEFT_MIRRORED_FORMS</span>);
-        <span class="kw">let</span> <span class="ident">has_vert</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::VERTICAL_WRITING</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>rtlm_mask = ot_map.one_mask(feature::RIGHT_TO_LEFT_MIRRORED_FORMS);
+        <span class="kw">let </span>has_vert = ot_map.one_mask(feature::VERTICAL_WRITING) != <span class="number">0</span>;
 
-        <span class="kw">let</span> <span class="ident">horizontal</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">direction</span>.<span class="ident">is_horizontal</span>();
-        <span class="kw">let</span> <span class="ident">kern_tag</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">horizontal</span> { <span class="ident">feature::KERNING</span> } <span class="kw">else</span> { <span class="ident">feature::VERTICAL_KERNING</span> };
-        <span class="kw">let</span> <span class="ident">kern_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">mask</span>(<span class="ident">kern_tag</span>).<span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">requested_kerning</span> <span class="op">=</span> <span class="ident">kern_mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">trak_mask</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">mask</span>(<span class="ident">Tag::from_bytes</span>(<span class="string">b&quot;trak&quot;</span>)).<span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">requested_tracking</span> <span class="op">=</span> <span class="ident">trak_mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>horizontal = <span class="self">self</span>.direction.is_horizontal();
+        <span class="kw">let </span>kern_tag = <span class="kw">if </span>horizontal { feature::KERNING } <span class="kw">else </span>{ feature::VERTICAL_KERNING };
+        <span class="kw">let </span>kern_mask = ot_map.mask(kern_tag).<span class="number">0</span>;
+        <span class="kw">let </span>requested_kerning = kern_mask != <span class="number">0</span>;
+        <span class="kw">let </span>trak_mask = ot_map.mask(Tag::from_bytes(<span class="string">b&quot;trak&quot;</span>)).<span class="number">0</span>;
+        <span class="kw">let </span>requested_tracking = trak_mask != <span class="number">0</span>;
 
-        <span class="kw">let</span> <span class="ident">has_gpos_kern</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">feature_index</span>(<span class="ident">TableIndex::GPOS</span>, <span class="ident">kern_tag</span>).<span class="ident">is_some</span>();
-        <span class="kw">let</span> <span class="ident">disable_gpos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">shaper</span>.<span class="ident">gpos_tag</span>.<span class="ident">is_some</span>()
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">shaper</span>.<span class="ident">gpos_tag</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">chosen_script</span>(<span class="ident">TableIndex::GPOS</span>);
+        <span class="kw">let </span>has_gpos_kern = ot_map.feature_index(TableIndex::GPOS, kern_tag).is_some();
+        <span class="kw">let </span>disable_gpos = <span class="self">self</span>.shaper.gpos_tag.is_some()
+            &amp;&amp; <span class="self">self</span>.shaper.gpos_tag != ot_map.chosen_script(TableIndex::GPOS);
 
-        <span class="comment">// Decide who provides glyph classes. GDEF or Unicode.</span>
-        <span class="kw">let</span> <span class="ident">fallback_glyph_classes</span> <span class="op">=</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">gdef</span>
-            .<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">table</span><span class="op">|</span> <span class="ident">table</span>.<span class="ident">has_glyph_classes</span>());
+        <span class="comment">// Decide who provides glyph classes. GDEF or Unicode.
+        </span><span class="kw">let </span>fallback_glyph_classes = !<span class="self">self</span>.face.tables().gdef
+            .map_or(<span class="bool-val">false</span>, |table| table.has_glyph_classes());
 
-        <span class="comment">// Decide who does substitutions. GSUB, morx, or fallback.</span>
-        <span class="kw">let</span> <span class="ident">apply_morx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">apply_morx</span>;
+        <span class="comment">// Decide who does substitutions. GSUB, morx, or fallback.
+        </span><span class="kw">let </span>apply_morx = <span class="self">self</span>.apply_morx;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">apply_gpos</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">apply_kerx</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">apply_kern</span> <span class="op">=</span> <span class="bool-val">false</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>apply_gpos = <span class="bool-val">false</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>apply_kerx = <span class="bool-val">false</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>apply_kern = <span class="bool-val">false</span>;
 
-        <span class="comment">// Decide who does positioning. GPOS, kerx, kern, or fallback.</span>
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">kerx</span>.<span class="ident">is_some</span>() {
-            <span class="ident">apply_kerx</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">apply_morx</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">disable_gpos</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">gpos</span>.<span class="ident">is_some</span>() {
-            <span class="ident">apply_gpos</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="comment">// Decide who does positioning. GPOS, kerx, kern, or fallback.
+        </span><span class="kw">if </span><span class="self">self</span>.face.tables().kerx.is_some() {
+            apply_kerx = <span class="bool-val">true</span>;
+        } <span class="kw">else if </span>!apply_morx &amp;&amp; !disable_gpos &amp;&amp; <span class="self">self</span>.face.gpos.is_some() {
+            apply_gpos = <span class="bool-val">true</span>;
         }
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">apply_kerx</span> <span class="op">&amp;&amp;</span> (<span class="op">!</span><span class="ident">has_gpos_kern</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">apply_gpos</span>) {
-            <span class="comment">// Apparently Apple applies kerx if GPOS kern was not applied.</span>
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">kerx</span>.<span class="ident">is_some</span>() {
-                <span class="ident">apply_kerx</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ot::has_kerning</span>(<span class="self">self</span>.<span class="ident">face</span>) {
-                <span class="ident">apply_kern</span> <span class="op">=</span> <span class="bool-val">true</span>;
+        <span class="kw">if </span>!apply_kerx &amp;&amp; (!has_gpos_kern || !apply_gpos) {
+            <span class="comment">// Apparently Apple applies kerx if GPOS kern was not applied.
+            </span><span class="kw">if </span><span class="self">self</span>.face.tables().kerx.is_some() {
+                apply_kerx = <span class="bool-val">true</span>;
+            } <span class="kw">else if </span>ot::has_kerning(<span class="self">self</span>.face) {
+                apply_kern = <span class="bool-val">true</span>;
             }
         }
 
-        <span class="kw">let</span> <span class="ident">zero_marks</span> <span class="op">=</span>
-            <span class="self">self</span>.<span class="ident">script_zero_marks</span>
-            <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">apply_kerx</span>
-            <span class="op">&amp;&amp;</span> (<span class="op">!</span><span class="ident">apply_kern</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">ot::has_machine_kerning</span>(<span class="self">self</span>.<span class="ident">face</span>));
+        <span class="kw">let </span>zero_marks =
+            <span class="self">self</span>.script_zero_marks
+            &amp;&amp; !apply_kerx
+            &amp;&amp; (!apply_kern || !ot::has_machine_kerning(<span class="self">self</span>.face));
 
-        <span class="kw">let</span> <span class="ident">has_gpos_mark</span> <span class="op">=</span> <span class="ident">ot_map</span>.<span class="ident">one_mask</span>(<span class="ident">feature::MARK_POSITIONING</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let </span>has_gpos_mark = ot_map.one_mask(feature::MARK_POSITIONING) != <span class="number">0</span>;
 
-        <span class="kw">let</span> <span class="ident">adjust_mark_positioning_when_zeroing</span> <span class="op">=</span>
-            <span class="op">!</span><span class="ident">apply_gpos</span>
-            <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">apply_kerx</span>
-            <span class="op">&amp;&amp;</span> (<span class="op">!</span><span class="ident">apply_kern</span> <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">ot::has_cross_kerning</span>(<span class="self">self</span>.<span class="ident">face</span>));
+        <span class="kw">let </span>adjust_mark_positioning_when_zeroing =
+            !apply_gpos
+            &amp;&amp; !apply_kerx
+            &amp;&amp; (!apply_kern || !ot::has_cross_kerning(<span class="self">self</span>.face));
 
-        <span class="kw">let</span> <span class="ident">fallback_mark_positioning</span> <span class="op">=</span>
-            <span class="ident">adjust_mark_positioning_when_zeroing</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">script_fallback_mark_positioning</span>;
+        <span class="kw">let </span>fallback_mark_positioning =
+            adjust_mark_positioning_when_zeroing
+            &amp;&amp; <span class="self">self</span>.script_fallback_mark_positioning;
 
-        <span class="comment">// Currently we always apply trak.</span>
-        <span class="kw">let</span> <span class="ident">apply_trak</span> <span class="op">=</span> <span class="ident">requested_tracking</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">trak</span>.<span class="ident">is_some</span>();
+        <span class="comment">// Currently we always apply trak.
+        </span><span class="kw">let </span>apply_trak = requested_tracking &amp;&amp; <span class="self">self</span>.face.tables().trak.is_some();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">plan</span> <span class="op">=</span> <span class="ident">ShapePlan</span> {
-            <span class="ident">direction</span>: <span class="self">self</span>.<span class="ident">direction</span>,
-            <span class="ident">script</span>: <span class="self">self</span>.<span class="ident">script</span>,
-            <span class="ident">shaper</span>: <span class="self">self</span>.<span class="ident">shaper</span>,
-            <span class="ident">ot_map</span>,
-            <span class="ident">aat_map</span>,
-            <span class="ident">data</span>: <span class="prelude-val">None</span>,
-            <span class="ident">frac_mask</span>,
-            <span class="ident">numr_mask</span>,
-            <span class="ident">dnom_mask</span>,
-            <span class="ident">rtlm_mask</span>,
-            <span class="ident">kern_mask</span>,
-            <span class="ident">trak_mask</span>,
-            <span class="ident">requested_kerning</span>,
-            <span class="ident">requested_tracking</span>,
-            <span class="ident">has_frac</span>,
-            <span class="ident">has_vert</span>,
-            <span class="ident">has_gpos_mark</span>,
-            <span class="ident">zero_marks</span>,
-            <span class="ident">fallback_glyph_classes</span>,
-            <span class="ident">fallback_mark_positioning</span>,
-            <span class="ident">adjust_mark_positioning_when_zeroing</span>,
-            <span class="ident">apply_gpos</span>,
-            <span class="ident">apply_kern</span>,
-            <span class="ident">apply_kerx</span>,
-            <span class="ident">apply_morx</span>,
-            <span class="ident">apply_trak</span>,
+        <span class="kw">let </span><span class="kw-2">mut </span>plan = ShapePlan {
+            direction: <span class="self">self</span>.direction,
+            script: <span class="self">self</span>.script,
+            shaper: <span class="self">self</span>.shaper,
+            ot_map,
+            aat_map,
+            data: <span class="prelude-val">None</span>,
+            frac_mask,
+            numr_mask,
+            dnom_mask,
+            rtlm_mask,
+            kern_mask,
+            trak_mask,
+            requested_kerning,
+            requested_tracking,
+            has_frac,
+            has_vert,
+            has_gpos_mark,
+            zero_marks,
+            fallback_glyph_classes,
+            fallback_mark_positioning,
+            adjust_mark_positioning_when_zeroing,
+            apply_gpos,
+            apply_kern,
+            apply_kerx,
+            apply_morx,
+            apply_trak,
         };
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">shaper</span>.<span class="ident">create_data</span> {
-            <span class="ident">plan</span>.<span class="ident">data</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">func</span>(<span class="kw-2">&amp;</span><span class="ident">plan</span>));
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(func) = <span class="self">self</span>.shaper.create_data {
+            plan.data = <span class="prelude-val">Some</span>(func(<span class="kw-2">&amp;</span>plan));
         }
 
-        <span class="ident">plan</span>
+        plan
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/cluster.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cluster.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/text/cluster/cluster.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cluster.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../swash/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -431,438 +431,438 @@
 <span id="431">431</span>
 <span id="432">432</span>
 <span id="433">433</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::<span class="kw">super</span></span>::{<span class="ident">Codepoint</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">JoiningType</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::char</span>::{<span class="ident">Char</span>, <span class="ident">ShapeClass</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::token::Token</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">ClusterInfo</span>, <span class="ident">UserData</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::GlyphId</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::{Codepoint <span class="kw">as _</span>, JoiningType};
+<span class="kw">use </span><span class="kw">super</span>::char::{Char, ShapeClass};
+<span class="kw">use </span><span class="kw">super</span>::token::Token;
+<span class="kw">use super</span>::{ClusterInfo, UserData};
+<span class="kw">use </span><span class="kw">crate</span>::GlyphId;
 
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::ops::Range</span>;
+<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::ops::Range;
 
-<span class="doccomment">/// The maximum number of characters in a single cluster.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_CLUSTER_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">32</span>;
+<span class="doccomment">/// The maximum number of characters in a single cluster.
+</span><span class="kw">pub const </span>MAX_CLUSTER_SIZE: usize = <span class="number">32</span>;
 
-<span class="doccomment">/// Character cluster; output from the parser and input to the shaper.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CharCluster</span> {
-    <span class="ident">info</span>: <span class="ident">ClusterInfo</span>,
-    <span class="ident">chars</span>: [<span class="ident">Char</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-    <span class="ident">len</span>: <span class="ident">u8</span>,
-    <span class="ident">map_len</span>: <span class="ident">u8</span>,
-    <span class="ident">start</span>: <span class="ident">u32</span>,
-    <span class="ident">end</span>: <span class="ident">u32</span>,
-    <span class="ident">force_normalize</span>: <span class="ident">bool</span>,
-    <span class="ident">comp</span>: <span class="ident">Form</span>,
-    <span class="ident">decomp</span>: <span class="ident">Form</span>,
-    <span class="ident">form</span>: <span class="ident">FormKind</span>,
-    <span class="ident">best_ratio</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// Character cluster; output from the parser and input to the shaper.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>CharCluster {
+    info: ClusterInfo,
+    chars: [Char; MAX_CLUSTER_SIZE],
+    len: u8,
+    map_len: u8,
+    start: u32,
+    end: u32,
+    force_normalize: bool,
+    comp: Form,
+    decomp: Form,
+    form: FormKind,
+    best_ratio: f32,
 }
 
-<span class="kw">impl</span> <span class="ident">CharCluster</span> {
-    <span class="doccomment">/// Creates a new empty cluster.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">info</span>: <span class="ident">ClusterInfo</span>(<span class="number">0</span>),
-            <span class="ident">chars</span>: [<span class="ident">DEFAULT_CHAR</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-            <span class="ident">len</span>: <span class="number">0</span>,
-            <span class="ident">map_len</span>: <span class="number">0</span>,
-            <span class="ident">start</span>: <span class="number">0</span>,
-            <span class="ident">end</span>: <span class="number">0</span>,
-            <span class="ident">force_normalize</span>: <span class="bool-val">false</span>,
-            <span class="ident">comp</span>: <span class="ident">Form::new</span>(),
-            <span class="ident">decomp</span>: <span class="ident">Form::new</span>(),
-            <span class="ident">form</span>: <span class="ident">FormKind::Original</span>,
-            <span class="ident">best_ratio</span>: <span class="number">0.</span>,
+<span class="kw">impl </span>CharCluster {
+    <span class="doccomment">/// Creates a new empty cluster.
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            info: ClusterInfo(<span class="number">0</span>),
+            chars: [DEFAULT_CHAR; MAX_CLUSTER_SIZE],
+            len: <span class="number">0</span>,
+            map_len: <span class="number">0</span>,
+            start: <span class="number">0</span>,
+            end: <span class="number">0</span>,
+            force_normalize: <span class="bool-val">false</span>,
+            comp: Form::new(),
+            decomp: Form::new(),
+            form: FormKind::Original,
+            best_ratio: <span class="number">0.</span>,
         }
     }
 
-    <span class="doccomment">/// Returns the cluster information.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ClusterInfo</span> {
-        <span class="self">self</span>.<span class="ident">info</span>
+    <span class="doccomment">/// Returns the cluster information.
+    </span><span class="kw">pub fn </span>info(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ClusterInfo {
+        <span class="self">self</span>.info
     }
 
-    <span class="doccomment">/// Returns the primary user data for the cluster.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">user_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">UserData</span> {
-        <span class="self">self</span>.<span class="ident">chars</span>[<span class="number">0</span>].<span class="ident">data</span>
+    <span class="doccomment">/// Returns the primary user data for the cluster.
+    </span><span class="kw">pub fn </span>user_data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; UserData {
+        <span class="self">self</span>.chars[<span class="number">0</span>].data
     }
 
-    <span class="doccomment">/// Returns the source range for the cluster in code units.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SourceRange</span> {
-        <span class="ident">SourceRange</span> {
-            <span class="ident">start</span>: <span class="self">self</span>.<span class="ident">start</span>,
-            <span class="ident">end</span>: <span class="self">self</span>.<span class="ident">end</span>,
+    <span class="doccomment">/// Returns the source range for the cluster in code units.
+    </span><span class="kw">pub fn </span>range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SourceRange {
+        SourceRange {
+            start: <span class="self">self</span>.start,
+            end: <span class="self">self</span>.end,
         }
     }
 
-    <span class="doccomment">/// Returns true if the cluster is empty.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span>
+    <span class="doccomment">/// Returns true if the cluster is empty.
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.len == <span class="number">0
+    </span>}
+
+    <span class="doccomment">/// Returns the sequence of characters in the cluster.
+    </span><span class="kw">pub fn </span>chars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Char] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize]
     }
 
-    <span class="doccomment">/// Returns the sequence of characters in the cluster.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Char</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>]
-    }
-
-    <span class="doccomment">/// Returns the currently mapped sequence of characters in the cluster.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mapped_chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Char</span>] {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">form</span> {
-            <span class="ident">FormKind::Original</span> =&gt; <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>],
-            <span class="ident">FormKind::NFD</span> =&gt; <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>(),
-            <span class="ident">FormKind::NFC</span> =&gt; <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">chars</span>(),
+    <span class="doccomment">/// Returns the currently mapped sequence of characters in the cluster.
+    </span><span class="kw">pub fn </span>mapped_chars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Char] {
+        <span class="kw">match </span><span class="self">self</span>.form {
+            FormKind::Original =&gt; <span class="kw-2">&amp;</span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize],
+            FormKind::NFD =&gt; <span class="self">self</span>.decomp.chars(),
+            FormKind::NFC =&gt; <span class="self">self</span>.comp.chars(),
         }
     }
 
-    <span class="doccomment">/// Applies a nominal glyph identifier mapping to the cluster, returning</span>
-    <span class="doccomment">/// a result indicating the status of the mapping.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">char</span>) -&gt; <span class="ident">GlyphId</span>) -&gt; <span class="ident">Status</span> {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>;
-        <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="ident">Status::Complete</span>;
+    <span class="doccomment">/// Applies a nominal glyph identifier mapping to the cluster, returning
+    /// a result indicating the status of the mapping.
+    </span><span class="kw">pub fn </span>map(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">impl </span>Fn(char) -&gt; GlyphId) -&gt; Status {
+        <span class="kw">let </span>len = <span class="self">self</span>.len;
+        <span class="kw">if </span>len == <span class="number">0 </span>{
+            <span class="kw">return </span>Status::Complete;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">glyph_ids</span> <span class="op">=</span> [<span class="number">0u16</span>; <span class="ident">MAX_CLUSTER_SIZE</span>];
-        <span class="kw">let</span> <span class="ident">prev_ratio</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">best_ratio</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ratio</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">force_normalize</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">composed</span>().<span class="ident">is_some</span>() {
-            <span class="ident">ratio</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyph_ids</span>, <span class="self">self</span>.<span class="ident">best_ratio</span>);
-            <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">best_ratio</span> {
-                <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">=</span> <span class="ident">ratio</span>;
-                <span class="self">self</span>.<span class="ident">form</span> <span class="op">=</span> <span class="ident">FormKind::NFC</span>;
-                <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
-                    <span class="kw">return</span> <span class="ident">Status::Complete</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>glyph_ids = [<span class="number">0u16</span>; MAX_CLUSTER_SIZE];
+        <span class="kw">let </span>prev_ratio = <span class="self">self</span>.best_ratio;
+        <span class="kw">let </span><span class="kw-2">mut </span>ratio;
+        <span class="kw">if </span><span class="self">self</span>.force_normalize &amp;&amp; <span class="self">self</span>.composed().is_some() {
+            ratio = <span class="self">self</span>.comp.map(<span class="kw-2">&amp;</span>f, <span class="kw-2">&amp;mut </span>glyph_ids, <span class="self">self</span>.best_ratio);
+            <span class="kw">if </span>ratio &gt; <span class="self">self</span>.best_ratio {
+                <span class="self">self</span>.best_ratio = ratio;
+                <span class="self">self</span>.form = FormKind::NFC;
+                <span class="kw">if </span>ratio &gt;= <span class="number">1. </span>{
+                    <span class="kw">return </span>Status::Complete;
                 }
             }
         }
-        <span class="ident">ratio</span> <span class="op">=</span> <span class="ident">Mapper</span> {
-            <span class="ident">chars</span>: <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>],
-            <span class="ident">map_len</span>: <span class="self">self</span>.<span class="ident">map_len</span>.<span class="ident">max</span>(<span class="number">1</span>),
+        ratio = Mapper {
+            chars: <span class="kw-2">&amp;mut </span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize],
+            map_len: <span class="self">self</span>.map_len.max(<span class="number">1</span>),
         }
-        .<span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyph_ids</span>, <span class="self">self</span>.<span class="ident">best_ratio</span>);
-        <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">best_ratio</span> {
-            <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">=</span> <span class="ident">ratio</span>;
-            <span class="self">self</span>.<span class="ident">form</span> <span class="op">=</span> <span class="ident">FormKind::Original</span>;
-            <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
-                <span class="kw">return</span> <span class="ident">Status::Complete</span>;
+        .map(<span class="kw-2">&amp;</span>f, <span class="kw-2">&amp;mut </span>glyph_ids, <span class="self">self</span>.best_ratio);
+        <span class="kw">if </span>ratio &gt; <span class="self">self</span>.best_ratio {
+            <span class="self">self</span>.best_ratio = ratio;
+            <span class="self">self</span>.form = FormKind::Original;
+            <span class="kw">if </span>ratio &gt;= <span class="number">1. </span>{
+                <span class="kw">return </span>Status::Complete;
             }
         }
-        <span class="kw">if</span> <span class="ident">len</span> <span class="op">&gt;</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">decomposed</span>().<span class="ident">is_some</span>() {
-            <span class="ident">ratio</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyph_ids</span>, <span class="self">self</span>.<span class="ident">best_ratio</span>);
-            <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">best_ratio</span> {
-                <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">=</span> <span class="ident">ratio</span>;
-                <span class="self">self</span>.<span class="ident">form</span> <span class="op">=</span> <span class="ident">FormKind::NFD</span>;
-                <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
-                    <span class="kw">return</span> <span class="ident">Status::Complete</span>;
+        <span class="kw">if </span>len &gt; <span class="number">1 </span>&amp;&amp; <span class="self">self</span>.decomposed().is_some() {
+            ratio = <span class="self">self</span>.decomp.map(<span class="kw-2">&amp;</span>f, <span class="kw-2">&amp;mut </span>glyph_ids, <span class="self">self</span>.best_ratio);
+            <span class="kw">if </span>ratio &gt; <span class="self">self</span>.best_ratio {
+                <span class="self">self</span>.best_ratio = ratio;
+                <span class="self">self</span>.form = FormKind::NFD;
+                <span class="kw">if </span>ratio &gt;= <span class="number">1. </span>{
+                    <span class="kw">return </span>Status::Complete;
                 }
             }
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">force_normalize</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">composed</span>().<span class="ident">is_some</span>() {
-                <span class="ident">ratio</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">map</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>, <span class="kw-2">&amp;mut</span> <span class="ident">glyph_ids</span>, <span class="self">self</span>.<span class="ident">best_ratio</span>);
-                <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">best_ratio</span> {
-                    <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">=</span> <span class="ident">ratio</span>;
-                    <span class="self">self</span>.<span class="ident">form</span> <span class="op">=</span> <span class="ident">FormKind::NFC</span>;
-                    <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
-                        <span class="kw">return</span> <span class="ident">Status::Complete</span>;
+            <span class="kw">if </span>!<span class="self">self</span>.force_normalize &amp;&amp; <span class="self">self</span>.composed().is_some() {
+                ratio = <span class="self">self</span>.comp.map(<span class="kw-2">&amp;</span>f, <span class="kw-2">&amp;mut </span>glyph_ids, <span class="self">self</span>.best_ratio);
+                <span class="kw">if </span>ratio &gt; <span class="self">self</span>.best_ratio {
+                    <span class="self">self</span>.best_ratio = ratio;
+                    <span class="self">self</span>.form = FormKind::NFC;
+                    <span class="kw">if </span>ratio &gt;= <span class="number">1. </span>{
+                        <span class="kw">return </span>Status::Complete;
                     }
                 }
             }
         }
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">&gt;</span> <span class="ident">prev_ratio</span> {
-            <span class="ident">Status::Keep</span>
-        } <span class="kw">else</span> {
-            <span class="ident">Status::Discard</span>
+        <span class="kw">if </span><span class="self">self</span>.best_ratio &gt; prev_ratio {
+            Status::Keep
+        } <span class="kw">else </span>{
+            Status::Discard
         }
     }
 
-    <span class="doccomment">/// Resets the cluster to the intial empty state.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">info</span> <span class="op">=</span> <span class="ident">ClusterInfo</span>(<span class="number">0</span>);
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">force_normalize</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">form</span> <span class="op">=</span> <span class="ident">FormKind::Original</span>;
-        <span class="self">self</span>.<span class="ident">best_ratio</span> <span class="op">=</span> <span class="number">0.</span>;
+    <span class="doccomment">/// Resets the cluster to the intial empty state.
+    </span><span class="kw">pub fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.info = ClusterInfo(<span class="number">0</span>);
+        <span class="self">self</span>.len = <span class="number">0</span>;
+        <span class="self">self</span>.map_len = <span class="number">0</span>;
+        <span class="self">self</span>.start = <span class="number">0</span>;
+        <span class="self">self</span>.end = <span class="number">0</span>;
+        <span class="self">self</span>.force_normalize = <span class="bool-val">false</span>;
+        <span class="self">self</span>.comp.clear();
+        <span class="self">self</span>.decomp.clear();
+        <span class="self">self</span>.form = FormKind::Original;
+        <span class="self">self</span>.best_ratio = <span class="number">0.</span>;
     }
 
-    <span class="doccomment">/// Returns the sequence of decomposed characters for the cluster.</span>
-    <span class="kw">fn</span> <span class="ident">decomposed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">Char</span>]<span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">state</span> {
-            <span class="ident">FormState::Invalid</span> =&gt; <span class="prelude-val">None</span>,
-            <span class="ident">FormState::None</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::Invalid</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>] {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">i</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">copy</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ch</span>;
-                    <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">ch</span>.<span class="ident">ch</span>.<span class="ident">decompose</span>() {
-                        <span class="kw">if</span> <span class="ident">end</span> <span class="op">==</span> <span class="ident">MAX_CLUSTER_SIZE</span> {
-                            <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the sequence of decomposed characters for the cluster.
+    </span><span class="kw">fn </span>decomposed(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[Char]&gt; {
+        <span class="kw">match </span><span class="self">self</span>.decomp.state {
+            FormState::Invalid =&gt; <span class="prelude-val">None</span>,
+            FormState::None =&gt; {
+                <span class="self">self</span>.decomp.state = FormState::Invalid;
+                <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                <span class="kw">for </span>ch <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize] {
+                    <span class="kw">let </span><span class="kw-2">mut </span>end = i;
+                    <span class="kw">let </span><span class="kw-2">mut </span>copy = <span class="kw-2">*</span>ch;
+                    <span class="kw">for </span>c <span class="kw">in </span>ch.ch.decompose() {
+                        <span class="kw">if </span>end == MAX_CLUSTER_SIZE {
+                            <span class="kw">return </span><span class="prelude-val">None</span>;
                         }
-                        <span class="ident">copy</span>.<span class="ident">ch</span> <span class="op">=</span> <span class="ident">c</span>;
-                        <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>[<span class="ident">end</span>] <span class="op">=</span> <span class="ident">copy</span>;
-                        <span class="ident">end</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        copy.ch = c;
+                        <span class="self">self</span>.decomp.chars[end] = copy;
+                        end += <span class="number">1</span>;
                     }
-                    <span class="ident">i</span> <span class="op">=</span> <span class="ident">end</span>;
+                    i = end;
                 }
-                <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span> {
-                    <span class="kw">return</span> <span class="prelude-val">None</span>;
+                <span class="kw">if </span>i == <span class="number">0 </span>{
+                    <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
-                <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span>;
-                <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::Valid</span>;
-                <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">setup</span>();
-                <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>())
+                <span class="self">self</span>.decomp.len = i <span class="kw">as </span>u8;
+                <span class="self">self</span>.decomp.state = FormState::Valid;
+                <span class="self">self</span>.decomp.setup();
+                <span class="prelude-val">Some</span>(<span class="self">self</span>.decomp.chars())
             }
-            <span class="ident">FormState::Valid</span> =&gt; <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>()),
+            FormState::Valid =&gt; <span class="prelude-val">Some</span>(<span class="self">self</span>.decomp.chars()),
         }
     }
 
-    <span class="doccomment">/// Returns the sequence of composed characters for the cluster.</span>
-    <span class="kw">fn</span> <span class="ident">composed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">Char</span>]<span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">state</span> {
-            <span class="ident">FormState::Invalid</span> =&gt; <span class="prelude-val">None</span>,
-            <span class="ident">FormState::None</span> =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">decomposed</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">chars</span><span class="op">|</span> <span class="ident">chars</span>.<span class="ident">len</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>) <span class="op">==</span> <span class="number">0</span> {
-                    <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::Invalid</span>;
-                    <span class="kw">return</span> <span class="prelude-val">None</span>;
+    <span class="doccomment">/// Returns the sequence of composed characters for the cluster.
+    </span><span class="kw">fn </span>composed(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[Char]&gt; {
+        <span class="kw">match </span><span class="self">self</span>.comp.state {
+            FormState::Invalid =&gt; <span class="prelude-val">None</span>,
+            FormState::None =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.decomposed().map(|chars| chars.len()).unwrap_or(<span class="number">0</span>) == <span class="number">0 </span>{
+                    <span class="self">self</span>.comp.state = FormState::Invalid;
+                    <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
-                <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::Invalid</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>[<span class="number">0</span>];
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">for</span> <span class="ident">ch</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">decomp</span>.<span class="ident">chars</span>()[<span class="number">1</span>..] {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comp</span>) <span class="op">=</span> <span class="ident">char::compose</span>(<span class="ident">last</span>.<span class="ident">ch</span>, <span class="ident">ch</span>.<span class="ident">ch</span>) {
-                        <span class="ident">last</span>.<span class="ident">ch</span> <span class="op">=</span> <span class="ident">comp</span>;
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">chars</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">last</span>;
-                        <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">last</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ch</span>;
+                <span class="self">self</span>.comp.state = FormState::Invalid;
+                <span class="kw">let </span><span class="kw-2">mut </span>last = <span class="self">self</span>.decomp.chars[<span class="number">0</span>];
+                <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+                <span class="kw">for </span>ch <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.decomp.chars()[<span class="number">1</span>..] {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(comp) = char::compose(last.ch, ch.ch) {
+                        last.ch = comp;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.comp.chars[i] = last;
+                        i += <span class="number">1</span>;
+                        last = <span class="kw-2">*</span>ch;
                     }
                 }
-                <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">chars</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">last</span>;
-                <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">len</span> <span class="op">=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">+</span> <span class="number">1</span>;
-                <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::Valid</span>;
-                <span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">setup</span>();
-                <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">chars</span>())
+                <span class="self">self</span>.comp.chars[i] = last;
+                <span class="self">self</span>.comp.len = i <span class="kw">as </span>u8 + <span class="number">1</span>;
+                <span class="self">self</span>.comp.state = FormState::Valid;
+                <span class="self">self</span>.comp.setup();
+                <span class="prelude-val">Some</span>(<span class="self">self</span>.comp.chars())
             }
-            <span class="ident">FormState::Valid</span> =&gt; <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">comp</span>.<span class="ident">chars</span>()),
+            FormState::Valid =&gt; <span class="prelude-val">Some</span>(<span class="self">self</span>.comp.chars()),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">CharCluster</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>()
+<span class="kw">impl </span>Default <span class="kw">for </span>CharCluster {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new()
     }
 }
 
-<span class="doccomment">/// Functions for cluster building.</span>
-<span class="kw">impl</span> <span class="ident">CharCluster</span> {
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">info_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">ClusterInfo</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">info</span>
+<span class="doccomment">/// Functions for cluster building.
+</span><span class="kw">impl </span>CharCluster {
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>info_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>ClusterInfo {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.info
     }
 
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="self">self</span>.<span class="ident">len</span>
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="self">self</span>.len
     }
 
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">force_normalize</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">force_normalize</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>force_normalize(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.force_normalize = <span class="bool-val">true</span>;
     }
 
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Token</span>, <span class="ident">class</span>: <span class="ident">ShapeClass</span>) {
-        <span class="kw">let</span> <span class="ident">contributes_to_shaping</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">contributes_to_shaping</span>();
-        <span class="self">self</span>.<span class="ident">chars</span>[<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>] <span class="op">=</span> <span class="ident">Char</span> {
-            <span class="ident">ch</span>: <span class="ident">input</span>.<span class="ident">ch</span>,
-            <span class="ident">shape_class</span>: <span class="ident">class</span>,
-            <span class="ident">joining_type</span>: <span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">joining_type</span>(),
-            <span class="ident">ignorable</span>: <span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">is_ignorable</span>(),
-            <span class="ident">contributes_to_shaping</span>,
-            <span class="ident">glyph_id</span>: <span class="number">0</span>,
-            <span class="ident">offset</span>: <span class="ident">input</span>.<span class="ident">offset</span>,
-            <span class="ident">data</span>: <span class="ident">input</span>.<span class="ident">data</span>,
+    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, input: <span class="kw-2">&amp;</span>Token, class: ShapeClass) {
+        <span class="kw">let </span>contributes_to_shaping = input.info.contributes_to_shaping();
+        <span class="self">self</span>.chars[<span class="self">self</span>.len <span class="kw">as </span>usize] = Char {
+            ch: input.ch,
+            shape_class: class,
+            joining_type: input.info.joining_type(),
+            ignorable: input.info.is_ignorable(),
+            contributes_to_shaping,
+            glyph_id: <span class="number">0</span>,
+            offset: input.offset,
+            data: input.data,
         };
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">offset</span>;
+        <span class="kw">if </span><span class="self">self</span>.len == <span class="number">0 </span>{
+            <span class="self">self</span>.start = input.offset;
         }
-        <span class="self">self</span>.<span class="ident">info</span>.<span class="ident">merge_boundary</span>(<span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">boundary</span>() <span class="kw">as</span> <span class="ident">u16</span>);
-        <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="ident">input</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u32</span>;
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">+</span><span class="op">=</span> <span class="ident">contributes_to_shaping</span> <span class="kw">as</span> <span class="ident">u8</span>;
+        <span class="self">self</span>.info.merge_boundary(input.info.boundary() <span class="kw">as </span>u16);
+        <span class="self">self</span>.end = input.offset + input.len <span class="kw">as </span>u32;
+        <span class="self">self</span>.len += <span class="number">1</span>;
+        <span class="self">self</span>.map_len += contributes_to_shaping <span class="kw">as </span>u8;
     }
 
-    <span class="doccomment">/// This function records the attributes and range information for</span>
-    <span class="doccomment">/// a character but does not add it to the cluster. It is used when</span>
-    <span class="doccomment">/// characters such as emoji variation selectors are dropped from</span>
-    <span class="doccomment">/// shaping but should still be included in the cluster range.</span>
-    <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">note_char</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Token</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">offset</span>;
+    <span class="doccomment">/// This function records the attributes and range information for
+    /// a character but does not add it to the cluster. It is used when
+    /// characters such as emoji variation selectors are dropped from
+    /// shaping but should still be included in the cluster range.
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>note_char(<span class="kw-2">&amp;mut </span><span class="self">self</span>, input: <span class="kw-2">&amp;</span>Token) {
+        <span class="kw">if </span><span class="self">self</span>.len == <span class="number">0 </span>{
+            <span class="self">self</span>.start = input.offset;
         }
-        <span class="self">self</span>.<span class="ident">info</span>.<span class="ident">merge_boundary</span>(<span class="ident">input</span>.<span class="ident">info</span>.<span class="ident">boundary</span>() <span class="kw">as</span> <span class="ident">u16</span>);
-        <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">offset</span> <span class="op">+</span> <span class="ident">input</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u32</span>;
+        <span class="self">self</span>.info.merge_boundary(input.info.boundary() <span class="kw">as </span>u16);
+        <span class="self">self</span>.end = input.offset + input.len <span class="kw">as </span>u32;
     }
 }
 
-<span class="doccomment">/// Iterative status of mapping a character cluster to nominal glyph identifiers.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Status</span> {
-    <span class="doccomment">/// Mapping should be skipped.</span>
-    <span class="ident">Discard</span>,
-    <span class="doccomment">/// The best mapping so far.</span>
-    <span class="ident">Keep</span>,
-    <span class="doccomment">/// Complete mapping.</span>
-    <span class="ident">Complete</span>,
+<span class="doccomment">/// Iterative status of mapping a character cluster to nominal glyph identifiers.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>Status {
+    <span class="doccomment">/// Mapping should be skipped.
+    </span>Discard,
+    <span class="doccomment">/// The best mapping so far.
+    </span>Keep,
+    <span class="doccomment">/// Complete mapping.
+    </span>Complete,
 }
 
-<span class="doccomment">/// Source range of a cluster in code units.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SourceRange</span> {
-    <span class="kw">pub</span> <span class="ident">start</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">end</span>: <span class="ident">u32</span>,
+<span class="doccomment">/// Source range of a cluster in code units.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>SourceRange {
+    <span class="kw">pub </span>start: u32,
+    <span class="kw">pub </span>end: u32,
 }
 
-<span class="kw">impl</span> <span class="ident">SourceRange</span> {
-    <span class="doccomment">/// Converts the source range into a `usize` range.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_range</span>(<span class="self">self</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">start</span> <span class="kw">as</span> <span class="ident">usize</span>..<span class="self">self</span>.<span class="ident">end</span> <span class="kw">as</span> <span class="ident">usize</span>
+<span class="kw">impl </span>SourceRange {
+    <span class="doccomment">/// Converts the source range into a `usize` range.
+    </span><span class="kw">pub fn </span>to_range(<span class="self">self</span>) -&gt; Range&lt;usize&gt; {
+        <span class="self">self</span>.start <span class="kw">as </span>usize..<span class="self">self</span>.end <span class="kw">as </span>usize
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SourceRange</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">SourceRange</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">s</span>.<span class="ident">to_range</span>()
+<span class="kw">impl </span>From&lt;SourceRange&gt; <span class="kw">for </span>Range&lt;usize&gt; {
+    <span class="kw">fn </span>from(s: SourceRange) -&gt; <span class="self">Self </span>{
+        s.to_range()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">SourceRange</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}..{}&quot;</span>, <span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">end</span>)
+<span class="kw">impl </span>fmt::Debug <span class="kw">for </span>SourceRange {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">&quot;{}..{}&quot;</span>, <span class="self">self</span>.start, <span class="self">self</span>.end)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">SourceRange</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}..{}&quot;</span>, <span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">end</span>)
+<span class="kw">impl </span>fmt::Display <span class="kw">for </span>SourceRange {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">&quot;{}..{}&quot;</span>, <span class="self">self</span>.start, <span class="self">self</span>.end)
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::upper_case_acronyms</span>)]</span>
-<span class="kw">enum</span> <span class="ident">FormKind</span> {
-    <span class="ident">Original</span>,
-    <span class="ident">NFD</span>,
-    <span class="ident">NFC</span>,
+<span class="attribute">#[derive(Copy, Clone, PartialEq, Eq)]
+#[allow(clippy::upper_case_acronyms)]
+</span><span class="kw">enum </span>FormKind {
+    Original,
+    NFD,
+    NFC,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">enum</span> <span class="ident">FormState</span> {
+<span class="attribute">#[derive(Copy, Clone, PartialEq, Eq)]
+</span><span class="kw">enum </span>FormState {
     <span class="prelude-val">None</span>,
-    <span class="ident">Valid</span>,
-    <span class="ident">Invalid</span>,
+    Valid,
+    Invalid,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Form</span> {
-    <span class="kw">pub</span> <span class="ident">chars</span>: [<span class="ident">Char</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-    <span class="kw">pub</span> <span class="ident">len</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">map_len</span>: <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">state</span>: <span class="ident">FormState</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">struct </span>Form {
+    <span class="kw">pub </span>chars: [Char; MAX_CLUSTER_SIZE],
+    <span class="kw">pub </span>len: u8,
+    <span class="kw">pub </span>map_len: u8,
+    <span class="kw">pub </span>state: FormState,
 }
 
-<span class="kw">impl</span> <span class="ident">Form</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">chars</span>: [<span class="ident">DEFAULT_CHAR</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-            <span class="ident">len</span>: <span class="number">0</span>,
-            <span class="ident">map_len</span>: <span class="number">0</span>,
-            <span class="ident">state</span>: <span class="ident">FormState::None</span>,
+<span class="kw">impl </span>Form {
+    <span class="kw">fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            chars: [DEFAULT_CHAR; MAX_CLUSTER_SIZE],
+            len: <span class="number">0</span>,
+            map_len: <span class="number">0</span>,
+            state: FormState::None,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">FormState::None</span>;
+    <span class="kw">fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.len = <span class="number">0</span>;
+        <span class="self">self</span>.map_len = <span class="number">0</span>;
+        <span class="self">self</span>.state = FormState::None;
     }
 
-    <span class="kw">fn</span> <span class="ident">chars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Char</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>]
+    <span class="kw">fn </span>chars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Char] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize]
     }
 
-    <span class="kw">fn</span> <span class="ident">setup</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">=</span> (<span class="self">self</span>
-            .<span class="ident">chars</span>()
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">shape_class</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ShapeClass::Control</span>)
-            .<span class="ident">count</span>() <span class="kw">as</span> <span class="ident">u8</span>)
-            .<span class="ident">max</span>(<span class="number">1</span>);
+    <span class="kw">fn </span>setup(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.map_len = (<span class="self">self
+            </span>.chars()
+            .iter()
+            .filter(|c| c.shape_class != ShapeClass::Control)
+            .count() <span class="kw">as </span>u8)
+            .max(<span class="number">1</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">map</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">char</span>) -&gt; <span class="ident">u16</span>,
-        <span class="ident">glyphs</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u16</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-        <span class="ident">best_ratio</span>: <span class="ident">f32</span>,
-    ) -&gt; <span class="ident">f32</span> {
-        <span class="ident">Mapper</span> {
-            <span class="ident">chars</span>: <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">chars</span>[..<span class="self">self</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>],
-            <span class="ident">map_len</span>: <span class="self">self</span>.<span class="ident">map_len</span>,
+    <span class="kw">fn </span>map(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        f: <span class="kw-2">&amp;</span><span class="kw">impl </span>Fn(char) -&gt; u16,
+        glyphs: <span class="kw-2">&amp;mut </span>[u16; MAX_CLUSTER_SIZE],
+        best_ratio: f32,
+    ) -&gt; f32 {
+        Mapper {
+            chars: <span class="kw-2">&amp;mut </span><span class="self">self</span>.chars[..<span class="self">self</span>.len <span class="kw">as </span>usize],
+            map_len: <span class="self">self</span>.map_len,
         }
-        .<span class="ident">map</span>(<span class="ident">f</span>, <span class="ident">glyphs</span>, <span class="ident">best_ratio</span>)
+        .map(f, glyphs, best_ratio)
     }
 }
 
-<span class="kw">struct</span> <span class="ident">Mapper</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">chars</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">Char</span>],
-    <span class="ident">map_len</span>: <span class="ident">u8</span>,
+<span class="kw">struct </span>Mapper&lt;<span class="lifetime">&#39;a</span>&gt; {
+    chars: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>[Char],
+    map_len: u8,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Mapper</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">map</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">Fn</span>(<span class="ident">char</span>) -&gt; <span class="ident">u16</span>,
-        <span class="ident">glyphs</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u16</span>; <span class="ident">MAX_CLUSTER_SIZE</span>],
-        <span class="ident">best_ratio</span>: <span class="ident">f32</span>,
-    ) -&gt; <span class="ident">f32</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="number">1.</span>;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Mapper&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>map(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        f: <span class="kw-2">&amp;</span><span class="kw">impl </span>Fn(char) -&gt; u16,
+        glyphs: <span class="kw-2">&amp;mut </span>[u16; MAX_CLUSTER_SIZE],
+        best_ratio: f32,
+    ) -&gt; f32 {
+        <span class="kw">if </span><span class="self">self</span>.map_len == <span class="number">0 </span>{
+            <span class="kw">return </span><span class="number">1.</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mapped</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> (<span class="ident">c</span>, <span class="ident">g</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">chars</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">glyphs</span>.<span class="ident">iter_mut</span>()) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">contributes_to_shaping</span> {
-                <span class="kw-2">*</span><span class="ident">g</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">c</span>.<span class="ident">ch</span>);
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">map_len</span> <span class="op">==</span> <span class="number">1</span> {
-                    <span class="ident">mapped</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>mapped = <span class="number">0</span>;
+        <span class="kw">for </span>(c, g) <span class="kw">in </span><span class="self">self</span>.chars.iter().zip(glyphs.iter_mut()) {
+            <span class="kw">if </span>!c.contributes_to_shaping {
+                <span class="kw-2">*</span>g = f(c.ch);
+                <span class="kw">if </span><span class="self">self</span>.map_len == <span class="number">1 </span>{
+                    mapped += <span class="number">1</span>;
                 }
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">gid</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">c</span>.<span class="ident">ch</span>);
-                <span class="kw-2">*</span><span class="ident">g</span> <span class="op">=</span> <span class="ident">gid</span>;
-                <span class="kw">if</span> <span class="ident">gid</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">mapped</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>gid = f(c.ch);
+                <span class="kw-2">*</span>g = gid;
+                <span class="kw">if </span>gid != <span class="number">0 </span>{
+                    mapped += <span class="number">1</span>;
                 }
             }
         }
-        <span class="kw">let</span> <span class="ident">ratio</span> <span class="op">=</span> <span class="ident">mapped</span> <span class="kw">as</span> <span class="ident">f32</span> <span class="op">/</span> <span class="self">self</span>.<span class="ident">map_len</span> <span class="kw">as</span> <span class="ident">f32</span>;
-        <span class="kw">if</span> <span class="ident">ratio</span> <span class="op">&gt;</span> <span class="ident">best_ratio</span> {
-            <span class="kw">for</span> (<span class="ident">ch</span>, <span class="ident">glyph</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">chars</span>.<span class="ident">iter_mut</span>().<span class="ident">zip</span>(<span class="ident">glyphs</span>) {
-                <span class="ident">ch</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">glyph</span>;
+        <span class="kw">let </span>ratio = mapped <span class="kw">as </span>f32 / <span class="self">self</span>.map_len <span class="kw">as </span>f32;
+        <span class="kw">if </span>ratio &gt; best_ratio {
+            <span class="kw">for </span>(ch, glyph) <span class="kw">in </span><span class="self">self</span>.chars.iter_mut().zip(glyphs) {
+                ch.glyph_id = <span class="kw-2">*</span>glyph;
             }
         }
-        <span class="ident">ratio</span>
+        ratio
     }
 }
 
-<span class="kw">const</span> <span class="ident">DEFAULT_CHAR</span>: <span class="ident">Char</span> <span class="op">=</span> <span class="ident">Char</span> {
-    <span class="ident">ch</span>: <span class="string">&#39; &#39;</span>,
-    <span class="ident">shape_class</span>: <span class="ident">ShapeClass::Base</span>,
-    <span class="ident">joining_type</span>: <span class="ident">JoiningType::U</span>,
-    <span class="ident">ignorable</span>: <span class="bool-val">false</span>,
-    <span class="ident">contributes_to_shaping</span>: <span class="bool-val">true</span>,
-    <span class="ident">glyph_id</span>: <span class="number">0</span>,
-    <span class="ident">data</span>: <span class="number">0</span>,
-    <span class="ident">offset</span>: <span class="number">0</span>,
+<span class="kw">const </span>DEFAULT_CHAR: Char = Char {
+    ch: <span class="string">&#39; &#39;</span>,
+    shape_class: ShapeClass::Base,
+    joining_type: JoiningType::U,
+    ignorable: <span class="bool-val">false</span>,
+    contributes_to_shaping: <span class="bool-val">true</span>,
+    glyph_id: <span class="number">0</span>,
+    data: <span class="number">0</span>,
+    offset: <span class="number">0</span>,
 };
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

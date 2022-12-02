@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/traversal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>traversal.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/traversal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>traversal.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -233,240 +233,240 @@
 <span id="233">233</span>
 <span id="234">234</span>
 <span id="235">235</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Path traversal algorithms.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Path traversal algorithms.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::command</span>::{<span class="ident">Command</span>, <span class="ident">TransformCommands</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_data::PathData</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::segment</span>::{<span class="ident">segments</span>, <span class="ident">Segment</span>, <span class="ident">Segments</span>};
+</span><span class="kw">use </span><span class="kw">super</span>::command::{Command, TransformCommands};
+<span class="kw">use </span><span class="kw">super</span>::geometry::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">super</span>::path_data::PathData;
+<span class="kw">use </span><span class="kw">super</span>::segment::{segments, Segment, Segments};
 
-<span class="kw">use</span> <span class="ident">core::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">core::cell::RefCell</span>;
+<span class="kw">use </span>core::borrow::Borrow;
+<span class="kw">use </span>core::cell::RefCell;
 
-<span class="doccomment">/// A vertex of a path.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Vertex</span> {
-    <span class="doccomment">/// The start point and direction of a subpath.</span>
-    <span class="ident">Start</span>(<span class="ident">Point</span>, <span class="ident">Vector</span>),
-    <span class="doccomment">/// The incoming direction, location, and outgoing direction of an</span>
-    <span class="doccomment">/// intermediate vertex in a subpath.</span>
-    <span class="ident">Middle</span>(<span class="ident">Vector</span>, <span class="ident">Point</span>, <span class="ident">Vector</span>),
-    <span class="doccomment">/// The incoming direction and location of the final vertex in a subpath.</span>
-    <span class="doccomment">/// The boolean value is true if the subpath is closed.</span>
-    <span class="ident">End</span>(<span class="ident">Vector</span>, <span class="ident">Point</span>, <span class="ident">bool</span>),
+<span class="doccomment">/// A vertex of a path.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Debug)]
+</span><span class="kw">pub enum </span>Vertex {
+    <span class="doccomment">/// The start point and direction of a subpath.
+    </span>Start(Point, Vector),
+    <span class="doccomment">/// The incoming direction, location, and outgoing direction of an
+    /// intermediate vertex in a subpath.
+    </span>Middle(Vector, Point, Vector),
+    <span class="doccomment">/// The incoming direction and location of the final vertex in a subpath.
+    /// The boolean value is true if the subpath is closed.
+    </span>End(Vector, Point, bool),
 }
 
-<span class="doccomment">/// An iterator over the vertices of a path.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Vertices</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="ident">segments</span>: <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>,
-    <span class="ident">prev_point</span>: <span class="ident">Point</span>,
-    <span class="ident">prev_dir</span>: <span class="ident">Vector</span>,
-    <span class="ident">is_first</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// An iterator over the vertices of a path.
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>Vertices&lt;D&gt; {
+    segments: Segments&lt;D&gt;,
+    prev_point: Point,
+    prev_dir: Vector,
+    is_first: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Vertices</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">impl</span>&lt;D&gt; Vertices&lt;D&gt;
+<span class="kw">where
+    </span>D: Iterator&lt;Item = Command&gt; + Clone,
 {
-    <span class="doccomment">/// Creates a new iterator over the vertices of a path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span><span class="op">&lt;</span><span class="ident">Commands</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">segments</span>: <span class="ident">segments</span>(<span class="ident">data</span>.<span class="ident">commands</span>(), <span class="bool-val">false</span>),
-            <span class="ident">prev_point</span>: <span class="ident">Point::ZERO</span>,
-            <span class="ident">prev_dir</span>: <span class="ident">Vector::new</span>(<span class="number">1.</span>, <span class="number">0.</span>),
-            <span class="ident">is_first</span>: <span class="bool-val">true</span>,
+    <span class="doccomment">/// Creates a new iterator over the vertices of a path.
+    </span><span class="kw">pub fn </span>new(data: <span class="kw">impl </span>PathData&lt;Commands = D&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            segments: segments(data.commands(), <span class="bool-val">false</span>),
+            prev_point: Point::ZERO,
+            prev_dir: Vector::new(<span class="number">1.</span>, <span class="number">0.</span>),
+            is_first: <span class="bool-val">true</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Vertices</span><span class="op">&lt;</span><span class="ident">TransformCommands</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">impl</span>&lt;D&gt; Vertices&lt;TransformCommands&lt;D&gt;&gt;
+<span class="kw">where
+    </span>D: Iterator&lt;Item = Command&gt; + Clone,
 {
-    <span class="doccomment">/// Creates a new iterator over the vertices of a transformed path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_transform</span>(<span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span><span class="op">&lt;</span><span class="ident">Commands</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">transform</span>: <span class="ident">Transform</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">TransformCommands</span> {
-            <span class="ident">data</span>: <span class="ident">data</span>.<span class="ident">commands</span>(),
-            <span class="ident">transform</span>,
+    <span class="doccomment">/// Creates a new iterator over the vertices of a transformed path.
+    </span><span class="kw">pub fn </span>with_transform(data: <span class="kw">impl </span>PathData&lt;Commands = D&gt;, transform: Transform) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = TransformCommands {
+            data: data.commands(),
+            transform,
         };
-        <span class="self">Self</span> {
-            <span class="ident">segments</span>: <span class="ident">segments</span>(<span class="ident">data</span>, <span class="bool-val">false</span>),
-            <span class="ident">prev_point</span>: <span class="ident">Point::ZERO</span>,
-            <span class="ident">prev_dir</span>: <span class="ident">Vector::new</span>(<span class="number">1.</span>, <span class="number">0.</span>),
-            <span class="ident">is_first</span>: <span class="bool-val">true</span>,
+        <span class="self">Self </span>{
+            segments: segments(data, <span class="bool-val">false</span>),
+            prev_point: Point::ZERO,
+            prev_dir: Vector::new(<span class="number">1.</span>, <span class="number">0.</span>),
+            is_first: <span class="bool-val">true</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Vertices</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">D::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;D&gt; Iterator <span class="kw">for </span>Vertices&lt;D&gt;
+<span class="kw">where
+    </span>D: Iterator + Clone,
+    D::Item: Borrow&lt;Command&gt;,
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Vertex</span>;
+    <span class="kw">type </span>Item = Vertex;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">Segment</span>::<span class="kw-2">*</span>;
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_first</span> {
-            <span class="self">self</span>.<span class="ident">is_first</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">segments</span>.<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">borrow</span>() {
-                <span class="ident">End</span>(<span class="ident">closed</span>) =&gt; {
-                    <span class="self">self</span>.<span class="ident">is_first</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Vertex::End</span>(<span class="self">self</span>.<span class="ident">prev_dir</span>, <span class="self">self</span>.<span class="ident">prev_point</span>, <span class="kw-2">*</span><span class="ident">closed</span>));
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">use </span>Segment::<span class="kw-2">*</span>;
+        <span class="kw">if </span><span class="self">self</span>.is_first {
+            <span class="self">self</span>.is_first = <span class="bool-val">false</span>;
+            <span class="kw">match </span><span class="self">self</span>.segments.next()<span class="question-mark">?</span>.borrow() {
+                End(closed) =&gt; {
+                    <span class="self">self</span>.is_first = <span class="bool-val">true</span>;
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(Vertex::End(<span class="self">self</span>.prev_dir, <span class="self">self</span>.prev_point, <span class="kw-2">*</span>closed));
                 }
-                <span class="ident">segment</span> =&gt; {
-                    <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">in_dir</span>, <span class="ident">out_dir</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="ident">get_components</span>(<span class="ident">segment</span>);
-                    <span class="self">self</span>.<span class="ident">prev_dir</span> <span class="op">=</span> <span class="ident">out_dir</span>;
-                    <span class="self">self</span>.<span class="ident">prev_point</span> <span class="op">=</span> <span class="ident">end</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Vertex::Start</span>(<span class="ident">start</span>, <span class="ident">in_dir</span>));
-                }
-            }
-        } <span class="kw">else</span> {
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">segments</span>.<span class="ident">next</span>()<span class="question-mark">?</span>.<span class="ident">borrow</span>() {
-                <span class="ident">End</span>(<span class="ident">closed</span>) =&gt; {
-                    <span class="self">self</span>.<span class="ident">is_first</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Vertex::End</span>(<span class="self">self</span>.<span class="ident">prev_dir</span>, <span class="self">self</span>.<span class="ident">prev_point</span>, <span class="kw-2">*</span><span class="ident">closed</span>));
-                }
-                <span class="ident">segment</span> =&gt; {
-                    <span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">in_dir</span>, <span class="ident">out_dir</span>, <span class="ident">end</span>) <span class="op">=</span> <span class="ident">get_components</span>(<span class="ident">segment</span>);
-                    <span class="kw">let</span> <span class="ident">prev_dir</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">prev_dir</span>;
-                    <span class="self">self</span>.<span class="ident">prev_dir</span> <span class="op">=</span> <span class="ident">out_dir</span>;
-                    <span class="self">self</span>.<span class="ident">prev_point</span> <span class="op">=</span> <span class="ident">end</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Vertex::Middle</span>(<span class="ident">prev_dir</span>, <span class="ident">start</span>, <span class="ident">in_dir</span>));
+                segment =&gt; {
+                    <span class="kw">let </span>(start, in_dir, out_dir, end) = get_components(segment);
+                    <span class="self">self</span>.prev_dir = out_dir;
+                    <span class="self">self</span>.prev_point = end;
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(Vertex::Start(start, in_dir));
                 }
             }
+        } <span class="kw">else </span>{
+            <span class="kw">match </span><span class="self">self</span>.segments.next()<span class="question-mark">?</span>.borrow() {
+                End(closed) =&gt; {
+                    <span class="self">self</span>.is_first = <span class="bool-val">true</span>;
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(Vertex::End(<span class="self">self</span>.prev_dir, <span class="self">self</span>.prev_point, <span class="kw-2">*</span>closed));
+                }
+                segment =&gt; {
+                    <span class="kw">let </span>(start, in_dir, out_dir, end) = get_components(segment);
+                    <span class="kw">let </span>prev_dir = <span class="self">self</span>.prev_dir;
+                    <span class="self">self</span>.prev_dir = out_dir;
+                    <span class="self">self</span>.prev_point = end;
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(Vertex::Middle(prev_dir, start, in_dir));
+                }
+            }
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">get_components</span>(<span class="ident">segment</span>: <span class="kw-2">&amp;</span><span class="ident">Segment</span>) -&gt; (<span class="ident">Point</span>, <span class="ident">Vector</span>, <span class="ident">Vector</span>, <span class="ident">Point</span>) {
-    <span class="kw">match</span> <span class="ident">segment</span> {
-        <span class="ident">Segment::Curve</span>(<span class="kw">_</span>, <span class="ident">curve</span>) =&gt; {
-            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">evaluate</span>(<span class="number">0.05</span>);
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">curve</span>.<span class="ident">evaluate</span>(<span class="number">0.95</span>);
-            <span class="kw">let</span> <span class="ident">a_dir</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">-</span> <span class="ident">curve</span>.<span class="ident">a</span>).<span class="ident">normalize</span>();
-            <span class="kw">let</span> <span class="ident">b_dir</span> <span class="op">=</span> (<span class="ident">curve</span>.<span class="ident">d</span> <span class="op">-</span> <span class="ident">b</span>).<span class="ident">normalize</span>();
-            (<span class="ident">curve</span>.<span class="ident">a</span>, <span class="ident">a_dir</span>, <span class="ident">b_dir</span>, <span class="ident">curve</span>.<span class="ident">d</span>)
+<span class="kw">fn </span>get_components(segment: <span class="kw-2">&amp;</span>Segment) -&gt; (Point, Vector, Vector, Point) {
+    <span class="kw">match </span>segment {
+        Segment::Curve(<span class="kw">_</span>, curve) =&gt; {
+            <span class="kw">let </span>a = curve.evaluate(<span class="number">0.05</span>);
+            <span class="kw">let </span>b = curve.evaluate(<span class="number">0.95</span>);
+            <span class="kw">let </span>a_dir = (a - curve.a).normalize();
+            <span class="kw">let </span>b_dir = (curve.d - b).normalize();
+            (curve.a, a_dir, b_dir, curve.d)
         }
-        <span class="ident">Segment::Line</span>(<span class="kw">_</span>, <span class="ident">line</span>) =&gt; {
-            <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> (<span class="ident">line</span>.<span class="ident">b</span> <span class="op">-</span> <span class="ident">line</span>.<span class="ident">a</span>).<span class="ident">normalize</span>();
-            (<span class="ident">line</span>.<span class="ident">a</span>, <span class="ident">dir</span>, <span class="ident">dir</span>, <span class="ident">line</span>.<span class="ident">b</span>)
+        Segment::Line(<span class="kw">_</span>, line) =&gt; {
+            <span class="kw">let </span>dir = (line.b - line.a).normalize();
+            (line.a, dir, dir, line.b)
         }
-        <span class="ident">Segment::End</span>(..) =&gt; (<span class="ident">Point::ZERO</span>, <span class="ident">Vector::ZERO</span>, <span class="ident">Vector::ZERO</span>, <span class="ident">Point::ZERO</span>),
+        Segment::End(..) =&gt; (Point::ZERO, Vector::ZERO, Vector::ZERO, Point::ZERO),
     }
 }
 
-<span class="doccomment">/// An iterator like type that walks along a path by arbitrary steps.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Walk</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="ident">init</span>: <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>,
-    <span class="ident">iter</span>: <span class="ident">Segments</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>,
-    <span class="ident">segment</span>: <span class="ident">Segment</span>,
-    <span class="ident">segment_offset</span>: <span class="ident">f32</span>,
-    <span class="ident">first</span>: <span class="ident">bool</span>,
-    <span class="ident">length</span>: <span class="ident">RefCell</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">walked</span>: <span class="ident">f32</span>,
+<span class="doccomment">/// An iterator like type that walks along a path by arbitrary steps.
+</span><span class="kw">pub struct </span>Walk&lt;D&gt; {
+    init: Segments&lt;D&gt;,
+    iter: Segments&lt;D&gt;,
+    segment: Segment,
+    segment_offset: f32,
+    first: bool,
+    length: RefCell&lt;<span class="prelude-ty">Option</span>&lt;f32&gt;&gt;,
+    walked: f32,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Walk</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">impl</span>&lt;D&gt; Walk&lt;D&gt;
+<span class="kw">where
+    </span>D: Iterator&lt;Item = Command&gt; + Clone,
 {
-    <span class="doccomment">/// Creates a new iterator like type that steps along a path by abitrary distances.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span><span class="op">&lt;</span><span class="ident">Commands</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">commands</span>();
-        <span class="self">Self</span> {
-            <span class="ident">init</span>: <span class="ident">segments</span>(<span class="ident">data</span>.<span class="ident">clone</span>(), <span class="bool-val">false</span>),
-            <span class="ident">iter</span>: <span class="ident">segments</span>(<span class="ident">data</span>, <span class="bool-val">false</span>),
-            <span class="ident">segment</span>: <span class="ident">Segment::default</span>(),
-            <span class="ident">segment_offset</span>: <span class="number">0.</span>,
-            <span class="ident">first</span>: <span class="bool-val">true</span>,
-            <span class="ident">length</span>: <span class="ident">RefCell::new</span>(<span class="prelude-val">None</span>),
-            <span class="ident">walked</span>: <span class="number">0.</span>,
+    <span class="doccomment">/// Creates a new iterator like type that steps along a path by abitrary distances.
+    </span><span class="kw">pub fn </span>new(data: <span class="kw">impl </span>PathData&lt;Commands = D&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = data.commands();
+        <span class="self">Self </span>{
+            init: segments(data.clone(), <span class="bool-val">false</span>),
+            iter: segments(data, <span class="bool-val">false</span>),
+            segment: Segment::default(),
+            segment_offset: <span class="number">0.</span>,
+            first: <span class="bool-val">true</span>,
+            length: RefCell::new(<span class="prelude-val">None</span>),
+            walked: <span class="number">0.</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Walk</span><span class="op">&lt;</span><span class="ident">TransformCommands</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Command</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">impl</span>&lt;D&gt; Walk&lt;TransformCommands&lt;D&gt;&gt;
+<span class="kw">where
+    </span>D: Iterator&lt;Item = Command&gt; + Clone,
 {
-    <span class="doccomment">/// Creates a new iterator like type that steps along a transformed path by abitrary distances.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_transform</span>(<span class="ident">data</span>: <span class="kw">impl</span> <span class="ident">PathData</span><span class="op">&lt;</span><span class="ident">Commands</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">transform</span>: <span class="ident">Transform</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">commands</span>();
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">TransformCommands</span> { <span class="ident">data</span>, <span class="ident">transform</span> };
-        <span class="self">Self</span> {
-            <span class="ident">init</span>: <span class="ident">segments</span>(<span class="ident">data</span>.<span class="ident">clone</span>(), <span class="bool-val">false</span>),
-            <span class="ident">iter</span>: <span class="ident">segments</span>(<span class="ident">data</span>, <span class="bool-val">false</span>),
-            <span class="ident">segment</span>: <span class="ident">Segment::default</span>(),
-            <span class="ident">segment_offset</span>: <span class="number">0.</span>,
-            <span class="ident">first</span>: <span class="bool-val">true</span>,
-            <span class="ident">length</span>: <span class="ident">RefCell::new</span>(<span class="prelude-val">None</span>),
-            <span class="ident">walked</span>: <span class="number">0.</span>,
+    <span class="doccomment">/// Creates a new iterator like type that steps along a transformed path by abitrary distances.
+    </span><span class="kw">pub fn </span>with_transform(data: <span class="kw">impl </span>PathData&lt;Commands = D&gt;, transform: Transform) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = data.commands();
+        <span class="kw">let </span>data = TransformCommands { data, transform };
+        <span class="self">Self </span>{
+            init: segments(data.clone(), <span class="bool-val">false</span>),
+            iter: segments(data, <span class="bool-val">false</span>),
+            segment: Segment::default(),
+            segment_offset: <span class="number">0.</span>,
+            first: <span class="bool-val">true</span>,
+            length: RefCell::new(<span class="prelude-val">None</span>),
+            walked: <span class="number">0.</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Walk</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Iterator</span> <span class="op">+</span> <span class="ident">Clone</span>,
-    <span class="ident">D::Item</span>: <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Command</span><span class="op">&gt;</span>,
+<span class="kw">impl</span>&lt;D&gt; Walk&lt;D&gt;
+<span class="kw">where
+    </span>D: Iterator + Clone,
+    D::Item: Borrow&lt;Command&gt;,
 {
-    <span class="doccomment">/// Steps by the specified distance and returns the point at the new</span>
-    <span class="doccomment">/// location and the normal vector describing the left-ward direction at</span>
-    <span class="doccomment">/// that point. Returns `None` if the distance steps beyond the end</span>
-    <span class="doccomment">/// of the path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">step</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">distance</span>: <span class="ident">f32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">Point</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">first</span> {
-            <span class="self">self</span>.<span class="ident">segment</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_segment</span>()<span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">segment_offset</span> <span class="op">=</span> <span class="number">0.</span>;
-            <span class="self">self</span>.<span class="ident">first</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="doccomment">/// Steps by the specified distance and returns the point at the new
+    /// location and the normal vector describing the left-ward direction at
+    /// that point. Returns `None` if the distance steps beyond the end
+    /// of the path.
+    </span><span class="kw">pub fn </span>step(<span class="kw-2">&amp;mut </span><span class="self">self</span>, distance: f32) -&gt; <span class="prelude-ty">Option</span>&lt;(Point, Vector)&gt; {
+        <span class="kw">if </span><span class="self">self</span>.first {
+            <span class="self">self</span>.segment = <span class="self">self</span>.next_segment()<span class="question-mark">?</span>;
+            <span class="self">self</span>.segment_offset = <span class="number">0.</span>;
+            <span class="self">self</span>.first = <span class="bool-val">false</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">segment_offset</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">segment</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">segment</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="ident">distance</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="ident">segment</span>.<span class="ident">time</span>(<span class="ident">offset</span> <span class="op">+</span> <span class="ident">remaining</span>, <span class="number">1.</span>);
-            <span class="ident">remaining</span> <span class="op">-</span><span class="op">=</span> <span class="ident">dt</span>.<span class="ident">distance</span> <span class="op">-</span> <span class="ident">offset</span>;
-            <span class="ident">t</span> <span class="op">=</span> <span class="ident">dt</span>.<span class="ident">time</span>;
-            <span class="ident">offset</span> <span class="op">=</span> <span class="ident">dt</span>.<span class="ident">distance</span>;
-            <span class="kw">if</span> <span class="ident">remaining</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0.</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>t;
+        <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="self">self</span>.segment_offset;
+        <span class="kw">let </span><span class="kw-2">mut </span>segment = <span class="self">self</span>.segment;
+        <span class="kw">let </span><span class="kw-2">mut </span>remaining = distance;
+        <span class="kw">loop </span>{
+            <span class="kw">let </span>dt = segment.time(offset + remaining, <span class="number">1.</span>);
+            remaining -= dt.distance - offset;
+            t = dt.time;
+            offset = dt.distance;
+            <span class="kw">if </span>remaining &lt;= <span class="number">0. </span>{
                 <span class="kw">break</span>;
             }
-            <span class="ident">segment</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">next_segment</span>()<span class="question-mark">?</span>;
-            <span class="ident">offset</span> <span class="op">=</span> <span class="number">0.</span>;
+            segment = <span class="self">self</span>.next_segment()<span class="question-mark">?</span>;
+            offset = <span class="number">0.</span>;
         }
-        <span class="self">self</span>.<span class="ident">segment</span> <span class="op">=</span> <span class="ident">segment</span>;
-        <span class="self">self</span>.<span class="ident">segment_offset</span> <span class="op">=</span> <span class="ident">offset</span>;
-        <span class="self">self</span>.<span class="ident">walked</span> <span class="op">+</span><span class="op">=</span> <span class="ident">distance</span>;
-        <span class="kw">let</span> (<span class="ident">p</span>, <span class="ident">n</span>) <span class="op">=</span> <span class="ident">segment</span>.<span class="ident">point_normal</span>(<span class="ident">t</span>);
-        <span class="prelude-val">Some</span>((<span class="ident">p</span>, <span class="ident">n</span>))
+        <span class="self">self</span>.segment = segment;
+        <span class="self">self</span>.segment_offset = offset;
+        <span class="self">self</span>.walked += distance;
+        <span class="kw">let </span>(p, n) = segment.point_normal(t);
+        <span class="prelude-val">Some</span>((p, n))
     }
 
-    <span class="doccomment">/// Returns the remaining distance available to walk on the path.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">length</span>.<span class="ident">borrow_mut</span>();
-        <span class="kw">if</span> <span class="ident">l</span>.<span class="ident">is_none</span>() {
-            <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">init</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sum</span> <span class="op">=</span> <span class="number">0.</span>;
-            <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">iter</span> {
-                <span class="ident">sum</span> <span class="op">+</span><span class="op">=</span> <span class="ident">s</span>.<span class="ident">length</span>();
+    <span class="doccomment">/// Returns the remaining distance available to walk on the path.
+    </span><span class="kw">pub fn </span>remaining(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f32 {
+        <span class="kw">let </span><span class="kw-2">mut </span>l = <span class="self">self</span>.length.borrow_mut();
+        <span class="kw">if </span>l.is_none() {
+            <span class="kw">let </span>iter = <span class="self">self</span>.init.clone();
+            <span class="kw">let </span><span class="kw-2">mut </span>sum = <span class="number">0.</span>;
+            <span class="kw">for </span>s <span class="kw">in </span>iter {
+                sum += s.length();
             }
-            <span class="kw-2">*</span><span class="ident">l</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">sum</span>);
+            <span class="kw-2">*</span>l = <span class="prelude-val">Some</span>(sum);
         }
-        <span class="ident">l</span>.<span class="ident">unwrap</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">walked</span>
+        l.unwrap() - <span class="self">self</span>.walked
     }
 
-    <span class="kw">fn</span> <span class="ident">next_segment</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Segment</span><span class="op">&gt;</span> {
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>.<span class="ident">next</span>() {
-            <span class="kw">match</span> <span class="ident">s</span> {
-                <span class="ident">Segment::End</span>(..) =&gt; <span class="kw">continue</span>,
-                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>),
+    <span class="kw">fn </span>next_segment(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Segment&gt; {
+        <span class="kw">while let </span><span class="prelude-val">Some</span>(s) = <span class="self">self</span>.iter.next() {
+            <span class="kw">match </span>s {
+                Segment::End(..) =&gt; <span class="kw">continue</span>,
+                <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Some</span>(s),
             }
         }
-        <span class="prelude-val">None</span>
-    }
+        <span class="prelude-val">None
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/shape/engine.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>engine.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/swash-0.1.5/src/shape/engine.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>engine.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../swash/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../swash/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -305,312 +305,312 @@
 <span id="305">305</span>
 <span id="306">306</span>
 <span id="307">307</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">aat</span>, <span class="ident">at</span>};
+</pre><pre class="rust"><code><span class="kw">use super</span>::{aat, at};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::buffer</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::internal</span>::{<span class="self">self</span>, <span class="ident">at::Gdef</span>, <span class="ident">raw_tag</span>, <span class="ident">Bytes</span>, <span class="ident">RawFont</span>, <span class="ident">RawTag</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::font::FontRef</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::text</span>::{<span class="ident">Language</span>, <span class="ident">Script</span>};
+<span class="kw">use </span><span class="kw">super</span>::buffer::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">super</span>::internal::{<span class="self">self</span>, at::Gdef, raw_tag, Bytes, RawFont, RawTag};
+<span class="kw">use </span><span class="kw">crate</span>::font::FontRef;
+<span class="kw">use </span><span class="kw">crate</span>::text::{Language, Script};
 
-<span class="kw">use</span> <span class="ident">core::ops::Range</span>;
+<span class="kw">use </span>core::ops::Range;
 
-<span class="doccomment">/// Shaping engine that handles the various methods available in</span>
-<span class="doccomment">/// an OpenType font.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Engine</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Bytes</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">gdef</span>: <span class="ident">Gdef</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">gsub</span>: <span class="ident">at::StageOffsets</span>,
-    <span class="kw">pub</span> <span class="ident">gpos</span>: <span class="ident">at::StageOffsets</span>,
-    <span class="kw">pub</span> <span class="ident">morx</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">ltag</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">kerx</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">ankr</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">kern</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">storage</span>: <span class="ident">at::Storage</span>,
-    <span class="kw">pub</span> <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-    <span class="kw">pub</span> <span class="ident">script</span>: <span class="ident">Script</span>,
-    <span class="kw">pub</span> <span class="ident">lang</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Language</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">tags</span>: [<span class="ident">RawTag</span>; <span class="number">4</span>],
-    <span class="kw">pub</span> <span class="ident">sub_mode</span>: <span class="ident">SubMode</span>,
-    <span class="kw">pub</span> <span class="ident">pos_mode</span>: <span class="ident">PosMode</span>,
-    <span class="kw">pub</span> <span class="ident">use_ot</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">use_aat</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">mode</span>: <span class="ident">EngineMode</span>,
+<span class="doccomment">/// Shaping engine that handles the various methods available in
+/// an OpenType font.
+</span><span class="kw">pub struct </span>Engine&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub </span>data: Bytes&lt;<span class="lifetime">&#39;a</span>&gt;,
+    <span class="kw">pub </span>gdef: Gdef&lt;<span class="lifetime">&#39;a</span>&gt;,
+    <span class="kw">pub </span>gsub: at::StageOffsets,
+    <span class="kw">pub </span>gpos: at::StageOffsets,
+    <span class="kw">pub </span>morx: u32,
+    <span class="kw">pub </span>ltag: u32,
+    <span class="kw">pub </span>kerx: u32,
+    <span class="kw">pub </span>ankr: u32,
+    <span class="kw">pub </span>kern: u32,
+    <span class="kw">pub </span>storage: at::Storage,
+    <span class="kw">pub </span>coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+    <span class="kw">pub </span>script: Script,
+    <span class="kw">pub </span>lang: <span class="prelude-ty">Option</span>&lt;Language&gt;,
+    <span class="kw">pub </span>tags: [RawTag; <span class="number">4</span>],
+    <span class="kw">pub </span>sub_mode: SubMode,
+    <span class="kw">pub </span>pos_mode: PosMode,
+    <span class="kw">pub </span>use_ot: bool,
+    <span class="kw">pub </span>use_aat: bool,
+    <span class="kw">pub </span>mode: EngineMode,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Engine</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Creates a new shaping engine from precreated metadata.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">EngineMetadata</span>,
-        <span class="ident">font_data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
-        <span class="ident">coords</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">i16</span>],
-        <span class="ident">script</span>: <span class="ident">Script</span>,
-        <span class="ident">lang</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Language</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Bytes::new</span>(<span class="ident">font_data</span>);
-        <span class="kw">let</span> <span class="ident">gdef</span> <span class="op">=</span> <span class="ident">Gdef::from_offset</span>(<span class="ident">font_data</span>, <span class="ident">metadata</span>.<span class="ident">gdef</span>).<span class="ident">unwrap_or_else</span>(<span class="ident">Gdef::empty</span>);
-        <span class="kw">let</span> <span class="ident">script_tag</span> <span class="op">=</span> <span class="ident">script</span>.<span class="ident">to_opentype</span>();
-        <span class="kw">let</span> <span class="ident">lang_tag</span> <span class="op">=</span> <span class="ident">lang</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="ident">l</span>.<span class="ident">to_opentype</span>()).<span class="ident">flatten</span>();
-        <span class="kw">let</span> (<span class="ident">gsub</span>, <span class="ident">stags</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">metadata</span>.<span class="ident">sub_mode</span> <span class="op">==</span> <span class="ident">SubMode::Gsub</span> {
-            <span class="ident">at::StageOffsets::new</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>, <span class="ident">metadata</span>.<span class="ident">gsub</span>, <span class="ident">script_tag</span>, <span class="ident">lang_tag</span>).<span class="ident">unwrap_or_default</span>()
-        } <span class="kw">else</span> {
-            (<span class="ident">at::StageOffsets::default</span>(), [<span class="number">0</span>, <span class="number">0</span>])
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Engine&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Creates a new shaping engine from precreated metadata.
+    </span><span class="kw">pub fn </span>new(
+        metadata: <span class="kw-2">&amp;</span>EngineMetadata,
+        font_data: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
+        coords: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[i16],
+        script: Script,
+        lang: <span class="prelude-ty">Option</span>&lt;Language&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>data = Bytes::new(font_data);
+        <span class="kw">let </span>gdef = Gdef::from_offset(font_data, metadata.gdef).unwrap_or_else(Gdef::empty);
+        <span class="kw">let </span>script_tag = script.to_opentype();
+        <span class="kw">let </span>lang_tag = lang.map(|l| l.to_opentype()).flatten();
+        <span class="kw">let </span>(gsub, stags) = <span class="kw">if </span>metadata.sub_mode == SubMode::Gsub {
+            at::StageOffsets::new(<span class="kw-2">&amp;</span>data, metadata.gsub, script_tag, lang_tag).unwrap_or_default()
+        } <span class="kw">else </span>{
+            (at::StageOffsets::default(), [<span class="number">0</span>, <span class="number">0</span>])
         };
-        <span class="kw">let</span> (<span class="ident">gpos</span>, <span class="ident">ptags</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">metadata</span>.<span class="ident">pos_mode</span> <span class="op">==</span> <span class="ident">PosMode::Gpos</span> {
-            <span class="ident">at::StageOffsets::new</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>, <span class="ident">metadata</span>.<span class="ident">gpos</span>, <span class="ident">script_tag</span>, <span class="ident">lang_tag</span>).<span class="ident">unwrap_or_default</span>()
-        } <span class="kw">else</span> {
-            (<span class="ident">at::StageOffsets::default</span>(), [<span class="number">0</span>, <span class="number">0</span>])
+        <span class="kw">let </span>(gpos, ptags) = <span class="kw">if </span>metadata.pos_mode == PosMode::Gpos {
+            at::StageOffsets::new(<span class="kw-2">&amp;</span>data, metadata.gpos, script_tag, lang_tag).unwrap_or_default()
+        } <span class="kw">else </span>{
+            (at::StageOffsets::default(), [<span class="number">0</span>, <span class="number">0</span>])
         };
-        <span class="kw">let</span> <span class="ident">tags</span> <span class="op">=</span> [<span class="ident">stags</span>[<span class="number">0</span>], <span class="ident">stags</span>[<span class="number">1</span>], <span class="ident">ptags</span>[<span class="number">0</span>], <span class="ident">ptags</span>[<span class="number">1</span>]];
-        <span class="kw">let</span> <span class="ident">use_ot</span> <span class="op">=</span> <span class="ident">gsub</span>.<span class="ident">lang</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">gpos</span>.<span class="ident">lang</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">use_aat</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">morx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">metadata</span>.<span class="ident">kerx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">mode</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">gsub</span>.<span class="ident">lang</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">script</span>.<span class="ident">is_complex</span>() {
-            <span class="kw">if</span> <span class="ident">script</span> <span class="op">==</span> <span class="ident">Script::Myanmar</span> {
-                <span class="ident">EngineMode::Myanmar</span>
-            } <span class="kw">else</span> {
-                <span class="ident">EngineMode::Complex</span>
+        <span class="kw">let </span>tags = [stags[<span class="number">0</span>], stags[<span class="number">1</span>], ptags[<span class="number">0</span>], ptags[<span class="number">1</span>]];
+        <span class="kw">let </span>use_ot = gsub.lang != <span class="number">0 </span>|| gpos.lang != <span class="number">0</span>;
+        <span class="kw">let </span>use_aat = metadata.morx != <span class="number">0 </span>|| metadata.kerx != <span class="number">0</span>;
+        <span class="kw">let </span>mode = <span class="kw">if </span>gsub.lang != <span class="number">0 </span>&amp;&amp; script.is_complex() {
+            <span class="kw">if </span>script == Script::Myanmar {
+                EngineMode::Myanmar
+            } <span class="kw">else </span>{
+                EngineMode::Complex
             }
-        } <span class="kw">else</span> {
-            <span class="ident">EngineMode::Simple</span>
+        } <span class="kw">else </span>{
+            EngineMode::Simple
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sub_mode</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">sub_mode</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos_mode</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pos_mode</span>;
-        <span class="kw">if</span> <span class="ident">sub_mode</span> <span class="op">==</span> <span class="ident">SubMode::Gsub</span> <span class="op">&amp;&amp;</span> <span class="ident">gsub</span>.<span class="ident">lang</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">sub_mode</span> <span class="op">=</span> <span class="ident">SubMode::None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>sub_mode = metadata.sub_mode;
+        <span class="kw">let </span><span class="kw-2">mut </span>pos_mode = metadata.pos_mode;
+        <span class="kw">if </span>sub_mode == SubMode::Gsub &amp;&amp; gsub.lang == <span class="number">0 </span>{
+            sub_mode = SubMode::None;
         }
-        <span class="kw">if</span> <span class="ident">pos_mode</span> <span class="op">==</span> <span class="ident">PosMode::Gpos</span> <span class="op">&amp;&amp;</span> <span class="ident">gpos</span>.<span class="ident">lang</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">pos_mode</span> <span class="op">=</span> <span class="ident">PosMode::None</span>;
+        <span class="kw">if </span>pos_mode == PosMode::Gpos &amp;&amp; gpos.lang == <span class="number">0 </span>{
+            pos_mode = PosMode::None;
         }
-        <span class="self">Self</span> {
-            <span class="ident">data</span>,
-            <span class="ident">gdef</span>,
-            <span class="ident">gsub</span>,
-            <span class="ident">gpos</span>,
-            <span class="ident">morx</span>: <span class="ident">metadata</span>.<span class="ident">morx</span>,
-            <span class="ident">ltag</span>: <span class="ident">metadata</span>.<span class="ident">ltag</span>,
-            <span class="ident">kerx</span>: <span class="ident">metadata</span>.<span class="ident">kerx</span>,
-            <span class="ident">ankr</span>: <span class="ident">metadata</span>.<span class="ident">ankr</span>,
-            <span class="ident">kern</span>: <span class="ident">metadata</span>.<span class="ident">kern</span>,
-            <span class="ident">storage</span>: <span class="ident">at::Storage::default</span>(),
-            <span class="ident">coords</span>,
-            <span class="ident">script</span>,
-            <span class="ident">lang</span>,
-            <span class="ident">tags</span>,
-            <span class="ident">sub_mode</span>,
-            <span class="ident">pos_mode</span>,
-            <span class="ident">use_ot</span>,
-            <span class="ident">use_aat</span>,
-            <span class="ident">mode</span>,
+        <span class="self">Self </span>{
+            data,
+            gdef,
+            gsub,
+            gpos,
+            morx: metadata.morx,
+            ltag: metadata.ltag,
+            kerx: metadata.kerx,
+            ankr: metadata.ankr,
+            kern: metadata.kern,
+            storage: at::Storage::default(),
+            coords,
+            script,
+            lang,
+            tags,
+            sub_mode,
+            pos_mode,
+            use_ot,
+            use_aat,
+            mode,
         }
     }
 }
 
-<span class="doccomment">/// OpenType shaping.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Engine</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Returns the script and language tags that have been selected for</span>
-    <span class="doccomment">/// the GSUB and GPOS tables.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">RawTag</span>; <span class="number">4</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tags</span>
+<span class="doccomment">/// OpenType shaping.
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Engine&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Returns the script and language tags that have been selected for
+    /// the GSUB and GPOS tables.
+    </span><span class="kw">pub fn </span>tags(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[RawTag; <span class="number">4</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.tags
     }
 
-    <span class="doccomment">/// Builds a feature store for the current engine configuration.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">collect_features</span>(
+    <span class="doccomment">/// Builds a feature store for the current engine configuration.
+    </span><span class="kw">pub fn </span>collect_features(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">builder</span>: <span class="kw-2">&amp;mut</span> <span class="ident">at::FeatureStoreBuilder</span>,
-        <span class="ident">store</span>: <span class="kw-2">&amp;mut</span> <span class="ident">at::FeatureStore</span>,
+        builder: <span class="kw-2">&amp;mut </span>at::FeatureStoreBuilder,
+        store: <span class="kw-2">&amp;mut </span>at::FeatureStore,
     ) {
-        <span class="ident">builder</span>.<span class="ident">build</span>(
-            <span class="ident">store</span>,
-            <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">data</span>(),
-            <span class="self">self</span>.<span class="ident">coords</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gdef</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gsub</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gpos</span>,
+        builder.build(
+            store,
+            <span class="self">self</span>.data.data(),
+            <span class="self">self</span>.coords,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gdef,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gsub,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gpos,
         );
-        <span class="ident">store</span>.<span class="ident">groups</span> <span class="op">=</span> <span class="ident">store</span>.<span class="ident">groups</span>(<span class="self">self</span>.<span class="ident">script</span>);
+        store.groups = store.groups(<span class="self">self</span>.script);
     }
 
-    <span class="doccomment">/// Returns true if feature variations are supported.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_feature_vars</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">gsub</span>.<span class="ident">var</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">gpos</span>.<span class="ident">var</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
+    <span class="doccomment">/// Returns true if feature variations are supported.
+    </span><span class="kw">pub fn </span>has_feature_vars(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.gsub.var != <span class="number">0 </span>|| <span class="self">self</span>.gpos.var != <span class="number">0
+    </span>}
 
-    <span class="doccomment">/// Sets glyph and mark classes for the specified range of the buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_classes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">range</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">gdef</span>.<span class="ident">ok</span>() {
+    <span class="doccomment">/// Sets glyph and mark classes for the specified range of the buffer.
+    </span><span class="kw">pub fn </span>set_classes(<span class="kw-2">&amp;</span><span class="self">self</span>, buffer: <span class="kw-2">&amp;mut </span>Buffer, range: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt;) {
+        <span class="kw">if </span>!<span class="self">self</span>.gdef.ok() {
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">range</span>) <span class="op">=</span> <span class="ident">range</span> {
-            <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">glyphs</span>[<span class="ident">range</span>]
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">glyphs</span>[..]
+        <span class="kw">let </span>slice = <span class="kw">if let </span><span class="prelude-val">Some</span>(range) = range {
+            <span class="kw-2">&amp;mut </span>buffer.glyphs[range]
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;mut </span>buffer.glyphs[..]
         };
-        <span class="kw">let</span> <span class="ident">gdef</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gdef</span>;
-        <span class="kw">if</span> <span class="ident">gdef</span>.<span class="ident">has_mark_classes</span>() {
-            <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="ident">slice</span>.<span class="ident">iter_mut</span>() {
-                <span class="ident">g</span>.<span class="ident">class</span> <span class="op">=</span> <span class="ident">gdef</span>.<span class="ident">class</span>(<span class="ident">g</span>.<span class="ident">id</span>) <span class="kw">as</span> <span class="ident">u8</span>;
-                <span class="ident">g</span>.<span class="ident">mark_type</span> <span class="op">=</span> <span class="ident">gdef</span>.<span class="ident">mark_class</span>(<span class="ident">g</span>.<span class="ident">id</span>) <span class="kw">as</span> <span class="ident">u8</span>;
+        <span class="kw">let </span>gdef = <span class="kw-2">&amp;</span><span class="self">self</span>.gdef;
+        <span class="kw">if </span>gdef.has_mark_classes() {
+            <span class="kw">for </span>g <span class="kw">in </span>slice.iter_mut() {
+                g.class = gdef.class(g.id) <span class="kw">as </span>u8;
+                g.mark_type = gdef.mark_class(g.id) <span class="kw">as </span>u8;
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">g</span> <span class="kw">in</span> <span class="ident">slice</span>.<span class="ident">iter_mut</span>() {
-                <span class="ident">g</span>.<span class="ident">class</span> <span class="op">=</span> <span class="ident">gdef</span>.<span class="ident">class</span>(<span class="ident">g</span>.<span class="ident">id</span>) <span class="kw">as</span> <span class="ident">u8</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>g <span class="kw">in </span>slice.iter_mut() {
+                g.class = gdef.class(g.id) <span class="kw">as </span>u8;
             }
         }
     }
 
-    <span class="doccomment">/// Applies the GSUB features to the specified range of the buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gsub</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">at::FeatureStore</span>,
-        <span class="ident">feature_mask</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">at::FeatureMask</span><span class="op">&gt;</span>,
-        <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>,
-        <span class="ident">buffer_range</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="ident">at::apply</span>(
+    <span class="doccomment">/// Applies the GSUB features to the specified range of the buffer.
+    </span><span class="kw">pub fn </span>gsub(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        store: <span class="kw-2">&amp;</span>at::FeatureStore,
+        feature_mask: <span class="kw">impl </span>Into&lt;at::FeatureMask&gt;,
+        buffer: <span class="kw-2">&amp;mut </span>Buffer,
+        buffer_range: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt;,
+    ) -&gt; bool {
+        at::apply(
             <span class="number">0</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>,
-            <span class="self">self</span>.<span class="ident">gsub</span>.<span class="ident">base</span>,
-            <span class="self">self</span>.<span class="ident">coords</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gdef</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">storage</span>,
-            <span class="ident">store</span>,
-            <span class="ident">feature_mask</span>.<span class="ident">into</span>(),
-            <span class="ident">buffer</span>,
-            <span class="ident">buffer_range</span>,
-        ) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+            <span class="kw-2">&amp;</span><span class="self">self</span>.data,
+            <span class="self">self</span>.gsub.base,
+            <span class="self">self</span>.coords,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gdef,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.storage,
+            store,
+            feature_mask.into(),
+            buffer,
+            buffer_range,
+        ) == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
     }
 
-    <span class="doccomment">/// Applies the GPOS features to the specified range of the buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gpos</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">at::FeatureStore</span>,
-        <span class="ident">feature_mask</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">at::FeatureMask</span><span class="op">&gt;</span>,
-        <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>,
-        <span class="ident">buffer_range</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">bool</span> {
-        <span class="ident">at::apply</span>(
+    <span class="doccomment">/// Applies the GPOS features to the specified range of the buffer.
+    </span><span class="kw">pub fn </span>gpos(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        store: <span class="kw-2">&amp;</span>at::FeatureStore,
+        feature_mask: <span class="kw">impl </span>Into&lt;at::FeatureMask&gt;,
+        buffer: <span class="kw-2">&amp;mut </span>Buffer,
+        buffer_range: <span class="prelude-ty">Option</span>&lt;Range&lt;usize&gt;&gt;,
+    ) -&gt; bool {
+        at::apply(
             <span class="number">1</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>,
-            <span class="self">self</span>.<span class="ident">gpos</span>.<span class="ident">base</span>,
-            <span class="self">self</span>.<span class="ident">coords</span>,
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">gdef</span>,
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">storage</span>,
-            <span class="ident">store</span>,
-            <span class="ident">feature_mask</span>.<span class="ident">into</span>(),
-            <span class="ident">buffer</span>,
-            <span class="ident">buffer_range</span>,
-        ) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+            <span class="kw-2">&amp;</span><span class="self">self</span>.data,
+            <span class="self">self</span>.gpos.base,
+            <span class="self">self</span>.coords,
+            <span class="kw-2">&amp;</span><span class="self">self</span>.gdef,
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.storage,
+            store,
+            feature_mask.into(),
+            buffer,
+            buffer_range,
+        ) == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
     }
 }
 
-<span class="doccomment">/// Apple shaping.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Engine</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Converts a feature list into a sorted collection of AAT selectors.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">collect_selectors</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">features</span>: <span class="kw-2">&amp;</span>[(<span class="ident">RawTag</span>, <span class="ident">u16</span>)], <span class="ident">selectors</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">u16</span>, <span class="ident">u16</span>)<span class="op">&gt;</span>) {
-        <span class="kw">use</span> <span class="ident">internal::aat::morx::feature_from_tag</span>;
-        <span class="ident">selectors</span>.<span class="ident">clear</span>();
-        <span class="kw">for</span> (<span class="ident">tag</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">features</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">selector</span>, [<span class="ident">on</span>, <span class="ident">off</span>])) <span class="op">=</span> <span class="ident">feature_from_tag</span>(<span class="kw-2">*</span><span class="ident">tag</span>) {
-                <span class="kw">let</span> <span class="ident">setting</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">value</span> <span class="op">==</span> <span class="number">0</span> { <span class="ident">off</span> } <span class="kw">else</span> { <span class="ident">on</span> };
-                <span class="ident">selectors</span>.<span class="ident">push</span>((<span class="ident">selector</span>, <span class="ident">setting</span>))
+<span class="doccomment">/// Apple shaping.
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Engine&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Converts a feature list into a sorted collection of AAT selectors.
+    </span><span class="kw">pub fn </span>collect_selectors(<span class="kw-2">&amp;</span><span class="self">self</span>, features: <span class="kw-2">&amp;</span>[(RawTag, u16)], selectors: <span class="kw-2">&amp;mut </span>Vec&lt;(u16, u16)&gt;) {
+        <span class="kw">use </span>internal::aat::morx::feature_from_tag;
+        selectors.clear();
+        <span class="kw">for </span>(tag, value) <span class="kw">in </span>features {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((selector, [on, off])) = feature_from_tag(<span class="kw-2">*</span>tag) {
+                <span class="kw">let </span>setting = <span class="kw">if </span><span class="kw-2">*</span>value == <span class="number">0 </span>{ off } <span class="kw">else </span>{ on };
+                selectors.push((selector, setting))
             }
         }
-        <span class="ident">selectors</span>.<span class="ident">sort_unstable</span>();
+        selectors.sort_unstable();
     }
 
-    <span class="doccomment">/// Applies the extended metamorphosis table.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">morx</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">selectors</span>: <span class="kw-2">&amp;</span>[(<span class="ident">u16</span>, <span class="ident">u16</span>)]) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">morx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">aat::apply_morx</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">data</span>(), <span class="self">self</span>.<span class="ident">morx</span>, <span class="ident">buffer</span>, <span class="ident">selectors</span>);
-            <span class="ident">buffer</span>.<span class="ident">ensure_order</span>(<span class="bool-val">false</span>);
+    <span class="doccomment">/// Applies the extended metamorphosis table.
+    </span><span class="kw">pub fn </span>morx(<span class="kw-2">&amp;</span><span class="self">self</span>, buffer: <span class="kw-2">&amp;mut </span>Buffer, selectors: <span class="kw-2">&amp;</span>[(u16, u16)]) {
+        <span class="kw">if </span><span class="self">self</span>.morx != <span class="number">0 </span>{
+            aat::apply_morx(<span class="self">self</span>.data.data(), <span class="self">self</span>.morx, buffer, selectors);
+            buffer.ensure_order(<span class="bool-val">false</span>);
         }
     }
 
-    <span class="doccomment">/// Applies the extended kerning table.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">kerx</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>, <span class="ident">disable_kern</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">kerx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">aat::apply_kerx</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">data</span>(), <span class="self">self</span>.<span class="ident">kerx</span>, <span class="self">self</span>.<span class="ident">ankr</span>, <span class="ident">buffer</span>, <span class="ident">disable_kern</span>);
-            <span class="ident">buffer</span>.<span class="ident">ensure_order</span>(<span class="bool-val">false</span>);
+    <span class="doccomment">/// Applies the extended kerning table.
+    </span><span class="kw">pub fn </span>kerx(<span class="kw-2">&amp;</span><span class="self">self</span>, buffer: <span class="kw-2">&amp;mut </span>Buffer, disable_kern: bool) {
+        <span class="kw">if </span><span class="self">self</span>.kerx != <span class="number">0 </span>{
+            aat::apply_kerx(<span class="self">self</span>.data.data(), <span class="self">self</span>.kerx, <span class="self">self</span>.ankr, buffer, disable_kern);
+            buffer.ensure_order(<span class="bool-val">false</span>);
         }
     }
 
-    <span class="doccomment">/// Applies the kerning table.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">kern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">kern</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">aat::apply_kern</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">data</span>(), <span class="self">self</span>.<span class="ident">kern</span>, <span class="ident">buffer</span>);
+    <span class="doccomment">/// Applies the kerning table.
+    </span><span class="kw">pub fn </span>kern(<span class="kw-2">&amp;</span><span class="self">self</span>, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+        <span class="kw">if </span><span class="self">self</span>.kern != <span class="number">0 </span>{
+            aat::apply_kern(<span class="self">self</span>.data.data(), <span class="self">self</span>.kern, buffer);
         }
     }
 }
 
-<span class="doccomment">/// The overall mode of the engine based on a combination of the</span>
-<span class="doccomment">/// supported tables and the selected script.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">EngineMode</span> {
-    <span class="ident">Simple</span>,
-    <span class="ident">Myanmar</span>,
-    <span class="ident">Complex</span>,
+<span class="doccomment">/// The overall mode of the engine based on a combination of the
+/// supported tables and the selected script.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>EngineMode {
+    Simple,
+    Myanmar,
+    Complex,
 }
 
-<span class="doccomment">/// The substitution mode supported by the engine.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SubMode</span> {
+<span class="doccomment">/// The substitution mode supported by the engine.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>SubMode {
     <span class="prelude-val">None</span>,
-    <span class="ident">Gsub</span>,
-    <span class="ident">Morx</span>,
+    Gsub,
+    Morx,
 }
 
-<span class="doccomment">/// The positioning mode supported by the engine.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">PosMode</span> {
+<span class="doccomment">/// The positioning mode supported by the engine.
+</span><span class="attribute">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
+</span><span class="kw">pub enum </span>PosMode {
     <span class="prelude-val">None</span>,
-    <span class="ident">Gpos</span>,
-    <span class="ident">Kerx</span>,
-    <span class="ident">Kern</span>,
+    Gpos,
+    Kerx,
+    Kern,
 }
 
-<span class="doccomment">/// Metadata for creating a shaping engine.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EngineMetadata</span> {
-    <span class="kw">pub</span> <span class="ident">gdef</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">gsub</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">gpos</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">morx</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">ltag</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">kerx</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">ankr</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">kern</span>: <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">sub_mode</span>: <span class="ident">SubMode</span>,
-    <span class="kw">pub</span> <span class="ident">pos_mode</span>: <span class="ident">PosMode</span>,
+<span class="doccomment">/// Metadata for creating a shaping engine.
+</span><span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>EngineMetadata {
+    <span class="kw">pub </span>gdef: u32,
+    <span class="kw">pub </span>gsub: u32,
+    <span class="kw">pub </span>gpos: u32,
+    <span class="kw">pub </span>morx: u32,
+    <span class="kw">pub </span>ltag: u32,
+    <span class="kw">pub </span>kerx: u32,
+    <span class="kw">pub </span>ankr: u32,
+    <span class="kw">pub </span>kern: u32,
+    <span class="kw">pub </span>sub_mode: SubMode,
+    <span class="kw">pub </span>pos_mode: PosMode,
 }
 
-<span class="kw">impl</span> <span class="ident">EngineMetadata</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_font</span>(<span class="ident">font</span>: <span class="kw-2">&amp;</span><span class="ident">FontRef</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">this</span> <span class="op">=</span> <span class="self">Self</span> {
-            <span class="ident">gdef</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;GDEF&quot;</span>)),
-            <span class="ident">gsub</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;GSUB&quot;</span>)),
-            <span class="ident">gpos</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;GPOS&quot;</span>)),
-            <span class="ident">morx</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;morx&quot;</span>)),
-            <span class="ident">ltag</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;ltag&quot;</span>)),
-            <span class="ident">kerx</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;kerx&quot;</span>)),
-            <span class="ident">ankr</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;ankr&quot;</span>)),
-            <span class="ident">kern</span>: <span class="ident">font</span>.<span class="ident">table_offset</span>(<span class="ident">raw_tag</span>(<span class="string">b&quot;kern&quot;</span>)),
-            <span class="ident">sub_mode</span>: <span class="ident">SubMode::None</span>,
-            <span class="ident">pos_mode</span>: <span class="ident">PosMode::None</span>,
+<span class="kw">impl </span>EngineMetadata {
+    <span class="kw">pub fn </span>from_font(font: <span class="kw-2">&amp;</span>FontRef) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>this = <span class="self">Self </span>{
+            gdef: font.table_offset(raw_tag(<span class="string">b&quot;GDEF&quot;</span>)),
+            gsub: font.table_offset(raw_tag(<span class="string">b&quot;GSUB&quot;</span>)),
+            gpos: font.table_offset(raw_tag(<span class="string">b&quot;GPOS&quot;</span>)),
+            morx: font.table_offset(raw_tag(<span class="string">b&quot;morx&quot;</span>)),
+            ltag: font.table_offset(raw_tag(<span class="string">b&quot;ltag&quot;</span>)),
+            kerx: font.table_offset(raw_tag(<span class="string">b&quot;kerx&quot;</span>)),
+            ankr: font.table_offset(raw_tag(<span class="string">b&quot;ankr&quot;</span>)),
+            kern: font.table_offset(raw_tag(<span class="string">b&quot;kern&quot;</span>)),
+            sub_mode: SubMode::None,
+            pos_mode: PosMode::None,
         };
-        <span class="kw">if</span> <span class="ident">this</span>.<span class="ident">gsub</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">this</span>.<span class="ident">sub_mode</span> <span class="op">=</span> <span class="ident">SubMode::Gsub</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">this</span>.<span class="ident">morx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">this</span>.<span class="ident">sub_mode</span> <span class="op">=</span> <span class="ident">SubMode::Morx</span>;
+        <span class="kw">if </span>this.gsub != <span class="number">0 </span>{
+            this.sub_mode = SubMode::Gsub;
+        } <span class="kw">else if </span>this.morx != <span class="number">0 </span>{
+            this.sub_mode = SubMode::Morx;
         }
-        <span class="kw">if</span> <span class="ident">this</span>.<span class="ident">gpos</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">this</span>.<span class="ident">pos_mode</span> <span class="op">=</span> <span class="ident">PosMode::Gpos</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">this</span>.<span class="ident">kerx</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">this</span>.<span class="ident">pos_mode</span> <span class="op">=</span> <span class="ident">PosMode::Kerx</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">this</span>.<span class="ident">kern</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="ident">this</span>.<span class="ident">pos_mode</span> <span class="op">=</span> <span class="ident">PosMode::Kern</span>;
+        <span class="kw">if </span>this.gpos != <span class="number">0 </span>{
+            this.pos_mode = PosMode::Gpos;
+        } <span class="kw">else if </span>this.kerx != <span class="number">0 </span>{
+            this.pos_mode = PosMode::Kerx;
+        } <span class="kw">else if </span>this.kern != <span class="number">0 </span>{
+            this.pos_mode = PosMode::Kern;
         }
-        <span class="ident">this</span>
+        this
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="swash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

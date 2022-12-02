@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer_line.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer_line.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer_line.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer_line.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -171,178 +171,178 @@
 <span id="171">171</span>
 <span id="172">172</span>
 <span id="173">173</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-<span class="kw">use</span> <span class="ident">alloc</span>::{
-    <span class="ident">string::String</span>,
-    <span class="ident">vec::Vec</span>,
+</pre><pre class="rust"><code><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>alloc::{
+    string::String,
+    vec::Vec,
 };
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AttrsList</span>, <span class="ident">FontSystem</span>, <span class="ident">LayoutLine</span>, <span class="ident">ShapeLine</span>};
+<span class="kw">use crate</span>::{AttrsList, FontSystem, LayoutLine, ShapeLine};
 
-<span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BufferLine</span> {
-    <span class="comment">//TODO: make this not pub(crate)</span>
-    <span class="ident">text</span>: <span class="ident">String</span>,
-    <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>,
-    <span class="ident">wrap_simple</span>: <span class="ident">bool</span>,
-    <span class="ident">shape_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span>,
-    <span class="ident">layout_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out
+</span><span class="kw">pub struct </span>BufferLine {
+    <span class="comment">//TODO: make this not pub(crate)
+    </span>text: String,
+    attrs_list: AttrsList,
+    wrap_simple: bool,
+    shape_opt: <span class="prelude-ty">Option</span>&lt;ShapeLine&gt;,
+    layout_opt: <span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">BufferLine</span> {
-    <span class="doccomment">/// Create a new line with the given text and attributes list</span>
-    <span class="doccomment">/// Cached shaping and layout can be done using the [`Self::shape`] and</span>
-    <span class="doccomment">/// [`Self::layout`] functions</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">text</span>: <span class="ident">T</span>, <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">text</span>: <span class="ident">text</span>.<span class="ident">into</span>(),
-            <span class="ident">attrs_list</span>,
-            <span class="ident">wrap_simple</span>: <span class="bool-val">false</span>,
-            <span class="ident">shape_opt</span>: <span class="prelude-val">None</span>,
-            <span class="ident">layout_opt</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl </span>BufferLine {
+    <span class="doccomment">/// Create a new line with the given text and attributes list
+    /// Cached shaping and layout can be done using the [`Self::shape`] and
+    /// [`Self::layout`] functions
+    </span><span class="kw">pub fn </span>new&lt;T: Into&lt;String&gt;&gt;(text: T, attrs_list: AttrsList) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            text: text.into(),
+            attrs_list,
+            wrap_simple: <span class="bool-val">false</span>,
+            shape_opt: <span class="prelude-val">None</span>,
+            layout_opt: <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="doccomment">/// Get current text</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">text</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span>
+    <span class="doccomment">/// Get current text
+    </span><span class="kw">pub fn </span>text(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.text
     }
 
-    <span class="doccomment">/// Set text and attributes list</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Will reset shape and layout if it differs from current text and attributes list.</span>
-    <span class="doccomment">/// Returns true if the line was reset</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_text</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="ident">T</span>, <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">as_ref</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">text</span> <span class="op">|</span><span class="op">|</span> <span class="ident">attrs_list</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span> {
-            <span class="self">self</span>.<span class="ident">text</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">into</span>();
-            <span class="self">self</span>.<span class="ident">attrs_list</span> <span class="op">=</span> <span class="ident">attrs_list</span>;
-            <span class="self">self</span>.<span class="ident">reset</span>();
-            <span class="bool-val">true</span>
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        }
+    <span class="doccomment">/// Set text and attributes list
+    ///
+    /// Will reset shape and layout if it differs from current text and attributes list.
+    /// Returns true if the line was reset
+    </span><span class="kw">pub fn </span>set_text&lt;T: AsRef&lt;str&gt; + Into&lt;String&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: T, attrs_list: AttrsList) -&gt; bool {
+        <span class="kw">if </span>text.as_ref() != <span class="self">self</span>.text || attrs_list != <span class="self">self</span>.attrs_list {
+            <span class="self">self</span>.text = text.into();
+            <span class="self">self</span>.attrs_list = attrs_list;
+            <span class="self">self</span>.reset();
+            <span class="bool-val">true
+        </span>} <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
     }
 
-    <span class="doccomment">/// Get attributes list</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">attrs_list</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">AttrsList</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attrs_list</span>
+    <span class="doccomment">/// Get attributes list
+    </span><span class="kw">pub fn </span>attrs_list(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>AttrsList {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.attrs_list
     }
 
-    <span class="doccomment">/// Set attributes list</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Will reset shape and layout if it differs from current attributes list.</span>
-    <span class="doccomment">/// Returns true if the line was reset</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_attrs_list</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">attrs_list</span>: <span class="ident">AttrsList</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">attrs_list</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span> {
-            <span class="self">self</span>.<span class="ident">attrs_list</span> <span class="op">=</span> <span class="ident">attrs_list</span>;
-            <span class="self">self</span>.<span class="ident">reset</span>();
-            <span class="bool-val">true</span>
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        }
+    <span class="doccomment">/// Set attributes list
+    ///
+    /// Will reset shape and layout if it differs from current attributes list.
+    /// Returns true if the line was reset
+    </span><span class="kw">pub fn </span>set_attrs_list(<span class="kw-2">&amp;mut </span><span class="self">self</span>, attrs_list: AttrsList) -&gt; bool {
+        <span class="kw">if </span>attrs_list != <span class="self">self</span>.attrs_list {
+            <span class="self">self</span>.attrs_list = attrs_list;
+            <span class="self">self</span>.reset();
+            <span class="bool-val">true
+        </span>} <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
     }
 
-    <span class="doccomment">/// Get simple wrapping setting (wrap by characters only)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">wrap_simple</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">wrap_simple</span>
+    <span class="doccomment">/// Get simple wrapping setting (wrap by characters only)
+    </span><span class="kw">pub fn </span>wrap_simple(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.wrap_simple
     }
 
-    <span class="doccomment">/// Set simple wrapping setting (wrap by characters only)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Will reset shape and layout if it differs from current simple wrapping setting.</span>
-    <span class="doccomment">/// Returns true if the line was reset</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_wrap_simple</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">wrap_simple</span>: <span class="ident">bool</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">wrap_simple</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">wrap_simple</span> {
-            <span class="self">self</span>.<span class="ident">wrap_simple</span> <span class="op">=</span> <span class="ident">wrap_simple</span>;
-            <span class="self">self</span>.<span class="ident">reset</span>();
-            <span class="bool-val">true</span>
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        }
+    <span class="doccomment">/// Set simple wrapping setting (wrap by characters only)
+    ///
+    /// Will reset shape and layout if it differs from current simple wrapping setting.
+    /// Returns true if the line was reset
+    </span><span class="kw">pub fn </span>set_wrap_simple(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap_simple: bool) -&gt; bool {
+        <span class="kw">if </span>wrap_simple != <span class="self">self</span>.wrap_simple {
+            <span class="self">self</span>.wrap_simple = wrap_simple;
+            <span class="self">self</span>.reset();
+            <span class="bool-val">true
+        </span>} <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
     }
 
-    <span class="doccomment">/// Append line at end of this line</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The wrap setting of the appended line will be lost</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">append</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) {
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">len</span>();
-        <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">push_str</span>(<span class="ident">other</span>.<span class="ident">text</span>());
+    <span class="doccomment">/// Append line at end of this line
+    ///
+    /// The wrap setting of the appended line will be lost
+    </span><span class="kw">pub fn </span>append(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
+        <span class="kw">let </span>len = <span class="self">self</span>.text.len();
+        <span class="self">self</span>.text.push_str(other.text());
 
-        <span class="kw">if</span> <span class="ident">other</span>.<span class="ident">attrs_list</span>.<span class="ident">defaults</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span>.<span class="ident">defaults</span>() {
-            <span class="comment">// If default formatting does not match, make a new span for it</span>
-            <span class="self">self</span>.<span class="ident">attrs_list</span>.<span class="ident">add_span</span>(<span class="ident">len</span>..<span class="ident">len</span> <span class="op">+</span> <span class="ident">other</span>.<span class="ident">text</span>().<span class="ident">len</span>(), <span class="ident">other</span>.<span class="ident">attrs_list</span>.<span class="ident">defaults</span>());
-        }
-
-        <span class="kw">for</span> (<span class="ident">other_range</span>, <span class="ident">attrs</span>) <span class="kw">in</span> <span class="ident">other</span>.<span class="ident">attrs_list</span>.<span class="ident">spans</span>() {
-            <span class="comment">// Add previous attrs spans</span>
-            <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">other_range</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">len</span>..<span class="ident">other_range</span>.<span class="ident">end</span> <span class="op">+</span> <span class="ident">len</span>;
-            <span class="self">self</span>.<span class="ident">attrs_list</span>.<span class="ident">add_span</span>(<span class="ident">range</span>, <span class="ident">attrs</span>.<span class="ident">as_attrs</span>());
+        <span class="kw">if </span>other.attrs_list.defaults() != <span class="self">self</span>.attrs_list.defaults() {
+            <span class="comment">// If default formatting does not match, make a new span for it
+            </span><span class="self">self</span>.attrs_list.add_span(len..len + other.text().len(), other.attrs_list.defaults());
         }
 
-        <span class="self">self</span>.<span class="ident">reset</span>();
-    }
-
-    <span class="doccomment">/// Split off new line at index</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_off</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">split_off</span>(<span class="ident">index</span>);
-        <span class="kw">let</span> <span class="ident">attrs_list</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">attrs_list</span>.<span class="ident">split_off</span>(<span class="ident">index</span>);
-        <span class="self">self</span>.<span class="ident">reset</span>();
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">text</span>, <span class="ident">attrs_list</span>);
-        <span class="ident">new</span>.<span class="ident">wrap_simple</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">wrap_simple</span>;
-        <span class="ident">new</span>
-    }
-
-    <span class="doccomment">/// Reset shaping and layout information</span>
-    <span class="comment">//TODO: make this private</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">shape_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    }
-
-    <span class="doccomment">/// Reset only layout information</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset_layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-    }
-
-    <span class="doccomment">/// Check if shaping and layout information is cleared</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_reset</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">is_none</span>()
-    }
-
-    <span class="doccomment">/// Shape line, will cache results</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="ident">FontSystem</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">ShapeLine</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">is_none</span>() {
-            <span class="self">self</span>.<span class="ident">shape_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">ShapeLine::new</span>(<span class="ident">font_system</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">text</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">attrs_list</span>));
-            <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+        <span class="kw">for </span>(other_range, attrs) <span class="kw">in </span>other.attrs_list.spans() {
+            <span class="comment">// Add previous attrs spans
+            </span><span class="kw">let </span>range = other_range.start + len..other_range.end + len;
+            <span class="self">self</span>.attrs_list.add_span(range, attrs.as_attrs());
         }
-        <span class="self">self</span>.<span class="ident">shape_opt</span>.<span class="ident">as_ref</span>().<span class="ident">expect</span>(<span class="string">&quot;shape not found&quot;</span>)
+
+        <span class="self">self</span>.reset();
     }
 
-    <span class="doccomment">/// Get line shaping cache</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ShapeLine</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">shape_opt</span>
+    <span class="doccomment">/// Split off new line at index
+    </span><span class="kw">pub fn </span>split_off(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>text = <span class="self">self</span>.text.split_off(index);
+        <span class="kw">let </span>attrs_list = <span class="self">self</span>.attrs_list.split_off(index);
+        <span class="self">self</span>.reset();
+
+        <span class="kw">let </span><span class="kw-2">mut </span>new = <span class="self">Self</span>::new(text, attrs_list);
+        new.wrap_simple = <span class="self">self</span>.wrap_simple;
+        new
     }
 
-    <span class="doccomment">/// Layout line, will cache results</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">font_system</span>: <span class="kw-2">&amp;</span><span class="ident">FontSystem</span>, <span class="ident">font_size</span>: <span class="ident">i32</span>, <span class="ident">width</span>: <span class="ident">i32</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">LayoutLine</span>] {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">layout_opt</span>.<span class="ident">is_none</span>() {
-            <span class="kw">let</span> <span class="ident">wrap_simple</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">wrap_simple</span>;
-            <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">shape</span>(<span class="ident">font_system</span>);
-            <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">layout</span>(
-                <span class="ident">font_size</span>,
-                <span class="ident">width</span>,
-                <span class="ident">wrap_simple</span>
+    <span class="doccomment">/// Reset shaping and layout information
+    </span><span class="comment">//TODO: make this private
+    </span><span class="kw">pub fn </span>reset(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.shape_opt = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
+    }
+
+    <span class="doccomment">/// Reset only layout information
+    </span><span class="kw">pub fn </span>reset_layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
+    }
+
+    <span class="doccomment">/// Check if shaping and layout information is cleared
+    </span><span class="kw">pub fn </span>is_reset(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.shape_opt.is_none()
+    }
+
+    <span class="doccomment">/// Shape line, will cache results
+    </span><span class="kw">pub fn </span>shape(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;</span>FontSystem) -&gt; <span class="kw-2">&amp;</span>ShapeLine {
+        <span class="kw">if </span><span class="self">self</span>.shape_opt.is_none() {
+            <span class="self">self</span>.shape_opt = <span class="prelude-val">Some</span>(ShapeLine::new(font_system, <span class="kw-2">&amp;</span><span class="self">self</span>.text, <span class="kw-2">&amp;</span><span class="self">self</span>.attrs_list));
+            <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
+        }
+        <span class="self">self</span>.shape_opt.as_ref().expect(<span class="string">&quot;shape not found&quot;</span>)
+    }
+
+    <span class="doccomment">/// Get line shaping cache
+    </span><span class="kw">pub fn </span>shape_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;ShapeLine&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.shape_opt
+    }
+
+    <span class="doccomment">/// Layout line, will cache results
+    </span><span class="kw">pub fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;</span>FontSystem, font_size: i32, width: i32) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
+        <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
+            <span class="kw">let </span>wrap_simple = <span class="self">self</span>.wrap_simple;
+            <span class="kw">let </span>shape = <span class="self">self</span>.shape(font_system);
+            <span class="kw">let </span>layout = shape.layout(
+                font_size,
+                width,
+                wrap_simple
             );
-            <span class="self">self</span>.<span class="ident">layout_opt</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>);
+            <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
         }
-        <span class="self">self</span>.<span class="ident">layout_opt</span>.<span class="ident">as_ref</span>().<span class="ident">expect</span>(<span class="string">&quot;layout not found&quot;</span>)
+        <span class="self">self</span>.layout_opt.as_ref().expect(<span class="string">&quot;layout not found&quot;</span>)
     }
 
-    <span class="doccomment">/// Get line layout cache</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutLine</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">layout_opt</span>
+    <span class="doccomment">/// Get line layout cache
+    </span><span class="kw">pub fn </span>layout_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.layout_opt
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

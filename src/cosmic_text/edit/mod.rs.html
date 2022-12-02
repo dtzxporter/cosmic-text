@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/edit/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../cosmic_text/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/edit/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../cosmic_text/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -94,101 +94,101 @@
 <span id="94">94</span>
 <span id="95">95</span>
 <span id="96">96</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>))]</span>
-<span class="kw">use</span> <span class="ident">alloc::string::String</span>;
+</pre><pre class="rust"><code><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>alloc::string::String;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Buffer</span>, <span class="ident">Cursor</span>};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Color</span>;
+<span class="kw">use crate</span>::{Buffer, Cursor};
+<span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">crate</span>::Color;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::editor</span>::<span class="kw-2">*</span>;
-<span class="kw">mod</span> <span class="ident">editor</span>;
+<span class="kw">pub use </span><span class="self">self</span>::editor::<span class="kw-2">*</span>;
+<span class="kw">mod </span>editor;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;syntect&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::syntect</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;syntect&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">syntect</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;syntect&quot;</span>)]
+</span><span class="kw">pub use </span><span class="self">self</span>::syntect::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;syntect&quot;</span>)]
+</span><span class="kw">mod </span>syntect;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;vi&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::vi</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;vi&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">vi</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;vi&quot;</span>)]
+</span><span class="kw">pub use </span><span class="self">self</span>::vi::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;vi&quot;</span>)]
+</span><span class="kw">mod </span>vi;
 
-<span class="doccomment">/// An action to perform on an [`Editor`]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Action</span> {
-    <span class="doccomment">/// Move cursor to previous character ([Self::Left] in LTR, [Self::Right] in RTL)</span>
-    <span class="ident">Previous</span>,
-    <span class="doccomment">/// Move cursor to next character ([Self::Right] in LTR, [Self::Left] in RTL)</span>
-    <span class="ident">Next</span>,
-    <span class="doccomment">/// Move cursor left</span>
-    <span class="ident">Left</span>,
-    <span class="doccomment">/// Move cursor right</span>
-    <span class="ident">Right</span>,
-    <span class="doccomment">/// Move cursor up</span>
-    <span class="ident">Up</span>,
-    <span class="doccomment">/// Move cursor down</span>
-    <span class="ident">Down</span>,
-    <span class="doccomment">/// Move cursor to start of line</span>
-    <span class="ident">Home</span>,
-    <span class="doccomment">/// Move cursor to end of line</span>
-    <span class="ident">End</span>,
-    <span class="doccomment">/// Scroll up one page</span>
-    <span class="ident">PageUp</span>,
-    <span class="doccomment">/// Scroll down one page</span>
-    <span class="ident">PageDown</span>,
-    <span class="doccomment">/// Escape, clears selection</span>
-    <span class="ident">Escape</span>,
-    <span class="doccomment">/// Insert character at cursor</span>
-    <span class="ident">Insert</span>(<span class="ident">char</span>),
-    <span class="doccomment">/// Create new line</span>
-    <span class="ident">Enter</span>,
-    <span class="doccomment">/// Delete text behind cursor</span>
-    <span class="ident">Backspace</span>,
-    <span class="doccomment">/// Delete text in front of cursor</span>
-    <span class="ident">Delete</span>,
-    <span class="doccomment">/// Mouse click at specified position</span>
-    <span class="ident">Click</span> { <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span> },
-    <span class="doccomment">/// Mouse drag to specified position</span>
-    <span class="ident">Drag</span> { <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span> },
-    <span class="doccomment">/// Scroll specified number of lines</span>
-    <span class="ident">Scroll</span> { <span class="ident">lines</span>: <span class="ident">i32</span> },
+<span class="doccomment">/// An action to perform on an [`Editor`]
+</span><span class="attribute">#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+</span><span class="kw">pub enum </span>Action {
+    <span class="doccomment">/// Move cursor to previous character ([Self::Left] in LTR, [Self::Right] in RTL)
+    </span>Previous,
+    <span class="doccomment">/// Move cursor to next character ([Self::Right] in LTR, [Self::Left] in RTL)
+    </span>Next,
+    <span class="doccomment">/// Move cursor left
+    </span>Left,
+    <span class="doccomment">/// Move cursor right
+    </span>Right,
+    <span class="doccomment">/// Move cursor up
+    </span>Up,
+    <span class="doccomment">/// Move cursor down
+    </span>Down,
+    <span class="doccomment">/// Move cursor to start of line
+    </span>Home,
+    <span class="doccomment">/// Move cursor to end of line
+    </span>End,
+    <span class="doccomment">/// Scroll up one page
+    </span>PageUp,
+    <span class="doccomment">/// Scroll down one page
+    </span>PageDown,
+    <span class="doccomment">/// Escape, clears selection
+    </span>Escape,
+    <span class="doccomment">/// Insert character at cursor
+    </span>Insert(char),
+    <span class="doccomment">/// Create new line
+    </span>Enter,
+    <span class="doccomment">/// Delete text behind cursor
+    </span>Backspace,
+    <span class="doccomment">/// Delete text in front of cursor
+    </span>Delete,
+    <span class="doccomment">/// Mouse click at specified position
+    </span>Click { x: i32, y: i32 },
+    <span class="doccomment">/// Mouse drag to specified position
+    </span>Drag { x: i32, y: i32 },
+    <span class="doccomment">/// Scroll specified number of lines
+    </span>Scroll { lines: i32 },
 }
 
-<span class="doccomment">/// A trait to allow easy replacements of [`Editor`], like `SyntaxEditor`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Edit</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Get the internal [`Buffer`]</span>
-    <span class="kw">fn</span> <span class="ident">buffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+<span class="doccomment">/// A trait to allow easy replacements of [`Editor`], like `SyntaxEditor`
+</span><span class="kw">pub trait </span>Edit&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Get the internal [`Buffer`]
+    </span><span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="doccomment">/// Get the internal [`Buffer`], mutably</span>
-    <span class="kw">fn</span> <span class="ident">buffer_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Get the internal [`Buffer`], mutably
+    </span><span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="doccomment">/// Get the current cursor position</span>
-    <span class="kw">fn</span> <span class="ident">cursor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cursor</span>;
+    <span class="doccomment">/// Get the current cursor position
+    </span><span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor;
 
-    <span class="doccomment">/// Get the current selection position</span>
-    <span class="kw">fn</span> <span class="ident">select_opt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Get the current selection position
+    </span><span class="kw">fn </span>select_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Cursor&gt;;
 
-    <span class="doccomment">/// Set the current selection position</span>
-    <span class="kw">fn</span> <span class="ident">set_select_opt</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">select_opt</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span>);
+    <span class="doccomment">/// Set the current selection position
+    </span><span class="kw">fn </span>set_select_opt(<span class="kw-2">&amp;mut </span><span class="self">self</span>, select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;);
 
-    <span class="doccomment">/// Shape lines until scroll, after adjusting scroll if the cursor moved</span>
-    <span class="kw">fn</span> <span class="ident">shape_as_needed</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>);
+    <span class="doccomment">/// Shape lines until scroll, after adjusting scroll if the cursor moved
+    </span><span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
 
-    <span class="doccomment">/// Copy selection</span>
-    <span class="kw">fn</span> <span class="ident">copy_selection</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Copy selection
+    </span><span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt;;
 
-    <span class="doccomment">/// Delete selection, adjusting cursor and returning true if there was a selection</span>
-    <span class="comment">// Also used by backspace, delete, insert, and enter when there is a selection</span>
-    <span class="kw">fn</span> <span class="ident">delete_selection</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+    <span class="doccomment">/// Delete selection, adjusting cursor and returning true if there was a selection
+    </span><span class="comment">// Also used by backspace, delete, insert, and enter when there is a selection
+    </span><span class="kw">fn </span>delete_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool;
 
-    <span class="doccomment">/// Perform an [Action] on the editor</span>
-    <span class="kw">fn</span> <span class="ident">action</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">action</span>: <span class="ident">Action</span>);
+    <span class="doccomment">/// Perform an [Action] on the editor
+    </span><span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action);
 
-    <span class="doccomment">/// Draw the editor</span>
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;swash&quot;</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">draw</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">cache</span>: <span class="kw-2">&amp;mut</span> <span class="ident"><span class="kw">crate</span>::SwashCache</span>, <span class="ident">color</span>: <span class="ident">Color</span>, <span class="ident">f</span>: <span class="ident">F</span>)
-        <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">i32</span>, <span class="ident">i32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">Color</span>);
+    <span class="doccomment">/// Draw the editor
+    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+    </span><span class="kw">fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, f: F)
+        <span class="kw">where </span>F: FnMut(i32, i32, u32, u32, Color);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

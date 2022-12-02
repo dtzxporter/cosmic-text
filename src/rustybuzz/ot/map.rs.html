@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/map.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/ot/map.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>map.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -544,456 +544,456 @@
 <span id="544">544</span>
 <span id="545">545</span>
 <span id="546">546</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
-<span class="kw">use</span> <span class="ident">core::ops::Range</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>alloc::vec::Vec;
+<span class="kw">use </span>core::ops::Range;
 
-<span class="kw">use</span> <span class="ident">ttf_parser::opentype_layout</span>::{<span class="ident">FeatureIndex</span>, <span class="ident">LanguageIndex</span>, <span class="ident">LookupIndex</span>, <span class="ident">VariationIndex</span>, <span class="ident">ScriptIndex</span>};
+<span class="kw">use </span>ttf_parser::opentype_layout::{FeatureIndex, LanguageIndex, LookupIndex, VariationIndex, ScriptIndex};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">tag</span>, <span class="ident">Face</span>, <span class="ident">Language</span>, <span class="ident">Mask</span>, <span class="ident">Tag</span>, <span class="ident">Script</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer</span>::{<span class="ident">glyph_flag</span>, <span class="ident">Buffer</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan::ShapePlan</span>;
-<span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">LayoutTableExt</span>, <span class="ident">TableIndex</span>};
+<span class="kw">use crate</span>::{tag, Face, Language, Mask, Tag, Script};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::{glyph_flag, Buffer};
+<span class="kw">use </span><span class="kw">crate</span>::plan::ShapePlan;
+<span class="kw">use super</span>::{LayoutTableExt, TableIndex};
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Map</span> {
-    <span class="ident">found_script</span>: [<span class="ident">bool</span>; <span class="number">2</span>],
-    <span class="ident">chosen_script</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tag</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">global_mask</span>: <span class="ident">Mask</span>,
-    <span class="ident">features</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FeatureMap</span><span class="op">&gt;</span>,
-    <span class="ident">lookups</span>: [<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LookupMap</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">stages</span>: [<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StageMap</span><span class="op">&gt;</span>; <span class="number">2</span>],
+<span class="kw">pub struct </span>Map {
+    found_script: [bool; <span class="number">2</span>],
+    chosen_script: [<span class="prelude-ty">Option</span>&lt;Tag&gt;; <span class="number">2</span>],
+    global_mask: Mask,
+    features: Vec&lt;FeatureMap&gt;,
+    lookups: [Vec&lt;LookupMap&gt;; <span class="number">2</span>],
+    stages: [Vec&lt;StageMap&gt;; <span class="number">2</span>],
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FeatureMap</span> {
-    <span class="ident">tag</span>: <span class="ident">Tag</span>,
-    <span class="comment">// GSUB/GPOS</span>
-    <span class="ident">index</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FeatureIndex</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">stage</span>: [<span class="ident">usize</span>; <span class="number">2</span>],
-    <span class="ident">shift</span>: <span class="ident">u32</span>,
-    <span class="ident">mask</span>: <span class="ident">Mask</span>,
-    <span class="comment">// mask for value=1, for quick access</span>
-    <span class="ident">one_mask</span>: <span class="ident">Mask</span>,
-    <span class="ident">auto_zwnj</span>: <span class="ident">bool</span>,
-    <span class="ident">auto_zwj</span>: <span class="ident">bool</span>,
-    <span class="ident">random</span>: <span class="ident">bool</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+</span><span class="kw">pub struct </span>FeatureMap {
+    tag: Tag,
+    <span class="comment">// GSUB/GPOS
+    </span>index: [<span class="prelude-ty">Option</span>&lt;FeatureIndex&gt;; <span class="number">2</span>],
+    stage: [usize; <span class="number">2</span>],
+    shift: u32,
+    mask: Mask,
+    <span class="comment">// mask for value=1, for quick access
+    </span>one_mask: Mask,
+    auto_zwnj: bool,
+    auto_zwj: bool,
+    random: bool,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LookupMap</span> {
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">LookupIndex</span>,
-    <span class="comment">// TODO: to bitflags</span>
-    <span class="kw">pub</span> <span class="ident">auto_zwnj</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">auto_zwj</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">random</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">mask</span>: <span class="ident">Mask</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+</span><span class="kw">pub struct </span>LookupMap {
+    <span class="kw">pub </span>index: LookupIndex,
+    <span class="comment">// TODO: to bitflags
+    </span><span class="kw">pub </span>auto_zwnj: bool,
+    <span class="kw">pub </span>auto_zwj: bool,
+    <span class="kw">pub </span>random: bool,
+    <span class="kw">pub </span>mask: Mask,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StageMap</span> {
-    <span class="comment">// Cumulative</span>
-    <span class="kw">pub</span> <span class="ident">last_lookup</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">pause_func</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PauseFunc</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone, Copy)]
+</span><span class="kw">pub struct </span>StageMap {
+    <span class="comment">// Cumulative
+    </span><span class="kw">pub </span>last_lookup: usize,
+    <span class="kw">pub </span>pause_func: <span class="prelude-ty">Option</span>&lt;PauseFunc&gt;,
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PauseFunc</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>);
+<span class="kw">pub type </span>PauseFunc = <span class="kw">fn</span>(<span class="kw-2">&amp;</span>ShapePlan, <span class="kw-2">&amp;</span>Face, <span class="kw-2">&amp;mut </span>Buffer);
 
-<span class="kw">impl</span> <span class="ident">Map</span> {
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_BITS</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">8</span>;
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX_VALUE</span>: <span class="ident">u32</span> <span class="op">=</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident"><span class="self">Self</span>::MAX_BITS</span>) <span class="op">-</span> <span class="number">1</span>;
+<span class="kw">impl </span>Map {
+    <span class="kw">pub const </span>MAX_BITS: u32 = <span class="number">8</span>;
+    <span class="kw">pub const </span>MAX_VALUE: u32 = (<span class="number">1 </span>&lt;&lt; <span class="self">Self</span>::MAX_BITS) - <span class="number">1</span>;
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">found_script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">found_script</span>[<span class="ident">table_index</span>]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>found_script(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex) -&gt; bool {
+        <span class="self">self</span>.found_script[table_index]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chosen_script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tag</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">chosen_script</span>[<span class="ident">table_index</span>]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>chosen_script(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex) -&gt; <span class="prelude-ty">Option</span>&lt;Tag&gt; {
+        <span class="self">self</span>.chosen_script[table_index]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">global_mask</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Mask</span> {
-        <span class="self">self</span>.<span class="ident">global_mask</span>
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>global_mask(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Mask {
+        <span class="self">self</span>.global_mask
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mask</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">feature_tag</span>: <span class="ident">Tag</span>) -&gt; (<span class="ident">Mask</span>, <span class="ident">u32</span>) {
-        <span class="self">self</span>.<span class="ident">features</span>
-            .<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">feature_tag</span>, <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">tag</span>)
-            .<span class="ident">map_or</span>((<span class="number">0</span>, <span class="number">0</span>), <span class="op">|</span><span class="ident">idx</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">features</span>[<span class="ident">idx</span>].<span class="ident">mask</span>, <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">idx</span>].<span class="ident">shift</span>))
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>mask(<span class="kw-2">&amp;</span><span class="self">self</span>, feature_tag: Tag) -&gt; (Mask, u32) {
+        <span class="self">self</span>.features
+            .binary_search_by_key(<span class="kw-2">&amp;</span>feature_tag, |f| f.tag)
+            .map_or((<span class="number">0</span>, <span class="number">0</span>), |idx| (<span class="self">self</span>.features[idx].mask, <span class="self">self</span>.features[idx].shift))
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">one_mask</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">feature_tag</span>: <span class="ident">Tag</span>) -&gt; <span class="ident">Mask</span> {
-        <span class="self">self</span>.<span class="ident">features</span>
-            .<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">feature_tag</span>, <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">tag</span>)
-            .<span class="ident">map_or</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">idx</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">idx</span>].<span class="ident">one_mask</span>)
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>one_mask(<span class="kw-2">&amp;</span><span class="self">self</span>, feature_tag: Tag) -&gt; Mask {
+        <span class="self">self</span>.features
+            .binary_search_by_key(<span class="kw-2">&amp;</span>feature_tag, |f| f.tag)
+            .map_or(<span class="number">0</span>, |idx| <span class="self">self</span>.features[idx].one_mask)
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">feature_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">feature_tag</span>: <span class="ident">Tag</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FeatureIndex</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">features</span>
-            .<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">feature_tag</span>, <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">tag</span>)
-            .<span class="ident">ok</span>()
-            .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">idx</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">idx</span>].<span class="ident">index</span>[<span class="ident">table_index</span>])
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>feature_index(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex, feature_tag: Tag) -&gt; <span class="prelude-ty">Option</span>&lt;FeatureIndex&gt; {
+        <span class="self">self</span>.features
+            .binary_search_by_key(<span class="kw-2">&amp;</span>feature_tag, |f| f.tag)
+            .ok()
+            .and_then(|idx| <span class="self">self</span>.features[idx].index[table_index])
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">feature_stage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">feature_tag</span>: <span class="ident">Tag</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">features</span>
-            .<span class="ident">binary_search_by_key</span>(<span class="kw-2">&amp;</span><span class="ident">feature_tag</span>, <span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">tag</span>)
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">idx</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">features</span>[<span class="ident">idx</span>].<span class="ident">stage</span>[<span class="ident">table_index</span>])
-            .<span class="ident">ok</span>()
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>feature_stage(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex, feature_tag: Tag) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="self">self</span>.features
+            .binary_search_by_key(<span class="kw-2">&amp;</span>feature_tag, |f| f.tag)
+            .map(|idx| <span class="self">self</span>.features[idx].stage[table_index])
+            .ok()
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stages</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">StageMap</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stages</span>[<span class="ident">table_index</span>]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>stages(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex) -&gt; <span class="kw-2">&amp;</span>[StageMap] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.stages[table_index]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lookup</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">LookupMap</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">lookups</span>[<span class="ident">table_index</span>][<span class="ident">index</span>]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>lookup(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex, index: usize) -&gt; <span class="kw-2">&amp;</span>LookupMap {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.lookups[table_index][index]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stage_lookups</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">stage</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">LookupMap</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">lookups</span>[<span class="ident">table_index</span>][<span class="self">self</span>.<span class="ident">stage_lookup_range</span>(<span class="ident">table_index</span>, <span class="ident">stage</span>)]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>stage_lookups(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex, stage: usize) -&gt; <span class="kw-2">&amp;</span>[LookupMap] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.lookups[table_index][<span class="self">self</span>.stage_lookup_range(table_index, stage)]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stage_lookup_range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">stage</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">stages</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">stages</span>[<span class="ident">table_index</span>];
-        <span class="kw">let</span> <span class="ident">lookups</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">lookups</span>[<span class="ident">table_index</span>];
-        <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">stage</span>.<span class="ident">checked_sub</span>(<span class="number">1</span>).<span class="ident">map_or</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">prev</span><span class="op">|</span> <span class="ident">stages</span>[<span class="ident">prev</span>].<span class="ident">last_lookup</span>);
-        <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">stages</span>.<span class="ident">get</span>(<span class="ident">stage</span>).<span class="ident">map_or</span>(<span class="ident">lookups</span>.<span class="ident">len</span>(), <span class="op">|</span><span class="ident">curr</span><span class="op">|</span> <span class="ident">curr</span>.<span class="ident">last_lookup</span>);
-        <span class="ident">start</span>..<span class="ident">end</span>
-    }
-}
-
-<span class="macro">bitflags::bitflags!</span> {
-    <span class="doccomment">/// Flags used for serialization with a `BufferSerializer`.</span>
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FeatureFlags</span>: <span class="ident">u32</span> {
-        <span class="doccomment">/// Feature applies to all characters; results in no mask allocated for it.</span>
-        <span class="kw">const</span> <span class="ident">GLOBAL</span> <span class="op">=</span> <span class="number">0x01</span>;
-        <span class="doccomment">/// Has fallback implementation, so include mask bit even if feature not found.</span>
-        <span class="kw">const</span> <span class="ident">HAS_FALLBACK</span> <span class="op">=</span> <span class="number">0x02</span>;
-        <span class="doccomment">/// Don&#39;t skip over ZWNJ when matching **context**.</span>
-        <span class="kw">const</span> <span class="ident">MANUAL_ZWNJ</span> <span class="op">=</span> <span class="number">0x04</span>;
-        <span class="doccomment">/// Don&#39;t skip over ZWJ when matching **input**.</span>
-        <span class="kw">const</span> <span class="ident">MANUAL_ZWJ</span> <span class="op">=</span> <span class="number">0x08</span>;
-        <span class="doccomment">/// If feature not found in LangSys, look for it in global feature list and pick one.</span>
-        <span class="kw">const</span> <span class="ident">GLOBAL_SEARCH</span> <span class="op">=</span> <span class="number">0x10</span>;
-        <span class="doccomment">/// Randomly select a glyph from an AlternateSubstFormat1 subtable.</span>
-        <span class="kw">const</span> <span class="ident">RANDOM</span> <span class="op">=</span> <span class="number">0x20</span>;
-
-        <span class="kw">const</span> <span class="ident">MANUAL_JOINERS</span>        <span class="op">=</span> <span class="ident"><span class="self">Self</span>::MANUAL_ZWNJ</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::MANUAL_ZWJ</span>.<span class="ident">bits</span>;
-        <span class="kw">const</span> <span class="ident">GLOBAL_MANUAL_JOINERS</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::GLOBAL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::MANUAL_JOINERS</span>.<span class="ident">bits</span>;
-        <span class="kw">const</span> <span class="ident">GLOBAL_HAS_FALLBACK</span>   <span class="op">=</span> <span class="ident"><span class="self">Self</span>::GLOBAL</span>.<span class="ident">bits</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::HAS_FALLBACK</span>.<span class="ident">bits</span>;
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>stage_lookup_range(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex, stage: usize) -&gt; Range&lt;usize&gt; {
+        <span class="kw">let </span>stages = <span class="kw-2">&amp;</span><span class="self">self</span>.stages[table_index];
+        <span class="kw">let </span>lookups = <span class="kw-2">&amp;</span><span class="self">self</span>.lookups[table_index];
+        <span class="kw">let </span>start = stage.checked_sub(<span class="number">1</span>).map_or(<span class="number">0</span>, |prev| stages[prev].last_lookup);
+        <span class="kw">let </span>end = stages.get(stage).map_or(lookups.len(), |curr| curr.last_lookup);
+        start..end
     }
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MapBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Face</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">found_script</span>: [<span class="ident">bool</span>; <span class="number">2</span>],
-    <span class="ident">script_index</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ScriptIndex</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">chosen_script</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tag</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">lang_index</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LanguageIndex</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    <span class="ident">current_stage</span>: [<span class="ident">usize</span>; <span class="number">2</span>],
-    <span class="ident">feature_infos</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FeatureInfo</span><span class="op">&gt;</span>,
-    <span class="ident">stages</span>: [<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StageInfo</span><span class="op">&gt;</span>; <span class="number">2</span>],
+<span class="macro">bitflags::bitflags! </span>{
+    <span class="doccomment">/// Flags used for serialization with a `BufferSerializer`.
+    </span><span class="attribute">#[derive(Default)]
+    </span><span class="kw">pub struct </span>FeatureFlags: u32 {
+        <span class="doccomment">/// Feature applies to all characters; results in no mask allocated for it.
+        </span><span class="kw">const </span>GLOBAL = <span class="number">0x01</span>;
+        <span class="doccomment">/// Has fallback implementation, so include mask bit even if feature not found.
+        </span><span class="kw">const </span>HAS_FALLBACK = <span class="number">0x02</span>;
+        <span class="doccomment">/// Don&#39;t skip over ZWNJ when matching **context**.
+        </span><span class="kw">const </span>MANUAL_ZWNJ = <span class="number">0x04</span>;
+        <span class="doccomment">/// Don&#39;t skip over ZWJ when matching **input**.
+        </span><span class="kw">const </span>MANUAL_ZWJ = <span class="number">0x08</span>;
+        <span class="doccomment">/// If feature not found in LangSys, look for it in global feature list and pick one.
+        </span><span class="kw">const </span>GLOBAL_SEARCH = <span class="number">0x10</span>;
+        <span class="doccomment">/// Randomly select a glyph from an AlternateSubstFormat1 subtable.
+        </span><span class="kw">const </span>RANDOM = <span class="number">0x20</span>;
+
+        <span class="kw">const </span>MANUAL_JOINERS        = <span class="self">Self</span>::MANUAL_ZWNJ.bits | <span class="self">Self</span>::MANUAL_ZWJ.bits;
+        <span class="kw">const </span>GLOBAL_MANUAL_JOINERS = <span class="self">Self</span>::GLOBAL.bits | <span class="self">Self</span>::MANUAL_JOINERS.bits;
+        <span class="kw">const </span>GLOBAL_HAS_FALLBACK   = <span class="self">Self</span>::GLOBAL.bits | <span class="self">Self</span>::HAS_FALLBACK.bits;
+    }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
-<span class="kw">struct</span> <span class="ident">FeatureInfo</span> {
-    <span class="ident">tag</span>: <span class="ident">Tag</span>,
-    <span class="comment">// sequence number, used for stable sorting only</span>
-    <span class="ident">seq</span>: <span class="ident">usize</span>,
-    <span class="ident">max_value</span>: <span class="ident">u32</span>,
-    <span class="ident">flags</span>: <span class="ident">FeatureFlags</span>,
-    <span class="comment">// for non-global features, what should the unset glyphs take</span>
-    <span class="ident">default_value</span>: <span class="ident">u32</span>,
-    <span class="comment">// GSUB/GPOS</span>
-    <span class="ident">stage</span>: [<span class="ident">usize</span>; <span class="number">2</span>],
+<span class="kw">pub struct </span>MapBuilder&lt;<span class="lifetime">&#39;a</span>&gt; {
+    face: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Face&lt;<span class="lifetime">&#39;a</span>&gt;,
+    found_script: [bool; <span class="number">2</span>],
+    script_index: [<span class="prelude-ty">Option</span>&lt;ScriptIndex&gt;; <span class="number">2</span>],
+    chosen_script: [<span class="prelude-ty">Option</span>&lt;Tag&gt;; <span class="number">2</span>],
+    lang_index: [<span class="prelude-ty">Option</span>&lt;LanguageIndex&gt;; <span class="number">2</span>],
+    current_stage: [usize; <span class="number">2</span>],
+    feature_infos: Vec&lt;FeatureInfo&gt;,
+    stages: [Vec&lt;StageInfo&gt;; <span class="number">2</span>],
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">struct</span> <span class="ident">StageInfo</span> {
-    <span class="ident">index</span>: <span class="ident">usize</span>,
-    <span class="ident">pause_func</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PauseFunc</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+</span><span class="kw">struct </span>FeatureInfo {
+    tag: Tag,
+    <span class="comment">// sequence number, used for stable sorting only
+    </span>seq: usize,
+    max_value: u32,
+    flags: FeatureFlags,
+    <span class="comment">// for non-global features, what should the unset glyphs take
+    </span>default_value: u32,
+    <span class="comment">// GSUB/GPOS
+    </span>stage: [usize; <span class="number">2</span>],
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">MapBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Face</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>, <span class="ident">script</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Script</span><span class="op">&gt;</span>, <span class="ident">language</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Language</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="comment">// Fetch script/language indices for GSUB/GPOS.  We need these later to skip</span>
-        <span class="comment">// features not available in either table and not waste precious bits for them.</span>
-        <span class="kw">let</span> (<span class="ident">script_tags</span>, <span class="ident">lang_tags</span>) <span class="op">=</span> <span class="ident">tag::tags_from_script_and_language</span>(<span class="ident">script</span>, <span class="ident">language</span>);
+<span class="attribute">#[derive(Clone, Copy)]
+</span><span class="kw">struct </span>StageInfo {
+    index: usize,
+    pause_func: <span class="prelude-ty">Option</span>&lt;PauseFunc&gt;,
+}
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found_script</span> <span class="op">=</span> [<span class="bool-val">false</span>; <span class="number">2</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">script_index</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">chosen_script</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lang_index</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; MapBuilder&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">pub fn </span>new(face: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Face&lt;<span class="lifetime">&#39;a</span>&gt;, script: <span class="prelude-ty">Option</span>&lt;Script&gt;, language: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>Language&gt;) -&gt; <span class="self">Self </span>{
+        <span class="comment">// Fetch script/language indices for GSUB/GPOS.  We need these later to skip
+        // features not available in either table and not waste precious bits for them.
+        </span><span class="kw">let </span>(script_tags, lang_tags) = tag::tags_from_script_and_language(script, language);
 
-        <span class="kw">for</span> (<span class="ident">table_index</span>, <span class="ident">table</span>) <span class="kw">in</span> <span class="ident">face</span>.<span class="ident">layout_tables</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">found</span>, <span class="ident">idx</span>, <span class="ident">tag</span>)) <span class="op">=</span> <span class="ident">table</span>.<span class="ident">select_script</span>(<span class="kw-2">&amp;</span><span class="ident">script_tags</span>) {
-                <span class="ident">chosen_script</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">tag</span>);
-                <span class="ident">found_script</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="ident">found</span>;
-                <span class="ident">script_index</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>found_script = [<span class="bool-val">false</span>; <span class="number">2</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>script_index = [<span class="prelude-val">None</span>; <span class="number">2</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>chosen_script = [<span class="prelude-val">None</span>; <span class="number">2</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>lang_index = [<span class="prelude-val">None</span>; <span class="number">2</span>];
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>) <span class="op">=</span> <span class="ident">table</span>.<span class="ident">select_script_language</span>(<span class="ident">idx</span>, <span class="kw-2">&amp;</span><span class="ident">lang_tags</span>) {
-                    <span class="ident">lang_index</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>);
+        <span class="kw">for </span>(table_index, table) <span class="kw">in </span>face.layout_tables() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((found, idx, tag)) = table.select_script(<span class="kw-2">&amp;</span>script_tags) {
+                chosen_script[table_index] = <span class="prelude-val">Some</span>(tag);
+                found_script[table_index] = found;
+                script_index[table_index] = <span class="prelude-val">Some</span>(idx);
+
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(idx) = table.select_script_language(idx, <span class="kw-2">&amp;</span>lang_tags) {
+                    lang_index[table_index] = <span class="prelude-val">Some</span>(idx);
                 }
             }
         }
 
-        <span class="self">Self</span> {
-            <span class="ident">face</span>,
-            <span class="ident">found_script</span>,
-            <span class="ident">script_index</span>,
-            <span class="ident">chosen_script</span>,
-            <span class="ident">lang_index</span>,
-            <span class="ident">current_stage</span>: [<span class="number">0</span>, <span class="number">0</span>],
-            <span class="ident">feature_infos</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">stages</span>: [<span class="ident">Vec::new</span>(), <span class="ident">Vec::new</span>()],
+        <span class="self">Self </span>{
+            face,
+            found_script,
+            script_index,
+            chosen_script,
+            lang_index,
+            current_stage: [<span class="number">0</span>, <span class="number">0</span>],
+            feature_infos: Vec::new(),
+            stages: [Vec::new(), Vec::new()],
         }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chosen_script</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tag</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">chosen_script</span>[<span class="ident">table_index</span>]
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>chosen_script(<span class="kw-2">&amp;</span><span class="self">self</span>, table_index: TableIndex) -&gt; <span class="prelude-ty">Option</span>&lt;Tag&gt; {
+        <span class="self">self</span>.chosen_script[table_index]
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_feature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">tag</span>: <span class="ident">Tag</span>, <span class="ident">flags</span>: <span class="ident">FeatureFlags</span>, <span class="ident">value</span>: <span class="ident">u32</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">tag</span>.<span class="ident">is_null</span>() {
-            <span class="kw">let</span> <span class="ident">seq</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">feature_infos</span>.<span class="ident">len</span>();
-            <span class="self">self</span>.<span class="ident">feature_infos</span>.<span class="ident">push</span>(<span class="ident">FeatureInfo</span> {
-                <span class="ident">tag</span>,
-                <span class="ident">seq</span>,
-                <span class="ident">max_value</span>: <span class="ident">value</span>,
-                <span class="ident">flags</span>,
-                <span class="ident">default_value</span>: <span class="kw">if</span> <span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL</span>) { <span class="ident">value</span> } <span class="kw">else</span> { <span class="number">0</span> },
-                <span class="ident">stage</span>: <span class="self">self</span>.<span class="ident">current_stage</span>,
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>add_feature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tag: Tag, flags: FeatureFlags, value: u32) {
+        <span class="kw">if </span>!tag.is_null() {
+            <span class="kw">let </span>seq = <span class="self">self</span>.feature_infos.len();
+            <span class="self">self</span>.feature_infos.push(FeatureInfo {
+                tag,
+                seq,
+                max_value: value,
+                flags,
+                default_value: <span class="kw">if </span>flags.contains(FeatureFlags::GLOBAL) { value } <span class="kw">else </span>{ <span class="number">0 </span>},
+                stage: <span class="self">self</span>.current_stage,
             });
         }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_feature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">tag</span>: <span class="ident">Tag</span>, <span class="ident">flags</span>: <span class="ident">FeatureFlags</span>, <span class="ident">value</span>: <span class="ident">u32</span>) {
-        <span class="self">self</span>.<span class="ident">add_feature</span>(<span class="ident">tag</span>, <span class="ident">flags</span> <span class="op">|</span> <span class="ident">FeatureFlags::GLOBAL</span>, <span class="ident">value</span>);
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>enable_feature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tag: Tag, flags: FeatureFlags, value: u32) {
+        <span class="self">self</span>.add_feature(tag, flags | FeatureFlags::GLOBAL, value);
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disable_feature</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">tag</span>: <span class="ident">Tag</span>) {
-        <span class="self">self</span>.<span class="ident">add_feature</span>(<span class="ident">tag</span>, <span class="ident">FeatureFlags::GLOBAL</span>, <span class="number">0</span>);
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>disable_feature(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tag: Tag) {
+        <span class="self">self</span>.add_feature(tag, FeatureFlags::GLOBAL, <span class="number">0</span>);
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_gsub_pause</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">pause</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PauseFunc</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">add_pause</span>(<span class="ident">TableIndex::GSUB</span>, <span class="ident">pause</span>);
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>add_gsub_pause(<span class="kw-2">&amp;mut </span><span class="self">self</span>, pause: <span class="prelude-ty">Option</span>&lt;PauseFunc&gt;) {
+        <span class="self">self</span>.add_pause(TableIndex::GSUB, pause);
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_gpos_pause</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">pause</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PauseFunc</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">add_pause</span>(<span class="ident">TableIndex::GPOS</span>, <span class="ident">pause</span>);
+    <span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>add_gpos_pause(<span class="kw-2">&amp;mut </span><span class="self">self</span>, pause: <span class="prelude-ty">Option</span>&lt;PauseFunc&gt;) {
+        <span class="self">self</span>.add_pause(TableIndex::GPOS, pause);
     }
 
-    <span class="kw">fn</span> <span class="ident">add_pause</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">table_index</span>: <span class="ident">TableIndex</span>, <span class="ident">pause</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PauseFunc</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">stages</span>[<span class="ident">table_index</span>].<span class="ident">push</span>(<span class="ident">StageInfo</span> {
-            <span class="ident">index</span>: <span class="self">self</span>.<span class="ident">current_stage</span>[<span class="ident">table_index</span>],
-            <span class="ident">pause_func</span>: <span class="ident">pause</span>,
+    <span class="kw">fn </span>add_pause(<span class="kw-2">&amp;mut </span><span class="self">self</span>, table_index: TableIndex, pause: <span class="prelude-ty">Option</span>&lt;PauseFunc&gt;) {
+        <span class="self">self</span>.stages[table_index].push(StageInfo {
+            index: <span class="self">self</span>.current_stage[table_index],
+            pause_func: pause,
         });
 
-        <span class="self">self</span>.<span class="ident">current_stage</span>[<span class="ident">table_index</span>] <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="self">self</span>.current_stage[table_index] += <span class="number">1</span>;
     }
 
-    <span class="kw">const</span> <span class="ident">GLOBAL_BIT_MASK</span>: <span class="ident">Mask</span> <span class="op">=</span> <span class="ident">glyph_flag::DEFINED</span> <span class="op">+</span> <span class="number">1</span>;
-    <span class="kw">const</span> <span class="ident">GLOBAL_BIT_SHIFT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">glyph_flag::DEFINED</span>.<span class="ident">count_ones</span>();
+    <span class="kw">const </span>GLOBAL_BIT_MASK: Mask = glyph_flag::DEFINED + <span class="number">1</span>;
+    <span class="kw">const </span>GLOBAL_BIT_SHIFT: u32 = glyph_flag::DEFINED.count_ones();
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">Map</span> {
-        <span class="comment">// We default to applying required feature in stage 0.  If the required</span>
-        <span class="comment">// feature has a tag that is known to the shaper, we apply required feature</span>
-        <span class="comment">// in the stage for that tag.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">required_index</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">required_tag</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
+    <span class="kw">pub fn </span>compile(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; Map {
+        <span class="comment">// We default to applying required feature in stage 0.  If the required
+        // feature has a tag that is known to the shaper, we apply required feature
+        // in the stage for that tag.
+        </span><span class="kw">let </span><span class="kw-2">mut </span>required_index = [<span class="prelude-val">None</span>; <span class="number">2</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>required_tag = [<span class="prelude-val">None</span>; <span class="number">2</span>];
 
-        <span class="kw">for</span> (<span class="ident">table_index</span>, <span class="ident">table</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">layout_tables</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">script</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">script_index</span>[<span class="ident">table_index</span>] {
-                <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lang_index</span>[<span class="ident">table_index</span>];
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">idx</span>, <span class="ident">tag</span>)) <span class="op">=</span> <span class="ident">table</span>.<span class="ident">get_required_language_feature</span>(<span class="ident">script</span>, <span class="ident">lang</span>) {
-                    <span class="ident">required_index</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>);
-                    <span class="ident">required_tag</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">tag</span>);
+        <span class="kw">for </span>(table_index, table) <span class="kw">in </span><span class="self">self</span>.face.layout_tables() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(script) = <span class="self">self</span>.script_index[table_index] {
+                <span class="kw">let </span>lang = <span class="self">self</span>.lang_index[table_index];
+                <span class="kw">if let </span><span class="prelude-val">Some</span>((idx, tag)) = table.get_required_language_feature(script, lang) {
+                    required_index[table_index] = <span class="prelude-val">Some</span>(idx);
+                    required_tag[table_index] = <span class="prelude-val">Some</span>(tag);
                 }
             }
         }
 
-        <span class="kw">let</span> (<span class="ident">features</span>, <span class="ident">required_stage</span>, <span class="ident">global_mask</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">collect_feature_maps</span>(<span class="ident">required_tag</span>);
+        <span class="kw">let </span>(features, required_stage, global_mask) = <span class="self">self</span>.collect_feature_maps(required_tag);
 
-        <span class="self">self</span>.<span class="ident">add_gsub_pause</span>(<span class="prelude-val">None</span>);
-        <span class="self">self</span>.<span class="ident">add_gpos_pause</span>(<span class="prelude-val">None</span>);
+        <span class="self">self</span>.add_gsub_pause(<span class="prelude-val">None</span>);
+        <span class="self">self</span>.add_gpos_pause(<span class="prelude-val">None</span>);
 
-        <span class="kw">let</span> (<span class="ident">lookups</span>, <span class="ident">stages</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">collect_lookup_stages</span>(<span class="kw-2">&amp;</span><span class="ident">features</span>, <span class="ident">required_index</span>, <span class="ident">required_stage</span>);
+        <span class="kw">let </span>(lookups, stages) = <span class="self">self</span>.collect_lookup_stages(<span class="kw-2">&amp;</span>features, required_index, required_stage);
 
-        <span class="ident">Map</span> {
-            <span class="ident">found_script</span>: <span class="self">self</span>.<span class="ident">found_script</span>,
-            <span class="ident">chosen_script</span>: <span class="self">self</span>.<span class="ident">chosen_script</span>,
-            <span class="ident">global_mask</span>,
-            <span class="ident">features</span>,
-            <span class="ident">lookups</span>,
-            <span class="ident">stages</span>,
+        Map {
+            found_script: <span class="self">self</span>.found_script,
+            chosen_script: <span class="self">self</span>.chosen_script,
+            global_mask,
+            features,
+            lookups,
+            stages,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">collect_feature_maps</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">required_tag</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Tag</span><span class="op">&gt;</span>; <span class="number">2</span>],
-    ) -&gt; (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FeatureMap</span><span class="op">&gt;</span>, [<span class="ident">usize</span>; <span class="number">2</span>], <span class="ident">Mask</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map_features</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">required_stage</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">2</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">global_mask</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::GLOBAL_BIT_MASK</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">next_bit</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::GLOBAL_BIT_SHIFT</span> <span class="op">+</span> <span class="number">1</span>;
+    <span class="kw">fn </span>collect_feature_maps(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        required_tag: [<span class="prelude-ty">Option</span>&lt;Tag&gt;; <span class="number">2</span>],
+    ) -&gt; (Vec&lt;FeatureMap&gt;, [usize; <span class="number">2</span>], Mask) {
+        <span class="kw">let </span><span class="kw-2">mut </span>map_features = Vec::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>required_stage = [<span class="number">0</span>; <span class="number">2</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>global_mask = <span class="self">Self</span>::GLOBAL_BIT_MASK;
+        <span class="kw">let </span><span class="kw-2">mut </span>next_bit = <span class="self">Self</span>::GLOBAL_BIT_SHIFT + <span class="number">1</span>;
 
-        <span class="comment">// Sort features and merge duplicates.</span>
-        <span class="self">self</span>.<span class="ident">dedup_feature_infos</span>();
+        <span class="comment">// Sort features and merge duplicates.
+        </span><span class="self">self</span>.dedup_feature_infos();
 
-        <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">feature_infos</span> {
-            <span class="kw">let</span> <span class="ident">bits_needed</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL</span>) <span class="op">&amp;&amp;</span> <span class="ident">info</span>.<span class="ident">max_value</span> <span class="op">==</span> <span class="number">1</span> {
-                <span class="comment">// Uses the global bit.</span>
-                <span class="number">0</span>
-            } <span class="kw">else</span> {
-                <span class="comment">// Limit bits per feature.</span>
-                <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">max_value</span>;
-                <span class="kw">let</span> <span class="ident">num_bits</span> <span class="op">=</span> <span class="number">8</span> <span class="op">*</span> <span class="ident">core::mem::size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>) <span class="kw">as</span> <span class="ident">u32</span> <span class="op">-</span> <span class="ident">v</span>.<span class="ident">leading_zeros</span>();
-                <span class="ident">Map::MAX_BITS</span>.<span class="ident">min</span>(<span class="ident">num_bits</span>)
+        <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.feature_infos {
+            <span class="kw">let </span>bits_needed = <span class="kw">if </span>info.flags.contains(FeatureFlags::GLOBAL) &amp;&amp; info.max_value == <span class="number">1 </span>{
+                <span class="comment">// Uses the global bit.
+                </span><span class="number">0
+            </span>} <span class="kw">else </span>{
+                <span class="comment">// Limit bits per feature.
+                </span><span class="kw">let </span>v = info.max_value;
+                <span class="kw">let </span>num_bits = <span class="number">8 </span>* core::mem::size_of_val(<span class="kw-2">&amp;</span>v) <span class="kw">as </span>u32 - v.leading_zeros();
+                Map::MAX_BITS.min(num_bits)
             };
 
-            <span class="kw">let</span> <span class="ident">bits_available</span> <span class="op">=</span> <span class="number">8</span> <span class="op">*</span> <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">Mask</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u32</span>;
-            <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">max_value</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">next_bit</span> <span class="op">+</span> <span class="ident">bits_needed</span> <span class="op">&gt;</span> <span class="ident">bits_available</span> {
-                 <span class="comment">// Feature disabled, or not enough bits.</span>
-                <span class="kw">continue</span>;
+            <span class="kw">let </span>bits_available = <span class="number">8 </span>* core::mem::size_of::&lt;Mask&gt;() <span class="kw">as </span>u32;
+            <span class="kw">if </span>info.max_value == <span class="number">0 </span>|| next_bit + bits_needed &gt; bits_available {
+                 <span class="comment">// Feature disabled, or not enough bits.
+                </span><span class="kw">continue</span>;
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">feature_index</span> <span class="op">=</span> [<span class="prelude-val">None</span>; <span class="number">2</span>];
+            <span class="kw">let </span><span class="kw-2">mut </span>found = <span class="bool-val">false</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>feature_index = [<span class="prelude-val">None</span>; <span class="number">2</span>];
 
-            <span class="kw">for</span> (<span class="ident">table_index</span>, <span class="ident">table</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">layout_tables</span>() {
-                <span class="kw">if</span> <span class="ident">required_tag</span>[<span class="ident">table_index</span>] <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">info</span>.<span class="ident">tag</span>) {
-                    <span class="ident">required_stage</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="ident">info</span>.<span class="ident">stage</span>[<span class="ident">table_index</span>];
+            <span class="kw">for </span>(table_index, table) <span class="kw">in </span><span class="self">self</span>.face.layout_tables() {
+                <span class="kw">if </span>required_tag[table_index] == <span class="prelude-val">Some</span>(info.tag) {
+                    required_stage[table_index] = info.stage[table_index];
                 }
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">script</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">script_index</span>[<span class="ident">table_index</span>] {
-                    <span class="kw">let</span> <span class="ident">lang</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lang_index</span>[<span class="ident">table_index</span>];
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>) <span class="op">=</span> <span class="ident">table</span>.<span class="ident">find_language_feature</span>(<span class="ident">script</span>, <span class="ident">lang</span>, <span class="ident">info</span>.<span class="ident">tag</span>) {
-                        <span class="ident">feature_index</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>);
-                        <span class="ident">found</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(script) = <span class="self">self</span>.script_index[table_index] {
+                    <span class="kw">let </span>lang = <span class="self">self</span>.lang_index[table_index];
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(idx) = table.find_language_feature(script, lang, info.tag) {
+                        feature_index[table_index] = <span class="prelude-val">Some</span>(idx);
+                        found = <span class="bool-val">true</span>;
                     }
                 }
             }
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">found</span> <span class="op">&amp;&amp;</span> <span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL_SEARCH</span>) {
-                <span class="kw">for</span> (<span class="ident">table_index</span>, <span class="ident">table</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">layout_tables</span>() {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>) <span class="op">=</span> <span class="ident">table</span>.<span class="ident">features</span>.<span class="ident">index</span>(<span class="ident">info</span>.<span class="ident">tag</span>) {
-                        <span class="ident">feature_index</span>[<span class="ident">table_index</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">idx</span>);
-                        <span class="ident">found</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="kw">if </span>!found &amp;&amp; info.flags.contains(FeatureFlags::GLOBAL_SEARCH) {
+                <span class="kw">for </span>(table_index, table) <span class="kw">in </span><span class="self">self</span>.face.layout_tables() {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(idx) = table.features.index(info.tag) {
+                        feature_index[table_index] = <span class="prelude-val">Some</span>(idx);
+                        found = <span class="bool-val">true</span>;
                     }
                 }
             }
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">found</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::HAS_FALLBACK</span>) {
+            <span class="kw">if </span>!found &amp;&amp; !info.flags.contains(FeatureFlags::HAS_FALLBACK) {
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">let</span> (<span class="ident">shift</span>, <span class="ident">mask</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL</span>) <span class="op">&amp;&amp;</span> <span class="ident">info</span>.<span class="ident">max_value</span> <span class="op">==</span> <span class="number">1</span> {
-                <span class="comment">// Uses the global bit</span>
-                (<span class="ident"><span class="self">Self</span>::GLOBAL_BIT_SHIFT</span>, <span class="ident"><span class="self">Self</span>::GLOBAL_BIT_MASK</span>)
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">shift</span> <span class="op">=</span> <span class="ident">next_bit</span>;
-                <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">next_bit</span> <span class="op">+</span> <span class="ident">bits_needed</span>)) <span class="op">-</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">next_bit</span>);
-                <span class="ident">next_bit</span> <span class="op">+</span><span class="op">=</span> <span class="ident">bits_needed</span>;
-                <span class="ident">global_mask</span> <span class="op">|</span><span class="op">=</span> (<span class="ident">info</span>.<span class="ident">default_value</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">shift</span>) <span class="op">&amp;</span> <span class="ident">mask</span>;
-                (<span class="ident">shift</span>, <span class="ident">mask</span>)
+            <span class="kw">let </span>(shift, mask) = <span class="kw">if </span>info.flags.contains(FeatureFlags::GLOBAL) &amp;&amp; info.max_value == <span class="number">1 </span>{
+                <span class="comment">// Uses the global bit
+                </span>(<span class="self">Self</span>::GLOBAL_BIT_SHIFT, <span class="self">Self</span>::GLOBAL_BIT_MASK)
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>shift = next_bit;
+                <span class="kw">let </span>mask = (<span class="number">1 </span>&lt;&lt; (next_bit + bits_needed)) - (<span class="number">1 </span>&lt;&lt; next_bit);
+                next_bit += bits_needed;
+                global_mask |= (info.default_value &lt;&lt; shift) &amp; mask;
+                (shift, mask)
             };
 
-            <span class="ident">map_features</span>.<span class="ident">push</span>(<span class="ident">FeatureMap</span> {
-                <span class="ident">tag</span>: <span class="ident">info</span>.<span class="ident">tag</span>,
-                <span class="ident">index</span>: <span class="ident">feature_index</span>,
-                <span class="ident">stage</span>: <span class="ident">info</span>.<span class="ident">stage</span>,
-                <span class="ident">shift</span>,
-                <span class="ident">mask</span>,
-                <span class="ident">one_mask</span>: (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">shift</span>) <span class="op">&amp;</span> <span class="ident">mask</span>,
-                <span class="ident">auto_zwnj</span>: <span class="op">!</span><span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::MANUAL_ZWNJ</span>),
-                <span class="ident">auto_zwj</span>: <span class="op">!</span><span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::MANUAL_ZWJ</span>),
-                <span class="ident">random</span>: <span class="ident">info</span>.<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::RANDOM</span>),
+            map_features.push(FeatureMap {
+                tag: info.tag,
+                index: feature_index,
+                stage: info.stage,
+                shift,
+                mask,
+                one_mask: (<span class="number">1 </span>&lt;&lt; shift) &amp; mask,
+                auto_zwnj: !info.flags.contains(FeatureFlags::MANUAL_ZWNJ),
+                auto_zwj: !info.flags.contains(FeatureFlags::MANUAL_ZWJ),
+                random: info.flags.contains(FeatureFlags::RANDOM),
             });
         }
 
-        (<span class="ident">map_features</span>, <span class="ident">required_stage</span>, <span class="ident">global_mask</span>)
+        (map_features, required_stage, global_mask)
     }
 
-    <span class="kw">fn</span> <span class="ident">dedup_feature_infos</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">feature_infos</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">feature_infos</span>;
-        <span class="kw">if</span> <span class="ident">feature_infos</span>.<span class="ident">is_empty</span>() {
+    <span class="kw">fn </span>dedup_feature_infos(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">let </span>feature_infos = <span class="kw-2">&amp;mut </span><span class="self">self</span>.feature_infos;
+        <span class="kw">if </span>feature_infos.is_empty() {
             <span class="kw">return</span>;
         }
 
-        <span class="ident">feature_infos</span>.<span class="ident">sort</span>();
+        feature_infos.sort();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">feature_infos</span>.<span class="ident">len</span>() {
-            <span class="kw">if</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">tag</span> <span class="op">!</span><span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">tag</span> {
-                <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">feature_infos</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>];
-            } <span class="kw">else</span> {
-                <span class="kw">if</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL</span>) {
-                    <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">FeatureFlags::GLOBAL</span>;
-                    <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">max_value</span> <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">max_value</span>;
-                    <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">default_value</span> <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">default_value</span>;
-                } <span class="kw">else</span> {
-                    <span class="kw">if</span> <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">flags</span>.<span class="ident">contains</span>(<span class="ident">FeatureFlags::GLOBAL</span>) {
-                        <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">flags</span> <span class="op">^</span><span class="op">=</span> <span class="ident">FeatureFlags::GLOBAL</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..feature_infos.len() {
+            <span class="kw">if </span>feature_infos[i].tag != feature_infos[j].tag {
+                j += <span class="number">1</span>;
+                feature_infos[j] = feature_infos[i];
+            } <span class="kw">else </span>{
+                <span class="kw">if </span>feature_infos[i].flags.contains(FeatureFlags::GLOBAL) {
+                    feature_infos[j].flags |= FeatureFlags::GLOBAL;
+                    feature_infos[j].max_value = feature_infos[i].max_value;
+                    feature_infos[j].default_value = feature_infos[i].default_value;
+                } <span class="kw">else </span>{
+                    <span class="kw">if </span>feature_infos[j].flags.contains(FeatureFlags::GLOBAL) {
+                        feature_infos[j].flags ^= FeatureFlags::GLOBAL;
                     }
-                    <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">max_value</span> <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">max_value</span>.<span class="ident">max</span>(<span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">max_value</span>);
-                    <span class="comment">// Inherit default_value from j</span>
-                }
-                <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident">FeatureFlags::HAS_FALLBACK</span>;
-                <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">flags</span>;
-                <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">stage</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">stage</span>[<span class="number">0</span>].<span class="ident">min</span>(<span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">stage</span>[<span class="number">0</span>]);
-                <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">stage</span>[<span class="number">1</span>] <span class="op">=</span> <span class="ident">feature_infos</span>[<span class="ident">j</span>].<span class="ident">stage</span>[<span class="number">1</span>].<span class="ident">min</span>(<span class="ident">feature_infos</span>[<span class="ident">i</span>].<span class="ident">stage</span>[<span class="number">1</span>]);
+                    feature_infos[j].max_value = feature_infos[j].max_value.max(feature_infos[i].max_value);
+                    <span class="comment">// Inherit default_value from j
+                </span>}
+                <span class="kw">let </span>flags = feature_infos[i].flags &amp; FeatureFlags::HAS_FALLBACK;
+                feature_infos[j].flags |= flags;
+                feature_infos[j].stage[<span class="number">0</span>] = feature_infos[j].stage[<span class="number">0</span>].min(feature_infos[i].stage[<span class="number">0</span>]);
+                feature_infos[j].stage[<span class="number">1</span>] = feature_infos[j].stage[<span class="number">1</span>].min(feature_infos[i].stage[<span class="number">1</span>]);
             }
         }
 
-        <span class="ident">feature_infos</span>.<span class="ident">truncate</span>(<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>);
+        feature_infos.truncate(j + <span class="number">1</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">collect_lookup_stages</span>(
+    <span class="kw">fn </span>collect_lookup_stages(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">map_features</span>: <span class="kw-2">&amp;</span>[<span class="ident">FeatureMap</span>],
-        <span class="ident">required_feature_index</span>: [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FeatureIndex</span><span class="op">&gt;</span>; <span class="number">2</span>],
-        <span class="ident">required_feature_stage</span>: [<span class="ident">usize</span>; <span class="number">2</span>],
-    ) -&gt; ([<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LookupMap</span><span class="op">&gt;</span>; <span class="number">2</span>], [<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">StageMap</span><span class="op">&gt;</span>; <span class="number">2</span>]) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map_lookups</span> <span class="op">=</span> [<span class="ident">Vec::new</span>(), <span class="ident">Vec::new</span>()];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map_stages</span> <span class="op">=</span> [<span class="ident">Vec::new</span>(), <span class="ident">Vec::new</span>()];
+        map_features: <span class="kw-2">&amp;</span>[FeatureMap],
+        required_feature_index: [<span class="prelude-ty">Option</span>&lt;FeatureIndex&gt;; <span class="number">2</span>],
+        required_feature_stage: [usize; <span class="number">2</span>],
+    ) -&gt; ([Vec&lt;LookupMap&gt;; <span class="number">2</span>], [Vec&lt;StageMap&gt;; <span class="number">2</span>]) {
+        <span class="kw">let </span><span class="kw-2">mut </span>map_lookups = [Vec::new(), Vec::new()];
+        <span class="kw">let </span><span class="kw-2">mut </span>map_stages = [Vec::new(), Vec::new()];
 
-        <span class="kw">for</span> <span class="ident">table_index</span> <span class="kw">in</span> <span class="ident">TableIndex::iter</span>() {
-            <span class="comment">// Collect lookup indices for features.</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stage_index</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_lookup</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">for </span>table_index <span class="kw">in </span>TableIndex::iter() {
+            <span class="comment">// Collect lookup indices for features.
+            </span><span class="kw">let </span><span class="kw-2">mut </span>stage_index = <span class="number">0</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>last_lookup = <span class="number">0</span>;
 
-            <span class="kw">let</span> <span class="ident">coords</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">ttfp_face</span>.<span class="ident">variation_coordinates</span>();
-            <span class="kw">let</span> <span class="ident">variation_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">face</span>
-                .<span class="ident">layout_table</span>(<span class="ident">table_index</span>)
-                .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">variations</span><span class="question-mark">?</span>.<span class="ident">find_index</span>(<span class="ident">coords</span>));
+            <span class="kw">let </span>coords = <span class="self">self</span>.face.ttfp_face.variation_coordinates();
+            <span class="kw">let </span>variation_index = <span class="self">self</span>.face
+                .layout_table(table_index)
+                .and_then(|t| t.variations<span class="question-mark">?</span>.find_index(coords));
 
-            <span class="kw">for</span> <span class="ident">stage</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">current_stage</span>[<span class="ident">table_index</span>] {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">feature_index</span>) <span class="op">=</span> <span class="ident">required_feature_index</span>[<span class="ident">table_index</span>] {
-                    <span class="kw">if</span> <span class="ident">required_feature_stage</span>[<span class="ident">table_index</span>] <span class="op">==</span> <span class="ident">stage</span> {
-                        <span class="self">self</span>.<span class="ident">add_lookups</span>(
-                            <span class="kw-2">&amp;mut</span> <span class="ident">map_lookups</span>[<span class="ident">table_index</span>],
-                            <span class="ident">table_index</span>,
-                            <span class="ident">feature_index</span>,
-                            <span class="ident">variation_index</span>,
-                            <span class="ident"><span class="self">Self</span>::GLOBAL_BIT_MASK</span>,
+            <span class="kw">for </span>stage <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.current_stage[table_index] {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(feature_index) = required_feature_index[table_index] {
+                    <span class="kw">if </span>required_feature_stage[table_index] == stage {
+                        <span class="self">self</span>.add_lookups(
+                            <span class="kw-2">&amp;mut </span>map_lookups[table_index],
+                            table_index,
+                            feature_index,
+                            variation_index,
+                            <span class="self">Self</span>::GLOBAL_BIT_MASK,
                             <span class="bool-val">true</span>,
                             <span class="bool-val">true</span>,
                             <span class="bool-val">false</span>,
@@ -1001,89 +1001,89 @@
                     }
                 }
 
-                <span class="kw">for</span> <span class="ident">feature</span> <span class="kw">in</span> <span class="ident">map_features</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">feature_index</span>) <span class="op">=</span> <span class="ident">feature</span>.<span class="ident">index</span>[<span class="ident">table_index</span>] {
-                        <span class="kw">if</span> <span class="ident">feature</span>.<span class="ident">stage</span>[<span class="ident">table_index</span>] <span class="op">==</span> <span class="ident">stage</span> {
-                            <span class="self">self</span>.<span class="ident">add_lookups</span>(
-                                <span class="kw-2">&amp;mut</span> <span class="ident">map_lookups</span>[<span class="ident">table_index</span>],
-                                <span class="ident">table_index</span>,
-                                <span class="ident">feature_index</span>,
-                                <span class="ident">variation_index</span>,
-                                <span class="ident">feature</span>.<span class="ident">mask</span>,
-                                <span class="ident">feature</span>.<span class="ident">auto_zwnj</span>,
-                                <span class="ident">feature</span>.<span class="ident">auto_zwj</span>,
-                                <span class="ident">feature</span>.<span class="ident">random</span>,
+                <span class="kw">for </span>feature <span class="kw">in </span>map_features {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(feature_index) = feature.index[table_index] {
+                        <span class="kw">if </span>feature.stage[table_index] == stage {
+                            <span class="self">self</span>.add_lookups(
+                                <span class="kw-2">&amp;mut </span>map_lookups[table_index],
+                                table_index,
+                                feature_index,
+                                variation_index,
+                                feature.mask,
+                                feature.auto_zwnj,
+                                feature.auto_zwj,
+                                feature.random,
                             );
                         }
                     }
                 }
 
-                <span class="comment">// Sort lookups and merge duplicates.</span>
-                <span class="kw">let</span> <span class="ident">lookups</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">map_lookups</span>[<span class="ident">table_index</span>];
-                <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">lookups</span>.<span class="ident">len</span>();
+                <span class="comment">// Sort lookups and merge duplicates.
+                </span><span class="kw">let </span>lookups = <span class="kw-2">&amp;mut </span>map_lookups[table_index];
+                <span class="kw">let </span>len = lookups.len();
 
-                <span class="kw">if</span> <span class="ident">last_lookup</span> <span class="op">&lt;</span> <span class="ident">len</span> {
-                    <span class="ident">lookups</span>[<span class="ident">last_lookup</span>..].<span class="ident">sort</span>();
+                <span class="kw">if </span>last_lookup &lt; len {
+                    lookups[last_lookup..].sort();
 
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">last_lookup</span>;
-                    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">j</span><span class="op">+</span><span class="number">1</span>..<span class="ident">len</span> {
-                        <span class="kw">if</span> <span class="ident">lookups</span>[<span class="ident">i</span>].<span class="ident">index</span> <span class="op">!</span><span class="op">=</span> <span class="ident">lookups</span>[<span class="ident">j</span>].<span class="ident">index</span> {
-                            <span class="ident">j</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                            <span class="ident">lookups</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="ident">lookups</span>[<span class="ident">i</span>];
-                        } <span class="kw">else</span> {
-                            <span class="ident">lookups</span>[<span class="ident">j</span>].<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">lookups</span>[<span class="ident">i</span>].<span class="ident">mask</span>;
-                            <span class="ident">lookups</span>[<span class="ident">j</span>].<span class="ident">auto_zwnj</span> <span class="op">&amp;=</span> <span class="ident">lookups</span>[<span class="ident">i</span>].<span class="ident">auto_zwnj</span>;
-                            <span class="ident">lookups</span>[<span class="ident">j</span>].<span class="ident">auto_zwj</span> <span class="op">&amp;=</span> <span class="ident">lookups</span>[<span class="ident">i</span>].<span class="ident">auto_zwj</span>;
+                    <span class="kw">let </span><span class="kw-2">mut </span>j = last_lookup;
+                    <span class="kw">for </span>i <span class="kw">in </span>j+<span class="number">1</span>..len {
+                        <span class="kw">if </span>lookups[i].index != lookups[j].index {
+                            j += <span class="number">1</span>;
+                            lookups[j] = lookups[i];
+                        } <span class="kw">else </span>{
+                            lookups[j].mask |= lookups[i].mask;
+                            lookups[j].auto_zwnj &amp;= lookups[i].auto_zwnj;
+                            lookups[j].auto_zwj &amp;= lookups[i].auto_zwj;
                         }
                     }
 
-                    <span class="ident">lookups</span>.<span class="ident">truncate</span>(<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>);
+                    lookups.truncate(j + <span class="number">1</span>);
                 }
 
-                <span class="ident">last_lookup</span> <span class="op">=</span> <span class="ident">lookups</span>.<span class="ident">len</span>();
+                last_lookup = lookups.len();
 
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">info</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stages</span>[<span class="ident">table_index</span>].<span class="ident">get</span>(<span class="ident">stage_index</span>) {
-                    <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">index</span> <span class="op">==</span> <span class="ident">stage</span> {
-                        <span class="ident">map_stages</span>[<span class="ident">table_index</span>].<span class="ident">push</span>(<span class="ident">StageMap</span> {
-                            <span class="ident">last_lookup</span>,
-                            <span class="ident">pause_func</span>: <span class="ident">info</span>.<span class="ident">pause_func</span>,
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(info) = <span class="self">self</span>.stages[table_index].get(stage_index) {
+                    <span class="kw">if </span>info.index == stage {
+                        map_stages[table_index].push(StageMap {
+                            last_lookup,
+                            pause_func: info.pause_func,
                         });
 
-                        <span class="ident">stage_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        stage_index += <span class="number">1</span>;
                     }
                 }
             }
         }
 
-        (<span class="ident">map_lookups</span>, <span class="ident">map_stages</span>)
+        (map_lookups, map_stages)
     }
 
-    <span class="kw">fn</span> <span class="ident">add_lookups</span>(
+    <span class="kw">fn </span>add_lookups(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">lookups</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LookupMap</span><span class="op">&gt;</span>,
-        <span class="ident">table_index</span>: <span class="ident">TableIndex</span>,
-        <span class="ident">feature_index</span>: <span class="ident">FeatureIndex</span>,
-        <span class="ident">variation_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VariationIndex</span><span class="op">&gt;</span>,
-        <span class="ident">mask</span>: <span class="ident">Mask</span>,
-        <span class="ident">auto_zwnj</span>: <span class="ident">bool</span>,
-        <span class="ident">auto_zwj</span>: <span class="ident">bool</span>,
-        <span class="ident">random</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">table</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">face</span>.<span class="ident">layout_table</span>(<span class="ident">table_index</span>)<span class="question-mark">?</span>;
+        lookups: <span class="kw-2">&amp;mut </span>Vec&lt;LookupMap&gt;,
+        table_index: TableIndex,
+        feature_index: FeatureIndex,
+        variation_index: <span class="prelude-ty">Option</span>&lt;VariationIndex&gt;,
+        mask: Mask,
+        auto_zwnj: bool,
+        auto_zwj: bool,
+        random: bool,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>table = <span class="self">self</span>.face.layout_table(table_index)<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">lookup_count</span> <span class="op">=</span> <span class="ident">table</span>.<span class="ident">lookups</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">feature</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">variation_index</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">idx</span>) =&gt; {
-                <span class="ident">table</span>.<span class="ident">variations</span>
-                    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">var</span><span class="op">|</span> <span class="ident">var</span>.<span class="ident">find_substitute</span>(<span class="ident">feature_index</span>, <span class="ident">idx</span>))
-                    .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">table</span>.<span class="ident">features</span>.<span class="ident">get</span>(<span class="ident">feature_index</span>))<span class="question-mark">?</span>
-            }
-            <span class="prelude-val">None</span> =&gt; <span class="ident">table</span>.<span class="ident">features</span>.<span class="ident">get</span>(<span class="ident">feature_index</span>)<span class="question-mark">?</span>,
+        <span class="kw">let </span>lookup_count = table.lookups.len();
+        <span class="kw">let </span>feature = <span class="kw">match </span>variation_index {
+            <span class="prelude-val">Some</span>(idx) =&gt; {
+                table.variations
+                    .and_then(|var| var.find_substitute(feature_index, idx))
+                    .or_else(|| table.features.get(feature_index))<span class="question-mark">?
+            </span>}
+            <span class="prelude-val">None </span>=&gt; table.features.get(feature_index)<span class="question-mark">?</span>,
         };
 
-        <span class="kw">for</span> <span class="ident">index</span> <span class="kw">in</span> <span class="ident">feature</span>.<span class="ident">lookup_indices</span> {
-            <span class="kw">if</span> <span class="ident">index</span> <span class="op">&lt;</span> <span class="ident">lookup_count</span> {
-                <span class="ident">lookups</span>.<span class="ident">push</span>(<span class="ident">LookupMap</span> { <span class="ident">mask</span>, <span class="ident">index</span>, <span class="ident">auto_zwnj</span>, <span class="ident">auto_zwj</span>, <span class="ident">random</span> });
+        <span class="kw">for </span>index <span class="kw">in </span>feature.lookup_indices {
+            <span class="kw">if </span>index &lt; lookup_count {
+                lookups.push(LookupMap { mask, index, auto_zwnj, auto_zwj, random });
             }
         }
 
@@ -1091,4 +1091,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

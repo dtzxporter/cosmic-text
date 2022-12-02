@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/metamorphosis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metamorphosis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rustybuzz-0.6.0/src/aat/metamorphosis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metamorphosis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../rustybuzz/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../rustybuzz/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -649,102 +649,102 @@
 <span id="649">649</span>
 <span id="650">650</span>
 <span id="651">651</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">ttf_parser</span>::{<span class="ident">apple_layout</span>, <span class="ident">morx</span>, <span class="ident">GlyphId</span>, <span class="ident">FromData</span>, <span class="ident">LazyArray32</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>ttf_parser::{apple_layout, morx, GlyphId, FromData, LazyArray32};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Face</span>, <span class="ident">GlyphInfo</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::buffer::Buffer</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::plan::ShapePlan</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::aat</span>::{<span class="ident">Map</span>, <span class="ident">MapBuilder</span>, <span class="ident">FeatureType</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::aat::feature_selector</span>;
+<span class="kw">use crate</span>::{Face, GlyphInfo};
+<span class="kw">use </span><span class="kw">crate</span>::buffer::Buffer;
+<span class="kw">use </span><span class="kw">crate</span>::plan::ShapePlan;
+<span class="kw">use </span><span class="kw">crate</span>::aat::{Map, MapBuilder, FeatureType};
+<span class="kw">use </span><span class="kw">crate</span>::aat::feature_selector;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile_flags</span>(<span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">builder</span>: <span class="kw-2">&amp;</span><span class="ident">MapBuilder</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Map</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">Map::default</span>();
+<span class="kw">pub fn </span>compile_flags(face: <span class="kw-2">&amp;</span>Face, builder: <span class="kw-2">&amp;</span>MapBuilder) -&gt; <span class="prelude-ty">Option</span>&lt;Map&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>map = Map::default();
 
-    <span class="kw">for</span> <span class="ident">chain</span> <span class="kw">in</span> <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">morx</span>.<span class="ident">as_ref</span>()<span class="question-mark">?</span>.<span class="ident">chains</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">chain</span>.<span class="ident">default_flags</span>;
-        <span class="kw">for</span> <span class="ident">feature</span> <span class="kw">in</span> <span class="ident">chain</span>.<span class="ident">features</span> {
-            <span class="comment">// Check whether this type/setting pair was requested in the map,</span>
-            <span class="comment">// and if so, apply its flags.</span>
+    <span class="kw">for </span>chain <span class="kw">in </span>face.tables().morx.as_ref()<span class="question-mark">?</span>.chains {
+        <span class="kw">let </span><span class="kw-2">mut </span>flags = chain.default_flags;
+        <span class="kw">for </span>feature <span class="kw">in </span>chain.features {
+            <span class="comment">// Check whether this type/setting pair was requested in the map,
+            // and if so, apply its flags.
 
-            <span class="kw">if</span> <span class="ident">builder</span>.<span class="ident">has_feature</span>(<span class="ident">feature</span>.<span class="ident">kind</span>, <span class="ident">feature</span>.<span class="ident">setting</span>) {
-                <span class="ident">flags</span> <span class="op">&amp;=</span> <span class="ident">feature</span>.<span class="ident">disable_flags</span>;
-                <span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">feature</span>.<span class="ident">enable_flags</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">feature</span>.<span class="ident">kind</span> <span class="op">==</span> <span class="ident">FeatureType::LetterCase</span> <span class="kw">as</span> <span class="ident">u16</span> <span class="op">&amp;&amp;</span>
-                <span class="ident">feature</span>.<span class="ident">setting</span> <span class="op">==</span> <span class="ident">u16::from</span>(<span class="ident">feature_selector::SMALL_CAPS</span>) {
+            </span><span class="kw">if </span>builder.has_feature(feature.kind, feature.setting) {
+                flags &amp;= feature.disable_flags;
+                flags |= feature.enable_flags;
+            } <span class="kw">else if </span>feature.kind == FeatureType::LetterCase <span class="kw">as </span>u16 &amp;&amp;
+                feature.setting == u16::from(feature_selector::SMALL_CAPS) {
 
-                <span class="comment">// Deprecated. https://github.com/harfbuzz/harfbuzz/issues/1342</span>
-                <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">has_feature</span>(
-                    <span class="ident">FeatureType::LowerCase</span> <span class="kw">as</span> <span class="ident">u16</span>,
-                    <span class="ident">u16::from</span>(<span class="ident">feature_selector::LOWER_CASE_SMALL_CAPS</span>),
+                <span class="comment">// Deprecated. https://github.com/harfbuzz/harfbuzz/issues/1342
+                </span><span class="kw">let </span>ok = builder.has_feature(
+                    FeatureType::LowerCase <span class="kw">as </span>u16,
+                    u16::from(feature_selector::LOWER_CASE_SMALL_CAPS),
                 );
-                <span class="kw">if</span> <span class="ident">ok</span> {
-                    <span class="ident">flags</span> <span class="op">&amp;=</span> <span class="ident">feature</span>.<span class="ident">disable_flags</span>;
-                    <span class="ident">flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">feature</span>.<span class="ident">enable_flags</span>;
+                <span class="kw">if </span>ok {
+                    flags &amp;= feature.disable_flags;
+                    flags |= feature.enable_flags;
                 }
             }
         }
 
-        <span class="ident">map</span>.<span class="ident">chain_flags</span>.<span class="ident">push</span>(<span class="ident">flags</span>);
+        map.chain_flags.push(flags);
     }
 
-    <span class="prelude-val">Some</span>(<span class="ident">map</span>)
+    <span class="prelude-val">Some</span>(map)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apply</span>(<span class="ident">plan</span>: <span class="kw-2">&amp;</span><span class="ident">ShapePlan</span>, <span class="ident">face</span>: <span class="kw-2">&amp;</span><span class="ident">Face</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">for</span> (<span class="ident">chain_idx</span>, <span class="ident">chain</span>) <span class="kw">in</span> <span class="ident">face</span>.<span class="ident">tables</span>().<span class="ident">morx</span>.<span class="ident">as_ref</span>()<span class="question-mark">?</span>.<span class="ident">chains</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>() {
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">plan</span>.<span class="ident">aat_map</span>.<span class="ident">chain_flags</span>[<span class="ident">chain_idx</span>];
-        <span class="kw">for</span> <span class="ident">subtable</span> <span class="kw">in</span> <span class="ident">chain</span>.<span class="ident">subtables</span> {
-            <span class="kw">if</span> <span class="ident">subtable</span>.<span class="ident">feature_flags</span> <span class="op">&amp;</span> <span class="ident">flags</span> <span class="op">==</span> <span class="number">0</span> {
+<span class="kw">pub fn </span>apply(plan: <span class="kw-2">&amp;</span>ShapePlan, face: <span class="kw-2">&amp;</span>Face, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+    <span class="kw">for </span>(chain_idx, chain) <span class="kw">in </span>face.tables().morx.as_ref()<span class="question-mark">?</span>.chains.into_iter().enumerate() {
+        <span class="kw">let </span>flags = plan.aat_map.chain_flags[chain_idx];
+        <span class="kw">for </span>subtable <span class="kw">in </span>chain.subtables {
+            <span class="kw">if </span>subtable.feature_flags &amp; flags == <span class="number">0 </span>{
                 <span class="kw">continue</span>;
             }
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">subtable</span>.<span class="ident">coverage</span>.<span class="ident">is_all_directions</span>() <span class="op">&amp;&amp;</span>
-                <span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_vertical</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">subtable</span>.<span class="ident">coverage</span>.<span class="ident">is_vertical</span>()
+            <span class="kw">if </span>!subtable.coverage.is_all_directions() &amp;&amp;
+                buffer.direction.is_vertical() != subtable.coverage.is_vertical()
             {
                 <span class="kw">continue</span>;
             }
 
-            <span class="comment">// Buffer contents is always in logical direction.  Determine if</span>
-            <span class="comment">// we need to reverse before applying this subtable.  We reverse</span>
-            <span class="comment">// back after if we did reverse indeed.</span>
-            <span class="comment">//</span>
-            <span class="comment">// Quoting the spec:</span>
-            <span class="comment">// &quot;&quot;&quot;</span>
-            <span class="comment">// Bits 28 and 30 of the coverage field control the order in which</span>
-            <span class="comment">// glyphs are processed when the subtable is run by the layout engine.</span>
-            <span class="comment">// Bit 28 is used to indicate if the glyph processing direction is</span>
-            <span class="comment">// the same as logical order or layout order. Bit 30 is used to</span>
-            <span class="comment">// indicate whether glyphs are processed forwards or backwards within</span>
-            <span class="comment">// that order.</span>
-            <span class="comment">//</span>
-            <span class="comment">// Bit 30   Bit 28   Interpretation for Horizontal Text</span>
-            <span class="comment">//      0        0   The subtable is processed in layout order</span>
-            <span class="comment">//                   (the same order as the glyphs, which is</span>
-            <span class="comment">//                   always left-to-right).</span>
-            <span class="comment">//      1        0   The subtable is processed in reverse layout order</span>
-            <span class="comment">//                   (the order opposite that of the glyphs, which is</span>
-            <span class="comment">//                   always right-to-left).</span>
-            <span class="comment">//      0        1   The subtable is processed in logical order</span>
-            <span class="comment">//                   (the same order as the characters, which may be</span>
-            <span class="comment">//                   left-to-right or right-to-left).</span>
-            <span class="comment">//      1        1   The subtable is processed in reverse logical order</span>
-            <span class="comment">//                   (the order opposite that of the characters, which</span>
-            <span class="comment">//                   may be right-to-left or left-to-right).</span>
+            <span class="comment">// Buffer contents is always in logical direction.  Determine if
+            // we need to reverse before applying this subtable.  We reverse
+            // back after if we did reverse indeed.
+            //
+            // Quoting the spec:
+            // &quot;&quot;&quot;
+            // Bits 28 and 30 of the coverage field control the order in which
+            // glyphs are processed when the subtable is run by the layout engine.
+            // Bit 28 is used to indicate if the glyph processing direction is
+            // the same as logical order or layout order. Bit 30 is used to
+            // indicate whether glyphs are processed forwards or backwards within
+            // that order.
+            //
+            // Bit 30   Bit 28   Interpretation for Horizontal Text
+            //      0        0   The subtable is processed in layout order
+            //                   (the same order as the glyphs, which is
+            //                   always left-to-right).
+            //      1        0   The subtable is processed in reverse layout order
+            //                   (the order opposite that of the glyphs, which is
+            //                   always right-to-left).
+            //      0        1   The subtable is processed in logical order
+            //                   (the same order as the characters, which may be
+            //                   left-to-right or right-to-left).
+            //      1        1   The subtable is processed in reverse logical order
+            //                   (the order opposite that of the characters, which
+            //                   may be right-to-left or left-to-right).
 
-            <span class="kw">let</span> <span class="ident">reverse</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">subtable</span>.<span class="ident">coverage</span>.<span class="ident">is_logical</span>() {
-                <span class="ident">subtable</span>.<span class="ident">coverage</span>.<span class="ident">is_backwards</span>()
-            } <span class="kw">else</span> {
-                <span class="ident">subtable</span>.<span class="ident">coverage</span>.<span class="ident">is_backwards</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">direction</span>.<span class="ident">is_backward</span>()
+            </span><span class="kw">let </span>reverse = <span class="kw">if </span>subtable.coverage.is_logical() {
+                subtable.coverage.is_backwards()
+            } <span class="kw">else </span>{
+                subtable.coverage.is_backwards() != buffer.direction.is_backward()
             };
 
-            <span class="kw">if</span> <span class="ident">reverse</span> {
-                <span class="ident">buffer</span>.<span class="ident">reverse</span>();
+            <span class="kw">if </span>reverse {
+                buffer.reverse();
             }
 
-            <span class="ident">apply_subtable</span>(<span class="kw-2">&amp;</span><span class="ident">subtable</span>.<span class="ident">kind</span>, <span class="ident">buffer</span>);
+            apply_subtable(<span class="kw-2">&amp;</span>subtable.kind, buffer);
 
-            <span class="kw">if</span> <span class="ident">reverse</span> {
-                <span class="ident">buffer</span>.<span class="ident">reverse</span>();
+            <span class="kw">if </span>reverse {
+                buffer.reverse();
             }
         }
     }
@@ -752,238 +752,238 @@
     <span class="prelude-val">Some</span>(())
 }
 
-<span class="kw">trait</span> <span class="ident">Driver</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromData</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">in_place</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;</span><span class="ident">Buffer</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">transition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">trait </span>Driver&lt;T: FromData&gt; {
+    <span class="kw">fn </span>in_place(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>can_advance(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;T&gt;) -&gt; bool;
+    <span class="kw">fn </span>is_actionable(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;T&gt;, buffer: <span class="kw-2">&amp;</span>Buffer) -&gt; bool;
+    <span class="kw">fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;T&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt;;
 }
 
-<span class="kw">const</span> <span class="ident">START_OF_TEXT</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0</span>;
+<span class="kw">const </span>START_OF_TEXT: u16 = <span class="number">0</span>;
 
-<span class="kw">fn</span> <span class="ident">drive</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">FromData</span><span class="op">&gt;</span>(<span class="ident">machine</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::ExtendedStateTable</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">c</span>: <span class="kw-2">&amp;mut</span> <span class="kw">dyn</span> <span class="ident">Driver</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">in_place</span>() {
-        <span class="ident">buffer</span>.<span class="ident">clear_output</span>();
+<span class="kw">fn </span>drive&lt;T: FromData&gt;(machine: <span class="kw-2">&amp;</span>apple_layout::ExtendedStateTable&lt;T&gt;, c: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Driver&lt;T&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">if </span>!c.in_place() {
+        buffer.clear_output();
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">START_OF_TEXT</span>;
-    <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">loop</span> {
-        <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-            <span class="ident">machine</span>.<span class="ident">class</span>(<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">buffer</span>.<span class="ident">idx</span>].<span class="ident">as_glyph</span>()).<span class="ident">unwrap_or</span>(<span class="number">1</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">u16::from</span>(<span class="ident">apple_layout::class::END_OF_TEXT</span>)
+    <span class="kw">let </span><span class="kw-2">mut </span>state = START_OF_TEXT;
+    buffer.idx = <span class="number">0</span>;
+    <span class="kw">loop </span>{
+        <span class="kw">let </span>class = <span class="kw">if </span>buffer.idx &lt; buffer.len {
+            machine.class(buffer.info[buffer.idx].as_glyph()).unwrap_or(<span class="number">1</span>)
+        } <span class="kw">else </span>{
+            u16::from(apple_layout::class::END_OF_TEXT)
         };
 
-        <span class="kw">let</span> <span class="ident">entry</span>: <span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">machine</span>.<span class="ident">entry</span>(<span class="ident">state</span>, <span class="ident">class</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">v</span>) =&gt; <span class="ident">v</span>,
-            <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+        <span class="kw">let </span>entry: apple_layout::GenericStateEntry&lt;T&gt; = <span class="kw">match </span>machine.entry(state, class) {
+            <span class="prelude-val">Some</span>(v) =&gt; v,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
         };
 
-        <span class="comment">// Unsafe-to-break before this if not in state 0, as things might</span>
-        <span class="comment">// go differently if we start from state 0 here.</span>
-        <span class="kw">if</span> <span class="ident">state</span> <span class="op">!</span><span class="op">=</span> <span class="ident">START_OF_TEXT</span> <span class="op">&amp;&amp;</span>
-            <span class="ident">buffer</span>.<span class="ident">backtrack_len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span>
-            <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span>
+        <span class="comment">// Unsafe-to-break before this if not in state 0, as things might
+        // go differently if we start from state 0 here.
+        </span><span class="kw">if </span>state != START_OF_TEXT &amp;&amp;
+            buffer.backtrack_len() != <span class="number">0 </span>&amp;&amp;
+            buffer.idx &lt; buffer.len
         {
-            <span class="comment">// If there&#39;s no value and we&#39;re just epsilon-transitioning to state 0, safe to break.</span>
-            <span class="kw">if</span>  <span class="ident">c</span>.<span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>, <span class="ident">buffer</span>) <span class="op">|</span><span class="op">|</span>
-                <span class="op">!</span>(<span class="ident">entry</span>.<span class="ident">new_state</span> <span class="op">==</span> <span class="ident">START_OF_TEXT</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>))
+            <span class="comment">// If there&#39;s no value and we&#39;re just epsilon-transitioning to state 0, safe to break.
+            </span><span class="kw">if  </span>c.is_actionable(<span class="kw-2">&amp;</span>entry, buffer) ||
+                !(entry.new_state == START_OF_TEXT &amp;&amp; !c.can_advance(<span class="kw-2">&amp;</span>entry))
             {
-                <span class="ident">buffer</span>.<span class="ident">unsafe_to_break_from_outbuffer</span>(<span class="ident">buffer</span>.<span class="ident">backtrack_len</span>() <span class="op">-</span> <span class="number">1</span>, <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>);
+                buffer.unsafe_to_break_from_outbuffer(buffer.backtrack_len() - <span class="number">1</span>, buffer.idx + <span class="number">1</span>);
             }
         }
 
-        <span class="comment">// Unsafe-to-break if end-of-text would kick in here.</span>
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">2</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-            <span class="kw">let</span> <span class="ident">end_entry</span>: <span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">machine</span>.<span class="ident">entry</span>(<span class="ident">state</span>, <span class="ident">u16::from</span>(<span class="ident">apple_layout::class::END_OF_TEXT</span>)) {
-                <span class="prelude-val">Some</span>(<span class="ident">v</span>) =&gt; <span class="ident">v</span>,
-                <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+        <span class="comment">// Unsafe-to-break if end-of-text would kick in here.
+        </span><span class="kw">if </span>buffer.idx + <span class="number">2 </span>&lt;= buffer.len {
+            <span class="kw">let </span>end_entry: apple_layout::GenericStateEntry&lt;T&gt; = <span class="kw">match </span>machine.entry(state, u16::from(apple_layout::class::END_OF_TEXT)) {
+                <span class="prelude-val">Some</span>(v) =&gt; v,
+                <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
             };
 
-            <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="ident">end_entry</span>, <span class="ident">buffer</span>) {
-                <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="ident">buffer</span>.<span class="ident">idx</span>, <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">2</span>);
+            <span class="kw">if </span>c.is_actionable(<span class="kw-2">&amp;</span>end_entry, buffer) {
+                buffer.unsafe_to_break(buffer.idx, buffer.idx + <span class="number">2</span>);
             }
         }
 
-        <span class="ident">c</span>.<span class="ident">transition</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>, <span class="ident">buffer</span>);
+        c.transition(<span class="kw-2">&amp;</span>entry, buffer);
 
-        <span class="ident">state</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">new_state</span>;
+        state = entry.new_state;
 
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
+        <span class="kw">if </span>buffer.idx &gt;= buffer.len {
             <span class="kw">break</span>;
         }
 
-        <span class="kw">if</span> <span class="ident">c</span>.<span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>) {
-            <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
-        } <span class="kw">else</span> {
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+        <span class="kw">if </span>c.can_advance(<span class="kw-2">&amp;</span>entry) {
+            buffer.next_glyph();
+        } <span class="kw">else </span>{
+            <span class="kw">if </span>buffer.max_ops &lt;= <span class="number">0 </span>{
+                buffer.next_glyph();
             }
-            <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+            buffer.max_ops -= <span class="number">1</span>;
         }
     }
 
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">c</span>.<span class="ident">in_place</span>() {
-        <span class="kw">while</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-            <span class="ident">buffer</span>.<span class="ident">next_glyph</span>();
+    <span class="kw">if </span>!c.in_place() {
+        <span class="kw">while </span>buffer.idx &lt; buffer.len {
+            buffer.next_glyph();
         }
 
-        <span class="ident">buffer</span>.<span class="ident">swap_buffers</span>();
+        buffer.swap_buffers();
     }
 }
 
-<span class="kw">fn</span> <span class="ident">apply_subtable</span>(<span class="ident">kind</span>: <span class="kw-2">&amp;</span><span class="ident">morx::SubtableKind</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) {
-    <span class="kw">match</span> <span class="ident">kind</span> {
-        <span class="ident">morx::SubtableKind::Rearrangement</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">RearrangementCtx</span> {
-                <span class="ident">start</span>: <span class="number">0</span>,
-                <span class="ident">end</span>: <span class="number">0</span>,
+<span class="kw">fn </span>apply_subtable(kind: <span class="kw-2">&amp;</span>morx::SubtableKind, buffer: <span class="kw-2">&amp;mut </span>Buffer) {
+    <span class="kw">match </span>kind {
+        morx::SubtableKind::Rearrangement(<span class="kw-2">ref </span>table) =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>c = RearrangementCtx {
+                start: <span class="number">0</span>,
+                end: <span class="number">0</span>,
             };
 
-            <span class="ident">drive</span>::<span class="op">&lt;</span>()<span class="op">&gt;</span>(<span class="ident">table</span>, <span class="kw-2">&amp;mut</span> <span class="ident">c</span>, <span class="ident">buffer</span>);
+            drive::&lt;()&gt;(table, <span class="kw-2">&amp;mut </span>c, buffer);
         }
-        <span class="ident">morx::SubtableKind::Contextual</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">ContextualCtx</span> {
-                <span class="ident">mark_set</span>: <span class="bool-val">false</span>,
-                <span class="ident">mark</span>: <span class="number">0</span>,
-                <span class="ident">table</span>,
+        morx::SubtableKind::Contextual(<span class="kw-2">ref </span>table) =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>c = ContextualCtx {
+                mark_set: <span class="bool-val">false</span>,
+                mark: <span class="number">0</span>,
+                table,
             };
 
-            <span class="ident">drive</span>::<span class="op">&lt;</span><span class="ident">morx::ContextualEntryData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">table</span>.<span class="ident">state</span>, <span class="kw-2">&amp;mut</span> <span class="ident">c</span>, <span class="ident">buffer</span>);
+            drive::&lt;morx::ContextualEntryData&gt;(<span class="kw-2">&amp;</span>table.state, <span class="kw-2">&amp;mut </span>c, buffer);
         }
-        <span class="ident">morx::SubtableKind::Ligature</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">LigatureCtx</span> {
-                <span class="ident">table</span>,
-                <span class="ident">match_length</span>: <span class="number">0</span>,
-                <span class="ident">match_positions</span>: [<span class="number">0</span>; <span class="ident">LIGATURE_MAX_MATCHES</span>],
+        morx::SubtableKind::Ligature(<span class="kw-2">ref </span>table) =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>c = LigatureCtx {
+                table,
+                match_length: <span class="number">0</span>,
+                match_positions: [<span class="number">0</span>; LIGATURE_MAX_MATCHES],
             };
 
-            <span class="ident">drive</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">table</span>.<span class="ident">state</span>, <span class="kw-2">&amp;mut</span> <span class="ident">c</span>, <span class="ident">buffer</span>);
+            drive::&lt;u16&gt;(<span class="kw-2">&amp;</span>table.state, <span class="kw-2">&amp;mut </span>c, buffer);
         }
-        <span class="ident">morx::SubtableKind::NonContextual</span>(<span class="kw-2">ref</span> <span class="ident">lookup</span>) =&gt; {
-            <span class="kw">for</span> <span class="ident">info</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>.<span class="ident">info</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">replacement</span>) <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">value</span>(<span class="ident">info</span>.<span class="ident">as_glyph</span>()) {
-                    <span class="ident">info</span>.<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">replacement</span>);
+        morx::SubtableKind::NonContextual(<span class="kw-2">ref </span>lookup) =&gt; {
+            <span class="kw">for </span>info <span class="kw">in </span><span class="kw-2">&amp;mut </span>buffer.info {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(replacement) = lookup.value(info.as_glyph()) {
+                    info.glyph_id = u32::from(replacement);
                 }
             }
         }
-        <span class="ident">morx::SubtableKind::Insertion</span>(<span class="kw-2">ref</span> <span class="ident">table</span>) =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">InsertionCtx</span> {
-                <span class="ident">mark</span>: <span class="number">0</span>,
-                <span class="ident">glyphs</span>: <span class="ident">table</span>.<span class="ident">glyphs</span>,
+        morx::SubtableKind::Insertion(<span class="kw-2">ref </span>table) =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>c = InsertionCtx {
+                mark: <span class="number">0</span>,
+                glyphs: table.glyphs,
             };
 
-            <span class="ident">drive</span>::<span class="op">&lt;</span><span class="ident">morx::InsertionEntryData</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">table</span>.<span class="ident">state</span>, <span class="kw-2">&amp;mut</span> <span class="ident">c</span>, <span class="ident">buffer</span>);
+            drive::&lt;morx::InsertionEntryData&gt;(<span class="kw-2">&amp;</span>table.state, <span class="kw-2">&amp;mut </span>c, buffer);
         }
     }
 }
 
 
-<span class="kw">struct</span> <span class="ident">RearrangementCtx</span> {
-    <span class="ident">start</span>: <span class="ident">usize</span>,
-    <span class="ident">end</span>: <span class="ident">usize</span>,
+<span class="kw">struct </span>RearrangementCtx {
+    start: usize,
+    end: usize,
 }
 
-<span class="kw">impl</span> <span class="ident">RearrangementCtx</span> {
-    <span class="kw">const</span> <span class="ident">MARK_FIRST</span>: <span class="ident">u16</span>   <span class="op">=</span> <span class="number">0x8000</span>;
-    <span class="kw">const</span> <span class="ident">DONT_ADVANCE</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="number">0x4000</span>;
-    <span class="kw">const</span> <span class="ident">MARK_LAST</span>: <span class="ident">u16</span>    <span class="op">=</span> <span class="number">0x2000</span>;
-    <span class="kw">const</span> <span class="ident">VERB</span>: <span class="ident">u16</span>         <span class="op">=</span> <span class="number">0x000F</span>;
+<span class="kw">impl </span>RearrangementCtx {
+    <span class="kw">const </span>MARK_FIRST: u16   = <span class="number">0x8000</span>;
+    <span class="kw">const </span>DONT_ADVANCE: u16 = <span class="number">0x4000</span>;
+    <span class="kw">const </span>MARK_LAST: u16    = <span class="number">0x2000</span>;
+    <span class="kw">const </span>VERB: u16         = <span class="number">0x000F</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">Driver</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RearrangementCtx</span> {
-    <span class="kw">fn</span> <span class="ident">in_place</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
+<span class="kw">impl </span>Driver&lt;()&gt; <span class="kw">for </span>RearrangementCtx {
+    <span class="kw">fn </span>in_place(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
+
+    <span class="kw">fn </span>can_advance(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;()&gt;) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::DONT_ADVANCE == <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_actionable(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;()&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Buffer) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::VERB != <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.start &lt; <span class="self">self</span>.end
     }
 
-    <span class="kw">fn</span> <span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span>()<span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::DONT_ADVANCE</span> <span class="op">==</span> <span class="number">0</span>
-    }
+    <span class="kw">fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;()&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>flags = entry.flags;
 
-    <span class="kw">fn</span> <span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Buffer</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::VERB</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">start</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">end</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">transition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">flags</span>;
-
-        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::MARK_FIRST</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">idx</span>;
+        <span class="kw">if </span>flags &amp; <span class="self">Self</span>::MARK_FIRST != <span class="number">0 </span>{
+            <span class="self">self</span>.start = buffer.idx;
         }
 
-        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::MARK_LAST</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span> (<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">min</span>(<span class="ident">buffer</span>.<span class="ident">len</span>);
+        <span class="kw">if </span>flags &amp; <span class="self">Self</span>::MARK_LAST != <span class="number">0 </span>{
+            <span class="self">self</span>.end = (buffer.idx + <span class="number">1</span>).min(buffer.len);
         }
 
-        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::VERB</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">start</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">end</span> {
-            <span class="comment">// The following map has two nibbles, for start-side</span>
-            <span class="comment">// and end-side. Values of 0,1,2 mean move that many</span>
-            <span class="comment">// to the other side. Value of 3 means move 2 and</span>
-            <span class="comment">// flip them.</span>
-            <span class="kw">const</span> <span class="ident">MAP</span>: [<span class="ident">u8</span>; <span class="number">16</span>] <span class="op">=</span> [
-                <span class="number">0x00</span>, <span class="comment">// 0  no change</span>
-                <span class="number">0x10</span>, <span class="comment">// 1  Ax =&gt; xA</span>
-                <span class="number">0x01</span>, <span class="comment">// 2  xD =&gt; Dx</span>
-                <span class="number">0x11</span>, <span class="comment">// 3  AxD =&gt; DxA</span>
-                <span class="number">0x20</span>, <span class="comment">// 4  ABx =&gt; xAB</span>
-                <span class="number">0x30</span>, <span class="comment">// 5  ABx =&gt; xBA</span>
-                <span class="number">0x02</span>, <span class="comment">// 6  xCD =&gt; CDx</span>
-                <span class="number">0x03</span>, <span class="comment">// 7  xCD =&gt; DCx</span>
-                <span class="number">0x12</span>, <span class="comment">// 8  AxCD =&gt; CDxA</span>
-                <span class="number">0x13</span>, <span class="comment">// 9  AxCD =&gt; DCxA</span>
-                <span class="number">0x21</span>, <span class="comment">// 10 ABxD =&gt; DxAB</span>
-                <span class="number">0x31</span>, <span class="comment">// 11 ABxD =&gt; DxBA</span>
-                <span class="number">0x22</span>, <span class="comment">// 12 ABxCD =&gt; CDxAB</span>
-                <span class="number">0x32</span>, <span class="comment">// 13 ABxCD =&gt; CDxBA</span>
-                <span class="number">0x23</span>, <span class="comment">// 14 ABxCD =&gt; DCxAB</span>
-                <span class="number">0x33</span>, <span class="comment">// 15 ABxCD =&gt; DCxBA</span>
-            ];
+        <span class="kw">if </span>flags &amp; <span class="self">Self</span>::VERB != <span class="number">0 </span>&amp;&amp; <span class="self">self</span>.start &lt; <span class="self">self</span>.end {
+            <span class="comment">// The following map has two nibbles, for start-side
+            // and end-side. Values of 0,1,2 mean move that many
+            // to the other side. Value of 3 means move 2 and
+            // flip them.
+            </span><span class="kw">const </span>MAP: [u8; <span class="number">16</span>] = [
+                <span class="number">0x00</span>, <span class="comment">// 0  no change
+                </span><span class="number">0x10</span>, <span class="comment">// 1  Ax =&gt; xA
+                </span><span class="number">0x01</span>, <span class="comment">// 2  xD =&gt; Dx
+                </span><span class="number">0x11</span>, <span class="comment">// 3  AxD =&gt; DxA
+                </span><span class="number">0x20</span>, <span class="comment">// 4  ABx =&gt; xAB
+                </span><span class="number">0x30</span>, <span class="comment">// 5  ABx =&gt; xBA
+                </span><span class="number">0x02</span>, <span class="comment">// 6  xCD =&gt; CDx
+                </span><span class="number">0x03</span>, <span class="comment">// 7  xCD =&gt; DCx
+                </span><span class="number">0x12</span>, <span class="comment">// 8  AxCD =&gt; CDxA
+                </span><span class="number">0x13</span>, <span class="comment">// 9  AxCD =&gt; DCxA
+                </span><span class="number">0x21</span>, <span class="comment">// 10 ABxD =&gt; DxAB
+                </span><span class="number">0x31</span>, <span class="comment">// 11 ABxD =&gt; DxBA
+                </span><span class="number">0x22</span>, <span class="comment">// 12 ABxCD =&gt; CDxAB
+                </span><span class="number">0x32</span>, <span class="comment">// 13 ABxCD =&gt; CDxBA
+                </span><span class="number">0x23</span>, <span class="comment">// 14 ABxCD =&gt; DCxAB
+                </span><span class="number">0x33</span>, <span class="comment">// 15 ABxCD =&gt; DCxBA
+            </span>];
 
-            <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">MAP</span>[<span class="ident">usize::from</span>(<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::VERB</span>)];
-            <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="number">2</span>.<span class="ident">min</span>(<span class="ident">m</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="number">2</span>.<span class="ident">min</span>(<span class="ident">m</span> <span class="op">&amp;</span> <span class="number">0x0F</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="kw">let</span> <span class="ident">reverse_l</span> <span class="op">=</span> <span class="number">3</span> <span class="op">==</span> (<span class="ident">m</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">4</span>);
-            <span class="kw">let</span> <span class="ident">reverse_r</span> <span class="op">=</span> <span class="number">3</span> <span class="op">==</span> (<span class="ident">m</span> <span class="op">&amp;</span> <span class="number">0x0F</span>);
+            <span class="kw">let </span>m = MAP[usize::from(flags &amp; <span class="self">Self</span>::VERB)];
+            <span class="kw">let </span>l = <span class="number">2</span>.min(m &gt;&gt; <span class="number">4</span>) <span class="kw">as </span>usize;
+            <span class="kw">let </span>r = <span class="number">2</span>.min(m &amp; <span class="number">0x0F</span>) <span class="kw">as </span>usize;
+            <span class="kw">let </span>reverse_l = <span class="number">3 </span>== (m &gt;&gt; <span class="number">4</span>);
+            <span class="kw">let </span>reverse_r = <span class="number">3 </span>== (m &amp; <span class="number">0x0F</span>);
 
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">start</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">r</span> {
-                <span class="ident">buffer</span>.<span class="ident">merge_clusters</span>(<span class="self">self</span>.<span class="ident">start</span>, (<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">min</span>(<span class="ident">buffer</span>.<span class="ident">len</span>));
-                <span class="ident">buffer</span>.<span class="ident">merge_clusters</span>(<span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">end</span>);
+            <span class="kw">if </span><span class="self">self</span>.end - <span class="self">self</span>.start &gt;= l + r {
+                buffer.merge_clusters(<span class="self">self</span>.start, (buffer.idx + <span class="number">1</span>).min(buffer.len));
+                buffer.merge_clusters(<span class="self">self</span>.start, <span class="self">self</span>.end);
 
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="ident">GlyphInfo::default</span>(); <span class="number">4</span>];
+                <span class="kw">let </span><span class="kw-2">mut </span>buf = [GlyphInfo::default(); <span class="number">4</span>];
 
-                <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">glyph_info</span>) <span class="kw">in</span> <span class="ident">buf</span>[..<span class="ident">l</span>].<span class="ident">iter_mut</span>().<span class="ident">enumerate</span>() {
-                    <span class="kw-2">*</span><span class="ident">glyph_info</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span>];
+                <span class="kw">for </span>(i, glyph_info) <span class="kw">in </span>buf[..l].iter_mut().enumerate() {
+                    <span class="kw-2">*</span>glyph_info = buffer.info[<span class="self">self</span>.start + i];
                 }
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">r</span> {
-                    <span class="ident">buf</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">2</span>] <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="ident">r</span> <span class="op">+</span> <span class="ident">i</span>];
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..r {
+                    buf[i + <span class="number">2</span>] = buffer.info[<span class="self">self</span>.end - r + i];
                 }
 
-                <span class="kw">if</span> <span class="ident">l</span> <span class="op">&gt;</span> <span class="ident">r</span> {
-                    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">start</span> <span class="op">-</span> <span class="ident">l</span> <span class="op">-</span> <span class="ident">r</span>) {
-                        <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">r</span> <span class="op">+</span> <span class="ident">i</span>] <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">i</span>];
+                <span class="kw">if </span>l &gt; r {
+                    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..(<span class="self">self</span>.end - <span class="self">self</span>.start - l - r) {
+                        buffer.info[<span class="self">self</span>.start + r + i] = buffer.info[<span class="self">self</span>.start + l + i];
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">l</span> <span class="op">&lt;</span> <span class="ident">r</span> {
-                    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..(<span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">start</span> <span class="op">-</span> <span class="ident">l</span> <span class="op">-</span> <span class="ident">r</span>)).<span class="ident">rev</span>() {
-                        <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">r</span> <span class="op">+</span> <span class="ident">i</span>] <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">i</span>];
+                } <span class="kw">else if </span>l &lt; r {
+                    <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..(<span class="self">self</span>.end - <span class="self">self</span>.start - l - r)).rev() {
+                        buffer.info[<span class="self">self</span>.start + r + i] = buffer.info[<span class="self">self</span>.start + l + i];
                     }
                 }
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">r</span> {
-                    <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span>] <span class="op">=</span> <span class="ident">buf</span>[<span class="number">2</span> <span class="op">+</span> <span class="ident">i</span>];
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..r {
+                    buffer.info[<span class="self">self</span>.start + i] = buf[<span class="number">2 </span>+ i];
                 }
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-                    <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="ident">l</span> <span class="op">+</span> <span class="ident">i</span>] <span class="op">=</span> <span class="ident">buf</span>[<span class="ident">i</span>];
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+                    buffer.info[<span class="self">self</span>.end - l + i] = buf[i];
                 }
 
-                <span class="kw">if</span> <span class="ident">reverse_l</span> {
-                    <span class="ident">buffer</span>.<span class="ident">info</span>.<span class="ident">swap</span>(<span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="number">1</span>, <span class="self">self</span>.<span class="ident">end</span> <span class="op">-</span> <span class="number">2</span>);
+                <span class="kw">if </span>reverse_l {
+                    buffer.info.swap(<span class="self">self</span>.end - <span class="number">1</span>, <span class="self">self</span>.end - <span class="number">2</span>);
                 }
 
-                <span class="kw">if</span> <span class="ident">reverse_r</span> {
-                    <span class="ident">buffer</span>.<span class="ident">info</span>.<span class="ident">swap</span>(<span class="self">self</span>.<span class="ident">start</span>, <span class="self">self</span>.<span class="ident">start</span> <span class="op">+</span> <span class="number">1</span>);
+                <span class="kw">if </span>reverse_r {
+                    buffer.info.swap(<span class="self">self</span>.start, <span class="self">self</span>.start + <span class="number">1</span>);
                 }
             }
         }
@@ -993,181 +993,181 @@
 }
 
 
-<span class="kw">struct</span> <span class="ident">ContextualCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">mark_set</span>: <span class="ident">bool</span>,
-    <span class="ident">mark</span>: <span class="ident">usize</span>,
-    <span class="ident">table</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">morx::ContextualSubtable</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+<span class="kw">struct </span>ContextualCtx&lt;<span class="lifetime">&#39;a</span>&gt; {
+    mark_set: bool,
+    mark: usize,
+    table: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>morx::ContextualSubtable&lt;<span class="lifetime">&#39;a</span>&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">ContextualCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">SET_MARK</span>: <span class="ident">u16</span>         <span class="op">=</span> <span class="number">0x8000</span>;
-    <span class="kw">const</span> <span class="ident">DONT_ADVANCE</span>: <span class="ident">u16</span>     <span class="op">=</span> <span class="number">0x4000</span>;
+<span class="kw">impl </span>ContextualCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">const </span>SET_MARK: u16         = <span class="number">0x8000</span>;
+    <span class="kw">const </span>DONT_ADVANCE: u16     = <span class="number">0x4000</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">Driver</span><span class="op">&lt;</span><span class="ident">morx::ContextualEntryData</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ContextualCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">in_place</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">true</span>
-    }
+<span class="kw">impl </span>Driver&lt;morx::ContextualEntryData&gt; <span class="kw">for </span>ContextualCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>in_place(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::ContextualEntryData</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::DONT_ADVANCE</span> <span class="op">==</span> <span class="number">0</span>
-    }
+    <span class="kw">fn </span>can_advance(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::ContextualEntryData&gt;) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::DONT_ADVANCE == <span class="number">0
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::ContextualEntryData</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;</span><span class="ident">Buffer</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">==</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">mark_set</span> {
-            <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>is_actionable(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::ContextualEntryData&gt;, buffer: <span class="kw-2">&amp;</span>Buffer) -&gt; bool {
+        <span class="kw">if </span>buffer.idx == buffer.len &amp;&amp; !<span class="self">self</span>.mark_set {
+            <span class="kw">return </span><span class="bool-val">false</span>;
         }
 
-        <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">mark_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> <span class="op">|</span><span class="op">|</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span>
-    }
+        entry.extra.mark_index != <span class="number">0xFFFF </span>|| entry.extra.current_index != <span class="number">0xFFFF
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">transition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::ContextualEntryData</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="comment">// Looks like CoreText applies neither mark nor current substitution for</span>
-        <span class="comment">// end-of-text if mark was not explicitly set.</span>
-        <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">==</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">mark_set</span> {
-            <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+    <span class="kw">fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::ContextualEntryData&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="comment">// Looks like CoreText applies neither mark nor current substitution for
+        // end-of-text if mark was not explicitly set.
+        </span><span class="kw">if </span>buffer.idx == buffer.len &amp;&amp; !<span class="self">self</span>.mark_set {
+            <span class="kw">return </span><span class="prelude-val">Some</span>(());
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">replacement</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>replacement = <span class="prelude-val">None</span>;
 
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">mark_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> {
-            <span class="kw">let</span> <span class="ident">lookup</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">lookup</span>(<span class="ident">u32::from</span>(<span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">mark_index</span>))<span class="question-mark">?</span>;
-            <span class="ident">replacement</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">value</span>(<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">mark</span>].<span class="ident">as_glyph</span>());
+        <span class="kw">if </span>entry.extra.mark_index != <span class="number">0xFFFF </span>{
+            <span class="kw">let </span>lookup = <span class="self">self</span>.table.lookup(u32::from(entry.extra.mark_index))<span class="question-mark">?</span>;
+            replacement = lookup.value(buffer.info[<span class="self">self</span>.mark].as_glyph());
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">replacement</span>) <span class="op">=</span> <span class="ident">replacement</span> {
-            <span class="ident">buffer</span>.<span class="ident">unsafe_to_break</span>(<span class="self">self</span>.<span class="ident">mark</span>, (<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span><span class="number">1</span> ).<span class="ident">min</span>(<span class="ident">buffer</span>.<span class="ident">len</span>));
-            <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="self">self</span>.<span class="ident">mark</span>].<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">replacement</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(replacement) = replacement {
+            buffer.unsafe_to_break(<span class="self">self</span>.mark, (buffer.idx +<span class="number">1 </span>).min(buffer.len));
+            buffer.info[<span class="self">self</span>.mark].glyph_id = u32::from(replacement);
         }
 
-        <span class="ident">replacement</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">idx</span>.<span class="ident">min</span>(<span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">-</span> <span class="number">1</span>);
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> {
-            <span class="kw">let</span> <span class="ident">lookup</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">lookup</span>(<span class="ident">u32::from</span>(<span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_index</span>))<span class="question-mark">?</span>;
-            <span class="ident">replacement</span> <span class="op">=</span> <span class="ident">lookup</span>.<span class="ident">value</span>(<span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">as_glyph</span>());
+        replacement = <span class="prelude-val">None</span>;
+        <span class="kw">let </span>idx = buffer.idx.min(buffer.len - <span class="number">1</span>);
+        <span class="kw">if </span>entry.extra.current_index != <span class="number">0xFFFF </span>{
+            <span class="kw">let </span>lookup = <span class="self">self</span>.table.lookup(u32::from(entry.extra.current_index))<span class="question-mark">?</span>;
+            replacement = lookup.value(buffer.info[idx].as_glyph());
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">replacement</span>) <span class="op">=</span> <span class="ident">replacement</span> {
-            <span class="ident">buffer</span>.<span class="ident">info</span>[<span class="ident">idx</span>].<span class="ident">glyph_id</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">replacement</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(replacement) = replacement {
+            buffer.info[idx].glyph_id = u32::from(replacement);
         }
 
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::SET_MARK</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">mark_set</span> <span class="op">=</span> <span class="bool-val">true</span>;
-            <span class="self">self</span>.<span class="ident">mark</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">idx</span>;
+        <span class="kw">if </span>entry.flags &amp; <span class="self">Self</span>::SET_MARK != <span class="number">0 </span>{
+            <span class="self">self</span>.mark_set = <span class="bool-val">true</span>;
+            <span class="self">self</span>.mark = buffer.idx;
         }
 
         <span class="prelude-val">Some</span>(())
     }
 }
 
-<span class="kw">struct</span> <span class="ident">InsertionCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">mark</span>: <span class="ident">u32</span>,
-    <span class="ident">glyphs</span>: <span class="ident">LazyArray32</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">GlyphId</span><span class="op">&gt;</span>,
+<span class="kw">struct </span>InsertionCtx&lt;<span class="lifetime">&#39;a</span>&gt; {
+    mark: u32,
+    glyphs: LazyArray32&lt;<span class="lifetime">&#39;a</span>, GlyphId&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">InsertionCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">SET_MARK</span>: <span class="ident">u16</span>                 <span class="op">=</span> <span class="number">0x8000</span>;
-    <span class="kw">const</span> <span class="ident">DONT_ADVANCE</span>: <span class="ident">u16</span>             <span class="op">=</span> <span class="number">0x4000</span>;
-    <span class="kw">const</span> <span class="ident">CURRENT_INSERT_BEFORE</span>: <span class="ident">u16</span>    <span class="op">=</span> <span class="number">0x0800</span>;
-    <span class="kw">const</span> <span class="ident">MARKED_INSERT_BEFORE</span>: <span class="ident">u16</span>     <span class="op">=</span> <span class="number">0x0400</span>;
-    <span class="kw">const</span> <span class="ident">CURRENT_INSERT_COUNT</span>: <span class="ident">u16</span>     <span class="op">=</span> <span class="number">0x03E0</span>;
-    <span class="kw">const</span> <span class="ident">MARKED_INSERT_COUNT</span>: <span class="ident">u16</span>      <span class="op">=</span> <span class="number">0x001F</span>;
+<span class="kw">impl </span>InsertionCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">const </span>SET_MARK: u16                 = <span class="number">0x8000</span>;
+    <span class="kw">const </span>DONT_ADVANCE: u16             = <span class="number">0x4000</span>;
+    <span class="kw">const </span>CURRENT_INSERT_BEFORE: u16    = <span class="number">0x0800</span>;
+    <span class="kw">const </span>MARKED_INSERT_BEFORE: u16     = <span class="number">0x0400</span>;
+    <span class="kw">const </span>CURRENT_INSERT_COUNT: u16     = <span class="number">0x03E0</span>;
+    <span class="kw">const </span>MARKED_INSERT_COUNT: u16      = <span class="number">0x001F</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">Driver</span><span class="op">&lt;</span><span class="ident">morx::InsertionEntryData</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">InsertionCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">in_place</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">false</span>
+<span class="kw">impl </span>Driver&lt;morx::InsertionEntryData&gt; <span class="kw">for </span>InsertionCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>in_place(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>can_advance(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::InsertionEntryData&gt;) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::DONT_ADVANCE == <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>is_actionable(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::InsertionEntryData&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Buffer) -&gt; bool {
+        (entry.flags &amp; (<span class="self">Self</span>::CURRENT_INSERT_COUNT | <span class="self">Self</span>::MARKED_INSERT_COUNT) != <span class="number">0</span>) &amp;&amp;
+            (entry.extra.current_insert_index != <span class="number">0xFFFF </span>|| entry.extra.marked_insert_index != <span class="number">0xFFFF</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::InsertionEntryData</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::DONT_ADVANCE</span> <span class="op">==</span> <span class="number">0</span>
-    }
+    <span class="kw">fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;morx::InsertionEntryData&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">let </span>flags = entry.flags;
+        <span class="kw">let </span>mark_loc = buffer.out_len;
 
-    <span class="kw">fn</span> <span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::InsertionEntryData</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Buffer</span>) -&gt; <span class="ident">bool</span> {
-        (<span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> (<span class="ident"><span class="self">Self</span>::CURRENT_INSERT_COUNT</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::MARKED_INSERT_COUNT</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>) <span class="op">&amp;&amp;</span>
-            (<span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_insert_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> <span class="op">|</span><span class="op">|</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">marked_insert_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">transition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">morx::InsertionEntryData</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">flags</span>;
-        <span class="kw">let</span> <span class="ident">mark_loc</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
-
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">marked_insert_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> {
-            <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::MARKED_INSERT_COUNT</span>;
-            <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">-</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="ident">count</span>);
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">&lt;</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+        <span class="kw">if </span>entry.extra.marked_insert_index != <span class="number">0xFFFF </span>{
+            <span class="kw">let </span>count = flags &amp; <span class="self">Self</span>::MARKED_INSERT_COUNT;
+            buffer.max_ops -= i32::from(count);
+            <span class="kw">if </span>buffer.max_ops &lt; <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Some</span>(());
             }
 
-            <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">marked_insert_index</span>;
-            <span class="kw">let</span> <span class="ident">before</span> <span class="op">=</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::MARKED_INSERT_BEFORE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
+            <span class="kw">let </span>start = entry.extra.marked_insert_index;
+            <span class="kw">let </span>before = flags &amp; <span class="self">Self</span>::MARKED_INSERT_BEFORE != <span class="number">0</span>;
 
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
-            <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="self">self</span>.<span class="ident">mark</span> <span class="kw">as</span> <span class="ident">usize</span>);
+            <span class="kw">let </span>end = buffer.out_len;
+            buffer.move_to(<span class="self">self</span>.mark <span class="kw">as </span>usize);
 
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">before</span> {
-                <span class="ident">buffer</span>.<span class="ident">copy_glyph</span>();
+            <span class="kw">if </span>buffer.idx &lt; buffer.len &amp;&amp; !before {
+                buffer.copy_glyph();
             }
 
-            <span class="comment">// TODO We ignore KashidaLike setting.</span>
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-                <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span>);
-                <span class="ident">buffer</span>.<span class="ident">output_glyph</span>(<span class="ident">u32::from</span>(<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">get</span>(<span class="ident">i</span>)<span class="question-mark">?</span>.<span class="number">0</span>));
+            <span class="comment">// TODO We ignore KashidaLike setting.
+            </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..count {
+                <span class="kw">let </span>i = u32::from(start + i);
+                buffer.output_glyph(u32::from(<span class="self">self</span>.glyphs.get(i)<span class="question-mark">?</span>.<span class="number">0</span>));
             }
 
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">before</span> {
-                <span class="ident">buffer</span>.<span class="ident">skip_glyph</span>();
+            <span class="kw">if </span>buffer.idx &lt; buffer.len &amp;&amp; !before {
+                buffer.skip_glyph();
             }
 
-            <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="ident">end</span> <span class="op">+</span> <span class="ident">usize::from</span>(<span class="ident">count</span>));
+            buffer.move_to(end + usize::from(count));
 
-            <span class="ident">buffer</span>.<span class="ident">unsafe_to_break_from_outbuffer</span>(<span class="self">self</span>.<span class="ident">mark</span> <span class="kw">as</span> <span class="ident">usize</span>, (<span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">min</span>(<span class="ident">buffer</span>.<span class="ident">len</span>));
+            buffer.unsafe_to_break_from_outbuffer(<span class="self">self</span>.mark <span class="kw">as </span>usize, (buffer.idx + <span class="number">1</span>).min(buffer.len));
         }
 
-        <span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::SET_MARK</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">mark</span> <span class="op">=</span> <span class="ident">mark_loc</span> <span class="kw">as</span> <span class="ident">u32</span>;
+        <span class="kw">if </span>flags &amp; <span class="self">Self</span>::SET_MARK != <span class="number">0 </span>{
+            <span class="self">self</span>.mark = mark_loc <span class="kw">as </span>u32;
         }
 
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_insert_index</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xFFFF</span> {
-            <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::CURRENT_INSERT_COUNT</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">5</span>;
-            <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">-</span><span class="op">=</span> <span class="ident">i32::from</span>(<span class="ident">count</span>);
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">max_ops</span> <span class="op">&lt;</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+        <span class="kw">if </span>entry.extra.current_insert_index != <span class="number">0xFFFF </span>{
+            <span class="kw">let </span>count = (flags &amp; <span class="self">Self</span>::CURRENT_INSERT_COUNT) &gt;&gt; <span class="number">5</span>;
+            buffer.max_ops -= i32::from(count);
+            <span class="kw">if </span>buffer.max_ops &lt; <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Some</span>(());
             }
 
-            <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">extra</span>.<span class="ident">current_insert_index</span>;
-            <span class="kw">let</span> <span class="ident">before</span> <span class="op">=</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::CURRENT_INSERT_BEFORE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
+            <span class="kw">let </span>start = entry.extra.current_insert_index;
+            <span class="kw">let </span>before = flags &amp; <span class="self">Self</span>::CURRENT_INSERT_BEFORE != <span class="number">0</span>;
+            <span class="kw">let </span>end = buffer.out_len;
 
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">before</span> {
-                <span class="ident">buffer</span>.<span class="ident">copy_glyph</span>();
+            <span class="kw">if </span>buffer.idx &lt; buffer.len &amp;&amp; !before {
+                buffer.copy_glyph();
             }
 
-            <span class="comment">// TODO We ignore KashidaLike setting.</span>
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">count</span> {
-                <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">start</span> <span class="op">+</span> <span class="ident">i</span>);
-                <span class="ident">buffer</span>.<span class="ident">output_glyph</span>(<span class="ident">u32::from</span>(<span class="self">self</span>.<span class="ident">glyphs</span>.<span class="ident">get</span>(<span class="ident">i</span>)<span class="question-mark">?</span>.<span class="number">0</span>));
+            <span class="comment">// TODO We ignore KashidaLike setting.
+            </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..count {
+                <span class="kw">let </span>i = u32::from(start + i);
+                buffer.output_glyph(u32::from(<span class="self">self</span>.glyphs.get(i)<span class="question-mark">?</span>.<span class="number">0</span>));
             }
 
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">buffer</span>.<span class="ident">len</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">before</span> {
-                <span class="ident">buffer</span>.<span class="ident">skip_glyph</span>();
+            <span class="kw">if </span>buffer.idx &lt; buffer.len &amp;&amp; !before {
+                buffer.skip_glyph();
             }
 
-            <span class="comment">// Humm. Not sure where to move to. There&#39;s this wording under</span>
-            <span class="comment">// DontAdvance flag:</span>
-            <span class="comment">//</span>
-            <span class="comment">// &quot;If set, don&#39;t update the glyph index before going to the new state.</span>
-            <span class="comment">// This does not mean that the glyph pointed to is the same one as</span>
-            <span class="comment">// before. If you&#39;ve made insertions immediately downstream of the</span>
-            <span class="comment">// current glyph, the next glyph processed would in fact be the first</span>
-            <span class="comment">// one inserted.&quot;</span>
-            <span class="comment">//</span>
-            <span class="comment">// This suggests that if DontAdvance is NOT set, we should move to</span>
-            <span class="comment">// end+count. If it *was*, then move to end, such that newly inserted</span>
-            <span class="comment">// glyphs are now visible.</span>
-            <span class="comment">//</span>
-            <span class="comment">// https://github.com/harfbuzz/harfbuzz/issues/1224#issuecomment-427691417</span>
-            <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="kw">if</span> <span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::DONT_ADVANCE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="ident">end</span> } <span class="kw">else</span> { <span class="ident">end</span> <span class="op">+</span> <span class="ident">usize::from</span>(<span class="ident">count</span>) });
+            <span class="comment">// Humm. Not sure where to move to. There&#39;s this wording under
+            // DontAdvance flag:
+            //
+            // &quot;If set, don&#39;t update the glyph index before going to the new state.
+            // This does not mean that the glyph pointed to is the same one as
+            // before. If you&#39;ve made insertions immediately downstream of the
+            // current glyph, the next glyph processed would in fact be the first
+            // one inserted.&quot;
+            //
+            // This suggests that if DontAdvance is NOT set, we should move to
+            // end+count. If it *was*, then move to end, such that newly inserted
+            // glyphs are now visible.
+            //
+            // https://github.com/harfbuzz/harfbuzz/issues/1224#issuecomment-427691417
+            </span>buffer.move_to(<span class="kw">if </span>flags &amp; <span class="self">Self</span>::DONT_ADVANCE != <span class="number">0 </span>{ end } <span class="kw">else </span>{ end + usize::from(count) });
         }
 
         <span class="prelude-val">Some</span>(())
@@ -1176,129 +1176,129 @@
 
 
 
-<span class="kw">const</span> <span class="ident">LIGATURE_MAX_MATCHES</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">64</span>;
+<span class="kw">const </span>LIGATURE_MAX_MATCHES: usize = <span class="number">64</span>;
 
-<span class="kw">struct</span> <span class="ident">LigatureCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">table</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">morx::LigatureSubtable</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    <span class="ident">match_length</span>: <span class="ident">usize</span>,
-    <span class="ident">match_positions</span>: [<span class="ident">usize</span>; <span class="ident">LIGATURE_MAX_MATCHES</span>],
+<span class="kw">struct </span>LigatureCtx&lt;<span class="lifetime">&#39;a</span>&gt; {
+    table: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>morx::LigatureSubtable&lt;<span class="lifetime">&#39;a</span>&gt;,
+    match_length: usize,
+    match_positions: [usize; LIGATURE_MAX_MATCHES],
 }
 
-<span class="kw">impl</span> <span class="ident">LigatureCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">const</span> <span class="ident">SET_COMPONENT</span>: <span class="ident">u16</span>    <span class="op">=</span> <span class="number">0x8000</span>;
-    <span class="kw">const</span> <span class="ident">DONT_ADVANCE</span>: <span class="ident">u16</span>     <span class="op">=</span> <span class="number">0x4000</span>;
-    <span class="kw">const</span> <span class="ident">PERFORM_ACTION</span>: <span class="ident">u16</span>   <span class="op">=</span> <span class="number">0x2000</span>;
+<span class="kw">impl </span>LigatureCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">const </span>SET_COMPONENT: u16    = <span class="number">0x8000</span>;
+    <span class="kw">const </span>DONT_ADVANCE: u16     = <span class="number">0x4000</span>;
+    <span class="kw">const </span>PERFORM_ACTION: u16   = <span class="number">0x2000</span>;
 
-    <span class="kw">const</span> <span class="ident">LIG_ACTION_LAST</span>: <span class="ident">u32</span>      <span class="op">=</span> <span class="number">0x80000000</span>;
-    <span class="kw">const</span> <span class="ident">LIG_ACTION_STORE</span>: <span class="ident">u32</span>     <span class="op">=</span> <span class="number">0x40000000</span>;
-    <span class="kw">const</span> <span class="ident">LIG_ACTION_OFFSET</span>: <span class="ident">u32</span>    <span class="op">=</span> <span class="number">0x3FFFFFFF</span>;
+    <span class="kw">const </span>LIG_ACTION_LAST: u32      = <span class="number">0x80000000</span>;
+    <span class="kw">const </span>LIG_ACTION_STORE: u32     = <span class="number">0x40000000</span>;
+    <span class="kw">const </span>LIG_ACTION_OFFSET: u32    = <span class="number">0x3FFFFFFF</span>;
 }
 
-<span class="kw">impl</span> <span class="ident">Driver</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">LigatureCtx</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">in_place</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="bool-val">false</span>
-    }
+<span class="kw">impl </span>Driver&lt;u16&gt; <span class="kw">for </span>LigatureCtx&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">fn </span>in_place(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">can_advance</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::DONT_ADVANCE</span> <span class="op">==</span> <span class="number">0</span>
-    }
+    <span class="kw">fn </span>can_advance(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;u16&gt;) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::DONT_ADVANCE == <span class="number">0
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">is_actionable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Buffer</span>) -&gt; <span class="ident">bool</span> {
-        <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::PERFORM_ACTION</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-    }
+    <span class="kw">fn </span>is_actionable(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;u16&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Buffer) -&gt; bool {
+        entry.flags &amp; <span class="self">Self</span>::PERFORM_ACTION != <span class="number">0
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">transition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">apple_layout::GenericStateEntry</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Buffer</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::SET_COMPONENT</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="comment">// Never mark same index twice, in case DONT_ADVANCE was used...</span>
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span>
-                <span class="self">self</span>.<span class="ident">match_positions</span>[(<span class="self">self</span>.<span class="ident">match_length</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>] <span class="op">==</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>
+    <span class="kw">fn </span>transition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>apple_layout::GenericStateEntry&lt;u16&gt;, buffer: <span class="kw-2">&amp;mut </span>Buffer) -&gt; <span class="prelude-ty">Option</span>&lt;()&gt; {
+        <span class="kw">if </span>entry.flags &amp; <span class="self">Self</span>::SET_COMPONENT != <span class="number">0 </span>{
+            <span class="comment">// Never mark same index twice, in case DONT_ADVANCE was used...
+            </span><span class="kw">if </span><span class="self">self</span>.match_length != <span class="number">0 </span>&amp;&amp;
+                <span class="self">self</span>.match_positions[(<span class="self">self</span>.match_length - <span class="number">1</span>) % LIGATURE_MAX_MATCHES] == buffer.out_len
             {
-                <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="self">self</span>.match_length -= <span class="number">1</span>;
             }
 
-            <span class="self">self</span>.<span class="ident">match_positions</span>[<span class="self">self</span>.<span class="ident">match_length</span> <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>] <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
-            <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="self">self</span>.match_positions[<span class="self">self</span>.match_length % LIGATURE_MAX_MATCHES] = buffer.out_len;
+            <span class="self">self</span>.match_length += <span class="number">1</span>;
         }
 
-        <span class="kw">if</span> <span class="ident">entry</span>.<span class="ident">flags</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::PERFORM_ACTION</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">out_len</span>;
+        <span class="kw">if </span>entry.flags &amp; <span class="self">Self</span>::PERFORM_ACTION != <span class="number">0 </span>{
+            <span class="kw">let </span>end = buffer.out_len;
 
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(());
+            <span class="kw">if </span><span class="self">self</span>.match_length == <span class="number">0 </span>{
+                <span class="kw">return </span><span class="prelude-val">Some</span>(());
             }
 
-            <span class="kw">if</span> <span class="ident">buffer</span>.<span class="ident">idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">len</span> {
-                <span class="kw">return</span> <span class="prelude-val">Some</span>(()); <span class="comment">// TODO: Work on previous instead?</span>
-            }
+            <span class="kw">if </span>buffer.idx &gt;= buffer.len {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(()); <span class="comment">// TODO: Work on previous instead?
+            </span>}
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">match_length</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.match_length;
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ligature_actions_index</span> <span class="op">=</span> <span class="ident">entry</span>.<span class="ident">extra</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ligature_idx</span> <span class="op">=</span> <span class="number">0</span>;
-            <span class="kw">loop</span> {
-                <span class="kw">if</span> <span class="ident">cursor</span> <span class="op">==</span> <span class="number">0</span> {
-                    <span class="comment">// Stack underflow. Clear the stack.</span>
-                    <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">=</span> <span class="number">0</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>ligature_actions_index = entry.extra;
+            <span class="kw">let </span><span class="kw-2">mut </span>ligature_idx = <span class="number">0</span>;
+            <span class="kw">loop </span>{
+                <span class="kw">if </span>cursor == <span class="number">0 </span>{
+                    <span class="comment">// Stack underflow. Clear the stack.
+                    </span><span class="self">self</span>.match_length = <span class="number">0</span>;
                     <span class="kw">break</span>;
                 }
 
-                <span class="ident">cursor</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="self">self</span>.<span class="ident">match_positions</span>[<span class="ident">cursor</span> <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>]);
+                cursor -= <span class="number">1</span>;
+                buffer.move_to(<span class="self">self</span>.match_positions[cursor % LIGATURE_MAX_MATCHES]);
 
-                <span class="comment">// We cannot use ? in this loop, because we must call</span>
-                <span class="comment">// buffer.move_to(end) in the end.</span>
-                <span class="kw">let</span> <span class="ident">action</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">ligature_actions</span>.<span class="ident">get</span>(<span class="ident">u32::from</span>(<span class="ident">ligature_actions_index</span>)) {
-                    <span class="prelude-val">Some</span>(<span class="ident">v</span>) =&gt; <span class="ident">v</span>,
-                    <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+                <span class="comment">// We cannot use ? in this loop, because we must call
+                // buffer.move_to(end) in the end.
+                </span><span class="kw">let </span>action = <span class="kw">match </span><span class="self">self</span>.table.ligature_actions.get(u32::from(ligature_actions_index)) {
+                    <span class="prelude-val">Some</span>(v) =&gt; v,
+                    <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
                 };
 
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">uoffset</span> <span class="op">=</span> <span class="ident">action</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::LIG_ACTION_OFFSET</span>;
-                <span class="kw">if</span> <span class="ident">uoffset</span> <span class="op">&amp;</span> <span class="number">0x20000000</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="ident">uoffset</span> <span class="op">|</span><span class="op">=</span> <span class="number">0xC0000000</span>; <span class="comment">// Sign-extend.</span>
-                }
+                <span class="kw">let </span><span class="kw-2">mut </span>uoffset = action &amp; <span class="self">Self</span>::LIG_ACTION_OFFSET;
+                <span class="kw">if </span>uoffset &amp; <span class="number">0x20000000 </span>!= <span class="number">0 </span>{
+                    uoffset |= <span class="number">0xC0000000</span>; <span class="comment">// Sign-extend.
+                </span>}
 
-                <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">uoffset</span> <span class="kw">as</span> <span class="ident">i32</span>;
-                <span class="kw">let</span> <span class="ident">component_idx</span> <span class="op">=</span> (<span class="ident">buffer</span>.<span class="ident">cur</span>(<span class="number">0</span>).<span class="ident">glyph_id</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">+</span> <span class="ident">offset</span>) <span class="kw">as</span> <span class="ident">u32</span>;
-                <span class="ident">ligature_idx</span> <span class="op">+</span><span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">components</span>.<span class="ident">get</span>(<span class="ident">component_idx</span>) {
-                    <span class="prelude-val">Some</span>(<span class="ident">v</span>) =&gt; <span class="ident">v</span>,
-                    <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+                <span class="kw">let </span>offset = uoffset <span class="kw">as </span>i32;
+                <span class="kw">let </span>component_idx = (buffer.cur(<span class="number">0</span>).glyph_id <span class="kw">as </span>i32 + offset) <span class="kw">as </span>u32;
+                ligature_idx += <span class="kw">match </span><span class="self">self</span>.table.components.get(component_idx) {
+                    <span class="prelude-val">Some</span>(v) =&gt; v,
+                    <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
                 };
 
-                <span class="kw">if</span> (<span class="ident">action</span> <span class="op">&amp;</span> (<span class="ident"><span class="self">Self</span>::LIG_ACTION_STORE</span> <span class="op">|</span> <span class="ident"><span class="self">Self</span>::LIG_ACTION_LAST</span>)) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">lig</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">table</span>.<span class="ident">ligatures</span>.<span class="ident">get</span>(<span class="ident">u32::from</span>(<span class="ident">ligature_idx</span>)) {
-                        <span class="prelude-val">Some</span>(<span class="ident">v</span>) =&gt; <span class="ident">v</span>,
-                        <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+                <span class="kw">if </span>(action &amp; (<span class="self">Self</span>::LIG_ACTION_STORE | <span class="self">Self</span>::LIG_ACTION_LAST)) != <span class="number">0 </span>{
+                    <span class="kw">let </span>lig = <span class="kw">match </span><span class="self">self</span>.table.ligatures.get(u32::from(ligature_idx)) {
+                        <span class="prelude-val">Some</span>(v) =&gt; v,
+                        <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
                     };
 
-                    <span class="ident">buffer</span>.<span class="ident">replace_glyph</span>(<span class="ident">u32::from</span>(<span class="ident">lig</span>.<span class="number">0</span>));
+                    buffer.replace_glyph(u32::from(lig.<span class="number">0</span>));
 
-                    <span class="kw">let</span> <span class="ident">lig_end</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">match_positions</span>[(<span class="self">self</span>.<span class="ident">match_length</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>] <span class="op">+</span> <span class="number">1</span>;
-                    <span class="comment">// Now go and delete all subsequent components.</span>
-                    <span class="kw">while</span> <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">-</span> <span class="number">1</span> <span class="op">&gt;</span> <span class="ident">cursor</span> {
-                        <span class="self">self</span>.<span class="ident">match_length</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="self">self</span>.<span class="ident">match_positions</span>[<span class="self">self</span>.<span class="ident">match_length</span> <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>]);
-                        <span class="ident">buffer</span>.<span class="ident">replace_glyph</span>(<span class="number">0xFFFF</span>);
+                    <span class="kw">let </span>lig_end = <span class="self">self</span>.match_positions[(<span class="self">self</span>.match_length - <span class="number">1</span>) % LIGATURE_MAX_MATCHES] + <span class="number">1</span>;
+                    <span class="comment">// Now go and delete all subsequent components.
+                    </span><span class="kw">while </span><span class="self">self</span>.match_length - <span class="number">1 </span>&gt; cursor {
+                        <span class="self">self</span>.match_length -= <span class="number">1</span>;
+                        buffer.move_to(<span class="self">self</span>.match_positions[<span class="self">self</span>.match_length % LIGATURE_MAX_MATCHES]);
+                        buffer.replace_glyph(<span class="number">0xFFFF</span>);
                     }
 
-                    <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="ident">lig_end</span>);
-                    <span class="ident">buffer</span>.<span class="ident">merge_out_clusters</span>(
-                        <span class="self">self</span>.<span class="ident">match_positions</span>[<span class="ident">cursor</span> <span class="op">%</span> <span class="ident">LIGATURE_MAX_MATCHES</span>],
-                        <span class="ident">buffer</span>.<span class="ident">out_len</span>,
+                    buffer.move_to(lig_end);
+                    buffer.merge_out_clusters(
+                        <span class="self">self</span>.match_positions[cursor % LIGATURE_MAX_MATCHES],
+                        buffer.out_len,
                     );
                 }
 
-                <span class="ident">ligature_actions_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                ligature_actions_index += <span class="number">1</span>;
 
-                <span class="kw">if</span> <span class="ident">action</span> <span class="op">&amp;</span> <span class="ident"><span class="self">Self</span>::LIG_ACTION_LAST</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+                <span class="kw">if </span>action &amp; <span class="self">Self</span>::LIG_ACTION_LAST != <span class="number">0 </span>{
                     <span class="kw">break</span>;
                 }
             }
 
-            <span class="ident">buffer</span>.<span class="ident">move_to</span>(<span class="ident">end</span>);
+            buffer.move_to(end);
         }
 
         <span class="prelude-val">Some</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rustybuzz" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/raster.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>raster.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/zeno-0.2.2/src/raster.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>raster.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../zeno/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../zeno/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -824,831 +824,831 @@
 <span id="824">824</span>
 <span id="825">825</span>
 <span id="826">826</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Path rasterizer.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Path rasterizer.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::geometry</span>::{<span class="ident">Point</span>, <span class="ident">Vector</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::path_builder::PathBuilder</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::style::Fill</span>;
+</span><span class="kw">use </span><span class="kw">super</span>::geometry::{Point, Vector};
+<span class="kw">use </span><span class="kw">super</span>::path_builder::PathBuilder;
+<span class="kw">use </span><span class="kw">super</span>::style::Fill;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::lib::Vec</span>;
-<span class="kw">use</span> <span class="ident">core::fmt</span>;
+<span class="kw">use </span><span class="kw">crate</span>::lib::Vec;
+<span class="kw">use </span>core::fmt;
 
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">coverage</span>(<span class="ident">fill</span>: <span class="ident">Fill</span>, <span class="kw-2">mut</span> <span class="ident">coverage</span>: <span class="ident">i32</span>) -&gt; <span class="ident">u8</span> {
-    <span class="ident">coverage</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="ident">PIXEL_BITS</span> <span class="op">*</span> <span class="number">2</span> <span class="op">+</span> <span class="number">1</span> <span class="op">-</span> <span class="number">8</span>;
-    <span class="kw">if</span> <span class="ident">fill</span> <span class="op">==</span> <span class="ident">Fill::EvenOdd</span> {
-        <span class="ident">coverage</span> <span class="op">&amp;=</span> <span class="number">511</span>;
-        <span class="kw">if</span> <span class="ident">coverage</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">256</span> {
-            <span class="ident">coverage</span> <span class="op">=</span> <span class="number">511i32</span>.<span class="ident">wrapping_sub</span>(<span class="ident">coverage</span>);
+<span class="attribute">#[inline(always)]
+</span><span class="kw">fn </span>coverage(fill: Fill, <span class="kw-2">mut </span>coverage: i32) -&gt; u8 {
+    coverage &gt;&gt;= PIXEL_BITS * <span class="number">2 </span>+ <span class="number">1 </span>- <span class="number">8</span>;
+    <span class="kw">if </span>fill == Fill::EvenOdd {
+        coverage &amp;= <span class="number">511</span>;
+        <span class="kw">if </span>coverage &gt;= <span class="number">256 </span>{
+            coverage = <span class="number">511i32</span>.wrapping_sub(coverage);
         }
-    } <span class="kw">else</span> {
-        <span class="kw">if</span> <span class="ident">coverage</span> <span class="op">&lt;</span> <span class="number">0</span> {
-            <span class="ident">coverage</span> <span class="op">=</span> <span class="op">!</span><span class="ident">coverage</span>;
+    } <span class="kw">else </span>{
+        <span class="kw">if </span>coverage &lt; <span class="number">0 </span>{
+            coverage = !coverage;
         }
-        <span class="kw">if</span> <span class="ident">coverage</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">256</span> {
-            <span class="ident">coverage</span> <span class="op">=</span> <span class="number">255</span>;
+        <span class="kw">if </span>coverage &gt;= <span class="number">256 </span>{
+            coverage = <span class="number">255</span>;
         }
     }
-    <span class="ident">coverage</span> <span class="kw">as</span> <span class="ident">u8</span>
+    coverage <span class="kw">as </span>u8
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Rasterizer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>: <span class="ident">RasterStorage</span><span class="op">&gt;</span> {
-    <span class="ident">storage</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">S</span>,
-    <span class="ident">xmin</span>: <span class="ident">i32</span>,
-    <span class="ident">xmax</span>: <span class="ident">i32</span>,
-    <span class="ident">ymin</span>: <span class="ident">i32</span>,
-    <span class="ident">ymax</span>: <span class="ident">i32</span>,
-    <span class="ident">height</span>: <span class="ident">i32</span>,
-    <span class="ident">shift</span>: <span class="ident">Vector</span>,
-    <span class="ident">start</span>: <span class="ident">FixedPoint</span>,
-    <span class="ident">closed</span>: <span class="ident">bool</span>,
-    <span class="ident">current</span>: <span class="ident">Point</span>,
-    <span class="ident">x</span>: <span class="ident">i32</span>,
-    <span class="ident">y</span>: <span class="ident">i32</span>,
-    <span class="ident">px</span>: <span class="ident">i32</span>,
-    <span class="ident">py</span>: <span class="ident">i32</span>,
-    <span class="ident">cover</span>: <span class="ident">i32</span>,
-    <span class="ident">area</span>: <span class="ident">i32</span>,
-    <span class="ident">invalid</span>: <span class="ident">bool</span>,
+<span class="kw">pub struct </span>Rasterizer&lt;<span class="lifetime">&#39;a</span>, S: RasterStorage&gt; {
+    storage: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>S,
+    xmin: i32,
+    xmax: i32,
+    ymin: i32,
+    ymax: i32,
+    height: i32,
+    shift: Vector,
+    start: FixedPoint,
+    closed: bool,
+    current: Point,
+    x: i32,
+    y: i32,
+    px: i32,
+    py: i32,
+    cover: i32,
+    area: i32,
+    invalid: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>: <span class="ident">RasterStorage</span><span class="op">&gt;</span> <span class="ident">Rasterizer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">storage</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">S</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">storage</span>,
-            <span class="ident">xmin</span>: <span class="number">0</span>,
-            <span class="ident">xmax</span>: <span class="number">0</span>,
-            <span class="ident">ymin</span>: <span class="number">0</span>,
-            <span class="ident">ymax</span>: <span class="number">0</span>,
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">shift</span>: <span class="ident">Vector::ZERO</span>,
-            <span class="ident">start</span>: <span class="ident">FixedPoint::default</span>(),
-            <span class="ident">closed</span>: <span class="bool-val">false</span>,
-            <span class="ident">current</span>: <span class="ident">Point::ZERO</span>,
-            <span class="ident">x</span>: <span class="number">0</span>,
-            <span class="ident">y</span>: <span class="number">0</span>,
-            <span class="ident">px</span>: <span class="number">0</span>,
-            <span class="ident">py</span>: <span class="number">0</span>,
-            <span class="ident">cover</span>: <span class="number">0</span>,
-            <span class="ident">area</span>: <span class="number">0</span>,
-            <span class="ident">invalid</span>: <span class="bool-val">false</span>,
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, S: RasterStorage&gt; Rasterizer&lt;<span class="lifetime">&#39;a</span>, S&gt; {
+    <span class="kw">pub fn </span>new(storage: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>S) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            storage,
+            xmin: <span class="number">0</span>,
+            xmax: <span class="number">0</span>,
+            ymin: <span class="number">0</span>,
+            ymax: <span class="number">0</span>,
+            height: <span class="number">0</span>,
+            shift: Vector::ZERO,
+            start: FixedPoint::default(),
+            closed: <span class="bool-val">false</span>,
+            current: Point::ZERO,
+            x: <span class="number">0</span>,
+            y: <span class="number">0</span>,
+            px: <span class="number">0</span>,
+            py: <span class="number">0</span>,
+            cover: <span class="number">0</span>,
+            area: <span class="number">0</span>,
+            invalid: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rasterize</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">shift</span>: <span class="ident">Vector</span>,
-        <span class="ident">width</span>: <span class="ident">u32</span>,
-        <span class="ident">height</span>: <span class="ident">u32</span>,
-        <span class="ident">apply</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="self">Self</span>),
-        <span class="ident">fill</span>: <span class="ident">Fill</span>,
-        <span class="ident">buffer</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">u8</span>],
-        <span class="ident">pitch</span>: <span class="ident">usize</span>,
-        <span class="ident">y_up</span>: <span class="ident">bool</span>,
+    <span class="kw">pub fn </span>rasterize(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        shift: Vector,
+        width: u32,
+        height: u32,
+        apply: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>FnMut(<span class="kw-2">&amp;mut </span><span class="self">Self</span>),
+        fill: Fill,
+        buffer: <span class="kw-2">&amp;mut </span>[u8],
+        pitch: usize,
+        y_up: bool,
     ) {
-        <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="self">self</span>.<span class="ident">storage</span>
-            .<span class="ident">reset</span>(<span class="ident">FixedPoint</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> }, <span class="ident">FixedPoint</span> { <span class="ident">x</span>: <span class="ident">w</span>, <span class="ident">y</span>: <span class="ident">h</span> });
-        <span class="self">self</span>.<span class="ident">shift</span> <span class="op">=</span> <span class="ident">shift</span>;
-        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">FixedPoint::default</span>();
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">Point::ZERO</span>;
-        <span class="self">self</span>.<span class="ident">xmin</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">ymin</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">xmax</span> <span class="op">=</span> <span class="ident">w</span>;
-        <span class="self">self</span>.<span class="ident">ymax</span> <span class="op">=</span> <span class="ident">h</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">h</span>;
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">invalid</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">apply</span>(<span class="self">self</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">closed</span> {
-            <span class="self">self</span>.<span class="ident">line_to</span>(<span class="self">self</span>.<span class="ident">start</span>);
+        <span class="kw">let </span>w = width <span class="kw">as </span>i32;
+        <span class="kw">let </span>h = height <span class="kw">as </span>i32;
+        <span class="self">self</span>.storage
+            .reset(FixedPoint { x: <span class="number">0</span>, y: <span class="number">0 </span>}, FixedPoint { x: w, y: h });
+        <span class="self">self</span>.shift = shift;
+        <span class="self">self</span>.start = FixedPoint::default();
+        <span class="self">self</span>.closed = <span class="bool-val">true</span>;
+        <span class="self">self</span>.current = Point::ZERO;
+        <span class="self">self</span>.xmin = <span class="number">0</span>;
+        <span class="self">self</span>.ymin = <span class="number">0</span>;
+        <span class="self">self</span>.xmax = w;
+        <span class="self">self</span>.ymax = h;
+        <span class="self">self</span>.height = h;
+        <span class="self">self</span>.x = <span class="number">0</span>;
+        <span class="self">self</span>.y = <span class="number">0</span>;
+        <span class="self">self</span>.px = <span class="number">0</span>;
+        <span class="self">self</span>.py = <span class="number">0</span>;
+        <span class="self">self</span>.invalid = <span class="bool-val">true</span>;
+        apply(<span class="self">self</span>);
+        <span class="kw">if </span>!<span class="self">self</span>.closed {
+            <span class="self">self</span>.line_to(<span class="self">self</span>.start);
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">invalid</span> {
-            <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">area</span>, <span class="self">self</span>.<span class="ident">cover</span>);
+        <span class="kw">if </span>!<span class="self">self</span>.invalid {
+            <span class="self">self</span>.storage.set(<span class="self">self</span>.x, <span class="self">self</span>.y, <span class="self">self</span>.area, <span class="self">self</span>.cover);
         }
-        <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">indices</span>();
-        <span class="kw">let</span> <span class="ident">cells</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">cells</span>();
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="ident">FixedPoint::new</span>(<span class="self">self</span>.<span class="ident">xmin</span>, <span class="self">self</span>.<span class="ident">ymin</span>);
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">FixedPoint::new</span>(<span class="self">self</span>.<span class="ident">xmax</span>, <span class="self">self</span>.<span class="ident">ymax</span>);
-        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">index</span>) <span class="kw">in</span> <span class="ident">indices</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-                <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> ((<span class="ident">i</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">-</span> <span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">let</span> <span class="ident">row_offset</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">y_up</span> {
-                    (<span class="ident">pitch</span> <span class="op">*</span> (<span class="ident">height</span> <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">y</span>)) <span class="kw">as</span> <span class="ident">usize</span>
-                } <span class="kw">else</span> {
-                    (<span class="ident">pitch</span> <span class="op">*</span> <span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>
+        <span class="kw">let </span>indices = <span class="self">self</span>.storage.indices();
+        <span class="kw">let </span>cells = <span class="self">self</span>.storage.cells();
+        <span class="kw">let </span>min = FixedPoint::new(<span class="self">self</span>.xmin, <span class="self">self</span>.ymin);
+        <span class="kw">let </span>max = FixedPoint::new(<span class="self">self</span>.xmax, <span class="self">self</span>.ymax);
+        <span class="kw">let </span>height = height <span class="kw">as </span>usize;
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>index) <span class="kw">in </span>indices.iter().enumerate() {
+            <span class="kw">if </span>index != -<span class="number">1 </span>{
+                <span class="kw">let </span>y = ((i <span class="kw">as </span>i32) - min.y) <span class="kw">as </span>usize;
+                <span class="kw">let </span>row_offset = <span class="kw">if </span>y_up {
+                    (pitch * (height - <span class="number">1 </span>- y)) <span class="kw">as </span>usize
+                } <span class="kw">else </span>{
+                    (pitch * y) <span class="kw">as </span>usize
                 };
-                <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>[<span class="ident">row_offset</span>..];
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">min</span>.<span class="ident">x</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cover</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">area</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">index</span>;
-                <span class="kw">loop</span> {
-                    <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cells</span>[<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-                    <span class="kw">if</span> <span class="ident">cover</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">x</span> {
-                        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">cell</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">x</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">cover</span>);
-                        <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="kw">for</span> <span class="ident">b</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">row</span>[<span class="ident">xi</span>..<span class="ident">xi</span> <span class="op">+</span> <span class="ident">count</span>] {
-                            <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span> <span class="ident">c</span>;
+                <span class="kw">let </span>row = <span class="kw-2">&amp;mut </span>buffer[row_offset..];
+                <span class="kw">let </span><span class="kw-2">mut </span>x = min.x;
+                <span class="kw">let </span><span class="kw-2">mut </span>cover = <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>area;
+                <span class="kw">let </span><span class="kw-2">mut </span>index = index;
+                <span class="kw">loop </span>{
+                    <span class="kw">let </span>cell = <span class="kw-2">&amp;</span>cells[index <span class="kw">as </span>usize];
+                    <span class="kw">if </span>cover != <span class="number">0 </span>&amp;&amp; cell.x &gt; x {
+                        <span class="kw">let </span>count = (cell.x - x) <span class="kw">as </span>usize;
+                        <span class="kw">let </span>c = coverage(fill, cover);
+                        <span class="kw">let </span>xi = x <span class="kw">as </span>usize;
+                        <span class="kw">for </span>b <span class="kw">in </span><span class="kw-2">&amp;mut </span>row[xi..xi + count] {
+                            <span class="kw-2">*</span>b = c;
                         }
                     }
-                    <span class="ident">cover</span> <span class="op">=</span> <span class="ident">cover</span>.<span class="ident">wrapping_add</span>(<span class="ident">cell</span>.<span class="ident">cover</span>.<span class="ident">wrapping_mul</span>(<span class="ident">ONE_PIXEL</span> <span class="op">*</span> <span class="number">2</span>));
-                    <span class="ident">area</span> <span class="op">=</span> <span class="ident">cover</span>.<span class="ident">wrapping_sub</span>(<span class="ident">cell</span>.<span class="ident">area</span>);
-                    <span class="kw">if</span> <span class="ident">area</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">min</span>.<span class="ident">x</span> {
-                        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">1</span>;
-                        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">area</span>);
-                        <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="kw">for</span> <span class="ident">b</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">row</span>[<span class="ident">xi</span>..<span class="ident">xi</span> <span class="op">+</span> <span class="ident">count</span>] {
-                            <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span> <span class="ident">c</span>;
+                    cover = cover.wrapping_add(cell.cover.wrapping_mul(ONE_PIXEL * <span class="number">2</span>));
+                    area = cover.wrapping_sub(cell.area);
+                    <span class="kw">if </span>area != <span class="number">0 </span>&amp;&amp; cell.x &gt;= min.x {
+                        <span class="kw">let </span>count = <span class="number">1</span>;
+                        <span class="kw">let </span>c = coverage(fill, area);
+                        <span class="kw">let </span>xi = cell.x <span class="kw">as </span>usize;
+                        <span class="kw">for </span>b <span class="kw">in </span><span class="kw-2">&amp;mut </span>row[xi..xi + count] {
+                            <span class="kw-2">*</span>b = c;
                         }
                     }
-                    <span class="ident">x</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="ident">index</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">next</span>;
-                    <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
+                    x = cell.x + <span class="number">1</span>;
+                    index = cell.next;
+                    <span class="kw">if </span>index == -<span class="number">1 </span>{
                         <span class="kw">break</span>;
                     }
                 }
-                <span class="kw">if</span> <span class="ident">cover</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">max</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">x</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">cover</span>);
-                    <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="kw">for</span> <span class="ident">b</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="ident">row</span>[<span class="ident">xi</span>..<span class="ident">xi</span> <span class="op">+</span> <span class="ident">count</span>] {
-                        <span class="kw-2">*</span><span class="ident">b</span> <span class="op">=</span> <span class="ident">c</span>;
+                <span class="kw">if </span>cover != <span class="number">0 </span>{
+                    <span class="kw">let </span>count = (max.x - x) <span class="kw">as </span>usize;
+                    <span class="kw">let </span>c = coverage(fill, cover);
+                    <span class="kw">let </span>xi = x <span class="kw">as </span>usize;
+                    <span class="kw">for </span>b <span class="kw">in </span><span class="kw-2">&amp;mut </span>row[xi..xi + count] {
+                        <span class="kw-2">*</span>b = c;
                     }
                 }
             }
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rasterize_write</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">shift</span>: <span class="ident">Vector</span>,
-        <span class="ident">width</span>: <span class="ident">u32</span>,
-        <span class="ident">height</span>: <span class="ident">u32</span>,
-        <span class="ident">apply</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;mut</span> <span class="self">Self</span>),
-        <span class="ident">fill</span>: <span class="ident">Fill</span>,
-        <span class="ident">pitch</span>: <span class="ident">usize</span>,
-        <span class="ident">y_up</span>: <span class="ident">bool</span>,
-        <span class="ident">write</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">usize</span>, <span class="ident">usize</span>, <span class="ident">usize</span>, <span class="ident">u8</span>),
+    <span class="kw">pub fn </span>rasterize_write(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        shift: Vector,
+        width: u32,
+        height: u32,
+        apply: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>FnMut(<span class="kw-2">&amp;mut </span><span class="self">Self</span>),
+        fill: Fill,
+        pitch: usize,
+        y_up: bool,
+        write: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>FnMut(usize, usize, usize, u8),
     ) {
-        <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="self">self</span>.<span class="ident">storage</span>
-            .<span class="ident">reset</span>(<span class="ident">FixedPoint</span> { <span class="ident">x</span>: <span class="number">0</span>, <span class="ident">y</span>: <span class="number">0</span> }, <span class="ident">FixedPoint</span> { <span class="ident">x</span>: <span class="ident">w</span>, <span class="ident">y</span>: <span class="ident">h</span> });
-        <span class="self">self</span>.<span class="ident">shift</span> <span class="op">=</span> <span class="ident">shift</span>;
-        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">FixedPoint::default</span>();
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">Point::ZERO</span>;
-        <span class="self">self</span>.<span class="ident">xmin</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">ymin</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">xmax</span> <span class="op">=</span> <span class="ident">w</span>;
-        <span class="self">self</span>.<span class="ident">ymax</span> <span class="op">=</span> <span class="ident">h</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="ident">h</span>;
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">y</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">invalid</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="ident">apply</span>(<span class="self">self</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">closed</span> {
-            <span class="self">self</span>.<span class="ident">line_to</span>(<span class="self">self</span>.<span class="ident">start</span>);
+        <span class="kw">let </span>w = width <span class="kw">as </span>i32;
+        <span class="kw">let </span>h = height <span class="kw">as </span>i32;
+        <span class="self">self</span>.storage
+            .reset(FixedPoint { x: <span class="number">0</span>, y: <span class="number">0 </span>}, FixedPoint { x: w, y: h });
+        <span class="self">self</span>.shift = shift;
+        <span class="self">self</span>.start = FixedPoint::default();
+        <span class="self">self</span>.closed = <span class="bool-val">true</span>;
+        <span class="self">self</span>.current = Point::ZERO;
+        <span class="self">self</span>.xmin = <span class="number">0</span>;
+        <span class="self">self</span>.ymin = <span class="number">0</span>;
+        <span class="self">self</span>.xmax = w;
+        <span class="self">self</span>.ymax = h;
+        <span class="self">self</span>.height = h;
+        <span class="self">self</span>.x = <span class="number">0</span>;
+        <span class="self">self</span>.y = <span class="number">0</span>;
+        <span class="self">self</span>.px = <span class="number">0</span>;
+        <span class="self">self</span>.py = <span class="number">0</span>;
+        <span class="self">self</span>.invalid = <span class="bool-val">true</span>;
+        apply(<span class="self">self</span>);
+        <span class="kw">if </span>!<span class="self">self</span>.closed {
+            <span class="self">self</span>.line_to(<span class="self">self</span>.start);
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">invalid</span> {
-            <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">area</span>, <span class="self">self</span>.<span class="ident">cover</span>);
+        <span class="kw">if </span>!<span class="self">self</span>.invalid {
+            <span class="self">self</span>.storage.set(<span class="self">self</span>.x, <span class="self">self</span>.y, <span class="self">self</span>.area, <span class="self">self</span>.cover);
         }
-        <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">indices</span>();
-        <span class="kw">let</span> <span class="ident">cells</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">cells</span>();
-        <span class="kw">let</span> <span class="ident">min</span> <span class="op">=</span> <span class="ident">FixedPoint::new</span>(<span class="self">self</span>.<span class="ident">xmin</span>, <span class="self">self</span>.<span class="ident">ymin</span>);
-        <span class="kw">let</span> <span class="ident">max</span> <span class="op">=</span> <span class="ident">FixedPoint::new</span>(<span class="self">self</span>.<span class="ident">xmax</span>, <span class="self">self</span>.<span class="ident">ymax</span>);
-        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">index</span>) <span class="kw">in</span> <span class="ident">indices</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-                <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> ((<span class="ident">i</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">-</span> <span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">let</span> <span class="ident">row_offset</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">y_up</span> {
-                    (<span class="ident">pitch</span> <span class="op">*</span> (<span class="ident">height</span> <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">y</span>)) <span class="kw">as</span> <span class="ident">usize</span>
-                } <span class="kw">else</span> {
-                    (<span class="ident">pitch</span> <span class="op">*</span> <span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>
+        <span class="kw">let </span>indices = <span class="self">self</span>.storage.indices();
+        <span class="kw">let </span>cells = <span class="self">self</span>.storage.cells();
+        <span class="kw">let </span>min = FixedPoint::new(<span class="self">self</span>.xmin, <span class="self">self</span>.ymin);
+        <span class="kw">let </span>max = FixedPoint::new(<span class="self">self</span>.xmax, <span class="self">self</span>.ymax);
+        <span class="kw">let </span>height = height <span class="kw">as </span>usize;
+        <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>index) <span class="kw">in </span>indices.iter().enumerate() {
+            <span class="kw">if </span>index != -<span class="number">1 </span>{
+                <span class="kw">let </span>y = ((i <span class="kw">as </span>i32) - min.y) <span class="kw">as </span>usize;
+                <span class="kw">let </span>row_offset = <span class="kw">if </span>y_up {
+                    (pitch * (height - <span class="number">1 </span>- y)) <span class="kw">as </span>usize
+                } <span class="kw">else </span>{
+                    (pitch * y) <span class="kw">as </span>usize
                 };
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">min</span>.<span class="ident">x</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cover</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">area</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">index</span>;
-                <span class="kw">loop</span> {
-                    <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cells</span>[<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-                    <span class="kw">if</span> <span class="ident">cover</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">x</span> {
-                        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">cell</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">x</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">cover</span>);
-                        <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="ident">write</span>(<span class="ident">row_offset</span>, <span class="ident">xi</span>, <span class="ident">count</span>, <span class="ident">c</span>);
+                <span class="kw">let </span><span class="kw-2">mut </span>x = min.x;
+                <span class="kw">let </span><span class="kw-2">mut </span>cover = <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>area;
+                <span class="kw">let </span><span class="kw-2">mut </span>index = index;
+                <span class="kw">loop </span>{
+                    <span class="kw">let </span>cell = <span class="kw-2">&amp;</span>cells[index <span class="kw">as </span>usize];
+                    <span class="kw">if </span>cover != <span class="number">0 </span>&amp;&amp; cell.x &gt; x {
+                        <span class="kw">let </span>count = (cell.x - x) <span class="kw">as </span>usize;
+                        <span class="kw">let </span>c = coverage(fill, cover);
+                        <span class="kw">let </span>xi = x <span class="kw">as </span>usize;
+                        write(row_offset, xi, count, c);
                     }
-                    <span class="ident">cover</span> <span class="op">=</span> <span class="ident">cover</span>.<span class="ident">wrapping_add</span>(<span class="ident">cell</span>.<span class="ident">cover</span>.<span class="ident">wrapping_mul</span>(<span class="ident">ONE_PIXEL</span> <span class="op">*</span> <span class="number">2</span>));
-                    <span class="ident">area</span> <span class="op">=</span> <span class="ident">cover</span>.<span class="ident">wrapping_sub</span>(<span class="ident">cell</span>.<span class="ident">area</span>);
-                    <span class="kw">if</span> <span class="ident">area</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">min</span>.<span class="ident">x</span> {
-                        <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="number">1</span>;
-                        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">area</span>);
-                        <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                        <span class="ident">write</span>(<span class="ident">row_offset</span>, <span class="ident">xi</span>, <span class="ident">count</span>, <span class="ident">c</span>);
+                    cover = cover.wrapping_add(cell.cover.wrapping_mul(ONE_PIXEL * <span class="number">2</span>));
+                    area = cover.wrapping_sub(cell.area);
+                    <span class="kw">if </span>area != <span class="number">0 </span>&amp;&amp; cell.x &gt;= min.x {
+                        <span class="kw">let </span>count = <span class="number">1</span>;
+                        <span class="kw">let </span>c = coverage(fill, area);
+                        <span class="kw">let </span>xi = cell.x <span class="kw">as </span>usize;
+                        write(row_offset, xi, count, c);
                     }
-                    <span class="ident">x</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">+</span> <span class="number">1</span>;
-                    <span class="ident">index</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">next</span>;
-                    <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
+                    x = cell.x + <span class="number">1</span>;
+                    index = cell.next;
+                    <span class="kw">if </span>index == -<span class="number">1 </span>{
                         <span class="kw">break</span>;
                     }
                 }
-                <span class="kw">if</span> <span class="ident">cover</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> (<span class="ident">max</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">x</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">coverage</span>(<span class="ident">fill</span>, <span class="ident">cover</span>);
-                    <span class="kw">let</span> <span class="ident">xi</span> <span class="op">=</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>;
-                    <span class="ident">write</span>(<span class="ident">row_offset</span>, <span class="ident">xi</span>, <span class="ident">count</span>, <span class="ident">c</span>);
+                <span class="kw">if </span>cover != <span class="number">0 </span>{
+                    <span class="kw">let </span>count = (max.x - x) <span class="kw">as </span>usize;
+                    <span class="kw">let </span>c = coverage(fill, cover);
+                    <span class="kw">let </span>xi = x <span class="kw">as </span>usize;
+                    write(row_offset, xi, count, c);
                 }
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">set_cell</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">invalid</span> <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="ident">area</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">cover</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>) {
-            <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">set</span>(<span class="self">self</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">area</span>, <span class="self">self</span>.<span class="ident">cover</span>);
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>set_cell(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: i32, y: i32) {
+        <span class="kw">if </span>!<span class="self">self</span>.invalid &amp;&amp; (<span class="self">self</span>.area != <span class="number">0 </span>|| <span class="self">self</span>.cover != <span class="number">0</span>) {
+            <span class="self">self</span>.storage.set(<span class="self">self</span>.x, <span class="self">self</span>.y, <span class="self">self</span>.area, <span class="self">self</span>.cover);
         }
-        <span class="self">self</span>.<span class="ident">area</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">cover</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> (<span class="self">self</span>.<span class="ident">xmin</span> <span class="op">-</span> <span class="number">1</span>) {
-            <span class="ident">x</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">xmin</span> <span class="op">-</span> <span class="number">1</span>
-        };
-        <span class="self">self</span>.<span class="ident">y</span> <span class="op">=</span> <span class="ident">y</span>;
-        <span class="self">self</span>.<span class="ident">invalid</span> <span class="op">=</span> <span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span> <span class="op">|</span><span class="op">|</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span> <span class="op">|</span><span class="op">|</span> <span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">xmax</span>;
+        <span class="self">self</span>.area = <span class="number">0</span>;
+        <span class="self">self</span>.cover = <span class="number">0</span>;
+        <span class="self">self</span>.x = <span class="kw">if </span>x &gt; (<span class="self">self</span>.xmin - <span class="number">1</span>) {
+            x
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.xmin - <span class="number">1
+        </span>};
+        <span class="self">self</span>.y = y;
+        <span class="self">self</span>.invalid = y &gt;= <span class="self">self</span>.ymax || y &lt; <span class="self">self</span>.ymin || x &gt;= <span class="self">self</span>.xmax;
     }
 
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">FixedPoint</span>) {
-        <span class="self">self</span>.<span class="ident">set_cell</span>(<span class="ident">trunc</span>(<span class="ident">to</span>.<span class="ident">x</span>), <span class="ident">trunc</span>(<span class="ident">to</span>.<span class="ident">y</span>));
-        <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">x</span>;
-        <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">y</span>;
+    <span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: FixedPoint) {
+        <span class="self">self</span>.set_cell(trunc(to.x), trunc(to.y));
+        <span class="self">self</span>.px = to.x;
+        <span class="self">self</span>.py = to.y;
     }
 
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="ident">FixedPoint</span>) {
-        <span class="kw">let</span> <span class="ident">to_x</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">x</span>;
-        <span class="kw">let</span> <span class="ident">to_y</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">y</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ey1</span> <span class="op">=</span> <span class="ident">trunc</span>(<span class="self">self</span>.<span class="ident">py</span>);
-        <span class="kw">let</span> <span class="ident">ey2</span> <span class="op">=</span> <span class="ident">trunc</span>(<span class="ident">to_y</span>);
-        <span class="kw">if</span> (<span class="ident">ey1</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span> <span class="op">&amp;&amp;</span> <span class="ident">ey2</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>) <span class="op">|</span><span class="op">|</span> (<span class="ident">ey1</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span> <span class="op">&amp;&amp;</span> <span class="ident">ey2</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>) {
-            <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">to_x</span>;
-            <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">to_y</span>;
+    <span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: FixedPoint) {
+        <span class="kw">let </span>to_x = to.x;
+        <span class="kw">let </span>to_y = to.y;
+        <span class="kw">let </span><span class="kw-2">mut </span>ey1 = trunc(<span class="self">self</span>.py);
+        <span class="kw">let </span>ey2 = trunc(to_y);
+        <span class="kw">if </span>(ey1 &gt;= <span class="self">self</span>.ymax &amp;&amp; ey2 &gt;= <span class="self">self</span>.ymax) || (ey1 &lt; <span class="self">self</span>.ymin &amp;&amp; ey2 &lt; <span class="self">self</span>.ymin) {
+            <span class="self">self</span>.px = to_x;
+            <span class="self">self</span>.py = to_y;
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ex1</span> <span class="op">=</span> <span class="ident">trunc</span>(<span class="self">self</span>.<span class="ident">px</span>);
-        <span class="kw">let</span> <span class="ident">ex2</span> <span class="op">=</span> <span class="ident">trunc</span>(<span class="ident">to_x</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fx1</span> <span class="op">=</span> <span class="ident">fract</span>(<span class="self">self</span>.<span class="ident">px</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fy1</span> <span class="op">=</span> <span class="ident">fract</span>(<span class="self">self</span>.<span class="ident">py</span>);
-        <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="ident">to_x</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">px</span>;
-        <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="ident">to_y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">py</span>;
-        <span class="kw">if</span> <span class="ident">ex1</span> <span class="op">==</span> <span class="ident">ex2</span> <span class="op">&amp;&amp;</span> <span class="ident">ey1</span> <span class="op">==</span> <span class="ident">ey2</span> {
-            <span class="comment">// empty</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">dy</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">set_cell</span>(<span class="ident">ex2</span>, <span class="ident">ey2</span>);
-            <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">to_x</span>;
-            <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">to_y</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>ex1 = trunc(<span class="self">self</span>.px);
+        <span class="kw">let </span>ex2 = trunc(to_x);
+        <span class="kw">let </span><span class="kw-2">mut </span>fx1 = fract(<span class="self">self</span>.px);
+        <span class="kw">let </span><span class="kw-2">mut </span>fy1 = fract(<span class="self">self</span>.py);
+        <span class="kw">let </span>dx = to_x - <span class="self">self</span>.px;
+        <span class="kw">let </span>dy = to_y - <span class="self">self</span>.py;
+        <span class="kw">if </span>ex1 == ex2 &amp;&amp; ey1 == ey2 {
+            <span class="comment">// empty
+        </span>} <span class="kw">else if </span>dy == <span class="number">0 </span>{
+            <span class="self">self</span>.set_cell(ex2, ey2);
+            <span class="self">self</span>.px = to_x;
+            <span class="self">self</span>.py = to_y;
             <span class="kw">return</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">dx</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">if</span> <span class="ident">dy</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                <span class="kw">loop</span> {
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> <span class="ident">fx1</span> <span class="op">*</span> <span class="number">2</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="ident">ey1</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="self">self</span>.<span class="ident">set_cell</span>(<span class="ident">ex1</span>, <span class="ident">ey1</span>);
-                    <span class="kw">if</span> <span class="ident">ey1</span> <span class="op">==</span> <span class="ident">ey2</span> {
+        } <span class="kw">else if </span>dx == <span class="number">0 </span>{
+            <span class="kw">if </span>dy &gt; <span class="number">0 </span>{
+                <span class="kw">loop </span>{
+                    <span class="kw">let </span>fy2 = ONE_PIXEL;
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * fx1 * <span class="number">2</span>;
+                    fy1 = <span class="number">0</span>;
+                    ey1 += <span class="number">1</span>;
+                    <span class="self">self</span>.set_cell(ex1, ey1);
+                    <span class="kw">if </span>ey1 == ey2 {
                         <span class="kw">break</span>;
                     }
                 }
-            } <span class="kw">else</span> {
-                <span class="kw">loop</span> {
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> <span class="ident">fx1</span> <span class="op">*</span> <span class="number">2</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="ident">ey1</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="self">self</span>.<span class="ident">set_cell</span>(<span class="ident">ex1</span>, <span class="ident">ey1</span>);
-                    <span class="kw">if</span> <span class="ident">ey1</span> <span class="op">==</span> <span class="ident">ey2</span> {
+            } <span class="kw">else </span>{
+                <span class="kw">loop </span>{
+                    <span class="kw">let </span>fy2 = <span class="number">0</span>;
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * fx1 * <span class="number">2</span>;
+                    fy1 = ONE_PIXEL;
+                    ey1 -= <span class="number">1</span>;
+                    <span class="self">self</span>.set_cell(ex1, ey1);
+                    <span class="kw">if </span>ey1 == ey2 {
                         <span class="kw">break</span>;
                     }
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prod</span> <span class="op">=</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">fy1</span> <span class="op">-</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">fx1</span>;
-            <span class="kw">let</span> <span class="ident">dx_r</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ex1</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ex2</span> { (<span class="number">0x00FFFFFF</span>) <span class="op">/</span> <span class="ident">dx</span> } <span class="kw">else</span> { <span class="number">0</span> };
-            <span class="kw">let</span> <span class="ident">dy_r</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ey1</span> <span class="op">!</span><span class="op">=</span> <span class="ident">ey2</span> { (<span class="number">0x00FFFFFF</span>) <span class="op">/</span> <span class="ident">dy</span> } <span class="kw">else</span> { <span class="number">0</span> };
-            <span class="kw">fn</span> <span class="ident">udiv</span>(<span class="ident">a</span>: <span class="ident">i32</span>, <span class="ident">b</span>: <span class="ident">i32</span>) -&gt; <span class="ident">i32</span> {
-                ((<span class="ident">a</span> <span class="kw">as</span> <span class="ident">u64</span> <span class="op">*</span> <span class="ident">b</span> <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="number">4</span> <span class="op">*</span> <span class="number">8</span> <span class="op">-</span> <span class="ident">PIXEL_BITS</span>)) <span class="kw">as</span> <span class="ident">i32</span>
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>prod = dx * fy1 - dy * fx1;
+            <span class="kw">let </span>dx_r = <span class="kw">if </span>ex1 != ex2 { (<span class="number">0x00FFFFFF</span>) / dx } <span class="kw">else </span>{ <span class="number">0 </span>};
+            <span class="kw">let </span>dy_r = <span class="kw">if </span>ey1 != ey2 { (<span class="number">0x00FFFFFF</span>) / dy } <span class="kw">else </span>{ <span class="number">0 </span>};
+            <span class="kw">fn </span>udiv(a: i32, b: i32) -&gt; i32 {
+                ((a <span class="kw">as </span>u64 * b <span class="kw">as </span>u64) &gt;&gt; (<span class="number">4 </span>* <span class="number">8 </span>- PIXEL_BITS)) <span class="kw">as </span>i32
             }
-            <span class="kw">loop</span> {
-                <span class="kw">if</span> <span class="ident">prod</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">prod</span> <span class="op">-</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="kw">let</span> <span class="ident">fx2</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="ident">udiv</span>(<span class="op">-</span><span class="ident">prod</span>, <span class="op">-</span><span class="ident">dx_r</span>);
-                    <span class="ident">prod</span> <span class="op">-</span><span class="op">=</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> (<span class="ident">fx1</span> <span class="op">+</span> <span class="ident">fx2</span>);
-                    <span class="ident">fx1</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="ident">fy2</span>;
-                    <span class="ident">ex1</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">prod</span> <span class="op">-</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">prod</span> <span class="op">-</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">+</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                    <span class="ident">prod</span> <span class="op">-</span><span class="op">=</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="kw">let</span> <span class="ident">fx2</span> <span class="op">=</span> <span class="ident">udiv</span>(<span class="op">-</span><span class="ident">prod</span>, <span class="ident">dy_r</span>);
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> (<span class="ident">fx1</span> <span class="op">+</span> <span class="ident">fx2</span>);
-                    <span class="ident">fx1</span> <span class="op">=</span> <span class="ident">fx2</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="ident">ey1</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">prod</span> <span class="op">-</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">+</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">prod</span> <span class="op">+</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">0</span>
-                {
-                    <span class="ident">prod</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dy</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="kw">let</span> <span class="ident">fx2</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="ident">udiv</span>(<span class="ident">prod</span>, <span class="ident">dx_r</span>);
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> (<span class="ident">fx1</span> <span class="op">+</span> <span class="ident">fx2</span>);
-                    <span class="ident">fx1</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="ident">fy2</span>;
-                    <span class="ident">ex1</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">fx2</span> <span class="op">=</span> <span class="ident">udiv</span>(<span class="ident">prod</span>, <span class="op">-</span><span class="ident">dy_r</span>);
-                    <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="number">0</span>;
-                    <span class="ident">prod</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dx</span> <span class="op">*</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-                    <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> (<span class="ident">fx1</span> <span class="op">+</span> <span class="ident">fx2</span>);
-                    <span class="ident">fx1</span> <span class="op">=</span> <span class="ident">fx2</span>;
-                    <span class="ident">fy1</span> <span class="op">=</span> <span class="ident">ONE_PIXEL</span>;
-                    <span class="ident">ey1</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="kw">loop </span>{
+                <span class="kw">if </span>prod &lt;= <span class="number">0 </span>&amp;&amp; prod - dx * ONE_PIXEL &gt; <span class="number">0 </span>{
+                    <span class="kw">let </span>fx2 = <span class="number">0</span>;
+                    <span class="kw">let </span>fy2 = udiv(-prod, -dx_r);
+                    prod -= dy * ONE_PIXEL;
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * (fx1 + fx2);
+                    fx1 = ONE_PIXEL;
+                    fy1 = fy2;
+                    ex1 -= <span class="number">1</span>;
+                } <span class="kw">else if </span>prod - dx * ONE_PIXEL &lt;= <span class="number">0 </span>&amp;&amp; prod - dx * ONE_PIXEL + dy * ONE_PIXEL &gt; <span class="number">0 </span>{
+                    prod -= dx * ONE_PIXEL;
+                    <span class="kw">let </span>fx2 = udiv(-prod, dy_r);
+                    <span class="kw">let </span>fy2 = ONE_PIXEL;
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * (fx1 + fx2);
+                    fx1 = fx2;
+                    fy1 = <span class="number">0</span>;
+                    ey1 += <span class="number">1</span>;
+                } <span class="kw">else if </span>prod - dx * ONE_PIXEL + dy * ONE_PIXEL &lt;= <span class="number">0 </span>&amp;&amp; prod + dy * ONE_PIXEL &gt;= <span class="number">0
+                </span>{
+                    prod += dy * ONE_PIXEL;
+                    <span class="kw">let </span>fx2 = ONE_PIXEL;
+                    <span class="kw">let </span>fy2 = udiv(prod, dx_r);
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * (fx1 + fx2);
+                    fx1 = <span class="number">0</span>;
+                    fy1 = fy2;
+                    ex1 += <span class="number">1</span>;
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>fx2 = udiv(prod, -dy_r);
+                    <span class="kw">let </span>fy2 = <span class="number">0</span>;
+                    prod += dx * ONE_PIXEL;
+                    <span class="self">self</span>.cover += fy2 - fy1;
+                    <span class="self">self</span>.area += (fy2 - fy1) * (fx1 + fx2);
+                    fx1 = fx2;
+                    fy1 = ONE_PIXEL;
+                    ey1 -= <span class="number">1</span>;
                 }
-                <span class="self">self</span>.<span class="ident">set_cell</span>(<span class="ident">ex1</span>, <span class="ident">ey1</span>);
-                <span class="kw">if</span> <span class="ident">ex1</span> <span class="op">==</span> <span class="ident">ex2</span> <span class="op">&amp;&amp;</span> <span class="ident">ey1</span> <span class="op">==</span> <span class="ident">ey2</span> {
+                <span class="self">self</span>.set_cell(ex1, ey1);
+                <span class="kw">if </span>ex1 == ex2 &amp;&amp; ey1 == ey2 {
                     <span class="kw">break</span>;
                 }
             }
         }
-        <span class="kw">let</span> <span class="ident">fx2</span> <span class="op">=</span> <span class="ident">fract</span>(<span class="ident">to_x</span>);
-        <span class="kw">let</span> <span class="ident">fy2</span> <span class="op">=</span> <span class="ident">fract</span>(<span class="ident">to_y</span>);
-        <span class="self">self</span>.<span class="ident">cover</span> <span class="op">+</span><span class="op">=</span> <span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>;
-        <span class="self">self</span>.<span class="ident">area</span> <span class="op">+</span><span class="op">=</span> (<span class="ident">fy2</span> <span class="op">-</span> <span class="ident">fy1</span>) <span class="op">*</span> (<span class="ident">fx1</span> <span class="op">+</span> <span class="ident">fx2</span>);
-        <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">to_x</span>;
-        <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">to_y</span>;
+        <span class="kw">let </span>fx2 = fract(to_x);
+        <span class="kw">let </span>fy2 = fract(to_y);
+        <span class="self">self</span>.cover += fy2 - fy1;
+        <span class="self">self</span>.area += (fy2 - fy1) * (fx1 + fx2);
+        <span class="self">self</span>.px = to_x;
+        <span class="self">self</span>.py = to_y;
     }
 
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="ident">FixedPoint</span>, <span class="ident">to</span>: <span class="ident">FixedPoint</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arc</span>: [<span class="ident">FixedPoint</span>; <span class="number">16</span> <span class="op">*</span> <span class="number">2</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="ident">core::mem::MaybeUninit::uninit</span>().<span class="ident">assume_init</span>() };
-        <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">x</span>;
-        <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">y</span>;
-        <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">control</span>.<span class="ident">x</span>;
-        <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">control</span>.<span class="ident">y</span>;
-        <span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">px</span>;
-        <span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">py</span>;
-        <span class="kw">if</span> (<span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>)
-            <span class="op">|</span><span class="op">|</span> (<span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>)
+    <span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: FixedPoint, to: FixedPoint) {
+        <span class="kw">let </span><span class="kw-2">mut </span>arc: [FixedPoint; <span class="number">16 </span>* <span class="number">2 </span>+ <span class="number">1</span>] =
+            <span class="kw">unsafe </span>{ core::mem::MaybeUninit::uninit().assume_init() };
+        arc[<span class="number">0</span>].x = to.x;
+        arc[<span class="number">0</span>].y = to.y;
+        arc[<span class="number">1</span>].x = control.x;
+        arc[<span class="number">1</span>].y = control.y;
+        arc[<span class="number">2</span>].x = <span class="self">self</span>.px;
+        arc[<span class="number">2</span>].y = <span class="self">self</span>.py;
+        <span class="kw">if </span>(trunc(arc[<span class="number">0</span>].y) &gt;= <span class="self">self</span>.ymax
+            &amp;&amp; trunc(arc[<span class="number">1</span>].y) &gt;= <span class="self">self</span>.ymax
+            &amp;&amp; trunc(arc[<span class="number">2</span>].y) &gt;= <span class="self">self</span>.ymax)
+            || (trunc(arc[<span class="number">0</span>].y) &lt; <span class="self">self</span>.ymin
+                &amp;&amp; trunc(arc[<span class="number">1</span>].y) &lt; <span class="self">self</span>.ymin
+                &amp;&amp; trunc(arc[<span class="number">2</span>].y) &lt; <span class="self">self</span>.ymin)
         {
-            <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">x</span>;
-            <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>;
+            <span class="self">self</span>.px = arc[<span class="number">0</span>].x;
+            <span class="self">self</span>.py = arc[<span class="number">0</span>].y;
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dx</span> <span class="op">=</span> (<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">-</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">x</span>).<span class="ident">abs</span>();
-        <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> (<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">-</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span>).<span class="ident">abs</span>();
-        <span class="kw">if</span> <span class="ident">dx</span> <span class="op">&lt;</span> <span class="ident">dy</span> {
-            <span class="ident">dx</span> <span class="op">=</span> <span class="ident">dy</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>dx = (arc[<span class="number">2</span>].x + arc[<span class="number">0</span>].x - <span class="number">2 </span>* arc[<span class="number">1</span>].x).abs();
+        <span class="kw">let </span>dy = (arc[<span class="number">2</span>].y + arc[<span class="number">0</span>].y - <span class="number">2 </span>* arc[<span class="number">1</span>].y).abs();
+        <span class="kw">if </span>dx &lt; dy {
+            dx = dy;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">draw</span> <span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">while</span> <span class="ident">dx</span> <span class="op">&gt;</span> <span class="ident">ONE_PIXEL</span> <span class="op">/</span> <span class="number">4</span> {
-            <span class="ident">dx</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">2</span>;
-            <span class="ident">draw</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>draw = <span class="number">1</span>;
+        <span class="kw">while </span>dx &gt; ONE_PIXEL / <span class="number">4 </span>{
+            dx &gt;&gt;= <span class="number">2</span>;
+            draw &lt;&lt;= <span class="number">1</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">split</span> <span class="op">=</span> <span class="ident">draw</span> <span class="op">&amp;</span> (<span class="op">-</span><span class="ident">draw</span>);
-            <span class="kw">loop</span> {
-                <span class="ident">split</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="kw">if</span> <span class="ident">split</span> <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>a = <span class="number">0</span>;
+        <span class="kw">loop </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>split = draw &amp; (-draw);
+            <span class="kw">loop </span>{
+                split &gt;&gt;= <span class="number">1</span>;
+                <span class="kw">if </span>split == <span class="number">0 </span>{
                     <span class="kw">break</span>;
                 }
-                <span class="ident">split_quad</span>(<span class="kw-2">&amp;mut</span> <span class="ident">arc</span>[<span class="ident">a</span>..]);
-                <span class="ident">a</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
+                split_quad(<span class="kw-2">&amp;mut </span>arc[a..]);
+                a += <span class="number">2</span>;
             }
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="ident">a</span>];
-            <span class="self">self</span>.<span class="ident">line_to</span>(<span class="ident">p</span>);
-            <span class="ident">draw</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">if</span> <span class="ident">draw</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">let </span>p = arc[a];
+            <span class="self">self</span>.line_to(p);
+            draw -= <span class="number">1</span>;
+            <span class="kw">if </span>draw == <span class="number">0 </span>{
                 <span class="kw">break</span>;
             }
-            <span class="ident">a</span> <span class="op">-</span><span class="op">=</span> <span class="number">2</span>;
+            a -= <span class="number">2</span>;
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control1</span>: <span class="ident">FixedPoint</span>, <span class="ident">control2</span>: <span class="ident">FixedPoint</span>, <span class="ident">to</span>: <span class="ident">FixedPoint</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arc</span>: [<span class="ident">FixedPoint</span>; <span class="number">16</span> <span class="op">*</span> <span class="number">8</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="ident">core::mem::MaybeUninit::uninit</span>().<span class="ident">assume_init</span>() };
-        <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">x</span>;
-        <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">y</span>;
-        <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">control2</span>.<span class="ident">x</span>;
-        <span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">control2</span>.<span class="ident">y</span>;
-        <span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">control1</span>.<span class="ident">x</span>;
-        <span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">control1</span>.<span class="ident">y</span>;
-        <span class="ident">arc</span>[<span class="number">3</span>].<span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">px</span>;
-        <span class="ident">arc</span>[<span class="number">3</span>].<span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">py</span>;
-        <span class="kw">if</span> (<span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">3</span>].<span class="ident">y</span>) <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ymax</span>)
-            <span class="op">|</span><span class="op">|</span> (<span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">1</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">2</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>
-                <span class="op">&amp;&amp;</span> <span class="ident">trunc</span>(<span class="ident">arc</span>[<span class="number">3</span>].<span class="ident">y</span>) <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">ymin</span>)
+    <span class="kw">fn </span>curve_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control1: FixedPoint, control2: FixedPoint, to: FixedPoint) {
+        <span class="kw">let </span><span class="kw-2">mut </span>arc: [FixedPoint; <span class="number">16 </span>* <span class="number">8 </span>+ <span class="number">1</span>] =
+            <span class="kw">unsafe </span>{ core::mem::MaybeUninit::uninit().assume_init() };
+        arc[<span class="number">0</span>].x = to.x;
+        arc[<span class="number">0</span>].y = to.y;
+        arc[<span class="number">1</span>].x = control2.x;
+        arc[<span class="number">1</span>].y = control2.y;
+        arc[<span class="number">2</span>].x = control1.x;
+        arc[<span class="number">2</span>].y = control1.y;
+        arc[<span class="number">3</span>].x = <span class="self">self</span>.px;
+        arc[<span class="number">3</span>].y = <span class="self">self</span>.py;
+        <span class="kw">if </span>(trunc(arc[<span class="number">0</span>].y) &gt;= <span class="self">self</span>.ymax
+            &amp;&amp; trunc(arc[<span class="number">1</span>].y) &gt;= <span class="self">self</span>.ymax
+            &amp;&amp; trunc(arc[<span class="number">2</span>].y) &gt;= <span class="self">self</span>.ymax
+            &amp;&amp; trunc(arc[<span class="number">3</span>].y) &gt;= <span class="self">self</span>.ymax)
+            || (trunc(arc[<span class="number">0</span>].y) &lt; <span class="self">self</span>.ymin
+                &amp;&amp; trunc(arc[<span class="number">1</span>].y) &lt; <span class="self">self</span>.ymin
+                &amp;&amp; trunc(arc[<span class="number">2</span>].y) &lt; <span class="self">self</span>.ymin
+                &amp;&amp; trunc(arc[<span class="number">3</span>].y) &lt; <span class="self">self</span>.ymin)
         {
-            <span class="self">self</span>.<span class="ident">px</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">x</span>;
-            <span class="self">self</span>.<span class="ident">py</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="number">0</span>].<span class="ident">y</span>;
+            <span class="self">self</span>.px = arc[<span class="number">0</span>].x;
+            <span class="self">self</span>.py = arc[<span class="number">0</span>].y;
             <span class="kw">return</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">loop</span> {
-            <span class="kw">if</span> (<span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span>].<span class="ident">x</span> <span class="op">-</span> <span class="number">3</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">3</span>].<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">ONE_PIXEL</span> <span class="op">/</span> <span class="number">2</span>
-                <span class="op">|</span><span class="op">|</span> (<span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span>].<span class="ident">y</span> <span class="op">-</span> <span class="number">3</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">3</span>].<span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">ONE_PIXEL</span> <span class="op">/</span> <span class="number">2</span>
-                <span class="op">|</span><span class="op">|</span> (<span class="ident">arc</span>[<span class="ident">a</span>].<span class="ident">x</span> <span class="op">-</span> <span class="number">3</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">2</span>].<span class="ident">x</span> <span class="op">+</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">3</span>].<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">ONE_PIXEL</span> <span class="op">/</span> <span class="number">2</span>
-                <span class="op">|</span><span class="op">|</span> (<span class="ident">arc</span>[<span class="ident">a</span>].<span class="ident">y</span> <span class="op">-</span> <span class="number">3</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">2</span>].<span class="ident">y</span> <span class="op">+</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">arc</span>[<span class="ident">a</span> <span class="op">+</span> <span class="number">3</span>].<span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">ONE_PIXEL</span> <span class="op">/</span> <span class="number">2</span>
-            {
-                <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">arc</span>[<span class="ident">a</span>..];
-                <span class="comment">// if buf.len() &lt; 7 {</span>
-                <span class="comment">//     return;</span>
-                <span class="comment">// }</span>
-                <span class="kw">if</span> <span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">7</span> {
-                    <span class="ident">split_cubic</span>(<span class="ident">buf</span>);
-                    <span class="ident">a</span> <span class="op">+</span><span class="op">=</span> <span class="number">3</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>a = <span class="number">0</span>;
+        <span class="kw">loop </span>{
+            <span class="kw">if </span>(<span class="number">2 </span>* arc[a].x - <span class="number">3 </span>* arc[a + <span class="number">1</span>].x + arc[a + <span class="number">3</span>].x).abs() &gt; ONE_PIXEL / <span class="number">2
+                </span>|| (<span class="number">2 </span>* arc[a].y - <span class="number">3 </span>* arc[a + <span class="number">1</span>].y + arc[a + <span class="number">3</span>].y).abs() &gt; ONE_PIXEL / <span class="number">2
+                </span>|| (arc[a].x - <span class="number">3 </span>* arc[a + <span class="number">2</span>].x + <span class="number">2 </span>* arc[a + <span class="number">3</span>].x).abs() &gt; ONE_PIXEL / <span class="number">2
+                </span>|| (arc[a].y - <span class="number">3 </span>* arc[a + <span class="number">2</span>].y + <span class="number">2 </span>* arc[a + <span class="number">3</span>].y).abs() &gt; ONE_PIXEL / <span class="number">2
+            </span>{
+                <span class="kw">let </span>buf = <span class="kw-2">&amp;mut </span>arc[a..];
+                <span class="comment">// if buf.len() &lt; 7 {
+                //     return;
+                // }
+                </span><span class="kw">if </span>buf.len() &gt;= <span class="number">7 </span>{
+                    split_cubic(buf);
+                    a += <span class="number">3</span>;
                     <span class="kw">continue</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">line_to</span>(<span class="ident">to</span>);
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.line_to(to);
                     <span class="kw">return</span>;
                 }
             }
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">arc</span>[<span class="ident">a</span>];
-            <span class="self">self</span>.<span class="ident">line_to</span>(<span class="ident">p</span>);
-            <span class="kw">if</span> <span class="ident">a</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">let </span>p = arc[a];
+            <span class="self">self</span>.line_to(p);
+            <span class="kw">if </span>a == <span class="number">0 </span>{
                 <span class="kw">return</span>;
             }
-            <span class="ident">a</span> <span class="op">-</span><span class="op">=</span> <span class="number">3</span>;
+            a -= <span class="number">3</span>;
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>: <span class="ident">RasterStorage</span><span class="op">&gt;</span> <span class="ident">PathBuilder</span> <span class="kw">for</span> <span class="ident">Rasterizer</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">current_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Point</span> {
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, S: RasterStorage&gt; PathBuilder <span class="kw">for </span>Rasterizer&lt;<span class="lifetime">&#39;a</span>, S&gt; {
+    <span class="kw">fn </span>current_point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Point {
+        <span class="self">self</span>.current + <span class="self">self</span>.shift
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">move_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">closed</span> {
-            <span class="self">self</span>.<span class="ident">line_to</span>(<span class="self">self</span>.<span class="ident">start</span>);
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>move_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if </span>!<span class="self">self</span>.closed {
+            <span class="self">self</span>.line_to(<span class="self">self</span>.start);
         }
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">FixedPoint::from_point</span>(<span class="ident">to</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>);
-        <span class="self">self</span>.<span class="ident">move_to</span>(<span class="ident">p</span>);
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">start</span> <span class="op">=</span> <span class="ident">p</span>;
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">to</span>;
-        <span class="self">self</span>
-    }
+        <span class="kw">let </span>to = to.into();
+        <span class="kw">let </span>p = FixedPoint::from_point(to + <span class="self">self</span>.shift);
+        <span class="self">self</span>.move_to(p);
+        <span class="self">self</span>.closed = <span class="bool-val">false</span>;
+        <span class="self">self</span>.start = p;
+        <span class="self">self</span>.current = to;
+        <span class="self">self
+    </span>}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">line_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">to</span>;
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">line_to</span>(<span class="ident">FixedPoint::from_point</span>(<span class="ident">to</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>));
-        <span class="self">self</span>
-    }
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>line_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>to = to.into();
+        <span class="self">self</span>.current = to;
+        <span class="self">self</span>.closed = <span class="bool-val">false</span>;
+        <span class="self">self</span>.line_to(FixedPoint::from_point(to + <span class="self">self</span>.shift));
+        <span class="self">self
+    </span>}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">quad_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">control</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>, <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">to</span>;
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">quad_to</span>(
-            <span class="ident">FixedPoint::from_point</span>(<span class="ident">control</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>),
-            <span class="ident">FixedPoint::from_point</span>(<span class="ident">to</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>),
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>quad_to(<span class="kw-2">&amp;mut </span><span class="self">self</span>, control: <span class="kw">impl </span>Into&lt;Point&gt;, to: <span class="kw">impl </span>Into&lt;Point&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>to = to.into();
+        <span class="self">self</span>.current = to;
+        <span class="self">self</span>.closed = <span class="bool-val">false</span>;
+        <span class="self">self</span>.quad_to(
+            FixedPoint::from_point(control.into() + <span class="self">self</span>.shift),
+            FixedPoint::from_point(to + <span class="self">self</span>.shift),
         );
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">curve_to</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">control1</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">control2</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-        <span class="ident">to</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">to</span>.<span class="ident">into</span>();
-        <span class="self">self</span>.<span class="ident">current</span> <span class="op">=</span> <span class="ident">to</span>;
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">curve_to</span>(
-            <span class="ident">FixedPoint::from_point</span>(<span class="ident">control1</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>),
-            <span class="ident">FixedPoint::from_point</span>(<span class="ident">control2</span>.<span class="ident">into</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>),
-            <span class="ident">FixedPoint::from_point</span>(<span class="ident">to</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">shift</span>),
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>curve_to(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        control1: <span class="kw">impl </span>Into&lt;Point&gt;,
+        control2: <span class="kw">impl </span>Into&lt;Point&gt;,
+        to: <span class="kw">impl </span>Into&lt;Point&gt;,
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">let </span>to = to.into();
+        <span class="self">self</span>.current = to;
+        <span class="self">self</span>.closed = <span class="bool-val">false</span>;
+        <span class="self">self</span>.curve_to(
+            FixedPoint::from_point(control1.into() + <span class="self">self</span>.shift),
+            FixedPoint::from_point(control2.into() + <span class="self">self</span>.shift),
+            FixedPoint::from_point(to + <span class="self">self</span>.shift),
         );
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">line_to</span>(<span class="self">self</span>.<span class="ident">start</span>);
-        <span class="self">self</span>.<span class="ident">closed</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>
-    }
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>close(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.line_to(<span class="self">self</span>.start);
+        <span class="self">self</span>.closed = <span class="bool-val">true</span>;
+        <span class="self">self
+    </span>}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Cell</span> {
-    <span class="ident">x</span>: <span class="ident">i32</span>,
-    <span class="ident">cover</span>: <span class="ident">i32</span>,
-    <span class="ident">area</span>: <span class="ident">i32</span>,
-    <span class="ident">next</span>: <span class="ident">i32</span>,
+<span class="attribute">#[derive(Copy, Clone)]
+</span><span class="kw">pub struct </span>Cell {
+    x: i32,
+    cover: i32,
+    area: i32,
+    next: i32,
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RasterStorage</span> {
-    <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">FixedPoint</span>, <span class="ident">max</span>: <span class="ident">FixedPoint</span>);
-    <span class="kw">fn</span> <span class="ident">cells</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Cell</span>];
-    <span class="kw">fn</span> <span class="ident">indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">i32</span>];
-    <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">area</span>: <span class="ident">i32</span>, <span class="ident">cover</span>: <span class="ident">i32</span>);
+<span class="kw">pub trait </span>RasterStorage {
+    <span class="kw">fn </span>reset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, min: FixedPoint, max: FixedPoint);
+    <span class="kw">fn </span>cells(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Cell];
+    <span class="kw">fn </span>indices(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[i32];
+    <span class="kw">fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: i32, y: i32, area: i32, cover: i32);
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HeapStorage</span> {
-    <span class="ident">min</span>: <span class="ident">FixedPoint</span>,
-    <span class="ident">max</span>: <span class="ident">FixedPoint</span>,
-    <span class="ident">cells</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Cell</span><span class="op">&gt;</span>,
-    <span class="ident">indices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>HeapStorage {
+    min: FixedPoint,
+    max: FixedPoint,
+    cells: Vec&lt;Cell&gt;,
+    indices: Vec&lt;i32&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">RasterStorage</span> <span class="kw">for</span> <span class="ident">HeapStorage</span> {
-    <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">FixedPoint</span>, <span class="ident">max</span>: <span class="ident">FixedPoint</span>) {
-        <span class="self">self</span>.<span class="ident">min</span> <span class="op">=</span> <span class="ident">min</span>;
-        <span class="self">self</span>.<span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>;
-        <span class="self">self</span>.<span class="ident">cells</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">indices</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">indices</span>.<span class="ident">resize</span>((<span class="ident">max</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>, <span class="op">-</span><span class="number">1</span>);
+<span class="kw">impl </span>RasterStorage <span class="kw">for </span>HeapStorage {
+    <span class="kw">fn </span>reset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, min: FixedPoint, max: FixedPoint) {
+        <span class="self">self</span>.min = min;
+        <span class="self">self</span>.max = max;
+        <span class="self">self</span>.cells.clear();
+        <span class="self">self</span>.indices.clear();
+        <span class="self">self</span>.indices.resize((max.y - min.y) <span class="kw">as </span>usize, -<span class="number">1</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">cells</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Cell</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cells</span>
+    <span class="kw">fn </span>cells(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Cell] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.cells
     }
 
-    <span class="kw">fn</span> <span class="ident">indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">i32</span>] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">indices</span>
+    <span class="kw">fn </span>indices(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[i32] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.indices
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">area</span>: <span class="ident">i32</span>, <span class="ident">cover</span>: <span class="ident">i32</span>) {
-        <span class="kw">let</span> <span class="ident">yindex</span> <span class="op">=</span> (<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cell_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">indices</span>[<span class="ident">yindex</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_index</span> <span class="op">=</span> <span class="op">-</span><span class="number">1</span>;
-        <span class="kw">while</span> <span class="ident">cell_index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">cells</span>[<span class="ident">cell_index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-            <span class="kw">if</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">x</span> {
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: i32, y: i32, area: i32, cover: i32) {
+        <span class="kw">let </span>yindex = (y - <span class="self">self</span>.min.y) <span class="kw">as </span>usize;
+        <span class="kw">let </span><span class="kw-2">mut </span>cell_index = <span class="self">self</span>.indices[yindex];
+        <span class="kw">let </span><span class="kw-2">mut </span>last_index = -<span class="number">1</span>;
+        <span class="kw">while </span>cell_index != -<span class="number">1 </span>{
+            <span class="kw">let </span>cell = <span class="kw-2">&amp;mut </span><span class="self">self</span>.cells[cell_index <span class="kw">as </span>usize];
+            <span class="kw">if </span>cell.x &gt; x {
                 <span class="kw">break</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">==</span> <span class="ident">x</span> {
-                <span class="ident">cell</span>.<span class="ident">area</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">area</span>.<span class="ident">wrapping_add</span>(<span class="ident">area</span>);
-                <span class="ident">cell</span>.<span class="ident">cover</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">cover</span>.<span class="ident">wrapping_add</span>(<span class="ident">cover</span>);
+            } <span class="kw">else if </span>cell.x == x {
+                cell.area = cell.area.wrapping_add(area);
+                cell.cover = cell.cover.wrapping_add(cover);
                 <span class="kw">return</span>;
             }
-            <span class="ident">last_index</span> <span class="op">=</span> <span class="ident">cell_index</span>;
-            <span class="ident">cell_index</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">next</span>;
+            last_index = cell_index;
+            cell_index = cell.next;
         }
-        <span class="kw">let</span> <span class="ident">new_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cells</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="ident">Cell</span> {
-            <span class="ident">x</span>: <span class="ident">x</span>,
-            <span class="ident">area</span>,
-            <span class="ident">cover</span>,
-            <span class="ident">next</span>: <span class="ident">cell_index</span>,
+        <span class="kw">let </span>new_index = <span class="self">self</span>.cells.len();
+        <span class="kw">let </span>cell = Cell {
+            x: x,
+            area,
+            cover,
+            next: cell_index,
         };
-        <span class="kw">if</span> <span class="ident">last_index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-            <span class="self">self</span>.<span class="ident">cells</span>[<span class="ident">last_index</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">next</span> <span class="op">=</span> <span class="ident">new_index</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">indices</span>[<span class="ident">yindex</span>] <span class="op">=</span> <span class="ident">new_index</span> <span class="kw">as</span> <span class="ident">i32</span>;
+        <span class="kw">if </span>last_index != -<span class="number">1 </span>{
+            <span class="self">self</span>.cells[last_index <span class="kw">as </span>usize].next = new_index <span class="kw">as </span>i32;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.indices[yindex] = new_index <span class="kw">as </span>i32;
         }
-        <span class="self">self</span>.<span class="ident">cells</span>.<span class="ident">push</span>(<span class="ident">cell</span>);
+        <span class="self">self</span>.cells.push(cell);
     }
 }
 
-<span class="kw">const</span> <span class="ident">MAX_CELLS</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1024</span>;
-<span class="kw">const</span> <span class="ident">MAX_BAND</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">512</span>;
+<span class="kw">const </span>MAX_CELLS: usize = <span class="number">1024</span>;
+<span class="kw">const </span>MAX_BAND: usize = <span class="number">512</span>;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AdaptiveStorage</span> {
-    <span class="ident">min</span>: <span class="ident">FixedPoint</span>,
-    <span class="ident">max</span>: <span class="ident">FixedPoint</span>,
-    <span class="ident">height</span>: <span class="ident">usize</span>,
-    <span class="ident">cell_count</span>: <span class="ident">usize</span>,
-    <span class="ident">cells</span>: [<span class="ident">Cell</span>; <span class="ident">MAX_CELLS</span>],
-    <span class="ident">heap_cells</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Cell</span><span class="op">&gt;</span>,
-    <span class="ident">indices</span>: [<span class="ident">i32</span>; <span class="ident">MAX_BAND</span>],
-    <span class="ident">heap_indices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
+<span class="kw">pub struct </span>AdaptiveStorage {
+    min: FixedPoint,
+    max: FixedPoint,
+    height: usize,
+    cell_count: usize,
+    cells: [Cell; MAX_CELLS],
+    heap_cells: Vec&lt;Cell&gt;,
+    indices: [i32; MAX_BAND],
+    heap_indices: Vec&lt;i32&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">AdaptiveStorage</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">min</span>: <span class="ident">FixedPoint::default</span>(),
-            <span class="ident">max</span>: <span class="ident">FixedPoint::default</span>(),
-            <span class="ident">height</span>: <span class="number">0</span>,
-            <span class="ident">cell_count</span>: <span class="number">0</span>,
-            <span class="ident">cells</span>: <span class="kw">unsafe</span> { <span class="ident">core::mem::MaybeUninit::uninit</span>().<span class="ident">assume_init</span>() },
-            <span class="ident">heap_cells</span>: <span class="ident">Vec::new</span>(),
-            <span class="ident">indices</span>: <span class="kw">unsafe</span> { <span class="ident">core::mem::MaybeUninit::uninit</span>().<span class="ident">assume_init</span>() },
-            <span class="ident">heap_indices</span>: <span class="ident">Vec::new</span>(),
+<span class="kw">impl </span>AdaptiveStorage {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            min: FixedPoint::default(),
+            max: FixedPoint::default(),
+            height: <span class="number">0</span>,
+            cell_count: <span class="number">0</span>,
+            cells: <span class="kw">unsafe </span>{ core::mem::MaybeUninit::uninit().assume_init() },
+            heap_cells: Vec::new(),
+            indices: <span class="kw">unsafe </span>{ core::mem::MaybeUninit::uninit().assume_init() },
+            heap_indices: Vec::new(),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">RasterStorage</span> <span class="kw">for</span> <span class="ident">AdaptiveStorage</span> {
-    <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">FixedPoint</span>, <span class="ident">max</span>: <span class="ident">FixedPoint</span>) {
-        <span class="self">self</span>.<span class="ident">min</span> <span class="op">=</span> <span class="ident">min</span>;
-        <span class="self">self</span>.<span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>;
-        <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> (<span class="ident">max</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="self">self</span>.<span class="ident">cell_count</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="self">self</span>.<span class="ident">heap_cells</span>.<span class="ident">clear</span>();
-        <span class="self">self</span>.<span class="ident">heap_indices</span>.<span class="ident">clear</span>();
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">MAX_BAND</span> {
-            <span class="self">self</span>.<span class="ident">heap_indices</span>.<span class="ident">resize</span>((<span class="ident">max</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>, <span class="op">-</span><span class="number">1</span>);
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span> {
-                <span class="self">self</span>.<span class="ident">indices</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="op">-</span><span class="number">1</span>;
+<span class="kw">impl </span>RasterStorage <span class="kw">for </span>AdaptiveStorage {
+    <span class="kw">fn </span>reset(<span class="kw-2">&amp;mut </span><span class="self">self</span>, min: FixedPoint, max: FixedPoint) {
+        <span class="self">self</span>.min = min;
+        <span class="self">self</span>.max = max;
+        <span class="self">self</span>.height = (max.y - min.y) <span class="kw">as </span>usize;
+        <span class="self">self</span>.cell_count = <span class="number">0</span>;
+        <span class="self">self</span>.heap_cells.clear();
+        <span class="self">self</span>.heap_indices.clear();
+        <span class="kw">if </span><span class="self">self</span>.height &gt; MAX_BAND {
+            <span class="self">self</span>.heap_indices.resize((max.y - min.y) <span class="kw">as </span>usize, -<span class="number">1</span>);
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.height <span class="kw">as </span>usize {
+                <span class="self">self</span>.indices[i] = -<span class="number">1</span>;
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cells</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Cell</span>] {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cell_count</span> <span class="op">&gt;</span> <span class="ident">MAX_CELLS</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">heap_cells</span>
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cells</span>
+    <span class="kw">fn </span>cells(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Cell] {
+        <span class="kw">if </span><span class="self">self</span>.cell_count &gt; MAX_CELLS {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.heap_cells
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;</span><span class="self">self</span>.cells
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">i32</span>] {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">MAX_BAND</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">heap_indices</span>
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">indices</span>[..<span class="self">self</span>.<span class="ident">height</span>]
+    <span class="kw">fn </span>indices(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[i32] {
+        <span class="kw">if </span><span class="self">self</span>.height &gt; MAX_BAND {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.heap_indices
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;</span><span class="self">self</span>.indices[..<span class="self">self</span>.height]
         }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">area</span>: <span class="ident">i32</span>, <span class="ident">cover</span>: <span class="ident">i32</span>) {
-        <span class="kw">let</span> <span class="ident">yindex</span> <span class="op">=</span> (<span class="ident">y</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>.<span class="ident">y</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">MAX_BAND</span> {
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">heap_indices</span>[..]
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">indices</span>[..]
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">fn </span>set(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: i32, y: i32, area: i32, cover: i32) {
+        <span class="kw">let </span>yindex = (y - <span class="self">self</span>.min.y) <span class="kw">as </span>usize;
+        <span class="kw">let </span>indices = <span class="kw">if </span><span class="self">self</span>.height &gt; MAX_BAND {
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.heap_indices[..]
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.indices[..]
         };
-        <span class="kw">let</span> <span class="ident">cells</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">heap_cells</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">heap_cells</span>[..]
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">cells</span>[..]
+        <span class="kw">let </span>cells = <span class="kw">if </span><span class="self">self</span>.heap_cells.len() != <span class="number">0 </span>{
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.heap_cells[..]
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;mut </span><span class="self">self</span>.cells[..]
         };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cell_index</span> <span class="op">=</span> <span class="ident">indices</span>[<span class="ident">yindex</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">last_index</span> <span class="op">=</span> <span class="op">-</span><span class="number">1</span>;
-        <span class="kw">while</span> <span class="ident">cell_index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">cells</span>[<span class="ident">cell_index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-            <span class="kw">if</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">x</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>cell_index = indices[yindex];
+        <span class="kw">let </span><span class="kw-2">mut </span>last_index = -<span class="number">1</span>;
+        <span class="kw">while </span>cell_index != -<span class="number">1 </span>{
+            <span class="kw">let </span>cell = <span class="kw-2">&amp;mut </span>cells[cell_index <span class="kw">as </span>usize];
+            <span class="kw">if </span>cell.x &gt; x {
                 <span class="kw">break</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cell</span>.<span class="ident">x</span> <span class="op">==</span> <span class="ident">x</span> {
-                <span class="ident">cell</span>.<span class="ident">area</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">area</span>.<span class="ident">wrapping_add</span>(<span class="ident">area</span>);
-                <span class="ident">cell</span>.<span class="ident">cover</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">cover</span>.<span class="ident">wrapping_add</span>(<span class="ident">cover</span>);
+            } <span class="kw">else if </span>cell.x == x {
+                cell.area = cell.area.wrapping_add(area);
+                cell.cover = cell.cover.wrapping_add(cover);
                 <span class="kw">return</span>;
             }
-            <span class="ident">last_index</span> <span class="op">=</span> <span class="ident">cell_index</span>;
-            <span class="ident">cell_index</span> <span class="op">=</span> <span class="ident">cell</span>.<span class="ident">next</span>;
+            last_index = cell_index;
+            cell_index = cell.next;
         }
-        <span class="kw">let</span> <span class="ident">new_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cell_count</span>;
-        <span class="self">self</span>.<span class="ident">cell_count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="ident">Cell</span> {
-            <span class="ident">x</span>: <span class="ident">x</span>,
-            <span class="ident">area</span>,
-            <span class="ident">cover</span>,
-            <span class="ident">next</span>: <span class="ident">cell_index</span>,
+        <span class="kw">let </span>new_index = <span class="self">self</span>.cell_count;
+        <span class="self">self</span>.cell_count += <span class="number">1</span>;
+        <span class="kw">let </span>cell = Cell {
+            x: x,
+            area,
+            cover,
+            next: cell_index,
         };
-        <span class="kw">if</span> <span class="ident">last_index</span> <span class="op">!</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
-            <span class="ident">cells</span>[<span class="ident">last_index</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">next</span> <span class="op">=</span> <span class="ident">new_index</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">indices</span>[<span class="ident">yindex</span>] <span class="op">=</span> <span class="ident">new_index</span> <span class="kw">as</span> <span class="ident">i32</span>;
+        <span class="kw">if </span>last_index != -<span class="number">1 </span>{
+            cells[last_index <span class="kw">as </span>usize].next = new_index <span class="kw">as </span>i32;
+        } <span class="kw">else </span>{
+            indices[yindex] = new_index <span class="kw">as </span>i32;
         }
-        <span class="kw">if</span> <span class="ident">new_index</span> <span class="op">&lt;</span> <span class="ident">MAX_CELLS</span> {
-            <span class="ident">cells</span>[<span class="ident">new_index</span>] <span class="op">=</span> <span class="ident">cell</span>;
-        } <span class="kw">else</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">heap_cells</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
-                <span class="self">self</span>.<span class="ident">heap_cells</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cells</span>);
+        <span class="kw">if </span>new_index &lt; MAX_CELLS {
+            cells[new_index] = cell;
+        } <span class="kw">else </span>{
+            <span class="kw">if </span><span class="self">self</span>.heap_cells.len() == <span class="number">0 </span>{
+                <span class="self">self</span>.heap_cells.extend_from_slice(<span class="kw-2">&amp;</span><span class="self">self</span>.cells);
             }
-            <span class="self">self</span>.<span class="ident">heap_cells</span>.<span class="ident">push</span>(<span class="ident">cell</span>);
+            <span class="self">self</span>.heap_cells.push(cell);
         }
     }
 }
 
-<span class="kw">const</span> <span class="ident">_MAX_DIM</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">core::i16::MAX</span> <span class="kw">as</span> <span class="ident">u32</span>;
+<span class="kw">const </span>_MAX_DIM: u32 = core::i16::MAX <span class="kw">as </span>u32;
 
-<span class="kw">fn</span> <span class="ident">split_quad</span>(<span class="ident">base</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">FixedPoint</span>]) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span>;
-    <span class="ident">base</span>[<span class="number">4</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span>;
-    <span class="ident">a</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span>;
-    <span class="ident">b</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span>;
-    <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">b</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">base</span>[<span class="number">4</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span>;
-    <span class="ident">a</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span>;
-    <span class="ident">b</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span>;
-    <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">b</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
+<span class="kw">fn </span>split_quad(base: <span class="kw-2">&amp;mut </span>[FixedPoint]) {
+    <span class="kw">let </span><span class="kw-2">mut </span>a;
+    <span class="kw">let </span><span class="kw-2">mut </span>b;
+    base[<span class="number">4</span>].x = base[<span class="number">2</span>].x;
+    a = base[<span class="number">0</span>].x + base[<span class="number">1</span>].x;
+    b = base[<span class="number">1</span>].x + base[<span class="number">2</span>].x;
+    base[<span class="number">3</span>].x = b &gt;&gt; <span class="number">1</span>;
+    base[<span class="number">2</span>].x = (a + b) &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">1</span>].x = a &gt;&gt; <span class="number">1</span>;
+    base[<span class="number">4</span>].y = base[<span class="number">2</span>].y;
+    a = base[<span class="number">0</span>].y + base[<span class="number">1</span>].y;
+    b = base[<span class="number">1</span>].y + base[<span class="number">2</span>].y;
+    base[<span class="number">3</span>].y = b &gt;&gt; <span class="number">1</span>;
+    base[<span class="number">2</span>].y = (a + b) &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">1</span>].y = a &gt;&gt; <span class="number">1</span>;
 }
 
-<span class="kw">fn</span> <span class="ident">split_cubic</span>(<span class="ident">base</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">FixedPoint</span>]) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span>;
-    <span class="ident">base</span>[<span class="number">6</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">x</span>;
-    <span class="ident">a</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">0</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span>;
-    <span class="ident">b</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span>;
-    <span class="ident">c</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">x</span>;
-    <span class="ident">base</span>[<span class="number">5</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">c</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">b</span>;
-    <span class="ident">base</span>[<span class="number">4</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">c</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">a</span> <span class="op">+</span><span class="op">=</span> <span class="ident">b</span>;
-    <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">x</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">x</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">c</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>;
-    <span class="ident">base</span>[<span class="number">6</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">y</span>;
-    <span class="ident">a</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">0</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span>;
-    <span class="ident">b</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span>;
-    <span class="ident">c</span> <span class="op">=</span> <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">+</span> <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">y</span>;
-    <span class="ident">base</span>[<span class="number">5</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">c</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">b</span>;
-    <span class="ident">base</span>[<span class="number">4</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">c</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">1</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">1</span>;
-    <span class="ident">a</span> <span class="op">+</span><span class="op">=</span> <span class="ident">b</span>;
-    <span class="ident">base</span>[<span class="number">2</span>].<span class="ident">y</span> <span class="op">=</span> <span class="ident">a</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">2</span>;
-    <span class="ident">base</span>[<span class="number">3</span>].<span class="ident">y</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">c</span>) <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">3</span>;
+<span class="kw">fn </span>split_cubic(base: <span class="kw-2">&amp;mut </span>[FixedPoint]) {
+    <span class="kw">let </span><span class="kw-2">mut </span>a;
+    <span class="kw">let </span><span class="kw-2">mut </span>b;
+    <span class="kw">let </span><span class="kw-2">mut </span>c;
+    base[<span class="number">6</span>].x = base[<span class="number">3</span>].x;
+    a = base[<span class="number">0</span>].x + base[<span class="number">1</span>].x;
+    b = base[<span class="number">1</span>].x + base[<span class="number">2</span>].x;
+    c = base[<span class="number">2</span>].x + base[<span class="number">3</span>].x;
+    base[<span class="number">5</span>].x = c &gt;&gt; <span class="number">1</span>;
+    c += b;
+    base[<span class="number">4</span>].x = c &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">1</span>].x = a &gt;&gt; <span class="number">1</span>;
+    a += b;
+    base[<span class="number">2</span>].x = a &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">3</span>].x = (a + c) &gt;&gt; <span class="number">3</span>;
+    base[<span class="number">6</span>].y = base[<span class="number">3</span>].y;
+    a = base[<span class="number">0</span>].y + base[<span class="number">1</span>].y;
+    b = base[<span class="number">1</span>].y + base[<span class="number">2</span>].y;
+    c = base[<span class="number">2</span>].y + base[<span class="number">3</span>].y;
+    base[<span class="number">5</span>].y = c &gt;&gt; <span class="number">1</span>;
+    c += b;
+    base[<span class="number">4</span>].y = c &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">1</span>].y = a &gt;&gt; <span class="number">1</span>;
+    a += b;
+    base[<span class="number">2</span>].y = a &gt;&gt; <span class="number">2</span>;
+    base[<span class="number">3</span>].y = (a + c) &gt;&gt; <span class="number">3</span>;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FixedPoint</span> {
-    <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">i32</span>,
-    <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">i32</span>,
+<span class="attribute">#[derive(Copy, Clone, Default)]
+</span><span class="kw">pub struct </span>FixedPoint {
+    <span class="kw">pub </span>x: i32,
+    <span class="kw">pub </span>y: i32,
 }
 
-<span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">FixedPoint</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;({}, {})&quot;</span>, <span class="self">self</span>.<span class="ident">x</span>, <span class="self">self</span>.<span class="ident">y</span>)
+<span class="kw">impl </span>fmt::Debug <span class="kw">for </span>FixedPoint {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(f, <span class="string">&quot;({}, {})&quot;</span>, <span class="self">self</span>.x, <span class="self">self</span>.y)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FixedPoint</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">x</span>, <span class="ident">y</span> }
+<span class="kw">impl </span>FixedPoint {
+    <span class="kw">pub fn </span>new(x: i32, y: i32) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ x, y }
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_point</span>(<span class="ident">p</span>: <span class="ident">Point</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">x</span>: <span class="ident">to_fixed</span>(<span class="ident">p</span>.<span class="ident">x</span>),
-            <span class="ident">y</span>: <span class="ident">to_fixed</span>(<span class="ident">p</span>.<span class="ident">y</span>),
+    <span class="attribute">#[inline(always)]
+    </span><span class="kw">pub fn </span>from_point(p: Point) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            x: to_fixed(p.x),
+            y: to_fixed(p.y),
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">to_fixed</span>(<span class="ident">v</span>: <span class="ident">f32</span>) -&gt; <span class="ident">i32</span> {
-    <span class="kw">unsafe</span> { (<span class="ident">v</span> <span class="op">*</span> <span class="number">256.</span>).<span class="ident">to_int_unchecked</span>() }
+<span class="attribute">#[inline(always)]
+</span><span class="kw">fn </span>to_fixed(v: f32) -&gt; i32 {
+    <span class="kw">unsafe </span>{ (v * <span class="number">256.</span>).to_int_unchecked() }
 }
 
-<span class="kw">const</span> <span class="ident">PIXEL_BITS</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">8</span>;
-<span class="kw">const</span> <span class="ident">ONE_PIXEL</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">PIXEL_BITS</span>;
+<span class="kw">const </span>PIXEL_BITS: i32 = <span class="number">8</span>;
+<span class="kw">const </span>ONE_PIXEL: i32 = <span class="number">1 </span>&lt;&lt; PIXEL_BITS;
 
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">trunc</span>(<span class="ident">x</span>: <span class="ident">i32</span>) -&gt; <span class="ident">i32</span> {
-    <span class="ident">x</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">PIXEL_BITS</span>
+<span class="attribute">#[inline(always)]
+</span><span class="kw">fn </span>trunc(x: i32) -&gt; i32 {
+    x &gt;&gt; PIXEL_BITS
 }
 
-<span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">fract</span>(<span class="ident">x</span>: <span class="ident">i32</span>) -&gt; <span class="ident">i32</span> {
-    <span class="ident">x</span> <span class="op">&amp;</span> (<span class="ident">ONE_PIXEL</span> <span class="op">-</span> <span class="number">1</span>)
+<span class="attribute">#[inline(always)]
+</span><span class="kw">fn </span>fract(x: i32) -&gt; i32 {
+    x &amp; (ONE_PIXEL - <span class="number">1</span>)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zeno" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
