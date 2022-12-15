@@ -297,6 +297,17 @@
 <span id="297">297</span>
 <span id="298">298</span>
 <span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -400,6 +411,7 @@
     <span class="kw">pub </span>stretch: Stretch,
     <span class="kw">pub </span>style: Style,
     <span class="kw">pub </span>weight: Weight,
+    <span class="kw">pub </span>metadata: usize,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Attrs&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -414,6 +426,7 @@
             stretch: Stretch::Normal,
             style: Style::Normal,
             weight: Weight::NORMAL,
+            metadata: <span class="number">0</span>,
         }
     }
 
@@ -453,6 +466,12 @@
         <span class="self">self
     </span>}
 
+    <span class="doccomment">/// Set metadata
+    </span><span class="kw">pub fn </span>metadata(<span class="kw-2">mut </span><span class="self">self</span>, metadata: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.metadata = metadata;
+        <span class="self">self
+    </span>}
+
     <span class="doccomment">/// Check if font matches
     </span><span class="kw">pub fn </span>matches(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>fontdb::FaceInfo) -&gt; bool {
         <span class="comment">//TODO: smarter way of including emoji
@@ -484,6 +503,7 @@
     <span class="kw">pub </span>stretch: Stretch,
     <span class="kw">pub </span>style: Style,
     <span class="kw">pub </span>weight: Weight,
+    <span class="kw">pub </span>metadata: usize,
 }
 
 <span class="kw">impl </span>AttrsOwned {
@@ -495,6 +515,7 @@
             stretch: attrs.stretch,
             style: attrs.style,
             weight: attrs.weight,
+            metadata: attrs.metadata,
         }
     }
 
@@ -506,6 +527,7 @@
             stretch: <span class="self">self</span>.stretch,
             style: <span class="self">self</span>.style,
             weight: <span class="self">self</span>.weight,
+            metadata: <span class="self">self</span>.metadata,
         }
     }
 }

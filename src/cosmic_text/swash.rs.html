@@ -134,10 +134,52 @@
 <span id="134">134</span>
 <span id="135">135</span>
 <span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::collections::BTreeMap <span class="kw">as </span>Map;
+<span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>alloc::vec::Vec;
 <span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>std::collections::HashMap <span class="kw">as </span>Map;
 <span class="kw">use </span>swash::scale::{ScaleContext, image::Content};
@@ -146,6 +188,7 @@
 
 <span class="kw">use crate</span>::{CacheKey, Color, FontSystem};
 
+<span class="kw">pub use </span>swash::zeno::Command;
 <span class="kw">pub use </span>swash::scale::image::{Content <span class="kw">as </span>SwashContent, Image <span class="kw">as </span>SwashImage};
 
 <span class="kw">fn </span>swash_image(font_system: <span class="kw-2">&amp;</span>FontSystem, context: <span class="kw-2">&amp;mut </span>ScaleContext, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
@@ -169,6 +212,7 @@
     </span><span class="kw">let </span>offset =
         Vector::new(cache_key.x_bin.as_float(), cache_key.y_bin.as_float());
 
+
     <span class="comment">// Select our source order
     </span>Render::new(<span class="kw-2">&amp;</span>[
         <span class="comment">// Color outline with the first palette
@@ -186,11 +230,40 @@
     </span>.render(<span class="kw-2">&amp;mut </span>scaler, cache_key.glyph_id)
 }
 
+<span class="kw">fn </span>swash_outline_commands(font_system: <span class="kw-2">&amp;</span>FontSystem, context: <span class="kw-2">&amp;mut </span>ScaleContext, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt; {
+    <span class="kw">use </span>swash::zeno::PathData <span class="kw">as _</span>;
+
+    <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_id) {
+        <span class="prelude-val">Some</span>(some) =&gt; some,
+        <span class="prelude-val">None </span>=&gt; {
+            <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_id);
+            <span class="kw">return </span><span class="prelude-val">None</span>;
+        },
+    };
+
+
+    <span class="comment">// Build the scaler
+    </span><span class="kw">let </span><span class="kw-2">mut </span>scaler = context
+        .builder(font.as_swash())
+        .size(cache_key.font_size <span class="kw">as </span>f32)
+        .build();
+
+    <span class="comment">// Scale the outline
+    </span><span class="kw">let </span>outline = scaler.scale_outline(cache_key.glyph_id).or_else(|| scaler.scale_color_outline(cache_key.glyph_id))<span class="question-mark">?</span>;
+
+    <span class="comment">// Get the path information of the outline
+    </span><span class="kw">let </span>path = outline.path();
+
+    <span class="comment">// Return the commands
+    </span><span class="prelude-val">Some</span>(path.commands().collect())
+}
+
 <span class="doccomment">/// Cache for rasterizing with the swash scaler
 </span><span class="kw">pub struct </span>SwashCache&lt;<span class="lifetime">&#39;a</span>&gt; {
     font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
     context: ScaleContext,
     <span class="kw">pub </span>image_cache: Map&lt;CacheKey, <span class="prelude-ty">Option</span>&lt;SwashImage&gt;&gt;,
+    <span class="kw">pub </span>outline_command_cache: Map&lt;CacheKey, <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt;&gt;,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; SwashCache&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -199,7 +272,8 @@
         <span class="self">Self </span>{
             font_system,
             context: ScaleContext::new(),
-            image_cache: Map::new()
+            image_cache: Map::new(),
+            outline_command_cache: Map::new()
         }
     }
 
@@ -213,6 +287,12 @@
         <span class="self">self</span>.image_cache.entry(cache_key).or_insert_with(|| {
             swash_image(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
         })
+    }
+
+    <span class="kw">pub fn </span>get_outline_commands(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[swash::zeno::Command]&gt; {
+        <span class="self">self</span>.outline_command_cache.entry(cache_key).or_insert_with(|| {
+            swash_outline_commands(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
+        }).as_deref()
     }
 
     <span class="doccomment">/// Enumerate pixels in an Image, use `with_image` for better performance

@@ -670,13 +670,16 @@
 <span id="670">670</span>
 <span id="671">671</span>
 <span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
-<span class="kw">use </span>unicode_bidi::Level;
 <span class="kw">use </span>core::mem;
-<span class="kw">use </span>core::ops::Range;
 <span class="kw">use </span>unicode_script::{Script, UnicodeScript};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
@@ -726,6 +729,7 @@
             missing.push(start_glyph);
         }
 
+        <span class="kw">let </span>attrs = attrs_list.get_span(start_glyph);
         glyphs.push(ShapeGlyph {
             start: start_glyph,
             end: end_run, <span class="comment">// Set later
@@ -735,7 +739,9 @@
             y_offset,
             font_id: font.info.id,
             glyph_id: info.glyph_id.try_into().expect(<span class="string">&quot;failed to cast glyph ID&quot;</span>),
-            color_opt: <span class="prelude-val">None</span>,
+            <span class="comment">//TODO: color should not be related to shaping
+            </span>color_opt: attrs.color_opt,
+            metadata: attrs.metadata,
         });
     }
 
@@ -762,13 +768,6 @@
                 prev.end = next_start;
             }
         }
-    }
-
-    <span class="comment">// Set color
-    //TODO: these attributes should not be related to shaping
-    </span><span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;mut </span>glyphs {
-        <span class="kw">let </span>attrs = attrs_list.get_span(glyph.start);
-        glyph.color_opt = attrs.color_opt;
     }
 
     (glyphs, missing)
@@ -918,6 +917,7 @@
     <span class="kw">pub </span>font_id: fontdb::ID,
     <span class="kw">pub </span>glyph_id: u16,
     <span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
+    <span class="kw">pub </span>metadata: usize,
 }
 
 <span class="kw">impl </span>ShapeGlyph {
@@ -942,6 +942,7 @@
             x_int,
             y_int,
             color_opt: <span class="self">self</span>.color_opt,
+            metadata: <span class="self">self</span>.metadata,
         }
     }
 }
@@ -1117,7 +1118,7 @@
 
             <span class="kw">if </span>line_rtl {
                 <span class="kw">for </span>range <span class="kw">in </span>runs.into_iter().rev() {
-                    <span class="kw">let </span>span_rtl = levels[range.start].is_rtl(); 
+                    <span class="kw">let </span>span_rtl = levels[range.start].is_rtl();
                     spans.push(ShapeSpan::new(
                         font_system,
                         line,
@@ -1270,12 +1271,18 @@
                         mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
                         layout_lines.push(
                             LayoutLine {
+                                w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
                                 glyphs: glyphs_swap,
                             },
                         );
 
                         x = start_x;
                         y = <span class="number">0.0</span>;
+                    }
+
+                    <span class="kw">if </span>x == start_x &amp;&amp; word.blank {
+                        <span class="comment">// Skip blank words at start of line
+                        </span><span class="kw">continue</span>;
                     }
 
                     <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs {
@@ -1289,11 +1296,12 @@
                             x + x_advance &gt; end_x
                         };
 
-                        <span class="kw">if </span>glyph_wrap {
+                        <span class="kw">if </span>glyph_wrap &amp;&amp; wrap_simple &amp;&amp; ! glyphs.is_empty() {
                             <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
                             mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
                             layout_lines.push(
                                 LayoutLine {
+                                    w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
                                     glyphs: glyphs_swap,
                                 },
                             );
@@ -1316,11 +1324,12 @@
                     }
                 }
 
-                <span class="kw">if </span>wrap {
+                <span class="kw">if </span>wrap &amp;&amp; ! glyphs.is_empty() {
                     <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
                     mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
                     layout_lines.push(
                         LayoutLine {
+                            w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
                             glyphs: glyphs_swap,
                         },
                     );
@@ -1334,6 +1343,7 @@
         <span class="kw">if </span>push_line {
             layout_lines.push(
                 LayoutLine {
+                    w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
                     glyphs,
                 },
             );
