@@ -37,6 +37,26 @@
 <span id="37">37</span>
 <span id="38">38</span>
 <span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -59,6 +79,26 @@
     </span><span class="kw">pub </span>rtl: bool,
     <span class="doccomment">/// Cache key, see [CacheKey]
     </span><span class="kw">pub </span>cache_key: CacheKey,
+    <span class="doccomment">/// X offset in line
+    ///
+    /// If you are dealing with physical coordinates, you will want to use [`Self::x_int`]
+    /// together with [`CacheKey::x_bin`] instead. This will ensure the best alignment of the
+    /// rasterized glyphs with the pixel grid.
+    ///
+    /// This offset is useful when you are dealing with logical units and you do not care or
+    /// cannot guarantee pixel grid alignment. For instance, when you want to use the glyphs
+    /// for vectorial text, apply linear transformations to the layout, etc.
+    </span><span class="kw">pub </span>x_offset: f32,
+    <span class="doccomment">/// Y offset in line
+    ///
+    /// If you are dealing with physical coordinates, you will want to use [`Self::y_int`]
+    /// together with [`CacheKey::y_bin`] instead. This will ensure the best alignment of the
+    /// rasterized glyphs with the pixel grid.
+    ///
+    /// This offset is useful when you are dealing with logical units and you do not care or
+    /// cannot guarantee pixel grid alignment. For instance, when you want to use the glyphs
+    /// for vectorial text, apply linear transformations to the layout, etc.
+    </span><span class="kw">pub </span>y_offset: f32,
     <span class="doccomment">/// Integer component of X offset in line
     </span><span class="kw">pub </span>x_int: i32,
     <span class="doccomment">/// Integer component of Y offset in line
