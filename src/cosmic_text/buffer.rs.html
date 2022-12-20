@@ -552,6 +552,25 @@
 <span id="552">552</span>
 <span id="553">553</span>
 <span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -565,7 +584,7 @@
 };
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
-<span class="kw">use crate</span>::{Attrs, AttrsList, BufferLine, FontSystem, LayoutGlyph, LayoutLine, ShapeLine};
+<span class="kw">use crate</span>::{Attrs, AttrsList, BufferLine, FontSystem, LayoutGlyph, LayoutLine, ShapeLine, Wrap};
 <span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
 
@@ -711,6 +730,7 @@
     scroll: i32,
     <span class="doccomment">/// True if a redraw is requires. Set to false after processing
     </span>redraw: bool,
+    wrap: Wrap,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -727,6 +747,7 @@
             height: <span class="number">0</span>,
             scroll: <span class="number">0</span>,
             redraw: <span class="bool-val">false</span>,
+            wrap: Wrap::Word,
         };
         buffer.set_text(<span class="string">&quot;&quot;</span>, Attrs::new());
         buffer
@@ -742,7 +763,8 @@
                 line.layout(
                     <span class="self">self</span>.font_system,
                     <span class="self">self</span>.metrics.font_size,
-                    <span class="self">self</span>.width
+                    <span class="self">self</span>.width,
+                    <span class="self">self</span>.wrap
                 );
             }
         }
@@ -771,7 +793,8 @@
             <span class="kw">let </span>layout = line.layout(
                 <span class="self">self</span>.font_system,
                 <span class="self">self</span>.metrics.font_size,
-                <span class="self">self</span>.width
+                <span class="self">self</span>.width,
+                <span class="self">self</span>.wrap
             );
             total_layout += layout.len() <span class="kw">as </span>i32;
         }
@@ -803,7 +826,8 @@
             <span class="kw">let </span>layout = line.layout(
                 <span class="self">self</span>.font_system,
                 <span class="self">self</span>.metrics.font_size,
-                <span class="self">self</span>.width
+                <span class="self">self</span>.width,
+                <span class="self">self</span>.wrap
             );
             <span class="kw">if </span>line_i == cursor.line {
                 <span class="kw">let </span>layout_cursor = <span class="self">self</span>.layout_cursor(<span class="kw-2">&amp;</span>cursor);
@@ -904,7 +928,7 @@
     <span class="doccomment">/// Lay out the provided line index and return the result
     </span><span class="kw">pub fn </span>line_layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, line_i: usize) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[LayoutLine]&gt; {
         <span class="kw">let </span>line = <span class="self">self</span>.lines.get_mut(line_i)<span class="question-mark">?</span>;
-        <span class="prelude-val">Some</span>(line.layout(<span class="self">self</span>.font_system, <span class="self">self</span>.metrics.font_size, <span class="self">self</span>.width))
+        <span class="prelude-val">Some</span>(line.layout(<span class="self">self</span>.font_system, <span class="self">self</span>.metrics.font_size, <span class="self">self</span>.width, <span class="self">self</span>.wrap))
     }
 
     <span class="doccomment">/// Get the current [`Metrics`]
@@ -916,6 +940,20 @@
     </span><span class="kw">pub fn </span>set_metrics(<span class="kw-2">&amp;mut </span><span class="self">self</span>, metrics: Metrics) {
         <span class="kw">if </span>metrics != <span class="self">self</span>.metrics {
             <span class="self">self</span>.metrics = metrics;
+            <span class="self">self</span>.relayout();
+            <span class="self">self</span>.shape_until_scroll();
+        }
+    }
+
+    <span class="doccomment">/// Get the current [`Wrap`]
+    </span><span class="kw">pub fn </span>wrap(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Wrap {
+        <span class="self">self</span>.wrap
+    }
+
+    <span class="doccomment">/// Set the current [`Wrap`]
+    </span><span class="kw">pub fn </span>set_wrap(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap: Wrap) {
+        <span class="kw">if </span>wrap != <span class="self">self</span>.wrap {
+            <span class="self">self</span>.wrap = wrap;
             <span class="self">self</span>.relayout();
             <span class="self">self</span>.shape_until_scroll();
         }

@@ -57,9 +57,34 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-</span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+</span><span class="kw">use </span>core::fmt::Display;
+
+<span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
 
 <span class="kw">use crate</span>::{CacheKey, Color};
@@ -115,6 +140,27 @@
     </span><span class="kw">pub </span>w: f32,
     <span class="doccomment">/// Glyphs in line
     </span><span class="kw">pub </span>glyphs: Vec&lt;LayoutGlyph&gt;,
+}
+
+<span class="doccomment">/// Wrapping mode
+</span><span class="attribute">#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+</span><span class="kw">pub enum </span>Wrap {
+    <span class="doccomment">/// No wrapping
+    </span><span class="prelude-val">None</span>,
+    <span class="doccomment">/// Wraps at a glyph level
+    </span>Glyph,
+    <span class="doccomment">/// Word Wrapping
+    </span>Word,
+}
+
+<span class="kw">impl </span>Display <span class="kw">for </span>Wrap {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>core::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; core::fmt::Result {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="self">Self</span>::None =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;No Wrap&quot;</span>),
+            <span class="self">Self</span>::Word =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Word Wrap&quot;</span>),
+            <span class="self">Self</span>::Glyph =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Character&quot;</span>),
+        }
+    }
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

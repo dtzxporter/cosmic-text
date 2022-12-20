@@ -177,14 +177,14 @@
     vec::Vec,
 };
 
-<span class="kw">use crate</span>::{AttrsList, FontSystem, LayoutLine, ShapeLine};
+<span class="kw">use crate</span>::{AttrsList, FontSystem, LayoutLine, ShapeLine, Wrap};
 
 <span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out
 </span><span class="kw">pub struct </span>BufferLine {
     <span class="comment">//TODO: make this not pub(crate)
     </span>text: String,
     attrs_list: AttrsList,
-    wrap_simple: bool,
+    wrap: Wrap,
     shape_opt: <span class="prelude-ty">Option</span>&lt;ShapeLine&gt;,
     layout_opt: <span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt;,
 }
@@ -197,7 +197,7 @@
         <span class="self">Self </span>{
             text: text.into(),
             attrs_list,
-            wrap_simple: <span class="bool-val">false</span>,
+            wrap: Wrap::Word,
             shape_opt: <span class="prelude-val">None</span>,
             layout_opt: <span class="prelude-val">None</span>,
         }
@@ -242,18 +242,18 @@
         </span>}
     }
 
-    <span class="doccomment">/// Get simple wrapping setting (wrap by characters only)
-    </span><span class="kw">pub fn </span>wrap_simple(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.wrap_simple
+    <span class="doccomment">/// Get wrapping setting (wrap by characters/words or no wrapping)
+    </span><span class="kw">pub fn </span>wrap(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Wrap {
+        <span class="self">self</span>.wrap
     }
 
-    <span class="doccomment">/// Set simple wrapping setting (wrap by characters only)
+    <span class="doccomment">/// Set wrapping setting (wrap by characters/words or no wrapping)
     ///
-    /// Will reset shape and layout if it differs from current simple wrapping setting.
+    /// Will reset shape and layout if it differs from current wrapping setting.
     /// Returns true if the line was reset
-    </span><span class="kw">pub fn </span>set_wrap_simple(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap_simple: bool) -&gt; bool {
-        <span class="kw">if </span>wrap_simple != <span class="self">self</span>.wrap_simple {
-            <span class="self">self</span>.wrap_simple = wrap_simple;
+    </span><span class="kw">pub fn </span>set_wrap(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap: Wrap) -&gt; bool {
+        <span class="kw">if </span>wrap != <span class="self">self</span>.wrap {
+            <span class="self">self</span>.wrap = wrap;
             <span class="self">self</span>.reset();
             <span class="bool-val">true
         </span>} <span class="kw">else </span>{
@@ -289,7 +289,7 @@
         <span class="self">self</span>.reset();
 
         <span class="kw">let </span><span class="kw-2">mut </span>new = <span class="self">Self</span>::new(text, attrs_list);
-        new.wrap_simple = <span class="self">self</span>.wrap_simple;
+        new.wrap = <span class="self">self</span>.wrap;
         new
     }
 
@@ -325,14 +325,14 @@
     }
 
     <span class="doccomment">/// Layout line, will cache results
-    </span><span class="kw">pub fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;</span>FontSystem, font_size: i32, width: i32) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
+    </span><span class="kw">pub fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;</span>FontSystem, font_size: i32, width: i32, wrap: Wrap) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
         <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
-            <span class="kw">let </span>wrap_simple = <span class="self">self</span>.wrap_simple;
+            <span class="self">self</span>.wrap = wrap;
             <span class="kw">let </span>shape = <span class="self">self</span>.shape(font_system);
             <span class="kw">let </span>layout = shape.layout(
                 font_size,
                 width,
-                wrap_simple
+                wrap
             );
             <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
         }
