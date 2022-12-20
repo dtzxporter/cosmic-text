@@ -1308,7 +1308,7 @@
                 <span class="kw">let </span>x = <span class="kw">match </span>run.glyphs.get(cursor_glyph) {
                     <span class="prelude-val">Some</span>(glyph) =&gt; {
                         <span class="comment">// Start of detected glyph
-                        </span><span class="kw">if </span>glyph.rtl {
+                        </span><span class="kw">if </span>glyph.level.is_rtl() {
                             (glyph.x + glyph.w - cursor_glyph_offset) <span class="kw">as </span>i32
                         } <span class="kw">else </span>{
                             (glyph.x + cursor_glyph_offset) <span class="kw">as </span>i32
@@ -1317,7 +1317,7 @@
                     <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>run.glyphs.last() {
                         <span class="prelude-val">Some</span>(glyph) =&gt; {
                             <span class="comment">// End of last glyph
-                            </span><span class="kw">if </span>glyph.rtl {
+                            </span><span class="kw">if </span>glyph.level.is_rtl() {
                                 glyph.x <span class="kw">as </span>i32
                             } <span class="kw">else </span>{
                                 (glyph.x + glyph.w) <span class="kw">as </span>i32
