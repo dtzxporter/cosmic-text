@@ -801,13 +801,11 @@
 <span id="801">801</span>
 <span id="802">802</span>
 <span id="803">803</span>
-<span id="804">804</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-</span><span class="kw">use </span>alloc::string::{String, ToString};
-<span class="kw">use </span>core::cmp;
-<span class="kw">use </span>std::iter::once;
+</span><span class="kw">use </span>alloc::string::String;
+<span class="kw">use </span>core::{cmp, iter::once};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
 <span class="kw">use crate</span>::{Action, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
@@ -1031,7 +1029,7 @@
         <span class="kw">if let </span><span class="prelude-val">Some</span>(data_line) = lines_iter.next() {
             <span class="kw">let </span><span class="kw-2">mut </span>these_attrs = final_attrs.split_off(data_line.len());
             remaining_split_len -= data_line.len();
-            std::mem::swap(<span class="kw-2">&amp;mut </span>these_attrs, <span class="kw-2">&amp;mut </span>final_attrs);
+            core::mem::swap(<span class="kw-2">&amp;mut </span>these_attrs, <span class="kw-2">&amp;mut </span>final_attrs);
             line.append(BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), these_attrs));
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;str::lines() did not yield any elements&quot;</span>);

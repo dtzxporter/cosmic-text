@@ -712,7 +712,7 @@
             x_end = <span class="prelude-val">Some</span>(<span class="self">self</span>.glyphs.last().map_or(<span class="number">0.</span>, |glyph| glyph.x + glyph.w * ltr_factor));
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(x_start) = x_start {
-            <span class="kw">let </span>x_end = x_end.unwrap();
+            <span class="kw">let </span>x_end = x_end.expect(<span class="string">&quot;end of cursor not found&quot;</span>);
             <span class="kw">let </span>(x_start, x_end) = <span class="kw">if </span>x_start &lt; x_end { (x_start, x_end) } <span class="kw">else </span>{ (x_end, x_start) };
             <span class="prelude-val">Some</span>((x_start, x_end - x_start))
         } <span class="kw">else </span>{
