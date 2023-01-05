@@ -887,18 +887,44 @@
 <span id="887">887</span>
 <span id="888">888</span>
 <span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+<span id="900">900</span>
+<span id="901">901</span>
+<span id="902">902</span>
+<span id="903">903</span>
+<span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
+<span id="908">908</span>
+<span id="909">909</span>
+<span id="910">910</span>
+<span id="911">911</span>
+<span id="912">912</span>
+<span id="913">913</span>
+<span id="914">914</span>
+<span id="915">915</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
-<span class="kw">use </span>core::cmp::{min, max};
+<span class="kw">use </span>core::cmp::{max, min};
 <span class="kw">use </span>core::mem;
 <span class="kw">use </span>core::ops::Range;
 <span class="kw">use </span>unicode_script::{Script, UnicodeScript};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
-<span class="kw">use crate</span>::{AttrsList, CacheKey, Color, Font, FontSystem, LayoutGlyph, LayoutLine, Wrap};
 <span class="kw">use </span><span class="kw">crate</span>::fallback::FontFallbackIter;
+<span class="kw">use crate</span>::{AttrsList, CacheKey, Color, Font, FontSystem, LayoutGlyph, LayoutLine, Wrap};
 
 <span class="kw">fn </span>shape_fallback(
     font: <span class="kw-2">&amp;</span>Font,
@@ -999,21 +1025,16 @@
     </span><span class="kw">let </span><span class="kw-2">mut </span>scripts = Vec::new();
     <span class="kw">for </span>c <span class="kw">in </span>line[start_run..end_run].chars() {
         <span class="kw">match </span>c.script() {
-            Script::Common |
-            Script::Inherited |
-            Script::Latin |
-            Script::Unknown =&gt; (),
-            script =&gt; <span class="kw">if </span>! scripts.contains(<span class="kw-2">&amp;</span>script) {
-                scripts.push(script);
-            },
+            Script::Common | Script::Inherited | Script::Latin | Script::Unknown =&gt; (),
+            script =&gt; {
+                <span class="kw">if </span>!scripts.contains(<span class="kw-2">&amp;</span>script) {
+                    scripts.push(script);
+                }
+            }
         }
     }
 
-    <span class="macro">log::trace!</span>(
-        <span class="string">&quot;      Run {:?}: &#39;{}&#39;&quot;</span>,
-        scripts,
-        <span class="kw-2">&amp;</span>line[start_run..end_run],
-    );
+    <span class="macro">log::trace!</span>(<span class="string">&quot;      Run {:?}: &#39;{}&#39;&quot;</span>, scripts, <span class="kw-2">&amp;</span>line[start_run..end_run],);
 
     <span class="kw">let </span>attrs = attrs_list.get_span(start_run);
 
@@ -1024,7 +1045,7 @@
         <span class="kw-2">&amp;</span>font_matches.fonts,
         <span class="kw-2">&amp;</span>default_families,
         scripts,
-        font_matches.locale
+        font_matches.locale,
     );
 
     <span class="kw">let </span>(<span class="kw-2">mut </span>glyphs, <span class="kw-2">mut </span>missing) = shape_fallback(
@@ -1044,14 +1065,8 @@
         };
 
         <span class="macro">log::trace!</span>(<span class="string">&quot;Evaluating fallback with font &#39;{}&#39;&quot;</span>, font.info.family);
-        <span class="kw">let </span>(<span class="kw-2">mut </span>fb_glyphs, fb_missing) = shape_fallback(
-            font,
-            line,
-            attrs_list,
-            start_run,
-            end_run,
-            span_rtl,
-        );
+        <span class="kw">let </span>(<span class="kw-2">mut </span>fb_glyphs, fb_missing) =
+            shape_fallback(font, line, attrs_list, start_run, end_run, span_rtl);
 
         <span class="comment">// Insert all matching glyphs
         </span><span class="kw">let </span><span class="kw-2">mut </span>fb_i = <span class="number">0</span>;
@@ -1144,7 +1159,7 @@
             <span class="self">self</span>.font_id,
             <span class="self">self</span>.glyph_id,
             font_size,
-            (x + x_offset, y - y_offset)
+            (x + x_offset, y - y_offset),
         );
         LayoutGlyph {
             start: <span class="self">self</span>.start,
@@ -1196,7 +1211,7 @@
         <span class="kw">for </span>(egc_i, _egc) <span class="kw">in </span>word.grapheme_indices(<span class="bool-val">true</span>) {
             <span class="kw">let </span>start_egc = word_range.start + egc_i;
             <span class="kw">let </span>attrs_egc = attrs_list.get_span(start_egc);
-            <span class="kw">if </span>! attrs.compatible(<span class="kw-2">&amp;</span>attrs_egc) {
+            <span class="kw">if </span>!attrs.compatible(<span class="kw-2">&amp;</span>attrs_egc) {
                 <span class="comment">//TODO: more efficient
                 </span>glyphs.append(<span class="kw-2">&amp;mut </span>shape_run(
                     font_system,
@@ -1204,7 +1219,7 @@
                     attrs_list,
                     start_run,
                     start_egc,
-                    span_rtl
+                    span_rtl,
                 ));
 
                 start_run = start_egc;
@@ -1219,7 +1234,7 @@
                 attrs_list,
                 start_run,
                 word_range.end,
-                span_rtl
+                span_rtl,
             ));
         }
 
@@ -1230,7 +1245,12 @@
             y_advance += glyph.y_advance;
         }
 
-        <span class="self">Self </span>{ blank, glyphs, x_advance, y_advance}
+        <span class="self">Self </span>{
+            blank,
+            glyphs,
+            x_advance,
+            y_advance,
+        }
     }
 }
 
@@ -1287,7 +1307,8 @@
                         font_system,
                         line,
                         attrs_list,
-                        (span_range.start + start_lb + i)..(span_range.start + start_lb + i + c.len_utf8()),
+                        (span_range.start + start_lb + i)
+                            ..(span_range.start + start_lb + i + c.len_utf8()),
                         level,
                         <span class="bool-val">true</span>,
                     ));
@@ -1308,10 +1329,7 @@
             words.reverse();
         }
 
-        ShapeSpan {
-            level,
-            words,
-        }
+        ShapeSpan { level, words }
     }
 }
 
@@ -1325,11 +1343,7 @@
 </span><span class="kw">type </span>VlRange = (usize, (usize, usize), (usize, usize));
 
 <span class="kw">impl </span>ShapeLine {
-    <span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;a</span>&gt;(
-        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
-        line: <span class="kw-2">&amp;</span>str,
-        attrs_list: <span class="kw-2">&amp;</span>AttrsList
-    ) -&gt; <span class="self">Self </span>{
+    <span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;a</span>&gt;(font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem, line: <span class="kw-2">&amp;</span>str, attrs_list: <span class="kw-2">&amp;</span>AttrsList) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>spans = Vec::new();
 
         <span class="kw">let </span>bidi = unicode_bidi::BidiInfo::new(line, <span class="prelude-val">None</span>);
@@ -1345,12 +1359,17 @@
             <span class="kw">let </span>line_range = para_info.range.clone();
             <span class="kw">let </span>levels = <span class="self">Self</span>::adjust_levels(<span class="kw-2">&amp;</span>unicode_bidi::Paragraph::new(<span class="kw-2">&amp;</span>bidi, para_info));
 
-            <span class="comment">// Find consecutive level runs. We use this to create Spans. 
+            <span class="comment">// Find consecutive level runs. We use this to create Spans.
             // Each span is a set of characters with equal levels.
             </span><span class="kw">let </span><span class="kw-2">mut </span>start = line_range.start;
             <span class="kw">let </span><span class="kw-2">mut </span>run_level = levels[start];
 
-            <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>new_level) <span class="kw">in </span>levels.iter().enumerate().take(line_range.end).skip(start + <span class="number">1</span>) {
+            <span class="kw">for </span>(i, <span class="kw-2">&amp;</span>new_level) <span class="kw">in </span>levels
+                .iter()
+                .enumerate()
+                .take(line_range.end)
+                .skip(start + <span class="number">1</span>)
+            {
                 <span class="kw">if </span>new_level != run_level {
                     <span class="comment">// End of the previous run, start of a new one.
                     </span>spans.push(ShapeSpan::new(
@@ -1376,13 +1395,11 @@
             line_rtl
         };
 
-        <span class="self">Self </span>{ rtl, spans}
+        <span class="self">Self </span>{ rtl, spans }
     }
 
     <span class="comment">// A modified version of first part of unicode_bidi::bidi_info::visual_run
-    </span><span class="kw">fn </span>adjust_levels(
-        para: <span class="kw-2">&amp;</span>unicode_bidi::Paragraph,
-    ) -&gt; Vec&lt;unicode_bidi::Level&gt; {
+    </span><span class="kw">fn </span>adjust_levels(para: <span class="kw-2">&amp;</span>unicode_bidi::Paragraph) -&gt; Vec&lt;unicode_bidi::Level&gt; {
         <span class="kw">use </span>unicode_bidi::BidiClass::<span class="kw-2">*</span>;
         <span class="kw">let </span>text = para.info.text;
         <span class="kw">let </span>levels = <span class="kw-2">&amp;</span>para.info.levels;
@@ -1436,7 +1453,10 @@
 
     <span class="comment">// A modified version of second part of unicode_bidi::bidi_info::visual run
     </span><span class="kw">fn </span>reorder(<span class="kw-2">&amp;</span><span class="self">self</span>, line_range: <span class="kw-2">&amp;</span>[VlRange]) -&gt; Vec&lt;Range&lt;usize&gt;&gt; {
-        <span class="kw">let </span>line : Vec&lt;unicode_bidi::Level&gt; = line_range.iter().map(|(span_index, <span class="kw">_</span>, <span class="kw">_</span>)| <span class="self">self</span>.spans[<span class="kw-2">*</span>span_index].level).collect();
+        <span class="kw">let </span>line: Vec&lt;unicode_bidi::Level&gt; = line_range
+            .iter()
+            .map(|(span_index, <span class="kw">_</span>, <span class="kw">_</span>)| <span class="self">self</span>.spans[<span class="kw-2">*</span>span_index].level)
+            .collect();
         <span class="comment">// Find consecutive level runs.
         </span><span class="kw">let </span><span class="kw-2">mut </span>runs = Vec::new();
         <span class="kw">let </span><span class="kw-2">mut </span>start = <span class="number">0</span>;
@@ -1494,14 +1514,8 @@
 
         runs
     }
-    
 
-    <span class="kw">pub fn </span>layout(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        font_size: i32,
-        line_width: i32,
-        wrap: Wrap,
-    ) -&gt; Vec&lt;LayoutLine&gt; {
+    <span class="kw">pub fn </span>layout(<span class="kw-2">&amp;</span><span class="self">self</span>, font_size: i32, line_width: i32, wrap: Wrap) -&gt; Vec&lt;LayoutLine&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>layout_lines = Vec::with_capacity(<span class="number">1</span>);
 
         <span class="comment">// This is used to create a visual line for empty lines (e.g. lines with only a &lt;CR&gt;)
@@ -1516,8 +1530,6 @@
         <span class="kw">let </span><span class="kw-2">mut </span>x = start_x;
         <span class="kw">let </span><span class="kw-2">mut </span>y;
 
-
-
         <span class="comment">// This would keep the maximum number of spans that would fit on a visual line
         // If one span is too large, this variable will hold the range of words inside that span
         // that fits on a line.
@@ -1525,22 +1537,22 @@
 
         <span class="kw">if </span>wrap == Wrap::None {
             <span class="kw">for </span>(span_index, span) <span class="kw">in </span><span class="self">self</span>.spans.iter().enumerate() {
-                current_visual_line.push((span_index, (<span class="number">0</span>,<span class="number">0</span>), (span.words.len(), <span class="number">0</span>)));
+                current_visual_line.push((span_index, (<span class="number">0</span>, <span class="number">0</span>), (span.words.len(), <span class="number">0</span>)));
             }
-        }
-        <span class="kw">else </span>{
+        } <span class="kw">else </span>{
             <span class="kw">let </span><span class="kw-2">mut </span>fit_x = line_width <span class="kw">as </span>f32;
             <span class="kw">for </span>(span_index, span) <span class="kw">in </span><span class="self">self</span>.spans.iter().enumerate() {
-
                 <span class="kw">let </span><span class="kw-2">mut </span>word_ranges = Vec::new();
                 <span class="kw">let </span><span class="kw-2">mut </span>word_range_width = <span class="number">0.</span>;
 
                 <span class="comment">// Create the word ranges that fits in a visual line
-                </span><span class="kw">if </span><span class="self">self</span>.rtl != span.level.is_rtl() { <span class="comment">// incongruent directions
+                </span><span class="kw">if </span><span class="self">self</span>.rtl != span.level.is_rtl() {
+                    <span class="comment">// incongruent directions
                     </span><span class="kw">let </span><span class="kw-2">mut </span>fitting_start = (span.words.len(), <span class="number">0</span>);
                     <span class="kw">for </span>(i, word) <span class="kw">in </span>span.words.iter().enumerate().rev() {
                         <span class="kw">let </span>word_size = font_size <span class="kw">as </span>f32 * word.x_advance;
-                        <span class="kw">if </span>fit_x - word_size &gt;= <span class="number">0.  </span>{ <span class="comment">// fits
+                        <span class="kw">if </span>fit_x - word_size &gt;= <span class="number">0. </span>{
+                            <span class="comment">// fits
                             </span>fit_x -= word_size;
                             word_range_width += word_size;
                             <span class="kw">continue</span>;
@@ -1552,33 +1564,39 @@
                                     word_range_width += glyph_size;
                                     <span class="kw">continue</span>;
                                 } <span class="kw">else </span>{
-                                    word_ranges.push(((i, glyph_i+<span class="number">1</span>), fitting_start, word_range_width));
+                                    word_ranges.push((
+                                        (i, glyph_i + <span class="number">1</span>),
+                                        fitting_start,
+                                        word_range_width,
+                                    ));
                                     fit_x = line_width <span class="kw">as </span>f32 - glyph_size;
                                     word_range_width = glyph_size;
-                                    fitting_start = (i, glyph_i+<span class="number">1</span>);
+                                    fitting_start = (i, glyph_i + <span class="number">1</span>);
                                 }
                             }
-                        } <span class="kw">else </span>{ <span class="comment">// Wrap::Word
-                            </span>word_ranges.push(((i+<span class="number">1</span>, <span class="number">0</span>), fitting_start, word_range_width));
+                        } <span class="kw">else </span>{
+                            <span class="comment">// Wrap::Word
+                            </span>word_ranges.push(((i + <span class="number">1</span>, <span class="number">0</span>), fitting_start, word_range_width));
 
                             <span class="kw">if </span>word.blank {
                                 fit_x = line_width <span class="kw">as </span>f32;
                                 word_range_width = <span class="number">0.</span>;
-                                fitting_start = (i+<span class="number">1</span>, <span class="number">0</span>); 
+                                fitting_start = (i + <span class="number">1</span>, <span class="number">0</span>);
                             } <span class="kw">else </span>{
                                 fit_x = line_width <span class="kw">as </span>f32 - word_size;
                                 word_range_width = word_size;
-                                fitting_start = (i+<span class="number">1</span>, <span class="number">0</span>);
+                                fitting_start = (i + <span class="number">1</span>, <span class="number">0</span>);
                             }
                         }
                     }
-                    word_ranges.push(((<span class="number">0</span>,<span class="number">0</span>),fitting_start, word_range_width));
-
-                } <span class="kw">else </span>{ <span class="comment">// congruent direction
-                    </span><span class="kw">let </span><span class="kw-2">mut </span>fitting_start = (<span class="number">0</span>,<span class="number">0</span>);
+                    word_ranges.push(((<span class="number">0</span>, <span class="number">0</span>), fitting_start, word_range_width));
+                } <span class="kw">else </span>{
+                    <span class="comment">// congruent direction
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>fitting_start = (<span class="number">0</span>, <span class="number">0</span>);
                     <span class="kw">for </span>(i, word) <span class="kw">in </span>span.words.iter().enumerate() {
                         <span class="kw">let </span>word_size = font_size <span class="kw">as </span>f32 * word.x_advance;
-                        <span class="kw">if </span>fit_x - word_size &gt;= <span class="number">0.  </span>{ <span class="comment">// fits
+                        <span class="kw">if </span>fit_x - word_size &gt;= <span class="number">0. </span>{
+                            <span class="comment">// fits
                             </span>fit_x -= word_size;
                             word_range_width += word_size;
                             <span class="kw">continue</span>;
@@ -1590,19 +1608,24 @@
                                     word_range_width += glyph_size;
                                     <span class="kw">continue</span>;
                                 } <span class="kw">else </span>{
-                                    word_ranges.push((fitting_start, (i, glyph_i),  word_range_width));
+                                    word_ranges.push((
+                                        fitting_start,
+                                        (i, glyph_i),
+                                        word_range_width,
+                                    ));
                                     fit_x = line_width <span class="kw">as </span>f32 - glyph_size;
                                     word_range_width = glyph_size;
                                     fitting_start = (i, glyph_i);
                                 }
                             }
-                        } <span class="kw">else </span>{ <span class="comment">// Wrap::Word
-                            </span>word_ranges.push((fitting_start,(i,<span class="number">0</span>), word_range_width));
+                        } <span class="kw">else </span>{
+                            <span class="comment">// Wrap::Word
+                            </span>word_ranges.push((fitting_start, (i, <span class="number">0</span>), word_range_width));
 
                             <span class="kw">if </span>word.blank {
                                 fit_x = line_width <span class="kw">as </span>f32;
                                 word_range_width = <span class="number">0.</span>;
-                                fitting_start = (i+<span class="number">1</span>, <span class="number">0</span>);
+                                fitting_start = (i + <span class="number">1</span>, <span class="number">0</span>);
                             } <span class="kw">else </span>{
                                 fit_x = line_width <span class="kw">as </span>f32 - word_size;
                                 word_range_width = word_size;
@@ -1614,12 +1637,16 @@
                 }
 
                 <span class="comment">// Create a visual line
-                </span><span class="kw">for </span>((starting_word, starting_glyph), (ending_word, ending_glyph), word_range_width) <span class="kw">in </span>word_ranges {
+                </span><span class="kw">for </span>(
+                    (starting_word, starting_glyph),
+                    (ending_word, ending_glyph),
+                    word_range_width,
+                ) <span class="kw">in </span>word_ranges
+                {
                     <span class="comment">// To simplify the algorithm above, we might push empty ranges but we ignore them here
-                    </span><span class="kw">if </span>ending_word == starting_word &amp;&amp; starting_glyph == ending_glyph { 
+                    </span><span class="kw">if </span>ending_word == starting_word &amp;&amp; starting_glyph == ending_glyph {
                         <span class="kw">continue</span>;
                     }
-                    
 
                     <span class="kw">let </span>fits = !<span class="kw">if </span><span class="self">self</span>.rtl {
                         x - word_range_width &lt; end_x
@@ -1627,27 +1654,35 @@
                         x + word_range_width &gt; end_x
                     };
 
-
                     <span class="kw">if </span>fits {
-                        current_visual_line.push((span_index, (starting_word, starting_glyph), (ending_word, ending_glyph)));
+                        current_visual_line.push((
+                            span_index,
+                            (starting_word, starting_glyph),
+                            (ending_word, ending_glyph),
+                        ));
                         <span class="kw">if </span><span class="self">self</span>.rtl {
                             x -= word_range_width;
                         } <span class="kw">else </span>{
                             x += word_range_width;
                         }
                     } <span class="kw">else </span>{
-                        <span class="kw">if </span>!current_visual_line.is_empty(){
+                        <span class="kw">if </span>!current_visual_line.is_empty() {
                             vl_range_of_spans.push(current_visual_line);
                             current_visual_line = Vec::with_capacity(<span class="number">1</span>);
                             x = start_x;
                         }
-                        current_visual_line.push((span_index, (starting_word, starting_glyph), (ending_word, ending_glyph)));
+                        current_visual_line.push((
+                            span_index,
+                            (starting_word, starting_glyph),
+                            (ending_word, ending_glyph),
+                        ));
                         <span class="kw">if </span><span class="self">self</span>.rtl {
                             x -= word_range_width;
                         } <span class="kw">else </span>{
                             x += word_range_width;
                         }
-                        <span class="kw">if </span>word_range_width &gt; line_width <span class="kw">as </span>f32 { <span class="comment">// single word is bigger than line_width
+                        <span class="kw">if </span>word_range_width &gt; line_width <span class="kw">as </span>f32 {
+                            <span class="comment">// single word is bigger than line_width
                             </span>vl_range_of_spans.push(current_visual_line);
                             current_visual_line = Vec::with_capacity(<span class="number">1</span>);
                             x = start_x;
@@ -1669,10 +1704,18 @@
             y = <span class="number">0.</span>;
             <span class="kw">if </span><span class="self">self</span>.rtl {
                 <span class="kw">for </span>range <span class="kw">in </span>new_order.iter().rev() {
-                    <span class="kw">for </span>(span_index, (starting_word, starting_glyph), (ending_word, ending_glyph))  <span class="kw">in </span>visual_line[range.clone()].iter() {
+                    <span class="kw">for </span>(
+                        span_index,
+                        (starting_word, starting_glyph),
+                        (ending_word, ending_glyph),
+                    ) <span class="kw">in </span>visual_line[range.clone()].iter()
+                    {
                         <span class="kw">let </span>span = <span class="kw-2">&amp;</span><span class="self">self</span>.spans[<span class="kw-2">*</span>span_index];
                         <span class="kw">if </span>starting_word == ending_word {
-                            <span class="kw">for </span>glyph <span class="kw">in </span>span.words[<span class="kw-2">*</span>starting_word].glyphs[<span class="kw-2">*</span>starting_glyph..<span class="kw-2">*</span>ending_glyph].iter() {
+                            <span class="kw">for </span>glyph <span class="kw">in </span>span.words[<span class="kw-2">*</span>starting_word].glyphs
+                                [<span class="kw-2">*</span>starting_glyph..<span class="kw-2">*</span>ending_glyph]
+                                .iter()
+                            {
                                 <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
                                 <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
                                 <span class="kw">if </span><span class="self">self</span>.rtl {
@@ -1685,7 +1728,7 @@
                                 y += y_advance;
                             }
                         } <span class="kw">else </span>{
-                            <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word+<span class="number">1 </span>{
+                            <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word + <span class="number">1 </span>{
                                 <span class="kw">if let </span><span class="prelude-val">Some</span>(word) = span.words.get(i) {
                                     <span class="kw">let </span>(g1, g2) = <span class="kw">if </span>i == <span class="kw-2">*</span>starting_word {
                                         (<span class="kw-2">*</span>starting_glyph, word.glyphs.len())
@@ -1714,10 +1757,18 @@
                 }
             } <span class="kw">else </span>{
                 <span class="kw">for </span>range <span class="kw">in </span>new_order {
-                    <span class="kw">for </span>(span_index, (starting_word, starting_glyph), (ending_word, ending_glyph))  <span class="kw">in </span>visual_line[range.clone()].iter() {
+                    <span class="kw">for </span>(
+                        span_index,
+                        (starting_word, starting_glyph),
+                        (ending_word, ending_glyph),
+                    ) <span class="kw">in </span>visual_line[range.clone()].iter()
+                    {
                         <span class="kw">let </span>span = <span class="kw-2">&amp;</span><span class="self">self</span>.spans[<span class="kw-2">*</span>span_index];
                         <span class="kw">if </span>starting_word == ending_word {
-                            <span class="kw">for </span>glyph <span class="kw">in </span>span.words[<span class="kw-2">*</span>starting_word].glyphs[<span class="kw-2">*</span>starting_glyph..<span class="kw-2">*</span>ending_glyph].iter() {
+                            <span class="kw">for </span>glyph <span class="kw">in </span>span.words[<span class="kw-2">*</span>starting_word].glyphs
+                                [<span class="kw-2">*</span>starting_glyph..<span class="kw-2">*</span>ending_glyph]
+                                .iter()
+                            {
                                 <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
                                 <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
                                 <span class="kw">if </span><span class="self">self</span>.rtl {
@@ -1730,7 +1781,7 @@
                                 y += y_advance;
                             }
                         } <span class="kw">else </span>{
-                            <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word+<span class="number">1 </span>{
+                            <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word + <span class="number">1 </span>{
                                 <span class="kw">if let </span><span class="prelude-val">Some</span>(word) = span.words.get(i) {
                                     <span class="kw">let </span>(g1, g2) = <span class="kw">if </span>i == <span class="kw-2">*</span>starting_word {
                                         (<span class="kw-2">*</span>starting_glyph, word.glyphs.len())
@@ -1760,17 +1811,18 @@
             }
             <span class="kw">let </span><span class="kw-2">mut </span>glyphs_swap = Vec::new();
             mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
-            layout_lines.push(
-                LayoutLine {
-                    w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
-                   glyphs: glyphs_swap,
-                },
-            );
+            layout_lines.push(LayoutLine {
+                w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
+                glyphs: glyphs_swap,
+            });
             push_line = <span class="bool-val">false</span>;
         }
 
         <span class="kw">if </span>push_line {
-            layout_lines.push(LayoutLine { w: <span class="number">0.0 </span>, glyphs: Default::default() });
+            layout_lines.push(LayoutLine {
+                w: <span class="number">0.0</span>,
+                glyphs: Default::default(),
+            });
         }
 
         layout_lines

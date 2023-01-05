@@ -801,6 +801,30 @@
 <span id="801">801</span>
 <span id="802">802</span>
 <span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -808,9 +832,9 @@
 <span class="kw">use </span>core::{cmp, iter::once};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
-<span class="kw">use crate</span>::{Action, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
 <span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
+<span class="kw">use crate</span>::{Action, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
 
 <span class="doccomment">/// A wrapper of [`Buffer`] for easy editing
 </span><span class="kw">pub struct </span>Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -834,14 +858,17 @@
     }
 
     <span class="kw">fn </span>set_layout_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cursor: LayoutCursor) {
-        <span class="kw">let </span>layout = <span class="self">self</span>.buffer.line_layout(cursor.line).expect(<span class="string">&quot;layout not found&quot;</span>);
+        <span class="kw">let </span>layout = <span class="self">self
+            </span>.buffer
+            .line_layout(cursor.line)
+            .expect(<span class="string">&quot;layout not found&quot;</span>);
 
         <span class="kw">let </span>layout_line = <span class="kw">match </span>layout.get(cursor.layout) {
             <span class="prelude-val">Some</span>(some) =&gt; some,
             <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>layout.last() {
                 <span class="prelude-val">Some</span>(some) =&gt; some,
                 <span class="prelude-val">None </span>=&gt; <span class="macro">todo!</span>(<span class="string">&quot;layout cursor in line with no layouts&quot;</span>),
-            }
+            },
         };
 
         <span class="kw">let </span>new_index = <span class="kw">match </span>layout_line.glyphs.get(cursor.glyph) {
@@ -850,7 +877,7 @@
                 <span class="prelude-val">Some</span>(glyph) =&gt; glyph.end,
                 <span class="comment">//TODO: is this correct?
                 </span><span class="prelude-val">None </span>=&gt; <span class="number">0</span>,
-            }
+            },
         };
 
         <span class="kw">if </span><span class="self">self</span>.cursor.line != cursor.line || <span class="self">self</span>.cursor.index != new_index {
@@ -1020,7 +1047,8 @@
         <span class="kw">let </span>after_len = after.text().len();
 
         <span class="comment">// Collect attributes
-        </span><span class="kw">let </span><span class="kw-2">mut </span>final_attrs = attrs_list.unwrap_or_else(|| AttrsList::new(line.attrs_list().get_span(line.text().len())));
+        </span><span class="kw">let </span><span class="kw-2">mut </span>final_attrs = attrs_list
+            .unwrap_or_else(|| AttrsList::new(line.attrs_list().get_span(line.text().len())));
 
         <span class="comment">// Append the inserted text, line by line
         // we want to see a blank entry if the string ends with a newline
@@ -1030,13 +1058,23 @@
             <span class="kw">let </span><span class="kw-2">mut </span>these_attrs = final_attrs.split_off(data_line.len());
             remaining_split_len -= data_line.len();
             core::mem::swap(<span class="kw-2">&amp;mut </span>these_attrs, <span class="kw-2">&amp;mut </span>final_attrs);
-            line.append(BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), these_attrs));
+            line.append(BufferLine::new(
+                data_line
+                    .strip_suffix(char::is_control)
+                    .unwrap_or(data_line),
+                these_attrs,
+            ));
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;str::lines() did not yield any elements&quot;</span>);
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(data_line) = lines_iter.next_back() {
             remaining_split_len -= data_line.len();
-            <span class="kw">let </span><span class="kw-2">mut </span>tmp = BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), final_attrs.split_off(remaining_split_len));
+            <span class="kw">let </span><span class="kw-2">mut </span>tmp = BufferLine::new(
+                data_line
+                    .strip_suffix(char::is_control)
+                    .unwrap_or(data_line),
+                final_attrs.split_off(remaining_split_len),
+            );
             tmp.append(after);
             <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
             <span class="self">self</span>.cursor.line += <span class="number">1</span>;
@@ -1045,7 +1083,12 @@
         }
         <span class="kw">for </span>data_line <span class="kw">in </span>lines_iter.rev() {
             remaining_split_len -= data_line.len();
-            <span class="kw">let </span>tmp = BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), final_attrs.split_off(remaining_split_len));
+            <span class="kw">let </span>tmp = BufferLine::new(
+                data_line
+                    .strip_suffix(char::is_control)
+                    .unwrap_or(data_line),
+                final_attrs.split_off(remaining_split_len),
+            );
             <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
             <span class="self">self</span>.cursor.line += <span class="number">1</span>;
         }
@@ -1081,7 +1124,7 @@
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
-            },
+            }
             Action::Next =&gt; {
                 <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
                 <span class="kw">if </span><span class="self">self</span>.cursor.index &lt; line.text().len() {
@@ -1098,9 +1141,12 @@
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
-            },
+            }
             Action::Left =&gt; {
-                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line]
+                    .shape_opt()
+                    .as_ref()
+                    .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
                         <span class="self">self</span>.action(Action::Next);
@@ -1108,9 +1154,12 @@
                         <span class="self">self</span>.action(Action::Previous);
                     }
                 }
-            },
+            }
             Action::Right =&gt; {
-                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line]
+                    .shape_opt()
+                    .as_ref()
+                    .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
                         <span class="self">self</span>.action(Action::Previous);
@@ -1118,14 +1167,14 @@
                         <span class="self">self</span>.action(Action::Next);
                     }
                 }
-            },
+            }
             Action::Up =&gt; {
                 <span class="comment">//TODO: make this preserve X as best as possible!
                 </span><span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
 
                 <span class="kw">if </span><span class="self">self</span>.cursor_x_opt.is_none() {
                     <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">Some</span>(
-                        cursor.glyph <span class="kw">as </span>i32 <span class="comment">//TODO: glyph x position
+                        cursor.glyph <span class="kw">as </span>i32, <span class="comment">//TODO: glyph x position
                     </span>);
                 }
 
@@ -1141,16 +1190,20 @@
                 </span>}
 
                 <span class="self">self</span>.set_layout_cursor(cursor);
-            },
+            }
             Action::Down =&gt; {
                 <span class="comment">//TODO: make this preserve X as best as possible!
                 </span><span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
 
-                <span class="kw">let </span>layout_len = <span class="self">self</span>.buffer.line_layout(cursor.line).expect(<span class="string">&quot;layout not found&quot;</span>).len();
+                <span class="kw">let </span>layout_len = <span class="self">self
+                    </span>.buffer
+                    .line_layout(cursor.line)
+                    .expect(<span class="string">&quot;layout not found&quot;</span>)
+                    .len();
 
                 <span class="kw">if </span><span class="self">self</span>.cursor_x_opt.is_none() {
                     <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">Some</span>(
-                        cursor.glyph <span class="kw">as </span>i32 <span class="comment">//TODO: glyph x position
+                        cursor.glyph <span class="kw">as </span>i32, <span class="comment">//TODO: glyph x position
                     </span>);
                 }
 
@@ -1166,13 +1219,13 @@
                 </span>}
 
                 <span class="self">self</span>.set_layout_cursor(cursor);
-            },
+            }
             Action::Home =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
                 cursor.glyph = <span class="number">0</span>;
                 <span class="self">self</span>.set_layout_cursor(cursor);
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
-            },
+            }
             Action::End =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
                 cursor.glyph = usize::max_value();
@@ -1191,10 +1244,10 @@
             }
             Action::PageUp =&gt; {
                 <span class="self">self</span>.action(Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1</span>));
-            },
+            }
             Action::PageDown =&gt; {
                 <span class="self">self</span>.action(Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1</span>));
-            },
+            }
             Action::Vertical(px) =&gt; {
                 <span class="comment">// TODO more efficient
                 </span><span class="kw">let </span>lines = px / <span class="self">self</span>.buffer.metrics().line_height;
@@ -1207,16 +1260,14 @@
                         <span class="self">self</span>.action(Action::Down);
                     }
                 }
-            },
+            }
             Action::Escape =&gt; {
                 <span class="kw">if </span><span class="self">self</span>.select_opt.take().is_some() {
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
-            },
+            }
             Action::Insert(character) =&gt; {
-                <span class="kw">if </span>character.is_control()
-                    &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\n&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character)
-                {
+                <span class="kw">if </span>character.is_control() &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\n&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character) {
                     <span class="comment">// Filter out special chars (except for tab), use Action instead
                     </span><span class="macro">log::debug!</span>(<span class="string">&quot;Refusing to insert control character {:?}&quot;</span>, character);
                 } <span class="kw">else if </span>character == <span class="string">&#39;\n&#39; </span>{
@@ -1226,7 +1277,7 @@
                     <span class="kw">let </span>str_ref = character.encode_utf8(<span class="kw-2">&amp;mut </span>str_buf);
                     <span class="self">self</span>.insert_string(str_ref, <span class="prelude-val">None</span>);
                 }
-            },
+            }
             Action::Enter =&gt; {
                 <span class="self">self</span>.delete_selection();
 
@@ -1236,7 +1287,7 @@
                 <span class="self">self</span>.cursor.index = <span class="number">0</span>;
 
                 <span class="self">self</span>.buffer.lines.insert(<span class="self">self</span>.cursor.line, new_line);
-            },
+            }
             Action::Backspace =&gt; {
                 <span class="kw">if </span><span class="self">self</span>.delete_selection() {
                     <span class="comment">// Deleted selection
@@ -1275,7 +1326,7 @@
 
                     line.append(old_line);
                 }
-            },
+            }
             Action::Delete =&gt; {
                 <span class="kw">if </span><span class="self">self</span>.delete_selection() {
                     <span class="comment">// Deleted selection
@@ -1287,9 +1338,7 @@
                         .grapheme_indices(<span class="bool-val">true</span>)
                         .take_while(|(i, <span class="kw">_</span>)| <span class="kw-2">*</span>i &lt;= <span class="self">self</span>.cursor.index)
                         .last()
-                        .map(|(i, c)| {
-                            i..(i + c.len())
-                        });
+                        .map(|(i, c)| i..(i + c.len()));
 
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(range) = range_opt {
                         <span class="self">self</span>.cursor.index = range.start;
@@ -1307,7 +1356,7 @@
                     <span class="kw">let </span>old_line = <span class="self">self</span>.buffer.lines.remove(<span class="self">self</span>.cursor.line + <span class="number">1</span>);
                     <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].append(old_line);
                 }
-            },
+            }
             Action::Click { x, y } =&gt; {
                 <span class="self">self</span>.select_opt = <span class="prelude-val">None</span>;
 
@@ -1317,7 +1366,7 @@
                         <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                     }
                 }
-            },
+            }
             Action::Drag { x, y } =&gt; {
                 <span class="kw">if </span><span class="self">self</span>.select_opt.is_none() {
                     <span class="self">self</span>.select_opt = <span class="prelude-val">Some</span>(<span class="self">self</span>.cursor);
@@ -1330,7 +1379,7 @@
                         <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                     }
                 }
-            },
+            }
             Action::Scroll { lines } =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
                 scroll += lines;
@@ -1376,7 +1425,10 @@
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
             Action::LeftWord =&gt; {
-                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line]
+                    .shape_opt()
+                    .as_ref()
+                    .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
                         <span class="self">self</span>.action(Action::NextWord);
@@ -1384,9 +1436,12 @@
                         <span class="self">self</span>.action(Action::PreviousWord);
                     }
                 }
-            },
+            }
             Action::RightWord =&gt; {
-                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line]
+                    .shape_opt()
+                    .as_ref()
+                    .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
                         <span class="self">self</span>.action(Action::PreviousWord);
@@ -1394,7 +1449,7 @@
                         <span class="self">self</span>.action(Action::NextWord);
                     }
                 }
-            },
+            }
             Action::BufferStart =&gt; {
                 <span class="self">self</span>.cursor.line = <span class="number">0</span>;
                 <span class="self">self</span>.cursor.index = <span class="number">0</span>;
@@ -1431,7 +1486,8 @@
     <span class="doccomment">/// Draw the editor
     </span><span class="attribute">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
     </span><span class="kw">fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, <span class="kw-2">mut </span>f: F)
-        <span class="kw">where </span>F: FnMut(i32, i32, u32, u32, Color)
+    <span class="kw">where
+        </span>F: FnMut(i32, i32, u32, u32, Color),
     {
         <span class="kw">let </span>font_size = <span class="self">self</span>.buffer.metrics().font_size;
         <span class="kw">let </span>line_height = <span class="self">self</span>.buffer.metrics().line_height;
@@ -1467,7 +1523,7 @@
                             <span class="kw">if </span>cursor.index == glyph.end {
                                 <span class="kw">return </span><span class="prelude-val">Some</span>((run.glyphs.len(), <span class="number">0.0</span>));
                             }
-                        },
+                        }
                         <span class="prelude-val">None </span>=&gt; {
                             <span class="kw">return </span><span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="number">0.0</span>));
                         }
@@ -1504,16 +1560,14 @@
                             <span class="kw">let </span>c_start = glyph.start + i;
                             <span class="kw">let </span>c_end = glyph.start + i + c.len();
                             <span class="kw">if </span>(start.line != line_i || c_end &gt; start.index)
-                            &amp;&amp; (end.line != line_i || c_start &lt; end.index) {
+                                &amp;&amp; (end.line != line_i || c_start &lt; end.index)
+                            {
                                 range_opt = <span class="kw">match </span>range_opt.take() {
                                     <span class="prelude-val">Some</span>((min, max)) =&gt; <span class="prelude-val">Some</span>((
                                         cmp::min(min, c_x <span class="kw">as </span>i32),
                                         cmp::max(max, (c_x + c_w) <span class="kw">as </span>i32),
                                     )),
-                                    <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>((
-                                        c_x <span class="kw">as </span>i32,
-                                        (c_x + c_w) <span class="kw">as </span>i32,
-                                    ))
+                                    <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Some</span>((c_x <span class="kw">as </span>i32, (c_x + c_w) <span class="kw">as </span>i32)),
                                 };
                             } <span class="kw">else if let </span><span class="prelude-val">Some</span>((min, max)) = range_opt.take() {
                                 f(
@@ -1521,14 +1575,14 @@
                                     line_y - font_size,
                                     cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                                     line_height <span class="kw">as </span>u32,
-                                    Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>)
+                                    Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
                                 );
                             }
                             c_x += c_w;
                         }
                     }
 
-                    <span class="kw">if </span>run.glyphs.is_empty() &amp;&amp; end.line &gt; line_i{
+                    <span class="kw">if </span>run.glyphs.is_empty() &amp;&amp; end.line &gt; line_i {
                         <span class="comment">// Highlight all of internal empty lines
                         </span>range_opt = <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="self">self</span>.buffer.size().<span class="number">0</span>));
                     }
@@ -1547,7 +1601,7 @@
                             line_y - font_size,
                             cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                             line_height <span class="kw">as </span>u32,
-                            Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>)
+                            Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
                         );
                     }
                 }
@@ -1563,7 +1617,7 @@
                         } <span class="kw">else </span>{
                             (glyph.x + cursor_glyph_offset) <span class="kw">as </span>i32
                         }
-                    },
+                    }
                     <span class="prelude-val">None </span>=&gt; <span class="kw">match </span>run.glyphs.last() {
                         <span class="prelude-val">Some</span>(glyph) =&gt; {
                             <span class="comment">// End of last glyph
@@ -1572,21 +1626,15 @@
                             } <span class="kw">else </span>{
                                 (glyph.x + glyph.w) <span class="kw">as </span>i32
                             }
-                        },
+                        }
                         <span class="prelude-val">None </span>=&gt; {
                             <span class="comment">// Start of empty line
                             </span><span class="number">0
                         </span>}
-                    }
+                    },
                 };
 
-                f(
-                    x,
-                    line_y - font_size,
-                    <span class="number">1</span>,
-                    line_height <span class="kw">as </span>u32,
-                    color,
-                );
+                f(x, line_y - font_size, <span class="number">1</span>, line_height <span class="kw">as </span>u32, color);
             }
 
             <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {

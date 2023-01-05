@@ -176,11 +176,12 @@
 <span id="176">176</span>
 <span id="177">177</span>
 <span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
 </pre><pre class="rust"><code><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-</span><span class="kw">use </span>alloc::{
-    string::String,
-    vec::Vec,
-};
+</span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 
 <span class="kw">use crate</span>::{AttrsList, FontSystem, LayoutLine, ShapeLine, Wrap};
 
@@ -217,7 +218,11 @@
     ///
     /// Will reset shape and layout if it differs from current text and attributes list.
     /// Returns true if the line was reset
-    </span><span class="kw">pub fn </span>set_text&lt;T: AsRef&lt;str&gt; + Into&lt;String&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: T, attrs_list: AttrsList) -&gt; bool {
+    </span><span class="kw">pub fn </span>set_text&lt;T: AsRef&lt;str&gt; + Into&lt;String&gt;&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        text: T,
+        attrs_list: AttrsList,
+    ) -&gt; bool {
         <span class="kw">if </span>text.as_ref() != <span class="self">self</span>.text || attrs_list != <span class="self">self</span>.attrs_list {
             <span class="self">self</span>.text = text.into();
             <span class="self">self</span>.attrs_list = attrs_list;
@@ -280,7 +285,8 @@
 
         <span class="kw">if </span>other.attrs_list.defaults() != <span class="self">self</span>.attrs_list.defaults() {
             <span class="comment">// If default formatting does not match, make a new span for it
-            </span><span class="self">self</span>.attrs_list.add_span(len..len + other.text().len(), other.attrs_list.defaults());
+            </span><span class="self">self</span>.attrs_list
+                .add_span(len..len + other.text().len(), other.attrs_list.defaults());
         }
 
         <span class="kw">for </span>(other_range, attrs) <span class="kw">in </span>other.attrs_list.spans() {
@@ -335,15 +341,17 @@
     }
 
     <span class="doccomment">/// Layout line, will cache results
-    </span><span class="kw">pub fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;</span>FontSystem, font_size: i32, width: i32, wrap: Wrap) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
+    </span><span class="kw">pub fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_size: i32,
+        width: i32,
+        wrap: Wrap,
+    ) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
         <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
             <span class="self">self</span>.wrap = wrap;
             <span class="kw">let </span>shape = <span class="self">self</span>.shape(font_system);
-            <span class="kw">let </span>layout = shape.layout(
-                font_size,
-                width,
-                wrap
-            );
+            <span class="kw">let </span>layout = shape.layout(font_size, width, wrap);
             <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
         }
         <span class="self">self</span>.layout_opt.as_ref().expect(<span class="string">&quot;layout not found&quot;</span>)

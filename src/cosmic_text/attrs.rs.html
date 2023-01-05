@@ -302,11 +302,6 @@
 <span id="302">302</span>
 <span id="303">303</span>
 <span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -333,12 +328,7 @@
     <span class="doccomment">/// Create new color with red, green, blue, and alpha components
     </span><span class="attribute">#[inline]
     </span><span class="kw">pub const fn </span>rgba(r: u8, g: u8, b: u8, a: u8) -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>(
-            ((a <span class="kw">as </span>u32) &lt;&lt; <span class="number">24</span>) |
-            ((r <span class="kw">as </span>u32) &lt;&lt; <span class="number">16</span>) |
-            ((g <span class="kw">as </span>u32) &lt;&lt; <span class="number">8</span>) |
-            (b <span class="kw">as </span>u32)
-        )
+        <span class="self">Self</span>(((a <span class="kw">as </span>u32) &lt;&lt; <span class="number">24</span>) | ((r <span class="kw">as </span>u32) &lt;&lt; <span class="number">16</span>) | ((g <span class="kw">as </span>u32) &lt;&lt; <span class="number">8</span>) | (b <span class="kw">as </span>u32))
     }
 
     <span class="doccomment">/// Get the red component
@@ -474,22 +464,20 @@
     <span class="doccomment">/// Check if font matches
     </span><span class="kw">pub fn </span>matches(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>fontdb::FaceInfo) -&gt; bool {
         <span class="comment">//TODO: smarter way of including emoji
-        </span>face.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>) ||
-        (
-            face.style == <span class="self">self</span>.style &amp;&amp;
-            face.weight == <span class="self">self</span>.weight &amp;&amp;
-            face.stretch == <span class="self">self</span>.stretch &amp;&amp;
-            face.monospaced == <span class="self">self</span>.monospaced
-        )
+        </span>face.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>)
+            || (face.style == <span class="self">self</span>.style
+                &amp;&amp; face.weight == <span class="self">self</span>.weight
+                &amp;&amp; face.stretch == <span class="self">self</span>.stretch
+                &amp;&amp; face.monospaced == <span class="self">self</span>.monospaced)
     }
 
     <span class="doccomment">/// Check if this set of attributes can be shaped with another
     </span><span class="kw">pub fn </span>compatible(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
         <span class="self">self</span>.family == other.family
-        &amp;&amp; <span class="self">self</span>.monospaced == other.monospaced
-        &amp;&amp; <span class="self">self</span>.stretch == other.stretch
-        &amp;&amp; <span class="self">self</span>.style == other.style
-        &amp;&amp; <span class="self">self</span>.weight == other.weight
+            &amp;&amp; <span class="self">self</span>.monospaced == other.monospaced
+            &amp;&amp; <span class="self">self</span>.stretch == other.stretch
+            &amp;&amp; <span class="self">self</span>.style == other.style
+            &amp;&amp; <span class="self">self</span>.weight == other.weight
     }
 }
 
@@ -577,7 +565,10 @@
     ///
     /// This returns a span that contains the index
     </span><span class="kw">pub fn </span>get_span(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; Attrs {
-        <span class="self">self</span>.spans.get(<span class="kw-2">&amp;</span>index).map(|v| v.as_attrs()).unwrap_or(<span class="self">self</span>.defaults.as_attrs())
+        <span class="self">self</span>.spans
+            .get(<span class="kw-2">&amp;</span>index)
+            .map(|v| v.as_attrs())
+            .unwrap_or(<span class="self">self</span>.defaults.as_attrs())
     }
 
     <span class="doccomment">/// Split attributes list at an offset
@@ -597,20 +588,19 @@
         }
 
         <span class="kw">for </span>(key, resize) <span class="kw">in </span>removes {
-            <span class="kw">let </span>(range, attrs) =  <span class="self">self</span>.spans.get_key_value(<span class="kw-2">&amp;</span>key.start).map(|v| (v.<span class="number">0</span>.clone(), v.<span class="number">1</span>.clone())).expect(<span class="string">&quot;attrs span not found&quot;</span>);
+            <span class="kw">let </span>(range, attrs) = <span class="self">self
+                </span>.spans
+                .get_key_value(<span class="kw-2">&amp;</span>key.start)
+                .map(|v| (v.<span class="number">0</span>.clone(), v.<span class="number">1</span>.clone()))
+                .expect(<span class="string">&quot;attrs span not found&quot;</span>);
             <span class="self">self</span>.spans.remove(key);
 
             <span class="kw">if </span>resize {
-                new.spans.insert(
-                    <span class="number">0</span>..range.end - index,
-                    attrs.clone()
-                );
+                new.spans.insert(<span class="number">0</span>..range.end - index, attrs.clone());
                 <span class="self">self</span>.spans.insert(range.start..index, attrs);
             } <span class="kw">else </span>{
-                new.spans.insert(
-                    range.start - index..range.end - index,
-                    attrs
-                );
+                new.spans
+                    .insert(range.start - index..range.end - index, attrs);
             }
         }
         new

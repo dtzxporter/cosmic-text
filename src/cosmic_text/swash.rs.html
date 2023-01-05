@@ -174,6 +174,13 @@
 <span id="174">174</span>
 <span id="175">175</span>
 <span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -182,22 +189,26 @@
 </span><span class="kw">use </span>alloc::vec::Vec;
 <span class="attribute">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>std::collections::HashMap <span class="kw">as </span>Map;
-<span class="kw">use </span>swash::scale::{ScaleContext, image::Content};
+<span class="kw">use </span>swash::scale::{image::Content, ScaleContext};
 <span class="kw">use </span>swash::scale::{Render, Source, StrikeWith};
 <span class="kw">use </span>swash::zeno::{Format, Vector};
 
 <span class="kw">use crate</span>::{CacheKey, Color, FontSystem};
 
-<span class="kw">pub use </span>swash::zeno::Command;
 <span class="kw">pub use </span>swash::scale::image::{Content <span class="kw">as </span>SwashContent, Image <span class="kw">as </span>SwashImage};
+<span class="kw">pub use </span>swash::zeno::Command;
 
-<span class="kw">fn </span>swash_image(font_system: <span class="kw-2">&amp;</span>FontSystem, context: <span class="kw-2">&amp;mut </span>ScaleContext, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
+<span class="kw">fn </span>swash_image(
+    font_system: <span class="kw-2">&amp;</span>FontSystem,
+    context: <span class="kw-2">&amp;mut </span>ScaleContext,
+    cache_key: CacheKey,
+) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
     <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_id) {
         <span class="prelude-val">Some</span>(some) =&gt; some,
         <span class="prelude-val">None </span>=&gt; {
             <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_id);
             <span class="kw">return </span><span class="prelude-val">None</span>;
-        },
+        }
     };
 
     <span class="comment">// Build the scaler
@@ -209,9 +220,7 @@
 
     <span class="comment">// Compute the fractional offset-- you&#39;ll likely want to quantize this
     // in a real renderer
-    </span><span class="kw">let </span>offset =
-        Vector::new(cache_key.x_bin.as_float(), cache_key.y_bin.as_float());
-
+    </span><span class="kw">let </span>offset = Vector::new(cache_key.x_bin.as_float(), cache_key.y_bin.as_float());
 
     <span class="comment">// Select our source order
     </span>Render::new(<span class="kw-2">&amp;</span>[
@@ -230,7 +239,11 @@
     </span>.render(<span class="kw-2">&amp;mut </span>scaler, cache_key.glyph_id)
 }
 
-<span class="kw">fn </span>swash_outline_commands(font_system: <span class="kw-2">&amp;</span>FontSystem, context: <span class="kw-2">&amp;mut </span>ScaleContext, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt; {
+<span class="kw">fn </span>swash_outline_commands(
+    font_system: <span class="kw-2">&amp;</span>FontSystem,
+    context: <span class="kw-2">&amp;mut </span>ScaleContext,
+    cache_key: CacheKey,
+) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt; {
     <span class="kw">use </span>swash::zeno::PathData <span class="kw">as _</span>;
 
     <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_id) {
@@ -238,9 +251,8 @@
         <span class="prelude-val">None </span>=&gt; {
             <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_id);
             <span class="kw">return </span><span class="prelude-val">None</span>;
-        },
+        }
     };
-
 
     <span class="comment">// Build the scaler
     </span><span class="kw">let </span><span class="kw-2">mut </span>scaler = context
@@ -249,7 +261,9 @@
         .build();
 
     <span class="comment">// Scale the outline
-    </span><span class="kw">let </span>outline = scaler.scale_outline(cache_key.glyph_id).or_else(|| scaler.scale_color_outline(cache_key.glyph_id))<span class="question-mark">?</span>;
+    </span><span class="kw">let </span>outline = scaler
+        .scale_outline(cache_key.glyph_id)
+        .or_else(|| scaler.scale_color_outline(cache_key.glyph_id))<span class="question-mark">?</span>;
 
     <span class="comment">// Get the path information of the outline
     </span><span class="kw">let </span>path = outline.path();
@@ -273,7 +287,7 @@
             font_system,
             context: ScaleContext::new(),
             image_cache: Map::new(),
-            outline_command_cache: Map::new()
+            outline_command_cache: Map::new(),
         }
     }
 
@@ -284,15 +298,18 @@
 
     <span class="doccomment">/// Create a swash Image from a cache key, caching results
     </span><span class="kw">pub fn </span>get_image(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
-        <span class="self">self</span>.image_cache.entry(cache_key).or_insert_with(|| {
-            swash_image(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
-        })
+        <span class="self">self</span>.image_cache
+            .entry(cache_key)
+            .or_insert_with(|| swash_image(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key))
     }
 
     <span class="kw">pub fn </span>get_outline_commands(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[swash::zeno::Command]&gt; {
-        <span class="self">self</span>.outline_command_cache.entry(cache_key).or_insert_with(|| {
-            swash_outline_commands(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
-        }).as_deref()
+        <span class="self">self</span>.outline_command_cache
+            .entry(cache_key)
+            .or_insert_with(|| {
+                swash_outline_commands(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
+            })
+            .as_deref()
     }
 
     <span class="doccomment">/// Enumerate pixels in an Image, use `with_image` for better performance
@@ -300,7 +317,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         cache_key: CacheKey,
         base: Color,
-        <span class="kw-2">mut </span>f: F
+        <span class="kw-2">mut </span>f: F,
     ) {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(image) = <span class="self">self</span>.get_image(cache_key) {
             <span class="kw">let </span>x = image.placement.left;
@@ -315,10 +332,7 @@
                             </span>f(
                                 x + off_x,
                                 y + off_y,
-                                Color(
-                                    ((image.data[i] <span class="kw">as </span>u32) &lt;&lt; <span class="number">24</span>) |
-                                    base.<span class="number">0 </span>&amp; <span class="number">0xFF_FF_FF
-                                </span>)
+                                Color(((image.data[i] <span class="kw">as </span>u32) &lt;&lt; <span class="number">24</span>) | base.<span class="number">0 </span>&amp; <span class="number">0xFF_FF_FF</span>),
                             );
                             i += <span class="number">1</span>;
                         }
@@ -336,8 +350,8 @@
                                     image.data[i],
                                     image.data[i + <span class="number">1</span>],
                                     image.data[i + <span class="number">2</span>],
-                                    image.data[i + <span class="number">3</span>]
-                                )
+                                    image.data[i + <span class="number">3</span>],
+                                ),
                             );
                             i += <span class="number">4</span>;
                         }

@@ -151,6 +151,7 @@
 <span id="151">151</span>
 <span id="152">152</span>
 <span id="153">153</span>
+<span id="154">154</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>alloc::sync::Arc;
@@ -162,11 +163,7 @@
 
 <span class="kw">use </span><span class="self">self</span>::platform::<span class="kw-2">*</span>;
 
-<span class="attribute">#[cfg(not(any(
-    target_os = <span class="string">&quot;linux&quot;</span>,
-    target_os = <span class="string">&quot;macos&quot;</span>,
-    target_os = <span class="string">&quot;windows&quot;</span>,
-)))]
+<span class="attribute">#[cfg(not(any(target_os = <span class="string">&quot;linux&quot;</span>, target_os = <span class="string">&quot;macos&quot;</span>, target_os = <span class="string">&quot;windows&quot;</span>,)))]
 #[path = <span class="string">&quot;other.rs&quot;</span>]
 </span><span class="kw">mod </span>platform;
 
@@ -199,7 +196,7 @@
         fonts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Arc&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt;],
         default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str],
         scripts: Vec&lt;Script&gt;,
-        locale: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str
+        locale: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             fonts,
@@ -231,7 +228,7 @@
                 font.info.family,
                 word
             );
-        } <span class="kw">else if </span>! <span class="self">self</span>.scripts.is_empty() &amp;&amp; <span class="self">self</span>.common_i &gt; <span class="number">0 </span>{
+        } <span class="kw">else if </span>!<span class="self">self</span>.scripts.is_empty() &amp;&amp; <span class="self">self</span>.common_i &gt; <span class="number">0 </span>{
             <span class="kw">let </span>family = common_fallback()[<span class="self">self</span>.common_i - <span class="number">1</span>];
             <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find script fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
@@ -270,7 +267,12 @@
                         <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                     }
                 }
-                <span class="macro">log::warn!</span>(<span class="string">&quot;failed to find family &#39;{}&#39; for script {:?} and locale &#39;{}&#39;&quot;</span>, script_family, script, <span class="self">self</span>.locale);
+                <span class="macro">log::warn!</span>(
+                    <span class="string">&quot;failed to find family &#39;{}&#39; for script {:?} and locale &#39;{}&#39;&quot;</span>,
+                    script_family,
+                    script,
+                    <span class="self">self</span>.locale
+                );
             }
 
             <span class="self">self</span>.script_i.<span class="number">0 </span>+= <span class="number">1</span>;
@@ -295,7 +297,7 @@
         <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.fonts.len() {
             <span class="kw">let </span>font = <span class="kw-2">&amp;</span><span class="self">self</span>.fonts[<span class="self">self</span>.other_i];
             <span class="self">self</span>.other_i += <span class="number">1</span>;
-            <span class="kw">if </span>! forbidden_families.contains(<span class="kw-2">&amp;</span>font.info.family.as_str()) {
+            <span class="kw">if </span>!forbidden_families.contains(<span class="kw-2">&amp;</span>font.info.family.as_str()) {
                 <span class="kw">return </span><span class="prelude-val">Some</span>(font);
             }
         }
