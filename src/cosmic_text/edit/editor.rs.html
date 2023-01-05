@@ -676,11 +676,138 @@
 <span id="676">676</span>
 <span id="677">677</span>
 <span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
+<span id="709">709</span>
+<span id="710">710</span>
+<span id="711">711</span>
+<span id="712">712</span>
+<span id="713">713</span>
+<span id="714">714</span>
+<span id="715">715</span>
+<span id="716">716</span>
+<span id="717">717</span>
+<span id="718">718</span>
+<span id="719">719</span>
+<span id="720">720</span>
+<span id="721">721</span>
+<span id="722">722</span>
+<span id="723">723</span>
+<span id="724">724</span>
+<span id="725">725</span>
+<span id="726">726</span>
+<span id="727">727</span>
+<span id="728">728</span>
+<span id="729">729</span>
+<span id="730">730</span>
+<span id="731">731</span>
+<span id="732">732</span>
+<span id="733">733</span>
+<span id="734">734</span>
+<span id="735">735</span>
+<span id="736">736</span>
+<span id="737">737</span>
+<span id="738">738</span>
+<span id="739">739</span>
+<span id="740">740</span>
+<span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::string::{String, ToString};
 <span class="kw">use </span>core::cmp;
+<span class="kw">use </span>std::iter::once;
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
 <span class="kw">use crate</span>::{Action, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
@@ -880,6 +1007,57 @@
         <span class="bool-val">true
     </span>}
 
+    <span class="kw">fn </span>insert_string(<span class="kw-2">&amp;mut </span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>str, attrs_list: <span class="prelude-ty">Option</span>&lt;AttrsList&gt;) {
+        <span class="self">self</span>.delete_selection();
+        <span class="kw">let </span><span class="kw-2">mut </span>remaining_split_len = data.len();
+        <span class="kw">if </span>remaining_split_len == <span class="number">0 </span>{
+            <span class="kw">return</span>;
+        }
+
+        <span class="kw">let </span>line: <span class="kw-2">&amp;mut </span>BufferLine = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
+        <span class="kw">let </span>insert_line = <span class="self">self</span>.cursor.line + <span class="number">1</span>;
+
+        <span class="comment">// Collect text after insertion as a line
+        </span><span class="kw">let </span>after: BufferLine = line.split_off(<span class="self">self</span>.cursor.index);
+        <span class="kw">let </span>after_len = after.text().len();
+
+        <span class="comment">// Collect attributes
+        </span><span class="kw">let </span><span class="kw-2">mut </span>final_attrs = attrs_list.unwrap_or_else(|| AttrsList::new(line.attrs_list().get_span(line.text().len())));
+
+        <span class="comment">// Append the inserted text, line by line
+        // we want to see a blank entry if the string ends with a newline
+        </span><span class="kw">let </span>addendum = once(<span class="string">&quot;&quot;</span>).filter(|<span class="kw">_</span>| data.ends_with(<span class="string">&#39;\n&#39;</span>));
+        <span class="kw">let </span><span class="kw-2">mut </span>lines_iter = data.split_inclusive(<span class="string">&#39;\n&#39;</span>).chain(addendum);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(data_line) = lines_iter.next() {
+            <span class="kw">let </span><span class="kw-2">mut </span>these_attrs = final_attrs.split_off(data_line.len());
+            remaining_split_len -= data_line.len();
+            std::mem::swap(<span class="kw-2">&amp;mut </span>these_attrs, <span class="kw-2">&amp;mut </span>final_attrs);
+            line.append(BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), these_attrs));
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;str::lines() did not yield any elements&quot;</span>);
+        }
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(data_line) = lines_iter.next_back() {
+            remaining_split_len -= data_line.len();
+            <span class="kw">let </span><span class="kw-2">mut </span>tmp = BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), final_attrs.split_off(remaining_split_len));
+            tmp.append(after);
+            <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
+            <span class="self">self</span>.cursor.line += <span class="number">1</span>;
+        } <span class="kw">else </span>{
+            line.append(after);
+        }
+        <span class="kw">for </span>data_line <span class="kw">in </span>lines_iter.rev() {
+            remaining_split_len -= data_line.len();
+            <span class="kw">let </span>tmp = BufferLine::new(data_line.strip_suffix(char::is_control).unwrap_or(data_line), final_attrs.split_off(remaining_split_len));
+            <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
+            <span class="self">self</span>.cursor.line += <span class="number">1</span>;
+        }
+
+        <span class="macro">assert_eq!</span>(remaining_split_len, <span class="number">0</span>);
+
+        <span class="comment">// Append the text after insertion
+        </span><span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len() - after_len;
+    }
+
     <span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action) {
         <span class="kw">let </span>old_cursor = <span class="self">self</span>.cursor;
 
@@ -1003,17 +1181,34 @@
                 <span class="self">self</span>.set_layout_cursor(cursor);
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
+            Action::ParagraphStart =&gt; {
+                <span class="self">self</span>.cursor.index = <span class="number">0</span>;
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+            }
+            Action::ParagraphEnd =&gt; {
+                <span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len();
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+            }
             Action::PageUp =&gt; {
-                <span class="comment">//TODO: move cursor
-                </span><span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
-                scroll -= <span class="self">self</span>.buffer.visible_lines();
-                <span class="self">self</span>.buffer.set_scroll(scroll);
+                <span class="self">self</span>.action(Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1</span>));
             },
             Action::PageDown =&gt; {
-                <span class="comment">//TODO: move cursor
-                </span><span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
-                scroll += <span class="self">self</span>.buffer.visible_lines();
-                <span class="self">self</span>.buffer.set_scroll(scroll);
+                <span class="self">self</span>.action(Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1</span>));
+            },
+            Action::Vertical(px) =&gt; {
+                <span class="comment">// TODO more efficient
+                </span><span class="kw">let </span>lines = px / <span class="self">self</span>.buffer.metrics().line_height;
+                <span class="kw">if </span>lines &lt; <span class="number">0 </span>{
+                    <span class="kw">for _ in </span><span class="number">0</span>..-lines {
+                        <span class="self">self</span>.action(Action::Up);
+                    }
+                } <span class="kw">else if </span>lines &gt; <span class="number">0 </span>{
+                    <span class="kw">for _ in </span><span class="number">0</span>..lines {
+                        <span class="self">self</span>.action(Action::Down);
+                    }
+                }
             },
             Action::Escape =&gt; {
                 <span class="kw">if </span><span class="self">self</span>.select_opt.take().is_some() {
@@ -1022,28 +1217,16 @@
             },
             Action::Insert(character) =&gt; {
                 <span class="kw">if </span>character.is_control()
-                &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character)
+                    &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\n&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character)
                 {
                     <span class="comment">// Filter out special chars (except for tab), use Action instead
                     </span><span class="macro">log::debug!</span>(<span class="string">&quot;Refusing to insert control character {:?}&quot;</span>, character);
+                } <span class="kw">else if </span>character == <span class="string">&#39;\n&#39; </span>{
+                    <span class="self">self</span>.action(Action::Enter);
                 } <span class="kw">else </span>{
-                    <span class="self">self</span>.delete_selection();
-
-                    <span class="kw">let </span>line = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
-
-                    <span class="comment">// Collect text after insertion as a line
-                    </span><span class="kw">let </span>after = line.split_off(<span class="self">self</span>.cursor.index);
-
-                    <span class="comment">// Append the inserted text
-                    </span>line.append(BufferLine::new(
-                        character.to_string(),
-                        AttrsList::new(line.attrs_list().defaults() <span class="comment">/*TODO: provide attrs?*/</span>)
-                    ));
-
-                    <span class="comment">// Append the text after insertion
-                    </span>line.append(after);
-
-                    <span class="self">self</span>.cursor.index += character.len_utf8();
+                    <span class="kw">let </span><span class="kw-2">mut </span>str_buf = [<span class="number">0u8</span>; <span class="number">8</span>];
+                    <span class="kw">let </span>str_ref = character.encode_utf8(<span class="kw-2">&amp;mut </span>str_buf);
+                    <span class="self">self</span>.insert_string(str_ref, <span class="prelude-val">None</span>);
                 }
             },
             Action::Enter =&gt; {
@@ -1154,6 +1337,75 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>scroll = <span class="self">self</span>.buffer.scroll();
                 scroll += lines;
                 <span class="self">self</span>.buffer.set_scroll(scroll);
+            }
+            Action::PreviousWord =&gt; {
+                <span class="kw">let </span>line: <span class="kw-2">&amp;mut </span>BufferLine = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
+                <span class="kw">if </span><span class="self">self</span>.cursor.index &gt; <span class="number">0 </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>prev_index = <span class="number">0</span>;
+                    <span class="kw">for </span>(i, <span class="kw">_</span>) <span class="kw">in </span>line.text().unicode_word_indices() {
+                        <span class="kw">if </span>i &lt; <span class="self">self</span>.cursor.index {
+                            prev_index = i;
+                        } <span class="kw">else </span>{
+                            <span class="kw">break</span>;
+                        }
+                    }
+
+                    <span class="self">self</span>.cursor.index = prev_index;
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line &gt; <span class="number">0 </span>{
+                    <span class="self">self</span>.cursor.line -= <span class="number">1</span>;
+                    <span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len();
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>)
+                }
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+            }
+            Action::NextWord =&gt; {
+                <span class="kw">let </span>line: <span class="kw-2">&amp;mut </span>BufferLine = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
+                <span class="kw">if </span><span class="self">self</span>.cursor.index &lt; line.text().len() {
+                    <span class="kw">for </span>(i, word) <span class="kw">in </span>line.text().unicode_word_indices() {
+                        <span class="kw">let </span>i = i + word.len();
+                        <span class="kw">if </span>i &gt; <span class="self">self</span>.cursor.index {
+                            <span class="self">self</span>.cursor.index = i;
+                            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                            <span class="kw">break</span>;
+                        }
+                    }
+                } <span class="kw">else if </span><span class="self">self</span>.cursor.line + <span class="number">1 </span>&lt; <span class="self">self</span>.buffer.lines.len() {
+                    <span class="self">self</span>.cursor.line += <span class="number">1</span>;
+                    <span class="self">self</span>.cursor.index = <span class="number">0</span>;
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                }
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+            }
+            Action::LeftWord =&gt; {
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
+                    <span class="kw">if </span>rtl {
+                        <span class="self">self</span>.action(Action::NextWord);
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.action(Action::PreviousWord);
+                    }
+                }
+            },
+            Action::RightWord =&gt; {
+                <span class="kw">let </span>rtl_opt = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].shape_opt().as_ref().map(|shape| shape.rtl);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
+                    <span class="kw">if </span>rtl {
+                        <span class="self">self</span>.action(Action::PreviousWord);
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.action(Action::NextWord);
+                    }
+                }
+            },
+            Action::BufferStart =&gt; {
+                <span class="self">self</span>.cursor.line = <span class="number">0</span>;
+                <span class="self">self</span>.cursor.index = <span class="number">0</span>;
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+            }
+            Action::BufferEnd =&gt; {
+                <span class="self">self</span>.cursor.line = <span class="self">self</span>.buffer.lines.len() - <span class="number">1</span>;
+                <span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len();
+                <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
         }
 

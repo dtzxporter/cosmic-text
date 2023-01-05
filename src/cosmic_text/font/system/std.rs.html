@@ -133,6 +133,16 @@
 <span id="133">133</span>
 <span id="134">134</span>
 <span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>std::{
@@ -183,6 +193,11 @@
             );
         }
 
+        <span class="self">Self</span>::new_with_locale_and_db(locale, db)
+    }
+
+    <span class="doccomment">/// Create a new [`FontSystem`], manually specifying the current locale and font database.
+    </span><span class="kw">pub fn </span>new_with_locale_and_db(locale: String, <span class="kw-2">mut </span>db: fontdb::Database) -&gt; <span class="self">Self </span>{
         {
             <span class="kw">let </span>now = std::time::Instant::now();
 
@@ -213,6 +228,11 @@
 
     <span class="kw">pub fn </span>db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>fontdb::Database {
         <span class="self">self</span>.<span class="number">0</span>.borrow_db()
+    }
+
+    <span class="kw">pub fn </span>into_locale_and_db(<span class="self">self</span>) -&gt; (String, fontdb::Database) {
+        <span class="kw">let </span>heads = <span class="self">self</span>.<span class="number">0</span>.into_heads();
+        (heads.locale, heads.db)
     }
 
     <span class="comment">// Clippy false positive

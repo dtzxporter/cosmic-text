@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rangemap-1.2.0/src/inclusive_set.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>inclusive_set.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rangemap/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rangemap-1.3.0/src/inclusive_set.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>inclusive_set.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../rangemap/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../rangemap/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -489,6 +489,78 @@
 <span id="489">489</span>
 <span id="490">490</span>
 <span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
 </pre><pre class="rust"><code><span class="kw">use </span>core::cmp::Ordering;
 <span class="kw">use </span>core::fmt::{<span class="self">self</span>, Debug};
 <span class="kw">use </span>core::iter::FromIterator;
@@ -674,6 +746,22 @@
         Gaps {
             inner: <span class="self">self</span>.rm.gaps(outer_range),
         }
+    }
+
+    <span class="doccomment">/// Gets an iterator over all the stored ranges that are
+    /// either partially or completely overlapped by the given range.
+    ///
+    /// The iterator element type is `RangeInclusive&lt;T&gt;`.
+    </span><span class="kw">pub fn </span>overlapping&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, range: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RangeInclusive&lt;T&gt;) -&gt; Overlapping&lt;T&gt; {
+        Overlapping {
+            inner: <span class="self">self</span>.rm.overlapping(range),
+        }
+    }
+
+    <span class="doccomment">/// Returns `true` if any range in the set completely or partially
+    /// overlaps the given range.
+    </span><span class="kw">pub fn </span>overlaps(<span class="kw-2">&amp;</span><span class="self">self</span>, range: <span class="kw-2">&amp;</span>RangeInclusive&lt;T&gt;) -&gt; bool {
+        <span class="self">self</span>.overlapping(range).next().is_some()
     }
 }
 
@@ -861,6 +949,31 @@
     }
 }
 
+<span class="doccomment">/// An iterator over all stored ranges partially or completely
+/// overlapped by a given range.
+///
+/// This `struct` is created by the [`overlapping`] method on [`RangeInclusiveSet`]. See its
+/// documentation for more.
+///
+/// [`overlapping`]: RangeInclusiveSet::overlapping
+</span><span class="kw">pub struct </span>Overlapping&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    inner: <span class="kw">crate</span>::inclusive_map::Overlapping&lt;<span class="lifetime">&#39;a</span>, T, ()&gt;,
+}
+
+<span class="comment">// `Overlapping` is always fused. (See definition of `next` below.)
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; core::iter::FusedIterator <span class="kw">for </span>Overlapping&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="kw">where </span>T: Ord + Clone {}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Iterator <span class="kw">for </span>Overlapping&lt;<span class="lifetime">&#39;a</span>, T&gt;
+<span class="kw">where
+    </span>T: Ord + Clone,
+{
+    <span class="kw">type </span>Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RangeInclusive&lt;T&gt;;
+
+    <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="self">self</span>.inner.next().map(|(k, _v)| k)
+    }
+}
+
 <span class="attribute">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::<span class="kw-2">*</span>;
@@ -922,6 +1035,37 @@
         <span class="comment">// Gaps iterator should be fused.
         </span><span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">None</span>);
         <span class="macro">assert_eq!</span>(gaps.next(), <span class="prelude-val">None</span>);
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>overlapping_partial_edges_complete_middle() {
+        <span class="kw">let </span><span class="kw-2">mut </span>range_set: RangeInclusiveSet&lt;u32&gt; = RangeInclusiveSet::new();
+
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ●-● ◌ ◌ ◌ ◌ ◌ ◌ ◌ ◌
+        </span>range_set.insert(<span class="number">0</span>..=<span class="number">1</span>);
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◌ ◌ ●-● ◌ ◌ ◌ ◌ ◌
+        </span>range_set.insert(<span class="number">3</span>..=<span class="number">4</span>);
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◌ ◌ ◌ ◌ ◌ ●-● ◌ ◌
+        </span>range_set.insert(<span class="number">6</span>..=<span class="number">7</span>);
+
+        <span class="comment">// 0 1 2 3 4 5 6 7 8 9
+        // ◌ ◆---------◆ ◌ ◌ ◌
+        </span><span class="kw">let </span>query_range = <span class="number">1</span>..=<span class="number">6</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>overlapping = range_set.overlapping(<span class="kw-2">&amp;</span>query_range);
+
+        <span class="comment">// Should yield partially overlapped range at start.
+        </span><span class="macro">assert_eq!</span>(overlapping.next(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>(<span class="number">0</span>..=<span class="number">1</span>)));
+        <span class="comment">// Should yield completely overlapped range in middle.
+        </span><span class="macro">assert_eq!</span>(overlapping.next(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>(<span class="number">3</span>..=<span class="number">4</span>)));
+        <span class="comment">// Should yield partially overlapped range at end.
+        </span><span class="macro">assert_eq!</span>(overlapping.next(), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>(<span class="number">6</span>..=<span class="number">7</span>)));
+        <span class="comment">// Gaps iterator should be fused.
+        </span><span class="macro">assert_eq!</span>(overlapping.next(), <span class="prelude-val">None</span>);
+        <span class="macro">assert_eq!</span>(overlapping.next(), <span class="prelude-val">None</span>);
     }
 
     <span class="doccomment">///

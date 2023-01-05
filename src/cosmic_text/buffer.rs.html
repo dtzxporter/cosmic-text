@@ -571,6 +571,59 @@
 <span id="571">571</span>
 <span id="572">572</span>
 <span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -589,11 +642,11 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
 
 <span class="doccomment">/// Current cursor location
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+</span><span class="attribute">#[derive(Clone, Copy, Debug, Default, Eq, PartialEq, Ord, PartialOrd)]
 </span><span class="kw">pub struct </span>Cursor {
     <span class="doccomment">/// Text line the cursor is on
     </span><span class="kw">pub </span>line: usize,
-    <span class="doccomment">/// Index of glyph at cursor (will insert behind this glyph)
+    <span class="doccomment">/// First-byte-index of glyph at cursor (will insert behind this glyph)
     </span><span class="kw">pub </span>index: usize,
 }
 
@@ -632,21 +685,67 @@
     </span><span class="kw">pub </span>line_w: f32,
 }
 
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LayoutRun&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="doccomment">/// Return the pixel span Some((x_start, x_width)) of the highlighted area between cursor_start
+    /// and cursor_end within this run, or None if the cursor range does not intersect this run.
+    /// This may return widths of zero if cursor_start == cursor_end, if the run is empty, or if the
+    /// region&#39;s left start boundary is the same as the cursor&#39;s end boundary or vice versa.
+    </span><span class="kw">pub fn </span>highlight(<span class="kw-2">&amp;</span><span class="self">self</span>, cursor_start: Cursor, cursor_end: Cursor) -&gt; <span class="prelude-ty">Option</span>&lt;(f32, f32)&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>x_start = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>x_end = <span class="prelude-val">None</span>;
+        <span class="kw">let </span>rtl_factor = <span class="kw">if </span><span class="self">self</span>.rtl { <span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">0. </span>};
+        <span class="kw">let </span>ltr_factor = <span class="number">1. </span>- rtl_factor;
+        <span class="kw">for </span>glyph <span class="kw">in </span><span class="self">self</span>.glyphs.iter() {
+            <span class="kw">let </span>cursor = Cursor::new(<span class="self">self</span>.line_i, glyph.start);
+            <span class="kw">if </span>cursor &gt;= cursor_start &amp;&amp; cursor &lt;= cursor_end {
+                <span class="kw">if </span>x_start.is_none() {
+                    x_start = <span class="prelude-val">Some</span>(glyph.x + glyph.w * rtl_factor);
+                }
+                x_end = <span class="prelude-val">Some</span>(glyph.x + glyph.w * rtl_factor);
+            }
+        }
+        <span class="kw">let </span>cursor = Cursor::new(<span class="self">self</span>.line_i, <span class="self">self</span>.glyphs.last().map_or(<span class="number">0</span>, |glyph| glyph.end));
+        <span class="kw">if </span>cursor &gt;= cursor_start &amp;&amp; cursor &lt;= cursor_end {
+            <span class="kw">if </span>x_start.is_none() {
+                x_start = <span class="prelude-val">Some</span>(<span class="self">self</span>.glyphs.last().map_or(<span class="number">0.</span>, |glyph| glyph.x + glyph.w * ltr_factor));
+            }
+            x_end = <span class="prelude-val">Some</span>(<span class="self">self</span>.glyphs.last().map_or(<span class="number">0.</span>, |glyph| glyph.x + glyph.w * ltr_factor));
+        }
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x_start) = x_start {
+            <span class="kw">let </span>x_end = x_end.unwrap();
+            <span class="kw">let </span>(x_start, x_end) = <span class="kw">if </span>x_start &lt; x_end { (x_start, x_end) } <span class="kw">else </span>{ (x_end, x_start) };
+            <span class="prelude-val">Some</span>((x_start, x_end - x_start))
+        } <span class="kw">else </span>{
+            <span class="prelude-val">None
+        </span>}
+    }
+}
+
 <span class="doccomment">/// An iterator of visible text lines, see [`LayoutRun`]
 </span><span class="kw">pub struct </span>LayoutRunIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; {
     buffer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;,
     line_i: usize,
     layout_i: usize,
+    remaining_len: usize,
     line_y: i32,
     total_layout: i32,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; LayoutRunIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; {
     <span class="kw">pub fn </span>new(buffer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>total_layout_lines: usize = buffer.lines.iter().map(|line| line.layout_opt().as_ref().map(|layout| layout.len()).unwrap_or_default()).sum();
+        <span class="kw">let </span>top_cropped_layout_lines = total_layout_lines.saturating_sub(buffer.scroll.try_into().unwrap_or_default());
+        <span class="kw">let </span>maximum_lines = buffer.height.checked_div(buffer.metrics.line_height).unwrap_or_default();
+        <span class="kw">let </span>bottom_cropped_layout_lines = <span class="kw">if </span>top_cropped_layout_lines &gt; maximum_lines.try_into().unwrap_or_default() {
+            maximum_lines.try_into().unwrap_or_default()
+        } <span class="kw">else </span>{
+            top_cropped_layout_lines
+        };
         <span class="self">Self </span>{
             buffer,
             line_i: <span class="number">0</span>,
             layout_i: <span class="number">0</span>,
+            remaining_len: bottom_cropped_layout_lines <span class="kw">as </span>usize,
             line_y: buffer.metrics.font_size - buffer.metrics.line_height,
             total_layout: <span class="number">0</span>,
         }
@@ -655,6 +754,10 @@
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Iterator <span class="kw">for </span>LayoutRunIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; {
     <span class="kw">type </span>Item = LayoutRun&lt;<span class="lifetime">&#39;b</span>&gt;;
+
+    <span class="kw">fn </span>size_hint(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        (<span class="self">self</span>.remaining_len, <span class="prelude-val">Some</span>(<span class="self">self</span>.remaining_len))
+    }
 
     <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
         <span class="kw">while let </span><span class="prelude-val">Some</span>(line) = <span class="self">self</span>.buffer.lines.get(<span class="self">self</span>.line_i) {
@@ -674,6 +777,7 @@
                     <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
 
+                <span class="self">self</span>.remaining_len -= <span class="number">1</span>;
                 <span class="kw">return </span><span class="prelude-val">Some</span>(LayoutRun {
                     line_i: <span class="self">self</span>.line_i,
                     text: line.text(),
@@ -690,6 +794,8 @@
         <span class="prelude-val">None
     </span>}
 }
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; ExactSizeIterator <span class="kw">for </span>LayoutRunIter&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; { }
 
 <span class="doccomment">/// Metrics of text
 </span><span class="attribute">#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
