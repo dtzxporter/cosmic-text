@@ -213,7 +213,7 @@
 
     <span class="kw">pub fn </span>check_missing(<span class="kw-2">&amp;</span><span class="self">self</span>, word: <span class="kw-2">&amp;</span>str) {
         <span class="kw">if </span><span class="self">self</span>.end {
-            <span class="macro">log::warn!</span>(
+            <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find any fallback for {:?} locale &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
                 <span class="self">self</span>.locale,
@@ -221,7 +221,7 @@
             );
         } <span class="kw">else if </span><span class="self">self</span>.other_i &gt; <span class="number">0 </span>{
             <span class="kw">let </span>font = <span class="kw-2">&amp;</span><span class="self">self</span>.fonts[<span class="self">self</span>.other_i - <span class="number">1</span>];
-            <span class="macro">log::warn!</span>(
+            <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find preset fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
                 <span class="self">self</span>.locale,
@@ -267,7 +267,7 @@
                         <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                     }
                 }
-                <span class="macro">log::warn!</span>(
+                <span class="macro">log::debug!</span>(
                     <span class="string">&quot;failed to find family &#39;{}&#39; for script {:?} and locale &#39;{}&#39;&quot;</span>,
                     script_family,
                     script,
@@ -288,7 +288,7 @@
                     <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                 }
             }
-            <span class="macro">log::warn!</span>(<span class="string">&quot;failed to find family &#39;{}&#39;&quot;</span>, common_family);
+            <span class="macro">log::debug!</span>(<span class="string">&quot;failed to find family &#39;{}&#39;&quot;</span>, common_family);
         }
 
         <span class="comment">//TODO: do we need to do this?
