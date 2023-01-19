@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../cosmic_text/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -633,6 +633,71 @@
 <span id="633">633</span>
 <span id="634">634</span>
 <span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -654,12 +719,62 @@
     </span><span class="kw">pub </span>line: usize,
     <span class="doccomment">/// First-byte-index of glyph at cursor (will insert behind this glyph)
     </span><span class="kw">pub </span>index: usize,
+    <span class="doccomment">/// Whether to associate the cursor with the run before it or the run after it if placed at the
+    /// boundary between two runs
+    </span><span class="kw">pub </span>affinity: Affinity,
 }
 
 <span class="kw">impl </span>Cursor {
     <span class="doccomment">/// Create a new cursor
     </span><span class="kw">pub const fn </span>new(line: usize, index: usize) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{ line, index }
+        <span class="self">Self</span>::new_with_affinity(line, index, Affinity::Before)
+    }
+
+    <span class="doccomment">/// Create a new cursor, specifying the affinity
+    </span><span class="kw">pub const fn </span>new_with_affinity(line: usize, index: usize, affinity: Affinity) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            line,
+            index,
+            affinity,
+        }
+    }
+}
+
+<span class="attribute">#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+</span><span class="kw">pub enum </span>Affinity {
+    Before,
+    After,
+}
+
+<span class="kw">impl </span>Affinity {
+    <span class="kw">pub fn </span>before(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw-2">*</span><span class="self">self </span>== <span class="self">Self</span>::Before
+    }
+
+    <span class="kw">pub fn </span>after(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw-2">*</span><span class="self">self </span>== <span class="self">Self</span>::After
+    }
+
+    <span class="kw">pub fn </span>from_before(before: bool) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>before {
+            <span class="self">Self</span>::Before
+        } <span class="kw">else </span>{
+            <span class="self">Self</span>::After
+        }
+    }
+
+    <span class="kw">pub fn </span>from_after(after: bool) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>after {
+            <span class="self">Self</span>::After
+        } <span class="kw">else </span>{
+            <span class="self">Self</span>::Before
+        }
+    }
+}
+
+<span class="kw">impl </span>Default <span class="kw">for </span>Affinity {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        Affinity::Before
     }
 }
 
@@ -696,7 +811,7 @@
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LayoutRun&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="doccomment">/// Return the pixel span Some((x_start, x_width)) of the highlighted area between cursor_start
+    <span class="doccomment">/// Return the pixel span Some((x_left, x_width)) of the highlighted area between cursor_start
     /// and cursor_end within this run, or None if the cursor range does not intersect this run.
     /// This may return widths of zero if cursor_start == cursor_end, if the run is empty, or if the
     /// region&#39;s left start boundary is the same as the cursor&#39;s end boundary or vice versa.
@@ -706,28 +821,20 @@
         <span class="kw">let </span>rtl_factor = <span class="kw">if </span><span class="self">self</span>.rtl { <span class="number">1. </span>} <span class="kw">else </span>{ <span class="number">0. </span>};
         <span class="kw">let </span>ltr_factor = <span class="number">1. </span>- rtl_factor;
         <span class="kw">for </span>glyph <span class="kw">in </span><span class="self">self</span>.glyphs.iter() {
-            <span class="kw">let </span>cursor = Cursor::new(<span class="self">self</span>.line_i, glyph.start);
+            <span class="kw">let </span>cursor = <span class="self">self</span>.cursor_from_glyph_left(glyph);
             <span class="kw">if </span>cursor &gt;= cursor_start &amp;&amp; cursor &lt;= cursor_end {
                 <span class="kw">if </span>x_start.is_none() {
                     x_start = <span class="prelude-val">Some</span>(glyph.x + glyph.w * rtl_factor);
                 }
                 x_end = <span class="prelude-val">Some</span>(glyph.x + glyph.w * rtl_factor);
             }
-        }
-        <span class="kw">let </span>cursor = Cursor::new(<span class="self">self</span>.line_i, <span class="self">self</span>.glyphs.last().map_or(<span class="number">0</span>, |glyph| glyph.end));
-        <span class="kw">if </span>cursor &gt;= cursor_start &amp;&amp; cursor &lt;= cursor_end {
-            <span class="kw">if </span>x_start.is_none() {
-                x_start = <span class="prelude-val">Some</span>(
-                    <span class="self">self</span>.glyphs
-                        .last()
-                        .map_or(<span class="number">0.</span>, |glyph| glyph.x + glyph.w * ltr_factor),
-                );
+            <span class="kw">let </span>cursor = <span class="self">self</span>.cursor_from_glyph_right(glyph);
+            <span class="kw">if </span>cursor &gt;= cursor_start &amp;&amp; cursor &lt;= cursor_end {
+                <span class="kw">if </span>x_start.is_none() {
+                    x_start = <span class="prelude-val">Some</span>(glyph.x + glyph.w * ltr_factor);
+                }
+                x_end = <span class="prelude-val">Some</span>(glyph.x + glyph.w * ltr_factor);
             }
-            x_end = <span class="prelude-val">Some</span>(
-                <span class="self">self</span>.glyphs
-                    .last()
-                    .map_or(<span class="number">0.</span>, |glyph| glyph.x + glyph.w * ltr_factor),
-            );
         }
         <span class="kw">if let </span><span class="prelude-val">Some</span>(x_start) = x_start {
             <span class="kw">let </span>x_end = x_end.expect(<span class="string">&quot;end of cursor not found&quot;</span>);
@@ -740,6 +847,22 @@
         } <span class="kw">else </span>{
             <span class="prelude-val">None
         </span>}
+    }
+
+    <span class="kw">fn </span>cursor_from_glyph_left(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph: <span class="kw-2">&amp;</span>LayoutGlyph) -&gt; Cursor {
+        <span class="kw">if </span><span class="self">self</span>.rtl {
+            Cursor::new_with_affinity(<span class="self">self</span>.line_i, glyph.end, Affinity::Before)
+        } <span class="kw">else </span>{
+            Cursor::new_with_affinity(<span class="self">self</span>.line_i, glyph.start, Affinity::After)
+        }
+    }
+
+    <span class="kw">fn </span>cursor_from_glyph_right(<span class="kw-2">&amp;</span><span class="self">self</span>, glyph: <span class="kw-2">&amp;</span>LayoutGlyph) -&gt; Cursor {
+        <span class="kw">if </span><span class="self">self</span>.rtl {
+            Cursor::new_with_affinity(<span class="self">self</span>.line_i, glyph.start, Affinity::After)
+        } <span class="kw">else </span>{
+            Cursor::new_with_affinity(<span class="self">self</span>.line_i, glyph.end, Affinity::Before)
+        }
     }
 }
 
@@ -1013,18 +1136,20 @@
         </span><span class="kw">let </span>layout = line.layout_opt().as_ref().expect(<span class="string">&quot;layout not found&quot;</span>);
         <span class="kw">for </span>(layout_i, layout_line) <span class="kw">in </span>layout.iter().enumerate() {
             <span class="kw">for </span>(glyph_i, glyph) <span class="kw">in </span>layout_line.glyphs.iter().enumerate() {
-                <span class="kw">if </span>cursor.index == glyph.start {
+                <span class="kw">let </span>cursor_end =
+                    Cursor::new_with_affinity(cursor.line, glyph.end, Affinity::Before);
+                <span class="kw">let </span>cursor_start =
+                    Cursor::new_with_affinity(cursor.line, glyph.start, Affinity::After);
+                <span class="kw">let </span>(cursor_left, cursor_right) = <span class="kw">if </span>glyph.level.is_ltr() {
+                    (cursor_start, cursor_end)
+                } <span class="kw">else </span>{
+                    (cursor_end, cursor_start)
+                };
+                <span class="kw">if </span><span class="kw-2">*</span>cursor == cursor_left {
                     <span class="kw">return </span>LayoutCursor::new(cursor.line, layout_i, glyph_i);
                 }
-            }
-            <span class="kw">match </span>layout_line.glyphs.last() {
-                <span class="prelude-val">Some</span>(glyph) =&gt; {
-                    <span class="kw">if </span>cursor.index == glyph.end {
-                        <span class="kw">return </span>LayoutCursor::new(cursor.line, layout_i, layout_line.glyphs.len());
-                    }
-                }
-                <span class="prelude-val">None </span>=&gt; {
-                    <span class="kw">return </span>LayoutCursor::new(cursor.line, layout_i, <span class="number">0</span>);
+                <span class="kw">if </span><span class="kw-2">*</span>cursor == cursor_right {
+                    <span class="kw">return </span>LayoutCursor::new(cursor.line, layout_i, glyph_i + <span class="number">1</span>);
                 }
             }
         }
@@ -1172,6 +1297,7 @@
             } <span class="kw">else if </span>y &gt;= line_y - font_size &amp;&amp; y &lt; line_y - font_size + line_height {
                 <span class="kw">let </span><span class="kw-2">mut </span>new_cursor_glyph = run.glyphs.len();
                 <span class="kw">let </span><span class="kw-2">mut </span>new_cursor_char = <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>new_cursor_affinity = Affinity::After;
 
                 <span class="kw">let </span><span class="kw-2">mut </span>first_glyph = <span class="bool-val">true</span>;
 
@@ -1198,6 +1324,7 @@
                                 <span class="kw">if </span>right_half != glyph.level.is_rtl() {
                                     <span class="comment">// If clicking on last half of glyph, move cursor past glyph
                                     </span>new_cursor_char += egc.len();
+                                    new_cursor_affinity = Affinity::Before;
                                 }
                                 <span class="kw">break </span><span class="lifetime">&#39;hit</span>;
                             }
@@ -1208,6 +1335,7 @@
                         <span class="kw">if </span>right_half != glyph.level.is_rtl() {
                             <span class="comment">// If clicking on last half of glyph, move cursor past glyph
                             </span>new_cursor_char = cluster.len();
+                            new_cursor_affinity = Affinity::Before;
                         }
                         <span class="kw">break </span><span class="lifetime">&#39;hit</span>;
                     }
@@ -1219,11 +1347,13 @@
                     <span class="prelude-val">Some</span>(glyph) =&gt; {
                         <span class="comment">// Position at glyph
                         </span>new_cursor.index = glyph.start + new_cursor_char;
+                        new_cursor.affinity = new_cursor_affinity;
                     }
                     <span class="prelude-val">None </span>=&gt; {
                         <span class="kw">if let </span><span class="prelude-val">Some</span>(glyph) = run.glyphs.last() {
                             <span class="comment">// Position at end of line
                             </span>new_cursor.index = glyph.end;
+                            new_cursor.affinity = Affinity::Before;
                         }
                     }
                 }
@@ -1234,7 +1364,7 @@
             } <span class="kw">else if </span>runs.peek().is_none() &amp;&amp; y &gt; run.line_y {
                 <span class="kw">let </span><span class="kw-2">mut </span>new_cursor = Cursor::new(run.line_i, <span class="number">0</span>);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(glyph) = run.glyphs.last() {
-                    new_cursor.index = glyph.end;
+                    new_cursor = run.cursor_from_glyph_right(glyph);
                 }
                 new_cursor_opt = <span class="prelude-val">Some</span>(new_cursor);
             }
@@ -1269,4 +1399,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cosmic_text" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.1 (90743e729 2023-01-10)" ></div></body></html>
