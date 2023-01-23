@@ -161,6 +161,14 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>std::{
@@ -196,7 +204,8 @@
 
         <span class="kw">let </span><span class="kw-2">mut </span>db = fontdb::Database::new();
         {
-            <span class="kw">let </span>now = std::time::Instant::now();
+            <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+            </span><span class="kw">let </span>now = std::time::Instant::now();
 
             db.load_system_fonts();
             <span class="comment">//TODO: configurable default fonts
@@ -204,7 +213,8 @@
             db.set_sans_serif_family(<span class="string">&quot;Fira Sans&quot;</span>);
             db.set_serif_family(<span class="string">&quot;DejaVu Serif&quot;</span>);
 
-            <span class="macro">log::info!</span>(
+            <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+            </span><span class="macro">log::info!</span>(
                 <span class="string">&quot;Parsed {} font faces in {}ms.&quot;</span>,
                 db.len(),
                 now.elapsed().as_millis()
@@ -217,7 +227,8 @@
     <span class="doccomment">/// Create a new [`FontSystem`], manually specifying the current locale and font database.
     </span><span class="kw">pub fn </span>new_with_locale_and_db(locale: String, <span class="kw-2">mut </span>db: fontdb::Database) -&gt; <span class="self">Self </span>{
         {
-            <span class="kw">let </span>now = std::time::Instant::now();
+            <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+            </span><span class="kw">let </span>now = std::time::Instant::now();
 
             <span class="comment">//TODO only do this on demand!
             </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..db.faces().len() {
@@ -227,7 +238,8 @@
                 }
             }
 
-            <span class="macro">log::info!</span>(
+            <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+            </span><span class="macro">log::info!</span>(
                 <span class="string">&quot;Mapped {} font faces in {}ms.&quot;</span>,
                 db.len(),
                 now.elapsed().as_millis()
@@ -274,7 +286,8 @@
             </span>font_matches_cache
                 .entry(AttrsOwned::new(attrs))
                 .or_insert_with(|| {
-                    <span class="kw">let </span>now = std::time::Instant::now();
+                    <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+                    </span><span class="kw">let </span>now = std::time::Instant::now();
 
                     <span class="kw">let </span><span class="kw-2">mut </span>fonts = Vec::new();
                     <span class="kw">for </span>face <span class="kw">in </span>fields.db.faces() {
@@ -293,8 +306,11 @@
                         fonts,
                     });
 
-                    <span class="kw">let </span>elapsed = now.elapsed();
-                    <span class="macro">log::debug!</span>(<span class="string">&quot;font matches for {:?} in {:?}&quot;</span>, attrs, elapsed);
+                    <span class="attribute">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+                    </span>{
+                        <span class="kw">let </span>elapsed = now.elapsed();
+                        <span class="macro">log::debug!</span>(<span class="string">&quot;font matches for {:?} in {:?}&quot;</span>, attrs, elapsed);
+                    }
 
                     font_matches
                 })
