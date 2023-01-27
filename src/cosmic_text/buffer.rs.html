@@ -698,6 +698,9 @@
 <span id="698">698</span>
 <span id="699">699</span>
 <span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attribute">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1216,9 +1219,12 @@
 
     <span class="doccomment">/// Set the current buffer dimensions
     </span><span class="kw">pub fn </span>set_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, width: i32, height: i32) {
-        <span class="kw">if </span>width != <span class="self">self</span>.width || height != <span class="self">self</span>.height {
-            <span class="self">self</span>.width = width;
-            <span class="self">self</span>.height = height;
+        <span class="kw">let </span>clamped_width = width.max(<span class="number">0</span>);
+        <span class="kw">let </span>clamped_height = height.max(<span class="number">0</span>);
+
+        <span class="kw">if </span>clamped_width != <span class="self">self</span>.width || clamped_height != <span class="self">self</span>.height {
+            <span class="self">self</span>.width = clamped_width;
+            <span class="self">self</span>.height = clamped_height;
             <span class="self">self</span>.relayout();
             <span class="self">self</span>.shape_until_scroll();
         }
