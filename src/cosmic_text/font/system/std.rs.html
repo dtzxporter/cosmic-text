@@ -169,6 +169,15 @@
 <a href="#169" id="169">169</a>
 <a href="#170" id="170">170</a>
 <a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>std::{
@@ -196,6 +205,10 @@
 <span class="kw">impl </span>FontSystem {
     <span class="doccomment">/// Create a new [`FontSystem`], that allows access to any installed system fonts
     </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new_with_fonts(std::iter::empty())
+    }
+
+    <span class="kw">pub fn </span>new_with_fonts(fonts: <span class="kw">impl </span>Iterator&lt;Item = fontdb::Source&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>locale = sys_locale::get_locale().unwrap_or_else(|| {
             <span class="macro">log::warn!</span>(<span class="string">&quot;failed to get system locale, falling back to en-US&quot;</span>);
             String::from(<span class="string">&quot;en-US&quot;</span>)
@@ -208,6 +221,11 @@
             </span><span class="kw">let </span>now = std::time::Instant::now();
 
             db.load_system_fonts();
+
+            <span class="kw">for </span>source <span class="kw">in </span>fonts {
+                db.load_font_source(source);
+            }
+
             <span class="comment">//TODO: configurable default fonts
             </span>db.set_monospace_family(<span class="string">&quot;Fira Mono&quot;</span>);
             db.set_sans_serif_family(<span class="string">&quot;Fira Sans&quot;</span>);
