@@ -1032,6 +1032,52 @@
 <a href="#1032" id="1032">1032</a>
 <a href="#1033" id="1033">1033</a>
 <a href="#1034" id="1034">1034</a>
+<a href="#1035" id="1035">1035</a>
+<a href="#1036" id="1036">1036</a>
+<a href="#1037" id="1037">1037</a>
+<a href="#1038" id="1038">1038</a>
+<a href="#1039" id="1039">1039</a>
+<a href="#1040" id="1040">1040</a>
+<a href="#1041" id="1041">1041</a>
+<a href="#1042" id="1042">1042</a>
+<a href="#1043" id="1043">1043</a>
+<a href="#1044" id="1044">1044</a>
+<a href="#1045" id="1045">1045</a>
+<a href="#1046" id="1046">1046</a>
+<a href="#1047" id="1047">1047</a>
+<a href="#1048" id="1048">1048</a>
+<a href="#1049" id="1049">1049</a>
+<a href="#1050" id="1050">1050</a>
+<a href="#1051" id="1051">1051</a>
+<a href="#1052" id="1052">1052</a>
+<a href="#1053" id="1053">1053</a>
+<a href="#1054" id="1054">1054</a>
+<a href="#1055" id="1055">1055</a>
+<a href="#1056" id="1056">1056</a>
+<a href="#1057" id="1057">1057</a>
+<a href="#1058" id="1058">1058</a>
+<a href="#1059" id="1059">1059</a>
+<a href="#1060" id="1060">1060</a>
+<a href="#1061" id="1061">1061</a>
+<a href="#1062" id="1062">1062</a>
+<a href="#1063" id="1063">1063</a>
+<a href="#1064" id="1064">1064</a>
+<a href="#1065" id="1065">1065</a>
+<a href="#1066" id="1066">1066</a>
+<a href="#1067" id="1067">1067</a>
+<a href="#1068" id="1068">1068</a>
+<a href="#1069" id="1069">1069</a>
+<a href="#1070" id="1070">1070</a>
+<a href="#1071" id="1071">1071</a>
+<a href="#1072" id="1072">1072</a>
+<a href="#1073" id="1073">1073</a>
+<a href="#1074" id="1074">1074</a>
+<a href="#1075" id="1075">1075</a>
+<a href="#1076" id="1076">1076</a>
+<a href="#1077" id="1077">1077</a>
+<a href="#1078" id="1078">1078</a>
+<a href="#1079" id="1079">1079</a>
+<a href="#1080" id="1080">1080</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1269,10 +1315,16 @@
 }
 
 <span class="kw">impl </span>ShapeGlyph {
-    <span class="kw">fn </span>layout(<span class="kw-2">&amp;</span><span class="self">self</span>, font_size: i32, x: f32, y: f32, level: unicode_bidi::Level) -&gt; LayoutGlyph {
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        font_size: i32,
+        x: f32,
+        y: f32,
+        w: f32,
+        level: unicode_bidi::Level,
+    ) -&gt; LayoutGlyph {
         <span class="kw">let </span>x_offset = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.x_offset;
         <span class="kw">let </span>y_offset = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.y_offset;
-        <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * <span class="self">self</span>.x_advance;
 
         <span class="kw">let </span>(cache_key, x_int, y_int) = CacheKey::new(
             <span class="self">self</span>.font_id,
@@ -1284,7 +1336,7 @@
             start: <span class="self">self</span>.start,
             end: <span class="self">self</span>.end,
             x,
-            w: x_advance,
+            w,
             level,
             cache_key,
             x_offset,
@@ -1960,8 +2012,17 @@
                                 x -= x_advance;
                                 <span class="kw">if </span>word_blank &amp;&amp; align == Align::Justified {
                                     x -= alignment_correction;
+                                    glyphs.push(glyph.layout(
+                                        font_size,
+                                        x,
+                                        y,
+                                        x_advance + alignment_correction,
+                                        span.level,
+                                    ));
+                                } <span class="kw">else </span>{
+                                    glyphs
+                                        .push(glyph.layout(font_size, x, y, x_advance, span.level));
                                 }
-                                glyphs.push(glyph.layout(font_size, x, y, span.level));
                                 y += y_advance;
                             }
                         } <span class="kw">else </span>{
@@ -1979,11 +2040,22 @@
                                     <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs[g1..g2] {
                                         <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
                                         <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
+                                        x -= x_advance;
                                         <span class="kw">if </span>word_blank &amp;&amp; align == Align::Justified {
                                             x -= alignment_correction;
+                                            glyphs.push(glyph.layout(
+                                                font_size,
+                                                x,
+                                                y,
+                                                x_advance + alignment_correction,
+                                                span.level,
+                                            ));
+                                        } <span class="kw">else </span>{
+                                            glyphs
+                                                .push(glyph.layout(
+                                                    font_size, x, y, x_advance, span.level,
+                                                ));
                                         }
-                                        x -= x_advance;
-                                        glyphs.push(glyph.layout(font_size, x, y, span.level));
                                         y += y_advance;
                                     }
                                 }
@@ -2012,11 +2084,20 @@
                             {
                                 <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
                                 <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
-                                glyphs.push(glyph.layout(font_size, x, y, span.level));
-                                x += x_advance;
                                 <span class="kw">if </span>word_blank &amp;&amp; align == Align::Justified {
+                                    glyphs.push(glyph.layout(
+                                        font_size,
+                                        x,
+                                        y,
+                                        x_advance + alignment_correction,
+                                        span.level,
+                                    ));
                                     x += alignment_correction;
+                                } <span class="kw">else </span>{
+                                    glyphs
+                                        .push(glyph.layout(font_size, x, y, x_advance, span.level));
                                 }
+                                x += x_advance;
                                 y += y_advance;
                             }
                         } <span class="kw">else </span>{
@@ -2034,9 +2115,20 @@
                                     <span class="kw">for </span>glyph <span class="kw">in </span><span class="kw-2">&amp;</span>word.glyphs[g1..g2] {
                                         <span class="kw">let </span>x_advance = font_size <span class="kw">as </span>f32 * glyph.x_advance;
                                         <span class="kw">let </span>y_advance = font_size <span class="kw">as </span>f32 * glyph.y_advance;
-                                        glyphs.push(glyph.layout(font_size, x, y, span.level));
                                         <span class="kw">if </span>word_blank &amp;&amp; align == Align::Justified {
+                                            glyphs.push(glyph.layout(
+                                                font_size,
+                                                x,
+                                                y,
+                                                x_advance + alignment_correction,
+                                                span.level,
+                                            ));
                                             x += alignment_correction;
+                                        } <span class="kw">else </span>{
+                                            glyphs
+                                                .push(glyph.layout(
+                                                    font_size, x, y, x_advance, span.level,
+                                                ));
                                         }
                                         x += x_advance;
                                         y += y_advance;
