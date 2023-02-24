@@ -180,10 +180,33 @@
 <a href="#180" id="180">180</a>
 <a href="#181" id="181">181</a>
 <a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
 </pre><pre class="rust"><code><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 
-<span class="kw">use crate</span>::{AttrsList, FontSystem, LayoutLine, ShapeLine, Wrap};
+<span class="kw">use crate</span>::{Align, AttrsList, FontSystem, LayoutLine, ShapeLine, Wrap};
 
 <span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out
 </span><span class="kw">pub struct </span>BufferLine {
@@ -191,6 +214,7 @@
     </span>text: String,
     attrs_list: AttrsList,
     wrap: Wrap,
+    align: <span class="prelude-ty">Option</span>&lt;Align&gt;,
     shape_opt: <span class="prelude-ty">Option</span>&lt;ShapeLine&gt;,
     layout_opt: <span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt;,
 }
@@ -204,6 +228,7 @@
             text: text.into(),
             attrs_list,
             wrap: Wrap::Word,
+            align: <span class="prelude-val">None</span>,
             shape_opt: <span class="prelude-val">None</span>,
             layout_opt: <span class="prelude-val">None</span>,
         }
@@ -269,7 +294,27 @@
     </span><span class="kw">pub fn </span>set_wrap(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap: Wrap) -&gt; bool {
         <span class="kw">if </span>wrap != <span class="self">self</span>.wrap {
             <span class="self">self</span>.wrap = wrap;
-            <span class="self">self</span>.reset();
+            <span class="self">self</span>.reset_layout();
+            <span class="bool-val">true
+        </span>} <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
+    }
+
+    <span class="doccomment">/// Get the Text alignment
+    </span><span class="kw">pub fn </span>align(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Align&gt; {
+        <span class="self">self</span>.align
+    }
+
+    <span class="doccomment">/// Set the text alignment
+    ///
+    /// Will reset shape and layout if it differs from current alignment.
+    /// Setting to None will use `Align::Right` for RTL lines, and `Align::Left` for LTR lines.
+    /// Returns true if the line was reset
+    </span><span class="kw">pub fn </span>set_align(<span class="kw-2">&amp;mut </span><span class="self">self</span>, align: <span class="prelude-ty">Option</span>&lt;Align&gt;) -&gt; bool {
+        <span class="kw">if </span>align != <span class="self">self</span>.align {
+            <span class="self">self</span>.align = align;
+            <span class="self">self</span>.reset_layout();
             <span class="bool-val">true
         </span>} <span class="kw">else </span>{
             <span class="bool-val">false
@@ -350,8 +395,9 @@
     ) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
         <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
             <span class="self">self</span>.wrap = wrap;
+            <span class="kw">let </span>align = <span class="self">self</span>.align;
             <span class="kw">let </span>shape = <span class="self">self</span>.shape(font_system);
-            <span class="kw">let </span>layout = shape.layout(font_size, width, wrap);
+            <span class="kw">let </span>layout = shape.layout(font_size, width, wrap, align);
             <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
         }
         <span class="self">self</span>.layout_opt.as_ref().expect(<span class="string">&quot;layout not found&quot;</span>)
