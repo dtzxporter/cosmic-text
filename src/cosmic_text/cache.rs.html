@@ -154,8 +154,8 @@
     </span><span class="kw">pub </span>font_id: fontdb::ID,
     <span class="doccomment">/// Glyph ID
     </span><span class="kw">pub </span>glyph_id: u16,
-    <span class="doccomment">/// Font size in pixels
-    </span><span class="kw">pub </span>font_size: i32,
+    <span class="doccomment">/// `f32` bits of font size
+    </span><span class="kw">pub </span>font_size_bits: u32,
     <span class="doccomment">/// Binning of fractional X offset
     </span><span class="kw">pub </span>x_bin: SubpixelBin,
     <span class="doccomment">/// Binning of fractional Y offset
@@ -166,7 +166,7 @@
     <span class="kw">pub fn </span>new(
         font_id: fontdb::ID,
         glyph_id: u16,
-        font_size: i32,
+        font_size: f32,
         pos: (f32, f32),
     ) -&gt; (<span class="self">Self</span>, i32, i32) {
         <span class="kw">let </span>(x, x_bin) = SubpixelBin::new(pos.<span class="number">0</span>);
@@ -175,7 +175,7 @@
             <span class="self">Self </span>{
                 font_id,
                 glyph_id,
-                font_size,
+                font_size_bits: font_size.to_bits(),
                 x_bin,
                 y_bin,
             },

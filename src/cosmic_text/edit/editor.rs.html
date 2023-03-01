@@ -1259,14 +1259,14 @@
                 <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
             }
             Action::PageUp =&gt; {
-                <span class="self">self</span>.action(Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1</span>));
+                <span class="self">self</span>.action(Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
             }
             Action::PageDown =&gt; {
-                <span class="self">self</span>.action(Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1</span>));
+                <span class="self">self</span>.action(Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
             }
             Action::Vertical(px) =&gt; {
                 <span class="comment">// TODO more efficient
-                </span><span class="kw">let </span>lines = px / <span class="self">self</span>.buffer.metrics().line_height;
+                </span><span class="kw">let </span>lines = px / <span class="self">self</span>.buffer.metrics().line_height <span class="kw">as </span>i32;
                 <span class="kw">if </span>lines &lt; <span class="number">0 </span>{
                     <span class="kw">for _ in </span><span class="number">0</span>..-lines {
                         <span class="self">self</span>.action(Action::Up);
@@ -1376,7 +1376,7 @@
             Action::Click { x, y } =&gt; {
                 <span class="self">self</span>.select_opt = <span class="prelude-val">None</span>;
 
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x, y) {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x <span class="kw">as </span>f32, y <span class="kw">as </span>f32) {
                     <span class="kw">if </span>new_cursor != <span class="self">self</span>.cursor {
                         <span class="self">self</span>.cursor = new_cursor;
                         <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
@@ -1389,7 +1389,7 @@
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
 
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x, y) {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x <span class="kw">as </span>f32, y <span class="kw">as </span>f32) {
                     <span class="kw">if </span>new_cursor != <span class="self">self</span>.cursor {
                         <span class="self">self</span>.cursor = new_cursor;
                         <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
@@ -1588,7 +1588,7 @@
                             } <span class="kw">else if let </span><span class="prelude-val">Some</span>((min, max)) = range_opt.take() {
                                 f(
                                     min,
-                                    line_y - font_size,
+                                    (line_y - font_size) <span class="kw">as </span>i32,
                                     cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                                     line_height <span class="kw">as </span>u32,
                                     Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
@@ -1600,7 +1600,7 @@
 
                     <span class="kw">if </span>run.glyphs.is_empty() &amp;&amp; end.line &gt; line_i {
                         <span class="comment">// Highlight all of internal empty lines
-                        </span>range_opt = <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="self">self</span>.buffer.size().<span class="number">0</span>));
+                        </span>range_opt = <span class="prelude-val">Some</span>((<span class="number">0</span>, <span class="self">self</span>.buffer.size().<span class="number">0 </span><span class="kw">as </span>i32));
                     }
 
                     <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw-2">mut </span>min, <span class="kw-2">mut </span>max)) = range_opt.take() {
@@ -1609,12 +1609,12 @@
                             </span><span class="kw">if </span>run.rtl {
                                 min = <span class="number">0</span>;
                             } <span class="kw">else </span>{
-                                max = <span class="self">self</span>.buffer.size().<span class="number">0</span>;
+                                max = <span class="self">self</span>.buffer.size().<span class="number">0 </span><span class="kw">as </span>i32;
                             }
                         }
                         f(
                             min,
-                            line_y - font_size,
+                            (line_y - font_size) <span class="kw">as </span>i32,
                             cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                             line_height <span class="kw">as </span>u32,
                             Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
@@ -1650,7 +1650,7 @@
                     },
                 };
 
-                f(x, line_y - font_size, <span class="number">1</span>, line_height <span class="kw">as </span>u32, color);
+                f(x, (line_y - font_size) <span class="kw">as </span>i32, <span class="number">1</span>, line_height <span class="kw">as </span>u32, color);
             }
 
             <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {
@@ -1662,7 +1662,7 @@
                 };
 
                 cache.with_pixels(cache_key, glyph_color, |x, y, color| {
-                    f(x_int + x, line_y + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
+                    f(x_int + x, line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
                 });
             }
         }
