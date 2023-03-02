@@ -712,6 +712,14 @@
 <a href="#712" id="712">712</a>
 <a href="#713" id="713">713</a>
 <a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -827,9 +835,9 @@
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; LayoutRun&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="doccomment">/// Return the pixel span Some((x_left, x_width)) of the highlighted area between cursor_start
-    /// and cursor_end within this run, or None if the cursor range does not intersect this run.
-    /// This may return widths of zero if cursor_start == cursor_end, if the run is empty, or if the
+    <span class="doccomment">/// Return the pixel span `Some((x_left, x_width))` of the highlighted area between `cursor_start`
+    /// and `cursor_end` within this run, or None if the cursor range does not intersect this run.
+    /// This may return widths of zero if `cursor_start == cursor_end`, if the run is empty, or if the
     /// region&#39;s left start boundary is the same as the cursor&#39;s end boundary or vice versa.
     </span><span class="kw">pub fn </span>highlight(<span class="kw-2">&amp;</span><span class="self">self</span>, cursor_start: Cursor, cursor_end: Cursor) -&gt; <span class="prelude-ty">Option</span>&lt;(f32, f32)&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>x_start = <span class="prelude-val">None</span>;
@@ -922,7 +930,7 @@
             buffer,
             line_i: <span class="number">0</span>,
             layout_i: <span class="number">0</span>,
-            remaining_len: bottom_cropped_layout_lines <span class="kw">as </span>usize,
+            remaining_len: bottom_cropped_layout_lines,
             line_y: buffer.metrics.y_offset(),
             total_layout: <span class="number">0</span>,
         }
@@ -1025,6 +1033,10 @@
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Create a new [`Buffer`] with the provided [`FontSystem`] and [`Metrics`]
+    ///
+    /// # Panics
+    ///
+    /// Will panic if `metrics.line_height` is zero.
     </span><span class="kw">pub fn </span>new(font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem, metrics: Metrics) -&gt; <span class="self">Self </span>{
         <span class="macro">assert_ne!</span>(metrics.line_height, <span class="number">0.0</span>, <span class="string">&quot;line height cannot be 0&quot;</span>);
 
@@ -1211,6 +1223,10 @@
     }
 
     <span class="doccomment">/// Set the current [`Metrics`]
+    ///
+    /// # Panics
+    ///
+    /// Will panic if `metrics.font_size` is zero.
     </span><span class="kw">pub fn </span>set_metrics(<span class="kw-2">&amp;mut </span><span class="self">self</span>, metrics: Metrics) {
         <span class="kw">if </span>metrics != <span class="self">self</span>.metrics {
             <span class="macro">assert_ne!</span>(metrics.font_size, <span class="number">0.0</span>, <span class="string">&quot;font size cannot be 0&quot;</span>);
