@@ -181,6 +181,15 @@
 <a href="#181" id="181">181</a>
 <a href="#182" id="182">182</a>
 <a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -273,18 +282,16 @@
 }
 
 <span class="doccomment">/// Cache for rasterizing with the swash scaler
-</span><span class="kw">pub struct </span>SwashCache&lt;<span class="lifetime">&#39;a</span>&gt; {
-    font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem,
+</span><span class="kw">pub struct </span>SwashCache {
     context: ScaleContext,
     <span class="kw">pub </span>image_cache: Map&lt;CacheKey, <span class="prelude-ty">Option</span>&lt;SwashImage&gt;&gt;,
     <span class="kw">pub </span>outline_command_cache: Map&lt;CacheKey, <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; SwashCache&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl </span>SwashCache {
     <span class="doccomment">/// Create a new swash cache
-    </span><span class="kw">pub fn </span>new(font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>FontSystem) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
-            font_system,
             context: ScaleContext::new(),
             image_cache: Map::new(),
             outline_command_cache: Map::new(),
@@ -292,34 +299,45 @@
     }
 
     <span class="doccomment">/// Create a swash Image from a cache key, without caching results
-    </span><span class="kw">pub fn </span>get_image_uncached(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
-        swash_image(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
+    </span><span class="kw">pub fn </span>get_image_uncached(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        cache_key: CacheKey,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
+        swash_image(font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
     }
 
     <span class="doccomment">/// Create a swash Image from a cache key, caching results
-    </span><span class="kw">pub fn </span>get_image(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
+    </span><span class="kw">pub fn </span>get_image(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        cache_key: CacheKey,
+    ) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
         <span class="self">self</span>.image_cache
             .entry(cache_key)
-            .or_insert_with(|| swash_image(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key))
+            .or_insert_with(|| swash_image(font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key))
     }
 
-    <span class="kw">pub fn </span>get_outline_commands(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache_key: CacheKey) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[swash::zeno::Command]&gt; {
+    <span class="kw">pub fn </span>get_outline_commands(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        cache_key: CacheKey,
+    ) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[swash::zeno::Command]&gt; {
         <span class="self">self</span>.outline_command_cache
             .entry(cache_key)
-            .or_insert_with(|| {
-                swash_outline_commands(<span class="self">self</span>.font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
-            })
+            .or_insert_with(|| swash_outline_commands(font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key))
             .as_deref()
     }
 
     <span class="doccomment">/// Enumerate pixels in an Image, use `with_image` for better performance
     </span><span class="kw">pub fn </span>with_pixels&lt;F: FnMut(i32, i32, Color)&gt;(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span>FontSystem,
         cache_key: CacheKey,
         base: Color,
         <span class="kw-2">mut </span>f: F,
     ) {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(image) = <span class="self">self</span>.get_image(cache_key) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(image) = <span class="self">self</span>.get_image(font_system, cache_key) {
             <span class="kw">let </span>x = image.placement.left;
             <span class="kw">let </span>y = -image.placement.top;
 

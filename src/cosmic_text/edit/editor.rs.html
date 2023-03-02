@@ -833,6 +833,11 @@
 <a href="#833" id="833">833</a>
 <a href="#834" id="834">834</a>
 <a href="#835" id="835">835</a>
+<a href="#836" id="836">836</a>
+<a href="#837" id="837">837</a>
+<a href="#838" id="838">838</a>
+<a href="#839" id="839">839</a>
+<a href="#840" id="840">840</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1661,9 +1666,14 @@
                     <span class="prelude-val">None </span>=&gt; color,
                 };
 
-                cache.with_pixels(cache_key, glyph_color, |x, y, color| {
-                    f(x_int + x, line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
-                });
+                cache.with_pixels(
+                    <span class="self">self</span>.buffer.font_system(),
+                    cache_key,
+                    glyph_color,
+                    |x, y, color| {
+                        f(x_int + x, line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
+                    },
+                );
             }
         }
     }
