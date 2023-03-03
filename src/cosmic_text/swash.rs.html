@@ -212,10 +212,10 @@
     context: <span class="kw-2">&amp;mut </span>ScaleContext,
     cache_key: CacheKey,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
-    <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_id) {
+    <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_key) {
         <span class="prelude-val">Some</span>(some) =&gt; some,
         <span class="prelude-val">None </span>=&gt; {
-            <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_id);
+            <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_key.id);
             <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     };
@@ -255,10 +255,10 @@
 ) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt; {
     <span class="kw">use </span>swash::zeno::PathData <span class="kw">as _</span>;
 
-    <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_id) {
+    <span class="kw">let </span>font = <span class="kw">match </span>font_system.get_font(cache_key.font_key) {
         <span class="prelude-val">Some</span>(some) =&gt; some,
         <span class="prelude-val">None </span>=&gt; {
-            <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_id);
+            <span class="macro">log::warn!</span>(<span class="string">&quot;did not find font {:?}&quot;</span>, cache_key.font_key.id);
             <span class="kw">return </span><span class="prelude-val">None</span>;
         }
     };

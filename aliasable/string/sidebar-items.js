@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["AliasableString","Basic aliasable (non `core::ptr::Unique`) alternative to [`alloc::string::String`]."],["UniqueString","A UTF-8–encoded, growable string."]]};

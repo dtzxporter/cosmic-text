@@ -145,13 +145,17 @@
 <a href="#145" id="145">145</a>
 <a href="#146" id="146">146</a>
 <a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-</span><span class="doccomment">/// Key for building a glyph cache
+</span><span class="kw">use </span><span class="kw">crate</span>::FontKey;
+
+<span class="doccomment">/// Key for building a glyph cache
 </span><span class="attr">#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 </span><span class="kw">pub struct </span>CacheKey {
-    <span class="doccomment">/// Font ID
-    </span><span class="kw">pub </span>font_id: fontdb::ID,
+    <span class="doccomment">/// Font key
+    </span><span class="kw">pub </span>font_key: FontKey,
     <span class="doccomment">/// Glyph ID
     </span><span class="kw">pub </span>glyph_id: u16,
     <span class="doccomment">/// `f32` bits of font size
@@ -164,7 +168,7 @@
 
 <span class="kw">impl </span>CacheKey {
     <span class="kw">pub fn </span>new(
-        font_id: fontdb::ID,
+        font_key: FontKey,
         glyph_id: u16,
         font_size: f32,
         pos: (f32, f32),
@@ -173,7 +177,7 @@
         <span class="kw">let </span>(y, y_bin) = SubpixelBin::new(pos.<span class="number">1</span>);
         (
             <span class="self">Self </span>{
-                font_id,
+                font_key,
                 glyph_id,
                 font_size_bits: font_size.to_bits(),
                 x_bin,

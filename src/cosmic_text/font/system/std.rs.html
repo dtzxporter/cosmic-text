@@ -174,39 +174,25 @@
 <a href="#174" id="174">174</a>
 <a href="#175" id="175">175</a>
 <a href="#176" id="176">176</a>
-<a href="#177" id="177">177</a>
-<a href="#178" id="178">178</a>
-<a href="#179" id="179">179</a>
-<a href="#180" id="180">180</a>
-<a href="#181" id="181">181</a>
-<a href="#182" id="182">182</a>
-<a href="#183" id="183">183</a>
-<a href="#184" id="184">184</a>
-<a href="#185" id="185">185</a>
-<a href="#186" id="186">186</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-</span><span class="kw">use </span>std::{
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+</span><span class="kw">use </span>std::collections::hash_map::Entry;
+<span class="kw">use </span>std::{
     collections::HashMap,
     sync::{Arc, Mutex},
 };
 
-<span class="kw">use crate</span>::{Attrs, AttrsOwned, Font, FontMatches};
-
-<span class="attr">#[ouroboros::self_referencing]
-</span><span class="kw">struct </span>FontSystemInner {
-    locale: String,
-    db: fontdb::Database,
-    <span class="attr">#[borrows(db)]
-    #[not_covariant]
-    </span>font_cache: Mutex&lt;HashMap&lt;fontdb::ID, <span class="prelude-ty">Option</span>&lt;Arc&lt;Font&lt;<span class="lifetime">&#39;this</span>&gt;&gt;&gt;&gt;&gt;,
-    <span class="attr">#[borrows(locale, db)]
-    #[not_covariant]
-    </span>font_matches_cache: Mutex&lt;HashMap&lt;AttrsOwned, Arc&lt;FontMatches&lt;<span class="lifetime">&#39;this</span>&gt;&gt;&gt;&gt;,
-}
+<span class="kw">use crate</span>::{Attrs, AttrsOwned, Font, FontKey};
 
 <span class="doccomment">/// Access system fonts
-</span><span class="kw">pub struct </span>FontSystem(FontSystemInner);
+</span><span class="kw">pub struct </span>FontSystem {
+    locale: String,
+    db: fontdb::Database,
+    font_matches_cache: Mutex&lt;HashMap&lt;AttrsOwned, Arc&lt;Vec&lt;FontKey&gt;&gt;&gt;&gt;,
+    <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+    </span>font_key_cache: Mutex&lt;HashMap&lt;fontdb::ID, <span class="prelude-ty">Option</span>&lt;FontKey&gt;&gt;&gt;,
+}
 
 <span class="kw">impl </span>FontSystem {
     <span class="doccomment">/// Create a new [`FontSystem`], that allows access to any installed system fonts
@@ -261,8 +247,7 @@
             </span><span class="kw">let </span>now = std::time::Instant::now();
 
             <span class="comment">//TODO only do this on demand!
-            </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..db.faces().len() {
-                <span class="kw">let </span>id = db.faces()[i].id;
+            </span><span class="kw">for </span>id <span class="kw">in </span>db.faces().map(|face| face.id).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;() {
                 <span class="kw">unsafe </span>{
                     db.make_shared_face_data(id);
                 }
@@ -276,99 +261,94 @@
             );
         }
 
-        <span class="self">Self</span>(
-            FontSystemInnerBuilder {
-                locale,
-                db,
-                font_cache_builder: |<span class="kw">_</span>| Mutex::new(HashMap::new()),
-                font_matches_cache_builder: |<span class="kw">_</span>, <span class="kw">_</span>| Mutex::new(HashMap::new()),
-            }
-            .build(),
-        )
+        <span class="self">Self </span>{
+            locale,
+            db,
+            font_matches_cache: Mutex::new(HashMap::new()),
+            <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+            </span>font_key_cache: Mutex::new(HashMap::new()),
+        }
     }
 
     <span class="kw">pub fn </span>locale(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
-        <span class="self">self</span>.<span class="number">0</span>.borrow_locale()
+        <span class="kw-2">&amp;</span><span class="self">self</span>.locale
     }
 
     <span class="kw">pub fn </span>db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>fontdb::Database {
-        <span class="self">self</span>.<span class="number">0</span>.borrow_db()
+        <span class="kw-2">&amp;</span><span class="self">self</span>.db
     }
 
     <span class="kw">pub fn </span>into_locale_and_db(<span class="self">self</span>) -&gt; (String, fontdb::Database) {
-        <span class="kw">let </span>heads = <span class="self">self</span>.<span class="number">0</span>.into_heads();
-        (heads.locale, heads.db)
+        (<span class="self">self</span>.locale, <span class="self">self</span>.db)
     }
 
     <span class="comment">// Clippy false positive
     </span><span class="attr">#[allow(clippy::needless_lifetimes)]
-    </span><span class="kw">pub fn </span>get_font&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, id: fontdb::ID) -&gt; <span class="prelude-ty">Option</span>&lt;Arc&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt;&gt; {
-        <span class="self">self</span>.<span class="number">0</span>.with(|fields| get_font(<span class="kw-2">&amp;</span>fields, id))
+    </span><span class="kw">pub fn </span>get_font&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, key: FontKey) -&gt; <span class="prelude-ty">Option</span>&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+        <span class="kw">match </span>Font::from_key(<span class="kw-2">&amp;</span><span class="self">self</span>.db, key) {
+            <span class="prelude-val">Some</span>(font) =&gt; <span class="prelude-val">Some</span>(font),
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">let </span>face = <span class="self">self</span>.db.face(key.id)<span class="question-mark">?</span>;
+                <span class="macro">log::warn!</span>(<span class="string">&quot;failed to load font &#39;{}&#39;&quot;</span>, face.post_script_name);
+                <span class="prelude-val">None
+            </span>}
+        }
     }
 
-    <span class="kw">pub fn </span>get_font_matches&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, attrs: Attrs) -&gt; Arc&lt;FontMatches&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
-        <span class="self">self</span>.<span class="number">0</span>.with(|fields| {
-            <span class="kw">let </span><span class="kw-2">mut </span>font_matches_cache = fields
-                .font_matches_cache
-                .lock()
-                .expect(<span class="string">&quot;failed to lock font matches cache&quot;</span>);
-            <span class="comment">//TODO: do not create AttrsOwned unless entry does not already exist
-            </span>font_matches_cache
-                .entry(AttrsOwned::new(attrs))
-                .or_insert_with(|| {
-                    <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
-                    </span><span class="kw">let </span>now = std::time::Instant::now();
-
-                    <span class="kw">let </span><span class="kw-2">mut </span>fonts = Vec::new();
-                    <span class="kw">for </span>face <span class="kw">in </span>fields.db.faces() {
-                        <span class="kw">if </span>!attrs.matches(face) {
-                            <span class="kw">continue</span>;
-                        }
-
-                        <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = get_font(<span class="kw-2">&amp;</span>fields, face.id) {
-                            fonts.push(font);
-                        }
-                    }
-
-                    <span class="kw">let </span>font_matches = Arc::new(FontMatches {
-                        locale: fields.locale,
-                        default_family: fields.db.family_name(<span class="kw-2">&amp;</span>attrs.family).to_string(),
-                        fonts,
-                    });
-
-                    <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
-                    </span>{
-                        <span class="kw">let </span>elapsed = now.elapsed();
-                        <span class="macro">log::debug!</span>(<span class="string">&quot;font matches for {:?} in {:?}&quot;</span>, attrs, elapsed);
-                    }
-
-                    font_matches
-                })
-                .clone()
-        })
-    }
-}
-
-<span class="kw">fn </span>get_font&lt;<span class="lifetime">&#39;b</span>&gt;(
-    fields: <span class="kw-2">&amp;</span>ouroboros_impl_font_system_inner::BorrowedFields&lt;<span class="lifetime">&#39;_</span>, <span class="lifetime">&#39;b</span>&gt;,
-    id: fontdb::ID,
-) -&gt; <span class="prelude-ty">Option</span>&lt;Arc&lt;Font&lt;<span class="lifetime">&#39;b</span>&gt;&gt;&gt; {
-    fields
-        .font_cache
-        .lock()
-        .expect(<span class="string">&quot;failed to lock font cache&quot;</span>)
-        .entry(id)
-        .or_insert_with(|| {
-            <span class="kw">let </span>face = fields.db.face(id)<span class="question-mark">?</span>;
-            <span class="kw">match </span>Font::new(face) {
-                <span class="prelude-val">Some</span>(font) =&gt; <span class="prelude-val">Some</span>(Arc::new(font)),
-                <span class="prelude-val">None </span>=&gt; {
-                    <span class="macro">log::warn!</span>(<span class="string">&quot;failed to load font &#39;{}&#39;&quot;</span>, face.post_script_name);
-                    <span class="prelude-val">None
-                </span>}
+    <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+    </span><span class="kw">pub fn </span>get_font_key(<span class="kw-2">&amp;</span><span class="self">self</span>, id: fontdb::ID) -&gt; <span class="prelude-ty">Option</span>&lt;FontKey&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>font_key_cache = <span class="self">self
+            </span>.font_key_cache
+            .lock()
+            .expect(<span class="string">&quot;failed to lock font matches cache&quot;</span>);
+        <span class="kw">match </span>font_key_cache.entry(id) {
+            Entry::Occupied(entry) =&gt; <span class="kw-2">*</span>entry.get(),
+            Entry::Vacant(entry) =&gt; {
+                <span class="kw">let </span>key = <span class="self">self</span>.db.face(id).and_then(Font::new).as_ref().map(Font::key);
+                entry.insert(key);
+                key
             }
-        })
-        .clone()
+        }
+    }
+
+    <span class="attr">#[cfg(not(feature = <span class="string">&quot;swash&quot;</span>))]
+    </span><span class="kw">pub fn </span>get_font_key(<span class="kw-2">&amp;</span><span class="self">self</span>, id: fontdb::ID) -&gt; <span class="prelude-ty">Option</span>&lt;FontKey&gt; {
+        <span class="prelude-val">Some</span>(Font::new(<span class="self">self</span>.db.face(id)<span class="question-mark">?</span>)<span class="question-mark">?</span>.key())
+    }
+
+    <span class="kw">pub fn </span>get_font_matches(<span class="kw-2">&amp;</span><span class="self">self</span>, attrs: Attrs) -&gt; Arc&lt;Vec&lt;FontKey&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>font_matches_cache = <span class="self">self
+            </span>.font_matches_cache
+            .lock()
+            .expect(<span class="string">&quot;failed to lock font matches cache&quot;</span>);
+        <span class="comment">//TODO: do not create AttrsOwned unless entry does not already exist
+        </span>font_matches_cache
+            .entry(AttrsOwned::new(attrs))
+            .or_insert_with(|| {
+                <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+                </span><span class="kw">let </span>now = std::time::Instant::now();
+
+                <span class="kw">let </span><span class="kw-2">mut </span>font_keys = Vec::new();
+                <span class="kw">for </span>face <span class="kw">in </span><span class="self">self</span>.db.faces() {
+                    <span class="kw">if </span>!attrs.matches(face) {
+                        <span class="kw">continue</span>;
+                    }
+
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(key) = <span class="self">self</span>.get_font_key(face.id) {
+                        font_keys.push(key);
+                    }
+                }
+
+                <span class="attr">#[cfg(not(target_arch = <span class="string">&quot;wasm32&quot;</span>))]
+                </span>{
+                    <span class="kw">let </span>elapsed = now.elapsed();
+                    <span class="macro">log::debug!</span>(<span class="string">&quot;font matches for {:?} in {:?}&quot;</span>, attrs, elapsed);
+                }
+
+                Arc::new(font_keys)
+            })
+            .clone()
+    }
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

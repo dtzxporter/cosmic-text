@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["AliasableBox","Basic aliasable (non `core::ptr::Unique`) alternative to [`alloc::boxed::Box`]."],["UniqueBox","A pointer type that uniquely owns a heap allocation of type `T`."]]};
