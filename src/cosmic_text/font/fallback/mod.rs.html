@@ -152,6 +152,9 @@
 <a href="#152" id="152">152</a>
 <a href="#153" id="153">153</a>
 <a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>alloc::sync::Arc;
@@ -225,7 +228,7 @@
                 <span class="string">&quot;Failed to find preset fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
                 <span class="self">self</span>.locale,
-                font.info.family,
+                font.name(),
                 word
             );
         } <span class="kw">else if </span>!<span class="self">self</span>.scripts.is_empty() &amp;&amp; <span class="self">self</span>.common_i &gt; <span class="number">0 </span>{
@@ -249,7 +252,7 @@
             <span class="self">self</span>.default_i += <span class="number">1</span>;
 
             <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                <span class="kw">if </span>font.info.family == default_family {
+                <span class="kw">if </span>font.contains_family(default_family) {
                     <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                 }
             }
@@ -263,7 +266,7 @@
                 <span class="kw">let </span>script_family = script_families[<span class="self">self</span>.script_i.<span class="number">1</span>];
                 <span class="self">self</span>.script_i.<span class="number">1 </span>+= <span class="number">1</span>;
                 <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                    <span class="kw">if </span>font.info.family == script_family {
+                    <span class="kw">if </span>font.contains_family(script_family) {
                         <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                     }
                 }
@@ -284,7 +287,7 @@
             <span class="kw">let </span>common_family = common_families[<span class="self">self</span>.common_i];
             <span class="self">self</span>.common_i += <span class="number">1</span>;
             <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                <span class="kw">if </span>font.info.family == common_family {
+                <span class="kw">if </span>font.contains_family(common_family) {
                     <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                 }
             }
@@ -297,7 +300,10 @@
         <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.fonts.len() {
             <span class="kw">let </span>font = <span class="kw-2">&amp;</span><span class="self">self</span>.fonts[<span class="self">self</span>.other_i];
             <span class="self">self</span>.other_i += <span class="number">1</span>;
-            <span class="kw">if </span>!forbidden_families.contains(<span class="kw-2">&amp;</span>font.info.family.as_str()) {
+            <span class="kw">if </span>forbidden_families
+                .iter()
+                .all(|family| !font.contains_family(family))
+            {
                 <span class="kw">return </span><span class="prelude-val">Some</span>(font);
             }
         }

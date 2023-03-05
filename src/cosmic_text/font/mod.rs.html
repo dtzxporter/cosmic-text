@@ -53,6 +53,18 @@
 <a href="#53" id="53">53</a>
 <a href="#54" id="54">54</a>
 <a href="#55" id="55">55</a>
+<a href="#56" id="56">56</a>
+<a href="#57" id="57">57</a>
+<a href="#58" id="58">58</a>
+<a href="#59" id="59">59</a>
+<a href="#60" id="60">60</a>
+<a href="#61" id="61">61</a>
+<a href="#62" id="62">62</a>
+<a href="#63" id="63">63</a>
+<a href="#64" id="64">64</a>
+<a href="#65" id="65">65</a>
+<a href="#66" id="66">66</a>
+<a href="#67" id="67">67</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>core::ops::Deref;
@@ -97,6 +109,18 @@
                 (swash.offset, swash.key)
             },
         })
+    }
+
+    <span class="kw">pub fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>((name, <span class="kw">_</span>)) = <span class="self">self</span>.info.families.first() {
+            name
+        } <span class="kw">else </span>{
+            <span class="kw-2">&amp;</span><span class="self">self</span>.info.post_script_name
+        }
+    }
+
+    <span class="kw">pub fn </span>contains_family(<span class="kw-2">&amp;</span><span class="self">self</span>, family: <span class="kw-2">&amp;</span>str) -&gt; bool {
+        <span class="self">self</span>.info.families.iter().any(|(name, <span class="kw">_</span>)| name == family)
     }
 
     <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]

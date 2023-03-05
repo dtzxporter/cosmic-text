@@ -183,7 +183,6 @@
 <a href="#183" id="183">183</a>
 <a href="#184" id="184">184</a>
 <a href="#185" id="185">185</a>
-<a href="#186" id="186">186</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>std::{
@@ -261,8 +260,7 @@
             </span><span class="kw">let </span>now = std::time::Instant::now();
 
             <span class="comment">//TODO only do this on demand!
-            </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..db.faces().len() {
-                <span class="kw">let </span>id = db.faces()[i].id;
+            </span><span class="kw">for </span>id <span class="kw">in </span>db.faces().map(|face| face.id).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;() {
                 <span class="kw">unsafe </span>{
                     db.make_shared_face_data(id);
                 }
