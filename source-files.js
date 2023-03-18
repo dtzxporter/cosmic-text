@@ -3,7 +3,7 @@ var sourcesIndex = JSON.parse('{\
 "bitflags":["",[],["lib.rs"]],\
 "bytemuck":["",[],["allocation.rs","anybitpattern.rs","checked.rs","contiguous.rs","internal.rs","lib.rs","no_uninit.rs","offset_of.rs","pod.rs","pod_in_option.rs","transparent.rs","zeroable.rs","zeroable_in_option.rs"]],\
 "cfg_if":["",[],["lib.rs"]],\
-"cosmic_text":["",[["edit",[],["editor.rs","mod.rs"]],["font",[["fallback",[],["mod.rs","unix.rs"]],["system",[],["mod.rs","std.rs"]]],["matches.rs","mod.rs"]]],["attrs.rs","buffer.rs","buffer_line.rs","cache.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
+"cosmic_text":["",[["edit",[],["editor.rs","mod.rs"]],["font",[["fallback",[],["mod.rs","unix.rs"]],["system",[],["mod.rs","std.rs"]]],["mod.rs"]]],["attrs.rs","buffer.rs","buffer_line.rs","cache.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
 "fontdb":["",[],["lib.rs"]],\
 "inflector":["",[["cases",[["camelcase",[],["mod.rs"]],["case",[],["mod.rs"]],["classcase",[],["mod.rs"]],["kebabcase",[],["mod.rs"]],["pascalcase",[],["mod.rs"]],["screamingsnakecase",[],["mod.rs"]],["sentencecase",[],["mod.rs"]],["snakecase",[],["mod.rs"]],["tablecase",[],["mod.rs"]],["titlecase",[],["mod.rs"]],["traincase",[],["mod.rs"]]],["mod.rs"]],["numbers",[["deordinalize",[],["mod.rs"]],["ordinalize",[],["mod.rs"]]],["mod.rs"]],["suffix",[["foreignkey",[],["mod.rs"]]],["mod.rs"]]],["lib.rs"]],\
 "libc":["",[["unix",[["linux_like",[["linux",[["arch",[["generic",[],["mod.rs"]]],["mod.rs"]],["gnu",[["b64",[["x86_64",[],["align.rs","mod.rs","not_x32.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["align.rs","mod.rs","non_exhaustive.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["fixed_width_ints.rs","lib.rs","macros.rs"]],\

@@ -155,14 +155,45 @@
 <a href="#155" id="155">155</a>
 <a href="#156" id="156">156</a>
 <a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>alloc::sync::Arc;
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
+<span class="kw">use </span>fontdb::Family;
 <span class="kw">use </span>unicode_script::Script;
 
-<span class="kw">use </span><span class="kw">crate</span>::Font;
+<span class="kw">use crate</span>::{Font, FontSystem};
 
 <span class="kw">use </span><span class="self">self</span>::platform::<span class="kw-2">*</span>;
 
@@ -183,11 +214,11 @@
 </span><span class="kw">mod </span>platform;
 
 <span class="kw">pub struct </span>FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
-    fonts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Arc&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt;],
-    default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str],
+    font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>FontSystem,
+    font_ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[fontdb::ID],
+    default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Family&lt;<span class="lifetime">&#39;a</span>&gt;],
     default_i: usize,
     scripts: Vec&lt;Script&gt;,
-    locale: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     script_i: (usize, usize),
     common_i: usize,
     other_i: usize,
@@ -196,17 +227,17 @@
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">pub fn </span>new(
-        fonts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Arc&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt;],
-        default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str],
+        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>FontSystem,
+        font_ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[fontdb::ID],
+        default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Family&lt;<span class="lifetime">&#39;a</span>&gt;],
         scripts: Vec&lt;Script&gt;,
-        locale: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
-            fonts,
+            font_system,
+            font_ids,
             default_families,
             default_i: <span class="number">0</span>,
             scripts,
-            locale,
             script_i: (<span class="number">0</span>, <span class="number">0</span>),
             common_i: <span class="number">0</span>,
             other_i: <span class="number">0</span>,
@@ -214,21 +245,20 @@
         }
     }
 
-    <span class="kw">pub fn </span>check_missing(<span class="kw-2">&amp;</span><span class="self">self</span>, word: <span class="kw-2">&amp;</span>str) {
+    <span class="kw">pub fn </span>check_missing(<span class="kw-2">&amp;mut </span><span class="self">self</span>, word: <span class="kw-2">&amp;</span>str) {
         <span class="kw">if </span><span class="self">self</span>.end {
             <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find any fallback for {:?} locale &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
-                <span class="self">self</span>.locale,
+                <span class="self">self</span>.font_system.locale(),
                 word
             );
         } <span class="kw">else if </span><span class="self">self</span>.other_i &gt; <span class="number">0 </span>{
-            <span class="kw">let </span>font = <span class="kw-2">&amp;</span><span class="self">self</span>.fonts[<span class="self">self</span>.other_i - <span class="number">1</span>];
             <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find preset fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
-                <span class="self">self</span>.locale,
-                font.name(),
+                <span class="self">self</span>.font_system.locale(),
+                <span class="self">self</span>.face_name(<span class="self">self</span>.font_ids[<span class="self">self</span>.other_i - <span class="number">1</span>]),
                 word
             );
         } <span class="kw">else if </span>!<span class="self">self</span>.scripts.is_empty() &amp;&amp; <span class="self">self</span>.common_i &gt; <span class="number">0 </span>{
@@ -236,24 +266,48 @@
             <span class="macro">log::debug!</span>(
                 <span class="string">&quot;Failed to find script fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
-                <span class="self">self</span>.locale,
+                <span class="self">self</span>.font_system.locale(),
                 family,
                 word
             );
         }
     }
+
+    <span class="kw">pub fn </span>face_name(<span class="kw-2">&amp;</span><span class="self">self</span>, id: fontdb::ID) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(face) = <span class="self">self</span>.font_system.db().face(id) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((name, <span class="kw">_</span>)) = face.families.first() {
+                name
+            } <span class="kw">else </span>{
+                <span class="kw-2">&amp;</span>face.post_script_name
+            }
+        } <span class="kw">else </span>{
+            <span class="string">&quot;invalid font id&quot;
+        </span>}
+    }
+
+    <span class="kw">fn </span>face_contains_family(<span class="kw-2">&amp;</span><span class="self">self</span>, id: fontdb::ID, family_name: <span class="kw-2">&amp;</span>str) -&gt; bool {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(face) = <span class="self">self</span>.font_system.db().face(id) {
+            face.families.iter().any(|(name, <span class="kw">_</span>)| name == family_name)
+        } <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>}
+    }
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">type </span>Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Arc&lt;Font&lt;<span class="lifetime">&#39;a</span>&gt;&gt;;
+    <span class="kw">type </span>Item = Arc&lt;Font&gt;;
     <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
         <span class="kw">while </span><span class="self">self</span>.default_i &lt; <span class="self">self</span>.default_families.len() {
-            <span class="kw">let </span>default_family = <span class="self">self</span>.default_families[<span class="self">self</span>.default_i];
             <span class="self">self</span>.default_i += <span class="number">1</span>;
-
-            <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                <span class="kw">if </span>font.contains_family(default_family) {
-                    <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+            <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
+                <span class="kw">let </span>default_family = <span class="self">self
+                    </span>.font_system
+                    .db()
+                    .family_name(<span class="self">self</span>.default_families[<span class="self">self</span>.default_i - <span class="number">1</span>]);
+                <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, default_family) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                    }
                 }
             }
         }
@@ -261,20 +315,22 @@
         <span class="kw">while </span><span class="self">self</span>.script_i.<span class="number">0 </span>&lt; <span class="self">self</span>.scripts.len() {
             <span class="kw">let </span>script = <span class="self">self</span>.scripts[<span class="self">self</span>.script_i.<span class="number">0</span>];
 
-            <span class="kw">let </span>script_families = script_fallback(script, <span class="self">self</span>.locale);
+            <span class="kw">let </span>script_families = script_fallback(script, <span class="self">self</span>.font_system.locale());
             <span class="kw">while </span><span class="self">self</span>.script_i.<span class="number">1 </span>&lt; script_families.len() {
                 <span class="kw">let </span>script_family = script_families[<span class="self">self</span>.script_i.<span class="number">1</span>];
                 <span class="self">self</span>.script_i.<span class="number">1 </span>+= <span class="number">1</span>;
-                <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                    <span class="kw">if </span>font.contains_family(script_family) {
-                        <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
+                    <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, script_family) {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                        }
                     }
                 }
                 <span class="macro">log::debug!</span>(
                     <span class="string">&quot;failed to find family &#39;{}&#39; for script {:?} and locale &#39;{}&#39;&quot;</span>,
                     script_family,
                     script,
-                    <span class="self">self</span>.locale
+                    <span class="self">self</span>.font_system.locale(),
                 );
             }
 
@@ -286,9 +342,11 @@
         <span class="kw">while </span><span class="self">self</span>.common_i &lt; common_families.len() {
             <span class="kw">let </span>common_family = common_families[<span class="self">self</span>.common_i];
             <span class="self">self</span>.common_i += <span class="number">1</span>;
-            <span class="kw">for </span>font <span class="kw">in </span><span class="self">self</span>.fonts.iter() {
-                <span class="kw">if </span>font.contains_family(common_family) {
-                    <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+            <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
+                <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, common_family) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                    }
                 }
             }
             <span class="macro">log::debug!</span>(<span class="string">&quot;failed to find family &#39;{}&#39;&quot;</span>, common_family);
@@ -297,14 +355,16 @@
         <span class="comment">//TODO: do we need to do this?
         //TODO: do not evaluate fonts more than once!
         </span><span class="kw">let </span>forbidden_families = forbidden_fallback();
-        <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.fonts.len() {
-            <span class="kw">let </span>font = <span class="kw-2">&amp;</span><span class="self">self</span>.fonts[<span class="self">self</span>.other_i];
+        <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.font_ids.len() {
+            <span class="kw">let </span>id = <span class="self">self</span>.font_ids[<span class="self">self</span>.other_i];
             <span class="self">self</span>.other_i += <span class="number">1</span>;
             <span class="kw">if </span>forbidden_families
                 .iter()
-                .all(|family| !font.contains_family(family))
+                .all(|family_name| !<span class="self">self</span>.face_contains_family(id, family_name))
             {
-                <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(id) {
+                    <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                }
             }
         }
 

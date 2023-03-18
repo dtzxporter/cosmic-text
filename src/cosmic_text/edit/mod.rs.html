@@ -117,12 +117,60 @@
 <a href="#117" id="117">117</a>
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
 </pre><pre class="rust"><code><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::string::String;
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
-<span class="kw">use crate</span>::{AttrsList, Buffer, Cursor};
+<span class="kw">use crate</span>::{AttrsList, BorrowedWithFontSystem, Buffer, Cursor, FontSystem};
 
 <span class="kw">pub use </span><span class="self">self</span>::editor::<span class="kw-2">*</span>;
 <span class="kw">mod </span>editor;
@@ -197,12 +245,26 @@
 }
 
 <span class="doccomment">/// A trait to allow easy replacements of [`Editor`], like `SyntaxEditor`
-</span><span class="kw">pub trait </span>Edit&lt;<span class="lifetime">&#39;a</span>&gt; {
+</span><span class="kw">pub trait </span>Edit {
+    <span class="doccomment">/// Mutably borrows `self` together with an [`FontSystem`] for more convenient methods
+    </span><span class="kw">fn </span>borrow_with&lt;<span class="lifetime">&#39;a</span>&gt;(
+        <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>FontSystem,
+    ) -&gt; BorrowedWithFontSystem&lt;<span class="lifetime">&#39;a</span>, <span class="self">Self</span>&gt;
+    <span class="kw">where
+        </span><span class="self">Self</span>: Sized,
+    {
+        BorrowedWithFontSystem {
+            inner: <span class="self">self</span>,
+            font_system,
+        }
+    }
+
     <span class="doccomment">/// Get the internal [`Buffer`]
-    </span><span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;;
+    </span><span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer;
 
     <span class="doccomment">/// Get the internal [`Buffer`], mutably
-    </span><span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;;
+    </span><span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer;
 
     <span class="doccomment">/// Get the current cursor position
     </span><span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor;
@@ -214,7 +276,7 @@
     </span><span class="kw">fn </span>set_select_opt(<span class="kw-2">&amp;mut </span><span class="self">self</span>, select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;);
 
     <span class="doccomment">/// Shape lines until scroll, after adjusting scroll if the cursor moved
-    </span><span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
+    </span><span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem);
 
     <span class="doccomment">/// Copy selection
     </span><span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt;;
@@ -228,13 +290,47 @@
     </span><span class="kw">fn </span>insert_string(<span class="kw-2">&amp;mut </span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>str, attrs_list: <span class="prelude-ty">Option</span>&lt;AttrsList&gt;);
 
     <span class="doccomment">/// Perform an [Action] on the editor
-    </span><span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action);
+    </span><span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, action: Action);
 
     <span class="doccomment">/// Draw the editor
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
-    </span><span class="kw">fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, f: F)
-    <span class="kw">where
+    </span><span class="kw">fn </span>draw&lt;F&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
+        cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache,
+        color: Color,
+        f: F,
+    ) <span class="kw">where
         </span>F: FnMut(i32, i32, u32, u32, Color);
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Edit&gt; BorrowedWithFontSystem&lt;<span class="lifetime">&#39;a</span>, T&gt; {
+    <span class="doccomment">/// Get the internal [`Buffer`], mutably
+    </span><span class="kw">pub fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; BorrowedWithFontSystem&lt;Buffer&gt; {
+        BorrowedWithFontSystem {
+            inner: <span class="self">self</span>.inner.buffer_mut(),
+            font_system: <span class="self">self</span>.font_system,
+        }
+    }
+
+    <span class="doccomment">/// Shape lines until scroll, after adjusting scroll if the cursor moved
+    </span><span class="kw">pub fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.inner.shape_as_needed(<span class="self">self</span>.font_system);
+    }
+
+    <span class="doccomment">/// Perform an [Action] on the editor
+    </span><span class="kw">pub fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action) {
+        <span class="self">self</span>.inner.action(<span class="self">self</span>.font_system, action);
+    }
+
+    <span class="doccomment">/// Draw the editor
+    </span><span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
+    </span><span class="kw">pub fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, f: F)
+    <span class="kw">where
+        </span>F: FnMut(i32, i32, u32, u32, Color),
+    {
+        <span class="self">self</span>.inner.draw(<span class="self">self</span>.font_system, cache, color, f);
+    }
 }
 </code></pre></div>
 </section></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.68.0 (2c8cc3432 2023-03-06)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-c3c521c753752a1a.js" data-settings-css="settings-08ddfdda51b8ee2e.css" ></div></body></html>

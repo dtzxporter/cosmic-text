@@ -1062,12 +1062,6 @@
 <a href="#1062" id="1062">1062</a>
 <a href="#1063" id="1063">1063</a>
 <a href="#1064" id="1064">1064</a>
-<a href="#1065" id="1065">1065</a>
-<a href="#1066" id="1066">1066</a>
-<a href="#1067" id="1067">1067</a>
-<a href="#1068" id="1068">1068</a>
-<a href="#1069" id="1069">1069</a>
-<a href="#1070" id="1070">1070</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1091,7 +1085,7 @@
 ) -&gt; (Vec&lt;ShapeGlyph&gt;, Vec&lt;usize&gt;) {
     <span class="kw">let </span>run = <span class="kw-2">&amp;</span>line[start_run..end_run];
 
-    <span class="kw">let </span>font_scale = font.rustybuzz.units_per_em() <span class="kw">as </span>f32;
+    <span class="kw">let </span>font_scale = font.rustybuzz().units_per_em() <span class="kw">as </span>f32;
 
     <span class="kw">let </span><span class="kw-2">mut </span>buffer = rustybuzz::UnicodeBuffer::new();
     buffer.set_direction(<span class="kw">if </span>span_rtl {
@@ -1105,7 +1099,7 @@
     <span class="kw">let </span>rtl = <span class="macro">matches!</span>(buffer.direction(), rustybuzz::Direction::RightToLeft);
     <span class="macro">assert_eq!</span>(rtl, span_rtl);
 
-    <span class="kw">let </span>glyph_buffer = rustybuzz::shape(<span class="kw-2">&amp;</span>font.rustybuzz, <span class="kw-2">&amp;</span>[], buffer);
+    <span class="kw">let </span>glyph_buffer = rustybuzz::shape(font.rustybuzz(), <span class="kw-2">&amp;</span>[], buffer);
     <span class="kw">let </span>glyph_infos = glyph_buffer.glyph_infos();
     <span class="kw">let </span>glyph_positions = glyph_buffer.glyph_positions();
 
@@ -1131,7 +1125,7 @@
             y_advance,
             x_offset,
             y_offset,
-            font_id: font.info.id,
+            font_id: font.id(),
             glyph_id: info.glyph_id.try_into().expect(<span class="string">&quot;failed to cast glyph ID&quot;</span>),
             <span class="comment">//TODO: color should not be related to shaping
             </span>color_opt: attrs.color_opt,
@@ -1168,7 +1162,7 @@
 }
 
 <span class="kw">fn </span>shape_run(
-    font_system: <span class="kw-2">&amp;</span>FontSystem,
+    font_system: <span class="kw-2">&amp;mut </span>FontSystem,
     line: <span class="kw-2">&amp;</span>str,
     attrs_list: <span class="kw-2">&amp;</span>AttrsList,
     start_run: usize,
@@ -1192,24 +1186,15 @@
 
     <span class="kw">let </span>attrs = attrs_list.get_span(start_run);
 
-    <span class="kw">let </span>font_matches = font_system.get_font_matches(attrs);
+    <span class="kw">let </span>fonts = font_system.get_font_matches(attrs);
 
-    <span class="kw">let </span>default_families = [font_matches.default_family.as_str()];
-    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(
-        <span class="kw-2">&amp;</span>font_matches.fonts,
-        <span class="kw-2">&amp;</span>default_families,
-        scripts,
-        font_matches.locale,
-    );
+    <span class="kw">let </span>default_families = [<span class="kw-2">&amp;</span>attrs.family];
+    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(font_system, <span class="kw-2">&amp;</span>fonts, <span class="kw-2">&amp;</span>default_families, scripts);
 
-    <span class="kw">let </span>(<span class="kw-2">mut </span>glyphs, <span class="kw-2">mut </span>missing) = shape_fallback(
-        font_iter.next().expect(<span class="string">&quot;no default font found&quot;</span>),
-        line,
-        attrs_list,
-        start_run,
-        end_run,
-        span_rtl,
-    );
+    <span class="kw">let </span>font = font_iter.next().expect(<span class="string">&quot;no default font found&quot;</span>);
+
+    <span class="kw">let </span>(<span class="kw-2">mut </span>glyphs, <span class="kw-2">mut </span>missing) =
+        shape_fallback(<span class="kw-2">&amp;</span>font, line, attrs_list, start_run, end_run, span_rtl);
 
     <span class="comment">//TODO: improve performance!
     </span><span class="kw">while </span>!missing.is_empty() {
@@ -1218,9 +1203,12 @@
             <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
         };
 
-        <span class="macro">log::trace!</span>(<span class="string">&quot;Evaluating fallback with font &#39;{}&#39;&quot;</span>, font.name());
+        <span class="macro">log::trace!</span>(
+            <span class="string">&quot;Evaluating fallback with font &#39;{}&#39;&quot;</span>,
+            font_iter.face_name(font.id())
+        );
         <span class="kw">let </span>(<span class="kw-2">mut </span>fb_glyphs, fb_missing) =
-            shape_fallback(font, line, attrs_list, start_run, end_run, span_rtl);
+            shape_fallback(<span class="kw-2">&amp;</span>font, line, attrs_list, start_run, end_run, span_rtl);
 
         <span class="comment">// Insert all matching glyphs
         </span><span class="kw">let </span><span class="kw-2">mut </span>fb_i = <span class="number">0</span>;
@@ -1348,7 +1336,7 @@
 
 <span class="kw">impl </span>ShapeWord {
     <span class="kw">pub fn </span>new(
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         line: <span class="kw-2">&amp;</span>str,
         attrs_list: <span class="kw-2">&amp;</span>AttrsList,
         word_range: Range&lt;usize&gt;,
@@ -1422,7 +1410,7 @@
 
 <span class="kw">impl </span>ShapeSpan {
     <span class="kw">pub fn </span>new(
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         line: <span class="kw-2">&amp;</span>str,
         attrs_list: <span class="kw-2">&amp;</span>AttrsList,
         span_range: Range&lt;usize&gt;,
@@ -1513,7 +1501,7 @@
     <span class="doccomment">/// # Panics
     ///
     /// Will panic if `line` contains more than one paragraph.
-    </span><span class="kw">pub fn </span>new(font_system: <span class="kw-2">&amp;</span>FontSystem, line: <span class="kw-2">&amp;</span>str, attrs_list: <span class="kw-2">&amp;</span>AttrsList) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new(font_system: <span class="kw-2">&amp;mut </span>FontSystem, line: <span class="kw-2">&amp;</span>str, attrs_list: <span class="kw-2">&amp;</span>AttrsList) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span><span class="kw-2">mut </span>spans = Vec::new();
 
         <span class="kw">let </span>bidi = unicode_bidi::BidiInfo::new(line, <span class="prelude-val">None</span>);

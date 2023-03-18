@@ -845,6 +845,8 @@
 <a href="#845" id="845">845</a>
 <a href="#846" id="846">846</a>
 <a href="#847" id="847">847</a>
+<a href="#848" id="848">848</a>
+<a href="#849" id="849">849</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -857,20 +859,22 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
-<span class="kw">use crate</span>::{Action, Affinity, AttrsList, Buffer, BufferLine, Cursor, Edit, LayoutCursor};
+<span class="kw">use crate</span>::{
+    Action, Affinity, AttrsList, Buffer, BufferLine, Cursor, Edit, FontSystem, LayoutCursor,
+};
 
 <span class="doccomment">/// A wrapper of [`Buffer`] for easy editing
-</span><span class="kw">pub struct </span>Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
-    buffer: Buffer&lt;<span class="lifetime">&#39;a</span>&gt;,
+</span><span class="kw">pub struct </span>Editor {
+    buffer: Buffer,
     cursor: Cursor,
     cursor_x_opt: <span class="prelude-ty">Option</span>&lt;i32&gt;,
     select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;,
     cursor_moved: bool,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl </span>Editor {
     <span class="doccomment">/// Create a new [`Editor`] with the provided [`Buffer`]
-    </span><span class="kw">pub fn </span>new(buffer: Buffer&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new(buffer: Buffer) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             buffer,
             cursor: Cursor::default(),
@@ -880,10 +884,10 @@
         }
     }
 
-    <span class="kw">fn </span>set_layout_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cursor: LayoutCursor) {
+    <span class="kw">fn </span>set_layout_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, cursor: LayoutCursor) {
         <span class="kw">let </span>layout = <span class="self">self
             </span>.buffer
-            .line_layout(cursor.line)
+            .line_layout(font_system, cursor.line)
             .expect(<span class="string">&quot;layout not found&quot;</span>);
 
         <span class="kw">let </span>layout_line = <span class="kw">match </span>layout.get(cursor.layout) {
@@ -915,12 +919,12 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Edit&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>Editor&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl </span>Edit <span class="kw">for </span>Editor {
+    <span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer {
         <span class="kw-2">&amp;</span><span class="self">self</span>.buffer
     }
 
-    <span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer
     }
 
@@ -939,12 +943,12 @@
         }
     }
 
-    <span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+    <span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem) {
         <span class="kw">if </span><span class="self">self</span>.cursor_moved {
-            <span class="self">self</span>.buffer.shape_until_cursor(<span class="self">self</span>.cursor);
+            <span class="self">self</span>.buffer.shape_until_cursor(font_system, <span class="self">self</span>.cursor);
             <span class="self">self</span>.cursor_moved = <span class="bool-val">false</span>;
         } <span class="kw">else </span>{
-            <span class="self">self</span>.buffer.shape_until_scroll();
+            <span class="self">self</span>.buffer.shape_until_scroll(font_system);
         }
     }
 
@@ -1126,7 +1130,7 @@
         </span><span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len() - after_len;
     }
 
-    <span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, action: Action) {
+    <span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, action: Action) {
         <span class="kw">let </span>old_cursor = <span class="self">self</span>.cursor;
 
         <span class="kw">match </span>action {
@@ -1180,9 +1184,9 @@
                     .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
-                        <span class="self">self</span>.action(Action::Next);
+                        <span class="self">self</span>.action(font_system, Action::Next);
                     } <span class="kw">else </span>{
-                        <span class="self">self</span>.action(Action::Previous);
+                        <span class="self">self</span>.action(font_system, Action::Previous);
                     }
                 }
             }
@@ -1193,9 +1197,9 @@
                     .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
-                        <span class="self">self</span>.action(Action::Previous);
+                        <span class="self">self</span>.action(font_system, Action::Previous);
                     } <span class="kw">else </span>{
-                        <span class="self">self</span>.action(Action::Next);
+                        <span class="self">self</span>.action(font_system, Action::Next);
                     }
                 }
             }
@@ -1220,7 +1224,7 @@
                     cursor.glyph = cursor_x <span class="kw">as </span>usize; <span class="comment">//TODO: glyph x position
                 </span>}
 
-                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.set_layout_cursor(font_system, cursor);
             }
             Action::Down =&gt; {
                 <span class="comment">//TODO: make this preserve X as best as possible!
@@ -1228,7 +1232,7 @@
 
                 <span class="kw">let </span>layout_len = <span class="self">self
                     </span>.buffer
-                    .line_layout(cursor.line)
+                    .line_layout(font_system, cursor.line)
                     .expect(<span class="string">&quot;layout not found&quot;</span>)
                     .len();
 
@@ -1249,18 +1253,18 @@
                     cursor.glyph = cursor_x <span class="kw">as </span>usize; <span class="comment">//TODO: glyph x position
                 </span>}
 
-                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.set_layout_cursor(font_system, cursor);
             }
             Action::Home =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
                 cursor.glyph = <span class="number">0</span>;
-                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.set_layout_cursor(font_system, cursor);
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
             Action::End =&gt; {
                 <span class="kw">let </span><span class="kw-2">mut </span>cursor = <span class="self">self</span>.buffer.layout_cursor(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor);
                 cursor.glyph = usize::max_value();
-                <span class="self">self</span>.set_layout_cursor(cursor);
+                <span class="self">self</span>.set_layout_cursor(font_system, cursor);
                 <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
             }
             Action::ParagraphStart =&gt; {
@@ -1274,10 +1278,10 @@
                 <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
             }
             Action::PageUp =&gt; {
-                <span class="self">self</span>.action(Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
+                <span class="self">self</span>.action(font_system, Action::Vertical(-<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
             }
             Action::PageDown =&gt; {
-                <span class="self">self</span>.action(Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
+                <span class="self">self</span>.action(font_system, Action::Vertical(<span class="self">self</span>.buffer.size().<span class="number">1 </span><span class="kw">as </span>i32));
             }
             Action::Vertical(px) =&gt; {
                 <span class="comment">// TODO more efficient
@@ -1285,12 +1289,12 @@
                 <span class="kw">match </span>lines.cmp(<span class="kw-2">&amp;</span><span class="number">0</span>) {
                     Ordering::Less =&gt; {
                         <span class="kw">for _ in </span><span class="number">0</span>..-lines {
-                            <span class="self">self</span>.action(Action::Up);
+                            <span class="self">self</span>.action(font_system, Action::Up);
                         }
                     }
                     Ordering::Greater =&gt; {
                         <span class="kw">for _ in </span><span class="number">0</span>..lines {
-                            <span class="self">self</span>.action(Action::Down);
+                            <span class="self">self</span>.action(font_system, Action::Down);
                         }
                     }
                     Ordering::Equal =&gt; {}
@@ -1306,7 +1310,7 @@
                     <span class="comment">// Filter out special chars (except for tab), use Action instead
                     </span><span class="macro">log::debug!</span>(<span class="string">&quot;Refusing to insert control character {:?}&quot;</span>, character);
                 } <span class="kw">else if </span>character == <span class="string">&#39;\n&#39; </span>{
-                    <span class="self">self</span>.action(Action::Enter);
+                    <span class="self">self</span>.action(font_system, Action::Enter);
                 } <span class="kw">else </span>{
                     <span class="kw">let </span><span class="kw-2">mut </span>str_buf = [<span class="number">0u8</span>; <span class="number">8</span>];
                     <span class="kw">let </span>str_ref = character.encode_utf8(<span class="kw-2">&amp;mut </span>str_buf);
@@ -1466,9 +1470,9 @@
                     .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
-                        <span class="self">self</span>.action(Action::NextWord);
+                        <span class="self">self</span>.action(font_system, Action::NextWord);
                     } <span class="kw">else </span>{
-                        <span class="self">self</span>.action(Action::PreviousWord);
+                        <span class="self">self</span>.action(font_system, Action::PreviousWord);
                     }
                 }
             }
@@ -1479,9 +1483,9 @@
                     .map(|shape| shape.rtl);
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(rtl) = rtl_opt {
                     <span class="kw">if </span>rtl {
-                        <span class="self">self</span>.action(Action::PreviousWord);
+                        <span class="self">self</span>.action(font_system, Action::PreviousWord);
                     } <span class="kw">else </span>{
-                        <span class="self">self</span>.action(Action::NextWord);
+                        <span class="self">self</span>.action(font_system, Action::NextWord);
                     }
                 }
             }
@@ -1520,8 +1524,13 @@
 
     <span class="doccomment">/// Draw the editor
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
-    </span><span class="kw">fn </span>draw&lt;F&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache, color: Color, <span class="kw-2">mut </span>f: F)
-    <span class="kw">where
+    </span><span class="kw">fn </span>draw&lt;F&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
+        cache: <span class="kw-2">&amp;mut </span><span class="kw">crate</span>::SwashCache,
+        color: Color,
+        <span class="kw-2">mut </span>f: F,
+    ) <span class="kw">where
         </span>F: FnMut(i32, i32, u32, u32, Color),
     {
         <span class="kw">let </span>font_size = <span class="self">self</span>.buffer.metrics().font_size;
@@ -1680,14 +1689,9 @@
                     <span class="prelude-val">None </span>=&gt; color,
                 };
 
-                cache.with_pixels(
-                    <span class="self">self</span>.buffer.font_system(),
-                    cache_key,
-                    glyph_color,
-                    |x, y, color| {
-                        f(x_int + x, line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
-                    },
-                );
+                cache.with_pixels(font_system, cache_key, glyph_color, |x, y, color| {
+                    f(x_int + x, line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
+                });
             }
         }
     }

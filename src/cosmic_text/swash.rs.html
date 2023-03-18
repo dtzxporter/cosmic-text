@@ -208,7 +208,7 @@
 <span class="kw">pub use </span>swash::zeno::{Command, Placement};
 
 <span class="kw">fn </span>swash_image(
-    font_system: <span class="kw-2">&amp;</span>FontSystem,
+    font_system: <span class="kw-2">&amp;mut </span>FontSystem,
     context: <span class="kw-2">&amp;mut </span>ScaleContext,
     cache_key: CacheKey,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
@@ -249,7 +249,7 @@
 }
 
 <span class="kw">fn </span>swash_outline_commands(
-    font_system: <span class="kw-2">&amp;</span>FontSystem,
+    font_system: <span class="kw-2">&amp;mut </span>FontSystem,
     context: <span class="kw-2">&amp;mut </span>ScaleContext,
     cache_key: CacheKey,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;swash::zeno::Command&gt;&gt; {
@@ -301,7 +301,7 @@
     <span class="doccomment">/// Create a swash Image from a cache key, without caching results
     </span><span class="kw">pub fn </span>get_image_uncached(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         cache_key: CacheKey,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
         swash_image(font_system, <span class="kw-2">&amp;mut </span><span class="self">self</span>.context, cache_key)
@@ -310,7 +310,7 @@
     <span class="doccomment">/// Create a swash Image from a cache key, caching results
     </span><span class="kw">pub fn </span>get_image(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         cache_key: CacheKey,
     ) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;SwashImage&gt; {
         <span class="self">self</span>.image_cache
@@ -320,7 +320,7 @@
 
     <span class="kw">pub fn </span>get_outline_commands(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         cache_key: CacheKey,
     ) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[swash::zeno::Command]&gt; {
         <span class="self">self</span>.outline_command_cache
@@ -332,7 +332,7 @@
     <span class="doccomment">/// Enumerate pixels in an Image, use `with_image` for better performance
     </span><span class="kw">pub fn </span>with_pixels&lt;F: FnMut(i32, i32, Color)&gt;(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        font_system: <span class="kw-2">&amp;</span>FontSystem,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         cache_key: CacheKey,
         base: Color,
         <span class="kw-2">mut </span>f: F,
