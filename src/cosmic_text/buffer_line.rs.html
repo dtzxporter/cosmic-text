@@ -201,8 +201,6 @@
 <a href="#201" id="201">201</a>
 <a href="#202" id="202">202</a>
 <a href="#203" id="203">203</a>
-<a href="#204" id="204">204</a>
-<a href="#205" id="205">205</a>
 </pre><pre class="rust"><code><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 
@@ -243,13 +241,11 @@
     ///
     /// Will reset shape and layout if it differs from current text and attributes list.
     /// Returns true if the line was reset
-    </span><span class="kw">pub fn </span>set_text&lt;T: AsRef&lt;str&gt; + Into&lt;String&gt;&gt;(
-        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-        text: T,
-        attrs_list: AttrsList,
-    ) -&gt; bool {
-        <span class="kw">if </span>text.as_ref() != <span class="self">self</span>.text || attrs_list != <span class="self">self</span>.attrs_list {
-            <span class="self">self</span>.text = text.into();
+    </span><span class="kw">pub fn </span>set_text&lt;T: AsRef&lt;str&gt;&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: T, attrs_list: AttrsList) -&gt; bool {
+        <span class="kw">let </span>text = text.as_ref();
+        <span class="kw">if </span>text != <span class="self">self</span>.text || attrs_list != <span class="self">self</span>.attrs_list {
+            <span class="self">self</span>.text.clear();
+            <span class="self">self</span>.text.push_str(text);
             <span class="self">self</span>.attrs_list = attrs_list;
             <span class="self">self</span>.reset();
             <span class="bool-val">true
