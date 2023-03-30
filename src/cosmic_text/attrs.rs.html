@@ -291,19 +291,6 @@
 <a href="#291" id="291">291</a>
 <a href="#292" id="292">292</a>
 <a href="#293" id="293">293</a>
-<a href="#294" id="294">294</a>
-<a href="#295" id="295">295</a>
-<a href="#296" id="296">296</a>
-<a href="#297" id="297">297</a>
-<a href="#298" id="298">298</a>
-<a href="#299" id="299">299</a>
-<a href="#300" id="300">300</a>
-<a href="#301" id="301">301</a>
-<a href="#302" id="302">302</a>
-<a href="#303" id="303">303</a>
-<a href="#304" id="304">304</a>
-<a href="#305" id="305">305</a>
-<a href="#306" id="306">306</a>
 </pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -399,7 +386,6 @@
     <span class="comment">//TODO: should this be an option?
     </span><span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
     <span class="kw">pub </span>family: Family&lt;<span class="lifetime">&#39;a</span>&gt;,
-    <span class="kw">pub </span>monospaced: bool,
     <span class="kw">pub </span>stretch: Stretch,
     <span class="kw">pub </span>style: Style,
     <span class="kw">pub </span>weight: Weight,
@@ -414,7 +400,6 @@
         <span class="self">Self </span>{
             color_opt: <span class="prelude-val">None</span>,
             family: Family::SansSerif,
-            monospaced: <span class="bool-val">false</span>,
             stretch: Stretch::Normal,
             style: Style::Normal,
             weight: Weight::NORMAL,
@@ -431,12 +416,6 @@
     <span class="doccomment">/// Set [Family]
     </span><span class="kw">pub fn </span>family(<span class="kw-2">mut </span><span class="self">self</span>, family: Family&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.family = family;
-        <span class="self">self
-    </span>}
-
-    <span class="doccomment">/// Set monospaced
-    </span><span class="kw">pub fn </span>monospaced(<span class="kw-2">mut </span><span class="self">self</span>, monospaced: bool) -&gt; <span class="self">Self </span>{
-        <span class="self">self</span>.monospaced = monospaced;
         <span class="self">self
     </span>}
 
@@ -470,14 +449,12 @@
         </span>face.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>)
             || (face.style == <span class="self">self</span>.style
                 &amp;&amp; face.weight == <span class="self">self</span>.weight
-                &amp;&amp; face.stretch == <span class="self">self</span>.stretch
-                &amp;&amp; face.monospaced == <span class="self">self</span>.monospaced)
+                &amp;&amp; face.stretch == <span class="self">self</span>.stretch)
     }
 
     <span class="doccomment">/// Check if this set of attributes can be shaped with another
     </span><span class="kw">pub fn </span>compatible(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
         <span class="self">self</span>.family == other.family
-            &amp;&amp; <span class="self">self</span>.monospaced == other.monospaced
             &amp;&amp; <span class="self">self</span>.stretch == other.stretch
             &amp;&amp; <span class="self">self</span>.style == other.style
             &amp;&amp; <span class="self">self</span>.weight == other.weight
@@ -490,7 +467,6 @@
     <span class="comment">//TODO: should this be an option?
     </span><span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
     <span class="kw">pub </span>family_owned: FamilyOwned,
-    <span class="kw">pub </span>monospaced: bool,
     <span class="kw">pub </span>stretch: Stretch,
     <span class="kw">pub </span>style: Style,
     <span class="kw">pub </span>weight: Weight,
@@ -502,7 +478,6 @@
         <span class="self">Self </span>{
             color_opt: attrs.color_opt,
             family_owned: FamilyOwned::new(attrs.family),
-            monospaced: attrs.monospaced,
             stretch: attrs.stretch,
             style: attrs.style,
             weight: attrs.weight,
@@ -514,7 +489,6 @@
         Attrs {
             color_opt: <span class="self">self</span>.color_opt,
             family: <span class="self">self</span>.family_owned.as_family(),
-            monospaced: <span class="self">self</span>.monospaced,
             stretch: <span class="self">self</span>.stretch,
             style: <span class="self">self</span>.style,
             weight: <span class="self">self</span>.weight,
@@ -611,4 +585,4 @@
     }
 }
 </code></pre></div>
-</section></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.68.0 (2c8cc3432 2023-03-06)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-c3c521c753752a1a.js" data-settings-css="settings-08ddfdda51b8ee2e.css" ></div></body></html>
+</section></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.68.1 (8460ca823 2023-03-20)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-c3c521c753752a1a.js" data-settings-css="settings-08ddfdda51b8ee2e.css" ></div></body></html>
