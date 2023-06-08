@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Layer","Reference to a layer in a scaled outline."],["LayerMut","Mutable reference to a layer in a scaled outline."],["Outline","Scaled glyph outline represented as a collection of layers and a sequence of points and verbs."]]};
+window.SIDEBAR_ITEMS = {"struct":["Layer","LayerMut","Outline"]};

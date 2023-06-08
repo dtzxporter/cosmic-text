@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["UNICODE_VERSION","The Unicode version."]],"enum":[["CanonicalCombiningClass","Character Canonical Combining Class."]],"fn":[["get_canonical_combining_class","Returns a Canonical Combining Class of a character."]]};
+window.SIDEBAR_ITEMS = {"constant":["UNICODE_VERSION"],"enum":["CanonicalCombiningClass"],"fn":["get_canonical_combining_class"]};

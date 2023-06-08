@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Strike","A strike of glyphs."],["Strikes","A list of [`Strike`]s."],["StrikesIter","An iterator over [`Strikes`]."],["Table","A Standard Bitmap Graphics Table."]]};
+window.SIDEBAR_ITEMS = {"struct":["Strike","Strikes","StrikesIter","Table"]};

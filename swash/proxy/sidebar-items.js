@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["BitmapStrikesProxy","Proxy for rematerializing strike collections."],["CharmapProxy","Proxy for rematerializing a character map."],["MetricsProxy","Proxy for rematerializing metrics."],["VariationsProxy","Proxy for rematerializing variations collections."]]};
+window.SIDEBAR_ITEMS = {"struct":["BitmapStrikesProxy","CharmapProxy","MetricsProxy","VariationsProxy"]};

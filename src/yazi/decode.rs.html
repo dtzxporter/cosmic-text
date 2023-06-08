@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/yazi-0.1.4/src/decode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>decode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-93196c7a1c3542a8.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-4743e13df3dfe8c4.css"><link rel="stylesheet" disabled href="../../static.files/dark-0e1b889528bd466b.css"><link rel="stylesheet" disabled href="../../static.files/ayu-65289d5d067c7c66.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-ea63cb6500f71309.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-3367e395607fafc1.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../yazi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-6f17d22bba15001f/yazi-0.1.6/src/decode.rs`."><title>decode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="yazi" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0 (90c541806 2023-05-31)" data-search-js="search-e077946657036a58.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../static.files/source-script-905937fbbdc8e9ea.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-f61008743c98d196.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../yazi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1311,71 +1311,7 @@
 <a href="#1311" id="1311">1311</a>
 <a href="#1312" id="1312">1312</a>
 <a href="#1313" id="1313">1313</a>
-<a href="#1314" id="1314">1314</a>
-<a href="#1315" id="1315">1315</a>
-<a href="#1316" id="1316">1316</a>
-<a href="#1317" id="1317">1317</a>
-<a href="#1318" id="1318">1318</a>
-<a href="#1319" id="1319">1319</a>
-<a href="#1320" id="1320">1320</a>
-<a href="#1321" id="1321">1321</a>
-<a href="#1322" id="1322">1322</a>
-<a href="#1323" id="1323">1323</a>
-<a href="#1324" id="1324">1324</a>
-<a href="#1325" id="1325">1325</a>
-<a href="#1326" id="1326">1326</a>
-<a href="#1327" id="1327">1327</a>
-<a href="#1328" id="1328">1328</a>
-<a href="#1329" id="1329">1329</a>
-<a href="#1330" id="1330">1330</a>
-<a href="#1331" id="1331">1331</a>
-<a href="#1332" id="1332">1332</a>
-<a href="#1333" id="1333">1333</a>
-<a href="#1334" id="1334">1334</a>
-<a href="#1335" id="1335">1335</a>
-<a href="#1336" id="1336">1336</a>
-<a href="#1337" id="1337">1337</a>
-<a href="#1338" id="1338">1338</a>
-<a href="#1339" id="1339">1339</a>
-<a href="#1340" id="1340">1340</a>
-<a href="#1341" id="1341">1341</a>
-<a href="#1342" id="1342">1342</a>
-<a href="#1343" id="1343">1343</a>
-<a href="#1344" id="1344">1344</a>
-<a href="#1345" id="1345">1345</a>
-<a href="#1346" id="1346">1346</a>
-<a href="#1347" id="1347">1347</a>
-<a href="#1348" id="1348">1348</a>
-<a href="#1349" id="1349">1349</a>
-<a href="#1350" id="1350">1350</a>
-<a href="#1351" id="1351">1351</a>
-<a href="#1352" id="1352">1352</a>
-<a href="#1353" id="1353">1353</a>
-<a href="#1354" id="1354">1354</a>
-<a href="#1355" id="1355">1355</a>
-<a href="#1356" id="1356">1356</a>
-<a href="#1357" id="1357">1357</a>
-<a href="#1358" id="1358">1358</a>
-<a href="#1359" id="1359">1359</a>
-<a href="#1360" id="1360">1360</a>
-<a href="#1361" id="1361">1361</a>
-<a href="#1362" id="1362">1362</a>
-<a href="#1363" id="1363">1363</a>
-<a href="#1364" id="1364">1364</a>
-<a href="#1365" id="1365">1365</a>
-<a href="#1366" id="1366">1366</a>
-<a href="#1367" id="1367">1367</a>
-<a href="#1368" id="1368">1368</a>
-<a href="#1369" id="1369">1369</a>
-<a href="#1370" id="1370">1370</a>
-<a href="#1371" id="1371">1371</a>
-<a href="#1372" id="1372">1372</a>
-<a href="#1373" id="1373">1373</a>
-<a href="#1374" id="1374">1374</a>
-<a href="#1375" id="1375">1375</a>
-<a href="#1376" id="1376">1376</a>
-<a href="#1377" id="1377">1377</a>
-</pre><pre class="rust"><code><span class="doccomment">//! RFC 1590 decompression implementation.
+</pre></div><pre class="rust"><code><span class="doccomment">//! RFC 1590 decompression implementation.
 
 </span><span class="kw">use super</span>::{Error, Format};
 <span class="kw">use </span>std::io::{<span class="self">self</span>, Write};
@@ -1505,13 +1441,13 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, S: Sink&gt; Write <span class="kw">for </span>DecoderStream&lt;<span class="lifetime">&#39;a</span>, S&gt; {
     <span class="kw">fn </span>write(<span class="kw-2">&amp;mut </span><span class="self">self</span>, buf: <span class="kw-2">&amp;</span>[u8]) -&gt; io::Result&lt;usize&gt; {
         <span class="kw">match </span><span class="self">self</span>.ctx.inflate(buf, <span class="kw-2">&amp;mut </span><span class="self">self</span>.sink, <span class="bool-val">false</span>) {
-            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(buf.len()),
+            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(buf.len()),
             <span class="prelude-val">Err</span>(err) =&gt; <span class="kw">match </span>err {
-                Error::Io(err) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+                Error::Io(err) =&gt; <span class="prelude-val">Err</span>(err),
                 Error::Underflow | Error::Overflow =&gt; {
-                    <span class="kw">return </span><span class="prelude-val">Err</span>(io::Error::from(io::ErrorKind::InvalidInput))
+                    <span class="prelude-val">Err</span>(io::Error::from(io::ErrorKind::InvalidInput))
                 }
-                <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(io::Error::from(io::ErrorKind::InvalidData)),
+                <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(io::Error::from(io::ErrorKind::InvalidData)),
             },
         }
     }
@@ -1586,7 +1522,7 @@
         sink: <span class="kw-2">&amp;mut </span>S,
         is_last: bool,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">while </span>!<span class="self">self</span>.done &amp;&amp; (is_last || buf.len() != <span class="number">0</span>) {
+        <span class="kw">while </span>!<span class="self">self</span>.done &amp;&amp; (is_last || !buf.is_empty()) {
             <span class="kw">let </span><span class="kw-2">mut </span>bits = Bits::new(<span class="self">self</span>.bit_buffer, <span class="self">self</span>.bits_in);
             <span class="kw">let </span>(res, used_remainder) = <span class="kw">if </span><span class="self">self</span>.remainder.avail != <span class="number">0 </span>{
                 <span class="kw">let </span>used = <span class="self">self</span>.remainder.push(buf);
@@ -1627,18 +1563,16 @@
             };
             <span class="self">self</span>.bit_buffer = bits.bit_buffer;
             <span class="self">self</span>.bits_in = bits.bits_in;
-            <span class="kw">let </span>more_input = buf.len() != <span class="number">0</span>;
+            <span class="kw">let </span>more_input = !buf.is_empty();
             <span class="kw">match </span>res {
                 <span class="prelude-val">Err</span>(Error::Underflow) =&gt; {
                     <span class="kw">if </span>is_last &amp;&amp; !more_input {
                         <span class="kw">return </span>res;
                     } <span class="kw">else if </span>!more_input {
                         <span class="kw">return </span><span class="prelude-val">Ok</span>(());
-                    } <span class="kw">else </span>{
-                        <span class="kw">if </span><span class="self">self</span>.remainder.avail != <span class="number">0 </span>|| !used_remainder {
-                            <span class="kw">let </span>used = <span class="self">self</span>.remainder.push(buf);
-                            buf = <span class="kw-2">&amp;</span>buf[used..];
-                        }
+                    } <span class="kw">else if </span><span class="self">self</span>.remainder.avail != <span class="number">0 </span>|| !used_remainder {
+                        <span class="kw">let </span>used = <span class="self">self</span>.remainder.push(buf);
+                        buf = <span class="kw-2">&amp;</span>buf[used..];
                     }
                 }
                 <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
@@ -1707,11 +1641,11 @@
                     <span class="number">0 </span>=&gt; {
                         bits.try_skip(bits.bits_in &amp; <span class="number">7</span>)<span class="question-mark">?</span>;
                         <span class="kw">let </span><span class="kw-2">mut </span>parts = [<span class="number">0u32</span>; <span class="number">4</span>];
-                        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">4 </span>{
+                        <span class="kw">for </span>part <span class="kw">in </span><span class="kw-2">&amp;mut </span>parts {
                             <span class="kw">if </span>bits.bits_in &gt;= <span class="number">8 </span>{
-                                parts[i] = bits.pop(<span class="number">8</span>) <span class="kw">as </span>u32;
+                                <span class="kw-2">*</span>part = bits.pop(<span class="number">8</span>) <span class="kw">as </span>u32;
                             } <span class="kw">else </span>{
-                                parts[i] = <span class="kw-2">*</span>source
+                                <span class="kw-2">*</span>part = <span class="kw-2">*</span>source
                                     .buffer
                                     .get(source.pos)
                                     .ok_or(Error::InvalidBitstream)<span class="question-mark">?
@@ -1745,12 +1679,11 @@
                     }
                     <span class="number">1 </span>=&gt; {
                         <span class="kw">const </span>DISTANCE_LENGTHS: [u8; <span class="number">32</span>] = [<span class="number">5</span>; <span class="number">32</span>];
-                        <span class="kw">let </span><span class="kw-2">mut </span>lengths: [u8; <span class="number">288</span>] =
-                            <span class="kw">unsafe </span>{ std::mem::MaybeUninit::uninit().assume_init() };
-                        (<span class="kw-2">&amp;mut </span>lengths[<span class="number">0</span>..<span class="number">144</span>]).iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">8</span>);
-                        (<span class="kw-2">&amp;mut </span>lengths[<span class="number">144</span>..<span class="number">256</span>]).iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">9</span>);
-                        (<span class="kw-2">&amp;mut </span>lengths[<span class="number">256</span>..<span class="number">280</span>]).iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">7</span>);
-                        (<span class="kw-2">&amp;mut </span>lengths[<span class="number">280</span>..<span class="number">288</span>]).iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">8</span>);
+                        <span class="kw">let </span><span class="kw-2">mut </span>lengths: [u8; <span class="number">288</span>] = [<span class="number">0</span>; <span class="number">288</span>];
+                        lengths[<span class="number">0</span>..<span class="number">144</span>].iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">8</span>);
+                        lengths[<span class="number">144</span>..<span class="number">256</span>].iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">9</span>);
+                        lengths[<span class="number">256</span>..<span class="number">280</span>].iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">7</span>);
+                        lengths[<span class="number">280</span>..<span class="number">288</span>].iter_mut().for_each(|p| <span class="kw-2">*</span>p = <span class="number">8</span>);
                         trees.lt.build(<span class="kw-2">&amp;</span>lengths[..<span class="number">288</span>]);
                         trees.dt.build(<span class="kw-2">&amp;</span>DISTANCE_LENGTHS);
                         <span class="kw-2">*</span>state = State::Inflate;
@@ -1851,7 +1784,8 @@
                         <span class="kw">if </span>lbits.bits_in &lt; <span class="number">15 </span>{
                             lbits.fill(source);
                         }
-                        <span class="kw">let </span><span class="kw-2">mut </span>entry = trees.lt.table[lbits.peek(LITERAL_LENGTH_TABLE_BITS) <span class="kw">as </span>usize];
+                        <span class="kw">let </span><span class="kw-2">mut </span>entry =
+                            trees.lt.table[lbits.peek(LITERAL_LENGTH_TABLE_BITS) <span class="kw">as </span>usize];
                         <span class="kw">if </span>entry &amp; ENTRY_SUBTABLE != <span class="number">0 </span>{
                             lbits.try_skip(LITERAL_LENGTH_TABLE_BITS)<span class="question-mark">?</span>;
                             entry = trees.lt.table[(((entry &gt;&gt; ENTRY_SHIFT) &amp; <span class="number">0xFFFF</span>)
@@ -1956,7 +1890,7 @@
     dt: <span class="kw-2">&amp;mut </span>DistanceTree,
     is_last: bool,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-    <span class="kw">let </span><span class="kw-2">mut </span>lengths: [u8; MAX_LENGTHS] = <span class="kw">unsafe </span>{ std::mem::MaybeUninit::uninit().assume_init() };
+    <span class="kw">let </span><span class="kw-2">mut </span>lengths: [u8; MAX_LENGTHS] = [<span class="number">0</span>; MAX_LENGTHS];
     bits.fill(source);
     <span class="kw">let </span>ltlen;
     <span class="kw">let </span>dtlen;
@@ -1967,8 +1901,8 @@
         <span class="kw">if </span>ltlen &gt; <span class="number">286 </span>|| dtlen &gt; <span class="number">30 </span>{
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidBitstream);
         }
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">19 </span>{
-            lengths[i] = <span class="number">0</span>;
+        <span class="kw">for </span>length <span class="kw">in </span><span class="kw-2">&amp;mut </span>lengths[<span class="number">0</span>..<span class="number">19</span>] {
+            <span class="kw-2">*</span>length = <span class="number">0</span>;
         }
         bits.fill(source);
         <span class="kw">for </span>code <span class="kw">in </span><span class="kw-2">&amp;</span>PRECODE_SWIZZLE[..ptlen] {
@@ -1997,10 +1931,13 @@
             <span class="kw">if </span>presym &gt; <span class="number">18 </span>|| (presym == <span class="number">16 </span>&amp;&amp; i == <span class="number">0</span>) {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidBitstream);
             }
-            <span class="kw">let </span>(extra_bits, extra) = [(<span class="number">2</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">7</span>, <span class="number">11</span>), (<span class="number">0</span>, <span class="number">0</span>)][(presym <span class="kw">as </span>usize - <span class="number">16</span>) &amp; <span class="number">0x3</span>];
+            <span class="kw">let </span>(extra_bits, extra) =
+                [(<span class="number">2</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">7</span>, <span class="number">11</span>), (<span class="number">0</span>, <span class="number">0</span>)][(presym <span class="kw">as </span>usize - <span class="number">16</span>) &amp; <span class="number">0x3</span>];
             <span class="kw">let </span>count = bits.pop(extra_bits) <span class="kw">as </span>usize + extra;
             <span class="kw">let </span>l = <span class="kw">if </span>presym == <span class="number">16 </span>{ lengths[i - <span class="number">1</span>] } <span class="kw">else </span>{ <span class="number">0 </span>};
-            <span class="kw">let </span>p = lengths.get_mut(i..i + count).ok_or(Error::InvalidBitstream)<span class="question-mark">?</span>;
+            <span class="kw">let </span>p = lengths
+                .get_mut(i..i + count)
+                .ok_or(Error::InvalidBitstream)<span class="question-mark">?</span>;
             p.iter_mut().for_each(|p| <span class="kw-2">*</span>p = l);
             i += count;
         }
@@ -2011,8 +1948,8 @@
         <span class="kw">if </span>ltlen &gt; <span class="number">286 </span>|| dtlen &gt; <span class="number">30 </span>{
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidBitstream);
         }
-        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">19 </span>{
-            lengths[i] = <span class="number">0</span>;
+        <span class="kw">for </span>length <span class="kw">in </span><span class="kw-2">&amp;mut </span>lengths[<span class="number">0</span>..<span class="number">19</span>] {
+            <span class="kw-2">*</span>length = <span class="number">0</span>;
         }
         bits.fill(source);
         <span class="kw">for </span>code <span class="kw">in </span><span class="kw-2">&amp;</span>PRECODE_SWIZZLE[..ptlen] {
@@ -2041,10 +1978,13 @@
             <span class="kw">if </span>presym &gt; <span class="number">18 </span>|| (presym == <span class="number">16 </span>&amp;&amp; i == <span class="number">0</span>) {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidBitstream);
             }
-            <span class="kw">let </span>(extra_bits, extra) = [(<span class="number">2</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">7</span>, <span class="number">11</span>), (<span class="number">0</span>, <span class="number">0</span>)][(presym <span class="kw">as </span>usize - <span class="number">16</span>) &amp; <span class="number">0x3</span>];
+            <span class="kw">let </span>(extra_bits, extra) =
+                [(<span class="number">2</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">7</span>, <span class="number">11</span>), (<span class="number">0</span>, <span class="number">0</span>)][(presym <span class="kw">as </span>usize - <span class="number">16</span>) &amp; <span class="number">0x3</span>];
             <span class="kw">let </span>count = bits.try_pop(extra_bits)<span class="question-mark">? </span><span class="kw">as </span>usize + extra;
             <span class="kw">let </span>l = <span class="kw">if </span>presym == <span class="number">16 </span>{ lengths[i - <span class="number">1</span>] } <span class="kw">else </span>{ <span class="number">0 </span>};
-            <span class="kw">let </span>p = lengths.get_mut(i..i + count).ok_or(Error::InvalidBitstream)<span class="question-mark">?</span>;
+            <span class="kw">let </span>p = lengths
+                .get_mut(i..i + count)
+                .ok_or(Error::InvalidBitstream)<span class="question-mark">?</span>;
             p.iter_mut().for_each(|p| <span class="kw-2">*</span>p = l);
             i += count;
         }
@@ -2067,7 +2007,7 @@
 ) -&gt; bool {
     <span class="kw">let </span><span class="kw-2">mut </span>len_counts = [<span class="number">0usize</span>; MAX_CODE_SIZE + <span class="number">1</span>];
     <span class="kw">let </span><span class="kw-2">mut </span>offsets = [<span class="number">0usize</span>; MAX_CODE_SIZE + <span class="number">1</span>];
-    <span class="kw">let </span><span class="kw-2">mut </span>sorted_entries: [u32; <span class="number">288</span>] = <span class="kw">unsafe </span>{ std::mem::MaybeUninit::uninit().assume_init() };
+    <span class="kw">let </span><span class="kw-2">mut </span>sorted_entries: [u32; <span class="number">288</span>] = [<span class="number">0</span>; <span class="number">288</span>];
     <span class="kw">for </span><span class="kw-2">&amp;</span>len <span class="kw">in </span>lengths {
         len_counts[len <span class="kw">as </span>usize] += <span class="number">1</span>;
     }
@@ -2081,7 +2021,7 @@
     <span class="kw">for </span>sym <span class="kw">in </span><span class="number">0</span>..lengths.len() {
         <span class="kw">let </span>len = lengths[sym];
         <span class="kw">let </span>idx = <span class="kw-2">&amp;mut </span>offsets[len <span class="kw">as </span>usize];
-        sorted_entries[(<span class="kw-2">*</span>idx)] = entries[sym <span class="kw">as </span>usize];
+        sorted_entries[(<span class="kw-2">*</span>idx)] = entries[sym];
         <span class="kw-2">*</span>idx += <span class="number">1</span>;
     }
     <span class="kw">let </span>sorted_entries = <span class="kw-2">&amp;mut </span>sorted_entries[offsets[<span class="number">0</span>]..];
@@ -2199,8 +2139,8 @@
 
 <span class="kw">fn </span>read_zlib_checksum(source: <span class="kw-2">&amp;mut </span>Source, bits: <span class="kw-2">&amp;mut </span>Bits) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
     <span class="kw">let </span><span class="kw-2">mut </span>parts = [<span class="number">0u32</span>; <span class="number">4</span>];
-    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">4 </span>{
-        parts[i] = bits.try_pop_source(source, <span class="number">8</span>)<span class="question-mark">?</span>;
+    <span class="kw">for </span>part <span class="kw">in </span><span class="kw-2">&amp;mut </span>parts {
+        <span class="kw-2">*</span>part = bits.try_pop_source(source, <span class="number">8</span>)<span class="question-mark">?</span>;
     }
     <span class="prelude-val">Ok</span>(parts[<span class="number">0</span>] &lt;&lt; <span class="number">24 </span>| parts[<span class="number">1</span>] &lt;&lt; <span class="number">16 </span>| parts[<span class="number">2</span>] &lt;&lt; <span class="number">8 </span>| parts[<span class="number">3</span>])
 }
@@ -2242,7 +2182,7 @@
         }
         <span class="kw">let </span>extra = <span class="self">self</span>.buffer.len() - <span class="self">self</span>.avail;
         <span class="kw">let </span>copy_len = extra.min(buf.len());
-        (<span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer[<span class="self">self</span>.avail..<span class="self">self</span>.avail + copy_len]).copy_from_slice(<span class="kw-2">&amp;</span>buf[<span class="number">0</span>..copy_len]);
+        <span class="self">self</span>.buffer[<span class="self">self</span>.avail..<span class="self">self</span>.avail + copy_len].copy_from_slice(<span class="kw-2">&amp;</span>buf[<span class="number">0</span>..copy_len]);
         <span class="self">self</span>.avail += copy_len;
         copy_len
     }
@@ -2273,7 +2213,7 @@
 
     <span class="kw">fn </span>try_get(<span class="kw-2">&amp;mut </span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>[u8], Error&gt; {
         <span class="kw">let </span>bytes = <span class="self">self</span>.get(len);
-        <span class="kw">if </span>bytes.len() == <span class="number">0 </span>{
+        <span class="kw">if </span>bytes.is_empty() {
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::Underflow);
         }
         <span class="prelude-val">Ok</span>(bytes)
@@ -2296,7 +2236,7 @@
     bits_in: u32,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Bits {
+<span class="kw">impl </span>Bits {
     <span class="kw">fn </span>new(bit_buffer: u64, bits_in: u32) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             bit_buffer,
@@ -2310,42 +2250,29 @@
 
     <span class="attr">#[inline(always)]
     </span><span class="kw">fn </span>fill(<span class="kw-2">&amp;mut </span><span class="self">self</span>, source: <span class="kw-2">&amp;mut </span>Source) -&gt; u32 {
-        <span class="kw">const </span>NBITS: u32 = <span class="number">8 </span>* <span class="number">8 </span>- <span class="number">1</span>;
-        <span class="kw">if </span>USE_UNALIGNED_READS_LE &amp;&amp; source.avail &gt;= <span class="number">8 </span>{
-            <span class="kw">let </span>v = <span class="kw">unsafe </span>{ <span class="kw-2">*</span>(source.buffer.as_ptr().add(source.pos) <span class="kw">as </span><span class="kw-2">*const </span>u64) };
-            <span class="kw">let </span>bits_in = <span class="self">self</span>.bits_in;
-            <span class="self">self</span>.bit_buffer |= v &lt;&lt; bits_in;
-            <span class="kw">let </span>used = ((bits_in ^ NBITS) &gt;&gt; <span class="number">3</span>) <span class="kw">as </span>usize;
-            source.pos += used;
-            source.avail -= used;
-            <span class="self">self</span>.bits_in |= NBITS &amp; !<span class="number">7</span>;
-        } <span class="kw">else </span>{
-            <span class="kw">let </span>count = (<span class="number">64 </span>- <span class="self">self</span>.bits_in <span class="kw">as </span>usize) &gt;&gt; <span class="number">3</span>;
-            <span class="kw">let </span>bytes = source.get(count);
-            <span class="kw">let </span>len = bytes.len();
-            <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
-            <span class="kw">while </span>(i + <span class="number">4</span>) &lt;= len {
-                <span class="kw">use </span>std::convert::TryInto;
-                <span class="kw">let </span>v = u32::from_le_bytes((<span class="kw-2">&amp;</span>bytes[i..i + <span class="number">4</span>]).try_into().unwrap()) <span class="kw">as </span>u64;
-                <span class="self">self</span>.bit_buffer |= v &lt;&lt; <span class="self">self</span>.bits_in;
-                <span class="self">self</span>.bits_in += <span class="number">32</span>;
-                i += <span class="number">4</span>;
-            }
-            <span class="kw">while </span>i &lt; len {
-                <span class="self">self</span>.bit_buffer |= (bytes[i] <span class="kw">as </span>u64) &lt;&lt; <span class="self">self</span>.bits_in;
-                <span class="self">self</span>.bits_in += <span class="number">8</span>;
-                i += <span class="number">1</span>;
-            }
+        <span class="kw">let </span>count = (<span class="number">64 </span>- <span class="self">self</span>.bits_in <span class="kw">as </span>usize) &gt;&gt; <span class="number">3</span>;
+        <span class="kw">let </span>bytes = source.get(count);
+        <span class="kw">let </span>len = bytes.len();
+        <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+        <span class="kw">while </span>(i + <span class="number">4</span>) &lt;= len {
+            <span class="kw">use </span>std::convert::TryInto;
+            <span class="kw">let </span>v = u32::from_le_bytes((<span class="kw-2">&amp;</span>bytes[i..i + <span class="number">4</span>]).try_into().unwrap()) <span class="kw">as </span>u64;
+            <span class="self">self</span>.bit_buffer |= v &lt;&lt; <span class="self">self</span>.bits_in;
+            <span class="self">self</span>.bits_in += <span class="number">32</span>;
+            i += <span class="number">4</span>;
+        }
+        <span class="kw">while </span>i &lt; len {
+            <span class="self">self</span>.bit_buffer |= (bytes[i] <span class="kw">as </span>u64) &lt;&lt; <span class="self">self</span>.bits_in;
+            <span class="self">self</span>.bits_in += <span class="number">8</span>;
+            i += <span class="number">1</span>;
         }
         <span class="self">self</span>.bits_in
     }
 
     <span class="attr">#[inline(always)]
     </span><span class="kw">fn </span>try_pop_source(<span class="kw-2">&amp;mut </span><span class="self">self</span>, source: <span class="kw-2">&amp;mut </span>Source, len: u32) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
-        <span class="kw">if </span><span class="self">self</span>.bits_in &lt; len {
-            <span class="kw">if </span><span class="self">self</span>.fill(source) &lt; len {
-                <span class="kw">return </span><span class="prelude-val">Err</span>(Error::Underflow);
-            }
+        <span class="kw">if </span><span class="self">self</span>.bits_in &lt; len &amp;&amp; <span class="self">self</span>.fill(source) &lt; len {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::Underflow);
         }
         <span class="kw">let </span>bits = <span class="self">self</span>.bit_buffer &amp; ((<span class="number">1 </span>&lt;&lt; len) - <span class="number">1</span>);
         <span class="self">self</span>.bit_buffer &gt;&gt;= len;
@@ -2396,46 +2323,12 @@
 
 <span class="attr">#[inline(always)]
 </span><span class="kw">fn </span>copy_match(buf: <span class="kw-2">&amp;mut </span>[u8], pos: usize, len: usize, buf_end: usize) {
-    <span class="kw">let </span>limit = buf.len();
     <span class="kw">let </span>dist = buf_end - pos;
-    <span class="kw">const </span>WORDBYTES: usize = <span class="number">8</span>;
-    <span class="kw">unsafe </span>{
-        <span class="kw">let </span>src = buf.as_ptr().add(pos);
-        <span class="kw">let </span>dest = buf.as_mut_ptr().add(buf_end);
-        <span class="kw">let </span>next_end = buf_end + len;
-        <span class="kw">if </span>USE_UNALIGNED_READS_LE &amp;&amp; limit - next_end &gt;= WORDBYTES - <span class="number">1 </span>{
-            <span class="kw">if </span>dist &gt;= WORDBYTES {
-                <span class="kw">let </span>src = src <span class="kw">as </span><span class="kw-2">*const </span>u64;
-                <span class="kw">let </span>dest = dest <span class="kw">as </span><span class="kw-2">*mut </span>u64;
-                <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
-                <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
-                <span class="kw">while </span>i &lt; len {
-                    <span class="kw-2">*</span>dest.add(j) = <span class="kw-2">*</span>src.add(j);
-                    i += WORDBYTES;
-                    j += <span class="number">1</span>;
-                }
-            } <span class="kw">else if </span>dist == <span class="number">1 </span>{
-                <span class="kw">let </span><span class="kw-2">mut </span>v = (<span class="kw-2">*</span>src) <span class="kw">as </span>u64;
-                v |= v &lt;&lt; <span class="number">8</span>;
-                v |= v &lt;&lt; <span class="number">16</span>;
-                v |= v &lt;&lt; <span class="number">32</span>;
-                <span class="kw">let </span>dest = dest <span class="kw">as </span><span class="kw-2">*mut </span>u64;
-                <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
-                <span class="kw">let </span><span class="kw-2">mut </span>j = <span class="number">0</span>;
-                <span class="kw">while </span>i &lt; len {
-                    <span class="kw-2">*</span>dest.add(j) = v;
-                    i += WORDBYTES;
-                    j += <span class="number">1</span>;
-                }
-            } <span class="kw">else </span>{
-                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
-                    <span class="kw-2">*</span>dest.add(i) = <span class="kw-2">*</span>src.add(i);
-                }
-            }
-        } <span class="kw">else </span>{
-            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
-                <span class="kw-2">*</span>dest.add(i) = <span class="kw-2">*</span>src.add(i);
-            }
+    <span class="kw">if </span>dist &gt; len {
+        buf.copy_within(pos..pos + len, buf_end);
+    } <span class="kw">else </span>{
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..len {
+            buf[buf_end + i] = buf[pos + i];
         }
     }
 }
@@ -2457,21 +2350,10 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; VecSink&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">fn </span>new(buffer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Vec&lt;u8&gt;) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>start_pos = buffer.len();
-        <span class="kw">unsafe </span>{
-            buffer.set_len(buffer.capacity());
-        }
         <span class="self">Self </span>{
             buffer,
             start_pos,
             pos: start_pos,
-        }
-    }
-
-    <span class="kw">fn </span>grow(<span class="kw-2">&amp;mut </span><span class="self">self</span>, amount: usize) {
-        <span class="kw">unsafe </span>{
-            <span class="self">self</span>.buffer.set_len(<span class="self">self</span>.pos);
-            <span class="self">self</span>.buffer.reserve(amount);
-            <span class="self">self</span>.buffer.set_len(<span class="self">self</span>.buffer.capacity());
         }
     }
 }
@@ -2489,20 +2371,14 @@
 
     <span class="attr">#[inline(always)]
     </span><span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, byte: u8) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">if </span><span class="self">self</span>.pos &gt;= <span class="self">self</span>.buffer.len() {
-            <span class="self">self</span>.grow(<span class="number">1</span>);
-        }
-        <span class="self">self</span>.buffer[<span class="self">self</span>.pos] = byte;
+        <span class="self">self</span>.buffer.push(byte);
         <span class="self">self</span>.pos += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
     <span class="kw">fn </span>write(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>len = bytes.len();
-        <span class="kw">if </span><span class="self">self</span>.pos + len &gt; <span class="self">self</span>.buffer.len() {
-            <span class="self">self</span>.grow(len);
-        }
-        (<span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer[<span class="self">self</span>.pos..<span class="self">self</span>.pos + len]).copy_from_slice(bytes);
+        <span class="self">self</span>.buffer.extend_from_slice(bytes);
         <span class="self">self</span>.pos += len;
         <span class="prelude-val">Ok</span>(())
     }
@@ -2514,10 +2390,8 @@
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidBitstream);
         }
         <span class="kw">let </span>pos = <span class="self">self</span>.pos - dist;
-        <span class="kw">if </span><span class="self">self</span>.pos + len &gt; <span class="self">self</span>.buffer.len() {
-            <span class="self">self</span>.grow(len);
-        }
-        copy_match(<span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer, pos, len, <span class="self">self</span>.pos);
+        <span class="self">self</span>.buffer.resize(<span class="self">self</span>.pos + len, <span class="number">0</span>);
+        copy_match(<span class="self">self</span>.buffer, pos, len, <span class="self">self</span>.pos);
         <span class="self">self</span>.pos += len;
         <span class="prelude-val">Ok</span>(())
     }
@@ -2547,7 +2421,7 @@
     <span class="kw">fn </span>write(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
         <span class="kw">let </span>len = bytes.len();
         <span class="kw">if </span><span class="self">self</span>.pos + len &lt;= <span class="self">self</span>.buffer.len() {
-            (<span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer[<span class="self">self</span>.pos..<span class="self">self</span>.pos + len]).copy_from_slice(bytes);
+            <span class="self">self</span>.buffer[<span class="self">self</span>.pos..<span class="self">self</span>.pos + len].copy_from_slice(bytes);
             <span class="self">self</span>.pos += len;
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else </span>{
@@ -2679,8 +2553,6 @@
     }
 }
 
-<span class="kw">const </span>USE_UNALIGNED_READS_LE: bool = <span class="macro">cfg!</span>(any(target_arch = <span class="string">&quot;x86&quot;</span>, target_arch = <span class="string">&quot;x86_64&quot;</span>));
-
 <span class="kw">const </span>RING_BUFFER_SIZE: usize = <span class="number">32768</span>;
 <span class="kw">const </span>LITERAL_LENGTH_TREE_SIZE: usize = <span class="number">1334</span>;
 <span class="kw">const </span>DISTANCE_TREE_SIZE: usize = <span class="number">402</span>;
@@ -2752,5 +2624,4 @@
     <span class="number">0x07010100</span>, <span class="number">0x07018100</span>, <span class="number">0x08020100</span>, <span class="number">0x08030100</span>, <span class="number">0x09040100</span>, <span class="number">0x09060100</span>, <span class="number">0x0A080100</span>, <span class="number">0x0A0C0100</span>,
     <span class="number">0x0B100100</span>, <span class="number">0x0B180100</span>, <span class="number">0x0C200100</span>, <span class="number">0x0C300100</span>, <span class="number">0x0D400100</span>, <span class="number">0x0D600100</span>, <span class="number">0x0E800100</span>, <span class="number">0x0EC00100</span>,
 ];
-</code></pre></div>
-</section></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="yazi" data-themes="" data-resource-suffix="" data-rustdoc-version="1.68.1 (8460ca823 2023-03-20)" data-search-js="search-98d53477a794af0b.js" data-settings-js="settings-c3c521c753752a1a.js" data-settings-css="settings-08ddfdda51b8ee2e.css" ></div></body></html>
+</code></pre></div></section></main></body></html>

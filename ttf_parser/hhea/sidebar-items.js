@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Table","A Horizontal Header Table."]]};
+window.SIDEBAR_ITEMS = {"struct":["Table"]};

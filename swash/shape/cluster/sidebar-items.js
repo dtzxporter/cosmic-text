@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Glyph","Glyph identifier and positioning information as a result of shaping."],["GlyphCluster","Collection of glyphs and associated metadata corresponding to one or more source clusters."],["GlyphInfo","Information for a glyph."]]};
+window.SIDEBAR_ITEMS = {"struct":["Glyph","GlyphCluster","GlyphInfo"]};

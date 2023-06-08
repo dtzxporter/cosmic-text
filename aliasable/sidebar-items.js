@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["boxed","Aliasable `Box`."],["prelude","Export of all types enabled."],["string","Aliasable `String`."],["vec","Aliasable `Vec`."]],"struct":[["AliasableMut","Basic aliasable alternative to `&mut`."]]};
+window.SIDEBAR_ITEMS = {"mod":["boxed","prelude","string","vec"],"struct":["AliasableMut"]};

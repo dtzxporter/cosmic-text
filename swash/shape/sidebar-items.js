@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Direction","Text direction."]],"mod":[["cluster","Glyph cluster modeling– output from the shaper."]],"struct":[["ShapeContext","Context that manages caches and transient buffers for shaping."],["Shaper","Maps character clusters to positioned glyph clusters according to typographic rules and features."],["ShaperBuilder","Builder for configuring a shaper."]]};
+window.SIDEBAR_ITEMS = {"enum":["Direction"],"mod":["cluster"],"struct":["ShapeContext","Shaper","ShaperBuilder"]};

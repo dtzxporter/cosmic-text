@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Format","A kerning subtable format."]],"struct":[["KerningPair","A kerning pair."],["Subtable","A kerning subtable."],["Subtable0","A format 0 subtable."],["Subtable2","A format 2 subtable."],["Subtable3","A format 3 subtable."],["Subtables","A list of subtables."],["SubtablesIter","An iterator over kerning subtables."],["Table","A Kerning Table."]]};
+window.SIDEBAR_ITEMS = {"enum":["Format"],"struct":["KerningPair","Subtable","Subtable0","Subtable2","Subtable3","Subtables","SubtablesIter","Table"]};
