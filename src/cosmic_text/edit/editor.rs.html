@@ -847,6 +847,10 @@
 <a href="#847" id="847">847</a>
 <a href="#848" id="848">848</a>
 <a href="#849" id="849">849</a>
+<a href="#850" id="850">850</a>
+<a href="#851" id="851">851</a>
+<a href="#852" id="852">852</a>
+<a href="#853" id="853">853</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -861,6 +865,7 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
 <span class="kw">use crate</span>::{
     Action, Affinity, AttrsList, Buffer, BufferLine, Cursor, Edit, FontSystem, LayoutCursor,
+    Shaping,
 };
 
 <span class="doccomment">/// A wrapper of [`Buffer`] for easy editing
@@ -1094,6 +1099,7 @@
                     .strip_suffix(char::is_control)
                     .unwrap_or(data_line),
                 these_attrs,
+                Shaping::Advanced,
             ));
         } <span class="kw">else </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;str::lines() did not yield any elements&quot;</span>);
@@ -1105,6 +1111,7 @@
                     .strip_suffix(char::is_control)
                     .unwrap_or(data_line),
                 final_attrs.split_off(remaining_split_len),
+                Shaping::Advanced,
             );
             tmp.append(after);
             <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
@@ -1119,6 +1126,7 @@
                     .strip_suffix(char::is_control)
                     .unwrap_or(data_line),
                 final_attrs.split_off(remaining_split_len),
+                Shaping::Advanced,
             );
             <span class="self">self</span>.buffer.lines.insert(insert_line, tmp);
             <span class="self">self</span>.cursor.line += <span class="number">1</span>;

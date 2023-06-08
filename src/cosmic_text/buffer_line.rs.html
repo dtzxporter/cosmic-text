@@ -201,10 +201,17 @@
 <a href="#201" id="201">201</a>
 <a href="#202" id="202">202</a>
 <a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
 </pre></div><pre class="rust"><code><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 
-<span class="kw">use crate</span>::{Align, AttrsList, FontSystem, LayoutLine, ShapeLine, Wrap};
+<span class="kw">use crate</span>::{Align, AttrsList, FontSystem, LayoutLine, ShapeLine, Shaping, Wrap};
 
 <span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out
 </span><span class="kw">pub struct </span>BufferLine {
@@ -215,13 +222,14 @@
     align: <span class="prelude-ty">Option</span>&lt;Align&gt;,
     shape_opt: <span class="prelude-ty">Option</span>&lt;ShapeLine&gt;,
     layout_opt: <span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt;,
+    shaping: Shaping,
 }
 
 <span class="kw">impl </span>BufferLine {
     <span class="doccomment">/// Create a new line with the given text and attributes list
     /// Cached shaping and layout can be done using the [`Self::shape`] and
     /// [`Self::layout`] functions
-    </span><span class="kw">pub fn </span>new&lt;T: Into&lt;String&gt;&gt;(text: T, attrs_list: AttrsList) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new&lt;T: Into&lt;String&gt;&gt;(text: T, attrs_list: AttrsList, shaping: Shaping) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             text: text.into(),
             attrs_list,
@@ -229,6 +237,7 @@
             align: <span class="prelude-val">None</span>,
             shape_opt: <span class="prelude-val">None</span>,
             layout_opt: <span class="prelude-val">None</span>,
+            shaping,
         }
     }
 
@@ -345,7 +354,7 @@
         <span class="kw">let </span>attrs_list = <span class="self">self</span>.attrs_list.split_off(index);
         <span class="self">self</span>.reset();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>new = <span class="self">Self</span>::new(text, attrs_list);
+        <span class="kw">let </span><span class="kw-2">mut </span>new = <span class="self">Self</span>::new(text, attrs_list, <span class="self">self</span>.shaping);
         new.wrap = <span class="self">self</span>.wrap;
         new
     }
@@ -370,7 +379,12 @@
     <span class="doccomment">/// Shape line, will cache results
     </span><span class="kw">pub fn </span>shape(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem) -&gt; <span class="kw-2">&amp;</span>ShapeLine {
         <span class="kw">if </span><span class="self">self</span>.shape_opt.is_none() {
-            <span class="self">self</span>.shape_opt = <span class="prelude-val">Some</span>(ShapeLine::new(font_system, <span class="kw-2">&amp;</span><span class="self">self</span>.text, <span class="kw-2">&amp;</span><span class="self">self</span>.attrs_list));
+            <span class="self">self</span>.shape_opt = <span class="prelude-val">Some</span>(ShapeLine::new(
+                font_system,
+                <span class="kw-2">&amp;</span><span class="self">self</span>.text,
+                <span class="kw-2">&amp;</span><span class="self">self</span>.attrs_list,
+                <span class="self">self</span>.shaping,
+            ));
             <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
         }
         <span class="self">self</span>.shape_opt.as_ref().expect(<span class="string">&quot;shape not found&quot;</span>)

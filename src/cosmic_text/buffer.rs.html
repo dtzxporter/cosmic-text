@@ -782,6 +782,18 @@
 <a href="#782" id="782">782</a>
 <a href="#783" id="783">783</a>
 <a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
+<a href="#794" id="794">794</a>
+<a href="#795" id="795">795</a>
+<a href="#796" id="796">796</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -796,7 +808,7 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
 <span class="kw">use crate</span>::{
     Attrs, AttrsList, BorrowedWithFontSystem, BufferLine, FontSystem, LayoutGlyph, LayoutLine,
-    ShapeLine, Wrap,
+    ShapeLine, Shaping, Wrap,
 };
 
 <span class="doccomment">/// Current cursor location
@@ -1115,7 +1127,7 @@
             redraw: <span class="bool-val">false</span>,
             wrap: Wrap::Word,
         };
-        buffer.set_text(font_system, <span class="string">&quot;&quot;</span>, Attrs::new());
+        buffer.set_text(font_system, <span class="string">&quot;&quot;</span>, Attrs::new(), Shaping::Advanced);
         buffer
     }
 
@@ -1346,16 +1358,28 @@
     }
 
     <span class="doccomment">/// Set text of buffer, using provided attributes for each line by default
-    </span><span class="kw">pub fn </span>set_text(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, text: <span class="kw-2">&amp;</span>str, attrs: Attrs) {
+    </span><span class="kw">pub fn </span>set_text(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
+        text: <span class="kw-2">&amp;</span>str,
+        attrs: Attrs,
+        shaping: Shaping,
+    ) {
         <span class="self">self</span>.lines.clear();
         <span class="kw">for </span>line <span class="kw">in </span>text.lines() {
-            <span class="self">self</span>.lines
-                .push(BufferLine::new(line.to_string(), AttrsList::new(attrs)));
+            <span class="self">self</span>.lines.push(BufferLine::new(
+                line.to_string(),
+                AttrsList::new(attrs),
+                shaping,
+            ));
         }
         <span class="comment">// Make sure there is always one line
         </span><span class="kw">if </span><span class="self">self</span>.lines.is_empty() {
-            <span class="self">self</span>.lines
-                .push(BufferLine::new(String::new(), AttrsList::new(attrs)));
+            <span class="self">self</span>.lines.push(BufferLine::new(
+                String::new(),
+                AttrsList::new(attrs),
+                shaping,
+            ));
         }
 
         <span class="self">self</span>.scroll = <span class="number">0</span>;
@@ -1553,8 +1577,8 @@
     }
 
     <span class="doccomment">/// Set text of buffer, using provided attributes for each line by default
-    </span><span class="kw">pub fn </span>set_text(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: <span class="kw-2">&amp;</span>str, attrs: Attrs) {
-        <span class="self">self</span>.inner.set_text(<span class="self">self</span>.font_system, text, attrs);
+    </span><span class="kw">pub fn </span>set_text(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: <span class="kw-2">&amp;</span>str, attrs: Attrs, shaping: Shaping) {
+        <span class="self">self</span>.inner.set_text(<span class="self">self</span>.font_system, text, attrs, shaping);
     }
 
     <span class="doccomment">/// Draw the buffer
