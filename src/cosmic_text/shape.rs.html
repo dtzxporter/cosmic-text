@@ -1062,6 +1062,20 @@
 <a href="#1062" id="1062">1062</a>
 <a href="#1063" id="1063">1063</a>
 <a href="#1064" id="1064">1064</a>
+<a href="#1065" id="1065">1065</a>
+<a href="#1066" id="1066">1066</a>
+<a href="#1067" id="1067">1067</a>
+<a href="#1068" id="1068">1068</a>
+<a href="#1069" id="1069">1069</a>
+<a href="#1070" id="1070">1070</a>
+<a href="#1071" id="1071">1071</a>
+<a href="#1072" id="1072">1072</a>
+<a href="#1073" id="1073">1073</a>
+<a href="#1074" id="1074">1074</a>
+<a href="#1075" id="1075">1075</a>
+<a href="#1076" id="1076">1076</a>
+<a href="#1077" id="1077">1077</a>
+<a href="#1078" id="1078">1078</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1727,9 +1741,23 @@
 
         <span class="kw">if </span>wrap == Wrap::None {
             <span class="kw">for </span>(span_index, span) <span class="kw">in </span><span class="self">self</span>.spans.iter().enumerate() {
-                current_visual_line
-                    .ranges
-                    .push((span_index, (<span class="number">0</span>, <span class="number">0</span>), (span.words.len(), <span class="number">0</span>)));
+                <span class="kw">let </span><span class="kw-2">mut </span>word_range_width = <span class="number">0.</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>number_of_blanks: u32 = <span class="number">0</span>;
+                <span class="kw">for </span>word <span class="kw">in </span>span.words.iter() {
+                    <span class="kw">let </span>word_width = font_size * word.x_advance;
+                    word_range_width += word_width;
+                    <span class="kw">if </span>word.blank {
+                        number_of_blanks += <span class="number">1</span>;
+                    }
+                }
+                add_to_visual_line(
+                    <span class="kw-2">&amp;mut </span>current_visual_line,
+                    span_index,
+                    (<span class="number">0</span>, <span class="number">0</span>),
+                    (span.words.len(), <span class="number">0</span>),
+                    word_range_width,
+                    number_of_blanks,
+                );
             }
         } <span class="kw">else </span>{
             <span class="kw">let </span><span class="kw-2">mut </span>fit_x = line_width;
