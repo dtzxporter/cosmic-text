@@ -829,8 +829,8 @@
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
 <span class="kw">use crate</span>::{
-    Attrs, AttrsList, BorrowedWithFontSystem, BufferLine, Color, FontSystem, LayoutGlyph,
-    LayoutLine, ShapeLine, Shaping, Wrap,
+    Attrs, AttrsList, BidiParagraphs, BorrowedWithFontSystem, BufferLine, Color, FontSystem,
+    LayoutGlyph, LayoutLine, ShapeLine, Shaping, Wrap,
 };
 
 <span class="doccomment">/// Current cursor location
@@ -1414,7 +1414,7 @@
         shaping: Shaping,
     ) {
         <span class="self">self</span>.lines.clear();
-        <span class="kw">for </span>line <span class="kw">in </span>text.lines() {
+        <span class="kw">for </span>line <span class="kw">in </span>BidiParagraphs::new(text) {
             <span class="self">self</span>.lines.push(BufferLine::new(
                 line.to_string(),
                 AttrsList::new(attrs),
