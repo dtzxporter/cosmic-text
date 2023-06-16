@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/shape.rs`."><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-c4dbdcde0fbd8430.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-db279b6232be9c13.css"><link rel="stylesheet" disabled href="../../static.files/dark-cf923f49f397b216.css"><link rel="stylesheet" disabled href="../../static.files/ayu-be46fdc453a55015.css"><script src="../../static.files/storage-3891ce972e3a2bf8.js"></script><script defer src="../../static.files/source-script-1b95b7cca98b26e5.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-98a684e84ae5b08b.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/shape.rs`."><title>shape.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0 (90c541806 2023-05-31)" data-search-js="search-e077946657036a58.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../static.files/source-script-905937fbbdc8e9ea.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-f61008743c98d196.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1171,7 +1171,35 @@
 <a href="#1171" id="1171">1171</a>
 <a href="#1172" id="1172">1172</a>
 <a href="#1173" id="1173">1173</a>
-</pre><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
+<a href="#1174" id="1174">1174</a>
+<a href="#1175" id="1175">1175</a>
+<a href="#1176" id="1176">1176</a>
+<a href="#1177" id="1177">1177</a>
+<a href="#1178" id="1178">1178</a>
+<a href="#1179" id="1179">1179</a>
+<a href="#1180" id="1180">1180</a>
+<a href="#1181" id="1181">1181</a>
+<a href="#1182" id="1182">1182</a>
+<a href="#1183" id="1183">1183</a>
+<a href="#1184" id="1184">1184</a>
+<a href="#1185" id="1185">1185</a>
+<a href="#1186" id="1186">1186</a>
+<a href="#1187" id="1187">1187</a>
+<a href="#1188" id="1188">1188</a>
+<a href="#1189" id="1189">1189</a>
+<a href="#1190" id="1190">1190</a>
+<a href="#1191" id="1191">1191</a>
+<a href="#1192" id="1192">1192</a>
+<a href="#1193" id="1193">1193</a>
+<a href="#1194" id="1194">1194</a>
+<a href="#1195" id="1195">1195</a>
+<a href="#1196" id="1196">1196</a>
+<a href="#1197" id="1197">1197</a>
+<a href="#1198" id="1198">1198</a>
+<a href="#1199" id="1199">1199</a>
+<a href="#1200" id="1200">1200</a>
+<a href="#1201" id="1201">1201</a>
+</pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
@@ -1235,6 +1263,8 @@
     <span class="kw">let </span>run = <span class="kw-2">&amp;</span>line[start_run..end_run];
 
     <span class="kw">let </span>font_scale = font.rustybuzz().units_per_em() <span class="kw">as </span>f32;
+    <span class="kw">let </span>ascent = font.rustybuzz().ascender() <span class="kw">as </span>f32 / font_scale;
+    <span class="kw">let </span>descent = -font.rustybuzz().descender() <span class="kw">as </span>f32 / font_scale;
 
     <span class="kw">let </span><span class="kw-2">mut </span>buffer = rustybuzz::UnicodeBuffer::new();
     buffer.set_direction(<span class="kw">if </span>span_rtl {
@@ -1274,6 +1304,8 @@
             y_advance,
             x_offset,
             y_offset,
+            ascent,
+            descent,
             font_id: font.id(),
             glyph_id: info.glyph_id.try_into().expect(<span class="string">&quot;failed to cast glyph ID&quot;</span>),
             <span class="comment">//TODO: color should not be related to shaping
@@ -1445,7 +1477,11 @@
     <span class="kw">let </span>font = font.as_swash();
 
     <span class="kw">let </span>charmap = font.charmap();
+    <span class="kw">let </span>metrics = font.metrics(<span class="kw-2">&amp;</span>[]);
     <span class="kw">let </span>glyph_metrics = font.glyph_metrics(<span class="kw-2">&amp;</span>[]).scale(<span class="number">1.0</span>);
+
+    <span class="kw">let </span>ascent = metrics.ascent / f32::from(metrics.units_per_em);
+    <span class="kw">let </span>descent = metrics.descent / f32::from(metrics.units_per_em);
 
     line[start_run..end_run]
         .chars()
@@ -1461,6 +1497,8 @@
                 y_advance: <span class="number">0.0</span>,
                 x_offset: <span class="number">0.0</span>,
                 y_offset: <span class="number">0.0</span>,
+                ascent,
+                descent,
                 font_id,
                 glyph_id,
                 color_opt: attrs.color_opt,
@@ -1478,6 +1516,8 @@
     <span class="kw">pub </span>y_advance: f32,
     <span class="kw">pub </span>x_offset: f32,
     <span class="kw">pub </span>y_offset: f32,
+    <span class="kw">pub </span>ascent: f32,
+    <span class="kw">pub </span>descent: f32,
     <span class="kw">pub </span>font_id: fontdb::ID,
     <span class="kw">pub </span>glyph_id: u16,
     <span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
@@ -1922,6 +1962,8 @@
         <span class="kw">let </span>start_x = <span class="kw">if </span><span class="self">self</span>.rtl { line_width } <span class="kw">else </span>{ <span class="number">0.0 </span>};
         <span class="kw">let </span><span class="kw-2">mut </span>x;
         <span class="kw">let </span><span class="kw-2">mut </span>y;
+        <span class="kw">let </span><span class="kw-2">mut </span>max_ascent: f32 = <span class="number">0.</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>max_descent: f32 = <span class="number">0.</span>;
 
         <span class="comment">// This would keep the maximum number of spans that would fit on a visual line
         // If one span is too large, this variable will hold the range of words inside that span
@@ -2160,6 +2202,8 @@
             <span class="kw">let </span><span class="kw-2">mut </span>glyphs = Vec::with_capacity(<span class="number">1</span>);
             x = start_x;
             y = <span class="number">0.</span>;
+            max_ascent = <span class="number">0.</span>;
+            max_descent = <span class="number">0.</span>;
             <span class="kw">let </span>alignment_correction = <span class="kw">match </span>(align, <span class="self">self</span>.rtl) {
                 (Align::Left, <span class="bool-val">true</span>) =&gt; line_width - visual_line.w,
                 (Align::Left, <span class="bool-val">false</span>) =&gt; <span class="number">0.</span>,
@@ -2210,6 +2254,8 @@
                                         .push(glyph.layout(font_size, x, y, x_advance, span.level));
                                 }
                                 y += y_advance;
+                                max_ascent = max_ascent.max(glyph.ascent);
+                                max_descent = max_descent.max(glyph.descent);
                             }
                         } <span class="kw">else </span>{
                             <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word + <span class="number">1 </span>{
@@ -2243,6 +2289,8 @@
                                                 ));
                                         }
                                         y += y_advance;
+                                        max_ascent = max_ascent.max(glyph.ascent);
+                                        max_descent = max_descent.max(glyph.descent);
                                     }
                                 }
                             }
@@ -2285,6 +2333,8 @@
                                 }
                                 x += x_advance;
                                 y += y_advance;
+                                max_ascent = max_ascent.max(glyph.ascent);
+                                max_descent = max_descent.max(glyph.descent);
                             }
                         } <span class="kw">else </span>{
                             <span class="kw">for </span>i <span class="kw">in </span><span class="kw-2">*</span>starting_word..<span class="kw-2">*</span>ending_word + <span class="number">1 </span>{
@@ -2318,6 +2368,8 @@
                                         }
                                         x += x_advance;
                                         y += y_advance;
+                                        max_ascent = max_ascent.max(glyph.ascent);
+                                        max_descent = max_descent.max(glyph.descent);
                                     }
                                 }
                             }
@@ -2329,6 +2381,8 @@
             mem::swap(<span class="kw-2">&amp;mut </span>glyphs, <span class="kw-2">&amp;mut </span>glyphs_swap);
             layout_lines.push(LayoutLine {
                 w: <span class="kw">if </span><span class="self">self</span>.rtl { start_x - x } <span class="kw">else </span>{ x },
+                max_ascent: max_ascent * font_size,
+                max_descent: max_descent * font_size,
                 glyphs: glyphs_swap,
             });
             push_line = <span class="bool-val">false</span>;
@@ -2337,6 +2391,8 @@
         <span class="kw">if </span>push_line {
             layout_lines.push(LayoutLine {
                 w: <span class="number">0.0</span>,
+                max_ascent: max_ascent * font_size,
+                max_descent: max_descent * font_size,
                 glyphs: Default::default(),
             });
         }
@@ -2344,5 +2400,4 @@
         layout_lines
     }
 }
-</code></pre></div>
-</section></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0 (84c898d65 2023-04-16)" data-search-js="search-8a59a8356673ec1f.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>
+</code></pre></div></section></main></body></html>
