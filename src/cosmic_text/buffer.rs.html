@@ -819,6 +819,10 @@
 <a href="#819" id="819">819</a>
 <a href="#820" id="820">820</a>
 <a href="#821" id="821">821</a>
+<a href="#822" id="822">822</a>
+<a href="#823" id="823">823</a>
+<a href="#824" id="824">824</a>
+<a href="#825" id="825">825</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -942,6 +946,8 @@
     </span><span class="kw">pub </span>glyphs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[LayoutGlyph],
     <span class="doccomment">/// Y offset to baseline of line
     </span><span class="kw">pub </span>line_y: f32,
+    <span class="doccomment">/// Y offset to top of line
+    </span><span class="kw">pub </span>line_top: f32,
     <span class="doccomment">/// Width of line
     </span><span class="kw">pub </span>line_w: f32,
 }
@@ -1067,15 +1073,16 @@
                     <span class="kw">continue</span>;
                 }
 
-                <span class="kw">let </span>line_y = <span class="self">self
+                <span class="kw">let </span>line_top = <span class="self">self
                     </span>.total_layout
                     .saturating_sub(<span class="self">self</span>.buffer.scroll)
                     .saturating_sub(<span class="number">1</span>) <span class="kw">as </span>f32
                     * <span class="self">self</span>.buffer.metrics.line_height;
                 <span class="kw">let </span>glyph_height = layout_line.max_ascent + layout_line.max_descent;
                 <span class="kw">let </span>centering_offset = (<span class="self">self</span>.buffer.metrics.line_height - glyph_height) / <span class="number">2.0</span>;
+                <span class="kw">let </span>line_y = line_top + centering_offset + layout_line.max_ascent;
 
-                <span class="kw">if </span>line_y + centering_offset &gt; <span class="self">self</span>.buffer.height {
+                <span class="kw">if </span>line_top + centering_offset &gt; <span class="self">self</span>.buffer.height {
                     <span class="kw">return </span><span class="prelude-val">None</span>;
                 }
 
@@ -1086,7 +1093,8 @@
                         text: line.text(),
                         rtl: shape.rtl,
                         glyphs: <span class="kw-2">&amp;</span>layout_line.glyphs,
-                        line_y: line_y + centering_offset + layout_line.max_ascent,
+                        line_y,
+                        line_top,
                         line_w: layout_line.w,
                     }
                 });

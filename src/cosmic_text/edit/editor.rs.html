@@ -865,6 +865,7 @@
 <a href="#865" id="865">865</a>
 <a href="#866" id="866">866</a>
 <a href="#867" id="867">867</a>
+<a href="#868" id="868">868</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1569,6 +1570,7 @@
         <span class="kw">for </span>run <span class="kw">in </span><span class="self">self</span>.buffer.layout_runs() {
             <span class="kw">let </span>line_i = run.line_i;
             <span class="kw">let </span>line_y = run.line_y;
+            <span class="kw">let </span>line_top = run.line_top;
 
             <span class="kw">let </span>cursor_glyph_opt = |cursor: <span class="kw-2">&amp;</span>Cursor| -&gt; <span class="prelude-ty">Option</span>&lt;(usize, f32)&gt; {
                 <span class="kw">if </span>cursor.line == line_i {
@@ -1646,7 +1648,7 @@
                             } <span class="kw">else if let </span><span class="prelude-val">Some</span>((min, max)) = range_opt.take() {
                                 f(
                                     min,
-                                    (line_y - font_size) <span class="kw">as </span>i32,
+                                    line_top <span class="kw">as </span>i32,
                                     cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                                     line_height <span class="kw">as </span>u32,
                                     Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
@@ -1672,7 +1674,7 @@
                         }
                         f(
                             min,
-                            (line_y - font_size) <span class="kw">as </span>i32,
+                            line_top <span class="kw">as </span>i32,
                             cmp::max(<span class="number">0</span>, max - min) <span class="kw">as </span>u32,
                             line_height <span class="kw">as </span>u32,
                             Color::rgba(color.r(), color.g(), color.b(), <span class="number">0x33</span>),
@@ -1710,7 +1712,7 @@
 
                 f(
                     x,
-                    (line_y - font_size) <span class="kw">as </span>i32,
+                    line_top <span class="kw">as </span>i32,
                     <span class="number">1</span>,
                     line_height <span class="kw">as </span>u32,
                     <span class="self">self</span>.cursor.color.unwrap_or(color),
