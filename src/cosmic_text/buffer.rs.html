@@ -823,6 +823,17 @@
 <a href="#823" id="823">823</a>
 <a href="#824" id="824">824</a>
 <a href="#825" id="825">825</a>
+<a href="#826" id="826">826</a>
+<a href="#827" id="827">827</a>
+<a href="#828" id="828">828</a>
+<a href="#829" id="829">829</a>
+<a href="#830" id="830">830</a>
+<a href="#831" id="831">831</a>
+<a href="#832" id="832">832</a>
+<a href="#833" id="833">833</a>
+<a href="#834" id="834">834</a>
+<a href="#835" id="835">835</a>
+<a href="#836" id="836">836</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1574,16 +1585,27 @@
     {
         <span class="kw">for </span>run <span class="kw">in </span><span class="self">self</span>.layout_runs() {
             <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {
-                <span class="kw">let </span>(cache_key, x_int, y_int) = (glyph.cache_key, glyph.x_int, glyph.y_int);
+                <span class="kw">let </span>physical_glyph = glyph.physical((<span class="number">0.</span>, <span class="number">0.</span>), <span class="number">1.0</span>);
 
                 <span class="kw">let </span>glyph_color = <span class="kw">match </span>glyph.color_opt {
                     <span class="prelude-val">Some</span>(some) =&gt; some,
                     <span class="prelude-val">None </span>=&gt; color,
                 };
 
-                cache.with_pixels(font_system, cache_key, glyph_color, |x, y, color| {
-                    f(x_int + x, run.line_y <span class="kw">as </span>i32 + y_int + y, <span class="number">1</span>, <span class="number">1</span>, color);
-                });
+                cache.with_pixels(
+                    font_system,
+                    physical_glyph.cache_key,
+                    glyph_color,
+                    |x, y, color| {
+                        f(
+                            physical_glyph.x + x,
+                            run.line_y <span class="kw">as </span>i32 + physical_glyph.y + y,
+                            <span class="number">1</span>,
+                            <span class="number">1</span>,
+                            color,
+                        );
+                    },
+                );
             }
         }
     }

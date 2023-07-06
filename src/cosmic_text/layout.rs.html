@@ -104,6 +104,34 @@
 <a href="#104" id="104">104</a>
 <a href="#105" id="105">105</a>
 <a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
+<a href="#116" id="116">116</a>
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>core::fmt::Display;
@@ -120,19 +148,24 @@
     </span><span class="kw">pub </span>start: usize,
     <span class="doccomment">/// End index of cluster in original line
     </span><span class="kw">pub </span>end: usize,
+    <span class="doccomment">/// Font size of the glyph
+    </span><span class="kw">pub </span>font_size: f32,
+    <span class="doccomment">/// Font id of the glyph
+    </span><span class="kw">pub </span>font_id: fontdb::ID,
+    <span class="doccomment">/// Font id of the glyph
+    </span><span class="kw">pub </span>glyph_id: u16,
     <span class="doccomment">/// X offset of hitbox
     </span><span class="kw">pub </span>x: f32,
-    <span class="doccomment">/// width of hitbox
+    <span class="doccomment">/// Y offset of hitbox
+    </span><span class="kw">pub </span>y: f32,
+    <span class="doccomment">/// Width of hitbox
     </span><span class="kw">pub </span>w: f32,
     <span class="doccomment">/// Unicode BiDi embedding level, character is left-to-right if `level` is divisible by 2
     </span><span class="kw">pub </span>level: unicode_bidi::Level,
-    <span class="doccomment">/// Cache key, see [CacheKey]
-    </span><span class="kw">pub </span>cache_key: CacheKey,
     <span class="doccomment">/// X offset in line
     ///
-    /// If you are dealing with physical coordinates, you will want to use [`Self::x_int`]
-    /// together with [`CacheKey::x_bin`] instead. This will ensure the best alignment of the
-    /// rasterized glyphs with the pixel grid.
+    /// If you are dealing with physical coordinates, use [`Self::physical`] to obtain a
+    /// [`PhysicalGlyph`] for rendering.
     ///
     /// This offset is useful when you are dealing with logical units and you do not care or
     /// cannot guarantee pixel grid alignment. For instance, when you want to use the glyphs
@@ -140,22 +173,45 @@
     </span><span class="kw">pub </span>x_offset: f32,
     <span class="doccomment">/// Y offset in line
     ///
-    /// If you are dealing with physical coordinates, you will want to use [`Self::y_int`]
-    /// together with [`CacheKey::y_bin`] instead. This will ensure the best alignment of the
-    /// rasterized glyphs with the pixel grid.
+    /// If you are dealing with physical coordinates, use [`Self::physical`] to obtain a
+    /// [`PhysicalGlyph`] for rendering.
     ///
     /// This offset is useful when you are dealing with logical units and you do not care or
     /// cannot guarantee pixel grid alignment. For instance, when you want to use the glyphs
     /// for vectorial text, apply linear transformations to the layout, etc.
     </span><span class="kw">pub </span>y_offset: f32,
-    <span class="doccomment">/// Integer component of X offset in line
-    </span><span class="kw">pub </span>x_int: i32,
-    <span class="doccomment">/// Integer component of Y offset in line
-    </span><span class="kw">pub </span>y_int: i32,
     <span class="doccomment">/// Optional color override
     </span><span class="kw">pub </span>color_opt: <span class="prelude-ty">Option</span>&lt;Color&gt;,
     <span class="doccomment">/// Metadata from `Attrs`
     </span><span class="kw">pub </span>metadata: usize,
+}
+
+<span class="kw">pub struct </span>PhysicalGlyph {
+    <span class="doccomment">/// Cache key, see [CacheKey]
+    </span><span class="kw">pub </span>cache_key: CacheKey,
+    <span class="doccomment">/// Integer component of X offset in line
+    </span><span class="kw">pub </span>x: i32,
+    <span class="doccomment">/// Integer component of Y offset in line
+    </span><span class="kw">pub </span>y: i32,
+}
+
+<span class="kw">impl </span>LayoutGlyph {
+    <span class="kw">pub fn </span>physical(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: (f32, f32), scale: f32) -&gt; PhysicalGlyph {
+        <span class="kw">let </span>x_offset = <span class="self">self</span>.font_size * <span class="self">self</span>.x_offset;
+        <span class="kw">let </span>y_offset = <span class="self">self</span>.font_size * <span class="self">self</span>.y_offset;
+
+        <span class="kw">let </span>(cache_key, x, y) = CacheKey::new(
+            <span class="self">self</span>.font_id,
+            <span class="self">self</span>.glyph_id,
+            <span class="self">self</span>.font_size * scale,
+            (
+                (<span class="self">self</span>.x + x_offset) * scale + offset.<span class="number">0</span>,
+                libm::truncf((<span class="self">self</span>.y - y_offset) * scale + offset.<span class="number">1</span>), <span class="comment">// Hinting in Y axis
+            </span>),
+        );
+
+        PhysicalGlyph { cache_key, x, y }
+    }
 }
 
 <span class="doccomment">/// A line of laid out glyphs

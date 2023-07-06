@@ -1191,14 +1191,6 @@
 <a href="#1191" id="1191">1191</a>
 <a href="#1192" id="1192">1192</a>
 <a href="#1193" id="1193">1193</a>
-<a href="#1194" id="1194">1194</a>
-<a href="#1195" id="1195">1195</a>
-<a href="#1196" id="1196">1196</a>
-<a href="#1197" id="1197">1197</a>
-<a href="#1198" id="1198">1198</a>
-<a href="#1199" id="1199">1199</a>
-<a href="#1200" id="1200">1200</a>
-<a href="#1201" id="1201">1201</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1210,7 +1202,7 @@
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
 <span class="kw">use </span><span class="kw">crate</span>::fallback::FontFallbackIter;
-<span class="kw">use crate</span>::{Align, AttrsList, CacheKey, Color, Font, FontSystem, LayoutGlyph, LayoutLine, Wrap};
+<span class="kw">use crate</span>::{Align, AttrsList, Color, Font, FontSystem, LayoutGlyph, LayoutLine, Wrap};
 
 <span class="doccomment">/// The shaping strategy of some text.
 </span><span class="attr">#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -1533,26 +1525,18 @@
         w: f32,
         level: unicode_bidi::Level,
     ) -&gt; LayoutGlyph {
-        <span class="kw">let </span>x_offset = font_size * <span class="self">self</span>.x_offset;
-        <span class="kw">let </span>y_offset = font_size * <span class="self">self</span>.y_offset;
-
-        <span class="kw">let </span>(cache_key, x_int, y_int) = CacheKey::new(
-            <span class="self">self</span>.font_id,
-            <span class="self">self</span>.glyph_id,
-            font_size,
-            (x + x_offset, y - y_offset),
-        );
         LayoutGlyph {
             start: <span class="self">self</span>.start,
             end: <span class="self">self</span>.end,
+            font_size,
+            font_id: <span class="self">self</span>.font_id,
+            glyph_id: <span class="self">self</span>.glyph_id,
             x,
+            y,
             w,
             level,
-            cache_key,
-            x_offset,
-            y_offset,
-            x_int,
-            y_int,
+            x_offset: <span class="self">self</span>.x_offset,
+            y_offset: <span class="self">self</span>.y_offset,
             color_opt: <span class="self">self</span>.color_opt,
             metadata: <span class="self">self</span>.metadata,
         }
