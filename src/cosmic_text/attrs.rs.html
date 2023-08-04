@@ -291,6 +291,18 @@
 <a href="#291" id="291">291</a>
 <a href="#292" id="292">292</a>
 <a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -318,6 +330,18 @@
     </span><span class="attr">#[inline]
     </span><span class="kw">pub const fn </span>rgba(r: u8, g: u8, b: u8, a: u8) -&gt; <span class="self">Self </span>{
         <span class="self">Self</span>(((a <span class="kw">as </span>u32) &lt;&lt; <span class="number">24</span>) | ((r <span class="kw">as </span>u32) &lt;&lt; <span class="number">16</span>) | ((g <span class="kw">as </span>u32) &lt;&lt; <span class="number">8</span>) | (b <span class="kw">as </span>u32))
+    }
+
+    <span class="doccomment">/// Get a tuple over all of the attributes, in `(r, g, b, a)` order.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>as_rgba_tuple(<span class="self">self</span>) -&gt; (u8, u8, u8, u8) {
+        (<span class="self">self</span>.r(), <span class="self">self</span>.g(), <span class="self">self</span>.b(), <span class="self">self</span>.a())
+    }
+
+    <span class="doccomment">/// Get an array over all of the components, in `[r, g, b, a]` order.
+    </span><span class="attr">#[inline]
+    </span><span class="kw">pub fn </span>as_rgba(<span class="self">self</span>) -&gt; [u8; <span class="number">4</span>] {
+        [<span class="self">self</span>.r(), <span class="self">self</span>.g(), <span class="self">self</span>.b(), <span class="self">self</span>.a()]
     }
 
     <span class="doccomment">/// Get the red component
