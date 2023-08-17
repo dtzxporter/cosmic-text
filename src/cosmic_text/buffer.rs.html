@@ -838,6 +838,22 @@
 <a href="#838" id="838">838</a>
 <a href="#839" id="839">839</a>
 <a href="#840" id="840">840</a>
+<a href="#841" id="841">841</a>
+<a href="#842" id="842">842</a>
+<a href="#843" id="843">843</a>
+<a href="#844" id="844">844</a>
+<a href="#845" id="845">845</a>
+<a href="#846" id="846">846</a>
+<a href="#847" id="847">847</a>
+<a href="#848" id="848">848</a>
+<a href="#849" id="849">849</a>
+<a href="#850" id="850">850</a>
+<a href="#851" id="851">851</a>
+<a href="#852" id="852">852</a>
+<a href="#853" id="853">853</a>
+<a href="#854" id="854">854</a>
+<a href="#855" id="855">855</a>
+<a href="#856" id="856">856</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -850,7 +866,7 @@
 
 <span class="kw">use crate</span>::{
     Attrs, AttrsList, BidiParagraphs, BorrowedWithFontSystem, BufferLine, Color, FontSystem,
-    LayoutGlyph, LayoutLine, ShapeLine, Shaping, Wrap,
+    LayoutGlyph, LayoutLine, ShapeBuffer, ShapeLine, Shaping, Wrap,
 };
 
 <span class="doccomment">/// Current cursor location
@@ -1170,6 +1186,9 @@
     <span class="doccomment">/// True if a redraw is requires. Set to false after processing
     </span>redraw: bool,
     wrap: Wrap,
+
+    <span class="doccomment">/// Scratch buffer for shaping and laying out.
+    </span>scratch: ShapeBuffer,
 }
 
 <span class="kw">impl </span>Buffer {
@@ -1194,6 +1213,7 @@
             scroll: <span class="number">0</span>,
             redraw: <span class="bool-val">false</span>,
             wrap: Wrap::Word,
+            scratch: ShapeBuffer::default(),
         }
     }
 
@@ -1251,7 +1271,13 @@
             <span class="kw">if </span>line.shape_opt().is_none() {
                 reshaped += <span class="number">1</span>;
             }
-            <span class="kw">let </span>layout = line.layout(font_system, <span class="self">self</span>.metrics.font_size, <span class="self">self</span>.width, <span class="self">self</span>.wrap);
+            <span class="kw">let </span>layout = line.layout_in_buffer(
+                <span class="kw-2">&amp;mut </span><span class="self">self</span>.scratch,
+                font_system,
+                <span class="self">self</span>.metrics.font_size,
+                <span class="self">self</span>.width,
+                <span class="self">self</span>.wrap,
+            );
             total_layout += layout.len() <span class="kw">as </span>i32;
         }
 
@@ -1279,7 +1305,13 @@
             <span class="kw">if </span>line.shape_opt().is_none() {
                 reshaped += <span class="number">1</span>;
             }
-            <span class="kw">let </span>layout = line.layout(font_system, <span class="self">self</span>.metrics.font_size, <span class="self">self</span>.width, <span class="self">self</span>.wrap);
+            <span class="kw">let </span>layout = line.layout_in_buffer(
+                <span class="kw-2">&amp;mut </span><span class="self">self</span>.scratch,
+                font_system,
+                <span class="self">self</span>.metrics.font_size,
+                <span class="self">self</span>.width,
+                <span class="self">self</span>.wrap,
+            );
             <span class="kw">if </span>line_i == cursor.line {
                 <span class="kw">let </span>layout_cursor = <span class="self">self</span>.layout_cursor(<span class="kw-2">&amp;</span>cursor);
                 layout_i += layout_cursor.layout <span class="kw">as </span>i32;
