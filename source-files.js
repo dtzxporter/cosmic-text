@@ -3,12 +3,14 @@ var sourcesIndex = JSON.parse('{\
 "bitflags":["",[],["lib.rs"]],\
 "bytemuck":["",[],["allocation.rs","anybitpattern.rs","checked.rs","contiguous.rs","internal.rs","lib.rs","no_uninit.rs","offset_of.rs","pod.rs","pod_in_option.rs","transparent.rs","zeroable.rs","zeroable_in_option.rs"]],\
 "cosmic_text":["",[["edit",[],["editor.rs","mod.rs"]],["font",[["fallback",[],["mod.rs","unix.rs"]]],["mod.rs","system.rs"]]],["attrs.rs","bidi_para.rs","buffer.rs","buffer_line.rs","cache.rs","layout.rs","lib.rs","shape.rs","swash.rs"]],\
+"fontconfig_parser":["",[["types",[["match_",[],["edit.rs","test.rs"]]],["alias.rs","config.rs","constant.rs","dir.rs","document.rs","match_.rs","property.rs","selectfont.rs","value.rs"]]],["error.rs","lib.rs","parser.rs","types.rs","util.rs"]],\
 "fontdb":["",[],["lib.rs"]],\
 "libc":["",[["unix",[["linux_like",[["linux",[["arch",[["generic",[],["mod.rs"]]],["mod.rs"]],["gnu",[["b64",[["x86_64",[],["align.rs","mod.rs","not_x32.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["align.rs","mod.rs","non_exhaustive.rs"]]],["mod.rs"]]],["align.rs","mod.rs"]]],["fixed_width_ints.rs","lib.rs","macros.rs"]],\
 "libm":["",[["math",[],["acos.rs","acosf.rs","acosh.rs","acoshf.rs","asin.rs","asinf.rs","asinh.rs","asinhf.rs","atan.rs","atan2.rs","atan2f.rs","atanf.rs","atanh.rs","atanhf.rs","cbrt.rs","cbrtf.rs","ceil.rs","ceilf.rs","copysign.rs","copysignf.rs","cos.rs","cosf.rs","cosh.rs","coshf.rs","erf.rs","erff.rs","exp.rs","exp10.rs","exp10f.rs","exp2.rs","exp2f.rs","expf.rs","expm1.rs","expm1f.rs","expo2.rs","fabs.rs","fabsf.rs","fdim.rs","fdimf.rs","fenv.rs","floor.rs","floorf.rs","fma.rs","fmaf.rs","fmax.rs","fmaxf.rs","fmin.rs","fminf.rs","fmod.rs","fmodf.rs","frexp.rs","frexpf.rs","hypot.rs","hypotf.rs","ilogb.rs","ilogbf.rs","j0.rs","j0f.rs","j1.rs","j1f.rs","jn.rs","jnf.rs","k_cos.rs","k_cosf.rs","k_expo2.rs","k_expo2f.rs","k_sin.rs","k_sinf.rs","k_tan.rs","k_tanf.rs","ldexp.rs","ldexpf.rs","lgamma.rs","lgamma_r.rs","lgammaf.rs","lgammaf_r.rs","log.rs","log10.rs","log10f.rs","log1p.rs","log1pf.rs","log2.rs","log2f.rs","logf.rs","mod.rs","modf.rs","modff.rs","nextafter.rs","nextafterf.rs","pow.rs","powf.rs","rem_pio2.rs","rem_pio2_large.rs","rem_pio2f.rs","remainder.rs","remainderf.rs","remquo.rs","remquof.rs","rint.rs","rintf.rs","round.rs","roundf.rs","scalbn.rs","scalbnf.rs","sin.rs","sincos.rs","sincosf.rs","sinf.rs","sinh.rs","sinhf.rs","sqrt.rs","sqrtf.rs","tan.rs","tanf.rs","tanh.rs","tanhf.rs","tgamma.rs","tgammaf.rs","trunc.rs","truncf.rs"]]],["lib.rs","libm_helper.rs"]],\
 "log":["",[],["__private_api.rs","lib.rs","macros.rs"]],\
 "memmap2":["",[],["advice.rs","lib.rs","unix.rs"]],\
 "rangemap":["",[],["inclusive_map.rs","inclusive_set.rs","lib.rs","map.rs","range_wrapper.rs","set.rs","std_ext.rs"]],\
+"roxmltree":["",[],["lib.rs","parse.rs"]],\
 "rustc_hash":["",[],["lib.rs"]],\
 "rustybuzz":["",[["aat",[],["extended_kerning.rs","feature_mappings.rs","feature_selector.rs","map.rs","metamorphosis.rs","mod.rs","tracking.rs"]],["complex",[],["arabic.rs","arabic_table.rs","hangul.rs","hebrew.rs","indic.rs","indic_machine.rs","indic_table.rs","khmer.rs","khmer_machine.rs","mod.rs","myanmar.rs","myanmar_machine.rs","thai.rs","universal.rs","universal_machine.rs","universal_table.rs","vowel_constraints.rs"]],["ot",[],["apply.rs","contextual.rs","feature.rs","kerning.rs","layout.rs","map.rs","matching.rs","mod.rs","position.rs","substitute.rs"]]],["buffer.rs","common.rs","face.rs","fallback.rs","glyph_set.rs","lib.rs","normalize.rs","plan.rs","shape.rs","tag.rs","tag_table.rs","text_parser.rs","unicode.rs","unicode_norm.rs"]],\
 "slotmap":["",[],["basic.rs","dense.rs","hop.rs","lib.rs","secondary.rs"]],\
@@ -25,6 +27,7 @@ var sourcesIndex = JSON.parse('{\
 "unicode_linebreak":["",[],["lib.rs","shared.rs"]],\
 "unicode_script":["",[],["lib.rs","tables.rs"]],\
 "unicode_segmentation":["",[],["grapheme.rs","lib.rs","sentence.rs","tables.rs","word.rs"]],\
+"xmlparser":["",[],["error.rs","lib.rs","stream.rs","strspan.rs","xmlchar.rs"]],\
 "yazi":["",[],["decode.rs","encode.rs","lib.rs"]],\
 "zeno":["",[],["command.rs","geometry.rs","hit_test.rs","lib.rs","mask.rs","path_builder.rs","path_data.rs","raster.rs","scratch.rs","segment.rs","stroke.rs","style.rs","svg_parser.rs","traversal.rs"]]\
 }');
