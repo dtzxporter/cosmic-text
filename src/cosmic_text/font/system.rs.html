@@ -209,6 +209,7 @@
 <a href="#209" id="209">209</a>
 <a href="#210" id="210">210</a>
 <a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Attrs, AttrsOwned, Font};
 <span class="kw">use </span>alloc::string::String;
 <span class="kw">use </span>alloc::sync::Arc;
@@ -269,12 +270,13 @@
         <span class="macro">log::debug!</span>(<span class="string">&quot;Locale: {}&quot;</span>, locale);
 
         <span class="kw">let </span><span class="kw-2">mut </span>db = fontdb::Database::new();
-        <span class="self">Self</span>::load_fonts(<span class="kw-2">&amp;mut </span>db, fonts.into_iter());
 
         <span class="comment">//TODO: configurable default fonts
         </span>db.set_monospace_family(<span class="string">&quot;Fira Mono&quot;</span>);
         db.set_sans_serif_family(<span class="string">&quot;Fira Sans&quot;</span>);
         db.set_serif_family(<span class="string">&quot;DejaVu Serif&quot;</span>);
+
+        <span class="self">Self</span>::load_fonts(<span class="kw-2">&amp;mut </span>db, fonts.into_iter());
 
         <span class="self">Self</span>::new_with_locale_and_db(locale, db)
     }
