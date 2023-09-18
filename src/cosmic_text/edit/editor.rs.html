@@ -877,6 +877,9 @@
 <a href="#877" id="877">877</a>
 <a href="#878" id="878">878</a>
 <a href="#879" id="879">879</a>
+<a href="#880" id="880">880</a>
+<a href="#881" id="881">881</a>
+<a href="#882" id="882">882</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -988,7 +991,7 @@
         }
     }
 
-    <span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
+    <span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
         <span class="kw">let </span>select = <span class="self">self</span>.select_opt<span class="question-mark">?</span>;
 
         <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
@@ -1114,8 +1117,12 @@
         <span class="kw">let </span>after_len = after.text().len();
 
         <span class="comment">// Collect attributes
-        </span><span class="kw">let </span><span class="kw-2">mut </span>final_attrs = attrs_list
-            .unwrap_or_else(|| AttrsList::new(line.attrs_list().get_span(line.text().len())));
+        </span><span class="kw">let </span><span class="kw-2">mut </span>final_attrs = attrs_list.unwrap_or_else(|| {
+            AttrsList::new(
+                line.attrs_list()
+                    .get_span(<span class="self">self</span>.cursor.index.saturating_sub(<span class="number">1</span>)),
+            )
+        });
 
         <span class="comment">// Append the inserted text, line by line
         // we want to see a blank entry if the string ends with a newline
@@ -1167,6 +1174,7 @@
 
         <span class="comment">// Append the text after insertion
         </span><span class="self">self</span>.cursor.index = <span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line].text().len() - after_len;
+        <span class="self">self</span>.cursor_moved = <span class="bool-val">true</span>;
     }
 
     <span class="kw">fn </span>action(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, action: Action) {
@@ -1470,16 +1478,14 @@
             Action::PreviousWord =&gt; {
                 <span class="kw">let </span>line: <span class="kw-2">&amp;mut </span>BufferLine = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
                 <span class="kw">if </span><span class="self">self</span>.cursor.index &gt; <span class="number">0 </span>{
-                    <span class="kw">let </span><span class="kw-2">mut </span>prev_index = <span class="number">0</span>;
-                    <span class="kw">for </span>(i, <span class="kw">_</span>) <span class="kw">in </span>line.text().unicode_word_indices() {
-                        <span class="kw">if </span>i &lt; <span class="self">self</span>.cursor.index {
-                            prev_index = i;
-                        } <span class="kw">else </span>{
-                            <span class="kw">break</span>;
-                        }
-                    }
+                    <span class="self">self</span>.cursor.index = line
+                        .text()
+                        .unicode_word_indices()
+                        .rev()
+                        .map(|(i, <span class="kw">_</span>)| i)
+                        .find(|<span class="kw-2">&amp;</span>i| i &lt; <span class="self">self</span>.cursor.index)
+                        .unwrap_or(<span class="number">0</span>);
 
-                    <span class="self">self</span>.cursor.index = prev_index;
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 } <span class="kw">else if </span><span class="self">self</span>.cursor.line &gt; <span class="number">0 </span>{
                     <span class="self">self</span>.cursor.line -= <span class="number">1</span>;
@@ -1491,14 +1497,14 @@
             Action::NextWord =&gt; {
                 <span class="kw">let </span>line: <span class="kw-2">&amp;mut </span>BufferLine = <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer.lines[<span class="self">self</span>.cursor.line];
                 <span class="kw">if </span><span class="self">self</span>.cursor.index &lt; line.text().len() {
-                    <span class="kw">for </span>(i, word) <span class="kw">in </span>line.text().unicode_word_indices() {
-                        <span class="kw">let </span>i = i + word.len();
-                        <span class="kw">if </span>i &gt; <span class="self">self</span>.cursor.index {
-                            <span class="self">self</span>.cursor.index = i;
-                            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
-                            <span class="kw">break</span>;
-                        }
-                    }
+                    <span class="self">self</span>.cursor.index = line
+                        .text()
+                        .unicode_word_indices()
+                        .map(|(i, word)| i + word.len())
+                        .find(|<span class="kw-2">&amp;</span>i| i &gt; <span class="self">self</span>.cursor.index)
+                        .unwrap_or(line.text().len());
+
+                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 } <span class="kw">else if </span><span class="self">self</span>.cursor.line + <span class="number">1 </span>&lt; <span class="self">self</span>.buffer.lines.len() {
                     <span class="self">self</span>.cursor.line += <span class="number">1</span>;
                     <span class="self">self</span>.cursor.index = <span class="number">0</span>;
