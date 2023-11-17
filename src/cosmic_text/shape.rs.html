@@ -1277,8 +1277,6 @@
 <a href="#1277" id="1277">1277</a>
 <a href="#1278" id="1278">1278</a>
 <a href="#1279" id="1279">1279</a>
-<a href="#1280" id="1280">1280</a>
-<a href="#1281" id="1281">1281</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#![allow(clippy::too_many_arguments)]
@@ -2533,12 +2531,10 @@
             layout_lines.push(LayoutLine {
                 w: <span class="kw">if </span>align != Align::Justified {
                     visual_line.w
+                } <span class="kw">else if </span><span class="self">self</span>.rtl {
+                    start_x - x
                 } <span class="kw">else </span>{
-                    <span class="kw">if </span><span class="self">self</span>.rtl {
-                        start_x - x
-                    } <span class="kw">else </span>{
-                        x
-                    }
+                    x
                 },
                 max_ascent: max_ascent * font_size,
                 max_descent: max_descent * font_size,

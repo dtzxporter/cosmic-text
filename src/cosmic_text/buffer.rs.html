@@ -960,13 +960,31 @@
 <a href="#960" id="960">960</a>
 <a href="#961" id="961">961</a>
 <a href="#962" id="962">962</a>
+<a href="#963" id="963">963</a>
+<a href="#964" id="964">964</a>
+<a href="#965" id="965">965</a>
+<a href="#966" id="966">966</a>
+<a href="#967" id="967">967</a>
+<a href="#968" id="968">968</a>
+<a href="#969" id="969">969</a>
+<a href="#970" id="970">970</a>
+<a href="#971" id="971">971</a>
+<a href="#972" id="972">972</a>
+<a href="#973" id="973">973</a>
+<a href="#974" id="974">974</a>
+<a href="#975" id="975">975</a>
+<a href="#976" id="976">976</a>
+<a href="#977" id="977">977</a>
+<a href="#978" id="978">978</a>
+<a href="#979" id="979">979</a>
+<a href="#980" id="980">980</a>
+<a href="#981" id="981">981</a>
+<a href="#982" id="982">982</a>
+<a href="#983" id="983">983</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-</span><span class="kw">use </span>alloc::{
-    string::{String, ToString},
-    vec::Vec,
-};
+</span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 <span class="kw">use </span>core::{cmp, fmt};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
@@ -1016,9 +1034,10 @@
 }
 
 <span class="doccomment">/// Whether to associate cursors placed at a boundary between runs with the run before or after it.
-</span><span class="attr">#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+</span><span class="attr">#[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd)]
 </span><span class="kw">pub enum </span>Affinity {
-    Before,
+    <span class="attr">#[default]
+    </span>Before,
     After,
 }
 
@@ -1045,12 +1064,6 @@
         } <span class="kw">else </span>{
             <span class="self">Self</span>::Before
         }
-    }
-}
-
-<span class="kw">impl </span>Default <span class="kw">for </span>Affinity {
-    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
-        Affinity::Before
     }
 }
 
@@ -1514,12 +1527,7 @@
     ///
     /// Will panic if `metrics.font_size` is zero.
     </span><span class="kw">pub fn </span>set_metrics(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, metrics: Metrics) {
-        <span class="kw">if </span>metrics != <span class="self">self</span>.metrics {
-            <span class="macro">assert_ne!</span>(metrics.font_size, <span class="number">0.0</span>, <span class="string">&quot;font size cannot be 0&quot;</span>);
-            <span class="self">self</span>.metrics = metrics;
-            <span class="self">self</span>.relayout(font_system);
-            <span class="self">self</span>.shape_until_scroll(font_system);
-        }
+        <span class="self">self</span>.set_metrics_and_size(font_system, metrics, <span class="self">self</span>.width, <span class="self">self</span>.height);
     }
 
     <span class="doccomment">/// Get the current [`Wrap`]
@@ -1543,10 +1551,27 @@
 
     <span class="doccomment">/// Set the current buffer dimensions
     </span><span class="kw">pub fn </span>set_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem, width: f32, height: f32) {
+        <span class="self">self</span>.set_metrics_and_size(font_system, <span class="self">self</span>.metrics, width, height);
+    }
+
+    <span class="doccomment">/// Set the current [`Metrics`] and buffer dimensions at the same time
+    ///
+    /// # Panics
+    ///
+    /// Will panic if `metrics.font_size` is zero.
+    </span><span class="kw">pub fn </span>set_metrics_and_size(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        font_system: <span class="kw-2">&amp;mut </span>FontSystem,
+        metrics: Metrics,
+        width: f32,
+        height: f32,
+    ) {
         <span class="kw">let </span>clamped_width = width.max(<span class="number">0.0</span>);
         <span class="kw">let </span>clamped_height = height.max(<span class="number">0.0</span>);
 
-        <span class="kw">if </span>clamped_width != <span class="self">self</span>.width || clamped_height != <span class="self">self</span>.height {
+        <span class="kw">if </span>metrics != <span class="self">self</span>.metrics || clamped_width != <span class="self">self</span>.width || clamped_height != <span class="self">self</span>.height {
+            <span class="macro">assert_ne!</span>(metrics.font_size, <span class="number">0.0</span>, <span class="string">&quot;font size cannot be 0&quot;</span>);
+            <span class="self">self</span>.metrics = metrics;
             <span class="self">self</span>.width = clamped_width;
             <span class="self">self</span>.height = clamped_height;
             <span class="self">self</span>.relayout(font_system);
@@ -1580,7 +1605,7 @@
         attrs: Attrs,
         shaping: Shaping,
     ) {
-        <span class="self">self</span>.set_rich_text(font_system, [(text, attrs)], shaping);
+        <span class="self">self</span>.set_rich_text(font_system, [(text, attrs)], attrs, shaping);
     }
 
     <span class="doccomment">/// Set text of buffer, using an iterator of styled spans (pairs of text and attributes)
@@ -1596,6 +1621,7 @@
     ///         (&quot;hello, &quot;, attrs),
     ///         (&quot;cosmic\ntext&quot;, attrs.family(Family::Monospace)),
     ///     ],
+    ///     attrs,
     ///     Shaping::Advanced,
     /// );
     /// ```
@@ -1603,13 +1629,14 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         font_system: <span class="kw-2">&amp;mut </span>FontSystem,
         spans: I,
+        default_attrs: Attrs,
         shaping: Shaping,
     ) <span class="kw">where
         </span>I: IntoIterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span>str, Attrs&lt;<span class="lifetime">&#39;r</span>&gt;)&gt;,
     {
         <span class="self">self</span>.lines.clear();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>attrs_list = AttrsList::new(Attrs::new());
+        <span class="kw">let </span><span class="kw-2">mut </span>attrs_list = AttrsList::new(default_attrs);
         <span class="kw">let </span><span class="kw-2">mut </span>line_string = String::new();
         <span class="kw">let </span><span class="kw-2">mut </span>end = <span class="number">0</span>;
         <span class="kw">let </span>(string, spans_data): (String, Vec&lt;<span class="kw">_</span>&gt;) = spans
@@ -1638,7 +1665,7 @@
                 <span class="comment">// this is reached only if this text is empty
                 </span><span class="self">self</span>.lines.push(BufferLine::new(
                     String::new(),
-                    AttrsList::new(Attrs::new()),
+                    AttrsList::new(default_attrs),
                     shaping,
                 ));
                 <span class="kw">break</span>;
@@ -1652,7 +1679,10 @@
                 <span class="kw">let </span>text_start = line_string.len();
                 line_string.push_str(text);
                 <span class="kw">let </span>text_end = line_string.len();
-                attrs_list.add_span(text_start..text_end, <span class="kw-2">*</span>attrs);
+                <span class="comment">// Only add attrs if they don&#39;t match the defaults
+                </span><span class="kw">if </span><span class="kw-2">*</span>attrs != attrs_list.defaults() {
+                    attrs_list.add_span(text_start..text_end, <span class="kw-2">*</span>attrs);
+                }
             }
 
             <span class="comment">// we know that at the end of a line,
@@ -1667,7 +1697,7 @@
                 <span class="kw">if </span>maybe_line.is_some() {
                     <span class="comment">// finalize this line and start a new line
                     </span><span class="kw">let </span>prev_attrs_list =
-                        core::mem::replace(<span class="kw-2">&amp;mut </span>attrs_list, AttrsList::new(Attrs::new()));
+                        core::mem::replace(<span class="kw-2">&amp;mut </span>attrs_list, AttrsList::new(default_attrs));
                     <span class="kw">let </span>prev_line_string = core::mem::take(<span class="kw-2">&amp;mut </span>line_string);
                     <span class="kw">let </span>buffer_line = BufferLine::new(prev_line_string, prev_attrs_list, shaping);
                     <span class="self">self</span>.lines.push(buffer_line);
@@ -1885,6 +1915,16 @@
         <span class="self">self</span>.inner.set_size(<span class="self">self</span>.font_system, width, height);
     }
 
+    <span class="doccomment">/// Set the current [`Metrics`] and buffer dimensions at the same time
+    ///
+    /// # Panics
+    ///
+    /// Will panic if `metrics.font_size` is zero.
+    </span><span class="kw">pub fn </span>set_metrics_and_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, metrics: Metrics, width: f32, height: f32) {
+        <span class="self">self</span>.inner
+            .set_metrics_and_size(<span class="self">self</span>.font_system, metrics, width, height);
+    }
+
     <span class="doccomment">/// Set text of buffer, using provided attributes for each line by default
     </span><span class="kw">pub fn </span>set_text(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: <span class="kw-2">&amp;</span>str, attrs: Attrs, shaping: Shaping) {
         <span class="self">self</span>.inner.set_text(<span class="self">self</span>.font_system, text, attrs, shaping);
@@ -1903,14 +1943,16 @@
     ///         (&quot;hello, &quot;, attrs),
     ///         (&quot;cosmic\ntext&quot;, attrs.family(Family::Monospace)),
     ///     ],
+    ///     attrs,
     ///     Shaping::Advanced,
     /// );
     /// ```
-    </span><span class="kw">pub fn </span>set_rich_text&lt;<span class="lifetime">&#39;r</span>, <span class="lifetime">&#39;s</span>, I&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, spans: I, shaping: Shaping)
+    </span><span class="kw">pub fn </span>set_rich_text&lt;<span class="lifetime">&#39;r</span>, <span class="lifetime">&#39;s</span>, I&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, spans: I, default_attrs: Attrs, shaping: Shaping)
     <span class="kw">where
         </span>I: IntoIterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span>str, Attrs&lt;<span class="lifetime">&#39;r</span>&gt;)&gt;,
     {
-        <span class="self">self</span>.inner.set_rich_text(<span class="self">self</span>.font_system, spans, shaping);
+        <span class="self">self</span>.inner
+            .set_rich_text(<span class="self">self</span>.font_system, spans, default_attrs, shaping);
     }
 
     <span class="doccomment">/// Draw the buffer
