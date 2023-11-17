@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-6f17d22bba15001f/self_cell-1.0.1/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-cb6f1f67f1bcd037.css" id="mainThemeStyle"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="self_cell" data-themes="" data-resource-suffix="" data-rustdoc-version="1.73.0 (cc66ad468 2023-10-03)" data-channel="1.73.0" data-search-js="search-6dfdfced5eff6596.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-8c76f75bfb6bd192.css" data-theme-light-css="light-1596385f77d47ef2.css" data-theme-dark-css="dark-0a43001d3fc2282c.css" data-theme-ayu-css="ayu-fd19013d6ce078bf.css" ><script src="../../static.files/storage-db41da1a38ea3cb8.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-0795b7d26be81095.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-1596385f77d47ef2.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-0a43001d3fc2282c.css"><link rel="stylesheet" href="../../static.files/noscript-cffde32267a19fd6.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../self_cell/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-6f17d22bba15001f/self_cell-1.0.2/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-cb6f1f67f1bcd037.css" id="mainThemeStyle"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="self_cell" data-themes="" data-resource-suffix="" data-rustdoc-version="1.73.0 (cc66ad468 2023-10-03)" data-channel="1.73.0" data-search-js="search-6dfdfced5eff6596.js" data-settings-js="settings-de11bff964e9d4e5.js" data-settings-css="settings-8c76f75bfb6bd192.css" data-theme-light-css="light-1596385f77d47ef2.css" data-theme-dark-css="dark-0a43001d3fc2282c.css" data-theme-ayu-css="ayu-fd19013d6ce078bf.css" ><script src="../../static.files/storage-db41da1a38ea3cb8.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-0795b7d26be81095.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../static.files/light-1596385f77d47ef2.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../static.files/dark-0a43001d3fc2282c.css"><link rel="stylesheet" href="../../static.files/noscript-cffde32267a19fd6.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../self_cell/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -668,12 +668,6 @@
 <a href="#668" id="668">668</a>
 <a href="#669" id="669">669</a>
 <a href="#670" id="670">670</a>
-<a href="#671" id="671">671</a>
-<a href="#672" id="672">672</a>
-<a href="#673" id="673">673</a>
-<a href="#674" id="674">674</a>
-<a href="#675" id="675">675</a>
-<a href="#676" id="676">676</a>
 </pre></div><pre class="rust"><code><span class="doccomment">//! # Overview
 //!
 //! `self_cell` provides one macro-rules macro: [`self_cell`]. With this macro
@@ -939,7 +933,7 @@
 ///
 ///   * **covariant**: This generates the direct reference accessor function
 ///     `borrow_dependent`. This is only safe to do if this compiles `fn
-///     _assert_covariance&lt;&#39;x: &#39;y, &#39;y&gt;(x: $Dependent&lt;&#39;x&gt;) -&gt; $Dependent&lt;&#39;y&gt;
+///     _assert_covariance&lt;&#39;x: &#39;y, &#39;y&gt;(x: &amp;&#39;y $Dependent&lt;&#39;x&gt;) -&gt; &amp;&#39;y $Dependent&lt;&#39;y&gt;
 ///     {x}`. Otherwise you could choose a lifetime that is too short for types
 ///     with interior mutability like `Cell`, which can lead to UB in safe code.
 ///     Which would violate the promise of this library that it is safe-to-use.
@@ -1046,9 +1040,7 @@
 
                 <span class="kw">let </span>joined_void_ptr = NonNull::new(<span class="macro-nonterminal">$crate::alloc::alloc::alloc</span>(layout)).unwrap();
 
-                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = core::mem::transmute::&lt;NonNull&lt;u8&gt;, NonNull&lt;JoinedCell&gt;&gt;(
-                    joined_void_ptr
-                );
+                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = joined_void_ptr.cast::&lt;JoinedCell&gt;();
 
                 <span class="kw">let </span>(owner_ptr, dependent_ptr) = JoinedCell::_field_pointers(joined_ptr.as_ptr());
 
@@ -1093,9 +1085,7 @@
 
                 <span class="kw">let </span>joined_void_ptr = NonNull::new(<span class="macro-nonterminal">$crate::alloc::alloc::alloc</span>(layout)).unwrap();
 
-                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = core::mem::transmute::&lt;NonNull&lt;u8&gt;, NonNull&lt;JoinedCell&gt;&gt;(
-                    joined_void_ptr
-                );
+                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = joined_void_ptr.cast::&lt;JoinedCell&gt;();
 
                 <span class="kw">let </span>(owner_ptr, dependent_ptr) = JoinedCell::_field_pointers(joined_ptr.as_ptr());
 
@@ -1144,9 +1134,7 @@
 
                 <span class="kw">let </span>joined_void_ptr = NonNull::new(<span class="macro-nonterminal">$crate::alloc::alloc::alloc</span>(layout)).unwrap();
 
-                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = core::mem::transmute::&lt;NonNull&lt;u8&gt;, NonNull&lt;JoinedCell&gt;&gt;(
-                    joined_void_ptr
-                );
+                <span class="kw">let </span><span class="kw-2">mut </span>joined_ptr = joined_void_ptr.cast::&lt;JoinedCell&gt;();
 
                 <span class="kw">let </span>(owner_ptr, dependent_ptr) = JoinedCell::_field_pointers(joined_ptr.as_ptr());
 
@@ -1259,7 +1247,7 @@
     (covariant, <span class="macro-nonterminal">$Vis</span>:vis, <span class="macro-nonterminal">$Dependent</span>:ident) =&gt; {
         <span class="doccomment">/// Borrows dependent.
         </span><span class="macro-nonterminal">$Vis </span><span class="kw">fn </span>borrow_dependent&lt;<span class="lifetime">&#39;_q</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;_q </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;_q </span><span class="macro-nonterminal">$Dependent</span>&lt;<span class="lifetime">&#39;_q</span>&gt; {
-            <span class="kw">fn </span>_assert_covariance&lt;<span class="lifetime">&#39;x</span>: <span class="lifetime">&#39;y</span>, <span class="lifetime">&#39;y</span>&gt;(x: <span class="macro-nonterminal">$Dependent</span>&lt;<span class="lifetime">&#39;x</span>&gt;) -&gt; <span class="macro-nonterminal">$Dependent</span>&lt;<span class="lifetime">&#39;y</span>&gt; {
+            <span class="kw">fn </span>_assert_covariance&lt;<span class="lifetime">&#39;x</span>: <span class="lifetime">&#39;y</span>, <span class="lifetime">&#39;y</span>&gt;(x: <span class="kw-2">&amp;</span><span class="lifetime">&#39;y </span><span class="macro-nonterminal">$Dependent</span>&lt;<span class="lifetime">&#39;x</span>&gt;) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;y </span><span class="macro-nonterminal">$Dependent</span>&lt;<span class="lifetime">&#39;y</span>&gt; {
                 <span class="comment">//  This function only compiles for covariant types.
                 </span>x <span class="comment">// Change the macro invocation to not_covariant.
             </span>}
