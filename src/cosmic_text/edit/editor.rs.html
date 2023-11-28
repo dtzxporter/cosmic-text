@@ -1092,77 +1092,18 @@
 <a href="#1092" id="1092">1092</a>
 <a href="#1093" id="1093">1093</a>
 <a href="#1094" id="1094">1094</a>
-<a href="#1095" id="1095">1095</a>
-<a href="#1096" id="1096">1096</a>
-<a href="#1097" id="1097">1097</a>
-<a href="#1098" id="1098">1098</a>
-<a href="#1099" id="1099">1099</a>
-<a href="#1100" id="1100">1100</a>
-<a href="#1101" id="1101">1101</a>
-<a href="#1102" id="1102">1102</a>
-<a href="#1103" id="1103">1103</a>
-<a href="#1104" id="1104">1104</a>
-<a href="#1105" id="1105">1105</a>
-<a href="#1106" id="1106">1106</a>
-<a href="#1107" id="1107">1107</a>
-<a href="#1108" id="1108">1108</a>
-<a href="#1109" id="1109">1109</a>
-<a href="#1110" id="1110">1110</a>
-<a href="#1111" id="1111">1111</a>
-<a href="#1112" id="1112">1112</a>
-<a href="#1113" id="1113">1113</a>
-<a href="#1114" id="1114">1114</a>
-<a href="#1115" id="1115">1115</a>
-<a href="#1116" id="1116">1116</a>
-<a href="#1117" id="1117">1117</a>
-<a href="#1118" id="1118">1118</a>
-<a href="#1119" id="1119">1119</a>
-<a href="#1120" id="1120">1120</a>
-<a href="#1121" id="1121">1121</a>
-<a href="#1122" id="1122">1122</a>
-<a href="#1123" id="1123">1123</a>
-<a href="#1124" id="1124">1124</a>
-<a href="#1125" id="1125">1125</a>
-<a href="#1126" id="1126">1126</a>
-<a href="#1127" id="1127">1127</a>
-<a href="#1128" id="1128">1128</a>
-<a href="#1129" id="1129">1129</a>
-<a href="#1130" id="1130">1130</a>
-<a href="#1131" id="1131">1131</a>
-<a href="#1132" id="1132">1132</a>
-<a href="#1133" id="1133">1133</a>
-<a href="#1134" id="1134">1134</a>
-<a href="#1135" id="1135">1135</a>
-<a href="#1136" id="1136">1136</a>
-<a href="#1137" id="1137">1137</a>
-<a href="#1138" id="1138">1138</a>
-<a href="#1139" id="1139">1139</a>
-<a href="#1140" id="1140">1140</a>
-<a href="#1141" id="1141">1141</a>
-<a href="#1142" id="1142">1142</a>
-<a href="#1143" id="1143">1143</a>
-<a href="#1144" id="1144">1144</a>
-<a href="#1145" id="1145">1145</a>
-<a href="#1146" id="1146">1146</a>
-<a href="#1147" id="1147">1147</a>
-<a href="#1148" id="1148">1148</a>
-<a href="#1149" id="1149">1149</a>
-<a href="#1150" id="1150">1150</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::string::{String, ToString};
-<span class="kw">use </span>core::{
-    cmp::{<span class="self">self</span>, Ordering},
-    iter::once,
-};
+<span class="kw">use </span>core::{cmp, iter::once};
 <span class="kw">use </span>unicode_segmentation::UnicodeSegmentation;
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::Color;
 <span class="kw">use crate</span>::{
     Action, Affinity, AttrsList, Buffer, BufferLine, Change, ChangeItem, Cursor, Edit, FontSystem,
-    LayoutCursor, Shaping,
+    LayoutCursor, Selection, Shaping,
 };
 
 <span class="doccomment">/// A wrapper of [`Buffer`] for easy editing
@@ -1171,7 +1112,7 @@
     buffer: Buffer,
     cursor: Cursor,
     cursor_x_opt: <span class="prelude-ty">Option</span>&lt;i32&gt;,
-    select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;,
+    selection: Selection,
     cursor_moved: bool,
     auto_indent: bool,
     tab_width: u16,
@@ -1185,7 +1126,7 @@
             buffer,
             cursor: Cursor::default(),
             cursor_x_opt: <span class="prelude-val">None</span>,
-            select_opt: <span class="prelude-val">None</span>,
+            selection: Selection::None,
             cursor_moved: <span class="bool-val">false</span>,
             auto_indent: <span class="bool-val">false</span>,
             tab_width: <span class="number">4</span>,
@@ -1399,13 +1340,13 @@
         }
     }
 
-    <span class="kw">fn </span>select_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Cursor&gt; {
-        <span class="self">self</span>.select_opt
+    <span class="kw">fn </span>selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Selection {
+        <span class="self">self</span>.selection
     }
 
-    <span class="kw">fn </span>set_select_opt(<span class="kw-2">&amp;mut </span><span class="self">self</span>, select_opt: <span class="prelude-ty">Option</span>&lt;Cursor&gt;) {
-        <span class="kw">if </span><span class="self">self</span>.select_opt != select_opt {
-            <span class="self">self</span>.select_opt = select_opt;
+    <span class="kw">fn </span>set_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, selection: Selection) {
+        <span class="kw">if </span><span class="self">self</span>.selection != selection {
+            <span class="self">self</span>.selection = selection;
             <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
         }
     }
@@ -1443,21 +1384,7 @@
     }
 
     <span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
-        <span class="kw">let </span>select = <span class="self">self</span>.select_opt<span class="question-mark">?</span>;
-
-        <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
-            cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
-            cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
-            cmp::Ordering::Equal =&gt; {
-                <span class="comment">/* select.line == self.cursor.line */
-                </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
-                    (select, <span class="self">self</span>.cursor)
-                } <span class="kw">else </span>{
-                    <span class="comment">/* select.index &gt;= self.cursor.index */
-                    </span>(<span class="self">self</span>.cursor, select)
-                }
-            }
-        };
+        <span class="kw">let </span>(start, end) = <span class="self">self</span>.selection_bounds()<span class="question-mark">?</span>;
 
         <span class="kw">let </span><span class="kw-2">mut </span>selection = String::new();
         <span class="comment">// Take the selection from the first line
@@ -1487,23 +1414,9 @@
     }
 
     <span class="kw">fn </span>delete_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; bool {
-        <span class="kw">let </span>select = <span class="kw">match </span><span class="self">self</span>.select_opt.take() {
+        <span class="kw">let </span>(start, end) = <span class="kw">match </span><span class="self">self</span>.selection_bounds() {
             <span class="prelude-val">Some</span>(some) =&gt; some,
             <span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="bool-val">false</span>,
-        };
-
-        <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
-            cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
-            cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
-            cmp::Ordering::Equal =&gt; {
-                <span class="comment">/* select.line == self.cursor.line */
-                </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
-                    (select, <span class="self">self</span>.cursor)
-                } <span class="kw">else </span>{
-                    <span class="comment">/* select.index &gt;= self.cursor.index */
-                    </span>(<span class="self">self</span>.cursor, select)
-                }
-            }
         };
 
         <span class="comment">// Reset cursor to start of selection
@@ -1725,23 +1638,25 @@
                 <span class="comment">// TODO more efficient
                 </span><span class="kw">let </span>lines = px / <span class="self">self</span>.buffer.metrics().line_height <span class="kw">as </span>i32;
                 <span class="kw">match </span>lines.cmp(<span class="kw-2">&amp;</span><span class="number">0</span>) {
-                    Ordering::Less =&gt; {
+                    cmp::Ordering::Less =&gt; {
                         <span class="kw">for _ in </span><span class="number">0</span>..-lines {
                             <span class="self">self</span>.action(font_system, Action::Up);
                         }
                     }
-                    Ordering::Greater =&gt; {
+                    cmp::Ordering::Greater =&gt; {
                         <span class="kw">for _ in </span><span class="number">0</span>..lines {
                             <span class="self">self</span>.action(font_system, Action::Down);
                         }
                     }
-                    Ordering::Equal =&gt; {}
+                    cmp::Ordering::Equal =&gt; {}
                 }
             }
             Action::Escape =&gt; {
-                <span class="kw">if </span><span class="self">self</span>.select_opt.take().is_some() {
-                    <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+                <span class="kw">match </span><span class="self">self</span>.selection {
+                    Selection::None =&gt; {}
+                    <span class="kw">_ </span>=&gt; <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>),
                 }
+                <span class="self">self</span>.selection = Selection::None;
             }
             Action::Insert(character) =&gt; {
                 <span class="kw">if </span>character.is_control() &amp;&amp; ![<span class="string">&#39;\t&#39;</span>, <span class="string">&#39;\n&#39;</span>, <span class="string">&#39;\u{92}&#39;</span>].contains(<span class="kw-2">&amp;</span>character) {
@@ -1838,20 +1753,8 @@
             }
             Action::Indent =&gt; {
                 <span class="comment">// Get start and end of selection
-                </span><span class="kw">let </span>(start, end) = <span class="kw">match </span><span class="self">self</span>.select_opt {
-                    <span class="prelude-val">Some</span>(select) =&gt; <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
-                        cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
-                        cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
-                        cmp::Ordering::Equal =&gt; {
-                            <span class="comment">/* select.line == self.cursor.line */
-                            </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
-                                (select, <span class="self">self</span>.cursor)
-                            } <span class="kw">else </span>{
-                                <span class="comment">/* select.index &gt;= self.cursor.index */
-                                </span>(<span class="self">self</span>.cursor, select)
-                            }
-                        }
-                    },
+                </span><span class="kw">let </span>(start, end) = <span class="kw">match </span><span class="self">self</span>.selection_bounds() {
+                    <span class="prelude-val">Some</span>(some) =&gt; some,
                     <span class="prelude-val">None </span>=&gt; (<span class="self">self</span>.cursor, <span class="self">self</span>.cursor),
                 };
 
@@ -1896,9 +1799,17 @@
                     }
 
                     <span class="comment">// Adjust selection
-                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>select) = <span class="self">self</span>.select_opt {
-                        <span class="kw">if </span>select.line == line_i &amp;&amp; select.index &gt;= after_whitespace {
-                            select.index += required_indent;
+                    </span><span class="kw">match </span><span class="self">self</span>.selection {
+                        Selection::None =&gt; {}
+                        Selection::Normal(<span class="kw-2">ref mut </span>select) =&gt; {
+                            <span class="kw">if </span>select.line == line_i &amp;&amp; select.index &gt;= after_whitespace {
+                                select.index += required_indent;
+                            }
+                        }
+                        Selection::Line(<span class="kw-2">ref mut </span>select) =&gt; {
+                            <span class="kw">if </span>select.line == line_i &amp;&amp; select.index &gt;= after_whitespace {
+                                select.index += required_indent;
+                            }
                         }
                     }
 
@@ -1908,20 +1819,8 @@
             }
             Action::Unindent =&gt; {
                 <span class="comment">// Get start and end of selection
-                </span><span class="kw">let </span>(start, end) = <span class="kw">match </span><span class="self">self</span>.select_opt {
-                    <span class="prelude-val">Some</span>(select) =&gt; <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
-                        cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
-                        cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
-                        cmp::Ordering::Equal =&gt; {
-                            <span class="comment">/* select.line == self.cursor.line */
-                            </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
-                                (select, <span class="self">self</span>.cursor)
-                            } <span class="kw">else </span>{
-                                <span class="comment">/* select.index &gt;= self.cursor.index */
-                                </span>(<span class="self">self</span>.cursor, select)
-                            }
-                        }
-                    },
+                </span><span class="kw">let </span>(start, end) = <span class="kw">match </span><span class="self">self</span>.selection_bounds() {
+                    <span class="prelude-val">Some</span>(some) =&gt; some,
                     <span class="prelude-val">None </span>=&gt; (<span class="self">self</span>.cursor, <span class="self">self</span>.cursor),
                 };
 
@@ -1964,9 +1863,12 @@
                     }
 
                     <span class="comment">// Adjust selection
-                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>select) = <span class="self">self</span>.select_opt {
-                        <span class="kw">if </span>select.line == line_i &amp;&amp; select.index &gt; last_indent {
-                            select.index -= after_whitespace - last_indent;
+                    </span><span class="kw">match </span><span class="self">self</span>.selection {
+                        Selection::None =&gt; {}
+                        Selection::Normal(<span class="kw-2">ref mut </span>select) | Selection::Line(<span class="kw-2">ref mut </span>select) =&gt; {
+                            <span class="kw">if </span>select.line == line_i &amp;&amp; select.index &gt; last_indent {
+                                select.index -= after_whitespace - last_indent;
+                            }
                         }
                     }
 
@@ -1975,7 +1877,7 @@
                 }
             }
             Action::Click { x, y } =&gt; {
-                <span class="self">self</span>.select_opt = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.set_selection(Selection::None);
 
                 <span class="kw">if let </span><span class="prelude-val">Some</span>(new_cursor) = <span class="self">self</span>.buffer.hit(x <span class="kw">as </span>f32, y <span class="kw">as </span>f32) {
                     <span class="kw">if </span>new_cursor != <span class="self">self</span>.cursor {
@@ -1987,8 +1889,8 @@
                 }
             }
             Action::Drag { x, y } =&gt; {
-                <span class="kw">if </span><span class="self">self</span>.select_opt.is_none() {
-                    <span class="self">self</span>.select_opt = <span class="prelude-val">Some</span>(<span class="self">self</span>.cursor);
+                <span class="kw">if </span><span class="self">self</span>.selection == Selection::None {
+                    <span class="self">self</span>.selection = Selection::Normal(<span class="self">self</span>.cursor);
                     <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
                 }
 
@@ -2162,21 +2064,7 @@
             </span>};
 
             <span class="comment">// Highlight selection (TODO: HIGHLIGHT COLOR!)
-            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(select) = <span class="self">self</span>.select_opt {
-                <span class="kw">let </span>(start, end) = <span class="kw">match </span>select.line.cmp(<span class="kw-2">&amp;</span><span class="self">self</span>.cursor.line) {
-                    cmp::Ordering::Greater =&gt; (<span class="self">self</span>.cursor, select),
-                    cmp::Ordering::Less =&gt; (select, <span class="self">self</span>.cursor),
-                    cmp::Ordering::Equal =&gt; {
-                        <span class="comment">/* select.line == self.cursor.line */
-                        </span><span class="kw">if </span>select.index &lt; <span class="self">self</span>.cursor.index {
-                            (select, <span class="self">self</span>.cursor)
-                        } <span class="kw">else </span>{
-                            <span class="comment">/* select.index &gt;= self.cursor.index */
-                            </span>(<span class="self">self</span>.cursor, select)
-                        }
-                    }
-                };
-
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>((start, end)) = <span class="self">self</span>.selection_bounds() {
                 <span class="kw">if </span>line_i &gt;= start.line &amp;&amp; line_i &lt;= end.line {
                     <span class="kw">let </span><span class="kw-2">mut </span>range_opt = <span class="prelude-val">None</span>;
                     <span class="kw">for </span>glyph <span class="kw">in </span>run.glyphs.iter() {
