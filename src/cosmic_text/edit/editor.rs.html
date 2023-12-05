@@ -1089,12 +1089,6 @@
 <a href="#1089" id="1089">1089</a>
 <a href="#1090" id="1090">1090</a>
 <a href="#1091" id="1091">1091</a>
-<a href="#1092" id="1092">1092</a>
-<a href="#1093" id="1093">1093</a>
-<a href="#1094" id="1094">1094</a>
-<a href="#1095" id="1095">1095</a>
-<a href="#1096" id="1096">1096</a>
-<a href="#1097" id="1097">1097</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -1168,6 +1162,72 @@
             <span class="self">self</span>.cursor.index = new_index;
             <span class="self">self</span>.cursor.affinity = new_affinity;
             <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+        }
+    }
+}
+
+<span class="kw">impl </span>Edit <span class="kw">for </span>Editor {
+    <span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.buffer
+    }
+
+    <span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer
+    }
+
+    <span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor {
+        <span class="self">self</span>.cursor
+    }
+
+    <span class="kw">fn </span>set_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cursor: Cursor) {
+        <span class="kw">if </span><span class="self">self</span>.cursor != cursor {
+            <span class="self">self</span>.cursor = cursor;
+            <span class="self">self</span>.cursor_moved = <span class="bool-val">true</span>;
+            <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
+            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+        }
+    }
+
+    <span class="kw">fn </span>selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Selection {
+        <span class="self">self</span>.selection
+    }
+
+    <span class="kw">fn </span>set_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, selection: Selection) {
+        <span class="kw">if </span><span class="self">self</span>.selection != selection {
+            <span class="self">self</span>.selection = selection;
+            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+        }
+    }
+
+    <span class="kw">fn </span>auto_indent(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.auto_indent
+    }
+
+    <span class="kw">fn </span>set_auto_indent(<span class="kw-2">&amp;mut </span><span class="self">self</span>, auto_indent: bool) {
+        <span class="self">self</span>.auto_indent = auto_indent;
+    }
+
+    <span class="kw">fn </span>tab_width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
+        <span class="self">self</span>.tab_width
+    }
+
+    <span class="kw">fn </span>set_tab_width(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tab_width: u16) {
+        <span class="comment">// A tab width of 0 is not allowed
+        </span><span class="kw">if </span>tab_width == <span class="number">0 </span>{
+            <span class="kw">return</span>;
+        }
+        <span class="kw">if </span><span class="self">self</span>.tab_width != tab_width {
+            <span class="self">self</span>.tab_width = tab_width;
+            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
+        }
+    }
+
+    <span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem) {
+        <span class="kw">if </span><span class="self">self</span>.cursor_moved {
+            <span class="self">self</span>.buffer.shape_until_cursor(font_system, <span class="self">self</span>.cursor);
+            <span class="self">self</span>.cursor_moved = <span class="bool-val">false</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.buffer.shape_until_scroll(font_system);
         }
     }
 
@@ -1319,72 +1379,6 @@
 
         cursor
     }
-}
-
-<span class="kw">impl </span>Edit <span class="kw">for </span>Editor {
-    <span class="kw">fn </span>buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Buffer {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.buffer
-    }
-
-    <span class="kw">fn </span>buffer_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Buffer {
-        <span class="kw-2">&amp;mut </span><span class="self">self</span>.buffer
-    }
-
-    <span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor {
-        <span class="self">self</span>.cursor
-    }
-
-    <span class="kw">fn </span>set_cursor(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cursor: Cursor) {
-        <span class="kw">if </span><span class="self">self</span>.cursor != cursor {
-            <span class="self">self</span>.cursor = cursor;
-            <span class="self">self</span>.cursor_moved = <span class="bool-val">true</span>;
-            <span class="self">self</span>.cursor_x_opt = <span class="prelude-val">None</span>;
-            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
-        }
-    }
-
-    <span class="kw">fn </span>selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Selection {
-        <span class="self">self</span>.selection
-    }
-
-    <span class="kw">fn </span>set_selection(<span class="kw-2">&amp;mut </span><span class="self">self</span>, selection: Selection) {
-        <span class="kw">if </span><span class="self">self</span>.selection != selection {
-            <span class="self">self</span>.selection = selection;
-            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
-        }
-    }
-
-    <span class="kw">fn </span>auto_indent(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.auto_indent
-    }
-
-    <span class="kw">fn </span>set_auto_indent(<span class="kw-2">&amp;mut </span><span class="self">self</span>, auto_indent: bool) {
-        <span class="self">self</span>.auto_indent = auto_indent;
-    }
-
-    <span class="kw">fn </span>tab_width(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u16 {
-        <span class="self">self</span>.tab_width
-    }
-
-    <span class="kw">fn </span>set_tab_width(<span class="kw-2">&amp;mut </span><span class="self">self</span>, tab_width: u16) {
-        <span class="comment">// A tab width of 0 is not allowed
-        </span><span class="kw">if </span>tab_width == <span class="number">0 </span>{
-            <span class="kw">return</span>;
-        }
-        <span class="kw">if </span><span class="self">self</span>.tab_width != tab_width {
-            <span class="self">self</span>.tab_width = tab_width;
-            <span class="self">self</span>.buffer.set_redraw(<span class="bool-val">true</span>);
-        }
-    }
-
-    <span class="kw">fn </span>shape_as_needed(<span class="kw-2">&amp;mut </span><span class="self">self</span>, font_system: <span class="kw-2">&amp;mut </span>FontSystem) {
-        <span class="kw">if </span><span class="self">self</span>.cursor_moved {
-            <span class="self">self</span>.buffer.shape_until_cursor(font_system, <span class="self">self</span>.cursor);
-            <span class="self">self</span>.cursor_moved = <span class="bool-val">false</span>;
-        } <span class="kw">else </span>{
-            <span class="self">self</span>.buffer.shape_until_scroll(font_system);
-        }
-    }
 
     <span class="kw">fn </span>copy_selection(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
         <span class="kw">let </span>(start, end) = <span class="self">self</span>.selection_bounds()<span class="question-mark">?</span>;
@@ -1433,12 +1427,6 @@
 
         <span class="bool-val">true
     </span>}
-
-    <span class="kw">fn </span>insert_string(<span class="kw-2">&amp;mut </span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>str, attrs_list: <span class="prelude-ty">Option</span>&lt;AttrsList&gt;) {
-        <span class="self">self</span>.delete_selection();
-        <span class="kw">let </span>new_cursor = <span class="self">self</span>.insert_at(<span class="self">self</span>.cursor, data, attrs_list);
-        <span class="self">self</span>.set_cursor(new_cursor);
-    }
 
     <span class="kw">fn </span>apply_change(<span class="kw-2">&amp;mut </span><span class="self">self</span>, change: <span class="kw-2">&amp;</span>Change) -&gt; bool {
         <span class="comment">// Cannot apply changes if there is a pending change
