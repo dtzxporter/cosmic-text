@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/font/fallback/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-fa3bb1812debf86c.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.74.1 (a28077b28 2023-12-04)" data-channel="1.74.1" data-search-js="search-8be46b629f5f14a8.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-c5bd66d33317d69f.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../../cosmic_text/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/font/fallback/mod.rs`."><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -212,15 +212,76 @@
 <a href="#212" id="212">212</a>
 <a href="#213" id="213">213</a>
 <a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
+<a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
+<a href="#235" id="235">235</a>
+<a href="#236" id="236">236</a>
+<a href="#237" id="237">237</a>
+<a href="#238" id="238">238</a>
+<a href="#239" id="239">239</a>
+<a href="#240" id="240">240</a>
+<a href="#241" id="241">241</a>
+<a href="#242" id="242">242</a>
+<a href="#243" id="243">243</a>
+<a href="#244" id="244">244</a>
+<a href="#245" id="245">245</a>
+<a href="#246" id="246">246</a>
+<a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
+<a href="#252" id="252">252</a>
+<a href="#253" id="253">253</a>
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
-</span><span class="kw">use </span>alloc::sync::Arc;
+</span><span class="kw">use </span>alloc::collections::BTreeSet;
+<span class="kw">use </span>alloc::sync::Arc;
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::vec::Vec;
 <span class="kw">use </span>fontdb::Family;
 <span class="kw">use </span>unicode_script::Script;
 
-<span class="kw">use crate</span>::{Font, FontSystem, ShapePlanCache};
+<span class="kw">use crate</span>::{Font, FontMatchKey, FontSystem, ShapePlanCache};
 
 <span class="kw">use </span><span class="self">self</span>::platform::<span class="kw-2">*</span>;
 
@@ -245,10 +306,21 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;warn_on_missing_glyphs&quot;</span>)]
 </span><span class="kw">use </span>log::warn <span class="kw">as </span>missing_warn;
 
+<span class="comment">// Match on lowest weight_offset, then script_non_matches
+// Default font gets None for both `weight_offset` and `script_non_matches`, and thus, it is
+// always the first to be popped from the set.
+</span><span class="attr">#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
+</span><span class="kw">struct </span>MonospaceFallbackInfo {
+    weight_offset: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+    script_non_matches: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    id: fontdb::ID,
+}
+
 <span class="kw">pub struct </span>FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
     font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>FontSystem,
-    font_ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[fontdb::ID],
+    font_match_keys: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[FontMatchKey],
     default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Family&lt;<span class="lifetime">&#39;a</span>&gt;],
+    monospace_fallbacks: BTreeSet&lt;MonospaceFallbackInfo&gt;,
     default_i: usize,
     scripts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Script],
     script_i: (usize, usize),
@@ -260,14 +332,15 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">pub fn </span>new(
         font_system: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>FontSystem,
-        font_ids: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[fontdb::ID],
+        font_match_keys: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[FontMatchKey],
         default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Family&lt;<span class="lifetime">&#39;a</span>&gt;],
         scripts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Script],
     ) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             font_system,
-            font_ids,
+            font_match_keys,
             default_families,
+            monospace_fallbacks: BTreeSet::new(),
             default_i: <span class="number">0</span>,
             scripts,
             script_i: (<span class="number">0</span>, <span class="number">0</span>),
@@ -290,7 +363,7 @@
                 <span class="string">&quot;Failed to find preset fallback for {:?} locale &#39;{}&#39;, used &#39;{}&#39;: &#39;{}&#39;&quot;</span>,
                 <span class="self">self</span>.scripts,
                 <span class="self">self</span>.font_system.locale(),
-                <span class="self">self</span>.face_name(<span class="self">self</span>.font_ids[<span class="self">self</span>.other_i - <span class="number">1</span>]),
+                <span class="self">self</span>.face_name(<span class="self">self</span>.font_match_keys[<span class="self">self</span>.other_i - <span class="number">1</span>].id),
                 word
             );
         } <span class="kw">else if </span>!<span class="self">self</span>.scripts.is_empty() &amp;&amp; <span class="self">self</span>.common_i &gt; <span class="number">0 </span>{
@@ -333,34 +406,81 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Iterator <span class="kw">for </span>FontFallbackIter&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">type </span>Item = Arc&lt;Font&gt;;
     <span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(fallback_info) = <span class="self">self</span>.monospace_fallbacks.pop_first() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(fallback_info.id) {
+                <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+            }
+        }
+
+        <span class="kw">let </span>font_match_keys_iter = |is_mono| {
+            <span class="self">self</span>.font_match_keys
+                .iter()
+                .filter(<span class="kw">move </span>|m_key| m_key.weight_offset == <span class="number">0 </span>|| is_mono)
+        };
+
         <span class="kw">while </span><span class="self">self</span>.default_i &lt; <span class="self">self</span>.default_families.len() {
             <span class="self">self</span>.default_i += <span class="number">1</span>;
-            <span class="kw">let </span><span class="kw-2">mut </span>monospace_fallback = <span class="prelude-val">None</span>;
-            <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
+            <span class="kw">let </span>is_mono = <span class="self">self</span>.default_families[<span class="self">self</span>.default_i - <span class="number">1</span>] == <span class="kw-2">&amp;</span>Family::Monospace;
+
+            <span class="kw">for </span>m_key <span class="kw">in </span>font_match_keys_iter(is_mono) {
                 <span class="kw">let </span>default_family = <span class="self">self
                     </span>.font_system
                     .db()
                     .family_name(<span class="self">self</span>.default_families[<span class="self">self</span>.default_i - <span class="number">1</span>]);
-                <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, default_family) {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
-                        <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                <span class="kw">if </span><span class="self">self</span>.face_contains_family(m_key.id, default_family) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
+                        <span class="kw">if </span>!is_mono {
+                            <span class="kw">return </span><span class="prelude-val">Some</span>(font);
+                        } <span class="kw">else if </span>m_key.weight_offset == <span class="number">0 </span>{
+                            <span class="comment">// Default font
+                            </span><span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
+                                weight_offset: <span class="prelude-val">None</span>,
+                                script_non_matches: <span class="prelude-val">None</span>,
+                                id: m_key.id,
+                            };
+                            <span class="macro">assert_eq!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info), <span class="bool-val">true</span>);
+                        }
                     }
                 }
                 <span class="comment">// Set a monospace fallback if Monospace family is not found
-                </span><span class="kw">if </span><span class="self">self</span>.default_families[<span class="self">self</span>.default_i - <span class="number">1</span>] == <span class="kw-2">&amp;</span>Family::Monospace
-                    &amp;&amp; monospace_fallback.is_none()
-                {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(face_info) = <span class="self">self</span>.font_system.db().face(<span class="kw-2">*</span>id) {
+                </span><span class="kw">if </span>is_mono {
+                    <span class="kw">let </span>script_tags = <span class="self">self
+                        </span>.scripts
+                        .iter()
+                        .filter_map(|script| {
+                            <span class="kw">let </span>script_as_lower = script.short_name().to_lowercase();
+                            &lt;[u8; <span class="number">4</span>]&gt;::try_from(script_as_lower.as_bytes()).ok()
+                        })
+                        .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(face_info) = <span class="self">self</span>.font_system.db().face(m_key.id) {
                         <span class="comment">// Don&#39;t use emoji fonts as Monospace
                         </span><span class="kw">if </span>face_info.monospaced &amp;&amp; !face_info.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>) {
-                            monospace_fallback = <span class="prelude-val">Some</span>(id);
+                            <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
+                                <span class="kw">let </span>script_non_matches = <span class="self">self</span>.scripts.len()
+                                    - script_tags
+                                        .iter()
+                                        .filter(|&amp;&amp;script_tag| {
+                                            font.scripts()
+                                                .iter()
+                                                .any(|<span class="kw-2">&amp;</span>tag_bytes| tag_bytes == script_tag)
+                                        })
+                                        .count();
+
+                                <span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
+                                    weight_offset: <span class="prelude-val">Some</span>(m_key.weight_offset),
+                                    script_non_matches: <span class="prelude-val">Some</span>(script_non_matches),
+                                    id: m_key.id,
+                                };
+                                <span class="macro">assert_eq!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info), <span class="bool-val">true</span>);
+                            }
                         }
                     }
                 }
             }
             <span class="comment">// If default family is Monospace fallback to first monospaced font
-            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(id) = monospace_fallback {
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(fallback_info) = <span class="self">self</span>.monospace_fallbacks.pop_first() {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(fallback_info.id) {
                     <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                 }
             }
@@ -373,9 +493,9 @@
             <span class="kw">while </span><span class="self">self</span>.script_i.<span class="number">1 </span>&lt; script_families.len() {
                 <span class="kw">let </span>script_family = script_families[<span class="self">self</span>.script_i.<span class="number">1</span>];
                 <span class="self">self</span>.script_i.<span class="number">1 </span>+= <span class="number">1</span>;
-                <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
-                    <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, script_family) {
-                        <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+                <span class="kw">for </span>m_key <span class="kw">in </span>font_match_keys_iter(<span class="bool-val">false</span>) {
+                    <span class="kw">if </span><span class="self">self</span>.face_contains_family(m_key.id, script_family) {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
                             <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                         }
                     }
@@ -396,9 +516,9 @@
         <span class="kw">while </span><span class="self">self</span>.common_i &lt; common_families.len() {
             <span class="kw">let </span>common_family = common_families[<span class="self">self</span>.common_i];
             <span class="self">self</span>.common_i += <span class="number">1</span>;
-            <span class="kw">for </span>id <span class="kw">in </span><span class="self">self</span>.font_ids.iter() {
-                <span class="kw">if </span><span class="self">self</span>.face_contains_family(<span class="kw-2">*</span>id, common_family) {
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(<span class="kw-2">*</span>id) {
+            <span class="kw">for </span>m_key <span class="kw">in </span>font_match_keys_iter(<span class="bool-val">false</span>) {
+                <span class="kw">if </span><span class="self">self</span>.face_contains_family(m_key.id, common_family) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
                         <span class="kw">return </span><span class="prelude-val">Some</span>(font);
                     }
                 }
@@ -409,8 +529,8 @@
         <span class="comment">//TODO: do we need to do this?
         //TODO: do not evaluate fonts more than once!
         </span><span class="kw">let </span>forbidden_families = forbidden_fallback();
-        <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.font_ids.len() {
-            <span class="kw">let </span>id = <span class="self">self</span>.font_ids[<span class="self">self</span>.other_i];
+        <span class="kw">while </span><span class="self">self</span>.other_i &lt; <span class="self">self</span>.font_match_keys.len() {
+            <span class="kw">let </span>id = <span class="self">self</span>.font_match_keys[<span class="self">self</span>.other_i].id;
             <span class="self">self</span>.other_i += <span class="number">1</span>;
             <span class="kw">if </span>forbidden_families
                 .iter()

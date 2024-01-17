@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer_line.rs`."><title>buffer_line.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-fa3bb1812debf86c.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.74.1 (a28077b28 2023-12-04)" data-channel="1.74.1" data-search-js="search-8be46b629f5f14a8.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-c5bd66d33317d69f.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../cosmic_text/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/buffer_line.rs`."><title>buffer_line.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cosmic_text" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -239,22 +239,23 @@
 <a href="#239" id="239">239</a>
 <a href="#240" id="240">240</a>
 <a href="#241" id="241">241</a>
+<a href="#242" id="242">242</a>
 </pre></div><pre class="rust"><code><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">use </span>alloc::{string::String, vec::Vec};
 
 <span class="kw">use crate</span>::{Align, AttrsList, FontSystem, LayoutLine, ShapeBuffer, ShapeLine, Shaping, Wrap};
 
 <span class="doccomment">/// A line (or paragraph) of text that is shaped and laid out
-</span><span class="attr">#[derive(Debug)]
+</span><span class="attr">#[derive(Clone, Debug)]
 </span><span class="kw">pub struct </span>BufferLine {
     <span class="comment">//TODO: make this not pub(crate)
     </span>text: String,
     attrs_list: AttrsList,
-    wrap: Wrap,
     align: <span class="prelude-ty">Option</span>&lt;Align&gt;,
     shape_opt: <span class="prelude-ty">Option</span>&lt;ShapeLine&gt;,
     layout_opt: <span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt;,
     shaping: Shaping,
+    metadata: <span class="prelude-ty">Option</span>&lt;usize&gt;,
 }
 
 <span class="kw">impl </span>BufferLine {
@@ -265,11 +266,11 @@
         <span class="self">Self </span>{
             text: text.into(),
             attrs_list,
-            wrap: Wrap::Word,
             align: <span class="prelude-val">None</span>,
             shape_opt: <span class="prelude-val">None</span>,
             layout_opt: <span class="prelude-val">None</span>,
             shaping,
+            metadata: <span class="prelude-val">None</span>,
         }
     }
 
@@ -312,26 +313,7 @@
     </span><span class="kw">pub fn </span>set_attrs_list(<span class="kw-2">&amp;mut </span><span class="self">self</span>, attrs_list: AttrsList) -&gt; bool {
         <span class="kw">if </span>attrs_list != <span class="self">self</span>.attrs_list {
             <span class="self">self</span>.attrs_list = attrs_list;
-            <span class="self">self</span>.reset();
-            <span class="bool-val">true
-        </span>} <span class="kw">else </span>{
-            <span class="bool-val">false
-        </span>}
-    }
-
-    <span class="doccomment">/// Get wrapping setting (wrap by characters/words or no wrapping)
-    </span><span class="kw">pub fn </span>wrap(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Wrap {
-        <span class="self">self</span>.wrap
-    }
-
-    <span class="doccomment">/// Set wrapping setting (wrap by characters/words or no wrapping)
-    ///
-    /// Will reset shape and layout if it differs from current wrapping setting.
-    /// Returns true if the line was reset
-    </span><span class="kw">pub fn </span>set_wrap(<span class="kw-2">&amp;mut </span><span class="self">self</span>, wrap: Wrap) -&gt; bool {
-        <span class="kw">if </span>wrap != <span class="self">self</span>.wrap {
-            <span class="self">self</span>.wrap = wrap;
-            <span class="self">self</span>.reset_layout();
+            <span class="self">self</span>.reset_shaping();
             <span class="bool-val">true
         </span>} <span class="kw">else </span>{
             <span class="bool-val">false
@@ -387,25 +369,25 @@
         <span class="self">self</span>.reset();
 
         <span class="kw">let </span><span class="kw-2">mut </span>new = <span class="self">Self</span>::new(text, attrs_list, <span class="self">self</span>.shaping);
-        new.wrap = <span class="self">self</span>.wrap;
+        new.align = <span class="self">self</span>.align;
         new
     }
 
-    <span class="doccomment">/// Reset shaping and layout information
-    </span><span class="comment">//TODO: make this private
+    <span class="doccomment">/// Reset shaping, layout, and metadata caches
     </span><span class="kw">pub fn </span>reset(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="self">self</span>.shape_opt = <span class="prelude-val">None</span>;
-        <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.metadata = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.reset_shaping();
     }
 
-    <span class="doccomment">/// Reset only layout information
+    <span class="doccomment">/// Reset shaping and layout caches
+    </span><span class="kw">pub fn </span>reset_shaping(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.shape_opt = <span class="prelude-val">None</span>;
+        <span class="self">self</span>.reset_layout();
+    }
+
+    <span class="doccomment">/// Reset only layout cache
     </span><span class="kw">pub fn </span>reset_layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="self">self</span>.layout_opt = <span class="prelude-val">None</span>;
-    }
-
-    <span class="doccomment">/// Check if shaping and layout information is cleared
-    </span><span class="kw">pub fn </span>is_reset(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.shape_opt.is_none()
     }
 
     <span class="doccomment">/// Shape line, will cache results
@@ -413,7 +395,7 @@
         <span class="self">self</span>.shape_in_buffer(<span class="kw-2">&amp;mut </span>ShapeBuffer::default(), font_system)
     }
 
-    <span class="doccomment">/// Shape a line using a pre-existing shape buffer.
+    <span class="doccomment">/// Shape a line using a pre-existing shape buffer, will cache results
     </span><span class="kw">pub fn </span>shape_in_buffer(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         scratch: <span class="kw-2">&amp;mut </span>ShapeBuffer,
@@ -444,18 +426,19 @@
         font_size: f32,
         width: f32,
         wrap: Wrap,
+        match_mono_width: <span class="prelude-ty">Option</span>&lt;f32&gt;,
     ) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
-        <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
-            <span class="self">self</span>.wrap = wrap;
-            <span class="kw">let </span>align = <span class="self">self</span>.align;
-            <span class="kw">let </span>shape = <span class="self">self</span>.shape(font_system);
-            <span class="kw">let </span>layout = shape.layout(font_size, width, wrap, align);
-            <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
-        }
-        <span class="self">self</span>.layout_opt.as_ref().expect(<span class="string">&quot;layout not found&quot;</span>)
+        <span class="self">self</span>.layout_in_buffer(
+            <span class="kw-2">&amp;mut </span>ShapeBuffer::default(),
+            font_system,
+            font_size,
+            width,
+            wrap,
+            match_mono_width,
+        )
     }
 
-    <span class="doccomment">/// Layout a line using a pre-existing shape buffer.
+    <span class="doccomment">/// Layout a line using a pre-existing shape buffer, will cache results
     </span><span class="kw">pub fn </span>layout_in_buffer(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         scratch: <span class="kw-2">&amp;mut </span>ShapeBuffer,
@@ -463,13 +446,21 @@
         font_size: f32,
         width: f32,
         wrap: Wrap,
+        match_mono_width: <span class="prelude-ty">Option</span>&lt;f32&gt;,
     ) -&gt; <span class="kw-2">&amp;</span>[LayoutLine] {
         <span class="kw">if </span><span class="self">self</span>.layout_opt.is_none() {
-            <span class="self">self</span>.wrap = wrap;
             <span class="kw">let </span>align = <span class="self">self</span>.align;
             <span class="kw">let </span>shape = <span class="self">self</span>.shape_in_buffer(scratch, font_system);
             <span class="kw">let </span><span class="kw-2">mut </span>layout = Vec::with_capacity(<span class="number">1</span>);
-            shape.layout_to_buffer(scratch, font_size, width, wrap, align, <span class="kw-2">&amp;mut </span>layout);
+            shape.layout_to_buffer(
+                scratch,
+                font_size,
+                width,
+                wrap,
+                align,
+                <span class="kw-2">&amp;mut </span>layout,
+                match_mono_width,
+            );
             <span class="self">self</span>.layout_opt = <span class="prelude-val">Some</span>(layout);
         }
         <span class="self">self</span>.layout_opt.as_ref().expect(<span class="string">&quot;layout not found&quot;</span>)
@@ -478,6 +469,17 @@
     <span class="doccomment">/// Get line layout cache
     </span><span class="kw">pub fn </span>layout_opt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;Vec&lt;LayoutLine&gt;&gt; {
         <span class="kw-2">&amp;</span><span class="self">self</span>.layout_opt
+    }
+
+    <span class="doccomment">/// Get line metadata. This will be None if [`BufferLine::set_metadata`] has not been called
+    /// after the last reset of shaping and layout caches
+    </span><span class="kw">pub fn </span>metadata(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
+        <span class="self">self</span>.metadata
+    }
+
+    <span class="doccomment">/// Set line metadata. This is stored until the next line reset
+    </span><span class="kw">pub fn </span>set_metadata(<span class="kw-2">&amp;mut </span><span class="self">self</span>, metadata: usize) {
+        <span class="self">self</span>.metadata = <span class="prelude-val">Some</span>(metadata);
     }
 }
 </code></pre></div></section></main></body></html>
