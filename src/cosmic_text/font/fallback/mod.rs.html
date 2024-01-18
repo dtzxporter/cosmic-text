@@ -415,7 +415,7 @@
         <span class="kw">let </span>font_match_keys_iter = |is_mono| {
             <span class="self">self</span>.font_match_keys
                 .iter()
-                .filter(<span class="kw">move </span>|m_key| m_key.weight_offset == <span class="number">0 </span>|| is_mono)
+                .filter(<span class="kw">move </span>|m_key| m_key.weight_offset == <span class="prelude-val">Some</span>(<span class="number">0</span>) || is_mono)
         };
 
         <span class="kw">while </span><span class="self">self</span>.default_i &lt; <span class="self">self</span>.default_families.len() {
@@ -431,7 +431,7 @@
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
                         <span class="kw">if </span>!is_mono {
                             <span class="kw">return </span><span class="prelude-val">Some</span>(font);
-                        } <span class="kw">else if </span>m_key.weight_offset == <span class="number">0 </span>{
+                        } <span class="kw">else if </span>m_key.weight_offset == <span class="prelude-val">Some</span>(<span class="number">0</span>) {
                             <span class="comment">// Default font
                             </span><span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
                                 weight_offset: <span class="prelude-val">None</span>,
@@ -468,7 +468,7 @@
                                         .count();
 
                                 <span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
-                                    weight_offset: <span class="prelude-val">Some</span>(m_key.weight_offset),
+                                    weight_offset: m_key.weight_offset,
                                     script_non_matches: <span class="prelude-val">Some</span>(script_non_matches),
                                     id: m_key.id,
                                 };
