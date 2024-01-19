@@ -1325,6 +1325,12 @@
 <a href="#1325" id="1325">1325</a>
 <a href="#1326" id="1326">1326</a>
 <a href="#1327" id="1327">1327</a>
+<a href="#1328" id="1328">1328</a>
+<a href="#1329" id="1329">1329</a>
+<a href="#1330" id="1330">1330</a>
+<a href="#1331" id="1331">1331</a>
+<a href="#1332" id="1332">1332</a>
+<a href="#1333" id="1333">1333</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#![allow(clippy::too_many_arguments)]
@@ -1546,7 +1552,13 @@
     <span class="kw">let </span>fonts = font_system.get_font_matches(attrs);
 
     <span class="kw">let </span>default_families = [<span class="kw-2">&amp;</span>attrs.family];
-    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(font_system, <span class="kw-2">&amp;</span>fonts, <span class="kw-2">&amp;</span>default_families, <span class="kw-2">&amp;</span>scripts);
+    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(
+        font_system,
+        <span class="kw-2">&amp;</span>fonts,
+        <span class="kw-2">&amp;</span>default_families,
+        <span class="kw-2">&amp;</span>scripts,
+        <span class="kw-2">&amp;</span>line[start_run..end_run],
+    );
 
     <span class="kw">let </span>font = font_iter.next().expect(<span class="string">&quot;no default font found&quot;</span>);
 
@@ -1668,7 +1680,7 @@
     <span class="kw">let </span>fonts = font_system.get_font_matches(attrs);
 
     <span class="kw">let </span>default_families = [<span class="kw-2">&amp;</span>attrs.family];
-    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(font_system, <span class="kw-2">&amp;</span>fonts, <span class="kw-2">&amp;</span>default_families, <span class="kw-2">&amp;</span>[]);
+    <span class="kw">let </span><span class="kw-2">mut </span>font_iter = FontFallbackIter::new(font_system, <span class="kw-2">&amp;</span>fonts, <span class="kw-2">&amp;</span>default_families, <span class="kw-2">&amp;</span>[], <span class="string">&quot;&quot;</span>);
 
     <span class="kw">let </span>font = font_iter.next().expect(<span class="string">&quot;no default font found&quot;</span>);
     <span class="kw">let </span>font_id = font.id();

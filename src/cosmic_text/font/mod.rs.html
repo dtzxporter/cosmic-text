@@ -134,6 +134,15 @@
 <a href="#134" id="134">134</a>
 <a href="#135" id="135">135</a>
 <a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>fallback;
 
@@ -166,7 +175,7 @@
     data: Arc&lt;<span class="kw">dyn </span>AsRef&lt;[u8]&gt; + Send + Sync&gt;,
     id: fontdb::ID,
     monospace_em_width: <span class="prelude-ty">Option</span>&lt;f32&gt;,
-    scripts: Vec&lt;[u8; <span class="number">4</span>]&gt;,
+    unicode_codepoints: Vec&lt;u32&gt;,
 }
 
 <span class="kw">impl </span>fmt::Debug <span class="kw">for </span>Font {
@@ -186,8 +195,8 @@
         <span class="self">self</span>.monospace_em_width
     }
 
-    <span class="kw">pub fn </span>scripts(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[[u8; <span class="number">4</span>]] {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.scripts
+    <span class="kw">pub fn </span>unicode_codepoints(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u32] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.unicode_codepoints
     }
 
     <span class="kw">pub fn </span>data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
@@ -213,7 +222,7 @@
     <span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span>fontdb::Database, id: fontdb::ID) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>info = db.face(id)<span class="question-mark">?</span>;
 
-        <span class="kw">let </span>(monospace_em_width, scripts) = {
+        <span class="kw">let </span>(monospace_em_width, unicode_codepoints) = {
             db.with_face_data(id, |font_data, face_index| {
                 <span class="kw">let </span>face = ttf_parser::Face::parse(font_data, face_index).ok()<span class="question-mark">?</span>;
                 <span class="kw">let </span>monospace_em_width = info
@@ -229,16 +238,25 @@
                     <span class="prelude-val">None</span><span class="question-mark">?</span>;
                 }
 
-                <span class="kw">let </span>scripts = face
-                    .tables()
-                    .gpos
+                <span class="kw">let </span><span class="kw-2">mut </span>unicode_codepoints = Vec::new();
+
+                face.tables()
+                    .cmap<span class="question-mark">?
+                    </span>.subtables
                     .into_iter()
-                    .chain(face.tables().gsub)
-                    .map(|table| table.scripts)
-                    .flatten()
-                    .map(|script| script.tag.to_bytes())
-                    .collect();
-                <span class="prelude-val">Some</span>((monospace_em_width, scripts))
+                    .filter(|subtable| subtable.is_unicode())
+                    .for_each(|subtable| {
+                        unicode_codepoints.reserve(<span class="number">1024</span>);
+                        subtable.codepoints(|code_point| {
+                            <span class="kw">if </span>subtable.glyph_index(code_point).is_some() {
+                                unicode_codepoints.push(code_point);
+                            }
+                        });
+                    });
+
+                unicode_codepoints.shrink_to_fit();
+
+                <span class="prelude-val">Some</span>((monospace_em_width, unicode_codepoints))
             })<span class="question-mark">?
         </span>}<span class="question-mark">?</span>;
 
@@ -256,7 +274,7 @@
         <span class="prelude-val">Some</span>(<span class="self">Self </span>{
             id: info.id,
             monospace_em_width,
-            scripts,
+            unicode_codepoints,
             <span class="attr">#[cfg(feature = <span class="string">&quot;swash&quot;</span>)]
             </span>swash: {
                 <span class="kw">let </span>swash = swash::FontRef::from_index((<span class="kw-2">*</span>data).as_ref(), info.index <span class="kw">as </span>usize)<span class="question-mark">?</span>;

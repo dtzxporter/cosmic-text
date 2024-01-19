@@ -265,13 +265,6 @@
 <a href="#265" id="265">265</a>
 <a href="#266" id="266">266</a>
 <a href="#267" id="267">267</a>
-<a href="#268" id="268">268</a>
-<a href="#269" id="269">269</a>
-<a href="#270" id="270">270</a>
-<a href="#271" id="271">271</a>
-<a href="#272" id="272">272</a>
-<a href="#273" id="273">273</a>
-<a href="#274" id="274">274</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>alloc::collections::BTreeSet;
@@ -312,7 +305,7 @@
 </span><span class="attr">#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 </span><span class="kw">struct </span>MonospaceFallbackInfo {
     weight_offset: <span class="prelude-ty">Option</span>&lt;u16&gt;,
-    script_non_matches: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    codepoint_non_matches: <span class="prelude-ty">Option</span>&lt;usize&gt;,
     id: fontdb::ID,
 }
 
@@ -323,6 +316,7 @@
     monospace_fallbacks: BTreeSet&lt;MonospaceFallbackInfo&gt;,
     default_i: usize,
     scripts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Script],
+    word: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     script_i: (usize, usize),
     common_i: usize,
     other_i: usize,
@@ -335,6 +329,7 @@
         font_match_keys: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[FontMatchKey],
         default_families: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Family&lt;<span class="lifetime">&#39;a</span>&gt;],
         scripts: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Script],
+        word: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
     ) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             font_system,
@@ -343,6 +338,7 @@
             monospace_fallbacks: BTreeSet::new(),
             default_i: <span class="number">0</span>,
             scripts,
+            word,
             script_i: (<span class="number">0</span>, <span class="number">0</span>),
             common_i: <span class="number">0</span>,
             other_i: <span class="number">0</span>,
@@ -435,44 +431,34 @@
                             <span class="comment">// Default font
                             </span><span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
                                 weight_offset: <span class="prelude-val">None</span>,
-                                script_non_matches: <span class="prelude-val">None</span>,
+                                codepoint_non_matches: <span class="prelude-val">None</span>,
                                 id: m_key.id,
                             };
-                            <span class="macro">assert_eq!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info), <span class="bool-val">true</span>);
+                            <span class="macro">assert!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info));
                         }
                     }
                 }
                 <span class="comment">// Set a monospace fallback if Monospace family is not found
                 </span><span class="kw">if </span>is_mono {
-                    <span class="kw">let </span>script_tags = <span class="self">self
-                        </span>.scripts
-                        .iter()
-                        .filter_map(|script| {
-                            <span class="kw">let </span>script_as_lower = script.short_name().to_lowercase();
-                            &lt;[u8; <span class="number">4</span>]&gt;::try_from(script_as_lower.as_bytes()).ok()
-                        })
-                        .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(face_info) = <span class="self">self</span>.font_system.db().face(m_key.id) {
                         <span class="comment">// Don&#39;t use emoji fonts as Monospace
                         </span><span class="kw">if </span>face_info.monospaced &amp;&amp; !face_info.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>) {
                             <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
-                                <span class="kw">let </span>script_non_matches = <span class="self">self</span>.scripts.len()
-                                    - script_tags
-                                        .iter()
-                                        .filter(|&amp;&amp;script_tag| {
-                                            font.scripts()
-                                                .iter()
-                                                .any(|<span class="kw-2">&amp;</span>tag_bytes| tag_bytes == script_tag)
+                                <span class="kw">let </span>codepoint_non_matches = <span class="self">self</span>.word.chars().count()
+                                    - <span class="self">self
+                                        </span>.word
+                                        .chars()
+                                        .filter(|ch| {
+                                            font.unicode_codepoints().contains(<span class="kw-2">&amp;</span>u32::from(<span class="kw-2">*</span>ch))
                                         })
                                         .count();
 
                                 <span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
                                     weight_offset: m_key.weight_offset,
-                                    script_non_matches: <span class="prelude-val">Some</span>(script_non_matches),
+                                    codepoint_non_matches: <span class="prelude-val">Some</span>(codepoint_non_matches),
                                     id: m_key.id,
                                 };
-                                <span class="macro">assert_eq!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info), <span class="bool-val">true</span>);
+                                <span class="macro">assert!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info));
                             }
                         }
                     }
