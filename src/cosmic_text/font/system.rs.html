@@ -223,7 +223,14 @@
 <a href="#223" id="223">223</a>
 <a href="#224" id="224">224</a>
 <a href="#225" id="225">225</a>
-</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Attrs, AttrsOwned, Font, HashMap, ShapePlanCache};
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Attrs, Font, FontMatchAttrs, HashMap, ShapePlanCache};
 <span class="kw">use </span>alloc::string::String;
 <span class="kw">use </span>alloc::sync::Arc;
 <span class="kw">use </span>alloc::vec::Vec;
@@ -252,7 +259,7 @@
     </span>font_cache: HashMap&lt;fontdb::ID, <span class="prelude-ty">Option</span>&lt;Arc&lt;Font&gt;&gt;&gt;,
 
     <span class="doccomment">/// Cache for font matches.
-    </span>font_matches_cache: HashMap&lt;AttrsOwned, Arc&lt;Vec&lt;FontMatchKey&gt;&gt;&gt;,
+    </span>font_matches_cache: HashMap&lt;FontMatchAttrs, Arc&lt;Vec&lt;FontMatchKey&gt;&gt;&gt;,
 
     <span class="doccomment">/// Cache for rustybuzz shape plans.
     </span>shape_plan_cache: ShapePlanCache,
@@ -268,6 +275,7 @@
 }
 
 <span class="kw">impl </span>FontSystem {
+    <span class="kw">const </span>FONT_MATCHES_CACHE_SIZE_LIMIT: usize = <span class="number">256</span>;
     <span class="doccomment">/// Create a new [`FontSystem`], that allows access to any installed system fonts
     ///
     /// # Timing
@@ -357,9 +365,15 @@
     }
 
     <span class="kw">pub fn </span>get_font_matches(<span class="kw-2">&amp;mut </span><span class="self">self</span>, attrs: Attrs&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; Arc&lt;Vec&lt;FontMatchKey&gt;&gt; {
+        <span class="comment">// Clear the cache first if it reached the size limit
+        </span><span class="kw">if </span><span class="self">self</span>.font_matches_cache.len() &gt;= <span class="self">Self</span>::FONT_MATCHES_CACHE_SIZE_LIMIT {
+            <span class="macro">log::trace!</span>(<span class="string">&quot;clear font mache cache&quot;</span>);
+            <span class="self">self</span>.font_matches_cache.clear();
+        }
+
         <span class="self">self</span>.font_matches_cache
             <span class="comment">//TODO: do not create AttrsOwned unless entry does not already exist
-            </span>.entry(AttrsOwned::new(attrs))
+            </span>.entry(attrs.into())
             .or_insert_with(|| {
                 <span class="attr">#[cfg(all(feature = <span class="string">&quot;std&quot;</span>, not(target_arch = <span class="string">&quot;wasm32&quot;</span>)))]
                 </span><span class="kw">let </span>now = std::time::Instant::now();
