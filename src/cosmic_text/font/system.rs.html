@@ -230,6 +230,8 @@
 <a href="#230" id="230">230</a>
 <a href="#231" id="231">231</a>
 <a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Attrs, Font, FontMatchAttrs, HashMap, ShapePlanCache};
 <span class="kw">use </span>alloc::string::String;
 <span class="kw">use </span>alloc::sync::Arc;
@@ -243,7 +245,8 @@
 
 <span class="attr">#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 </span><span class="kw">pub struct </span>FontMatchKey {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) weight_offset: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) font_weight_diff: u16,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) font_weight: u16,
     <span class="kw">pub</span>(<span class="kw">crate</span>) id: fontdb::ID,
 }
 
@@ -383,7 +386,8 @@
                     .faces()
                     .filter(|face| attrs.matches(face))
                     .map(|face| FontMatchKey {
-                        weight_offset: attrs.weight.<span class="number">0</span>.checked_sub(face.weight.<span class="number">0</span>),
+                        font_weight_diff: attrs.weight.<span class="number">0</span>.abs_diff(face.weight.<span class="number">0</span>),
+                        font_weight: face.weight.<span class="number">0</span>,
                         id: face.id,
                     })
                     .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();

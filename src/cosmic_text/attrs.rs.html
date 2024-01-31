@@ -334,9 +334,6 @@
 <a href="#334" id="334">334</a>
 <a href="#335" id="335">335</a>
 <a href="#336" id="336">336</a>
-<a href="#337" id="337">337</a>
-<a href="#338" id="338">338</a>
-<a href="#339" id="339">339</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
@@ -515,10 +512,7 @@
     </span><span class="kw">pub fn </span>matches(<span class="kw-2">&amp;</span><span class="self">self</span>, face: <span class="kw-2">&amp;</span>fontdb::FaceInfo) -&gt; bool {
         <span class="comment">//TODO: smarter way of including emoji
         </span>face.post_script_name.contains(<span class="string">&quot;Emoji&quot;</span>)
-            || (face.style == <span class="self">self</span>.style
-                <span class="comment">// Relax exact weight matching for the Monospace fallback use-case
-                </span>&amp;&amp; face.weight &lt;= <span class="self">self</span>.weight
-                &amp;&amp; face.stretch == <span class="self">self</span>.stretch)
+            || (face.style == <span class="self">self</span>.style &amp;&amp; face.stretch == <span class="self">self</span>.stretch)
     }
 
     <span class="doccomment">/// Check if this set of attributes can be shaped with another

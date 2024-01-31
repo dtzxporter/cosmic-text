@@ -265,6 +265,9 @@
 <a href="#265" id="265">265</a>
 <a href="#266" id="266">266</a>
 <a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
 </pre></div><pre class="rust"><code><span class="comment">// SPDX-License-Identifier: MIT OR Apache-2.0
 
 </span><span class="kw">use </span>alloc::collections::BTreeSet;
@@ -299,13 +302,14 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;warn_on_missing_glyphs&quot;</span>)]
 </span><span class="kw">use </span>log::warn <span class="kw">as </span>missing_warn;
 
-<span class="comment">// Match on lowest weight_offset, then script_non_matches
+<span class="comment">// Match on lowest font_weight_diff, then script_non_matches, then font_weight
 // Default font gets None for both `weight_offset` and `script_non_matches`, and thus, it is
 // always the first to be popped from the set.
 </span><span class="attr">#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 </span><span class="kw">struct </span>MonospaceFallbackInfo {
-    weight_offset: <span class="prelude-ty">Option</span>&lt;u16&gt;,
+    font_weight_diff: <span class="prelude-ty">Option</span>&lt;u16&gt;,
     codepoint_non_matches: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    font_weight: u16,
     id: fontdb::ID,
 }
 
@@ -411,7 +415,7 @@
         <span class="kw">let </span>font_match_keys_iter = |is_mono| {
             <span class="self">self</span>.font_match_keys
                 .iter()
-                .filter(<span class="kw">move </span>|m_key| m_key.weight_offset == <span class="prelude-val">Some</span>(<span class="number">0</span>) || is_mono)
+                .filter(<span class="kw">move </span>|m_key| m_key.font_weight_diff == <span class="number">0 </span>|| is_mono)
         };
 
         <span class="kw">while </span><span class="self">self</span>.default_i &lt; <span class="self">self</span>.default_families.len() {
@@ -427,11 +431,12 @@
                     <span class="kw">if let </span><span class="prelude-val">Some</span>(font) = <span class="self">self</span>.font_system.get_font(m_key.id) {
                         <span class="kw">if </span>!is_mono {
                             <span class="kw">return </span><span class="prelude-val">Some</span>(font);
-                        } <span class="kw">else if </span>m_key.weight_offset == <span class="prelude-val">Some</span>(<span class="number">0</span>) {
+                        } <span class="kw">else if </span>m_key.font_weight_diff == <span class="number">0 </span>{
                             <span class="comment">// Default font
                             </span><span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
-                                weight_offset: <span class="prelude-val">None</span>,
+                                font_weight_diff: <span class="prelude-val">None</span>,
                                 codepoint_non_matches: <span class="prelude-val">None</span>,
+                                font_weight: m_key.font_weight,
                                 id: m_key.id,
                             };
                             <span class="macro">assert!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info));
@@ -454,8 +459,9 @@
                                         .count();
 
                                 <span class="kw">let </span>fallback_info = MonospaceFallbackInfo {
-                                    weight_offset: m_key.weight_offset,
+                                    font_weight_diff: <span class="prelude-val">Some</span>(m_key.font_weight_diff),
                                     codepoint_non_matches: <span class="prelude-val">Some</span>(codepoint_non_matches),
+                                    font_weight: m_key.font_weight,
                                     id: m_key.id,
                                 };
                                 <span class="macro">assert!</span>(<span class="self">self</span>.monospace_fallbacks.insert(fallback_info));
