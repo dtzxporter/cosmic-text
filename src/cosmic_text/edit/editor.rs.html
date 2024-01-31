@@ -1173,7 +1173,7 @@
     <span class="kw">fn </span>delete_range(<span class="kw-2">&amp;mut </span><span class="self">self</span>, start: Cursor, end: Cursor) {
         <span class="kw">let </span>change_item = <span class="self">self</span>.with_buffer_mut(|buffer| {
             <span class="comment">// Collect removed data for change tracking
-            </span><span class="kw">let </span><span class="kw-2">mut </span>change_text = String::new();
+            </span><span class="kw">let </span><span class="kw-2">mut </span>change_lines = Vec::new();
 
             <span class="comment">// Delete the selection from the last line
             </span><span class="kw">let </span>end_line_opt = <span class="kw">if </span>end.line &gt; start.line {
@@ -1182,7 +1182,7 @@
 
                 <span class="comment">// Remove end line
                 </span><span class="kw">let </span>removed = buffer.lines.remove(end.line);
-                change_text.insert_str(<span class="number">0</span>, removed.text());
+                change_lines.insert(<span class="number">0</span>, removed.text().to_string());
 
                 <span class="prelude-val">Some</span>(after)
             } <span class="kw">else </span>{
@@ -1192,7 +1192,7 @@
             <span class="comment">// Delete interior lines (in reverse for safety)
             </span><span class="kw">for </span>line_i <span class="kw">in </span>(start.line + <span class="number">1</span>..end.line).rev() {
                 <span class="kw">let </span>removed = buffer.lines.remove(line_i);
-                change_text.insert_str(<span class="number">0</span>, removed.text());
+                change_lines.insert(<span class="number">0</span>, removed.text().to_string());
             }
 
             <span class="comment">// Delete the selection from the first line
@@ -1206,7 +1206,7 @@
 
                 <span class="comment">// Delete selected part of line
                 </span><span class="kw">let </span>removed = buffer.lines[start.line].split_off(start.index);
-                change_text.insert_str(<span class="number">0</span>, removed.text());
+                change_lines.insert(<span class="number">0</span>, removed.text().to_string());
 
                 <span class="comment">// Re-add part of line after selection
                 </span><span class="kw">if let </span><span class="prelude-val">Some</span>(after) = after_opt {
@@ -1222,7 +1222,7 @@
             ChangeItem {
                 start,
                 end,
-                text: change_text,
+                text: change_lines.join(<span class="string">&quot;\n&quot;</span>),
                 insert: <span class="bool-val">false</span>,
             }
         });
